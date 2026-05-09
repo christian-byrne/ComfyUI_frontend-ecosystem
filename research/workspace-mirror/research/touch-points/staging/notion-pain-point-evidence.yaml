@@ -1,0 +1,241 @@
+# Staged evidence from Notion pain point assessment + milestone page
+# Source 1 (pain points): https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+# Source 2 (milestone):   https://www.notion.so/comfy-org/Nodes-2-0-Default-UI-DevRel-Docs-Migration-3226d73d365081b388c1c393c1d7415b
+# Date accessed: 2026-05-08
+# Methodology: first-principles developer walkthrough (Terry Jia) + milestone planning docs
+# Research artifact: research/architecture/notion-pain-point-assessment.md
+# To merge: extend scripts/merge-staging-pass3.py or write scripts/merge-staging-notion-painpoints.py
+# Surface family: S17 (runtime environment gaps — new family, not previously in database.yaml)
+
+source_tag: notion-pain-point-assessment
+
+# ─── New patterns (S17 surface family) ────────────────────────────────────────
+# All four are first-class gaps in the v2 extension API surface.
+# None were discoverable by code-search methodology (R7/R8/R9) because they manifest
+# as absent APIs rather than existing usage patterns.
+
+new_patterns:
+
+- pattern_id: S17.AM1
+  surface_family: S17
+  surface: appModeStore / canvas mode state
+  fingerprint: appModeStore|useAppMode|getMode|canvasMode
+  semantic: >-
+    Detect or react to ComfyUI canvas mode changes (graph / app / builder:inputs /
+    builder:outputs / builder:arrange). Custom nodes need to adapt rendering, widget
+    resize behavior, and read-only state when mode changes.
+  severity: moderate
+  lifecycle_coupling: true
+  silent_breakage: true
+  occurrences: null
+  packages_affected: all
+  v2_replacement: >-
+    node.on('canvasModeChanged', handler) on NodeHandle — a separate event from the
+    existing NodeModeChangedEvent (which covers execution mode: muted/bypass/always).
+    Or app-level event: app.on('canvasModeChanged', handler). IMPORTANT: NodeModeChangedEvent
+    already in node.ts covers execution mode only; canvas mode is a distinct concept.
+  notes: >-
+    appModeStore is a Pinia store only accessible via useAppMode() composable — JS
+    extensions cannot use Vue composables. In App mode, canvas is read-only and widgets
+    have special resize behavior, but custom node widgets do not automatically adapt.
+    No event fires when mode transitions. Extensions must poll or use heuristics.
+    Flagged in Terry's DX walkthrough appendix A.1. PKG2 surface impact: add
+    canvasModeChanged to NodeHandle event overloads, or document as known gap.
+  evidence_status: single-source
+  evidence:
+  - pattern_id: S17.AM1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.1 — App Mode Support. No public API for extensions to detect or react to mode changes.
+    excerpt: |
+      // Mode state lives in a Vue Pinia store (appModeStore), only accessible via useAppMode()
+      // composable — external JS extensions cannot use Vue composables.
+      // In App mode the canvas is read-only and widgets have special resize behavior,
+      // but custom node widgets do not automatically adapt.
+      // There is no event like node.on('modeChange') or app.on('modeChange').
+      // Custom nodes that render differently in editor vs app mode must resort to polling or heuristics.
+
+- pattern_id: S17.SB1
+  surface_family: S17
+  surface: subgraph boundary event propagation
+  fingerprint: SubgraphNode|subgraph.*onExecuted|onExecuted.*subgraph|MatchType.*subgraph|autogrow.*subgraph
+  semantic: >-
+    Custom node callbacks (onExecuted, onConnectionsChange autogrow, MatchType) that
+    work inside subgraphs but fail to propagate across the subgraph boundary. Four
+    distinct failure modes when custom nodes are placed inside subgraphs.
+  severity: high
+  lifecycle_coupling: true
+  silent_breakage: true
+  occurrences: null
+  packages_affected: all_with_dynamic_io
+  v2_replacement: >-
+    Requires D9 Phase B (post-Alex rebase on #11939). ECS substrate must emit
+    SubgraphNode execution events that forward from internal nodes. MatchType and
+    autogrow propagation require subgraph boundary awareness in the World dispatcher.
+    Tag as blocked: I-PG.B1. Short-term: document as known limitation with @experimental
+    on affected NodeHandle events; add subgraphCompatible flag to NodeExtensionOptions.
+  notes: >-
+    Four failure modes: (1) onExecuted fires on internal node; SubgraphNode does not
+    re-emit — external observers are blind. (2) MatchType freezes type as string on
+    initial connection; runtime type changes not propagated to boundary. (3) Autogrow
+    (new inputs from onConnectionsChange) never mirrored to SubgraphNode external slots.
+    (4) Promoted widget callbacks fire on internal node, invisible to external code.
+    Flagged in Terry's DX walkthrough appendix A.2. Also intersects ADR 0006
+    (PrimitiveNode copy/paste, I-NEW.1) and Austin's fix-linked-widget-promotion branch.
+    Documented partially in docs/architecture/ecs-lifecycle-scenarios.md on branch.
+  evidence_status: single-source
+  evidence:
+  - pattern_id: S17.SB1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.2 — Subgraph Support. Four distinct failure modes when custom nodes inside subgraphs.
+    excerpt: |
+      // 1. onExecuted fires on internal node but SubgraphNode does not re-emit it.
+      //    External observers cannot detect when an internal node executes.
+      // 2. MatchType breaks — SubgraphInputNode.connectByType freezes the type as a
+      //    string on initial connection. Runtime type changes NOT propagated to boundary.
+      // 3. Autogrow breaks — new inputs added by onConnectionsChange inside subgraph
+      //    are never mirrored to SubgraphNode's external slots.
+      // 4. Widget promotion gotcha — when a widget is promoted from internal node to
+      //    SubgraphNode, widget callback still fires on internal node, invisible externally.
+
+- pattern_id: S17.FA1
+  surface_family: S17
+  surface: file upload / asset URL construction
+  fingerprint: fetchApi.*upload|upload.*image|FormData.*upload|view\?filename|subfolder.*type.*input
+  semantic: >-
+    Upload files to ComfyUI backend and construct retrieval URLs. No helper API exists;
+    each extension manually builds FormData, calls api.fetchApi('/upload/image', ...),
+    and constructs /view?filename=...&type=input&subfolder=... URLs by hand.
+  severity: moderate
+  lifecycle_coupling: false
+  silent_breakage: false
+  occurrences: null
+  packages_affected: 32
+  v2_replacement: >-
+    comfyAPI.uploadFile(file, { subfolder, type }) + comfyAPI.getFileUrl(filename, type, subfolder).
+    Out of scope for @comfyorg/extension-api (node extension surface). Belongs in a
+    future @comfyorg/comfy-api package covering backend communication helpers.
+    Document as gap in src/extension-api/README.md.
+  notes: >-
+    32+ packages implement image preview; 9 implement video — each builds upload/URL
+    helpers from scratch. Upload timeout hardcoded at 120s; large 3D/video files fail
+    silently. No frontend-side asset browsing, delete, or rename. No temporary file
+    lifecycle management (files in temp/ never cleaned up by frontend). Scale: 32+
+    packages duplicating this wheel makes it a P1 API surface gap even though it's
+    outside the node-extension scope. Flagged in Terry's DX walkthrough appendix A.3.
+  evidence_status: single-source
+  evidence:
+  - pattern_id: S17.FA1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.3 — File Storage / Asset API. 32+ packages build upload helpers from scratch.
+    excerpt: |
+      // Each extension manually builds FormData and calls api.fetchApi with hardcoded params:
+      async function uploadFileToComfyUI(file, subfolder) {
+        const formData = new FormData()
+        formData.append('image', file)
+        formData.append('subfolder', subfolder)
+        formData.append('type', 'input')
+        const response = await api.fetchApi('/upload/image', {
+          method: 'POST', body: formData
+        })
+        const { name } = await response.json()
+        return `/view?filename=${name}&type=input&subfolder=${subfolder}`
+      }
+      // Upload timeout hardcoded 120s. Large 3D/video files fail silently.
+      // No comfyAPI.uploadFile() or comfyAPI.getFileUrl() helpers exist.
+
+- pattern_id: S17.WV1
+  surface_family: S17
+  surface: widgets_values positional array serialization
+  fingerprint: widgets_values|sortWidgetValuesByInputOrder|input_order|fallbackWidgetsValuesNames
+  semantic: >-
+    Widget values serialized as positional array [v1, v2, v3] rather than named dict.
+    Any input definition change (add, reorder, rename, remove, required→optional) causes
+    values to misalign when loading existing workflows. Root cause of #1 user complaint:
+    "my workflow broke after I updated the custom node."
+  severity: high
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: null
+  packages_affected: all
+  v2_replacement: >-
+    D7 Part 4 (4→2 serialization collapse) + beforeSerialize event as partial mitigation:
+    extensions can remap widgets_values in the beforeSerialize handler. Long-term fix is
+    named dict format { widgetName: value } — a breaking workflow JSON schema change
+    requiring versioning + migrateWidgetValues(oldVersion, values) callback. PR #10392
+    added widgets_values_named as opt-in fallback in /object_info schema (see
+    research/architecture/widget-serialization-historical-analysis.md). PR #11884 added
+    null guard. Tag: blocked on workflow-schema-migration (out of v2 surface scope).
+    Document positional contract clearly in widget.ts TSDoc.
+  notes: >-
+    Serialization format is widgets_values: [30, 12345, 'test'] not { seed: 12345,
+    steps: 30, prompt: 'test' }. Deserialization uses input_order to align positions,
+    but many custom nodes don't define input_order (rely on JS object key order, not
+    guaranteed). Frontend has sortWidgetValuesByInputOrder() in nodeDefOrderingUtil.ts
+    but only works when input_order is present. Breaking scenarios: add required input
+    in middle (all subsequent shift), reorder inputs (wrong values), rename input (old
+    workflow has value at wrong position), remove input (subsequent shift forward),
+    required→optional transition (position changes completely). Self-described as #1
+    source of "my workflow stopped working after I updated the custom node" reports.
+    Also deeply related to ADR 0006 (PrimitiveNode copy/paste), widget-serialization-
+    historical-analysis.md, and Austin's fix-linked-widget-promotion work.
+    Flagged in Terry's DX walkthrough appendix A.4.
+  evidence_status: multi-source
+  evidence:
+  - pattern_id: S17.WV1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.4. Positional array serialization fragility. Self-described #1 user complaint.
+    excerpt: |
+      // widgets_values is a positional array, not a named dict:
+      // { widgets_values: [30, 12345, 'test prompt'] }
+      // instead of: { seed: 12345, steps: 30, prompt: 'test prompt' }
+      //
+      // Breaking scenarios (all cause silent value misalignment):
+      //   Add a new required input in the middle → all subsequent values shift +1
+      //   Reorder existing inputs → wrong values assigned
+      //   Change required→optional → position changes completely
+      //   Remove an input → subsequent values shift forward
+      //   Rename an input → old workflow value at wrong position
+      //
+      // frontend sortWidgetValuesByInputOrder() only works when input_order present.
+      // Many custom nodes don't define input_order.
+  - pattern_id: S17.WV1
+    repo: Comfy-Org/ComfyUI_frontend
+    file: src/utils/nodeDefOrderingUtil.ts
+    lines:
+    - 1
+    url: https://github.com/Comfy-Org/ComfyUI_frontend
+    source: internal-analysis
+    variant: code-reference
+    notes: >-
+      sortWidgetValuesByInputOrder() exists but is conditional on input_order presence.
+      PR #10392 added widgets_values_named opt-in; PR #11884 added null guard.
+      See research/architecture/widget-serialization-historical-analysis.md for full history.
+    excerpt: |
+      // src/utils/nodeDefOrderingUtil.ts
+      // sortWidgetValuesByInputOrder(node, widgetValues) — aligns positional array
+      // with current input_order, but ONLY when input_order is defined in node schema.
+      // Absent input_order: falls back to JS object key order (not spec-guaranteed).

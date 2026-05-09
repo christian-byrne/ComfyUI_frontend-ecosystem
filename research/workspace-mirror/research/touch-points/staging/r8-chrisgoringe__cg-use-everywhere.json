@@ -1,0 +1,403 @@
+{
+  "repo": "chrisgoringe/cg-use-everywhere",
+  "repo_dir": "chrisgoringe__cg-use-everywhere",
+  "hits": [
+    {
+      "pattern_id": "S2.N3",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 78,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "        nodeType.prototype.onConnectionsChange = function (side,slot,connect,link_info,output) {     ",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 154,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.drawNode = function(node, ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 174,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.drawFrontCanvas = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 194,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.drawConnections = function(ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 153,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "        const original_drawNode = LGraphCanvas.prototype.drawNode;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 173,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "        const original_drawFrontCanvas = LGraphCanvas.prototype.drawFrontCanvas",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 193,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "        const drawConnections = LGraphCanvas.prototype.drawConnections;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 129,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"status\", ({detail}) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 119,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) { ",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 30,
+      "matched_regex": "\\.onDrawForeground\\s*=\\s*function",
+      "preview": "        node.onDrawForeground = function(ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 313,
+      "matched_regex": "\\.onDrawForeground\\s*=\\s*function",
+      "preview": "        app.canvas.onDrawForeground = function(ctx, visible_area) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 249,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "        app.graphToPrompt = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 248,
+      "matched_regex": "const\\s+orig\\w*\\s*=\\s*\\w*\\.?graphToPrompt",
+      "preview": "        const original_graphToPrompt = app.graphToPrompt;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 135,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "            const original_loadGraphData = app.loadGraphData;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 136,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "            app.loadGraphData = async function (data) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H3",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 342,
+      "matched_regex": "\\bgetCanvasMenuItems\\s*[:(]",
+      "preview": "    getCanvasMenuItems(canvas) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N13",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 95,
+      "matched_regex": "\\.onConnectOutput\\s*=\\s*function",
+      "preview": "            nodeType.prototype.onConnectOutput = function(outputIndex, type, input, inputNode, inputIndex) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_ui.js",
+      "line": 13,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "        if (!app.canvas.selected_group_moving) group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_ui.js",
+      "line": 34,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "            if (!app.canvas.selected_group_moving) group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 16,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const llink = ue.graph.links[input_node.inputs[input_index].link]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 89,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                if (graph.links[id]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 96,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                        if (new_subgraph.links[id]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 97,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                            if (new_subgraph.links[id].target_id==-20) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 116,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                new_subgraph_node.outputs[new_subgraph.links[llink.id].target_slot].links.forEach((link_id)=>{",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 117,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    if (graph.links[link_id].target_id==control_node_id) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_utilities.js",
+      "line": 170,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                        const llink = graph.links[input.link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_utilities.js",
+      "line": 259,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        link = graph.links[link_id];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_utilities.js",
+      "line": 272,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "    var the_link = graph.links[link_id];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_utilities.js",
+      "line": 340,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        var llink = graph.links[in_link]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_utilities.js",
+      "line": 344,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            llink = graph.links[in_link]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/connections.js",
+      "line": 123,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const llink = node.graph.links[input.link]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_subgraph_utils.js",
+      "line": 42,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = subgraph.links[lid]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_subgraph_utils.js",
+      "line": 69,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        this.graph.links[this.graph.last_link_id] = new LLink(this.graph.last_link_id, this.io_node.slots[output_index].type, -10, output_index, input_node.id, input_index) ",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_subgraph_utils.js",
+      "line": 72,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        return this.graph.links[this.graph.last_link_id]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/connections.js",
+      "line": 61,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "            in_slot.color_on = app.canvas.default_connection_color_byType[type];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/connections.js",
+      "line": 68,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "            in_slot.color_on = undefined;       ",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/connections.js",
+      "line": 86,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        node.addInput(`anything${node.properties.ue_properties.next_input_index}`, \"*\", {label:i18n('anything')})",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/connections.js",
+      "line": 97,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "            node.removeInput(idx)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere_apply.js",
+      "line": 23,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            new_link = output_node.connect(output_index, input_node, input_index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 68,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S15.OS1",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/combo_clone.js",
+      "line": 8,
+      "matched_regex": "node\\.outputs\\[\\s*\\w+\\s*\\]\\.type\\s*=",
+      "preview": "        node.outputs[0].type = \"COMBO\"",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W4",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/combo_clone.js",
+      "line": 7,
+      "matched_regex": "\\.options\\.values\\s*=",
+      "preview": "        node.widgets[0].options.values = [...node.properties.comboclone.options]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 265,
+      "matched_regex": "\\.queuePrompt\\s*=\\s*async\\s+function",
+      "preview": "        app.queuePrompt = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "chrisgoringe/cg-use-everywhere",
+      "file": "js/use_everywhere.js",
+      "line": 129,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "        api.addEventListener(\"status\", ({detail}) => {",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 44
+}

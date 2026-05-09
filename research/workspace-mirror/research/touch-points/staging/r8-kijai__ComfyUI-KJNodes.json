@@ -1,0 +1,1474 @@
+{
+  "repo": "kijai/ComfyUI-KJNodes",
+  "repo_dir": "kijai__ComfyUI-KJNodes",
+  "hits": [
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/utility.js",
+      "line": 186,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "      w.callback = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 269,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "\t\t\tcropWWidget.callback = function() { origWCb?.apply(this, arguments); updateCropFromWidgets(); };",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 270,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "\t\t\tcropHWidget.callback = function() { origHCb?.apply(this, arguments); updateCropFromWidgets(); };",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 311,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "                widget.callback = function (value) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 383,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "        w.callback = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 431,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "            sw.callback = function (...a) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/contextmenu.js",
+      "line": 146,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "\t\t\t\tmenuOpts.callback = function(v, cbOpts, e) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/performance.js",
+      "line": 191,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\t\t\t_origDraw.call(this, false, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/performance.js",
+      "line": 206,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t_origDraw.call(this, force_canvas, force_bgcanvas);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/performance.js",
+      "line": 269,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\t_origRenderInfo.call(this, infoCtx, 1, 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1448,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\tconst result = origProcessMiddle.call(this, e, node);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1454,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\tif (!_fromMiddleClick) return origCreateDefault.call(this, optPass);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1459,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\tif (!wantSetGet) return origCreateDefault.call(this, optPass);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1464,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\tif (!sourceNode || slotIndex == null) return origCreateDefault.call(this, optPass);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1466,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\tif (!graph) return origCreateDefault.call(this, optPass);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1520,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\t\t\t\t\t\t\treturn origResolveOutput.call(this, slot, type, visited);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1544,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\tconst result = originalShowLinkMenu.call(this, segment, e);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/canvas_background.js",
+      "line": 462,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "\t\t\t\tconst result = origCallback.call(this, cvs, ctx);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 453,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "\t\t\tthis.addDOMWidget(\"preview\", \"ScreencapPreview\", container, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 415,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "            const domWidget = node.addDOMWidget(\"hdr_preview\", \"hdr_preview\", container, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 365,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "      node.cropEditor = this.addDOMWidget(\"crop_preview\", \"CropPreviewWidget\", wrapper, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/editor_base.js",
+      "line": 521,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "    node[editorKey] = node.addDOMWidget(nodeData.name, `${editorClass.name}Widget`, element, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/editor_base.js",
+      "line": 582,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "    node.addDOMWidget(\"editor_buttons\", \"editorButtonRow\", buttonRow, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 9,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 12,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 40,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 66,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 91,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 119,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 285,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 311,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 419,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onNodeCreated = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/play_sound.js",
+      "line": 10,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "        nodeType.prototype.onExecuted = function (output) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 185,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onExecuted = function(message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 208,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onExecuted = function(message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 235,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onExecuted = function(message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 257,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onExecuted = function(message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 274,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onExecuted = function(message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/help_popup.js",
+      "line": 349,
+      "matched_regex": "prototype\\.onRemoved\\s*=",
+      "preview": "  nodeType.prototype.onRemoved = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1289,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "\t\tLGraphCanvas.prototype.computeVisibleNodes = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1434,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "\t\tLGraphCanvas.prototype._processMiddleButton = function(e, node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1453,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "\t\tLGraphCanvas.prototype.createDefaultNodeForSlot = function(optPass) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1542,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "\t\tLGraphCanvas.prototype.showLinkMenu = function(segment, e) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/play_sound.js",
+      "line": 88,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener(\"status\", this._kjStatusListener);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 6,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"executing\", e => { execId = e.detail ?? null; });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 31,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "      api.addEventListener(\"b_preview_with_metadata\", metaHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 32,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "      api.addEventListener(\"b_preview\", plainHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 566,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "\t\t\t\tthis.isVirtualNode = true; // This node is purely frontend and does not impact the resulting prompt so should not be serialized",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 894,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "\t\t\t\tthis.isVirtualNode = true; // This node is purely frontend and does not impact the resulting prompt so should not be serialized",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/help_popup.js",
+      "line": 255,
+      "matched_regex": "prototype\\.onDrawForeground\\s*=",
+      "preview": "  nodeType.prototype.onDrawForeground = function (ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 456,
+      "matched_regex": "\\.onDrawForeground\\s*=\\s*function",
+      "preview": "      node.onDrawForeground = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N10",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/help_popup.js",
+      "line": 323,
+      "matched_regex": "prototype\\.onMouseDown\\s*=",
+      "preview": "  nodeType.prototype.onMouseDown = function (e, localPos, canvas) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1493,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "\t\tapp.graphToPrompt = async function(...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1492,
+      "matched_regex": "const\\s+orig\\w*\\s*=\\s*\\w*\\.?graphToPrompt",
+      "preview": "\t\tconst originalGraphToPrompt = app.graphToPrompt.bind(app);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 477,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\tframeWidget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 422,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\twidget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H3",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1229,
+      "matched_regex": "\\bgetCanvasMenuItems\\s*[:(]",
+      "preview": "\tgetCanvasMenuItems() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/contextmenu.js",
+      "line": 75,
+      "matched_regex": "\\bgetNodeMenuItems\\s*[:(]",
+      "preview": "\tgetNodeMenuItems(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 548,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "\tregisterCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 878,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "\tregisterCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N12",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 177,
+      "matched_regex": "\\.onConnectInput\\s*=\\s*function",
+      "preview": "\t\t\t\tnodeType.prototype.onConnectInput = function (targetSlot, type, output, originNode, originSlot) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N12",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 197,
+      "matched_regex": "\\.onConnectInput\\s*=\\s*function",
+      "preview": "\t\t\t\tnodeType.prototype.onConnectInput = function (targetSlot, type, output, originNode, originSlot) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N12",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 222,
+      "matched_regex": "\\.onConnectInput\\s*=\\s*function",
+      "preview": "\t\t\t\tnodeType.prototype.onConnectInput = function (targetSlot, type, output, originNode, originSlot) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N12",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 251,
+      "matched_regex": "\\.onConnectInput\\s*=\\s*function",
+      "preview": "\t\t\t\tnodeType.prototype.onConnectInput = function (targetSlot, type, output, originNode, originSlot) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N12",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 267,
+      "matched_regex": "\\.onConnectInput\\s*=\\s*function",
+      "preview": "\t\t\t\tnodeType.prototype.onConnectInput = function (targetSlot, type, output, originNode, originSlot) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 430,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "                for (const w of node.widgets || []) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 47,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "        for (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fix_node.js",
+      "line": 60,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const link = app.graph.links[inp.linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fix_node.js",
+      "line": 73,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = app.graph.links[id];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 1849,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "                out.color_on = \"transparent\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 1855,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "                out.color_on = undefined;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.SG1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1551,
+      "matched_regex": "link\\.target_id\\s*=",
+      "preview": "\t\t\tif (!link || link.origin_id == null || link.target_id == null) return result;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.SG1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/node_insert.js",
+      "line": 57,
+      "matched_regex": "link\\.target_id\\s*=",
+      "preview": "\t\tif (link.origin_id === draggedNode.id || link.target_id === draggedNode.id) continue;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 416,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\tconst newInput = subgraph.addInput(inputName, linkType);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 584,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\tthis.addInput(\"*\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 31,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.addInput(`conditioning_${i}`, this._type)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 58,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.addInput(`image_${i}`, this._type, {shape: 7});",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 85,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.addInput(`image_${i}`, this._type, {shape: 7});",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 109,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.addInput(`mask_${i}`, this._type)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 305,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\t\t\t\t\tthis.addInput(`string_${i}`, this._type, {shape: 7});",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 462,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "\t\t\tconst newOutput = subgraph.addOutput(outputName, linkType);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 585,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "\t\t\t\tthis.addOutput(\"*\", '*');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 922,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "\t\t\t\tthis.addOutput(\"*\", '*');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 453,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\tsubgraph.removeInput(newInput);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 26,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.removeInput(this.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 53,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.removeInput(this.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 80,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.removeInput(this.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 104,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.removeInput(this.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 300,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\t\t\t\t\tthis.removeInput(this.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 441,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "\t\t\t\t\t\tsubgraph.removeOutput(sgOutput);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/contextmenu.js",
+      "line": 21,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\t\t\t\t\tnode.connect(0, nextTo, i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/contextmenu.js",
+      "line": 162,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\t\t\t\t\t\t\t\tnode.connect(0, optPass.nodeTo, slotIdx);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 273,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\t\tnode.connect(slotIdx, setNode, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/node_insert.js",
+      "line": 125,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\tnode.connect(slots.outputSlot, targetNode, targetSlot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/node_insert.js",
+      "line": 123,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\ttargetNode.disconnectInput(targetSlot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/shake_to_disconnect.js",
+      "line": 106,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\tnode.disconnectInput(i, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/shake_to_disconnect.js",
+      "line": 117,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\tif (targetNode) targetNode.disconnectInput(link.target_slot, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/nodeswap.js",
+      "line": 89,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\tif (node.inputs[i].link != null) node.disconnectInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/nodeswap.js",
+      "line": 94,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "\t\t\tif (node.outputs[o].links?.length) node.disconnectOutput(o);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/help_popup.js",
+      "line": 55,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/play_sound.js",
+      "line": 4,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 4,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 29,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fillconnect.js",
+      "line": 189,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/point_editor_canvas.js",
+      "line": 7,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 546,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 876,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1137,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1487,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1538,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 4,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 8,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/node_insert.js",
+      "line": 246,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/canvas_background.js",
+      "line": 315,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/shake_to_disconnect.js",
+      "line": 132,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/spline_editor_canvas.js",
+      "line": 51,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/nodeswap.js",
+      "line": 263,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/contextmenu.js",
+      "line": 55,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 112,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/appearance.js",
+      "line": 3,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/performance.js",
+      "line": 14,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 156,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\t\t\t\t\t\twidget.value = value;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 163,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\t\t\t\t\twidget.value = value;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/play_sound.js",
+      "line": 88,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "                api.addEventListener(\"status\", this._kjStatusListener);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 6,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]executing['\\\"]",
+      "preview": "api.addEventListener(\"executing\", e => { execId = e.detail ?? null; });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fix_node.js",
+      "line": 82,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "        app.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/help_popup.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 2,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/utility.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/play_sound.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/play_sound.js",
+      "line": 2,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { api } = window.comfyAPI.api;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fix_node.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/point_editor_canvas.js",
+      "line": 3,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 2,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/performance.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/editor_base.js",
+      "line": 291,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "    const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fillconnect.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/setgetnodes.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/spline_editor_canvas.js",
+      "line": 4,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 2,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 3,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { api } = window.comfyAPI.api;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/jsnodes.js",
+      "line": 2,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { applyTextReplacements } = window.comfyAPI.utils;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/node_insert.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/contextmenu.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/canvas_background.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 2,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/shake_to_disconnect.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/appearance.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/nodeswap.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "const { app } = window.comfyAPI.app;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/fast_preview.js",
+      "line": 18,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        img.onload = () => { nodeRef.imgs = [img]; nodeRef.setDirtyCanvas(true); };",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 110,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\tapp.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 399,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\tapp.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 426,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\tapp.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/screencap_stream.js",
+      "line": 471,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\tapp.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 293,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "          node.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 296,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            if (node.graph) node.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 1327,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        if (node.graph) node.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/image_transform.js",
+      "line": 1860,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "          node.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 446,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                node.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/hdr_preview.js",
+      "line": 466,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                    node.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/editor_base.js",
+      "line": 266,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.node.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "kijai/ComfyUI-KJNodes",
+      "file": "web/js/editors/editor_base.js",
+      "line": 701,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    if (this.node.graph) this.node.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 163
+}

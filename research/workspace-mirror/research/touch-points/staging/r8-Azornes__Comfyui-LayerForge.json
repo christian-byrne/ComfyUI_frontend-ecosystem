@@ -1,0 +1,511 @@
+{
+  "repo": "Azornes/Comfyui-LayerForge",
+  "repo_dir": "Azornes__Comfyui-LayerForge",
+  "hits": [
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1126,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "        showPreviewWidget.callback = function (value) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1299,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "        showPreviewWidget.callback = function (value: boolean) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 73,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "        return await originalUndoRedo.call(this, event);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1301,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "                originalCallback.call(this, value);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 53,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "        return await originalUndoRedo.call(this, event);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1128,
+      "matched_regex": "orig\\w*\\.call\\(this",
+      "preview": "                originalCallback.call(this, value);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1168,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "        node.addDOMWidget(\"mainContainer\", \"widget\", mainContainer);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1022,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "        node.addDOMWidget(\"mainContainer\", \"widget\", mainContainer);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1394,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function (this: ComfyNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1205,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1395,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "            nodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1604,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "            nodeType.prototype.onExecuted = function (this: ComfyNode, message: any) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1492,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "            nodeType.prototype.onConnectionsChange = function (this: ComfyNode, type: number, index: number, connected: boolean, link_info: any) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1290,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "            nodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1621,
+      "matched_regex": "prototype\\.onRemoved\\s*=",
+      "preview": "            nodeType.prototype.onRemoved = function (this: ComfyNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1409,
+      "matched_regex": "prototype\\.onRemoved\\s*=",
+      "preview": "            nodeType.prototype.onRemoved = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1702,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "            nodeType.prototype.getExtraMenuOptions = function (this: ComfyNode, _: any, options: any[]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1478,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "            nodeType.prototype.getExtraMenuOptions = function (_, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/Canvas.js",
+      "line": 425,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener('execution_start', handleExecutionStart);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/Canvas.js",
+      "line": 426,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener('execution_success', handleExecutionSuccess);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/Canvas.ts",
+      "line": 556,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener('execution_start', handleExecutionStart);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/Canvas.ts",
+      "line": 557,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener('execution_success', handleExecutionSuccess);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1685,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "            nodeType.prototype.onConfigure = async function (this: ComfyNode, data: any) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1463,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "            nodeType.prototype.onConfigure = async function (data) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1401,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "            nodeType.prototype.onAdded = async function (this: ComfyNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1211,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "            nodeType.prototype.onAdded = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/Canvas.js",
+      "line": 164,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "                imagePreviewWidget.computeSize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/Canvas.js",
+      "line": 178,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "                imagePreviewWidget.computeSize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/Canvas.ts",
+      "line": 242,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "                imagePreviewWidget.computeSize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/Canvas.ts",
+      "line": 256,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "                imagePreviewWidget.computeSize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N15",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1657,
+      "matched_regex": "prototype\\.serialize\\s*=\\s*function",
+      "preview": "            nodeType.prototype.serialize = function (this: ComfyNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N15",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1438,
+      "matched_regex": "prototype\\.serialize\\s*=\\s*function",
+      "preview": "            nodeType.prototype.serialize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N19",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1080,
+      "matched_regex": "\\.onResize\\s*=\\s*function",
+      "preview": "    node.onResize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N19",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 947,
+      "matched_regex": "\\.onResize\\s*=\\s*function",
+      "preview": "    node.onResize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasIO.js",
+      "line": 391,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const link = graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasIO.js",
+      "line": 486,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                        const link = graph.links[maskLinkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasIO.ts",
+      "line": 452,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const link = graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasIO.ts",
+      "line": 560,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                        const link = graph.links[maskLinkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1159,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1338,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasIO.js",
+      "line": 170,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                                        this.canvas.widget.value = fileName;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasIO.ts",
+      "line": 193,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                                        this.canvas.widget.value = fileName;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/utils/ClipboardManager.js",
+      "line": 85,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "            const response = await api.fetchApi(\"/ycnode/load_image_from_path\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/utils/ImageUploadUtils.js",
+      "line": 36,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const response = await api.fetchApi(\"/upload/image\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/utils/ClipboardManager.ts",
+      "line": 369,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "        const response = await api.fetchApi(\"/ycnode/load_image_from_path\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/utils/ImageUploadUtils.ts",
+      "line": 74,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const response = await api.fetchApi(\"/upload/image\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1345,
+      "matched_regex": "\\.queuePrompt\\s*=\\s*async\\s+function",
+      "preview": "        app.queuePrompt = async function (this: ComfyApp, number: number, prompt: any) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1164,
+      "matched_regex": "\\.queuePrompt\\s*=\\s*async\\s+function",
+      "preview": "        app.queuePrompt = async function (number, prompt) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/Canvas.js",
+      "line": 425,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener('execution_start', handleExecutionStart);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/Canvas.js",
+      "line": 426,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener('execution_success', handleExecutionSuccess);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/Canvas.ts",
+      "line": 556,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener('execution_start', handleExecutionStart);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/Canvas.ts",
+      "line": 557,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener('execution_success', handleExecutionSuccess);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1134,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                node.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "js/CanvasView.js",
+      "line": 1285,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1309,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                node.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "Azornes/Comfyui-LayerForge",
+      "file": "src/CanvasView.ts",
+      "line": 1486,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 56
+}

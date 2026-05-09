@@ -1,0 +1,124 @@
+{
+  "repo": "Lightricks/ComfyUI-LTXVideo",
+  "repo_dir": "Lightricks__ComfyUI-LTXVideo",
+  "hits": [
+    {
+      "pattern_id": "S4.W1",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/guider_parameters_advanced.js",
+      "line": 284,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "            enabledWidget.callback = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 218,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "  const widget = node.addDOMWidget(\"track_editor\", \"TrackEditorWidget\", container, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/guider_parameters_advanced.js",
+      "line": 300,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "        nodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 122,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "    nodeType.prototype.onExecuted = function (data) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N4",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 138,
+      "matched_regex": "prototype\\.onRemoved\\s*=",
+      "preview": "    nodeType.prototype.onRemoved = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 130,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "    nodeType.prototype.onConfigure = function (info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/guider_parameters_advanced.js",
+      "line": 49,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "    for (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/guider_parameters_advanced.js",
+      "line": 70,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "        for (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/guider_parameters_advanced.js",
+      "line": 259,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 110,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 235,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    app.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/sparse_track_editor.js",
+      "line": 278,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      app.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "Lightricks/ComfyUI-LTXVideo",
+      "file": "web/js/guider_parameters_advanced.js",
+      "line": 341,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "                this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 13
+}

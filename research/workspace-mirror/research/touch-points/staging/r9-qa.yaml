@@ -1,0 +1,951 @@
+source: qa
+source_root: /home/c_byrne/worktrees/custom-node-qa/main
+ingested_at: '2026-05-08'
+scenario_counts:
+  regression_findings: 32
+  load_all_nodes_workflows: 34
+  harness_scripts: 1
+  total: 67
+checklist_packs:
+- ComfyUI-Lotus
+- ComfyUI-NormalCrafterWrapper
+- ComfyUI-SCAIL-Pose
+- ComfyUI-WanAnimatePreprocess
+- ComfyUI-WanVideoWrapper
+- ComfyUI_AudioTools
+- ComfyUI_Fill-ChatterBox
+- ControlAltAI-Nodes
+- CustomNodeComfyMath
+- RES4LYF
+- audio-separation-nodes-comfyui
+- comfy_api_nodes
+- comfy_extras
+- comfyui-advanced-controlnet
+- comfyui-animatediff-evolved
+- comfyui-depthanythingv2
+- comfyui-enricos-nodes
+- comfyui-fl-path-animator
+- comfyui-florence2
+- comfyui-frame-interpolation
+- comfyui-impact-pack
+- comfyui-impact-subpack
+- comfyui-inpaint-cropandstitch
+- comfyui-kjnodes
+- comfyui-segment-anything-2
+- comfyui-supir
+- comfyui-videohelpersuite
+- comfyui_controlnet_aux
+- comfyui_essentials
+- comfyui_ipadapter_plus
+- comfyui_layerstyle
+- comfyui_ultimatesdupscale
+- core
+- websocket_image_save
+regression_scenarios:
+- name: "comfyui-videohelpersuite :: Load Video FFmpeg (Upload) \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 5
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Load Audio (Upload) \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 9
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph + two audio players
+    are present in the node (one for Vue node, one for LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Meta Batch Manager \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 13
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: VAE Encode Batched \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 17
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: VAE Decode Batched \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 21
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Split Latents \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 25
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Split Masks \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 29
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Repeat Latents \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 33
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Repeat Masks \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 37
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Select Every Nth Latent \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 41
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Select Every Nth Mask \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 45
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-videohelpersuite :: Select Latest \U0001F3A5\U0001F165\U0001F157\U0001F162"
+  file: findings/vue-node-cloud/findings.md
+  line: 49
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S2.N9
+  description: some widgets didn't properly migrate to Vue Nodes, showing LiteGraph.
+  test_seed_for: I-TF.3
+  source: qa
+- name: "comfyui-animatediff-evolved :: Load CameraCtrl Poses (Path) \U0001F3AD\U0001F150\U0001F153\u2461"
+  file: findings/vue-node-cloud/findings.md
+  line: 55
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S6.A3
+  description: cannot retrieve file path.
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: SEGSOrderedFilterDetailerHookProvider'
+  file: findings/vue-node-cloud/findings.md
+  line: 61
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: ascending/descending widget value for 'order' is hidden in Vue node (shows correctly in
+    LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: SEGSRangeFilterDetailerHookProvider'
+  file: findings/vue-node-cloud/findings.md
+  line: 65
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: inside/outside widget value for 'mode' is hidden in Vue node (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Switch (latent/legacy)'
+  file: findings/vue-node-cloud/findings.md
+  line: 69
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: select_on_execution/select_on_prompt widget value for 'set_mode' is hidden in Vue node
+    (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Switch (SEGS/legacy)'
+  file: findings/vue-node-cloud/findings.md
+  line: 73
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: select_on_execution/select_on_prompt widget value for 'set_mode' is hidden in Vue node
+    (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Switch (Any)'
+  file: findings/vue-node-cloud/findings.md
+  line: 77
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: select_on_execution/select_on_prompt widget value for 'set_mode' is hidden in Vue node
+    (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Inversed Switch (Any)'
+  file: findings/vue-node-cloud/findings.md
+  line: 81
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: select_on_execution/select_on_prompt widget value for 'set_mode' is hidden in Vue node
+    (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: SEGSDetailer For Video (SEGS/pipe)'
+  file: findings/vue-node-cloud/findings.md
+  line: 85
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: bbox/crop_region widget value for 'guide_size_for' is hidden in Vue node (shows correctly
+    in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: SEGS Filter (range)'
+  file: findings/vue-node-cloud/findings.md
+  line: 89
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: inside/outside widget value for 'mode' is hidden in Vue node (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: SEGS Filter (ordered)'
+  file: findings/vue-node-cloud/findings.md
+  line: 93
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: inside/outside widget value for 'mode' is hidden in Vue node (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: ImpactMinMax'
+  file: findings/vue-node-cloud/findings.md
+  line: 97
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: max/min widget value for 'mode' is hidden in Vue node (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Control Bridge'
+  file: findings/vue-node-cloud/findings.md
+  line: 101
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: active/(stop/mute/bypass) widget value for 'mode' is hidden in Vue node (shows correctly
+    in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Remote Boolean (on prompt)'
+  file: findings/vue-node-cloud/findings.md
+  line: 105
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: true/false widget value for 'value' is hidden in Vue node (shows correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Spline Editor'
+  file: findings/vue-node-cloud/findings.md
+  line: 111
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S2.N10
+  - S4.W2
+  - S2.N19
+  description: unable to interact with the node UI using Vue node (works correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Points Editor'
+  file: findings/vue-node-cloud/findings.md
+  line: 118
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S2.N10
+  - S4.W2
+  - S2.N19
+  description: unable to interact with the node UI using Vue node (works correctly in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Record Audio'
+  file: findings/vue-node-cloud/findings.md
+  line: 127
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S2.N11
+  - S2.N19
+  description: difficult to use, unable to stop/start recording effectively + recording audio ui on node
+    extends out of the node itself for Vue node.
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: Preview as Text'
+  file: findings/vue-node-cloud/findings.md
+  line: 131
+  kind: regression-finding
+  state: fixed
+  patterns_exercised:
+  - S4.W4
+  - S4.W5
+  description: markdown/plaintext widget value for 'previewmode' is hidden in Vue node (shows correctly
+    in LiteGraph)
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: collapsed nodes extend in size when switching to LiteGraph --> back to
+    Vue node'
+  file: findings/vue-node-cloud/findings.md
+  line: 137
+  kind: regression-finding
+  state: open
+  patterns_exercised: []
+  description: ''
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: collapsed nodes seem to have the correct width for the node (so it shows
+    the node name + custom node name), could be used as a base to resize all nodes correctly once loaded
+    in?'
+  file: findings/vue-node-cloud/findings.md
+  line: 138
+  kind: regression-finding
+  state: open
+  patterns_exercised: []
+  description: ''
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'comfyui-impact-pack :: unable to set seed to a ''fixed'' option with the options available in
+    the new seed layout for Vue node.'
+  file: findings/vue-node-cloud/findings.md
+  line: 139
+  kind: regression-finding
+  state: fixed
+  patterns_exercised: []
+  description: ''
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI-Lotus'
+  file: workflows/non-executable/all-nodes-ComfyUI-Lotus.json
+  kind: load-all-nodes-workflow
+  node_count: 2
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI-Lotus' (2 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI-NormalCrafterWrapper'
+  file: workflows/non-executable/all-nodes-ComfyUI-NormalCrafterWrapper.json
+  kind: load-all-nodes-workflow
+  node_count: 2
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI-NormalCrafterWrapper'\
+    \ (2 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI-SCAIL-Pose'
+  file: workflows/non-executable/all-nodes-ComfyUI-SCAIL-Pose.json
+  kind: load-all-nodes-workflow
+  node_count: 3
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI-SCAIL-Pose' (3 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI-WanAnimatePreprocess'
+  file: workflows/non-executable/all-nodes-ComfyUI-WanAnimatePreprocess.json
+  kind: load-all-nodes-workflow
+  node_count: 4
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI-WanAnimatePreprocess'\
+    \ (4 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI-WanVideoWrapper'
+  file: workflows/non-executable/all-nodes-ComfyUI-WanVideoWrapper.json
+  kind: load-all-nodes-workflow
+  node_count: 129
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI-WanVideoWrapper'\
+    \ (129 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI_AudioTools'
+  file: workflows/non-executable/all-nodes-ComfyUI_AudioTools.json
+  kind: load-all-nodes-workflow
+  node_count: 28
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI_AudioTools' (28\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ComfyUI_Fill-ChatterBox'
+  file: workflows/non-executable/all-nodes-ComfyUI_Fill-ChatterBox.json
+  kind: load-all-nodes-workflow
+  node_count: 5
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ComfyUI_Fill-ChatterBox'\
+    \ (5 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: ControlAltAI-Nodes'
+  file: workflows/non-executable/all-nodes-ControlAltAI-Nodes.json
+  kind: load-all-nodes-workflow
+  node_count: 21
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'ControlAltAI-Nodes' (21\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: CustomNodeComfyMath'
+  file: workflows/non-executable/all-nodes-CustomNodeComfyMath.json
+  kind: load-all-nodes-workflow
+  node_count: 53
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'CustomNodeComfyMath' (53\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: RES4LYF'
+  file: workflows/non-executable/all-nodes-RES4LYF.json
+  kind: load-all-nodes-workflow
+  node_count: 271
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'RES4LYF' (271 nodes). Exercises\
+    \ v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: audio-separation-nodes-comfyui'
+  file: workflows/non-executable/all-nodes-audio-separation-nodes-comfyui.json
+  kind: load-all-nodes-workflow
+  node_count: 7
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'audio-separation-nodes-comfyui'\
+    \ (7 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfy_api_nodes'
+  file: workflows/non-executable/all-nodes-comfy_api_nodes.json
+  kind: load-all-nodes-workflow
+  node_count: 119
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfy_api_nodes' (119 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfy_extras'
+  file: workflows/non-executable/all-nodes-comfy_extras.json
+  kind: load-all-nodes-workflow
+  node_count: 346
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfy_extras' (346 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-advanced-controlnet'
+  file: workflows/non-executable/all-nodes-comfyui-advanced-controlnet.json
+  kind: load-all-nodes-workflow
+  node_count: 35
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-advanced-controlnet'\
+    \ (35 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-animatediff-evolved'
+  file: workflows/non-executable/all-nodes-comfyui-animatediff-evolved.json
+  kind: load-all-nodes-workflow
+  node_count: 115
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-animatediff-evolved'\
+    \ (115 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-depthanythingv2'
+  file: workflows/non-executable/all-nodes-comfyui-depthanythingv2.json
+  kind: load-all-nodes-workflow
+  node_count: 2
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-depthanythingv2'\
+    \ (2 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-enricos-nodes'
+  file: workflows/non-executable/all-nodes-comfyui-enricos-nodes.json
+  kind: load-all-nodes-workflow
+  node_count: 7
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-enricos-nodes' (7\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-fl-path-animator'
+  file: workflows/non-executable/all-nodes-comfyui-fl-path-animator.json
+  kind: load-all-nodes-workflow
+  node_count: 1
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-fl-path-animator'\
+    \ (1 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-florence2'
+  file: workflows/non-executable/all-nodes-comfyui-florence2.json
+  kind: load-all-nodes-workflow
+  node_count: 4
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-florence2' (4 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-frame-interpolation'
+  file: workflows/non-executable/all-nodes-comfyui-frame-interpolation.json
+  kind: load-all-nodes-workflow
+  node_count: 9
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-frame-interpolation'\
+    \ (9 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-impact-pack'
+  file: workflows/non-executable/all-nodes-comfyui-impact-pack.json
+  kind: load-all-nodes-workflow
+  node_count: 184
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-impact-pack' (184\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-impact-subpack'
+  file: workflows/non-executable/all-nodes-comfyui-impact-subpack.json
+  kind: load-all-nodes-workflow
+  node_count: 1
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-impact-subpack'\
+    \ (1 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-inpaint-cropandstitch'
+  file: workflows/non-executable/all-nodes-comfyui-inpaint-cropandstitch.json
+  kind: load-all-nodes-workflow
+  node_count: 6
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-inpaint-cropandstitch'\
+    \ (6 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-kjnodes'
+  file: workflows/non-executable/all-nodes-comfyui-kjnodes.json
+  kind: load-all-nodes-workflow
+  node_count: 185
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-kjnodes' (185 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-segment-anything-2'
+  file: workflows/non-executable/all-nodes-comfyui-segment-anything-2.json
+  kind: load-all-nodes-workflow
+  node_count: 6
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-segment-anything-2'\
+    \ (6 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-supir'
+  file: workflows/non-executable/all-nodes-comfyui-supir.json
+  kind: load-all-nodes-workflow
+  node_count: 10
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-supir' (10 nodes).\
+    \ Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui-videohelpersuite'
+  file: workflows/non-executable/all-nodes-comfyui-videohelpersuite.json
+  kind: load-all-nodes-workflow
+  node_count: 33
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui-videohelpersuite'\
+    \ (33 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui_controlnet_aux'
+  file: workflows/non-executable/all-nodes-comfyui_controlnet_aux.json
+  kind: load-all-nodes-workflow
+  node_count: 64
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui_controlnet_aux'\
+    \ (64 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui_essentials'
+  file: workflows/non-executable/all-nodes-comfyui_essentials.json
+  kind: load-all-nodes-workflow
+  node_count: 62
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui_essentials' (62\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui_ipadapter_plus'
+  file: workflows/non-executable/all-nodes-comfyui_ipadapter_plus.json
+  kind: load-all-nodes-workflow
+  node_count: 29
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui_ipadapter_plus'\
+    \ (29 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui_layerstyle'
+  file: workflows/non-executable/all-nodes-comfyui_layerstyle.json
+  kind: load-all-nodes-workflow
+  node_count: 157
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui_layerstyle' (157\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: comfyui_ultimatesdupscale'
+  file: workflows/non-executable/all-nodes-comfyui_ultimatesdupscale.json
+  kind: load-all-nodes-workflow
+  node_count: 3
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'comfyui_ultimatesdupscale'\
+    \ (3 nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: core'
+  file: workflows/non-executable/all-nodes-core.json
+  kind: load-all-nodes-workflow
+  node_count: 62
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'core' (62 nodes). Exercises\
+    \ v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: 'all-nodes :: websocket_image_save'
+  file: workflows/non-executable/all-nodes-websocket_image_save.json
+  kind: load-all-nodes-workflow
+  node_count: 1
+  patterns_exercised:
+  - S11.G2
+  - S13.SC1
+  - S2.N1
+  - S2.N6
+  - S2.N7
+  - S6.A2
+  description: "Auto-generated workflow that instantiates EVERY node in pack 'websocket_image_save' (1\
+    \ nodes). Exercises v1\u2194v2 round-trip serialization, registration, and Vue-node migration."
+  test_seed_for: I-TF.3
+  source: qa
+- name: QA.testAllPacks (devtools harness)
+  file: scripts/devtools-node-pack-tester.js
+  kind: harness-script
+  patterns_exercised:
+  - S11.G2
+  - S2.N1
+  - S6.A2
+  - S7.G1
+  description: Browser-devtools harness that calls LiteGraph.createNode, app.graph.add, app.graph.serialize
+    for every node in every installed custom-node pack. The test fixture for I-TF.3 round-trip suites.
+  test_seed_for: I-TF.3
+  source: qa

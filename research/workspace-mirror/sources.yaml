@@ -1,0 +1,323 @@
+project: ecs-vue-hoisted-client-state-hook-api
+created: 2026-04-14
+sources:
+- type: meeting_transcript
+  url: file://Frontend-Sprint-Planning-8057ee19-4703.md
+  status: ingested
+  artifact: research/architecture/meeting-transcript-summary.md
+  notes: Sprint planning meeting with ECS/hook API scoping discussion
+- type: repo
+  url: file://ComfyUI_frontend/docs/adr/0008-entity-component-system.md
+  status: ingested
+  artifact: research/architecture/adr-0008-ecs-summary.md
+  notes: ECS ADR (on branch commit 3e197b5c5, not in working tree)
+- type: repo
+  url: file://ComfyUI_frontend/docs/architecture/ecs-target-architecture.md
+  status: ingested
+  artifact: research/architecture/ecs-target-architecture-summary.md
+  notes: Target architecture doc (on branch commit 3e197b5c5)
+- type: repo
+  url: file://ComfyUI_frontend/docs/architecture/ecs-world-command-api.md
+  status: ingested
+  artifact: research/architecture/ecs-world-command-api-summary.md
+  notes: World/Command layer design (on branch commit 20b2aaca7)
+- type: repo
+  url: file://ComfyUI_frontend/src/types/comfy.ts
+  status: ingested
+  artifact: research/architecture/comfy-extension-interface-analysis.md
+  notes: "ComfyExtension interface \u2014 current public API hooks"
+- type: repo
+  url: file://ComfyUI_frontend/src/types/index.ts
+  status: ingested
+  artifact: research/architecture/public-api-surface-analysis.md
+  notes: Public API barrel export
+- type: repo
+  url: file://core/packages/reactivity/
+  status: ingested
+  artifact: research/vue-internals/reactivity-system.md
+  notes: Vue reactivity system source code
+- type: repo
+  url: file://core/packages/runtime-core/
+  status: ingested
+  artifact: research/vue-internals/runtime-core-hooks.md
+  notes: "Vue runtime-core \u2014 setup functions, lifecycle hooks, component instances"
+- type: external
+  url: comfy_codesearch_mcp
+  status: pending
+  artifact: research/custom-node-patterns/
+  notes: Custom node code search for real extension patterns
+- type: repo
+  url: file://ComfyUI_frontend/docs/extensions/core.md
+  status: ingested
+  artifact: research/architecture/core-extensions-reference.md
+  notes: Core extensions reference doc
+- type: repo
+  url: file://ComfyUI_frontend/docs/extensions/development.md
+  status: ingested
+  artifact: research/architecture/extension-development-guide.md
+  notes: Extension development guide
+- type: repo
+  url: file://ComfyUI_frontend/docs/adr/0006-primitive-node-copy-paste-lifecycle.md
+  status: ingested
+  artifact: research/architecture/adr-0006-primitive-copy-paste-summary.md
+  notes: "ADR 0006 \u2014 PrimitiveNode copy/paste lifecycle. Status in source: Pending.\nKEY FINDING: narrowly about PrimitiveNode\
+    \ losing secondary widget values on copy\n(control_after_generate dropped because clone has no this.widgets), NOT general\n\
+    node copy lifecycle. Reframe: intersects I-WS (lazy widget serialization), not\nI-SR. Option C \"projection model\" is\
+    \ same shape as Subgraph widgets / PR #11811.\nI-SR scope copy semantics remains a separate open question (now I-NEW.1b\
+    \ / D12).\n"
+- type: repo
+  url: file://ComfyUI_frontend/docs/adr/0007-node-execution-output-passthrough-schema.md
+  status: pending
+  artifact: research/architecture/adr-0007-output-passthrough-summary.md
+  notes: "ADR 0007 \u2014 node execution output passthrough schema. Intersects widget-api-thoughts \xA7\"Output System Change\"\
+    \ and S15.OS1 dynamic outputs. Surfaced 2026-05-08; queued via I-NEW.2. May reframe I-WS scope."
+- type: repo
+  url: file://ComfyUI_frontend/docs/adr/0007-node-execution-output-passthrough-schema.md
+  status: ingested
+  artifact: research/architecture/adr-0007-output-passthrough-summary.md
+  notes: "ADR 0007 \u2014 NodeExecutionOutput passthrough schema. Status in source: Accepted (2026-03-11). KEY FINDING: backend\
+    \ execution payloads are deliberately open-ended (.passthrough() in zOutputs); .catchall() rejected due to TypeScript\
+    \ index-signature collision with explicit fields (animated, text). Decision centralizes parsing into src/stores/resultItemParsing.ts\
+    \ and accepts unknown[] cast at boundary. Intersects S15.OS1 (different layer \u2014 slot mutation vs execution payload)\
+    \ and tensions with widget-api-thoughts.md \xA7Output System Change (which proposed forcing schema declaration \u2014\
+    \ ADR 0007 forecloses that for execution payloads). Candidate D-OS1: split output-schema declaration vs payload."
+- type: github_issue
+  url: https://github.com/Comfy-Org/ComfyUI_frontend/issues/4668
+  branch_url: https://github.com/Comfy-Org/ComfyUI_frontend/tree/feat/import-based-api-versioning
+  branch_sha: 97547434b02e0a4503973398093d00c674fc7ccf
+  status: ingested
+  date_accessed: 2026-05-08
+  artifact: research/issues/issue-4668-import-based-api-versioning.md
+  notes: >-
+    GH issue proposing import-based API versioning alternative to our D6 approach. Branch has real
+    implementation: extensionService extended with registerExtensionWithVersion, invokeExtensionsForVersion,
+    invokeExtensionsForAllVersions, transformArgsForVersion, getExtensionVersionReport. Key extractable
+    lessons: VersionProxies = I-PG.C1 reference impl; getExtensionVersionReport = D6 telemetry primitive;
+    import-path versioning does NOT solve external author case (no npm pkg). Notion audit report
+    (prototype usage ~58 packs) not accessible (HTTP 400 auth required).
+- type: test_seed
+  source: external-branch
+  branch: feat/import-based-api-versioning
+  branch_sha: 97547434b02e0a4503973398093d00c674fc7ccf
+  original_path: browser_tests/assets/node_with_v2_combo_input.json
+  local_path: research/touch-points/node_with_v2_combo_input.json
+  date_accessed: 2026-05-08
+  notes: >-
+    LiteGraph workflow JSON containing a node with a v2 combo input widget. Intended as a
+    concrete test seed for I-TF.3 harness (loadEvidenceSnippet / synthetic fixture path).
+    Tagged source:external-branch per I-EXT.4 task spec.
+- type: notion_page
+  url: https://www.notion.so/comfy-org/Widget-Serialization-in-Frontend-A-Historical-Analysis-of-a-Structural-Flaw-3596d73d36508084b016ebeefd372572
+  status: ingested
+  date_accessed: 2026-05-08
+  page_date: 2026-05-07
+  artifact: research/architecture/widget-serialization-historical-analysis.md
+  notes: >-
+    Comfy-org Notion doc (Christian Byrne). Historical analysis of widgets_values positional-array
+    root cause. KEY FINDINGS: (1) widget.serialize vs widget.options.serialize duality — distinct
+    semantics (slot existence vs backend exclusion); (2) three index-drift sources: control_after_generate,
+    extension-injected widgets, V3 IO.MultiType topology-dependent widget count; (3) NaN→null failure
+    pipeline end-to-end; (4) PR #10392 widgets_values_named structural fix + fallbackWidgetsValuesNames
+    in /object_info schema; (5) PR #11884 immediate null guard with AustinMroz reviewer concern (silent
+    wrong-value substitution must be logged). Informs: I-WS.3 (WidgetHandle identity by name not position),
+    D7 3-tier persistence matrix, EVT2 (BeforeSerializeEvent targets widget by name), BC.12/BC.13 test
+    triples, patterns S4.W3/S2.N15/S2.N6/S2.N16.
+- type: notion_page
+  url: https://www.notion.so/comfy-org/APIs-required-by-Custom-Scripts-1ef6d73d365080bdbc42c9276088e9b5
+  status: ingested
+  date_accessed: 2026-05-08
+  page_date: 2025-05-10
+  notion_task_id: COM-3668
+  artifact: research/architecture/notion-custom-scripts-api-requirements.md
+  notes: >-
+    Simon Tranter's API requirements analysis for Custom Scripts extension. Three new gaps:
+    GAP-A S4.W6 DOM widget creation hook (cross-extension observer), GAP-B S12.UI3 settings-integrated
+    custom dialogs, GAP-C S6.A5 frontend widget validation (pre-queue reject). Simon's veto comment
+    (2025-05-12): canvas drawing overrides "too hacky/specific" — confirms S3.C* out of v1 scope,
+    supports D9 Phase C deferral. Existing patterns confirmed: S11.G* (arrange graph),
+    S1.H2 (widget defaults), S3.C*/S1.H3/H4 (context menus), S5.A1/S2.N2 (executed events),
+    S10.D1 (dynamic IO), S4.W3/S15.OS1 (base vs actual value / dynamic prompts).
+- type: notion_page
+  url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+  status: ingested
+  date_accessed: 2026-05-08
+  page_date: 2026-04-07
+  artifact: research/architecture/notion-api-usage-research-summary.md
+  staging: research/touch-points/staging/notion-api-research-evidence.yaml
+  notes: "Team-authored Notion audit. Scope: ~58 packages, ~290 JS/TS files. Methodology: local file-walk (complements\
+    \ R7 MCP + R8 clone-and-grep). KEY FINDINGS: (1) 7 new patterns staged (S16.DOM1-4, S16.VUE1, S3.C2, S6.A5,\
+    \ S12.UI2); (2) large occurrence counts for existing patterns (onNodeCreated=135, onExecuted=88, onConnectionsChange=64,\
+    \ LiteGraph.*=313, body.appendChild=364, innerHTML=443); (3) chainCallback independently reimplemented by 5+\
+    \ packages (DEP2 evidence); (4) 9 packages bundle own Vue runtime; (5) Vue composables section (useNodeSize,\
+    \ useNodeExecutionOutput, useNodeConnections, useNodeLifecycle) maps directly to I-SR/I-API design. Staging\
+    \ data not yet merged into database.yaml \u2014 pending task I-N4.1."
+- type: notion_page
+  url: https://www.notion.so/comfy-org/Widget-Component-APIs-2126d73d365080b0bf30f241c09dd756
+  status: ingested
+  date_accessed: 2026-05-08
+  parent_notion_task: https://www.notion.so/comfy-org/Define-component-widget-API-2116d73d365080d08c0fd890356187b0
+  artifact: research/notion/widget-component-apis.md
+  notes: >-
+    PrimeVue component prop API decisions for v2 widget system. Author: Christian Byrne + Pablo (design).
+    15 widget components in scope (Button, InputText, Select, ColorPicker, MultiSelect, SelectButton,
+    Slider, Textarea, ToggleSwitch, Chart, Image, ImageCompare, Galleria, FileUpload, TreeSelect).
+    STATUS WIP: only ToggleSwitch has completed Pick<> types; 14/15 empty. Exclusion rule: strip all
+    style/class/dt/pt/*Class/*Style props (no CSS escape hatches). KEY RELEVANCE: (1) Pick<> types are
+    the per-component typed options bag for D7 future-pivot (WidgetHandle<T, Opts>); (2) Python
+    Component.Input() pattern is the backend INPUT_TYPES counterpart to widget_options sidecar (D7 Part 3);
+    (3) 15 component list is the concrete widget-kind enumeration for BC.33 test triples (I-TF.2);
+    (4) disabled/readonly props confirm D7 first-class field rule (every-widget concerns already on WidgetHandle).
+- type: notion_page
+  url: https://www.notion.so/comfy-org/Nodes-2-0-Default-UI-DevRel-Docs-Migration-3226d73d365081b388c1c393c1d7415b
+  status: ingested
+  date_accessed: 2026-05-08
+  page_last_edited: 2026-04-15
+  artifact: research/architecture/notion-pain-point-assessment.md
+  notes: >-
+    Parent milestone page: "Nodes 2.0 Default UI — DevRel, Docs & Migration". P1 priority, in-progress.
+    Terry Jia lead. 8-checkpoint goal structure from API+feedback-loop through Default-UI-flip.
+    4/14 update: ecosystem audit done, synced with Terry+Jacob+Christian, starting API design from
+    first principles. KEY RELEVANCE: milestone framing confirms this project's scope, people, and
+    sequencing. Checkpoint goals 1-3 (API, docs, migration) are directly what this project produces.
+- type: notion_page
+  url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+  status: ingested
+  date_accessed: 2026-05-08
+  page_last_edited: 2026-04-14
+  artifact: research/architecture/notion-pain-point-assessment.md
+  notes: >-
+    Terry Jia's first-principles custom node DX walkthrough. 3 P0 blockers, 6 P1 issues, 7 P2 nice-to-haves,
+    plus 4 appendix gaps (A.1–A.4) not captured by code-search: app-mode surface (S17.AM1), subgraph
+    boundary propagation (S17.SB1), file/asset API gap (S17.FA1), widgets_values positional fragility
+    (S17.WV1). KEY FINDING: "The DX gap is 100% a documentation and API surface exposure problem, not
+    a technical one." Staged new patterns via I-N5.2–I-N5.4. KEY CLARIFICATION: NodeModeChangedEvent
+    in node.ts covers execution mode (muted/bypass), NOT canvas mode — A.1 requires a separate
+    canvasModeChanged event on NodeHandle or app-level event.
+- type: notion_page
+  url: https://www.notion.so/comfy-org/Workflow-Serialization-in-ComfyUI-Frontend-A-Historical-Analysis-3596d73d365080c9ba69e945df831c1b
+  date_accessed: 2026-05-08
+  page_last_edited: 2026-05-07
+  status: ingested
+  artifact: research/architecture/workflow-serialization-historical-analysis.md
+  staging: research/touch-points/staging/R-SER-new-patterns.yaml
+  notes: >-
+    Authoritative internal doc covering ComfyUI's three-format serialization system (workflow JSON,
+    API prompt, extra_pnginfo). Documents full graphToPrompt() anatomy (executionUtil.ts:27), the two
+    serialize flags (widget.serialize vs widget.options.serialize), dual schema versions (0.4 vs v1),
+    13 historical bugs with exact file+line locations, and maintenance rules. KEY FINDINGS: (1) two
+    distinct serialize flags are the root cause of index drift / widget slot corruption; (2)
+    graphToPrompt() patching (S6.A1 blast-radius #1) exists because no beforePrompt app-level hook
+    exists; (3) __type__: 'CURVE' wrapper has NO current backend consumer; (4) execution_error Zod
+    schema is wrong (node_id required but cloud sends null). Staged 3 new patterns: S18.SER1
+    (serialize flag confusion), S18.SER2 (onConfigure index patching), S18.SER3 (graph.extra
+    persistence). Directly informs I-WS.3, D7, D5/EVT2, PKG2, I-TF.3 harness.
+- type: notion_page
+  url: https://www.notion.so/comfy-org/Unified-Workflow-Format-Frontend-Implementation-Plan-3316d73d3650810abd07dcfb48daffff
+  date_accessed: 2026-05-08
+  page_last_edited: 2026-03-28
+  status: ingested
+  artifact: research/architecture/notion-uwf-frontend-impl-plan.md
+  tasks: I-UWF.1–I-UWF.9
+  notes: >-
+    UWF 3-phase frontend plan. Phase 3 is the official deprecation path for S6.A1
+    (graphToPrompt monkey-patching, blast radius #1). Four gaps vs current v2 plan:
+    GAP-UWF-1 (no app-level beforePrompt hook), GAP-UWF-2 (no virtual-node declaration API),
+    GAP-UWF-3 (no cross-node value sync for global seed), GAP-UWF-4 (D5 context enum may need
+    UWF phase-2 value). widgetValueStore (PR #8594) merged; widgets_values_named (PR #10392) open.
+    Parent backend spec page not yet ingested (I-UWF.9).
+- type: notion_page
+  url: https://www.notion.so/comfy-org/ComfyUI-Frontend-Architecture-3536d73d365080589f10f0a19594fc83
+  status: ingested
+  date_accessed: 2026-05-08
+  page_last_edited: 2026-05-01
+  artifact: research/architecture/frontend-architecture-overview.md
+  notes: >-
+    Internal 1:1 Frontend Q&A doc. Four-layer stack (LiteGraph → scripts/ → Pinia+Vue → ECS).
+    Key stores list (9), extension lifecycle timing table (init/setup/nodeCreated/afterConfigureGraph),
+    VueNode ComponentWidgetImpl bridge, waitForLoad3d deferral pattern, testing standards.
+    KEY FINDINGS: nodeCreated fires BEFORE VueNode mounts (informs I-SR.2.B2, BC.37 new category);
+    app.rootGraph is NOT Vue reactive (confirms D8 problem statement); scripts/ is compat-only
+    (confirms D6 parallel-paths direction).
+- type: generated_artifact
+  date_generated: 2026-05-08
+  status: generated
+  artifact: research/touch-points/test-stub-manifest.md
+  generated_from:
+    - research/touch-points/behavior-categories.yaml
+    - research/touch-points/rollup.yaml
+  tasks: I-TF.2.A1
+  notes: >-
+    Test stub manifest for I-TF.2. 41 behavior categories × 3 test types = 123 stub files.
+    34 categories have blast_radius ≥ 2.0 (compat-floor gate). Gates tasks A2–A6 which are
+    all parallel: v1 stubs BC.01–20, v1 stubs BC.21–41, v2 stubs BC.01–20, v2 stubs BC.21–41,
+    migration stubs BC.01–41.
+- type: generated_artifact
+  date_generated: 2026-05-08
+  status: generated
+  artifact: docs/architecture/extension-api-v2/names-appendix.md
+  generated_from:
+    - research/touch-points/database.yaml
+    - ComfyUI_frontend/src/extension-api/node.ts
+    - ComfyUI_frontend/src/extension-api/widget.ts
+    - decisions/D4-gap-analysis.md
+    - decisions/D6-parallel-paths-migration.md
+  tasks: DOC1.E6
+  notes: >-
+    Names appendix: 8 terms cross-walked across Python backend / LiteGraph v1 / v2 API / ECS World.
+    5 real inconsistencies identified and resolved. Covers S2.N16 (widget name invariant), S13.SC1
+    (nodeData schema — D4 G1 BLOCKER gap documented), S15.OS1 (slot mutation restricted in v2).
+    Resolves reviewer feedback F2 (naming audit) and F3 (widgetType stays).
+- type: notion_page
+  url: https://www.notion.so/3316d73d3650811587abd9c611e456dc
+  date_accessed: 2026-05-08
+  page_last_edited: 2026-04-29
+  status: ingested
+  artifact: research/architecture/uwf-backend-data-model.md
+  tasks: I-UWF.9
+  notes: >-
+    UWF backend data model spec (Matt Miller, Kishore Shimikeri). Four objects: WorkflowSpec,
+    WorkflowLayout (backend-opaque), ExecutionPrompt (derived, not stored), RunSnapshot
+    (immutable per-execution). KEY FINDINGS: (1) Inputs become { value, link } pairs —
+    named not positional, eliminates widget shift bugs; (2) Explicit spec.edges array with
+    named input targets; (3) Virtual node resolution (reroutes, Get/Set) happens at save time
+    into real edges — layout is opaque, confirms uwf-resolved for S6.A1; (4) Execute overrides
+    limited to promoted inputs only — arbitrary node patching not expressible in UWF;
+    (5) Three versioning tiers (structural/binding-only/layout-only). Directly informs:
+    I-WS.3 (named-input compat), I-UWF.4 (app hook scope), I-UWF.5 (virtual node narrower),
+    I-TF.3 (harness must cover both old flat-API and new { value, link } shapes).
+- type: codebase_audit
+  url: file://ComfyUI_frontend/src/types/index.ts
+  date_accessed: 2026-05-08
+  status: ingested
+  artifact: research/touch-points/orphan-exports.md
+  tasks: R10
+  notes: >-
+    Reverse-direction sweep A: cross-referenced all 32 exports in src/types/index.ts against
+    database.yaml patterns. Found 8 covered, 10 orphan @public_needed:YES, 6 @public_needed:MAYBE,
+    9 @public_needed:NO (API shapes, deprecation candidates). Three new pattern proposals: S18.CM1
+    (extensionManager/CommandManager), S18.TM1 (toast API), S18.DS1 (DOMWidgetOptions callbacks).
+- type: codebase_audit
+  url: file://ComfyUI_frontend/src/lib/litegraph/src/
+  date_accessed: 2026-05-08
+  status: ingested
+  artifact: research/touch-points/orphan-exports.md
+  tasks: R10
+  notes: >-
+    Reverse-direction sweep B: walked public methods of LGraphNode, LGraph, LGraphCanvas,
+    LGraphGroup, LLink, Reroute. Found 10 extension-accessible methods not in DB:
+    addWidget (S2.N20), getInputData/getOutputData (S2.N21), triggerSlot (S2.N22),
+    changeMode/mute (S2.N23), isSubgraphNode (S2.N24), graph.add/remove (S2.N25),
+    graph.beforeChange/afterChange (S2.N26). Plus S18.CM1/TM1/DS1. All proposed as new
+    patterns. LiteGraph rendering internals (draw*, measure, etc.) confirmed NOT extension surfaces.
+- type: design_spec
+  url: file://research/architecture/widget-lazy-serialize-spec.md
+  status: authored
+  artifact: research/architecture/widget-lazy-serialize-spec.md
+  tasks: I-WS.3
+  date: 2026-05-08
+  notes: >-
+    I-WS.3 lazy widget serialization spec. Collapses 4 v1 surfaces (widget.serializeValue,
+    onSerialize, prototype.serialize, direct widget.value) into widget.on('beforeSerialize').
+    Internal getSerializedValue(widgetId, context) reads widgetValueStore, writes back on
+    non-prompt contexts. Sync fast path for workflow-save. 3 v1 shims. ADR 0006 resolution.
+    4 open questions documented (OQ-1..4).

@@ -1,0 +1,77 @@
+source: guides
+source_root: /home/c_byrne/guides/custom-nodes-guides
+ingested_at: '2026-05-08'
+files_walked:
+- example-class.md
+code_block_stats:
+  total: 2
+  python: 2
+  js_ts: 0
+  other: 0
+sanctioned_surfaces: []
+summary:
+  patterns_taught_in_guides: []
+  patterns_in_db_but_not_taught: &id001
+  - S1.H1
+  - S1.H2
+  - S1.H3
+  - S1.H4
+  - S1.H5
+  - S1.H6
+  - S10.D1
+  - S10.D2
+  - S10.D3
+  - S11.G1
+  - S11.G2
+  - S11.G3
+  - S11.G4
+  - S12.UI1
+  - S13.SC1
+  - S14.ID1
+  - S15.OS1
+  - S2.N1
+  - S2.N10
+  - S2.N11
+  - S2.N12
+  - S2.N13
+  - S2.N14
+  - S2.N15
+  - S2.N16
+  - S2.N17
+  - S2.N18
+  - S2.N19
+  - S2.N2
+  - S2.N3
+  - S2.N4
+  - S2.N5
+  - S2.N6
+  - S2.N7
+  - S2.N8
+  - S2.N9
+  - S3.C1
+  - S4.W1
+  - S4.W2
+  - S4.W3
+  - S4.W4
+  - S4.W5
+  - S5.A1
+  - S5.A2
+  - S5.A3
+  - S6.A1
+  - S6.A2
+  - S6.A3
+  - S6.A4
+  - S7.G1
+  - S8.P1
+  - S9.G1
+  - S9.L1
+  - S9.R1
+  - S9.S1
+  - S9.SG1
+  candidate_v2_only_or_internal: *id001
+  patterns_taught_but_not_in_db: []
+  note: "Guides repo currently contains only example-class.md (Python). NO JS/TS frontend examples are\
+    \ taught. Implication: every JS/TS pattern in database.yaml is a v1-only surface from the perspective\
+    \ of our official documentation \u2014 extensions reverse-engineer the surface from code, not docs.\
+    \ Any of these 56 patterns MAY be deprecated in v2 without breaking 'documented behavior', but WILL\
+    \ break extension authors who learned by reading core extensions and other packs."

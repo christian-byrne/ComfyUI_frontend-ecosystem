@@ -1,0 +1,898 @@
+{
+  "repo": "melMass/comfy_mtb",
+  "repo_dir": "melMass__comfy_mtb",
+  "hits": [
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 328,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "        n_widget.callback = function (val) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/worker-css.js",
+      "line": 1,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/worker-base.js",
+      "line": 1,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/worker-html.js",
+      "line": 1,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/ace.js",
+      "line": 1,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/worker-json.js",
+      "line": 1,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/worker-javascript.js",
+      "line": 1,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/debug.js",
+      "line": 185,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "          this.addDOMWidget(`debug_section_${widgetI}`, 'CUSTOM', section, {})",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 153,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "    this.preview_widget = this.addDOMWidget('HTML', 'html', cinner, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 67,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "  const widget = node.addDOMWidget(name, 'textmultiline', inputEl, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 130,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "  // const widget = node.addDOMWidget(name, 'vector', inputEl, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 188,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "  const widget = node.addDOMWidget(name, 'vector', inputEl, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 986,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "          const value_preview = this.addDOMWidget(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1006,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "          const loop_preview = this.addDOMWidget(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 44,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "    python_node.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/debug.js",
+      "line": 84,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "      nodeType.prototype.onNodeCreated = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 793,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "      nodeType.prototype.onNodeCreated = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 862,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 886,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 958,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1109,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1258,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 413,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "  nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/debug.js",
+      "line": 127,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "      nodeType.prototype.onExecuted = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 876,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "        nodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 902,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "        nodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/debug.js",
+      "line": 95,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "      nodeType.prototype.onConnectionsChange = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1267,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "        nodeType.prototype.onConnectionsChange = function (",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 426,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "  nodeType.prototype.onConnectionsChange = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N4",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 871,
+      "matched_regex": "prototype\\.onRemoved\\s*=",
+      "preview": "  nodeType.prototype.onRemoved = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 1121,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "  nodeType.prototype.getExtraMenuOptions = function (app, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 807,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "      nodeType.prototype.getExtraMenuOptions = function (_, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1138,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "        nodeType.prototype.getExtraMenuOptions = function (_, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_input_output_sidebar.js",
+      "line": 498,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "          app.api.addEventListener('status', async () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/imageFeed.js",
+      "line": 347,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('executed', ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 130,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "    this.isVirtualNode = true",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/curve_widget.js",
+      "line": 200,
+      "matched_regex": "\\bgetCustomWidgets\\s*[:(]",
+      "preview": "  getCustomWidgets: () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 727,
+      "matched_regex": "\\bgetCustomWidgets\\s*[:(]",
+      "preview": "  getCustomWidgets: () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 891,
+      "matched_regex": "prototype\\.onDrawForeground\\s*=",
+      "preview": "  nodeType.prototype.onDrawForeground = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N10",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 1052,
+      "matched_regex": "prototype\\.onMouseDown\\s*=",
+      "preview": "  nodeType.prototype.onMouseDown = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N10",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/keybinding-emacs.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onMouseDown\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N10",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/ace.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onMouseDown\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 571,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "    widget.computeSize = function (width) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 133,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "  widget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 213,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "  // widget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 490,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  // registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 867,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N14",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/ace.js",
+      "line": 1,
+      "matched_regex": "\\.onWidgetChanged\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 179,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "  for (const widget of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 198,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "  for (const widget of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 318,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "  for (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N19",
+      "repo": "melMass/comfy_mtb",
+      "file": "web_async/ace/ace.js",
+      "line": 1,
+      "matched_regex": "\\.onResize\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 422,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "      const link = app.graph.links[links[i]]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 40,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "    python_node.shape = LiteGraph.BOX_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 131,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "    this.shape = LiteGraph.BOX_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1114,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            const input = this.addInput(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1262,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "          this.addInput('x', '*')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/debug.js",
+      "line": 87,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput('anything_1', '*')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 194,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "  node.addInput(widget.name, linkType, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 415,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 605,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      node.addInput(name, conType)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 53,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "      this.addOutput('Output', '*')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 368,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput('output', type)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 50,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "      this.removeInput(0)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 90,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "        this.removeInput(n)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 177,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "  node.removeInput(node.inputs.findIndex((i) => i.widget?.name === widget.name))",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 524,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "      node.removeInput(id)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 51,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "      this.removeOutput(0)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 366,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "          this.removeOutput(i)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 151,
+      "matched_regex": "graph\\._version\\b",
+      "preview": "  //     node.graph._version++",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 217,
+      "matched_regex": "graph\\._version\\b",
+      "preview": "  //     node.graph._version++",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 551,
+      "matched_regex": "graph\\._version\\b",
+      "preview": "              node.graph._version++",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1168,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "                    app.graph.add(tn)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1189,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "                    app.graph.add(tn)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/constant.js",
+      "line": 480,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/debug.js",
+      "line": 73,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/notify.js",
+      "line": 109,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/imageFeed.js",
+      "line": 60,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 831,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 1472,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension(mtb_widgets)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/curve_widget.js",
+      "line": 198,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_input_output_sidebar.js",
+      "line": 514,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "  app.registerExtension(sidebar_extension)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_input_output_sidebar.js",
+      "line": 409,
+      "matched_regex": "app\\.extensionManager\\.register",
+      "preview": "      app.extensionManager.registerSidebarTab({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S13.SC1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 777,
+      "matched_regex": "nodeData\\.input\\?\\.required",
+      "preview": "    // const rinputs = nodeData.input?.required",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S13.SC1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 780,
+      "matched_regex": "nodeData\\.input\\?\\.required",
+      "preview": "    if (nodeData.input?.required) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S13.SC1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 781,
+      "matched_regex": "nodeData\\.input\\.required",
+      "preview": "      for (const i of Object.keys(nodeData.input.required)) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S13.SC1",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 782,
+      "matched_regex": "nodeData\\.input\\.required",
+      "preview": "        const input_type = nodeData.input.required[i][0]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 521,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "              this.preview_widget.value = DEMO_CONTENT",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 696,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "    this.preview_widget.value = value",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 265,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "  widget.value = corrected_value",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 501,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "    widget.value = val || '#ff0000'",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 1149,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "  const req = await api.fetchApi('/mtb/actions', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 1161,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "  const res = await api.fetchApi('/mtb/server-info')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/comfy_shared.js",
+      "line": 1165,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "  await api.fetchApi('/mtb/server-info', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_input_output_sidebar.js",
+      "line": 498,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "          app.api.addEventListener('status', async () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 791,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.setDirtyCanvas(true, true)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/note_plus.js",
+      "line": 826,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.setDirtyCanvas(true, true)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 152,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "  //     node.setDirtyCanvas(true, true)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "melMass/comfy_mtb",
+      "file": "web/mtb_widgets.js",
+      "line": 218,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "  //     node.setDirtyCanvas(true, true)",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 99
+}

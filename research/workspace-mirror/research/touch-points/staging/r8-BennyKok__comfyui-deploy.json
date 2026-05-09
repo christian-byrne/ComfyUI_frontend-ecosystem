@@ -1,0 +1,349 @@
+{
+  "repo": "BennyKok/comfyui-deploy",
+  "repo_dir": "BennyKok__comfyui-deploy",
+  "hits": [
+    {
+      "pattern_id": "S2.N1",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 593,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "    // nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 504,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "    nodeType.prototype.getExtraMenuOptions = function (_, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 983,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"executed\", (evt) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 678,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 733,
+      "matched_regex": "\\bgetCustomWidgets\\s*[:(]",
+      "preview": "  getCustomWidgets() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 456,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "                window.app.loadGraphData(data.workflow);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 675,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "          window.app.loadGraphData(latestVersion.workflow);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 1239,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "                window.app.loadGraphData(data.workflow);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 488,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "          app.loadGraphData(workflow);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 861,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "            app.loadGraphData(comfyUIWorkflow);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 2766,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "//     app.loadGraphData(response.workflow);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 848,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "          if (comfyUIWorkflow && app && app.loadGraphData) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 192,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "  widget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 630,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 282,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "    node.connect(0, inputNode, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 1106,
+      "matched_regex": "\\.findNodesByType\\(",
+      "preview": "  let deployMeta = graph.findNodesByType(\"ComfyDeploy\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 23,
+      "matched_regex": "\\.findNodesByType\\(",
+      "preview": "  let nodes = graph.findNodesByType(\"ComfyDeploy\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 106,
+      "matched_regex": "\\.findNodesByType\\(",
+      "preview": "  const nodes = graph.findNodesByType(\"ComfyDeploy\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 265,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "    app.graph.add(inputNode);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 354,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "  app.graph.add(inputNode);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 920,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "          app.graph.add(node);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 1121,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "    app.graph.add(node);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 1622,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension(ext);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 2554,
+      "matched_regex": "app\\.extensionManager\\.register",
+      "preview": "  app.extensionManager.registerSidebarTab({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W4",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 350,
+      "matched_regex": "\\.options\\.values\\s*=",
+      "preview": "    inputNode.widgets.find((x) => x.name == \"default_value\").options.values =",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W4",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 830,
+      "matched_regex": "\\.options\\.values\\s*=",
+      "preview": "        node.widgets[default_value_index].options.values = dynamic_enum_options;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 68,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "            widget.value = newValues[index];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 904,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "          widget.value = value;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 25,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "  graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 908,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "          app.graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 1115,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "    app.graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 921,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "          app.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 1122,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "    app.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/workflow-list.js",
+      "line": 81,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "  graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 357,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "  app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 768,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            app.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 773,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            app.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "BennyKok/comfyui-deploy",
+      "file": "web-plugin/index.js",
+      "line": 905,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "          app.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 38
+}

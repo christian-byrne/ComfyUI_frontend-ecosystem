@@ -1,0 +1,85 @@
+# New patterns surfaced by Workflow Serialization historical analysis
+# Source: research/architecture/workflow-serialization-historical-analysis.md
+# Date: 2026-05-08
+# Merge via: scripts/merge-staging-pass3.py (or manual)
+# All evidence rows are internal (source: notion_internal_doc)
+
+# S18.SER1 — widget.serialize vs widget.options.serialize confusion
+# Two flags, two objects, two effects. Extensions that use the wrong flag produce
+# silent index drift or unexpected prompt inclusions. Distinct from S4.W3 (serializeValue override).
+- pattern_id: S18.SER1
+  surface_family: S18
+  surface: serialization flag confusion — widget.serialize vs widget.options.serialize
+  fingerprint: "widget.serialize = false  OR  addWidget('...', ..., { serialize: false })"
+  semantic: >-
+    Two entirely different flags control what gets serialized at what stage.
+    widget.serialize (direct property) excludes from widgets_values (workflow JSON).
+    widget.options.serialize (nested) excludes from API prompt inputs.
+    Getting them wrong produces: index drift in saved workflows, or values sent to backend
+    when they should not be (or vice versa).
+  v2_replacement: "WidgetHandle.setSerializeEnabled(false) for prompt exclusion; widget kind declaration controls workflow JSON inclusion"
+  decision_ref: D7
+  test_target: WIDGET_SERIALIZATION_FLAGS
+  lifecycle_coupling: 3
+  severity: HIGH
+  notes: >-
+    Canonical confused example: control_after_generate has options.serialize=false but NOT
+    widget.serialize=false — occupies widgets_values slot but never goes to backend.
+    Source: Notion workflow-serialization-historical-analysis §3.4, §Part 2.
+  evidence: []
+
+# S18.SER2 — widgets_values positional index patching in onConfigure / configure override
+# Extensions that override onConfigure to fix index drift from widget insertions/removals.
+# Pattern is: read widgets_values by index, detect stale layout, re-map values.
+- pattern_id: S18.SER2
+  surface_family: S18
+  surface: widgets_values index patching — onConfigure override for stale widget layout
+  fingerprint: "nodeType.prototype.onConfigure = function() { if (this.widgets_values?.length) { populate.call(this, this.widgets_values) } }"
+  semantic: >-
+    Extensions that must handle old saved workflows where their node had fewer/differently-ordered
+    widgets override onConfigure to detect and re-map widgets_values by index. This is the
+    established community pattern for managing widget order changes.
+  v2_replacement: "widgets_values_named (PR #10392) + fallbackWidgetsValuesNames in object_info; v2 should expose onNodeConfigure hook"
+  decision_ref: D7, I-WS
+  test_target: WIDGET_CONFIGURE_LEGACY
+  lifecycle_coupling: 3
+  severity: MEDIUM
+  notes: >-
+    Evidence already in DB (multiple extensions use this via R8 evidence); pattern consolidation
+    of existing S2.N15 (prototype.serialize) and widget configure patterns.
+    Source: Notion workflow-serialization-historical-analysis §Part 5, §3.4.
+    R8 found this pattern in rgthree, easy-use, and others.
+  evidence: []
+
+# S18.SER3 — LGraph.configure() blind property assignment exploitation
+# Extensions that rely on unknown graph-level keys surviving load via the blind this[i] = data[i]
+# fallback. Also: extensions that add arbitrary keys to graph.extra for cross-session state.
+- pattern_id: S18.SER3
+  surface_family: S18
+  surface: graph.extra / LGraph blind property persistence for extension cross-session state
+  fingerprint: "graph.extra['myExtension'] = { ... }  OR  app.graph.extra.myData = ..."
+  semantic: >-
+    Extensions store cross-session state in graph.extra (typed as Dictionary<unknown>) or rely
+    on the LGraph blind-assign fallback to persist custom keys across save/load cycles.
+    No formal extension state persistence API exists; graph.extra is the de facto mechanism.
+  v2_replacement: "Extension-keyed extra bag in v2 graph schema; or NodeHandle.setProperty() for per-node persistence"
+  decision_ref: D7, I-WS
+  test_target: EXTENSION_GRAPH_STATE_PERSISTENCE
+  lifecycle_coupling: 2
+  severity: MEDIUM
+  notes: >-
+    Source: Notion workflow-serialization-historical-analysis §3.10, §Stage 1 (extra envelope).
+    LGraph.ConfigureProperties set gates which keys get explicit handling vs fallthrough.
+    New risk: LiteGraph blind-assign means malformed data matching a real LGraph field silently
+    overwrites it — correctness hazard for any extension that accidentally uses a reserved key.
+  evidence: []
+
+# Update note for S6.A1: add internal anatomy detail from this source
+# (not a new pattern, but new context worth recording in CONTEXT.md and S6.A1 notes)
+# graphToPrompt() internal steps documented at executionUtil.ts:27:
+#   1. applyToGraph() on virtual nodes
+#   2. graph.serialize({ sortNodes })
+#   3. Strip localized_name from slots
+#   4. compressWidgetInputSlots()
+#   5. Stamp frontendVersion
+# Extensions patch this because NO beforePrompt / beforeSerialize app-level hook exists.

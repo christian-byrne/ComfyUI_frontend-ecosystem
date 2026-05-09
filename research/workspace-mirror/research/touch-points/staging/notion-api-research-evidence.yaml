@@ -1,0 +1,335 @@
+# Staged evidence from Notion API usage research page
+# Source: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+# Date accessed: 2026-05-08
+# Methodology: local file-walk across ~58 packages, ~290 frontend JS/TS files
+# To merge: run scripts/merge-staging-notion.py (to be written as part of I-N4.1)
+
+source_tag: notion-api-research
+
+# ─── Quantitative reinforcement of existing patterns ──────────────────────────
+# These add occurrence-count signal to patterns already in database.yaml.
+# Format: existing_pattern_id + new aggregate evidence row.
+
+existing_pattern_reinforcement:
+
+  - pattern_id: S2.N1
+    notes: "135 occurrences of nodeType.prototype.onNodeCreated across ~58 packages"
+    repo: "(aggregate — Notion §2.2)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // Standard pattern — save-and-wrap (ComfyUI-AnimateDiff-Evolved/web/js/gif_preview.js)
+      const onExecuted = nodeType.prototype.onExecuted
+      nodeType.prototype.onExecuted = function (message) {
+          const r = onExecuted ? onExecuted.apply(this, message) : undefined
+          // ... custom behavior ...
+          return r
+      }
+
+  - pattern_id: S2.N3
+    notes: "88 occurrences of nodeType.prototype.onExecuted — universal 'show backend output' pattern"
+    repo: "(aggregate — Notion §2.2)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // 88 occurrences: show_text, show_json, previewAny all use this
+      nodeType.prototype.onExecuted = function (message) {
+          const r = onExecuted ? onExecuted.apply(this, message) : undefined
+          return r
+      }
+
+  - pattern_id: S2.N4
+    notes: "64 occurrences of nodeType.prototype.onConnectionsChange — six distinct parameter signatures observed"
+    repo: "(aggregate — Notion §2.2)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+
+  - pattern_id: S2.N7
+    notes: "16 occurrences of nodeType.prototype.onConfigure — previously evidence-light, now substantial"
+    repo: "(aggregate — Notion §2.2)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+
+  - pattern_id: S2.N19
+    notes: "24 files patch onResize — previously evidence-light"
+    repo: "(aggregate — Notion §2.7)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // ComfyUI-Easy-Use
+      const onResize = node.onResize;
+      node.onResize = function (size) {
+          computeSize(size);
+          if (onResize) onResize.apply(this, arguments);
+      };
+
+  - pattern_id: S10.D3
+    notes: "57 files manipulate node.size[] directly"
+    repo: "(aggregate — Notion §2.7)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      node.setSize([node.size[0], node.computeSize()[1]])
+      widget.computeSize = function(width) {
+          const ratio = this.inputRatio || 1
+          return [width, (width / ratio + 10)]
+      }
+
+  - pattern_id: S11.G2
+    notes: "30 files iterate graph._nodes; 2 use findNodesByType"
+    repo: "(aggregate — Notion §2.8)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // ComfyUI-KJNodes/web/js/setgetnodes.js
+      graph._nodes.forEach(otherNode => {
+          if (otherNode !== this && otherNode.type === 'SetNode') {
+              existingValues.add(otherNode.widgets[0].value);
+          }
+      });
+      // ComfyUI-Impact-Pack — link traversal
+      let src_node = app.graph._nodes_by_id[app.graph.links[input.link].origin_id];
+
+  - pattern_id: S11.G3
+    notes: "8 files manually call graph.beforeChange/afterChange"
+    repo: "(aggregate — Notion §2.12)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // rgthree-comfy
+      app.graph.beforeChange();
+      this.renameContextInput(slotIndex, value);
+      app.graph.afterChange();
+
+  - pattern_id: S7.G1
+    notes: "313 occurrences of LiteGraph.* access; 95 packages use window.*; some mutate global constants"
+    repo: "(aggregate — Notion §2.5)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // READ (reasonable):
+      LiteGraph.NODE_TEXT_SIZE
+      LiteGraph.NODE_TITLE_HEIGHT
+      LiteGraph.NODE_COLORS
+      // WRITE (critical severity):
+      LiteGraph.NODE_TEXT_SIZE = 13
+      LiteGraph.DEFAULT_BACKGROUND_IMAGE = ui.colors.litegraph_base.BACKGROUND_IMAGE
+      LGraphCanvas.link_type_colors["PIPE_LINE"] = customPipeLineLink
+
+  - pattern_id: S4.W1
+    notes: "chainCallback independently reimplemented by 5+ packages (VHS, AnimateDiff, KJNodes + 2 more)"
+    repo: "(aggregate — Notion §2.2)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    excerpt: |
+      // ComfyUI-VideoHelperSuite/web/js/VHS.core.js — one of 5+ independent reimplementations
+      function chainCallback(object, property, callback) {
+          if (property in object && object[property]) {
+              const callback_orig = object[property]
+              object[property] = function () {
+                  const r = callback_orig.apply(this, arguments);
+                  return callback.apply(this, arguments) ?? r
+              };
+          } else {
+              object[property] = callback;
+          }
+      }
+
+  - pattern_id: S3.C1
+    notes: "5 packages patch LGraphCanvas.prototype — rare but maximally destructive; Easy-Use replaces drawNodeShape in 300+ lines"
+    repo: ComfyUI-Easy-Use
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    variant: aggregate-count
+    breakage_class: catastrophic
+    excerpt: |
+      // ComfyUI-Easy-Use/web_version/v1/js/easy/easyInterface.js:171
+      LGraphCanvas.prototype.drawNodeShape = function(node, ctx, size, fgcolor, bgcolor, selected, mouse_over) {
+          // Completely rewrites the original drawing function (~300 lines)
+      }
+      // Also: pasteFromClipboard, all mouse events (rgthree), keyboard
+
+# ─── NEW patterns not yet in database.yaml ────────────────────────────────────
+
+new_patterns:
+
+  - pattern_id: S16.DOM1
+    surface_family: S16
+    surface: document.createElement('style') + head.appendChild
+    fingerprint: "createElement.*style.*head\\.appendChild|createElement\\('style'\\)"
+    semantic: inject CSS into document head for custom node/widget styling
+    severity: moderate
+    lifecycle_coupling: false
+    silent_breakage: true
+    occurrences: 354
+    packages_affected: 81
+    v2_replacement: "extensionManager.injectStyles(css) — proposed; not yet designed"
+    decision_ref: null
+    notes: "No cleanup mechanism — styles persist after extension disable. Injected styles may conflict with host."
+    repo: "(aggregate — Notion §2.3)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    excerpt: |
+      // ComfyUI-KJNodes/web/js/help_popup.js
+      styleTag = document.createElement('style')
+      styleTag.innerHTML = `.kj-documentation-popup { background: var(--comfy-menu-bg); ... }`
+      document.head.appendChild(styleTag)
+
+  - pattern_id: S16.DOM2
+    surface_family: S16
+    surface: document.body.appendChild (arbitrary DOM)
+    fingerprint: "document\\.body\\.appendChild"
+    semantic: inject UI panels, toolbars, preview elements into document body
+    severity: moderate
+    lifecycle_coupling: false
+    silent_breakage: true
+    occurrences: 364
+    packages_affected: 81
+    v2_replacement: "extensionManager.addPanel() / addToolbarItem() — proposed"
+    decision_ref: null
+    notes: "Breaks when frontend DOM structure changes. No cleanup on extension disable."
+    repo: "(aggregate — Notion §2.3)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    excerpt: |
+      // ComfyUI-Easy-Use/web_version/v1/js/easy/easy.js
+      div = document.createElement('div')
+      btn = document.createElement('div')
+      document.body.appendChild(toolbar)
+
+  - pattern_id: S16.DOM3
+    surface_family: S16
+    surface: innerHTML concatenation (potentially user-controlled)
+    fingerprint: "\\.innerHTML\\s*="
+    semantic: render HTML content (help text, previews, dynamic content) via innerHTML
+    severity: high
+    lifecycle_coupling: false
+    silent_breakage: false
+    occurrences: 443
+    packages_affected: ~81
+    v2_replacement: "safe HTML rendering API; Vue component mounting"
+    decision_ref: null
+    notes: "XSS risk when content includes user-supplied data or backend output. 443 occurrences is highest DOM count."
+    repo: "(aggregate — Notion §2.3)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+
+  - pattern_id: S16.DOM4
+    surface_family: S16
+    surface: direct fetch() bypassing api.fetchApi
+    fingerprint: "fetch\\(['\"]/"
+    semantic: call backend HTTP endpoints without going through the authenticated api.fetchApi wrapper
+    severity: moderate
+    lifecycle_coupling: false
+    silent_breakage: true
+    occurrences: 232
+    v2_replacement: "api.fetchApi() typed wrapper (S6.A3); formal custom-route registration (S6.A5 direction)"
+    decision_ref: null
+    notes: "Bypasses auth headers and error normalization. Related to S6.A3 but distinct — no ComfyAPI instance involved."
+    repo: "(aggregate — Notion §5.3)"
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+
+  - pattern_id: S16.VUE1
+    surface_family: S16
+    surface: bundled Vue runtime inside DOM widget
+    fingerprint: "createApp\\(|vueApp\\.mount\\("
+    semantic: mount a Vue application inside addDOMWidget, bundling own copy of Vue runtime
+    severity: moderate
+    lifecycle_coupling: true
+    silent_breakage: false
+    occurrences: 9
+    packages_affected: 9
+    v2_replacement: "registerVueWidget(nodeType, name, Component) sharing host Vue instance"
+    decision_ref: null
+    notes: "Each package ships own Vue runtime (bundle bloat). Cannot access host stores, i18n, theme. Manual mount/unmount is error-prone."
+    repo: ComfyUI-NKD-Sigmas-Curve
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    excerpt: |
+      // ComfyUI-NKD-Sigmas-Curve — 7000+ line single file includes full Vue runtime
+      const vueApp = createApp(SigmaCurveWidget, { onChange: (json) => { ... } });
+      const instance = vueApp.mount(container);
+      const domWidget = this.addDOMWidget("sigma_curve_editor", "CURVE_EDITOR", container, {
+          getValue: () => instance.serialise(),
+          setValue: (val) => { instance.deserialise(val); }
+      });
+
+  - pattern_id: S3.C2
+    surface_family: S3
+    surface: LiteGraph.ContextMenu global replacement
+    fingerprint: "LiteGraph\\.ContextMenu\\s*="
+    semantic: replace the global ContextMenu constructor to customize all right-click menus
+    severity: critical
+    lifecycle_coupling: false
+    silent_breakage: true
+    occurrences: 1
+    packages_affected: 1
+    v2_replacement: "declarative menu contribution API; getExtraMenuOptions hook (already exists for node scope)"
+    decision_ref: null
+    notes: "Only last-writer wins. Cannot be detected or managed by frontend. ComfyUI-Easy-Use is sole evidenced user."
+    repo: ComfyUI-Easy-Use
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    excerpt: |
+      // ComfyUI-Easy-Use/web_version/v1/js/easy/easyQuick.js
+      LiteGraph.ContextMenu = function(values, options) {
+          // Completely replaces the global ContextMenu constructor
+      }
+
+  - pattern_id: S6.A5
+    surface_family: S6
+    surface: api.apiURL method patching
+    fingerprint: "api\\.apiURL\\s*="
+    semantic: intercept URL construction to redirect custom backend routes
+    severity: high
+    lifecycle_coupling: false
+    silent_breakage: true
+    occurrences: 1
+    packages_affected: 1
+    v2_replacement: "formal custom backend route registration API"
+    decision_ref: null
+    notes: "rgthree redirects /rgthree/* routes. Global patch — only last-writer wins."
+    repo: rgthree/rgthree-comfy
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    excerpt: |
+      // rgthree-comfy — modifies api.apiURL globally
+      const apiURL = api.apiURL;
+      api.apiURL = function (route) {
+          if (route.includes("rgthree/")) {
+              return (this.api_base + "/" + route).replace(/\/\//g, "/");
+          }
+          return apiURL.apply(this, arguments);
+      };
+
+  - pattern_id: S12.UI2
+    surface_family: S12
+    surface: app.ui.settings.settingsLookup direct mutation
+    fingerprint: "settingsLookup\\[|settingsLookup\\?\\."
+    semantic: reach into another extension's registered setting and replace its onChange handler
+    severity: high
+    lifecycle_coupling: false
+    silent_breakage: true
+    occurrences: 1
+    packages_affected: 1
+    v2_replacement: "settings isolation — registered settings should have immutable handles"
+    decision_ref: null
+    notes: "ComfyUI-Easy-Use replaces Comfy.UseNewMenu onChange. Cross-extension state corruption. Silently breaks the target extension."
+    repo: ComfyUI-Easy-Use
+    url: "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692"
+    source: notion-api-research
+    excerpt: |
+      // ComfyUI-Easy-Use — accesses internal settingsLookup and replaces onChange handler
+      const changeNewMenuPosition = app.ui.settings.settingsLookup?.['Comfy.UseNewMenu']
+      if(changeNewMenuPosition) changeNewMenuPosition.onChange = v => { ... }

@@ -1,0 +1,106 @@
+{
+  "repo": "Acly/comfyui-tooling-nodes",
+  "repo_dir": "Acly__comfyui-tooling-nodes",
+  "hits": [
+    {
+      "pattern_id": "S2.N3",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 192,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "    nodeType.prototype.onConnectionsChange = function(_, index, connected) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 224,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener('graphChanged', publishWorkflow)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 38,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "    nodeType.prototype.onAdded = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 169,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "    nodeType.prototype.onAdded = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 213,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "            nodeType.prototype.onAdded = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N13",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 181,
+      "matched_regex": "\\.onConnectOutput\\s*=\\s*function",
+      "preview": "    nodeType.prototype.onConnectOutput = function(slot, type, input, target_node, target_slot) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 138,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link = node.graph.links[links[0]]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 203,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S15.OS1",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 147,
+      "matched_regex": "node\\.outputs\\[\\s*\\w+\\s*\\]\\.type\\s*=",
+      "preview": "        node.outputs[0].type = input.type",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S15.OS1",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 161,
+      "matched_regex": "node\\.outputs\\[\\s*\\w+\\s*\\]\\.type\\s*=",
+      "preview": "        node.outputs[0].type = \"*\"",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Acly/comfyui-tooling-nodes",
+      "file": "js/external_tooling_nodes.js",
+      "line": 13,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    await api.fetchApi(\"/api/etn/workflow/publish\", {",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 11
+}

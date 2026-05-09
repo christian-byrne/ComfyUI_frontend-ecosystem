@@ -1,0 +1,583 @@
+{
+  "repo": "crystian/ComfyUI-Crystools",
+  "repo_dir": "crystian__ComfyUI-Crystools",
+  "hits": [
+    {
+      "pattern_id": "S2.N2",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.ts",
+      "line": 58,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "  nodeType.prototype.onExecuted = function(message: { text: string }): void {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.js",
+      "line": 39,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "    nodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 79,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('status', ({detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 89,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('progress', ({detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 101,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('executed', ({detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 109,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('execution_start', ({_detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 116,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('execution_error', ({_detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 131,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('status', ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 139,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('progress', ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 148,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('executed', ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 154,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('execution_start', ({ _detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 159,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('execution_error', ({ _detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.js",
+      "line": 642,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('crystools.monitor', (event) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.js",
+      "line": 69,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('executed', this.fillMetadataWidget, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.ts",
+      "line": 575,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('crystools.monitor', (event: CustomEvent) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.ts",
+      "line": 40,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener('executed', this.fillMetadataWidget, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.js",
+      "line": 55,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "                this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.ts",
+      "line": 23,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.ts",
+      "line": 66,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "  nodeType.prototype.onConfigure = function(): void {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.js",
+      "line": 44,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "    nodeType.prototype.onConfigure = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A2",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 89,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]progress['\\\"]",
+      "preview": "    api.addEventListener('progress', ({detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A2",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 139,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]progress['\\\"]",
+      "preview": "                api.addEventListener('progress', ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.js",
+      "line": 13,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.ts",
+      "line": 18,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.ts",
+      "line": 80,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "//       const link_info = app.graph.links[l];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.js",
+      "line": 74,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        MetadataNode.shape = LiteGraph.BOX_SHAPE;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.ts",
+      "line": 80,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "    MetadataNode.shape = LiteGraph.BOX_SHAPE;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 15,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "    | typeof LiteGraph.BOX_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 16,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "    | typeof LiteGraph.CIRCLE_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 17,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "    | typeof LiteGraph.ARROW_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 761,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        | typeof LiteGraph.BOX_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 763,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        | typeof LiteGraph.CIRCLE_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 764,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        | typeof LiteGraph.CARD_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 765,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        | typeof LiteGraph.ARROW_SHAPE;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 137,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 184,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.js",
+      "line": 653,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/extensions.ts",
+      "line": 26,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "  app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/extensions.js",
+      "line": 19,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "    app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.js",
+      "line": 3,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.js",
+      "line": 11,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.ts",
+      "line": 585,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.ts",
+      "line": 6,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/debugger.ts",
+      "line": 16,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.ts",
+      "line": 36,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "    widget.value = text || '';",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.ts",
+      "line": 88,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "//         widget.value = value;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.js",
+      "line": 24,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "        widget.value = text || '';",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.js",
+      "line": 552,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                const resp = await api.fetchApi('/crystools/monitor', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.js",
+      "line": 568,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                const resp = await api.fetchApi(`/crystools/monitor/GPU/${index}`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.js",
+      "line": 600,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                const resp = await api.fetchApi(`/crystools/monitor/${what}`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.ts",
+      "line": 492,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const resp = await api.fetchApi('/crystools/monitor', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.ts",
+      "line": 504,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const resp = await api.fetchApi(`/crystools/monitor/GPU/${index}`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/monitor.ts",
+      "line": 524,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const resp = await api.fetchApi(`/crystools/monitor/${what}`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 109,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "    api.addEventListener('execution_start', ({_detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 116,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "    api.addEventListener('execution_error', ({_detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 154,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "                api.addEventListener('execution_start', ({ _detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 159,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "                api.addEventListener('execution_error', ({ _detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.ts",
+      "line": 79,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "    api.addEventListener('status', ({detail}: any) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/progressBar.js",
+      "line": 131,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "                api.addEventListener('status', ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/liteGraph.js",
+      "line": 30,
+      "matched_regex": "window\\.LiteGraph\\b",
+      "preview": "export const LiteGraph = window.LiteGraph;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 653,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    setDirtyCanvas(fg: boolean, bg: boolean): void;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/comfy/typings/litegraph.d.ts",
+      "line": 1053,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    setDirtyCanvas(fg: boolean, bg: boolean): void;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.ts",
+      "line": 49,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      appFromArg.graph.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "crystian/ComfyUI-Crystools",
+      "file": "web/common.js",
+      "line": 35,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            appFromArg.graph.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 64
+}

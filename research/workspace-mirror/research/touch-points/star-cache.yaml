@@ -1,0 +1,724 @@
+# ───────────────────────────────────────────────────────────────────────
+# GitHub star cache for repos referenced in database.yaml
+# Refresh: bash scripts/fetch-stars.sh
+# Asof dates allow drift detection
+# ───────────────────────────────────────────────────────────────────────
+
+asof: 2026-05-08
+populated_via: scripts/fetch-stars.sh
+
+repos:
+  - repo: 40740/ComfyUI_LayerStyle_Bmss
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2024-10-16
+    asof: 2026-05-08
+  - repo: 834t/ComfyUI_834t_scene_composer
+    stars: 5
+    archived: false
+    forks: 1
+    last_commit: 2026-04-03
+    asof: 2026-05-08
+  - repo: aicocoa981/WhatDreamsCost-ComfyUI-private
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2026-03-30
+    asof: 2026-05-08
+  - repo: AIGODLIKE/AIGODLIKE-ComfyUI-Studio
+    stars: 405
+    archived: false
+    forks: 25
+    last_commit: 2025-10-27
+    asof: 2026-05-08
+  - repo: akawana/ComfyUI-Folded-Prompts
+    stars: 4
+    archived: false
+    forks: 2
+    last_commit: 2026-04-30
+    asof: 2026-05-08
+  - repo: AkihaTatsu/ComfyUI-Simple-Utility-Nodes
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-11
+    asof: 2026-05-08
+  - repo: alankent/ComfyUI-OA-360-Clip
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2025-11-16
+    asof: 2026-05-08
+  - repo: AlexZ1967/ComfyUI_ALEXZ_tools
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: ameliacode/comfyui-face3d
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-23
+    asof: 2026-05-08
+  - repo: andreszs/ComfyUI-Ultralytics-Studio
+    stars: 3
+    archived: false
+    forks: 1
+    last_commit: 2026-04-13
+    asof: 2026-05-08
+  - repo: ArtHommage/HommageTools
+    stars: 4
+    archived: false
+    forks: 1
+    last_commit: 2025-05-20
+    asof: 2026-05-08
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+    archived: false
+    forks: 16
+    last_commit: 2026-05-01
+    asof: 2026-05-08
+  - repo: becky3/comfyui-workspace
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-13
+    asof: 2026-05-08
+  - repo: BennyKok/comfyui-deploy
+    stars: 1508
+    archived: false
+    forks: 222
+    last_commit: 2025-11-13
+    asof: 2026-05-08
+  - repo: brycecovert/ComfyUI-compass-images
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-23
+    asof: 2026-05-08
+  - repo: choovin/comfyui-api
+    stars: 3
+    archived: false
+    forks: 0
+    last_commit: 2026-03-08
+    asof: 2026-05-08
+  - repo: chyer/Chye-ComfyUI-Toolset
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-03-10
+    asof: 2026-05-08
+  - repo: coeuskoalemoss/comfyUI-layerstyle-custom
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-06-23
+    asof: 2026-05-08
+  - repo: ComfyNodePRs/PR-comfyui-pkg39-ccab78b5
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2024-07-31
+    asof: 2026-05-08
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1787
+    archived: false
+    forks: 563
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: Comfy-Org/ComfyUI-Manager
+    stars: 14564
+    archived: false
+    forks: 2187
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: Comfy-Org/ComfyUI-test-framework
+    stars: 2
+    archived: false
+    forks: 1
+    last_commit: 2026-03-23
+    asof: 2026-05-08
+  - repo: ComfyUI-Kelin/ComfyUI_Image_Anything
+    stars: 3
+    archived: false
+    forks: 0
+    last_commit: 2026-04-20
+    asof: 2026-05-08
+  - repo: Creepybits/ComfyUI-Creepy_nodes
+    stars: 29
+    archived: false
+    forks: 5
+    last_commit: 2026-04-14
+    asof: 2026-05-08
+  - repo: criskb/Comfypencil
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-04-13
+    asof: 2026-05-08
+  - repo: criskb/Fancy_Grid
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-04-13
+    asof: 2026-05-08
+  - repo: crom8505/ComfyUI-Dynamic-Sigmas
+    stars: 8
+    archived: false
+    forks: 2
+    last_commit: 2026-03-30
+    asof: 2026-05-08
+  - repo: Damkohler/jlc-comfyui-nodes
+    stars: 16
+    archived: false
+    forks: 4
+    last_commit: 2026-04-17
+    asof: 2026-05-08
+  - repo: darth-veitcher/comfyui-ollama-model-manager
+    stars: 1
+    archived: false
+    forks: 1
+    last_commit: 2025-11-05
+    asof: 2026-05-08
+  - repo: DazzleNodes/ComfyUI-Smart-Resolution-Calc
+    stars: 7
+    archived: false
+    forks: 2
+    last_commit: 2026-04-22
+    asof: 2026-05-08
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 911
+    archived: false
+    forks: 101
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: dorpxam/ComfyUI-LTX2-Microscope
+    stars: 4
+    archived: false
+    forks: 1
+    last_commit: 2026-04-23
+    asof: 2026-05-08
+  - repo: DumiFlex/ComfyUI-Wildcard-Pipeline
+    stars: 4
+    archived: false
+    forks: 2
+    last_commit: 2026-04-08
+    asof: 2026-05-08
+  - repo: egormly/ComfyUI-EG_Tools
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-11-19
+    asof: 2026-05-08
+  - repo: EmanuelRiquelme/comfyui-art-venture
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2024-09-04
+    asof: 2026-05-08
+  - repo: EnragedAntelope/EA_LMStudio
+    stars: 7
+    archived: false
+    forks: 4
+    last_commit: 2026-04-22
+    asof: 2026-05-08
+  - repo: Firetheft/ComfyUI-Animate-Progress
+    stars: 3
+    archived: false
+    forks: 1
+    last_commit: 2025-09-09
+    asof: 2026-05-08
+  - repo: FloyoAI/ComfyUI-SoundFlow
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-11-21
+    asof: 2026-05-08
+  - repo: flymyd/koishi-plugin-comfyui-client
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2025-08-21
+    asof: 2026-05-08
+  - repo: FunnyFinger/Dynamic_Sliders_stack
+    stars: 4
+    archived: false
+    forks: 2
+    last_commit: 2025-04-22
+    asof: 2026-05-08
+  - repo: gigici/ComfyUI_BlendPack
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: goodtab/ComfyUI-Custom-Scripts
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2024-09-02
+    asof: 2026-05-08
+  - repo: guido-gfv/gfv_pro_upgrade
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-20
+    asof: 2026-05-08
+  - repo: haohaocreates/PR-rk-comfy-nodes-36d8f0a5
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2024-05-22
+    asof: 2026-05-08
+  - repo: hernantech/comfymcp
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-01-03
+    asof: 2026-05-08
+  - repo: hhayiyuan/ComfyUI-FFmpegURLMedia
+    stars: 2
+    archived: false
+    forks: 2
+    last_commit: 2026-01-02
+    asof: 2026-05-08
+  - repo: huafitwjb/ComfyUI-GO-Mobile-app
+    stars: 6
+    archived: false
+    forks: 1
+    last_commit: 2026-03-04
+    asof: 2026-05-08
+  - repo: ialhabbal/compare
+    stars: 1
+    archived: false
+    forks: 2
+    last_commit: 2026-03-31
+    asof: 2026-05-08
+  - repo: IAMCCS/IAMCCS-nodes
+    stars: 92
+    archived: false
+    forks: 6
+    last_commit: 2026-05-04
+    asof: 2026-05-08
+  - repo: IXIWORKS-KIMJUNGHO/comfyui-ixiworks-tools
+    stars: 1
+    archived: false
+    forks: 2
+    last_commit: 2026-03-15
+    asof: 2026-05-08
+  - repo: JichaoLiang/Immortal_comfyui_public
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-12-05
+    asof: 2026-05-08
+  - repo: jiekouai/ComfyUI-JieKou-API
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2026-03-25
+    asof: 2026-05-08
+  - repo: jonstreeter/comfyui-compressed-metadata
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2025-10-12
+    asof: 2026-05-08
+  - repo: ketle-man/ComfyUI-Workflow-Studio
+    stars: 2
+    archived: false
+    forks: 0
+    last_commit: 2026-04-28
+    asof: 2026-05-08
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2569
+    archived: false
+    forks: 292
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: koshimazaki/ComfyUI-Koshi-Nodes
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-03-12
+    asof: 2026-05-08
+  - repo: krismasdev/ComfyUI-Flux-Continuum
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-08-04
+    asof: 2026-05-08
+  - repo: KumihoIO/kumiho-plugins
+    stars: 2
+    archived: false
+    forks: 0
+    last_commit: 2026-03-28
+    asof: 2026-05-08
+  - repo: kyuz0/amd-strix-halo-comfyui-toolboxes
+    stars: 109
+    archived: false
+    forks: 14
+    last_commit: 2026-02-13
+    asof: 2026-05-08
+  - repo: LaoMaoBoss/ComfyUI-WBLESS
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-04-07
+    asof: 2026-05-08
+  - repo: Lightricks/ComfyUI-LTXVideo
+    stars: 3587
+    archived: false
+    forks: 390
+    last_commit: 2026-04-26
+    asof: 2026-05-08
+  - repo: linjm8780860/ljm_comfyui
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-29
+    asof: 2026-05-08
+  - repo: lordwedggie/xcpNodes
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: lucafoscili/lf-nodes
+    stars: 34
+    archived: false
+    forks: 3
+    last_commit: 2025-12-23
+    asof: 2026-05-08
+  - repo: m3rr/h4_Live
+    stars: 2
+    archived: false
+    forks: 2
+    last_commit: 2026-05-07
+    asof: 2026-05-08
+  - repo: MajoorWaldi/ComfyUI-Majoor-AssetsManager
+    stars: 97
+    archived: false
+    forks: 6
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: max-dingsda/ComfyUI-AllinOne-LazyNode
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-03-30
+    asof: 2026-05-08
+  - repo: maxi45274/ComfyUI_LinkFX
+    stars: 3
+    archived: false
+    forks: 0
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: melMass/comfy_mtb
+    stars: 702
+    archived: false
+    forks: 82
+    last_commit: 2026-03-19
+    asof: 2026-05-08
+  - repo: MockbaTheBorg/ComfyUI-Mockba
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2026-04-13
+    asof: 2026-05-08
+  - repo: mudknight/comfyui-mudknight-utils
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: MuhammadMuradKhan/efficiency-nodes-comfyui
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2024-02-11
+    asof: 2026-05-08
+  - repo: niknah/presentation-ComfyUI
+    stars: 2
+    archived: false
+    forks: 2
+    last_commit: 2026-04-21
+    asof: 2026-05-08
+  - repo: nodelee733/ComfyUI-mxToolkit
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-27
+    asof: 2026-05-08
+  - repo: nodetool-ai/nodetool
+    stars: 332
+    archived: false
+    forks: 40
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: nvmax/aspect-ratio-resizer
+    stars: 5
+    archived: false
+    forks: 1
+    last_commit: 2026-04-23
+    asof: 2026-05-08
+  - repo: o-l-l-i/ComfyUI-Olm-ImageAdjust
+    stars: 45
+    archived: false
+    forks: 4
+    last_commit: 2025-08-09
+    asof: 2026-05-08
+  - repo: PGCRT/CRT-Nodes
+    stars: 108
+    archived: false
+    forks: 14
+    last_commit: 2026-05-03
+    asof: 2026-05-08
+  - repo: philippjbauer/devint25-comfyui-api-demo
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-10-09
+    asof: 2026-05-08
+  - repo: pictorialink/ComfyUI-Easy-Use
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2025-07-15
+    asof: 2026-05-08
+  - repo: PioneerMNDR/ComfyUI-Polza
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-04-23
+    asof: 2026-05-08
+  - repo: pixaroma/ComfyUI-Pixaroma
+    stars: 146
+    archived: false
+    forks: 9
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: PROJECTMAD/PROJECT-MAD-NODES
+    stars: 4
+    archived: false
+    forks: 1
+    last_commit: 2026-04-01
+    asof: 2026-05-08
+  - repo: Raykosan/ComfyUI_RaykoStudio
+    stars: 45
+    archived: false
+    forks: 2
+    last_commit: 2026-05-05
+    asof: 2026-05-08
+  - repo: rgthree/rgthree-comfy
+    stars: 3054
+    archived: false
+    forks: 226
+    last_commit: 2026-04-07
+    asof: 2026-05-08
+  - repo: robertvoy/ComfyUI-Distributed
+    stars: 544
+    archived: false
+    forks: 57
+    last_commit: 2026-04-26
+    asof: 2026-05-08
+  - repo: rohapa/comfyui-replay
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-03-27
+    asof: 2026-05-08
+  - repo: r-vage/ComfyUI_Eclipse
+    stars: 19
+    archived: false
+    forks: 2
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: ryanontheinside/ComfyUI_RyanOnTheInside
+    stars: 801
+    archived: false
+    forks: 50
+    last_commit: 2026-03-20
+    asof: 2026-05-08
+  - repo: sammykumar/ComfyUI-SwissArmyKnife
+    stars: 5
+    archived: false
+    forks: 1
+    last_commit: 2026-01-14
+    asof: 2026-05-08
+  - repo: SaturMars/ComfyUI-NVVFR
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2025-08-05
+    asof: 2026-05-08
+  - repo: ShakerSmith/ShakerNodesSuite
+    stars: 8
+    archived: false
+    forks: 0
+    last_commit: 2026-02-18
+    asof: 2026-05-08
+  - repo: shrimbly/willie-comfy-frontend
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-28
+    asof: 2026-05-08
+  - repo: SKBv0/ComfyUI_SKBundle
+    stars: 116
+    archived: false
+    forks: 7
+    last_commit: 2026-04-23
+    asof: 2026-05-08
+  - repo: SKBv0/ComfyUI_SpideyReroute
+    stars: 13
+    archived: false
+    forks: 2
+    last_commit: 2025-12-19
+    asof: 2026-05-08
+  - repo: sofakid/dandy
+    stars: 54
+    archived: false
+    forks: 4
+    last_commit: 2025-12-15
+    asof: 2026-05-08
+  - repo: SpaceWarpStudio/ComfyUI-SetInputGetOutput
+    stars: 0
+    archived: false
+    forks: 1
+    last_commit: 2026-03-30
+    asof: 2026-05-08
+  - repo: SparknightLLC/ComfyUI-EnumCombo
+    stars: 2
+    archived: false
+    forks: 1
+    last_commit: 2026-05-08
+    asof: 2026-05-08
+  - repo: StableLlama/ComfyUI-basic_data_handling
+    stars: 43
+    archived: false
+    forks: 7
+    last_commit: 2026-05-07
+    asof: 2026-05-08
+  - repo: stavzszn/comfyui-teskors-utils
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-03-29
+    asof: 2026-05-08
+  - repo: Stibo/comfyui-nifty-nodes
+    stars: 3
+    archived: false
+    forks: 1
+    last_commit: 2026-03-21
+    asof: 2026-05-08
+  - repo: Sunwood-ai-labs/ComfyUI-LTXLongAudio
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-01
+    asof: 2026-05-08
+  - repo: sypex6/ComfyUI_InstaRAW_Nodes
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-04-07
+    asof: 2026-05-08
+  - repo: tavyra/ComfyUI_Curves
+    stars: 1
+    archived: false
+    forks: 1
+    last_commit: 2025-05-08
+    asof: 2026-05-08
+  - repo: tetsuoo-online/Comfyui-TOO-Pack
+    stars: 4
+    archived: false
+    forks: 2
+    last_commit: 2026-04-02
+    asof: 2026-05-08
+  - repo: touge/ComfyUI-NCE_Utils
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-01-25
+    asof: 2026-05-08
+  - repo: treforyan-hue/comfyui-deploy
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2026-05-05
+    asof: 2026-05-08
+  - repo: Valiant-Cat/ComfyUI-WanMove-Trajectory
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2025-12-12
+    asof: 2026-05-08
+  - repo: viswamohankomati/ComfyUI-Copilot
+    stars: 0
+    archived: false
+    forks: 0
+    last_commit: 2025-09-17
+    asof: 2026-05-08
+  - repo: vjumpkung/comfyui-infinitetalk-native-sampler
+    stars: 1
+    archived: false
+    forks: 2
+    last_commit: 2026-03-31
+    asof: 2026-05-08
+  - repo: Winnougan/WINT8-ComfyUI
+    stars: 1
+    archived: false
+    forks: 2
+    last_commit: 2026-04-17
+    asof: 2026-05-08
+  - repo: xeinherjer-dev/ComfyUI-XENodes
+    stars: 1
+    archived: false
+    forks: 1
+    last_commit: 2026-05-07
+    asof: 2026-05-08
+  - repo: yardimli/SafetensorViewer
+    stars: 7
+    archived: false
+    forks: 0
+    last_commit: 2025-02-19
+    asof: 2026-05-08
+  - repo: yolain/ComfyUI-Easy-Use
+    stars: 2504
+    archived: false
+    forks: 195
+    last_commit: 2026-04-29
+    asof: 2026-05-08
+  - repo: yolain/ComfyUI-Easy-Use-Frontend
+    stars: 27
+    archived: false
+    forks: 9
+    last_commit: 2026-04-01
+    asof: 2026-05-08
+  - repo: yorkane/ComfyUI-KYNode
+    stars: 10
+    archived: false
+    forks: 4
+    last_commit: 2026-02-04
+    asof: 2026-05-08
+  - repo: zhupeter010903/ComfyUI-XYZ-prompt-library
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2026-04-26
+    asof: 2026-05-08
+  - repo: zzggi2024/shaobkj
+    stars: 1
+    archived: false
+    forks: 0
+    last_commit: 2026-04-27
+    asof: 2026-05-08
+  - repo: zzw5516/ComfyUI-zw-tools
+    stars: 6
+    archived: false
+    forks: 1
+    last_commit: 2025-12-03
+    asof: 2026-05-08

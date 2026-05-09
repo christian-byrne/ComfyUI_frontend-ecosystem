@@ -1,0 +1,1933 @@
+{
+  "repo": "yolain/ComfyUI-Easy-Use",
+  "repo_dir": "yolain__ComfyUI-Easy-Use",
+  "hits": [
+    {
+      "pattern_id": "S4.W1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/poseEditor.js",
+      "line": 396,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "    this.image.callback = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 896,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "\t\t\t\tvaluesWidget.callback = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/easyuse.js",
+      "line": 2,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySelector.js",
+      "line": 127,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "                let selector = this.addDOMWidget('select_styles',\"btn\",$el('div.easyuse-prompt-styles',[$el('div.tools', [",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image.js",
+      "line": 14,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "\t\t\tconst widget = node.addDOMWidget(\"info\", \"customtext\", inputEl, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySeg.js",
+      "line": 57,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "                let selector = this.addDOMWidget('mask_components',\"btn\",$el('div.easyuse-prompt-styles',[list]))",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 199,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "                let account = this.addDOMWidget('account',\"btn\",$el('div.easyuse-account',user_div));",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1007,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "\t\t\t\t\t\tconst widget = this.addDOMWidget(type + \"_prompt\", \"customtext\", inputEl, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySliderControl.js",
+      "line": 85,
+      "matched_regex": "\\.addDOMWidget\\s*\\(",
+      "preview": "        sliders_value = _this.addDOMWidget('values',\"btn\",values_div)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/easyuse.js",
+      "line": 2,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/poseEditor.js",
+      "line": 626,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "      nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySelector.js",
+      "line": 119,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySaveImage.js",
+      "line": 12,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySaveImage.js",
+      "line": 25,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySliderControl.js",
+      "line": 104,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySeg.js",
+      "line": 50,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 179,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = async function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1066,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onNodeCreated = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1085,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onNodeCreated = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1190,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onNodeCreated = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image.js",
+      "line": 60,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 971,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 991,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1036,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1172,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 282,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "\tnodeType.prototype.getExtraMenuOptions = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 114,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.draw = function() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 171,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.drawNodeShape = function(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 487,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.drawNodeWidgets = function(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 141,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "LGraphCanvas.prototype.pasteFromClipboard = function(isConnectUnselected = false) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySuggestion.js",
+      "line": 253,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.createDefaultNodeForSlot = function(optPass) { // addNodeMenu for connection",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySuggestion.js",
+      "line": 412,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.showConnectionMenu = function(optPass) { // addNodeMenu for connection",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 466,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.getCanvasMenuOptions = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 503,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "            LGraphCanvas.prototype.renderInfo = function (ctx, x, y) {}",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 113,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "        const draw = LGraphCanvas.prototype.draw;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 129,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"easyuse-image-choose\", easyuseImageChooser);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 154,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"execution_start\", on_execution_start);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 105,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('progress', ({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 126,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener('status', ({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 12,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"easyuse-toast\",event=>{",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/seed.js",
+      "line": 28,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"easyuse-global-seed\", globalSeedHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 201,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "                api.addEventListener('stable-diffusion-api-generate-succeed', async ({detail}) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 152,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "\t\t\t\tthis.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 278,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "\t\t\t\tthis.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 356,
+      "matched_regex": "\\bgetCustomWidgets\\s*[:(]",
+      "preview": "    getCustomWidgets(app) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\bgetCustomWidgets\\s*[:(]",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 604,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "            nodeType.prototype.onConfigure = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 376,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "        nodeType.prototype.onConfigure = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N7",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1179,
+      "matched_regex": "prototype\\.onConfigure\\s*=",
+      "preview": "\t\t\t\tnodeType.prototype.onConfigure = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 388,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "        nodeType.prototype.onAdded = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1099,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onAdded = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1125,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onAdded = async function (graph) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1207,
+      "matched_regex": "prototype\\.onAdded\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onAdded = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N8",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 116,
+      "matched_regex": "\\.onAdded\\s*=\\s*function",
+      "preview": "\t\t\t\tthis.onAdded = function(graph) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.onDrawForeground\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N10",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.onMouseDown\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N10",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 178,
+      "matched_regex": "\\.onMouseDown\\s*=\\s*function",
+      "preview": "            node.onMouseDown = function( e, pos, canvas ) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/prompt.js",
+      "line": 107,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "    app.graphToPrompt = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/prompt.js",
+      "line": 108,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "        app.graphToPrompt = gtp_was;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 534,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "        let loadGraphDataEvent = app.loadGraphData",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 535,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "        app.loadGraphData = async function (data, clean=true) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 105,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]progress['\\\"]",
+      "preview": "    api.addEventListener('progress', ({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 791,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\tnode.widgets[combo_id].serializeValue = () => { return \"Select the LoRA to add to the text\"; }",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 792,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\tnode.widgets[combo_id+1].serializeValue = () => { return \"Select the Wildcard to add to the text\"; }",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 799,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\tnode.widgets[textarea_widget_index].serializeValue = () => {return node.widgets[textarea_widget_index].value};",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 345,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\twidget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySaveImage.js",
+      "line": 16,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\twidget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/bookmark.js",
+      "line": 6,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 7,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "\tregisterCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 180,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "\tregisterCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N15",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "prototype\\.serialize\\s*=\\s*function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 775,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "                for (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1251,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "\t\tfor (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyXYPlot.js",
+      "line": 59,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "\t\tfor (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 379,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "\tfor (const widget of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 227,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "\t\tfor (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N19",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 330,
+      "matched_regex": "\\.onResize\\s*=\\s*function",
+      "preview": "\t\tnode.onResize = function (size) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 159,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "            group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 253,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "\t\t\t\t\t\t\tconst link = node.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 287,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const link = this.graph.links[ slot_info.link ];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 202,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const originLinkInfo = oldNode.graph.links[input.link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 225,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                        const targetLinkInfo = oldNode.graph.links[link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 430,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const output_link = graph.links[linkID]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 213,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                if (shape == LiteGraph.BOX_SHAPE || low_quality) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 217,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    shape == LiteGraph.CARD_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 224,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                        shape == LiteGraph.CARD_SHAPE ? [this.round_radius,this.round_radius,0,0] : [this.round_radius]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 226,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                } else if (shape == LiteGraph.CIRCLE_SHAPE) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 284,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    if (shape == LiteGraph.BOX_SHAPE || low_quality) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 286,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    } else if (  shape == LiteGraph.ROUND_SHAPE || shape == LiteGraph.CARD_SHAPE ) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 315,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    shape == LiteGraph.CIRCLE_SHAPE ||",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 316,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    shape == LiteGraph.CARD_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 405,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    if( shape == LiteGraph.BOX_SHAPE || low_quality)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 442,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                if (shape == LiteGraph.BOX_SHAPE) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 451,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                    (shape == LiteGraph.CARD_SHAPE && node.flags.collapsed)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 460,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                } else if (shape == LiteGraph.CARD_SHAPE) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 468,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                } else if (shape == LiteGraph.CIRCLE_SHAPE) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 37,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\tthis.addInput(\"*\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 374,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        node.addInput(widget.name, type, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 210,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "\t\t\t\tthis.addOutput(\"*\", '*');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySuggestion.js",
+      "line": 365,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "                                    newNode.addOutput(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySuggestion.js",
+      "line": 374,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "                                    newNode.addOutput(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 243,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            origin_node.connect(link_info[1], target_node, link_info[3]);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 458,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            output_node.connect(output_slot, newNode.id, input_name)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 168,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "    app.graph.add(newNode);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 256,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "            app.graph.add(ksampler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 439,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "    const newNode = app.graph.add(LiteGraph.createNode(nodeType, nodeTitle, options));",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/bookmark.js",
+      "line": 4,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image.js",
+      "line": 4,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 5,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/getset.js",
+      "line": 178,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/poseEditor.js",
+      "line": 583,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 106,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyInterface.js",
+      "line": 758,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 354,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 53,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySelector.js",
+      "line": 112,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySuggestion.js",
+      "line": 249,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyContextMenu.js",
+      "line": 28,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyXYPlot.js",
+      "line": 177,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 693,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 461,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySliderControl.js",
+      "line": 98,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySaveImage.js",
+      "line": 6,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySeg.js",
+      "line": 43,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyExtraMenu.js",
+      "line": 528,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 173,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/poseEditor.js",
+      "line": 372,
+      "matched_regex": "\\.options\\.values\\.push\\(",
+      "preview": "            this.image.options.values.push(data.name);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 185,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                    cost_widget.value = '-'+api_cost[value]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 193,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                    if(seed_control.name == 'control_before_generate' && seed_widget.value === 0){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 194,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                        seed_widget.value = Math.floor(Math.random() * 4294967294)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 196,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                    cost_widget.value = '-'+api_cost[model_widget.value]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 14,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === \"None\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 24,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === 'by percentage' && rescale_after_model) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 29,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t} else if (widget.value === 'to Width/Height' && rescale_after_model) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 43,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === \"None\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 53,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t    if (widget.value === 'Sender' || widget.value === 'Sender&Save'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 58,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === 'Hide' || widget.value === 'Preview' || widget.value == 'Preview&Choose' || widget.value === 'Sender') {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 64,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t} else if (widget.value === 'Save' || widget.value === 'Hide&Save' || widget.value === 'Sender&Save') {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 72,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif(widget.value === 'Hide' || widget.value === 'Hide&Save'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 81,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === \"disable\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 85,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\tcontrol_before_widget.value = 'fixed'",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 90,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\tcontrol_after_widget.value = 'fixed'",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 96,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\tif(control_before_widget?.last_value) control_before_widget.value = control_before_widget.last_value",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 100,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\tif(control_after_widget?.last_value) control_after_widget.value = control_after_widget.last_value",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 156,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\tif (widget.value === \"simple\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 169,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\tif (widget.value === \"simple\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 180,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\tif (widget.value === \"Foreground\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 195,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif(widget.value === \"\u81ea\u5b9a\u4e49 x \u81ea\u5b9a\u4e49\"){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 196,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\twidget.value = 'width x height (custom)'",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 198,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === \"\u81ea\u5b9a\u4e49 x \u81ea\u5b9a\u4e49\" || widget.value === 'width x height (custom)') {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 207,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === \"custom\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 217,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif (widget.value === \"None\") widget_names.map(name=> toggleWidget(node, findWidgetByName(node, name)))",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 218,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\telse if(widget.value == 'Auto') widget_names.map(name =>toggleWidget(node, findWidgetByName(node, name),name == 'block_number' ? true : false))",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 224,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif(widget.value == 'step'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 227,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t}else if(widget.value == 'num_steps'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 240,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\tif(widget.value == 'replace'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 255,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t} else if(widget.value == 'average'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 261,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t}else if(widget.value == 'timestep'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 369,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t}else if(widget.value == 'vp'){",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 387,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\tif(widget.value == 'gits') \ttoggleWidget(node, findWidgetByName(node, 'coeff'), true)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1021,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\t\twidget.value = text;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1092,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\t\tseed_widget.value = Math.floor(Math.random() * 1125899906842624)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1104,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\tif(seed_control.name == 'control_before_generate' && seed_widget.value === 0) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1105,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\t\tseed_widget.value = Math.floor(Math.random() * 1125899906842624)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1226,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "\t\t\t\t\t\t\tprompt_widget.value = values",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/common/model.js",
+      "line": 46,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tconst req = api.fetchApi(\"/easyuse/metadata/\" + encodeURIComponent(`${type}/${value}`));",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/common/model.js",
+      "line": 227,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\t\t\t\t\t\t\tconst resp = await api.fetchApi(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/common/model.js",
+      "line": 344,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\t\t\t\t\t\t\tconst resp = await api.fetchApi(\"/upload/image\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/common/model.js",
+      "line": 359,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\t\t\t\t\t\t\tawait api.fetchApi(\"/easyuse/save/\" + encodeURIComponent(`${this.type}/${this.name}`), {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/messaging.js",
+      "line": 13,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    api.fetchApi(\"/easyuse/image_chooser_message\", { method: \"POST\", body, });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 63,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                const res = await api.fetchApi('/easyuse/stability/set_api_keys', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 143,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                    api.fetchApi('/easyuse/stability/set_api_keys', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 213,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                    const res = await api.fetchApi('/easyuse/stability/balance')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 225,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                const res = await api.fetchApi('/easyuse/stability/api_keys')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyAccount.js",
+      "line": 252,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                            const res = await  api.fetchApi('/easyuse/stability/user_info')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySelector.js",
+      "line": 13,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "       const resp = await api.fetchApi(`/easyuse/prompt/styles?name=${name}`);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySelector.js",
+      "line": 26,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "       const resp = await api.fetchApi(`/easyuse/prompt/styles/image?name=${name}&styles_name=${styles_name}`);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyContextMenu.js",
+      "line": 33,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "        const imgRes = await api.fetchApi(`/easyuse/models/thumbnail`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 907,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\t\tconst resp = await api.fetchApi(\"/easyuse/upload/csv\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 269,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "        api.fetchApi(\"/easyuse/cleangpu\",{",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 291,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    api.fetchApi(\"/easyuse/model/download\",{",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easy.js",
+      "line": 492,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "                                api.fetchApi(\"/easyuse/reboot\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/seed.js",
+      "line": 47,
+      "matched_regex": "api\\.queuePrompt\\s*=",
+      "preview": "api.queuePrompt = queuePrompt_with_seed;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.queuePrompt\\s*=\\s*async\\s+function",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 154,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener(\"execution_start\", on_execution_start);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 126,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "    api.addEventListener('status', ({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/easyuse.js",
+      "line": 2,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 151,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "    this.graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easySuggestion.js",
+      "line": 351,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "                    //that.graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyQuick.js",
+      "line": 249,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "    this.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/chooser.js",
+      "line": 233,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                this.setDirtyCanvas(true,true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image.js",
+      "line": 54,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\t\tapp.graph.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/image_chooser/preview.js",
+      "line": 22,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        img.onload = () => { app.graph.setDirtyCanvas(true); };",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyWidgets.js",
+      "line": 223,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\tnode.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v1/js/easy/easyDynamicWidgets.js",
+      "line": 1166,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\t\tapp.graph.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "yolain/ComfyUI-Easy-Use",
+      "file": "web_version/v2/assets/extensions-nX1P6R6o.js",
+      "line": 1,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "[Omitted long matching line]",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 214
+}

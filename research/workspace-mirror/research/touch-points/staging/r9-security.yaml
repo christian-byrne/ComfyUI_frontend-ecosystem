@@ -1,0 +1,313 @@
+meta:
+  source: security
+  ingest_script: scripts/ingest-security-scan.py
+  scan_corpus: /home/c_byrne/projects/custom-nodes-security-scan/docs
+  reports_processed: 241
+  raw_finding_total: 20699
+  kept_after_filter: 1030
+  skipped_vendored: 3759
+  skipped_python_no_dyncode: 2954
+  skipped_irrelevant_rule: 3561
+  evidence_rows_total: 32
+  proposed_patterns_count: 3
+  db_existing_pattern_ids_count: 56
+  notes: "bandit only scans Python (no JS) and yara malware rules do not target eval/Function/innerHTML \u2014 so direct dynamic-code\
+    \ evidence is sparse. The signal we DO surface here is yara rules that flag DOM-injection-equivalent patterns (svg_onload_onerror,\
+    \ html_wasm) and crypto/obfuscation indicators in shipped frontend bundles. All rows are proposals under a NEW family\
+    \ S16 (dynamic code execution / unsafe DOM injection) \u2014 none of S1-S15 cover this surface."
+proposed_patterns:
+- proposed_pattern_id: S16.D1
+  surface_family: S16
+  surface: SVG with onload/onerror attribute (XSS-equivalent dynamic JS)
+  fingerprint: <svg ... onload=...> or <svg ... onerror=...>
+  semantic: "inline event handler in shipped SVG/HTML \u2014 runs script when SVG renders"
+  v2_replacement: extension contract should disallow shipping SVG with inline event handlers; use addEventListener at mount
+  test_target: EXTENSION_NO_INLINE_HANDLER_IN_SVG
+  rationale: yara svg_onload_onerror rule; high-volume hits across vendored & 1st-party JS bundles
+  evidence_count: 13
+  evidence:
+  - repo: ComfyUI-Custom-Scripts
+    file: web/js/workflowImage.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: ComfyUI-Custom-Scripts-yara.html
+    snippet: b'Svg'
+    source: security
+    offset: '8609'
+  - repo: ComfyUI-OpenPose-Editor
+    file: js/fabric.min.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: ComfyUI-OpenPose-Editor-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '18717'
+  - repo: ComfyUI_Custom_Nodes_AlekPet
+    file: PainterNode/js/painter_node.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: ComfyUI_Custom_Nodes_AlekPet-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '354'
+  - repo: comfy_mtb
+    file: web_async/ace/worker-css.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '98534'
+  - repo: comfy_mtb
+    file: web_async/ace/mode-markdown.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '60733'
+  - repo: comfy_mtb
+    file: web_async/ace/worker-javascript.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'SVG'
+    source: security
+    offset: '488547'
+  - repo: comfy_mtb
+    file: web_async/ace/ace.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'Svg'
+    source: security
+    offset: '61061'
+  - repo: comfy_mtb
+    file: web_async/ace/mode-html.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '56088'
+  - repo: comfy_mtb
+    file: web_async/ace/worker-html.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '22967'
+  - repo: comfyui-mixlab-nodes
+    file: web/javascript/image_mixlab.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfyui-mixlab-nodes-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '1108'
+  - repo: comfyui-mixlab-nodes
+    file: web/javascript/3d_mixlab.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfyui-mixlab-nodes-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '798'
+  - repo: comfyui-mixlab-nodes
+    file: web/javascript/ui_mixlab.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfyui-mixlab-nodes-yara.html
+    snippet: b'svg'
+    source: security
+    offset: '75'
+  - repo: comfyui-mixlab-nodes
+    file: web/javascript/layer_mixlab.js
+    rule: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
+    scanner: yara
+    report: comfyui-mixlab-nodes-yara.html
+    snippet: b'Svg'
+    source: security
+    offset: '2931'
+- proposed_pattern_id: S16.D3
+  surface_family: S16
+  surface: Obfuscated string-replace pipeline (often PowerShell, but pattern bleeds into JS minifiers)
+  fingerprint: long .replace().replace().replace() chains over base64-ish strings
+  semantic: "indicator-of-compromise pattern \u2014 also a false-positive on heavily-minified bundles"
+  v2_replacement: "n/a \u2014 flag for human review; not a v2 contract change"
+  test_target: n/a
+  rationale: yara OBFUS_PowerShell_Common_Replace
+  evidence_count: 10
+  evidence:
+  - repo: ComfyUI-BlenderAI-node
+    file: SDNode/custom_nodes/Cup-ClipBoard/cup_clipboard.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: ComfyUI-BlenderAI-node-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '11070'
+  - repo: ComfyUI-KJNodes
+    file: kjweb_async/marked.min.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: ComfyUI-KJNodes-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '930'
+  - repo: ComfyUI_tinyterraNodes
+    file: js/ttNembedAC.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: ComfyUI_tinyterraNodes-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '1544'
+  - repo: comfy_mtb
+    file: web/extern/shodown.min.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '9781'
+  - repo: comfy_mtb
+    file: web_async/ace/ext-emmet.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '730'
+  - repo: comfy_mtb
+    file: web_async/ace/ext-language_tools.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '730'
+  - repo: comfy_mtb
+    file: web_async/ace/ext-prompt.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '9816'
+  - repo: comfy_mtb
+    file: web_async/ace/worker-base.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '134'
+  - repo: comfy_mtb
+    file: web_async/ace/worker-json.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '134'
+  - repo: comfy_mtb
+    file: web_async/ace/ext-inline_autocomplete.js
+    rule: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
+    scanner: yara
+    report: comfy_mtb-yara.html
+    snippet: b'replace('
+    source: security
+    offset: '730'
+- proposed_pattern_id: S16.D7
+  surface_family: S16
+  surface: Python web/ template uses exec/eval to emit JS
+  fingerprint: bandit B102 (exec_used) under web/|js/|src/
+  semantic: server-side dynamic code that produces frontend payloads
+  v2_replacement: static templating only; no exec/eval at request time
+  test_target: BACKEND_NO_DYNCODE_IN_FRONTEND_TEMPLATE
+  rationale: bandit B102 fired under a frontend path
+  evidence_count: 9
+  evidence:
+  - repo: comfyui_controlnet_aux
+    file: src/controlnet_aux/dsine/models/submodules/efficientnet_repo/setup.py
+    rule: B102
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "9\t# Get the long description from the README file\n10\twith open(path.join(here, 'README.md'), encoding='utf-8')\
+      \ as f:\n11\t    long_description = f.read()\n12\t\n13\texec(open('geffnet/version.py').read())\n1"
+    source: security
+    line: 13
+  - repo: comfyui_controlnet_aux
+    file: src/controlnet_aux/normalbae/nets/submodules/efficientnet_repo/setup.py
+    rule: B102
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "9\t# Get the long description from the README file\n10\twith open(path.join(here, 'README.md'), encoding='utf-8')\
+      \ as f:\n11\t    long_description = f.read()\n12\t\n13\texec(open('geffnet/version.py').read())\n1"
+    source: security
+    line: 13
+  - repo: comfyui_controlnet_aux
+    file: src/custom_detectron2/config/lazy.py
+    rule: B102
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "157\t            module = importlib.util.module_from_spec(spec)\n158\t            module.__file__ = cur_file\n\
+      159\t            with PathManager.open(cur_file) as f:\n160\t                content = f.read()\n1"
+    source: security
+    line: 161
+  - repo: comfyui_controlnet_aux
+    file: src/custom_detectron2/config/lazy.py
+    rule: B307
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "363\t            # Fallback. Does not support all the features and error checking like hydra.\n364\t       \
+      \     for o in overrides:\n365\t                key, value = o.split(\"=\")\n366\t                try:\n"
+    source: security
+    line: 367
+  - repo: comfyui_controlnet_aux
+    file: src/custom_detectron2/utils/tracing.py
+    rule: B307
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "56\t        try:\n57\t            if isinstance(condition, str):\n58\t                caller_frame = inspect.currentframe().f_back\n\
+      59\t                torch._assert(\n60\t                    eval(condition, c"
+    source: security
+    line: 60
+  - repo: comfyui_controlnet_aux
+    file: src/custom_midas_repo/midas/backbones/utils.py
+    rule: B102
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "60\t    return hook\n61\t\n62\t\n63\tdef forward_default(pretrained, x, function_name=\"forward_features\"):\n\
+      64\t    exec(f\"pretrained.model.{function_name}(x)\")\n65\t\n66\t    layer_1 = pretrained.activations[\"1\"]"
+    source: security
+    line: 64
+  - repo: comfyui_controlnet_aux
+    file: src/custom_midas_repo/midas/backbones/vit.py
+    rule: B102
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "146\t    readout_oper = get_readout_oper(vit_features, features, use_readout, start_index)\n147\t\n148\t   \
+      \ for s in range(used_number_stages):\n149\t        value = nn.Sequential(nn.Identity(), nn.Identity("
+    source: security
+    line: 150
+  - repo: comfyui_controlnet_aux
+    file: src/custom_mmpkg/custom_mmcv/ops/nms.py
+    rule: B307
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "298\t        offsets = idxs.to(boxes) * (max_coordinate + torch.tensor(1).to(boxes))\n299\t        boxes_for_nms\
+      \ = boxes + offsets[:, None]\n300\t\n301\t    nms_type = nms_cfg_.pop('type', 'nms')\n302\t    nms"
+    source: security
+    line: 302
+  - repo: comfyui_controlnet_aux
+    file: src/custom_mmpkg/custom_mmseg/core/evaluation/class_names.py
+    rule: B307
+    scanner: bandit
+    report: comfyui_controlnet_aux-bandit.html
+    snippet: "126\t            alias2name[alias] = name\n127\t\n128\t    if mmcv.is_str(dataset):\n129\t        if dataset\
+      \ in alias2name:\n130\t            labels = eval(alias2name[dataset] + '_classes()')\n131\t        else:"
+    source: security
+    line: 130

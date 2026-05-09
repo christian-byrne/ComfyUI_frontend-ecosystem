@@ -1,0 +1,4525 @@
+{
+  "repo": "rgthree/rgthree-comfy",
+  "repo_dir": "rgthree__rgthree-comfy",
+  "hits": [
+    {
+      "pattern_id": "S2.N1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/display_any.js",
+      "line": 11,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_prompt.js",
+      "line": 12,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "            nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/display_any.ts",
+      "line": 17,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "      nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_prompt.ts",
+      "line": 16,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "      nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/display_any.js",
+      "line": 29,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "            nodeType.prototype.onExecuted = function (message) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/display_any.ts",
+      "line": 47,
+      "matched_regex": "prototype\\.onExecuted\\s*=",
+      "preview": "      nodeType.prototype.onExecuted = function (message: any) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 32,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "    node.prototype.getExtraMenuOptions = function (canvas, menuOptions) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/menu_copy_image.ts",
+      "line": 38,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "        nodeType.prototype.getExtraMenuOptions = function (",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/menu_queue_node.js",
+      "line": 48,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "        nodeType.prototype.getExtraMenuOptions = function (canvas, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 87,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "  node.prototype.getExtraMenuOptions = function (",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/menu_queue_node.ts",
+      "line": 73,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "    nodeType.prototype.getExtraMenuOptions = function (",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/menu_copy_image.js",
+      "line": 28,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "                nodeType.prototype.getExtraMenuOptions = function (canvas, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/feature_group_fast_toggle.js",
+      "line": 86,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.drawGroups = function (canvasEl, ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/menu_queue_node.js",
+      "line": 58,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.getCanvasMenuOptions = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 246,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.processMouseDown = function (e) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 254,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.adjustMouseEvent = function (e) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 259,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.copyToClipboard = function (items) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 269,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.pasteFromClipboard = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 318,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "            LGraphCanvas.prototype.getCanvasMenuOptions = function (...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/feature_group_fast_toggle.ts",
+      "line": 133,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.drawGroups = function (",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/services/key_events_services.js",
+      "line": 18,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "        LGraphCanvas.prototype.processKey = function (e) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/menu_queue_node.ts",
+      "line": 86,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.getCanvasMenuOptions = function (...args: any[]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/services/key_events_services.ts",
+      "line": 30,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.processKey = function (e: KeyboardEvent) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/label.js",
+      "line": 133,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "LGraphCanvas.prototype.drawNode = function (node, ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/label.ts",
+      "line": 182,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "LGraphCanvas.prototype.drawNode = function (node: LGraphNode, ctx: CanvasRenderingContext2D) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 392,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.processMouseDown = function (e: PointerEvent) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 404,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.adjustMouseEvent = function <T extends MouseEvent>(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 416,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.copyToClipboard = function (items?: Iterable<Positionable>) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 428,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "    LGraphCanvas.prototype.pasteFromClipboard = function (...args: any[]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 517,
+      "matched_regex": "LGraphCanvas\\.prototype\\.\\w+\\s*=",
+      "preview": "      LGraphCanvas.prototype.getCanvasMenuOptions = function (...args: any[]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/feature_group_fast_toggle.js",
+      "line": 85,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "        const drawGroups = LGraphCanvas.prototype.drawGroups;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/label.js",
+      "line": 132,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "const oldDrawNode = LGraphCanvas.prototype.drawNode;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/feature_group_fast_toggle.ts",
+      "line": 132,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "    const drawGroups = LGraphCanvas.prototype.drawGroups;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S3.C1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/label.ts",
+      "line": 181,
+      "matched_regex": "LGraphCanvas\\.prototype\\.draw",
+      "preview": "const oldDrawNode = LGraphCanvas.prototype.drawNode;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/model_info_service.js",
+      "line": 10,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(this.apiRefreshEventString, this.handleAsyncUpdate.bind(this));",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 108,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"status\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 115,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"execution_start\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 123,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"executing\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 134,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"progress\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 142,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"execution_cached\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 152,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"executed\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 158,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"execution_error\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_power_prompt.js",
+      "line": 245,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"fresh-node-defs\", this.boundOnFreshNodeDefs);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 176,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"status\", (e: CustomEvent<ComfyApiEventDetailStatus>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 184,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"execution_start\", (e: CustomEvent<ComfyApiEventDetailExecutionStart>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 194,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"executing\", (e: CustomEvent<ComfyApiEventDetailExecuting>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 207,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"progress\", (e: CustomEvent<ComfyApiEventDetailProgress>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 217,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"execution_cached\", (e: CustomEvent<ComfyApiEventDetailCached>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 229,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"executed\", (e: CustomEvent<ComfyApiEventDetailExecuted>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 237,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"execution_error\", (e: CustomEvent<ComfyApiEventDetailError>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/model_info_service.ts",
+      "line": 20,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_power_prompt.ts",
+      "line": 359,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "    api.addEventListener(\"fresh-node-defs\", this.boundOnFreshNodeDefs as EventListener);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 250,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/bookmark.js",
+      "line": 25,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 8,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node.js",
+      "line": 198,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_actions_button.js",
+      "line": 14,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S8.P1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node_mode_changer.js",
+      "line": 8,
+      "matched_regex": "\\.isVirtualNode\\s*=\\s*true",
+      "preview": "        this.isVirtualNode = true;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/muter.js",
+      "line": 40,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_prompt.js",
+      "line": 22,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    async loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_actions_button.js",
+      "line": 271,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_bypasser.js",
+      "line": 22,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/random_unmuter.js",
+      "line": 97,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 432,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/display_any.ts",
+      "line": 56,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  // async loadedGraphNode(node: TLGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/bypasser.js",
+      "line": 40,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/context.js",
+      "line": 311,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "    async loadedGraphNode(node) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_bypasser.ts",
+      "line": 33,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  loadedGraphNode(node: FastGroupsBypasser) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/random_unmuter.ts",
+      "line": 112,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  loadedGraphNode(node: LGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_actions_button.ts",
+      "line": 354,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  loadedGraphNode(node: LGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/muter.ts",
+      "line": 46,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  loadedGraphNode(node: LGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_prompt.ts",
+      "line": 26,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  async loadedGraphNode(node: LGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/bypasser.ts",
+      "line": 47,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  loadedGraphNode(node: LGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 537,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  loadedGraphNode(node: LGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/context.ts",
+      "line": 476,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "  async loadedGraphNode(node: TLGraphNode) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_power_prompt.js",
+      "line": 161,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "                            this.combos[key].computeSize = function (width) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N11",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_power_prompt.ts",
+      "line": 251,
+      "matched_regex": "\\.computeSize\\s*=\\s*function",
+      "preview": "              this.combos[key]!.computeSize = function (width: number) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 496,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "        app.graphToPrompt = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 738,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "    app.graphToPrompt = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/link_fixer/link_page.js",
+      "line": 149,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "                this.loadGraphData(this.graph);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 573,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "                                                    wasLoadingAborted && app.loadGraphData(fixBadLinksResult.graph);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/link_fixer/link_page.ts",
+      "line": 183,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "        this.loadGraphData(this.graph);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 838,
+      "matched_regex": "\\.loadGraphData\\(",
+      "preview": "                          wasLoadingAborted && app.loadGraphData(fixBadLinksResult.graph);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 527,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "        const loadGraphData = app.loadGraphData;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 528,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "        app.loadGraphData = function (graph) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 777,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "    const loadGraphData = app.loadGraphData;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 781,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "    app.loadGraphData = function (graph: ISerialisedGraph) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 207,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]progress['\\\"]",
+      "preview": "    api.addEventListener(\"progress\", (e: CustomEvent<ComfyApiEventDetailProgress>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 134,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]progress['\\\"]",
+      "preview": "        api.addEventListener(\"progress\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_conductor.js",
+      "line": 144,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_relay.js",
+      "line": 197,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 978,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/random_unmuter.js",
+      "line": 94,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_actions_button.js",
+      "line": 268,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_bypasser.js",
+      "line": 19,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/bookmark.js",
+      "line": 102,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/muter.js",
+      "line": 37,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/label.js",
+      "line": 160,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 140,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/bypasser.js",
+      "line": 37,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 429,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 94,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 105,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "    registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_bypasser.ts",
+      "line": 30,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/random_unmuter.ts",
+      "line": 109,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_conductor.ts",
+      "line": 132,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 207,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_relay.ts",
+      "line": 271,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/muter.ts",
+      "line": 43,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/label.ts",
+      "line": 226,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/bookmark.ts",
+      "line": 160,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 534,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 146,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 159,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1282,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_actions_button.ts",
+      "line": 351,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H6",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/bypasser.ts",
+      "line": 44,
+      "matched_regex": "\\bregisterCustomNodes\\s*[:(]",
+      "preview": "  registerCustomNodes() {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N15",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 240,
+      "matched_regex": "prototype\\.serialize\\s*=\\s*function",
+      "preview": "        LGraph.prototype.serialize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N15",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 384,
+      "matched_regex": "prototype\\.serialize\\s*=\\s*function",
+      "preview": "    LGraph.prototype.serialize = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 320,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "        this.group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/feature_group_fast_toggle.ts",
+      "line": 105,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "              group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 168,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "        group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/feature_group_fast_toggle.js",
+      "line": 66,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "                            group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 102,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "                group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 397,
+      "matched_regex": "\\.recomputeInsideNodes\\(",
+      "preview": "    this.group.recomputeInsideNodes();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 307,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const types = new Set(this.outputs[0].links.map((l) => { var _a; return (_a = app.graph.links[l]) === null || _a === void 0 ? void 0 : _a.type; }).filter((t) => t && t !== \"*\"));",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 312,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const link = app.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 355,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const link = graph.links[this.inputs[0].link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 390,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = app.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 430,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    const link = app.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 499,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = app.graph.links[l];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 526,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = app.graph.links[l];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/link_fixer.js",
+      "line": 359,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        if (this.graph.links[id] == null) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/link_fixer.js",
+      "line": 362,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        delete this.graph.links[id];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils_deprecated_comfyui.js",
+      "line": 53,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link = app.graph.links[(_a = slot === null || slot === void 0 ? void 0 : slot.link) !== null && _a !== void 0 ? _a : -1];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/link_fixer.ts",
+      "line": 523,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "    if (this.graph.links[id] == null) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/link_fixer.ts",
+      "line": 526,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "    delete this.graph.links[id];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 63,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 73,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                const link = graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 367,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                link = (_h = graph.links[linkId]) !== null && _h !== void 0 ? _h : null;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 474,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const link = graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 484,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const link = graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 519,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "    let link = (_a = app.graph.links[linkId]) !== null && _a !== void 0 ? _a : null;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 521,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "    return link || findSomethingInAllSubgraphs((subgraph) => { var _a; return (_a = subgraph === null || subgraph === void 0 ? void 0 : subgraph.links[linkId]) !== null && _a !== void 0 ? _a : null; }",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 590,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "            const link = app.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 598,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link = app.graph.links[input.link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 166,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    app.graph.links[input.link].target_slot = index;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 176,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "                    app.graph.links[link].origin_slot = index;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 209,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "          app.graph.links[input.link!]!.target_slot = index;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 219,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "          app.graph.links[link!]!.origin_slot = index;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 577,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        link = graph.links[linkId] ?? null;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 742,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "      const link: LLink = graph.links[linkId]!;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 751,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "      const link: LLink = graph.links[linkId]!;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 791,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "  let link: LLink | null = app.graph.links[linkId] ?? null;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils_deprecated_comfyui.ts",
+      "line": 93,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "    const link = app.graph.links[(slot as INodeInputSlot)?.link ?? -1];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 487,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        this.outputs[0]!.links!.map((l) => app.graph.links[l]?.type).filter((t) => t && t !== \"*\"),",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 493,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "          const link = app.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 559,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "      const link = graph.links[this.inputs[0].link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 645,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "          const link = app.graph.links[linkId];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 737,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link = app.graph.links[l];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 771,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link = app.graph.links[l];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 113,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link: LLink = graph.links[linkId]!;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 122,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link: LLink = graph.links[linkId]!;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 198,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "        cxn.color_on = \"#666665\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 201,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "    else if (cxn.color_on === \"#666665\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 202,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "        cxn.color_on = cxn._color_on_org || undefined;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_prompt.js",
+      "line": 36,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "                    node.outputs[0].color_on = undefined;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_power_prompt.js",
+      "line": 100,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "                output.color_on = \"#7F7\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 65,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "                        this.inputs[index].color_on = \"#FC0\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 126,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "            this.inputs[index]!.color_on = \"#FC0\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 316,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "    cxn.color_on = \"#666665\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 318,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "  } else if (cxn.color_on === \"#666665\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 319,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "    cxn.color_on = (cxn as any)._color_on_org || undefined;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_prompt.ts",
+      "line": 42,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "          node.outputs[0]!.color_on = undefined;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_power_prompt.ts",
+      "line": 168,
+      "matched_regex": "\\.color_on\\s*=",
+      "preview": "        output.color_on = \"#7F7\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node.js",
+      "line": 277,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                ? LiteGraph.GRID_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node.js",
+      "line": 278,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "                : LiteGraph.CIRCLE_SHAPE;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_relay.js",
+      "line": 45,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "            shape: LiteGraph.ARROW_SHAPE,",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_relay.ts",
+      "line": 93,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "      shape: LiteGraph.ARROW_SHAPE,",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node.ts",
+      "line": 431,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        ? LiteGraph.GRID_SHAPE",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.S1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node.ts",
+      "line": 432,
+      "matched_regex": "LiteGraph\\.(GRID|CIRCLE|BOX|ARROW|CARD)_SHAPE",
+      "preview": "        : LiteGraph.CIRCLE_SHAPE;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 279,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 40,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"ctx_1\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 41,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"ctx_2\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 42,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"ctx_3\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 43,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"ctx_4\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 44,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"ctx_5\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_primitive.js",
+      "line": 125,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            this.addInput(\"value\", \"*\", { widget: this.valueWidget });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 14,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 46,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            this.addInput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 106,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        return super.addInput(name, type, extra_info);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 17,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"base_ctx\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 138,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(OWNED_PREFIX, \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 94,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            this.addInput(name, type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/any_switch.js",
+      "line": 27,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            this.addInput(`any_${String(this.inputs.length + 1).padStart(2, \"0\")}`, (this.nodeType || \"*\"));",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node.js",
+      "line": 242,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "                this.addInput(inputName, type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node.js",
+      "line": 256,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "                    this.addInput(inputName, type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/context.js",
+      "line": 176,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            this.addInput(`ctx_${String(this.inputs.length + 1).padStart(2, \"0\")}`, \"RGTHREE_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_or_latent_size.js",
+      "line": 14,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(\"input\", [\"IMAGE\", \"LATENT\", \"MASK\"]);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 444,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 43,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "            this.addInput(ALPHABET[this.inputs.length], \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_or_latent_size.ts",
+      "line": 26,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"input\", [\"IMAGE\", \"LATENT\", \"MASK\"] as any);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_primitive.ts",
+      "line": 190,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      this.addInput(\"value\", \"*\", {widget: this.valueWidget as any});",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 49,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 94,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      this.addInput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 189,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    return super.addInput(name, type, extra_info);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/any_switch.ts",
+      "line": 52,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      this.addInput(",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 134,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      this.addInput(name, type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/context.ts",
+      "line": 287,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      this.addInput(`ctx_${String(this.inputs.length + 1).padStart(2, \"0\")}`, \"RGTHREE_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 97,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"ctx_1\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 98,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"ctx_2\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 99,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"ctx_3\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 100,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"ctx_4\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 101,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"ctx_5\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 46,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(\"base_ctx\", \"RGTHREE_DYNAMIC_CONTEXT\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 185,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "    this.addInput(OWNED_PREFIX, \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 92,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "      this.addInput(ALPHABET[this.inputs.length]!, \"*\" as string);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node.ts",
+      "line": 393,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "        this.addInput(inputName, type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node.ts",
+      "line": 410,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "          this.addInput(inputName, type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 280,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 103,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "            const output = this.addOutput(getContextOutputName(name), type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 86,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "                existing = this.addOutput(getContextOutputName(data.name), data.type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 15,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"OPT_CONNECTION\", \"*\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 83,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "            this.addOutput(\"OPT_CONNECTION\", \"*\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_relay.js",
+      "line": 42,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"REPEATER\", \"_NODE_REPEATER_\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 97,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "                this.addOutput(\"*\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 14,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"Output\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node.js",
+      "line": 279,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "            this.addOutput(outputName, output, { shape: outputShape });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 33,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"OPT_CONNECTION\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node_mode_changer.js",
+      "line": 19,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"OPT_CONNECTION\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 56,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "            output = output || this.addOutput(\"\", \"\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 143,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        this.addOutput(\"*\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_relay.ts",
+      "line": 90,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "    this.addOutput(\"REPEATER\", \"_NODE_REPEATER_\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 142,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "      const output = this.addOutput(getContextOutputName(name), type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node.ts",
+      "line": 433,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "      this.addOutput(outputName, output, {shape: outputShape});",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 156,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "        existing = this.addOutput(getContextOutputName(data.name), data.type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 38,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "    this.addOutput(\"Output\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 38,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "    this.addOutput(\"OPT_CONNECTION\", \"*\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 145,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "      this.addOutput(\"OPT_CONNECTION\", \"*\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 106,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "      output = output || this.addOutput(\"\", \"\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 445,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "    this.addOutput(\"\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 85,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "    this.addOutput(\"OPT_CONNECTION\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node_mode_changer.ts",
+      "line": 33,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "    this.addOutput(\"OPT_CONNECTION\", \"*\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 21,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "                cloned.removeInput(cloned.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 52,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "                this.removeInput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 102,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "        return super.removeInput(slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 643,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "                    node.removeInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils_inputs_outputs.js",
+      "line": 8,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "                node.removeInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 153,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "        super.removeInput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 226,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "                    this.removeInput(slot.slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 69,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "            cloned.removeInput(cloned.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 128,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "            this.removeInput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 102,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "      cloned.removeInput(cloned.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 167,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "      this.removeInput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils_inputs_outputs.ts",
+      "line": 12,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "        node.removeInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 202,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "    super.removeInput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 276,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "          this.removeInput(slot.slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 977,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "          node.removeInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 61,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "        cloned.removeInput(cloned.inputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 100,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "        this.removeInput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 180,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "    return super.removeInput(slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 155,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "            this.removeOutput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 75,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "            cloned.removeOutput(cloned.outputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_base.js",
+      "line": 124,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "                this.removeOutput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 101,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "                this.removeOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 108,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "      cloned.removeOutput(cloned.outputs.length - 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_base.ts",
+      "line": 164,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "        this.removeOutput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 53,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "                this.removeOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 180,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "                    this.node.removeOutput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 647,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "                    node.removeOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 79,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "                this.removeOutput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 170,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "        this.removeOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 142,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "        this.removeOutput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 103,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "        this.removeOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 277,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "          this.node.removeOutput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 204,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "      this.removeOutput(slotIndex);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 980,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "          node.removeOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim_pnginfo.js",
+      "line": 212,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "                    prevModel.node.connect(prevModel.index, loraNode, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim_pnginfo.js",
+      "line": 213,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "                    prevClip.node.connect(prevClip.index, loraNode, 1);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim_pnginfo.js",
+      "line": 217,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "                prevClip.node.connect(1, clipNode, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim_pnginfo.js",
+      "line": 218,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "                prevModel.node.connect(0, samplerNode, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim_pnginfo.js",
+      "line": 220,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "                    prevModel.node.connect(0, hrSamplerNode, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim_pnginfo.ts",
+      "line": 305,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "          prevModel.node.connect(prevModel.index, loraNode, 0)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim_pnginfo.ts",
+      "line": 306,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "          prevClip.node.connect(prevClip.index, loraNode, 1)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim_pnginfo.ts",
+      "line": 311,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "        prevClip.node.connect(1, clipNode, 0)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim_pnginfo.ts",
+      "line": 312,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "        prevModel.node.connect(0, samplerNode, 0)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim_pnginfo.ts",
+      "line": 314,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "          prevModel.node.connect(0, hrSamplerNode, 0)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 203,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            data.node.connect(data.slot, entry.node, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 212,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            entry.node.connect(0, data.node, data.slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 965,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            node.connect(0, clone, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 86,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "            link.node.connect(link.slot, link.targetNode, link.targetSlot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 499,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "        link.node.connect(link.slot, link.targetNode, link.targetSlot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 768,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "    link.node.connect(link.slot, link.targetNode, link.targetSlot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 338,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "      data.node.connect(data.slot, entry.node, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 346,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "      entry.node.connect(0, data.node, data.slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1268,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "      node.connect(0, clone, 0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 137,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "      link.node.connect(link.slot, link.targetNode, link.targetSlot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 317,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "                    node.disconnectInput(link.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 361,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "        return super.disconnectInput(slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 400,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "                        currentNode.disconnectInput(link.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 454,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "                            node.disconnectInput(link.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 60,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "                    this.disconnectInput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 976,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "          node.disconnectInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 498,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "          node.disconnectInput(link!.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 567,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "    return super.disconnectInput(slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 612,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "            currentNode.disconnectInput(link.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 682,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "              node.disconnectInput(link.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 642,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "                    node.disconnectInput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 122,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "          this.disconnectInput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 56,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "    nodeCtx.disconnectInput(2);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 57,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "    nodeCtx.disconnectInput(5);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 59,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "    nodeCtx.disconnectInput(6);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 109,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "      nodeCtx2.disconnectInput(2);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 110,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "      nodeCtx2.disconnectInput(5);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 112,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "      nodeCtx2.disconnectInput(6);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/tests/context_dynamic_tests.ts",
+      "line": 166,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "      nodeCtx.disconnectInput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 141,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "        this.disconnectOutput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils_deprecated_comfyui.ts",
+      "line": 100,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "          originNode.disconnectOutput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 979,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "          node.disconnectOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 349,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "        return super.disconnectOutput(slot, targetNode);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 548,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "    return super.disconnectOutput(slot, targetNode);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 102,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "        this.disconnectOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 275,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "            this.node.disconnectOutput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_power_prompt.ts",
+      "line": 171,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "        // this.node.disconnectOutput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils_deprecated_comfyui.js",
+      "line": 61,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "                    originNode.disconnectOutput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 646,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "                    node.disconnectOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 52,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "                this.disconnectOutput(i);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 178,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "                        this.node.disconnectOutput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 78,
+      "matched_regex": "\\.disconnectOutput\\(",
+      "preview": "                this.disconnectOutput(0);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 948,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "            app.graph.add(clone);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 962,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "            app.graph.add(clone);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1252,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "      app.graph.add(clone);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1265,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "      app.graph.add(clone);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/seed.js",
+      "line": 201,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 243,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_bypasser.js",
+      "line": 17,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/display_any.js",
+      "line": 6,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_conductor.js",
+      "line": 142,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_bypasser.ts",
+      "line": 28,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_actions_button.js",
+      "line": 266,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/menu_copy_image.ts",
+      "line": 32,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_conductor.ts",
+      "line": 130,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/menu_copy_image.js",
+      "line": 22,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/feature_import_individual_nodes.js",
+      "line": 5,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/any_switch.js",
+      "line": 62,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_lora_loader.ts",
+      "line": 883,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/random_unmuter.js",
+      "line": 92,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/display_any.ts",
+      "line": 12,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_primitive.js",
+      "line": 168,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/menu_queue_node.js",
+      "line": 44,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 738,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/feature_group_fast_toggle.ts",
+      "line": 58,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 532,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_puter.js",
+      "line": 307,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 976,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/feature_group_fast_toggle.js",
+      "line": 28,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_prompt.js",
+      "line": 6,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_inset_crop.ts",
+      "line": 63,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/muter.ts",
+      "line": 41,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_lora_loader.js",
+      "line": 619,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/context.js",
+      "line": 289,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 144,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_collector.ts",
+      "line": 157,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_comparer.js",
+      "line": 358,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_or_latent_size.js",
+      "line": 28,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_relay.js",
+      "line": 195,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/menu_queue_node.ts",
+      "line": 69,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 292,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/label.js",
+      "line": 158,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_inset_crop.js",
+      "line": 52,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/bypasser.js",
+      "line": 35,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 427,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/feature_import_individual_nodes.ts",
+      "line": 13,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/comfy_ui_bar.js",
+      "line": 86,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_repeater.js",
+      "line": 138,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/bookmark.js",
+      "line": 100,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_relay.ts",
+      "line": 269,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_puter.ts",
+      "line": 454,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/bypasser.ts",
+      "line": 42,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 92,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_collector.js",
+      "line": 103,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/menu_auto_nest.js",
+      "line": 5,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/muter.js",
+      "line": 35,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/random_unmuter.ts",
+      "line": 107,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context_switch.js",
+      "line": 137,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/menu_auto_nest.ts",
+      "line": 18,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_repeater.ts",
+      "line": 205,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 1052,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context_switch.ts",
+      "line": 204,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1280,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_actions_button.ts",
+      "line": 349,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/label.ts",
+      "line": 224,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_prompt.ts",
+      "line": 10,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/comfy_ui_bar.ts",
+      "line": 110,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_primitive.ts",
+      "line": 247,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/any_switch.ts",
+      "line": 96,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/seed.ts",
+      "line": 327,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/bookmark.ts",
+      "line": 158,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_or_latent_size.ts",
+      "line": 44,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_comparer.ts",
+      "line": 473,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/context.ts",
+      "line": 445,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S15.OS1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 493,
+      "matched_regex": "node\\.outputs\\[\\s*\\w+\\s*\\]\\.type\\s*=",
+      "preview": "            node.outputs[0].type = inputType || \"*\";",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S15.OS1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_prompt.js",
+      "line": 25,
+      "matched_regex": "node\\.outputs\\[\\s*\\w+\\s*\\]\\.type\\s*=",
+      "preview": "                if (node.outputs[0].type === \"STRING\") {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S15.OS1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_prompt.js",
+      "line": 34,
+      "matched_regex": "node\\.outputs\\[\\s*\\w+\\s*\\]\\.type\\s*=",
+      "preview": "                    node.outputs[0].type = nodeData.output[0];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_power_prompt.js",
+      "line": 173,
+      "matched_regex": "\\.options\\.values\\s*=",
+      "preview": "                        this.combos[key].options.values = values;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_actions_button.js",
+      "line": 219,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                widget.value = String(widget.rgthree_lastValue);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node_mode_changer.js",
+      "line": 48,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "            widget.value = value;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_node_mode_changer.js",
+      "line": 63,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                widget.value = newValue;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_inset_crop.js",
+      "line": 38,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                    widget.value = 0;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_lora_loader.js",
+      "line": 68,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "                widget.value = { ...widgetValue };",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_lora_loader.ts",
+      "line": 141,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "        widget.value = {...(widgetValue as PowerLoraLoaderWidgetValue)};",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node_mode_changer.ts",
+      "line": 67,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "      widget.value = value;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_node_mode_changer.ts",
+      "line": 80,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "        widget.value = newValue;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_actions_button.ts",
+      "line": 306,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "          widget.value = String(widget.rgthree_lastValue);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W5",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_inset_crop.ts",
+      "line": 52,
+      "matched_regex": "widget\\.value\\s*=",
+      "preview": "          widget.value = 0;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 149,
+      "matched_regex": "api\\.queuePrompt\\s*=",
+      "preview": "    api.queuePrompt = async function (num: number, prompt: ComfyApiPrompt, ...args: any[]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 85,
+      "matched_regex": "api\\.queuePrompt\\s*=",
+      "preview": "        api.queuePrompt = async function (num, prompt, ...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 504,
+      "matched_regex": "api\\.queuePrompt\\s*=",
+      "preview": "        api.queuePrompt = async function (index, prompt, ...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 750,
+      "matched_regex": "api\\.queuePrompt\\s*=",
+      "preview": "    api.queuePrompt = async function (index: number, prompt: ComfyApiPrompt, ...args: any[]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 474,
+      "matched_regex": "\\.queuePrompt\\s*=\\s*async\\s+function",
+      "preview": "        app.queuePrompt = async function (number, batchCount) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 714,
+      "matched_regex": "\\.queuePrompt\\s*=\\s*async\\s+function",
+      "preview": "    app.queuePrompt = async function (number: number, batchCount?: number) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 115,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener(\"execution_start\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 142,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener(\"execution_cached\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 158,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "        api.addEventListener(\"execution_error\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 184,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "    api.addEventListener(\"execution_start\", (e: CustomEvent<ComfyApiEventDetailExecutionStart>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 217,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "    api.addEventListener(\"execution_cached\", (e: CustomEvent<ComfyApiEventDetailCached>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 237,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]execution_(start|success|error|cached)['\\\"]",
+      "preview": "    api.addEventListener(\"execution_error\", (e: CustomEvent<ComfyApiEventDetailError>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 176,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "    api.addEventListener(\"status\", (e: CustomEvent<ComfyApiEventDetailStatus>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 108,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]status['\\\"]",
+      "preview": "        api.addEventListener(\"status\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/prompt_service.js",
+      "line": 123,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]executing['\\\"]",
+      "preview": "        api.addEventListener(\"executing\", (e) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/prompt_service.ts",
+      "line": 194,
+      "matched_regex": "addEventListener\\(\\s*['\\\"]executing['\\\"]",
+      "preview": "    api.addEventListener(\"executing\", (e: CustomEvent<ComfyApiEventDetailExecuting>) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 232,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "        app.graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 283,
+      "matched_regex": "\\.beforeChange\\(",
+      "preview": "    app.graph.beforeChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 236,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "        app.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 287,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "    app.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim.ts",
+      "line": 22,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "    if (window.comfyAPI?.[moduleName]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/common/comfyui_shim.ts",
+      "line": 23,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "      module = window.comfyAPI?.[moduleName];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim.js",
+      "line": 6,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "        if ((_a = window.comfyAPI) === null || _a === void 0 ? void 0 : _a[moduleName]) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/common/comfyui_shim.js",
+      "line": 7,
+      "matched_regex": "window\\.comfyAPI\\b",
+      "preview": "            module = (_b = window.comfyAPI) === null || _b === void 0 ? void 0 : _b[moduleName];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 133,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 235,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 222,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 534,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 565,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 582,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 594,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 627,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 649,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 683,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 750,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                            this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 768,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/reroute.js",
+      "line": 836,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_comparer.js",
+      "line": 75,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_comparer.js",
+      "line": 81,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            this.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 76,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            this.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 132,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            (_a = this.graph) === null || _a === void 0 ? void 0 : _a.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/base_any_input_connected_node.js",
+      "line": 190,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                (_a = app.canvas.getCurrentGraph()) === null || _a === void 0 ? void 0 : _a.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_lora_loader.js",
+      "line": 83,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_lora_loader.js",
+      "line": 109,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                    this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/power_lora_loader.js",
+      "line": 143,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 157,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                this.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 177,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            (_a = this.graph) === null || _a === void 0 ? void 0 : _a.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 338,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        (_d = this.group.graph) === null || _d === void 0 ? void 0 : _d.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/node_mode_relay.js",
+      "line": 139,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                            outputNode.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/rgthree.js",
+      "line": 385,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                            graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 145,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "            (_a = node.graph) === null || _a === void 0 ? void 0 : _a.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/utils.js",
+      "line": 504,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    newNode.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 179,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 286,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/node_mode_relay.ts",
+      "line": 225,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "              outputNode.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 237,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      node.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/utils.ts",
+      "line": 773,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "  newNode.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 357,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 779,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 819,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 833,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 846,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 886,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 912,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 958,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1043,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "              this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1064,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/reroute.ts",
+      "line": 1133,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/rgthree.ts",
+      "line": 598,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "              graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 138,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 226,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/base_any_input_connected_node.ts",
+      "line": 322,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        app.canvas.getCurrentGraph()?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/testing/comfyui_env.ts",
+      "line": 44,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    app.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_lora_loader.ts",
+      "line": 160,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_lora_loader.ts",
+      "line": 202,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "              this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/power_lora_loader.ts",
+      "line": 241,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_comparer.ts",
+      "line": 126,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_comparer.ts",
+      "line": 138,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 226,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        this.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 249,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "      this.graph?.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 415,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "    this.group.graph?.setDirtyCanvas(true, false);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/image_comparer.js",
+      "line": 74,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "        this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/fast_groups_muter.js",
+      "line": 139,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "                this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "web/comfyui/dynamic_context.js",
+      "line": 132,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "            this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/dynamic_context.ts",
+      "line": 178,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "      this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/fast_groups_muter.ts",
+      "line": 206,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "        this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D3",
+      "repo": "rgthree/rgthree-comfy",
+      "file": "src_web/comfyui/image_comparer.ts",
+      "line": 125,
+      "matched_regex": "\\.setSize\\(\\s*\\w*\\.computeSize",
+      "preview": "    this.setSize(this.computeSize());",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 502
+}

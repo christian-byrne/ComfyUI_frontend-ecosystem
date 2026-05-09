@@ -1,0 +1,655 @@
+{
+  "repo": "ltdrdata/ComfyUI-Impact-Pack",
+  "repo_dir": "ltdrdata__ComfyUI-Impact-Pack",
+  "hits": [
+    {
+      "pattern_id": "S4.W1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 258,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "                w.callback = function (v, ...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area-advanced.js",
+      "line": 266,
+      "matched_regex": "\\.callback\\s*=\\s*function",
+      "preview": "                w.callback = function (v, ...args) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 220,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area-advanced.js",
+      "line": 227,
+      "matched_regex": "prototype\\.onNodeCreated\\s*=",
+      "preview": "        nodeType.prototype.onNodeCreated = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 319,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 342,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 369,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 384,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 414,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 568,
+      "matched_regex": "prototype\\.onConnectionsChange\\s*=",
+      "preview": "\t\t\tnodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-sam-editor.js",
+      "line": 9,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "\tnodeType.prototype.getExtraMenuOptions = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 94,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "\t\tapi.addEventListener(\"impact/update_status\", ({ detail }) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 261,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"stop-iteration\", () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 264,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"value-send\", valueSendHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 265,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"img-send\", imgSendHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 266,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"latent-send\", latentSendHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 267,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"executed\", progressExecuteHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 270,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"executed\", async (event) => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 75,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"impact-node-feedback\", nodeFeedbackHandler);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 89,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"impact-node-mute-state\", setMuteState);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 117,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"impact-bridge-continue\", bridgeContinue);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 124,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"impact-add-queue\", addQueue);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 137,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"impact-preview\", refreshPreview);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S1.H1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 305,
+      "matched_regex": "\\bloadedGraphNode\\s*[:(]",
+      "preview": "\tloadedGraphNode(node, app) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 105,
+      "matched_regex": "prototype\\.onDrawForeground\\s*=",
+      "preview": "\t\tnodeType.prototype.onDrawForeground = function (ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N9",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 756,
+      "matched_regex": "\\.onDrawForeground\\s*=\\s*function",
+      "preview": "\t\t\tnode.onDrawForeground = function (ctx) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 722,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\t\t\t\twidget.serializeValue = () => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 872,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\t\tnode.widgets[combo_id].serializeValue = () => { return \"Select the LoRA to add to the text\"; }",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S4.W3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 874,
+      "matched_regex": "\\.serializeValue\\s*=\\s*\\(",
+      "preview": "\t\t\tnode.widgets[combo_id+1].serializeValue = () => { return \"Select the Wildcard to add to the text\"; }",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N16",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 269,
+      "matched_regex": "for\\s*\\(\\s*(const|let|var)\\s+\\w+\\s+of\\s+node\\.widgets",
+      "preview": "    for (const w of node.widgets) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N17",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 393,
+      "matched_regex": "\\.onSelected\\s*=\\s*function",
+      "preview": "            this.onSelected = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N17",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area-advanced.js",
+      "line": 339,
+      "matched_regex": "\\.onSelected\\s*=\\s*function",
+      "preview": "            this.onSelected = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N17",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 396,
+      "matched_regex": "\\.onDeselected\\s*=\\s*function",
+      "preview": "            this.onDeselected = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N17",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area-advanced.js",
+      "line": 342,
+      "matched_regex": "\\.onDeselected\\s*=\\s*function",
+      "preview": "            this.onDeselected = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N19",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 205,
+      "matched_regex": "\\.onResize\\s*=\\s*function",
+      "preview": "    node.onResize = function (size) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N19",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area-advanced.js",
+      "line": 212,
+      "matched_regex": "\\.onResize\\s*=\\s*function",
+      "preview": "    node.onResize = function (size) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 162,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "        const link = node.graph.links && node.graph.links[inp.link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 172,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "\t\t\t\t\t\t\t\tlet src_node = app.graph._nodes_by_id[app.graph.links[input.link].origin_id];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 685,
+      "matched_regex": "\\.addInput\\(",
+      "preview": "\t\t\t\t\tthis.addInput(`${input_name}${slot_i}`, this.outputs[0].type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 505,
+      "matched_regex": "\\.addOutput\\(",
+      "preview": "\t\t\t\t\t\tthis.addOutput(`output${slot_i}`, this.outputs[0].type);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 671,
+      "matched_regex": "\\.removeInput\\(",
+      "preview": "\t\t\t\t\t\t    this.removeInput(index);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 487,
+      "matched_regex": "\\.removeOutput\\(",
+      "preview": "\t\t\t\t\t\t\t\tthis.removeOutput(link_info.origin_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 639,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\t\t\t\t\t\t\t\t\tnode.connect(link_info.origin_slot, node.id, 'input1');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 429,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\t\tapp.graph._nodes_by_id[link_info.target_id].disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 434,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\t\t\tapp.graph._nodes_by_id[link_info.target_id].disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 451,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\tthis.disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 463,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\t\tthis.disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 599,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\t\tapp.graph._nodes_by_id[link_info.target_id].disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 604,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\t\t\tapp.graph._nodes_by_id[link_info.target_id].disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 625,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\tthis.disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 643,
+      "matched_regex": "\\.disconnectInput\\(",
+      "preview": "\t\t\t\t\t\t\t\tthis.disconnectInput(link_info.target_slot);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 212,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area-advanced.js",
+      "line": 219,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-segs-picker.js",
+      "line": 172,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-sam-editor.js",
+      "line": 611,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-image-util.js",
+      "line": 73,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 278,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-segs-picker.js",
+      "line": 6,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const resp = await api.fetchApi(`/impact/segs/picker/count?id=${node.id}`);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 21,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tlet res = await api.fetchApi('/impact/wildcards/list');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 28,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tlet res = await api.fetchApi('/impact/wildcards/list/loaded');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 286,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\tawait api.fetchApi('/impact/wildcards/refresh');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-sam-editor.js",
+      "line": 46,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tawait api.fetchApi('/upload/mask', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-sam-editor.js",
+      "line": 465,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/sam/prepare', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-sam-editor.js",
+      "line": 492,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tconst response = await api.fetchApi('/sam/detect', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-image-util.js",
+      "line": 45,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tlet res = await api.fetchApi('/impact/set/pb_id_image'+params, { cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-image-util.js",
+      "line": 63,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tlet res = await api.fetchApi('/impact/get/pb_id_image?id='+v, { cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-image-util.js",
+      "line": 210,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\t\t\tlet res = api.fetchApi('/view/validate'+params, { cache: \"no-store\" }).then(response => response);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 384,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                    this.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/mask-rect-area.js",
+      "line": 386,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "                        this.graph.setDirtyCanvas(true, true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/impact-pack.js",
+      "line": 973,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "\t\t\t\t\t\t\t\tapp.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 259,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        node.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G4",
+      "repo": "ltdrdata/ComfyUI-Impact-Pack",
+      "file": "js/common.js",
+      "line": 265,
+      "matched_regex": "setDirtyCanvas\\(",
+      "preview": "        node.graph.setDirtyCanvas(true);",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 72
+}

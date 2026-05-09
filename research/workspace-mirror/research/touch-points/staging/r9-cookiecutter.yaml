@@ -1,0 +1,27 @@
+source: cookiecutter
+source_root: /home/c_byrne/.cookiecutters/cookiecutter-comfy-extension
+ingested_at: '2026-05-08'
+scaffold_files_total: 1
+scaffold_files:
+- '{{cookiecutter.project_slug}}/custom-nodes-template/web/js/example.js'
+forced_public_pattern_ids:
+- S7.G1-scaffold-app-global
+scaffold_surfaces:
+- pattern_id: S7.G1-scaffold-app-global
+  template_file: '{{cookiecutter.project_slug}}/custom-nodes-template/web/js/example.js'
+  excerpt: console.log(app);
+  byte_size: 18
+  source: cookiecutter
+react_template_state: empty-submodule
+notes:
+- "Cookiecutter offers frontend_type \u2208 {no, react, js}."
+- "frontend_type=no  \u2192 ZERO frontend surface scaffolded."
+- "frontend_type=js  \u2192 web/js/example.js scaffolded with `console.log(app);`"
+- "frontend_type=react \u2192 react-extension-template/ (currently 'empty-submodule' in this checkout\
+  \ \u2014 likely a git submodule pointing to Comfy-Org/ComfyUI-React-Extension-Template)."
+- 'Implication: the SINGLE forced-public JS surface scaffolded by the official template is the GLOBAL
+  `app` reference. Any v2 API that removes window.app / global app breaks the very first thing a `frontend_type=js`
+  extension author writes.'
+- "All other JS/TS frontend patterns in database.yaml are *conventionally* sanctioned (taught by core-extension\
+  \ code and by every popular pack), NOT scaffolded \u2014 so v2 may deprecate them with a migration shim,\
+  \ but the bare `app` global is non-negotiable."

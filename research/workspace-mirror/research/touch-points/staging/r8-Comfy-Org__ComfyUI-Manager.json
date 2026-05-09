@@ -1,0 +1,781 @@
+{
+  "repo": "Comfy-Org/ComfyUI-Manager",
+  "repo_dir": "Comfy-Org__ComfyUI-Manager",
+  "hits": [
+    {
+      "pattern_id": "S2.N5",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 6,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "\tnodeType.prototype.getExtraMenuOptions = function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S2.N5",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1687,
+      "matched_regex": "prototype\\.getExtraMenuOptions\\s*=",
+      "preview": "\t\tnode.prototype.getExtraMenuOptions = function (_, options) {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 758,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"cm-queue-status\", onQueueStatus);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/common.js",
+      "line": 457,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener('reconnected', onReconnected);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 73,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "        api.addEventListener(\"cm-queue-status\", this.onQueueStatus);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/cm-api.js",
+      "line": 67,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "api.addEventListener(\"cm-api-try-install-customnode\", tryInstallCustomNode);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S5.A1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/model-manager.js",
+      "line": 46,
+      "matched_regex": "api\\.addEventListener\\(",
+      "preview": "\t\tapi.addEventListener(\"cm-queue-status\", this.onQueueStatus);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 782,
+      "matched_regex": "app\\.graphToPrompt\\s*=",
+      "preview": "app.graphToPrompt = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 735,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "const loadGraphData = app.loadGraphData;",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A2",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 736,
+      "matched_regex": "app\\.loadGraphData",
+      "preview": "app.loadGraphData = async function () {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 103,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "\t\t\tlet link = app.graph.links[input.link];",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S9.L1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 117,
+      "matched_regex": "graph\\.links\\[",
+      "preview": "\t\t\t\t\tlinks.push(app.graph.links[output.links[j]]);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 90,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\t\tinfo.node.connect(info.slot, node.id, info.input_name);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S10.D2",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 105,
+      "matched_regex": "node\\.connect\\(",
+      "preview": "\t\t\tsrc_node.connect(link.origin_slot, dest.id, input.name);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G2",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1177,
+      "matched_regex": "app\\.graph\\.add\\(",
+      "preview": "\t\t\t\t\tapp.graph.add(node);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 144,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1474,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/workflow-metadata.js",
+      "line": 84,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "app.registerExtension(new WorkflowMetadataExtension());",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S12.UI1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 56,
+      "matched_regex": "app\\.registerExtension\\(",
+      "preview": "\t\tapp.registerExtension({",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-openart.js",
+      "line": 70,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "      key = await api.fetchApi(`/manager/get_openart_auth`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-openart.js",
+      "line": 85,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    await api.fetchApi(`/manager/set_openart_auth`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-openart.js",
+      "line": 462,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const current_snapshot = await api.fetchApi(`/snapshot/get_current`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 412,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tapi.fetchApi('/manager/share_option')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 420,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tapi.fetchApi('/manager/notice')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 473,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst response = await api.fetchApi('/manager/queue/update_comfyui', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 478,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tawait api.fetchApi('/manager/queue/start', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 609,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tlet res = await api.fetchApi(`/comfyui_manager/comfyui_versions`, { cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 628,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\tapi.fetchApi('/manager/policy/update', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: 'nightly-comfyui' }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 632,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\tapi.fetchApi('/manager/policy/update', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: 'stable-comfyui' }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 635,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tlet response = await api.fetchApi('/comfyui_manager/comfyui_switch_version', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ver: selected_version }), cach",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 772,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tawait api.fetchApi('/manager/queue/update_comfyui', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 775,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst response = await api.fetchApi('/manager/queue/update_all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: mode }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 787,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tawait api.fetchApi('/manager/queue/start', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 816,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/queue/reset', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 965,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/db_mode')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 970,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi('/manager/db_mode', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: event.target.value }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 992,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/preview_method')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1046,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi('/manager/preview_method', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: event.target.value }) })",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1077,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/channel_url_list')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1090,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\t\tapi.fetchApi('/manager/channel_url_list', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: event.target.value }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1120,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/share_option')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1130,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi(`/manager/share_option?value=${value}`);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1147,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/policy/component')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1155,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi('/manager/policy/component', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: event.target.value }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1167,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi('/manager/policy/update')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1174,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi('/manager/policy/update', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: event.target.value }) });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-manager.js",
+      "line": 1470,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tlet version = await api.fetchApi(`/manager/version`);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/snapshot.js",
+      "line": 12,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst response = await api.fetchApi('/snapshot/restore', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ target: target }), cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/snapshot.js",
+      "line": 40,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst response = await api.fetchApi('/snapshot/remove', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ target: target }), cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/snapshot.js",
+      "line": 66,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tconst response = await api.fetchApi('/snapshot/save', { method: 'POST', cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/snapshot.js",
+      "line": 81,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst response = await api.fetchApi(`/snapshot/getlist`);",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-common.js",
+      "line": 175,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tapi.fetchApi(`/manager/set_esheep_workflow_and_images`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-common.js",
+      "line": 815,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi(`/manager/get_matrix_auth`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-common.js",
+      "line": 834,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tapi.fetchApi(`/manager/get_comfyworkflows_auth`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-common.js",
+      "line": 894,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst response = await api.fetchApi(`/manager/share`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-youml.js",
+      "line": 182,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "      const response = await api.fetchApi(`/manager/youml/settings`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-youml.js",
+      "line": 191,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    await api.fetchApi(`/manager/youml/settings`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/comfyui-share-youml.js",
+      "line": 383,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "        const snapshot = await api.fetchApi(`/snapshot/get_current`)",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 465,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\tapi.fetchApi('/manager/queue/reset', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 641,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tconst response = await api.fetchApi(`/customnode/import_fail_info`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1401,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tres = await api.fetchApi(`/customnode/disabled_versions/${node_id}`, { cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1404,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tres = await api.fetchApi(`/customnode/versions/${node_id}`, { cache: \"no-store\" });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1446,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tlet stats = await api.fetchApi('/manager/queue/status');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1479,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tawait api.fetchApi('/manager/queue/reset', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1530,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst res = await api.fetchApi(`/manager/queue/${api_mode}`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1570,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tawait api.fetchApi('/manager/queue/start', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/common.js",
+      "line": 188,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst response = await api.fetchApi(\"/manager/reboot\", { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/common.js",
+      "line": 229,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst res = await api.fetchApi(\"/customnode/install/pip\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/common.js",
+      "line": 264,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst res = await api.fetchApi(\"/customnode/install/git_url\", {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/common.js",
+      "line": 302,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tlet res = await api.fetchApi(`/free`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/common.js",
+      "line": 368,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst res = await api.fetchApi(route, options).catch(e => {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/cm-api.js",
+      "line": 28,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst response = await api.fetchApi(`/customnode/toggle_active`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/cm-api.js",
+      "line": 38,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst response = await api.fetchApi(`/customnode/install`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/cm-api.js",
+      "line": 55,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tlet response = await api.fetchApi(\"/manager/reboot\", { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 67,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tlet data = await api.fetchApi('/manager/component/loads', {method: \"POST\"});",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 225,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tconst res = await api.fetchApi('/manager/component/save', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 262,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tconst res = await api.fetchApi('/manager/component/save', {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/components-manager.js",
+      "line": 712,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\tapi.fetchApi('/manager/policy/component')",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/workflow-metadata.js",
+      "line": 41,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "    const res = await api.fetchApi(\"/customnode/installed\");",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/model-manager.js",
+      "line": 173,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\t\t\tapi.fetchApi('/manager/queue/reset', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/model-manager.js",
+      "line": 433,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tlet stats = await api.fetchApi('/manager/queue/status');",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/model-manager.js",
+      "line": 447,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\tawait api.fetchApi('/manager/queue/reset', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/model-manager.js",
+      "line": 466,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tconst res = await api.fetchApi(`/manager/queue/install_model`, {",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S6.A3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/model-manager.js",
+      "line": 506,
+      "matched_regex": "api\\.fetchApi\\(",
+      "preview": "\t\t\tawait api.fetchApi('/manager/queue/start', { method: 'POST' });",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S11.G3",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/node_fixer.js",
+      "line": 141,
+      "matched_regex": "\\.afterChange\\(",
+      "preview": "\tapp.graph.afterChange();",
+      "variant": "clone-grep"
+    },
+    {
+      "pattern_id": "S7.G1",
+      "repo": "Comfy-Org/ComfyUI-Manager",
+      "file": "js/custom-nodes-manager.js",
+      "line": 1169,
+      "matched_regex": "window\\.LiteGraph\\b",
+      "preview": "\t\t\t\tconst node = window.LiteGraph?.createNode(",
+      "variant": "clone-grep"
+    }
+  ],
+  "hit_count": 86
+}
