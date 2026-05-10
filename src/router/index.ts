@@ -40,8 +40,15 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/node-packs',
     name: 'node-packs',
-    component: RouteSkeleton,
+    // Lazy-loaded so the YAML+registry bundle stays out of the entry chunk.
+    component: () => import('../pages/NodePacks.vue'),
     meta: { title: 'Node Packs', nav: true }
+  },
+  {
+    path: '/packs/:packId',
+    name: 'pack-detail',
+    component: () => import('../pages/PackDetail.vue'),
+    meta: { title: 'Pack Detail', nav: false }
   },
   {
     path: '/heatmap',
