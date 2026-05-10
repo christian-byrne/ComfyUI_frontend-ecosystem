@@ -55,7 +55,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/api-diff',
     name: 'api-diff',
-    component: RouteSkeleton,
+    component: () => import('../pages/ApiDiff.vue'),
     meta: { title: 'API Diff', nav: true }
   }
 ]
