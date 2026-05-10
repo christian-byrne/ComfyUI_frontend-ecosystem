@@ -5,6 +5,7 @@ import {
 } from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
+import Patterns from '../pages/Patterns.vue'
 
 /**
  * Placeholder routes for the 7 planned dashboard pages.
@@ -25,7 +26,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/patterns',
     name: 'patterns',
-    component: RouteSkeleton,
+    component: Patterns,
     meta: { title: 'Patterns', nav: true }
   },
   {
