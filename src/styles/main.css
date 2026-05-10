@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+/*
+ * typeui "simple" — minimal base typography.
+ *
+ * No colored brand. Zinc neutrals only. System font stack. Line-height 1.5.
+ * Prose blocks cap at 80ch for readability. Everything else opts in via
+ * Tailwind utility classes.
+ */
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffffff;
+  color: #18181b; /* zinc-900 */
+}
+
+.prose-narrow {
+  max-width: 80ch;
+}
