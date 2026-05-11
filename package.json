@@ -10,11 +10,11 @@
     "test": "vitest run",
     "test:unit": "vitest run",
     "test:watch": "vitest",
+    "typecheck": "vue-tsc --noEmit",
     "data:build": "python3 scripts/build-data.py"
   },
   "dependencies": {
     "@vueuse/core": "^11.2.0",
-    "@vueuse/router": "^14.3.0",
     "pinia": "^2.2.0",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0",
