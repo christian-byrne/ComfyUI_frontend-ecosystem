@@ -49,13 +49,13 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/heatmap',
     name: 'heatmap',
-    component: RouteSkeleton,
+    component: () => import('../pages/Heatmap.vue'),
     meta: { title: 'Heatmap', nav: true }
   },
   {
     path: '/api-diff',
     name: 'api-diff',
-    component: () => import('../pages/ApiDiff.vue'),
+    component: RouteSkeleton,
     meta: { title: 'API Diff', nav: true }
   }
 ]
