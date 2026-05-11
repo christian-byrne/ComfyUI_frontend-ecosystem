@@ -5,6 +5,7 @@ import {
 } from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
+import PatternDetail from '../pages/PatternDetail.vue'
 
 /**
  * Placeholder routes for the 7 planned dashboard pages.
@@ -31,7 +32,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/patterns/:id',
     name: 'pattern-detail',
-    component: RouteSkeleton,
+    component: PatternDetail,
     meta: { title: 'Pattern Detail', nav: false }
   },
   {
@@ -49,7 +50,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/heatmap',
     name: 'heatmap',
-    component: () => import('../pages/Heatmap.vue'),
+    component: RouteSkeleton,
     meta: { title: 'Heatmap', nav: true }
   },
   {
