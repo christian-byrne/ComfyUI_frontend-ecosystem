@@ -1,7 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type RouteRecordRaw
+} from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
+import Patterns from '../pages/Patterns.vue'
 
 /**
  * Placeholder routes for the 7 planned dashboard pages.
@@ -22,7 +26,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/patterns',
     name: 'patterns',
-    component: RouteSkeleton,
+    component: Patterns,
     meta: { title: 'Patterns', nav: true }
   },
   {
@@ -40,21 +44,8 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/node-packs',
     name: 'node-packs',
-    // Lazy-loaded so the YAML+registry bundle stays out of the entry chunk.
-    component: () => import('../pages/NodePacks.vue'),
+    component: RouteSkeleton,
     meta: { title: 'Node Packs', nav: true }
-  },
-  {
-    // Sibling rather than nested under `/node-packs` so that:
-    //   1. /packs/:packId remains a deep-linkable canonical URL even when
-    //      the browse page is split into a separate bundle, and
-    //   2. there is no shared layout component yet to mount as the parent.
-    // If a shared `NodePackLayout` ships later, nest under /node-packs and
-    // add `meta.parent: 'node-packs'` for breadcrumb wiring.
-    path: '/packs/:packId',
-    name: 'pack-detail',
-    component: () => import('../pages/PackDetail.vue'),
-    meta: { title: 'Pack Detail', nav: false }
   },
   {
     path: '/heatmap',
@@ -67,14 +58,6 @@ export const routes: RouteRecordRaw[] = [
     name: 'api-diff',
     component: RouteSkeleton,
     meta: { title: 'API Diff', nav: true }
-  },
-  {
-    // Storybook-style preview for NodePackCard / NodePackBanner.
-    // Lazy-loaded so it never ships in the main page bundle.
-    path: '/__demo/node-packs',
-    name: 'demo-node-packs',
-    component: () => import('../pages/NodePacksDemo.vue'),
-    meta: { title: 'NodePackCard demo', nav: false }
   }
 ]
 

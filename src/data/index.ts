@@ -7,7 +7,7 @@
  * afford to inline it. If/when it grows past ~2 MB we should split into
  * lazy-loaded chunks per page.
  */
-import { load as parseYaml } from 'js-yaml'
+import { parse as parseYaml } from 'yaml'
 
 import patternsRaw from '../../research/touch-points-database.yaml?raw'
 import rollupRaw from '../../research/touch-points-rollup.yaml?raw'
