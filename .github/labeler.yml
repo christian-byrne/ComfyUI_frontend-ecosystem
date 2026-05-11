@@ -1,0 +1,44 @@
+# Path-based PR auto-labeling for the dashboard repo.
+# Used by .github/workflows/labeler.yml + actions/labeler@v5.
+
+area:dashboard:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/pages/**'
+          - 'src/components/**'
+          - 'src/router/**'
+          - 'src/App.vue'
+          - 'src/main.ts'
+
+area:data:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/data/**'
+          - 'src/stores/**'
+          - 'research/**'
+
+area:registry:
+  - changed-files:
+      - any-glob-to-any-file: 'src/registry/**'
+
+area:tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'e2e/**'
+          - '**/*.test.ts'
+          - '**/*.spec.ts'
+
+area:ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**'
+          - 'vercel.json'
+          - 'package.json'
+          - 'pnpm-lock.yaml'
+
+area:docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'README.md'
+          - 'docs/**'
+          - '**/*.md'

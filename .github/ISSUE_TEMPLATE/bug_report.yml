@@ -1,0 +1,52 @@
+name: Bug Report
+description: Report a bug in the ComfyUI Frontend Ecosystem dashboard
+labels: ['bug']
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened? What did you expect to happen?
+      placeholder: 'When I ..., I expected ..., but instead ...'
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      options:
+        - dashboard (overview / pages)
+        - data-loader (research artifacts → store)
+        - registry-client (Comfy Registry API)
+        - test-runner page
+        - CI / build / Vercel
+        - schemas / types
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction Steps
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+    validations:
+      required: false
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: 'Browser, OS, deploy URL or local commit SHA'
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Screenshots
+      render: shell

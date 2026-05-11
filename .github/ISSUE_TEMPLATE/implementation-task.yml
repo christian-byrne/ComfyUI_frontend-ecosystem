@@ -1,0 +1,42 @@
+name: Implementation Task
+description: A discrete, scoped piece of work tied to a plan or wave
+labels: ['task']
+body:
+  - type: input
+    id: wave
+    attributes:
+      label: Wave / Plan ref
+      placeholder: 'e.g. W3.Heatmap, W5.2'
+    validations:
+      required: false
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What exactly will be done in this task?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: input
+    id: blocked_by
+    attributes:
+      label: Blocked by
+      placeholder: 'List issue numbers, branches, or upstream PRs'
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Complexity tier
+      options:
+        - routine (≤30m)
+        - analytical (30–90m)
+        - deep (1.5h+)
+    validations:
+      required: true

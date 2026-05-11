@@ -23,3 +23,28 @@ Visualize and explore the ComfyUI extension API ecosystem — patterns, blast ra
 
 ## License
 MIT
+
+## CI / Deploy
+
+This repo runs four GitHub Actions workflows:
+
+| Workflow              | Trigger                                                                                       | Purpose                                |
+| --------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `ci.yml`              | push to `main`, all PRs                                                                       | typecheck → lint → format → unit → build |
+| `e2e.yml`             | PR labeled `needs-e2e`, nightly cron, manual                                                  | Playwright e2e                         |
+| `vercel-preview.yml`  | every PR (advisory only — actual previews come from the Vercel ↔ GitHub integration)          | confirms Vercel hookup                 |
+| `data-refresh.yml`    | manual `workflow_dispatch`                                                                    | placeholder for refreshing `research/` |
+| `labeler.yml`         | every PR                                                                                      | path-based auto-labels                 |
+
+### Vercel setup (one-time, manual)
+
+1. Sign in at <https://vercel.com/dashboard>.
+2. **Add New → Project → Import Git Repository → `christian-byrne/ComfyUI_frontend-ecosystem`**.
+3. Vercel auto-detects Vite via `vercel.json`. No env vars needed.
+4. Production branch: `main`. Preview deploys: every PR.
+
+### Issue & PR templates
+
+`.github/ISSUE_TEMPLATE/` provides four pickers: bug, feature, implementation task, research spike.
+`.github/PULL_REQUEST_TEMPLATE.md` standardises PR descriptions.
+`.github/labeler.yml` auto-applies area labels (`area:dashboard`, `area:data`, `area:registry`, `area:tests`, `area:ci`, `area:docs`).

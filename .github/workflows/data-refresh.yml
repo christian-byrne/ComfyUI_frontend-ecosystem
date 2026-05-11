@@ -1,0 +1,25 @@
+name: Data Refresh
+
+# Manually triggered placeholder for refreshing research/* artifacts from
+# the cross-repo workspace. Real ingestion script lands with a later wave.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are we refreshing data?'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder
+        run: |
+          echo "Refresh requested: ${{ inputs.reason }}"
+          echo "TODO: wire scripts/refresh-research.sh once it exists."
