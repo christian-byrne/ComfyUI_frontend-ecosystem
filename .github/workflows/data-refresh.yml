@@ -1,25 +1,32 @@
 name: Data Refresh
 
-# Manually triggered placeholder for refreshing research/* artifacts from
-# the cross-repo workspace. Real ingestion script lands with a later wave.
+# Manually-triggered refresh of `research/` from the cross-repo workspace.
+# Placeholder: actual refresh scripts land in a later wave.
 
 on:
   workflow_dispatch:
     inputs:
       reason:
-        description: 'Why are we refreshing data?'
-        required: true
-        type: string
-
-permissions:
-  contents: read
+        description: 'Why are you refreshing? (audit log only)'
+        required: false
+        default: 'manual refresh'
 
 jobs:
   refresh:
+    name: Refresh research/ bundle (placeholder)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Placeholder
         run: |
-          echo "Refresh requested: ${{ inputs.reason }}"
-          echo "TODO: wire scripts/refresh-research.sh once it exists."
+          echo "Reason: ${{ inputs.reason }}"
+          echo "::notice::data-refresh.yml is a placeholder. Real refresh scripts arrive in a later wave."
+          echo "Planned scope:"
+          echo "  - re-run touch-points DB extraction"
+          echo "  - rebuild behavior categories"
+          echo "  - sync research/workspace-mirror/ from cross-repo workspace"
+          echo "  - open a PR with the diff if anything changed"

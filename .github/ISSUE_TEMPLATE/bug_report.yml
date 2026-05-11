@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug in the ComfyUI Frontend Ecosystem dashboard
+description: Report a bug in the ComfyUI Frontend Ecosystem Explorer
 labels: ['bug']
 body:
   - type: textarea
@@ -10,43 +10,56 @@ body:
       placeholder: 'When I ..., I expected ..., but instead ...'
     validations:
       required: true
+
   - type: dropdown
-    id: area
+    id: component
     attributes:
       label: Affected Area
       options:
-        - dashboard (overview / pages)
-        - data-loader (research artifacts → store)
-        - registry-client (Comfy Registry API)
-        - test-runner page
-        - CI / build / Vercel
-        - schemas / types
+        - dashboard (Vue UI)
+        - data (research/ bundle, scripts)
+        - registry (Comfy Registry integration)
+        - tests
+        - CI/CD (GitHub Actions)
+        - Vercel deploy
+        - documentation
         - other
     validations:
       required: true
-  - type: textarea
-    id: repro
+
+  - type: input
+    id: page
     attributes:
-      label: Reproduction Steps
-      placeholder: |
-        1. Go to ...
-        2. Click ...
-        3. Observe ...
-    validations:
-      required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected Behavior
+      label: Page / Route (if dashboard bug)
+      placeholder: '/patterns/event-listener'
     validations:
       required: false
-  - type: input
-    id: env
+
+  - type: textarea
+    id: reproduction
     attributes:
-      label: Environment
-      placeholder: 'Browser, OS, deploy URL or local commit SHA'
+      label: Steps to Reproduce
+      description: Minimal steps to reproduce the issue.
+      placeholder: |
+        1. Visit /patterns
+        2. Click on ...
+        3. Observe ...
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / Environment
+      placeholder: 'Chrome 120 on macOS / preview deploy / local dev'
+    validations:
+      required: false
+
   - type: textarea
     id: logs
     attributes:
-      label: Logs / Screenshots
+      label: Logs / Console Output / Screenshots
+      description: Paste relevant console errors, network failures, or attach screenshots.
       render: shell
+    validations:
+      required: false

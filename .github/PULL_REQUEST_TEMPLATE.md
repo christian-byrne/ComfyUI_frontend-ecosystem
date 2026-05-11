@@ -21,32 +21,41 @@ Fixes #
 ### Automated
 
 - [ ] Unit tests added/updated
+- [ ] Integration tests (if applicable)
 - [ ] All existing tests pass
-- [ ] Regression tests added for bug fixes
+- [ ] Regression tests added for bug fixes (`*.regression.test.*`)
 
-### Manual / Visual
+### E2E Verification Steps
 
-<!-- For UI changes: include screenshots and a Vercel preview link if available. -->
+<!-- Concrete steps someone can follow to verify the change works -->
 
 1.
 
-## Data / Research Artifacts
+### Verification Evidence
 
-<!-- If this PR touches research/* (bundled YAML/JSON), explain what changed. -->
+<!-- Paste actual command output (typecheck, lint, test, build). -->
 
-- [ ] No research artifact changes
-- [ ] Research artifacts updated — `pnpm test:unit` passes the schema validation
+```
+$ pnpm typecheck && pnpm lint && pnpm test:unit && pnpm build
+<paste actual output>
+```
 
-## Risk
+## Vercel Preview
 
-<!-- Pick one. -->
+<!-- The Vercel bot will post the preview URL automatically. Paste it here once available. -->
 
-- [ ] Low — internal-only, no API surface change
-- [ ] Medium — touches public route or visible component
-- [ ] High — schema change, build pipeline, or deploy config
+Preview:
 
-## Out of Scope
+## Noticed But Not Touched
 
-<!-- Anything intentionally NOT done in this PR. -->
+<!-- Minor out-of-scope observations. For significant issues, create a GitHub issue. -->
 
 -
+
+## Checklist
+
+- [ ] Self-reviewed the diff
+- [ ] No secrets or sensitive data committed
+- [ ] No `--no-verify` or `--admin` bypasses used
+- [ ] Updated documentation if needed
+- [ ] Verified Vercel preview renders the affected pages

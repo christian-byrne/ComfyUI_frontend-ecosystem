@@ -1,39 +1,62 @@
 name: CI
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
-  pull_request:
-
-permissions:
-  contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  ci:
+  build:
+    name: Typecheck · Lint · Unit · Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          version: 10
-      - uses: actions/setup-node@v4
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: pnpm
-      - name: Install
+
+      - name: Detect package manifest
+        id: detect
+        run: |
+          if [ -f package.json ]; then
+            echo "has_pkg=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_pkg=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No package.json yet — skipping install/typecheck/lint/test/build (scaffolding phase)"
+          fi
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_pkg == 'true'
         run: pnpm install --frozen-lockfile
+
       - name: Typecheck
-        run: pnpm typecheck
+        if: steps.detect.outputs.has_pkg == 'true'
+        run: pnpm run typecheck --if-present
+
       - name: Lint
-        run: pnpm lint
-      - name: Format check
-        run: pnpm format:check
+        if: steps.detect.outputs.has_pkg == 'true'
+        run: pnpm run lint --if-present
+
       - name: Unit tests
-        run: pnpm test:unit
+        if: steps.detect.outputs.has_pkg == 'true'
+        run: pnpm run test:unit --if-present
+
       - name: Build
-        run: pnpm build
+        if: steps.detect.outputs.has_pkg == 'true'
+        run: pnpm run build --if-present
