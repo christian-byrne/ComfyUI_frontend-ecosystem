@@ -1,8 +1,5 @@
-import {
-  createRouter,
-  createWebHistory,
-  type RouteRecordRaw
-} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
 
@@ -57,6 +54,14 @@ export const routes: RouteRecordRaw[] = [
     name: 'api-diff',
     component: RouteSkeleton,
     meta: { title: 'API Diff', nav: true }
+  },
+  {
+    // Storybook-style preview for NodePackCard / NodePackBanner.
+    // Lazy-loaded so it never ships in the main page bundle.
+    path: '/__demo/node-packs',
+    name: 'demo-node-packs',
+    component: () => import('../pages/NodePacksDemo.vue'),
+    meta: { title: 'NodePackCard demo', nav: false }
   }
 ]
 
