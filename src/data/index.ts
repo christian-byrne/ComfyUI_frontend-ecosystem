@@ -1,83 +1,55 @@
-import yaml from 'js-yaml'
+/**
+ * Data loader: parses the YAML touch-points bundle at build time (via Vite's
+ * `?raw` import) and exports typed structures plus pre-built indexes used by
+ * every dashboard page.
+ *
+ * The whole bundle is small enough (a few hundred kB of YAML) that we can
+ * afford to inline it. If/when it grows past ~2 MB we should split into
+ * lazy-loaded chunks per page.
+ */
+import { load as parseYaml } from 'js-yaml'
 
 import patternsRaw from '../../research/touch-points-database.yaml?raw'
 import rollupRaw from '../../research/touch-points-rollup.yaml?raw'
-import starCacheRaw from '../../research/touch-points-star-cache.yaml?raw'
-import behaviorCategoriesRaw from '../../research/workspace-mirror/research/touch-points/behavior-categories.yaml?raw'
 
-import {
-  BehaviorCategoriesFileSchema,
-  PatternFileSchema,
-  RollupFileSchema,
-  StarCacheFileSchema,
-  type BehaviorCategory,
-  type EvidenceRow,
-  type Pattern,
-  type RollupEntry,
-  type StarCacheEntry
+import type {
+  EvidenceRow,
+  Pattern,
+  PatternFile,
+  RollupEntry,
+  RollupFile
 } from './schema'
 
-// ───────────────────────────────────────────────────────────────────────
-// Build-time parse + validate. Throws on schema drift -> fails the build.
-// ───────────────────────────────────────────────────────────────────────
-function parseYaml<T>(raw: string, label: string): T {
+function parse<T>(raw: string, label: string): T {
   try {
-    return yaml.load(raw) as T
+    return parseYaml(raw) as T
   } catch (err) {
     throw new Error(`[data] failed to parse YAML ${label}: ${(err as Error).message}`)
   }
 }
 
-const patternsFile = PatternFileSchema.parse(
-  parseYaml(patternsRaw, 'touch-points-database.yaml')
-)
-const rollupFile = RollupFileSchema.parse(
-  parseYaml(rollupRaw, 'touch-points-rollup.yaml')
-)
-const starCacheFile = StarCacheFileSchema.parse(
-  parseYaml(starCacheRaw, 'touch-points-star-cache.yaml')
-)
-const behaviorCategoriesFile = BehaviorCategoriesFileSchema.parse(
-  parseYaml(behaviorCategoriesRaw, 'behavior-categories.yaml')
-)
+const patternsFile = parse<PatternFile>(patternsRaw, 'touch-points-database.yaml')
+const rollupFile = parse<RollupFile>(rollupRaw, 'touch-points-rollup.yaml')
 
-export const patterns: Pattern[] = patternsFile.patterns
-export const rollup: RollupEntry[] = rollupFile.patterns
-export const behaviorCategories: BehaviorCategory[] = behaviorCategoriesFile.categories
+export const patterns: Pattern[] = (patternsFile.patterns ?? []).map((p) => ({
+  ...p,
+  evidence: p.evidence ?? []
+}))
+export const rollup: RollupEntry[] = rollupFile.patterns ?? []
 
-export const starCache: Record<string, StarCacheEntry> = Object.fromEntries(
-  starCacheFile.repos.map((r) => [r.repo, r])
+/** Rollup entries keyed by pattern_id for O(1) lookup. */
+export const rollupByPatternId: Record<string, RollupEntry> = Object.fromEntries(
+  rollup.map((r) => [r.pattern_id, r])
 )
 
-// ───────────────────────────────────────────────────────────────────────
-// Computed indexes
-// ───────────────────────────────────────────────────────────────────────
-
-/** Patterns grouped by surface_family (e.g. "S2", "S4"). */
-export const patternsBySurface: Record<string, Pattern[]> = (() => {
-  const out: Record<string, Pattern[]> = {}
-  for (const p of patterns) {
-    ;(out[p.surface_family] ??= []).push(p)
-  }
-  return out
-})()
-
-/** Patterns grouped by node-pack repo (any pattern with at least one evidence row in that repo). */
-export const patternsByPack: Record<string, Pattern[]> = (() => {
-  const out: Record<string, Set<Pattern>> = {}
-  for (const p of patterns) {
-    for (const e of p.evidence) {
-      ;(out[e.repo] ??= new Set()).add(p)
-    }
-  }
-  return Object.fromEntries(
-    Object.entries(out).map(([repo, set]) => [repo, [...set]])
-  )
-})()
+/** Patterns keyed by pattern_id for O(1) lookup. */
+export const patternById: Record<string, Pattern> = Object.fromEntries(
+  patterns.map((p) => [p.pattern_id, p])
+)
 
 /**
- * Evidence rows grouped by pattern_id. Each row is annotated with its parent
- * pattern_id when missing, so consumers can flat-map without losing provenance.
+ * Evidence rows grouped by pattern_id with provenance backfilled. Lets
+ * consumers flat-map without re-walking the patterns array.
  */
 export const evidenceByPatternId: Record<string, EvidenceRow[]> = (() => {
   const out: Record<string, EvidenceRow[]> = {}
@@ -90,26 +62,16 @@ export const evidenceByPatternId: Record<string, EvidenceRow[]> = (() => {
   return out
 })()
 
-/** Behavior categories that include the given pattern_id as a member. */
-export const categoriesByPatternId: Record<string, BehaviorCategory[]> = (() => {
-  const out: Record<string, BehaviorCategory[]> = {}
-  for (const c of behaviorCategories) {
-    for (const pid of c.member_pattern_ids) {
-      ;(out[pid] ??= []).push(c)
+/** Total evidence-row count per pack (repo). Used by the heatmap to pick top-N. */
+export const evidenceCountByPack: Record<string, number> = (() => {
+  const out: Record<string, number> = {}
+  for (const p of patterns) {
+    for (const e of p.evidence) {
+      if (!e.repo) continue
+      out[e.repo] = (out[e.repo] ?? 0) + 1
     }
   }
   return out
 })()
 
-/** Rollup entries keyed by pattern_id for O(1) lookup. */
-export const rollupByPatternId: Record<string, RollupEntry> = Object.fromEntries(
-  rollup.map((r) => [r.pattern_id, r])
-)
-
-export type {
-  BehaviorCategory,
-  EvidenceRow,
-  Pattern,
-  RollupEntry,
-  StarCacheEntry
-}
+export type { EvidenceRow, Pattern, RollupEntry } from './schema'
