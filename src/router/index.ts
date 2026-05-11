@@ -1,7 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type RouteRecordRaw
+} from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
+import BehaviorCategories from '../pages/BehaviorCategories.vue'
+import CategoryDetail from '../pages/CategoryDetail.vue'
 
 /**
  * Placeholder routes for the 7 planned dashboard pages.
@@ -34,8 +39,14 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/behavior-categories',
     name: 'behavior-categories',
-    component: RouteSkeleton,
+    component: BehaviorCategories,
     meta: { title: 'Behavior Categories', nav: true }
+  },
+  {
+    path: '/categories/:id',
+    name: 'category-detail',
+    component: CategoryDetail,
+    meta: { title: 'Category Detail', nav: false }
   },
   {
     path: '/node-packs',

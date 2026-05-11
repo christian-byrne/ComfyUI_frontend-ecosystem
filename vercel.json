@@ -1,9 +1,16 @@
 {
-  "buildCommand": "pnpm build",
-  "outputDirectory": "dist",
-  "installCommand": "pnpm install --frozen-lockfile",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "outputDirectory": "dist",
+  "devCommand": "pnpm dev",
   "rewrites": [
-    { "source": "/((?!api).*)", "destination": "/index.html" }
-  ]
+    {
+      "source": "/((?!api/|assets/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

@@ -1,38 +1,43 @@
 ---
-name: Research Spike
-about: Time-boxed investigation that produces a written artifact, not shipped code
-title: '[Spike] '
-labels: research
+name: 'Research Spike'
+about: 'Focused deep-dive into a topic that needs investigation before implementation'
+title: '[research-spike] '
+labels: 'research-spike'
 ---
 
-## Question
+## Topic
 
-<!-- The single question this spike answers. -->
+<!-- What needs deeper investigation -->
 
-## Time-box
+## Source
 
-<!-- e.g. 2h, 1d. Hard cap. -->
+- **URL:**
+- **Type:** <!-- tweet | repo | article | reddit | blog | tool | mcp | upstream-issue -->
+- **Author:**
+- **Title:**
 
-## Inputs
+## Why This Needs Deeper Research
 
-<!-- Files, repos, or docs to read first. -->
+<!-- What was surface-level, what gaps exist, why a full session is needed -->
 
--
+## Research Questions
 
-## Deliverable
+<!-- Specific questions to answer during the spike -->
 
-<!-- Where will the answer live? -->
+1.
+2.
+3.
 
-- [ ] Markdown note in `research/`
-- [ ] Inline comment(s) on related issue(s)
-- [ ] Decision recorded in `decisions/`
+## Context
 
-## Out of Scope
+- **Amp Thread:** <!-- https://ampcode.com/threads/T-... -->
+- **Related Issues / PRs:**
+- **Session Date:** <!-- YYYY-MM-DD -->
 
--
+## Related Sources
 
-## Acceptance
+<!-- Other repos, articles, or tools that might inform this research -->
 
-<!-- How will we know the spike answered the question? -->
+## Expected Output
 
--
+<!-- What should the research produce? e.g., "A set of follow-up issues", "Updated research/ bundle", "ADR draft", "New page in dashboard" -->
