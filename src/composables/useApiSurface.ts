@@ -26,7 +26,7 @@ export const V1_SOURCE: ApiSource = {
 export const V2_SOURCES: ApiSource[] = (
   ['lifecycle', 'node', 'widget', 'events'] as const
 ).map((name) => ({
-  label: `v2 ${name}.ts`,
+  label: `${name}.ts`,
   url: `https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/ext-api/i-foundation/src/extension-api/${name}.ts`
 }))
 

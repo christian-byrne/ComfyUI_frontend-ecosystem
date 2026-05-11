@@ -80,7 +80,7 @@ describe('ApiDiff page', () => {
     expect(wrapper.find('[data-testid="error"]').exists()).toBe(false)
     expect(wrapper.find('[data-testid="diff-grid"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('v1 — comfy.ts')
-    expect(wrapper.text()).toContain('v2 — v2 lifecycle.ts')
+    expect(wrapper.text()).toContain('v2 — lifecycle.ts')
   })
 
   it('renders status badges for at least 5 detected v1 methods', async () => {

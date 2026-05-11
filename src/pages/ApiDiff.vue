@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import { useEventListener } from '@vueuse/core'
 import { diffLines, type Change } from 'diff'
 
 import { useApiSurface } from '../composables/useApiSurface'
@@ -39,13 +40,17 @@ const STATUS_STYLES: Record<MigrationStatus, string> = {
 }
 
 // ─── synced scroll ───────────────────────────────────────────────────────
+// `syncing` lives in setup() so each component instance has its own
+// re-entrancy guard — sharing the flag at module scope would cause
+// cross-instance interference and prevent GC of detached elements.
 const leftCol = ref<HTMLElement | null>(null)
 const rightCol = ref<HTMLElement | null>(null)
 let syncing = false
 
 function bindSync(source: HTMLElement | null, target: HTMLElement | null) {
   if (!source || !target) return
-  source.addEventListener('scroll', () => {
+  // useEventListener auto-removes on unmount — no manual cleanup needed.
+  useEventListener(source, 'scroll', () => {
     if (syncing) return
     syncing = true
     target.scrollTop = source.scrollTop
@@ -62,6 +67,9 @@ watch([leftCol, rightCol], ([l, r]) => {
 </script>
 
 <template>
+  <!-- TODO(N16b): per-MIGRATION_STATUS card layout — render one card per
+       entry showing v1 signature ↔ v2 replacement instead of diffing two
+       unrelated source files end-to-end. -->
   <section class="space-y-4">
     <header>
       <h1 class="text-2xl font-semibold text-zinc-900">
@@ -112,9 +120,11 @@ watch([leftCol, rightCol], ([l, r]) => {
           <pre
             ref="leftCol"
             class="h-[70vh] overflow-auto rounded border border-zinc-200 bg-zinc-50 p-3 text-xs leading-snug font-mono"
-          ><template v-for="(h, i) in hunks" :key="`l${i}`"><span
-              v-if="!h.added"
-              :class="h.removed ? 'bg-rose-100 text-rose-900' : ''"
+          ><template v-for="(h, i) in hunks" :key="`l${i}`"><del
+              v-if="h.removed"
+              class="bg-rose-100 text-rose-900 no-underline"
+            ><span class="sr-only">removed: </span>{{ h.value }}</del><span
+              v-else-if="!h.added"
             >{{ h.value }}</span></template></pre>
         </div>
 
@@ -125,9 +135,11 @@ watch([leftCol, rightCol], ([l, r]) => {
           <pre
             ref="rightCol"
             class="h-[70vh] overflow-auto rounded border border-zinc-200 bg-zinc-50 p-3 text-xs leading-snug font-mono"
-          ><template v-for="(h, i) in hunks" :key="`r${i}`"><span
-              v-if="!h.removed"
-              :class="h.added ? 'bg-emerald-100 text-emerald-900' : ''"
+          ><template v-for="(h, i) in hunks" :key="`r${i}`"><ins
+              v-if="h.added"
+              class="bg-emerald-100 text-emerald-900 no-underline"
+            ><span class="sr-only">added: </span>{{ h.value }}</ins><span
+              v-else-if="!h.removed"
             >{{ h.value }}</span></template></pre>
         </div>
       </div>
