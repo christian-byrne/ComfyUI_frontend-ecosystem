@@ -1,5 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type RouteRecordRaw
+} from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
 
