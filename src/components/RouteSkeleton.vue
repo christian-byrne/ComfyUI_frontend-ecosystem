@@ -12,7 +12,7 @@ defineProps<{
 <template>
   <section class="prose-narrow">
     <h1 class="text-2xl font-semibold text-zinc-900">
-      {{ title ?? route.meta.title ?? route.name }}
+      {{ title ?? (route.meta?.title as string | undefined) ?? route.name }}
     </h1>
     <p class="mt-2 text-sm text-zinc-500">
       Placeholder route. Real implementation lands in W3.*.
