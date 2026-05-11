@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter, type RouteLocationRaw } from 'vue-router'
 
 import { useDataStore } from '@/stores/data'
 
@@ -10,6 +11,25 @@ import { useDataStore } from '@/stores/data'
  * for everyone landing on the ecosystem dashboard.
  */
 const data = useDataStore()
+const router = useRouter()
+
+/**
+ * Defensive named-route helper for pattern-detail links.
+ *
+ * The `pattern-detail` route is registered on this branch (router/index.ts)
+ * but may not exist in every consumer (e.g. tests, embedded shells). Falls
+ * back to the path-based form with a console warning so broken links surface
+ * loudly in dev rather than 404'ing silently.
+ */
+function patternRoute(patternId: string): RouteLocationRaw {
+  if (router.hasRoute('pattern-detail')) {
+    return { name: 'pattern-detail', params: { id: patternId } }
+  }
+  console.warn(
+    `[Overview] route "pattern-detail" not registered; falling back to /patterns/${patternId}`
+  )
+  return `/patterns/${patternId}`
+}
 
 const heroStats = computed(() => [
   { label: 'patterns', value: data.patterns.length },
@@ -54,6 +74,7 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
   <section class="space-y-12">
     <!-- Hero numbers -->
     <header>
+      <h1 class="sr-only">Overview</h1>
       <dl class="grid grid-cols-2 gap-x-12 gap-y-8 md:grid-cols-4">
         <div v-for="stat in heroStats" :key="stat.label">
           <dt class="text-sm text-zinc-500">{{ stat.label }}</dt>
@@ -72,47 +93,55 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
         id="top-blast-heading"
         class="text-sm uppercase tracking-wide text-zinc-500"
       >
-        Top 12 patterns by blast radius
+        Top {{ topPatterns.length }} patterns by blast radius
       </h2>
-      <table class="w-full text-sm tabular-nums">
-        <thead>
-          <tr class="text-left text-zinc-500">
-            <th scope="col" class="py-2 pr-4 font-normal w-8">#</th>
-            <th scope="col" class="py-2 pr-4 font-normal">pattern</th>
-            <th scope="col" class="py-2 pr-4 font-normal">description</th>
-            <th scope="col" class="py-2 pr-4 font-normal text-right">
-              blast
-            </th>
-            <th scope="col" class="py-2 font-normal text-right">evidence</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(p, idx) in topPatterns"
-            :key="p.pattern_id"
-            class="border-t border-zinc-100 hover:bg-zinc-50"
-          >
-            <td class="py-2 pr-4 text-zinc-400">{{ idx + 1 }}</td>
-            <td class="py-2 pr-4">
-              <RouterLink
-                :to="`/patterns/${p.pattern_id}`"
-                class="text-zinc-900 underline-offset-4 hover:underline"
-              >
-                {{ p.pattern_id }}
-              </RouterLink>
-            </td>
-            <td class="py-2 pr-4 text-zinc-700">
-              {{ describe(p.pattern_id, p.name) }}
-            </td>
-            <td class="py-2 pr-4 text-right text-zinc-900">
-              {{ p.blast_radius.toLocaleString() }}
-            </td>
-            <td class="py-2 text-right text-zinc-700">
-              {{ evidenceCount(p.pattern_id).toLocaleString() }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm tabular-nums">
+          <thead>
+            <tr class="text-left text-zinc-500">
+              <th scope="col" class="py-2 pr-4 font-normal w-8">#</th>
+              <th scope="col" class="py-2 pr-4 font-normal">pattern</th>
+              <th scope="col" class="py-2 pr-4 font-normal">description</th>
+              <th scope="col" class="py-2 pr-4 font-normal text-right">
+                blast
+              </th>
+              <th scope="col" class="py-2 font-normal text-right">evidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="topPatterns.length === 0">
+              <td colspan="5" class="py-4 text-center text-zinc-500">
+                No patterns yet.
+              </td>
+            </tr>
+            <tr
+              v-for="(p, idx) in topPatterns"
+              v-else
+              :key="p.pattern_id"
+              class="border-t border-zinc-100 hover:bg-zinc-50"
+            >
+              <td class="py-2 pr-4 text-zinc-400">{{ idx + 1 }}</td>
+              <td class="py-2 pr-4">
+                <RouterLink
+                  :to="patternRoute(p.pattern_id)"
+                  class="text-zinc-900 underline-offset-4 hover:underline"
+                >
+                  {{ p.pattern_id }}
+                </RouterLink>
+              </td>
+              <td class="py-2 pr-4 text-zinc-700">
+                {{ describe(p.pattern_id, p.name) }}
+              </td>
+              <td class="py-2 pr-4 text-right text-zinc-900">
+                {{ p.blast_radius.toLocaleString() }}
+              </td>
+              <td class="py-2 text-right text-zinc-700">
+                {{ evidenceCount(p.pattern_id).toLocaleString() }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- Source-of-data footnote -->
