@@ -6,7 +6,7 @@
  * the visible slice (defaults to 20 per W3 spec).
  */
 import { computed } from 'vue'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
 import { evidenceCountByPack } from '@/data'
 import { starsFor } from '@/data/star-cache'
@@ -50,7 +50,7 @@ export function buildTopPacks(sort: TopPackSort, limit = 20): TopPackEntry[] {
 }
 
 export function useTopPacks(
-  sort: ComputedRef<TopPackSort>,
+  sort: Ref<TopPackSort> | ComputedRef<TopPackSort>,
   limit = 20
 ): ComputedRef<TopPackEntry[]> {
   return computed(() => buildTopPacks(sort.value, limit))

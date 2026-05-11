@@ -107,8 +107,8 @@ function fmt(n: number | undefined): string {
 <template>
   <section data-testid="pack-detail-page" :data-pack-id="packId">
     <RouterLink
-      to="/node-packs"
-      class="mb-4 inline-block text-xs text-zinc-500 hover:text-zinc-900"
+      :to="{ name: 'node-packs' }"
+      class="mb-4 inline-block text-xs text-zinc-500 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded"
     >
       ← All node packs
     </RouterLink>
@@ -116,6 +116,12 @@ function fmt(n: number | undefined): string {
     <div class="overflow-hidden rounded-lg border border-zinc-200 bg-white">
       <NodePackBanner :node-pack="pack" />
       <div class="p-4">
+        <!--
+          Title precedence: registry name → registry id → URL slug.
+          If the registry returns a canonical id different from the URL slug
+          we deliberately surface the URL slug as last-resort to keep the
+          page identifiable even when the registry is offline.
+        -->
         <h1 class="text-xl font-semibold text-zinc-900">
           {{ pack.name ?? pack.id ?? packId }}
         </h1>
@@ -162,8 +168,8 @@ function fmt(n: number | undefined): string {
                 v-if="pack.repository"
                 :href="pack.repository"
                 target="_blank"
-                rel="noreferrer"
-                class="underline-offset-2 hover:underline"
+                rel="noopener noreferrer"
+                class="underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded"
                 >{{ pack.repository }}</a
               >
               <span v-else>—</span>
@@ -196,7 +202,10 @@ function fmt(n: number | undefined): string {
       </div>
     </div>
 
-    <h2 class="mt-8 mb-3 text-sm font-medium text-zinc-700">
+    <h2
+      id="pattern-coverage-heading"
+      class="mt-8 mb-3 text-sm font-medium text-zinc-700"
+    >
       Pattern coverage
       <span class="ml-1 text-xs font-normal text-zinc-400">
         ({{ totals.patternCount }} patterns, weighted impact
@@ -208,19 +217,26 @@ function fmt(n: number | undefined): string {
       v-if="aggregateRows.length"
       class="w-full border-separate border-spacing-0 text-sm"
       data-testid="pattern-coverage-table"
+      aria-labelledby="pattern-coverage-heading"
     >
       <thead class="text-left text-xs uppercase tracking-wide text-zinc-400">
         <tr>
-          <th class="border-b border-zinc-200 py-2 pr-3 font-medium">
+          <th scope="col" class="border-b border-zinc-200 py-2 pr-3 font-medium">
             Pattern
           </th>
-          <th class="border-b border-zinc-200 py-2 pr-3 font-medium">
+          <th scope="col" class="border-b border-zinc-200 py-2 pr-3 font-medium">
             Surface
           </th>
-          <th class="border-b border-zinc-200 py-2 pr-3 text-right font-medium">
+          <th
+            scope="col"
+            class="border-b border-zinc-200 py-2 pr-3 text-right font-medium"
+          >
             Hits
           </th>
-          <th class="border-b border-zinc-200 py-2 pr-3 text-right font-medium">
+          <th
+            scope="col"
+            class="border-b border-zinc-200 py-2 pr-3 text-right font-medium"
+          >
             Blast radius
           </th>
         </tr>
@@ -243,7 +259,7 @@ function fmt(n: number | undefined): string {
           </td>
           <td class="border-b border-zinc-100 py-2 pr-3 align-top">
             <span
-              class="rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-[11px] text-zinc-600"
+              class="rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-xs text-zinc-600"
             >
               {{ row.surface_family }}
             </span>

@@ -43,8 +43,9 @@ const SORT_OPTIONS: readonly SortOption[] = [
 ] as const
 
 const sort = ref<TopPackSort>('stars')
-const sortRef = computed(() => sort.value)
-const packs = useTopPacks(sortRef, 20)
+// Sort changes are local-only — the top-N list is recomputed in-memory; no
+// registry refetch happens here. Per-tile fetches were primed on first mount.
+const packs = useTopPacks(sort, 20)
 
 const activeBlurb = computed(
   () => SORT_OPTIONS.find((o) => o.value === sort.value)?.blurb ?? ''
@@ -52,6 +53,20 @@ const activeBlurb = computed(
 
 function trackBy(entry: TopPackEntry): string {
   return entry.repo
+}
+
+/**
+ * Aggregate per-tile enrichment state so the grid can advertise
+ * `aria-busy="true"` to assistive tech while any tile's registry fetch is
+ * still in flight. Tiles emit `enrich-finished` once their request settles
+ * (success *or* error).
+ */
+const finishedRepos = ref<Set<string>>(new Set())
+const isEnriching = computed(() => finishedRepos.value.size < packs.value.length)
+function onTileFinished(repo: string): void {
+  if (!finishedRepos.value.has(repo)) {
+    finishedRepos.value = new Set(finishedRepos.value).add(repo)
+  }
 }
 </script>
 
@@ -67,7 +82,7 @@ function trackBy(entry: TopPackEntry): string {
 
     <div
       class="mb-4 flex flex-wrap items-center gap-3 text-sm"
-      role="group"
+      role="radiogroup"
       aria-label="Sort packs by"
     >
       <span class="text-zinc-500">Sort:</span>
@@ -75,9 +90,11 @@ function trackBy(entry: TopPackEntry): string {
         v-for="opt in SORT_OPTIONS"
         :key="opt.value"
         type="button"
-        :aria-pressed="sort === opt.value"
+        role="radio"
+        :aria-checked="sort === opt.value"
+        :aria-label="`Sort by ${opt.label}`"
         :data-testid="`sort-${opt.value}`"
-        class="rounded-md border px-3 py-1 transition"
+        class="rounded-md border px-3 py-1 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
         :class="
           sort === opt.value
             ? 'border-zinc-900 bg-zinc-900 text-white'
@@ -94,6 +111,8 @@ function trackBy(entry: TopPackEntry): string {
       v-if="packs.length"
       class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       data-testid="node-packs-grid"
+      :aria-busy="isEnriching"
+      aria-label="Top node packs"
     >
       <li v-for="entry in packs" :key="trackBy(entry)">
         <NodePackTile
@@ -102,10 +121,15 @@ function trackBy(entry: TopPackEntry): string {
           :pattern-hits="entry.patternHits"
           :weighted-impact="entry.weightedImpact"
           :total-hits="entry.totalHits"
+          @enrich-finished="onTileFinished(entry.repo)"
         />
       </li>
     </ul>
-    <p v-else class="text-sm text-zinc-500">
+    <p
+      v-else
+      class="text-sm text-zinc-500"
+      data-testid="node-packs-empty"
+    >
       No packs in the touch-points evidence yet.
     </p>
   </section>

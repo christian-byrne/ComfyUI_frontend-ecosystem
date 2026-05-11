@@ -45,6 +45,12 @@ export const routes: RouteRecordRaw[] = [
     meta: { title: 'Node Packs', nav: true }
   },
   {
+    // Sibling rather than nested under `/node-packs` so that:
+    //   1. /packs/:packId remains a deep-linkable canonical URL even when
+    //      the browse page is split into a separate bundle, and
+    //   2. there is no shared layout component yet to mount as the parent.
+    // If a shared `NodePackLayout` ships later, nest under /node-packs and
+    // add `meta.parent: 'node-packs'` for breadcrumb wiring.
     path: '/packs/:packId',
     name: 'pack-detail',
     component: () => import('../pages/PackDetail.vue'),
