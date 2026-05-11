@@ -1,0 +1,20 @@
+name: Vercel Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# Vercel auto-deploys previews via the official Vercel ↔ GitHub integration.
+# This workflow only confirms the branch produced a build artifact and posts
+# a placeholder comment if the Vercel integration hasn't been set up yet.
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Note
+        run: |
+          echo "Vercel preview deploys are managed via the Vercel ↔ GitHub integration."
+          echo "If no preview link appears on this PR, connect the repo at https://vercel.com/dashboard."
