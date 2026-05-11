@@ -55,6 +55,13 @@ function lineRange(lines?: number[]): string {
   if (lines.length === 1) return `L${lines[0]}`
   return `L${lines[0]}–L${lines[lines.length - 1]}`
 }
+
+/**
+ * Only render the W5.1 "Run v1↔v2 contract test" placeholder in dev/test
+ * builds. The real TestRunner lands in W5.1 — until then production users
+ * shouldn't see a disabled mystery button.
+ */
+const showContractTestPlaceholder = import.meta.env.DEV
 </script>
 
 <template>
@@ -247,12 +254,16 @@ function lineRange(lines?: number[]): string {
                 type="button"
                 class="text-xs text-zinc-500 underline underline-offset-2 hover:text-zinc-800"
                 data-testid="excerpt-toggle"
+                :aria-expanded="!!expanded[idx]"
+                :aria-controls="`excerpt-${idx}`"
                 @click="toggle(idx)"
               >
                 {{ expanded[idx] ? 'hide excerpt' : 'show excerpt' }}
               </button>
               <pre
                 v-if="expanded[idx]"
+                :id="`excerpt-${idx}`"
+                role="region"
                 class="mt-2 overflow-x-auto rounded bg-zinc-900 p-3 text-[11px] leading-relaxed text-zinc-100"
               ><code>{{ ev.excerpt }}</code></pre>
             </div>
@@ -260,13 +271,22 @@ function lineRange(lines?: number[]): string {
         </ul>
       </section>
 
-      <!-- Contract test runner placeholder (W5.1) -->
-      <section data-testid="contract-test" class="border-t border-zinc-200 pt-4">
+      <!--
+        Contract test runner placeholder (W5.1).
+        Gated to dev/test builds so the disabled "W5.1" affordance doesn't leak
+        into production routes before the real TestRunner ships in W5.1.
+      -->
+      <section
+        v-if="showContractTestPlaceholder"
+        data-testid="contract-test"
+        class="border-t border-zinc-200 pt-4"
+      >
         <button
           type="button"
           disabled
+          aria-disabled="true"
           class="cursor-not-allowed rounded-md border border-zinc-300 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-500"
-          title="TestRunner ships in W5.1"
+          title="Not yet wired — TestRunner ships in W5.1"
         >
           ▶ Run v1↔v2 contract test
           <span
