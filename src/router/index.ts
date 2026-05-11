@@ -5,7 +5,6 @@ import {
 } from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
-import Overview from '../pages/Overview.vue'
 
 /**
  * Placeholder routes for the 7 planned dashboard pages.
@@ -20,7 +19,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'overview',
-    component: Overview,
+    component: RouteSkeleton,
     meta: { title: 'Overview', nav: true }
   },
   {
@@ -56,7 +55,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/api-diff',
     name: 'api-diff',
-    component: RouteSkeleton,
+    component: () => import('../pages/ApiDiff.vue'),
     meta: { title: 'API Diff', nav: true }
   }
 ]

@@ -9,21 +9,15 @@
  */
 import { parse as parseYaml } from 'yaml'
 
-import behaviorCategoriesRaw from '../../research/workspace-mirror/research/touch-points/behavior-categories.yaml?raw'
 import patternsRaw from '../../research/touch-points-database.yaml?raw'
 import rollupRaw from '../../research/touch-points-rollup.yaml?raw'
-import starCacheRaw from '../../research/touch-points-star-cache.yaml?raw'
 
 import type {
-  BehaviorCategoriesFile,
-  BehaviorCategory,
   EvidenceRow,
   Pattern,
   PatternFile,
   RollupEntry,
-  RollupFile,
-  StarCacheEntry,
-  StarCacheFile
+  RollupFile
 } from './schema'
 
 function parse<T>(raw: string, label: string): T {
@@ -36,35 +30,12 @@ function parse<T>(raw: string, label: string): T {
 
 const patternsFile = parse<PatternFile>(patternsRaw, 'touch-points-database.yaml')
 const rollupFile = parse<RollupFile>(rollupRaw, 'touch-points-rollup.yaml')
-const starCacheFile = parse<StarCacheFile>(
-  starCacheRaw,
-  'touch-points-star-cache.yaml'
-)
-const behaviorCategoriesFile = parse<BehaviorCategoriesFile>(
-  behaviorCategoriesRaw,
-  'behavior-categories.yaml'
-)
 
 export const patterns: Pattern[] = (patternsFile.patterns ?? []).map((p) => ({
   ...p,
   evidence: p.evidence ?? []
 }))
 export const rollup: RollupEntry[] = rollupFile.patterns ?? []
-export const behaviorCategories: BehaviorCategory[] =
-  behaviorCategoriesFile.categories ?? []
-
-/** Star cache entries keyed by repo for O(1) lookup. */
-export const starCache: Record<string, StarCacheEntry> = Object.fromEntries(
-  (starCacheFile.repos ?? []).map((r) => [r.repo, r])
-)
-
-/**
- * Repos in the star cache with at least one star — i.e. real, public,
- * still-extant ComfyUI custom-node packs we are tracking.
- */
-export const starredPacks: StarCacheEntry[] = (starCacheFile.repos ?? []).filter(
-  (r) => (r.stars ?? 0) > 0
-)
 
 /** Rollup entries keyed by pattern_id for O(1) lookup. */
 export const rollupByPatternId: Record<string, RollupEntry> = Object.fromEntries(
@@ -103,17 +74,4 @@ export const evidenceCountByPack: Record<string, number> = (() => {
   return out
 })()
 
-/** Total number of evidence rows across all patterns. */
-export const totalEvidenceCount: number = patterns.reduce(
-  (acc, p) => acc + p.evidence.length,
-  0
-)
-
-export type {
-  BehaviorCategory,
-  BehaviorExemplar,
-  EvidenceRow,
-  Pattern,
-  RollupEntry,
-  StarCacheEntry
-} from './schema'
+export type { EvidenceRow, Pattern, RollupEntry } from './schema'
