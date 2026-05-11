@@ -5,7 +5,48 @@ import { useElementHover } from '@vueuse/core'
 import EvidenceDrawer from '@/components/EvidenceDrawer.vue'
 import { useHeatmap, type HeatmapCell } from '@/composables/useHeatmap'
 
-const { matrix, cellAt } = useHeatmap()
+const { matrix, cellAt, cellsByRowCol, cellKey } = useHeatmap()
+
+// ──────────────────────────────────────────────────────────────────
+// Pre-rendered per-cell display rows. The composable's `cellsByRowCol`
+// Map is computed once per data change (review #3), and we additionally
+// hoist the per-cell lookup + style derivation into a single pass so
+// the template performs ONE lookup per cell instead of 6.
+// ──────────────────────────────────────────────────────────────────
+interface CellView {
+  key: string
+  pack: string
+  count: number
+  ariaLabel: string
+  style: { backgroundColor: string; color: string }
+}
+interface RowView {
+  pattern: (typeof matrix.value.patterns)[number]
+  cells: CellView[]
+}
+
+const displayRows = computed<RowView[]>(() => {
+  const m = matrix.value
+  const byKey = cellsByRowCol.value
+  const max = m.max
+  return m.patterns.map((row) => ({
+    pattern: row,
+    cells: m.packs.map((pack) => {
+      const cell = byKey.get(cellKey(row.pattern_id, pack))
+      const count = cell?.count ?? 0
+      return {
+        key: `c-${row.pattern_id}-${pack}`,
+        pack,
+        count,
+        ariaLabel: `${row.pattern_id} in ${pack}: ${count} evidence rows`,
+        style: {
+          backgroundColor: rampColor(count, max),
+          color: textColor(count, max)
+        }
+      }
+    })
+  }))
+})
 
 // ──────────────────────────────────────────────────────────────────
 // Color ramp: zinc-50 (#fafafa) → zinc-900 (#18181b)
@@ -54,19 +95,30 @@ function onCellLeave(): void {
 const showTooltip = computed(() => gridHovered.value && hoveredCell.value !== null)
 
 // ──────────────────────────────────────────────────────────────────
-// Drawer state — opened on cell click.
+// Drawer state — opened on cell click. Track the triggering cell so
+// focus can be restored to it when the drawer closes (a11y: drawer
+// keyboard return-focus contract).
 // ──────────────────────────────────────────────────────────────────
 const drawerOpen = ref(false)
 const drawerCell = ref<HeatmapCell | null>(null)
+const drawerTrigger = ref<HTMLElement | null>(null)
 
-function onCellClick(patternId: string, pack: string): void {
+function onCellClick(patternId: string, pack: string, ev: MouseEvent): void {
   const c = cellAt(patternId, pack)
   drawerCell.value =
     c ?? { patternId, pack, count: 0, evidence: [] }
+  drawerTrigger.value = ev.currentTarget as HTMLElement | null
   drawerOpen.value = true
 }
 function closeDrawer(): void {
   drawerOpen.value = false
+  // Return focus to the cell that opened the drawer.
+  const trigger = drawerTrigger.value
+  drawerTrigger.value = null
+  if (trigger) {
+    // Defer to next microtask so the drawer's own focus handlers don't fight us.
+    queueMicrotask(() => trigger.focus())
+  }
 }
 
 // Truncate long pattern/pack labels for axis cells.
@@ -89,15 +141,34 @@ function truncate(s: string, n = 28): string {
           <span class="font-mono text-xs">(max {{ matrix.max }})</span>.
         </p>
       </div>
-      <label class="inline-flex items-center gap-2 text-sm text-zinc-700 print:hidden">
-        <input
-          v-model="logScale"
-          type="checkbox"
-          class="size-4 accent-zinc-900"
-          data-testid="log-scale-toggle"
-        />
-        log-scale color ramp
-      </label>
+      <div class="flex items-center gap-4">
+        <!-- Color legend: gradient bar with 0 → max labels mapping shade to count. -->
+        <div
+          class="inline-flex items-center gap-2 text-xs text-zinc-700"
+          data-testid="heatmap-legend"
+          aria-label="Color legend: lighter shades indicate fewer evidence rows, darker shades indicate more"
+        >
+          <span class="font-mono text-zinc-500">0</span>
+          <span
+            class="inline-block h-2 w-32 rounded border border-zinc-200"
+            :style="{
+              backgroundImage:
+                'linear-gradient(to right, rgb(250 250 250), rgb(24 24 27))'
+            }"
+            aria-hidden="true"
+          />
+          <span class="font-mono text-zinc-700">{{ matrix.max }}</span>
+        </div>
+        <label class="inline-flex items-center gap-2 text-sm text-zinc-700 print:hidden">
+          <input
+            v-model="logScale"
+            type="checkbox"
+            class="size-4 accent-zinc-900"
+            data-testid="log-scale-toggle"
+          />
+          log-scale color ramp
+        </label>
+      </div>
     </header>
 
     <div class="relative overflow-auto border border-zinc-200 rounded">
@@ -123,38 +194,35 @@ function truncate(s: string, n = 28): string {
         </div>
 
         <!-- Body rows: pattern label + cells -->
-        <template v-for="row in matrix.patterns" :key="`r-${row.pattern_id}`">
+        <template v-for="rv in displayRows" :key="`r-${rv.pattern.pattern_id}`">
           <div
             class="sticky left-0 z-10 bg-white border-r border-zinc-200 px-2 py-1 font-mono text-[11px] text-zinc-800 whitespace-nowrap"
-            :title="`${row.pattern_id} — ${row.name} (blast ${row.blast_radius.toFixed(2)})`"
+            :title="`${rv.pattern.pattern_id} — ${rv.pattern.name} (blast ${rv.pattern.blast_radius.toFixed(2)})`"
           >
-            <span class="text-zinc-500">{{ row.pattern_id }}</span>
+            <span class="text-zinc-500">{{ rv.pattern.pattern_id }}</span>
             <span class="text-zinc-400 mx-1">·</span>
-            <span>{{ truncate(row.name, 32) }}</span>
+            <span>{{ truncate(rv.pattern.name, 32) }}</span>
           </div>
           <button
-            v-for="pack in matrix.packs"
-            :key="`c-${row.pattern_id}-${pack}`"
+            v-for="cv in rv.cells"
+            :key="cv.key"
             type="button"
             class="heatmap-cell h-7 border-b border-r border-zinc-100 cursor-pointer focus:outline-2 focus:outline-zinc-900 focus:z-10 print:bg-white! print:border-zinc-200"
-            :style="{
-              backgroundColor: rampColor(cellAt(row.pattern_id, pack)?.count ?? 0, matrix.max),
-              color: textColor(cellAt(row.pattern_id, pack)?.count ?? 0, matrix.max)
-            }"
-            :data-pattern="row.pattern_id"
-            :data-pack="pack"
-            :data-count="cellAt(row.pattern_id, pack)?.count ?? 0"
-            :aria-label="`${row.pattern_id} in ${pack}: ${cellAt(row.pattern_id, pack)?.count ?? 0} evidence rows`"
-            @mouseenter="onCellEnter(row.pattern_id, pack)"
+            :style="cv.style"
+            :data-pattern="rv.pattern.pattern_id"
+            :data-pack="cv.pack"
+            :data-count="cv.count"
+            :aria-label="cv.ariaLabel"
+            @mouseenter="onCellEnter(rv.pattern.pattern_id, cv.pack)"
             @mouseleave="onCellLeave"
-            @focus="onCellEnter(row.pattern_id, pack)"
+            @focus="onCellEnter(rv.pattern.pattern_id, cv.pack)"
             @blur="onCellLeave"
-            @click="onCellClick(row.pattern_id, pack)"
+            @click="onCellClick(rv.pattern.pattern_id, cv.pack, $event)"
           >
             <span
-              v-if="(cellAt(row.pattern_id, pack)?.count ?? 0) > 0"
+              v-if="cv.count > 0"
               class="text-[10px] font-mono leading-none print:text-zinc-700"
-            >{{ cellAt(row.pattern_id, pack)?.count }}</span>
+            >{{ cv.count }}</span>
           </button>
         </template>
       </div>

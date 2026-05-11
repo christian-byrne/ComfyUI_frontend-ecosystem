@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { nextTick, ref, useTemplateRef, watch } from 'vue'
+
 import type { EvidenceRow } from '@/data/schema'
 
-defineProps<{
+const props = defineProps<{
   open: boolean
   patternId: string | null
   pack: string | null
@@ -9,6 +11,31 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{ (e: 'close'): void }>()
+
+// First focusable element inside the drawer (the close button).
+// We move keyboard focus here when the drawer opens so the user is
+// not stranded back on the heatmap cell behind the modal scrim.
+const closeBtnRef = useTemplateRef<HTMLButtonElement>('closeBtnRef')
+
+watch(
+  () => props.open,
+  async (isOpen) => {
+    if (!isOpen) return
+    await nextTick()
+    closeBtnRef.value?.focus()
+  },
+  { immediate: true }
+)
+
+// Track keydown on the dialog so we can close on Escape without
+// needing a global listener. Vue's `.esc` modifier also handles this
+// but we keep it on the host element for tighter scoping.
+function onKeydown(e: KeyboardEvent): void {
+  if (e.key === 'Escape') {
+    e.stopPropagation()
+    emit('close')
+  }
+}
 </script>
 
 <template>
@@ -18,6 +45,9 @@ const emit = defineEmits<{ (e: 'close'): void }>()
     role="dialog"
     aria-modal="true"
     :aria-label="`Evidence for ${patternId} in ${pack}`"
+    tabindex="-1"
+    data-testid="evidence-drawer-root"
+    @keydown="onKeydown"
   >
     <div
       class="flex-1 bg-zinc-900/30"
@@ -37,8 +67,10 @@ const emit = defineEmits<{ (e: 'close'): void }>()
           <p class="text-xs text-zinc-500 mt-0.5">{{ evidence.length }} row{{ evidence.length === 1 ? '' : 's' }}</p>
         </div>
         <button
-          class="text-zinc-500 hover:text-zinc-900 text-sm"
+          ref="closeBtnRef"
+          class="text-zinc-500 hover:text-zinc-900 text-sm focus:outline-2 focus:outline-zinc-900"
           aria-label="Close evidence drawer"
+          data-testid="drawer-close"
           @click="emit('close')"
         >
           ✕

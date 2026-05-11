@@ -107,6 +107,8 @@ export function buildHeatmapMatrix(
 export function useHeatmap(options: UseHeatmapOptions = {}): {
   matrix: ComputedRef<HeatmapMatrix>
   cellAt: (patternId: string, pack: string) => HeatmapCell | undefined
+  cellsByRowCol: ComputedRef<Map<string, HeatmapCell>>
+  cellKey: (patternId: string, pack: string) => string
 } {
   const matrix = computed(() =>
     buildHeatmapMatrix(
@@ -115,9 +117,29 @@ export function useHeatmap(options: UseHeatmapOptions = {}): {
     )
   )
 
+  function cellKey(patternId: string, pack: string): string {
+    return `${patternId},${pack}`
+  }
+
+  /**
+   * Pre-computed per-`${row},${col}` cell map, derived once per matrix change.
+   * Renderers should look up cells from this map instead of calling `cellAt()`
+   * 6× per cell in the template (≈7k Map lookups at 59×20 otherwise).
+   */
+  const cellsByRowCol = computed(() => {
+    const m = new Map<string, HeatmapCell>()
+    for (const row of matrix.value.patterns) {
+      for (const pack of matrix.value.packs) {
+        const cell = matrix.value.cells.get(`${row.pattern_id}::${pack}`)
+        if (cell) m.set(cellKey(row.pattern_id, pack), cell)
+      }
+    }
+    return m
+  })
+
   function cellAt(patternId: string, pack: string): HeatmapCell | undefined {
     return matrix.value.cells.get(`${patternId}::${pack}`)
   }
 
-  return { matrix, cellAt }
+  return { matrix, cellAt, cellsByRowCol, cellKey }
 }
