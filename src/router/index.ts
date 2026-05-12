@@ -4,29 +4,32 @@ import {
   type RouteRecordRaw
 } from 'vue-router'
 
-import RouteSkeleton from '../components/RouteSkeleton.vue'
+import ApiDiff from '../pages/ApiDiff.vue'
+import BehaviorCategories from '../pages/BehaviorCategories.vue'
+import CategoryDetail from '../pages/CategoryDetail.vue'
+import Heatmap from '../pages/Heatmap.vue'
+import NodePacks from '../pages/NodePacks.vue'
+import Overview from '../pages/Overview.vue'
+import PackDetail from '../pages/PackDetail.vue'
 import PatternDetail from '../pages/PatternDetail.vue'
+import Patterns from '../pages/Patterns.vue'
 
 /**
- * Placeholder routes for the 7 planned dashboard pages.
- *
- * Each route renders {@link RouteSkeleton} until the real page lands in W3.*.
- * To replace a placeholder: swap the `component` field for the real page
- * component and (optionally) refine `meta.title`.
- *
- * `meta.nav: true` opts a route into the App.vue header navigation.
+ * Dashboard routes. `meta.nav: true` opts a route into the App.vue header
+ * navigation; detail routes (pattern/category/pack) are reached by drilling
+ * down from a list page and are intentionally excluded.
  */
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'overview',
-    component: RouteSkeleton,
+    component: Overview,
     meta: { title: 'Overview', nav: true }
   },
   {
     path: '/patterns',
     name: 'patterns',
-    component: RouteSkeleton,
+    component: Patterns,
     meta: { title: 'Patterns', nav: true }
   },
   {
@@ -38,25 +41,37 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/behavior-categories',
     name: 'behavior-categories',
-    component: RouteSkeleton,
+    component: BehaviorCategories,
     meta: { title: 'Behavior Categories', nav: true }
+  },
+  {
+    path: '/behavior-categories/:id',
+    name: 'category-detail',
+    component: CategoryDetail,
+    meta: { title: 'Category Detail', nav: false }
   },
   {
     path: '/node-packs',
     name: 'node-packs',
-    component: RouteSkeleton,
+    component: NodePacks,
     meta: { title: 'Node Packs', nav: true }
+  },
+  {
+    path: '/node-packs/:id',
+    name: 'pack-detail',
+    component: PackDetail,
+    meta: { title: 'Pack Detail', nav: false }
   },
   {
     path: '/heatmap',
     name: 'heatmap',
-    component: RouteSkeleton,
+    component: Heatmap,
     meta: { title: 'Heatmap', nav: true }
   },
   {
     path: '/api-diff',
     name: 'api-diff',
-    component: RouteSkeleton,
+    component: ApiDiff,
     meta: { title: 'API Diff', nav: true }
   }
 ]
