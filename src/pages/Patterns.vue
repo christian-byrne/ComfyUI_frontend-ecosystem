@@ -25,6 +25,11 @@ import type { Pattern } from '@/data/schema'
 
 type BlastBin = '' | 'high' | 'mid' | 'low'
 
+// Sortable columns + grouping fields (DASH-FB-5).
+type SortKey = 'pattern_id' | 'surface' | 'blast_radius' | 'evidence_count' | 'top_pack'
+type SortDir = 'asc' | 'desc'
+type GroupKey = '' | 'surface_family' | 'behavior' | 'top_pack'
+
 const store = useDataStore()
 const { rollup } = storeToRefs(store)
 
@@ -33,6 +38,11 @@ const q = useRouteQuery<string>('q', '')
 const familyParam = useRouteQuery<string>('family', '')
 const behaviorParam = useRouteQuery<string>('behavior', '')
 const blastBin = useRouteQuery<BlastBin>('blast', '')
+const packParam = useRouteQuery<string>('pack', '')
+// Sort + group are URL-synced too, so deep-links reproduce the table view.
+const sortKey = useRouteQuery<SortKey>('sort', 'blast_radius')
+const sortDir = useRouteQuery<SortDir>('dir', 'desc')
+const groupKey = useRouteQuery<GroupKey>('group', '')
 
 // Single split per param change — both `families`/`behaviors` reads and the
 // `toggle*` mutators reuse this, removing per-keystroke string splits.
@@ -64,6 +74,25 @@ function resetFilters(): void {
   familyParam.value = ''
   behaviorParam.value = ''
   blastBin.value = ''
+  packParam.value = ''
+}
+
+/**
+ * Click-on-header sort (DASH-FB-5). Same key flips direction; new key
+ * resets to descending (the most-used direction for blast / evidence).
+ */
+function toggleSort(key: SortKey): void {
+  if (sortKey.value === key) {
+    sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    sortKey.value = key
+    sortDir.value = 'desc'
+  }
+}
+
+function sortIndicator(key: SortKey): string {
+  if (sortKey.value !== key) return ''
+  return sortDir.value === 'asc' ? '▲' : '▼'
 }
 
 // ── Facet vocabularies (derived from data) ──────────────────────────────
@@ -126,10 +155,26 @@ interface Row {
   behavior: string
 }
 
+/**
+ * All packs that appear in any evidence row. Used to power the
+ * 'Search by Node Pack' input's datalist (DASH-FB-6) — typeahead via
+ * native <datalist> means no new chrome.
+ */
+const allPacks = computed<string[]>(() => {
+  const set = new Set<string>()
+  for (const p of store.patterns) {
+    for (const e of p.evidence) {
+      if (e.repo) set.add(e.repo)
+    }
+  }
+  return [...set].sort((a, b) => a.localeCompare(b))
+})
+
 const rows = computed<Row[]>(() => {
   const matches = store.searchPatterns(q.value)
   const fams = familySet.value
   const behs = behaviorSet.value
+  const packNeedle = packParam.value.trim().toLowerCase()
   const out: Row[] = []
   for (const p of matches) {
     if (fams.size > 0 && !fams.has(p.surface_family)) continue
@@ -140,6 +185,12 @@ const rows = computed<Row[]>(() => {
     if (blastBin.value === 'high' && !(blast > 5)) continue
     if (blastBin.value === 'mid' && !(blast >= 2 && blast <= 5)) continue
     if (blastBin.value === 'low' && !(blast < 2)) continue
+    if (packNeedle) {
+      const hit = p.evidence.some((e) =>
+        (e.repo ?? '').toLowerCase().includes(packNeedle)
+      )
+      if (!hit) continue
+    }
     out.push({
       pattern_id: p.pattern_id,
       surface_family: p.surface_family,
@@ -151,7 +202,52 @@ const rows = computed<Row[]>(() => {
       behavior
     })
   }
-  return out.sort((a, b) => b.blast_radius - a.blast_radius)
+
+  const dir = sortDir.value === 'asc' ? 1 : -1
+  const key = sortKey.value
+  out.sort((a, b) => {
+    const av = a[key]
+    const bv = b[key]
+    if (typeof av === 'number' && typeof bv === 'number') {
+      return (av - bv) * dir
+    }
+    return String(av ?? '').localeCompare(String(bv ?? '')) * dir
+  })
+  return out
+})
+
+/**
+ * Group rows by `groupKey`. When grouping is off we return a single
+ * synthetic group so the template can iterate uniformly. Group order is
+ * the order of first appearance in the (already-sorted) `rows` array,
+ * so the chosen sort still drives layout.
+ */
+interface RowGroup {
+  key: string
+  label: string
+  rows: Row[]
+}
+const grouped = computed<RowGroup[]>(() => {
+  const list = rows.value
+  if (!groupKey.value) {
+    return [{ key: '__all__', label: '', rows: list }]
+  }
+  const order: string[] = []
+  const buckets = new Map<string, Row[]>()
+  for (const r of list) {
+    const raw = r[groupKey.value as keyof Row]
+    const k = String(raw ?? '') || '—'
+    if (!buckets.has(k)) {
+      buckets.set(k, [])
+      order.push(k)
+    }
+    buckets.get(k)!.push(r)
+  }
+  return order.map((k) => ({
+    key: k,
+    label: `${k} · ${buckets.get(k)!.length}`,
+    rows: buckets.get(k)!
+  }))
 })
 
 const totalCount = computed(() => store.patterns.length)
@@ -254,6 +350,27 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
         </div>
       </div>
 
+      <!-- Pack search (DASH-FB-6) — typeahead via native datalist -->
+      <div>
+        <label
+          for="patterns-pack-search"
+          class="block text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1"
+        >
+          Search by node pack
+        </label>
+        <input
+          id="patterns-pack-search"
+          v-model="packParam"
+          type="search"
+          list="patterns-pack-list"
+          placeholder="rgthree, kijai/ComfyUI-KJNodes, …"
+          class="w-full max-w-lg rounded border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm focus:border-zinc-500 focus:outline-none"
+        />
+        <datalist id="patterns-pack-list">
+          <option v-for="p in allPacks" :key="p" :value="p" />
+        </datalist>
+      </div>
+
       <!-- Blast-radius bin (single-select → radiogroup) -->
       <div>
         <div id="patterns-blast-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
@@ -288,14 +405,36 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
         </div>
       </div>
 
-      <button
-        v-if="q || families.length || behaviors.length || blastBin"
-        type="button"
-        class="text-xs text-zinc-500 dark:text-zinc-400 underline hover:text-zinc-700 dark:hover:text-zinc-300"
-        @click="resetFilters"
-      >
-        Reset filters
-      </button>
+      <!-- Group dropdown (DASH-FB-5) — single select keeps the chrome
+           minimal; grouping is layered on top of the existing sort. -->
+      <div class="flex flex-wrap items-center gap-3">
+        <label
+          for="patterns-group-by"
+          class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
+        >
+          Group by
+        </label>
+        <select
+          id="patterns-group-by"
+          v-model="groupKey"
+          data-testid="patterns-group-by"
+          class="rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-1 text-xs text-zinc-700 dark:text-zinc-300"
+        >
+          <option value="">none</option>
+          <option value="surface_family">surface family</option>
+          <option value="behavior">behavior</option>
+          <option value="top_pack">top pack</option>
+        </select>
+
+        <button
+          v-if="q || families.length || behaviors.length || blastBin || packParam"
+          type="button"
+          class="text-xs text-zinc-500 dark:text-zinc-400 underline hover:text-zinc-700 dark:hover:text-zinc-300"
+          @click="resetFilters"
+        >
+          Reset filters
+        </button>
+      </div>
     </div>
 
     <!-- Table -->
@@ -303,12 +442,40 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
       <table class="w-full text-sm">
         <thead class="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
           <tr class="text-left">
-            <th class="px-3 py-2 font-medium">ID</th>
-            <th class="px-3 py-2 font-medium">Surface</th>
-            <th class="px-3 py-2 font-medium">Description</th>
-            <th class="px-3 py-2 font-medium text-right">Blast</th>
-            <th class="px-3 py-2 font-medium text-right">Evidence</th>
-            <th class="px-3 py-2 font-medium">Top pack</th>
+            <th
+              v-for="col in [
+                { key: 'pattern_id', label: 'ID', align: 'left' },
+                { key: 'surface', label: 'Surface', align: 'left' },
+                { key: null, label: 'Description', align: 'left' },
+                { key: 'blast_radius', label: 'Blast', align: 'right' },
+                { key: 'evidence_count', label: 'Evidence', align: 'right' },
+                { key: 'top_pack', label: 'Top pack', align: 'left' }
+              ]"
+              :key="col.label"
+              :class="['px-3 py-2 font-medium', col.align === 'right' ? 'text-right' : '']"
+              :aria-sort="
+                col.key && sortKey === col.key
+                  ? sortDir === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : undefined
+              "
+            >
+              <button
+                v-if="col.key"
+                type="button"
+                class="inline-flex items-center gap-1 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded"
+                :data-testid="`sort-${col.key}`"
+                @click="toggleSort(col.key as SortKey)"
+              >
+                <span>{{ col.label }}</span>
+                <span
+                  class="text-[10px] tabular-nums"
+                  aria-hidden="true"
+                >{{ sortIndicator(col.key as SortKey) }}</span>
+              </button>
+              <span v-else>{{ col.label }}</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -317,32 +484,43 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
               No patterns match the current filters.
             </td>
           </tr>
-          <tr
-            v-for="row in rows"
-            :key="row.pattern_id"
-            tabindex="0"
-            class="border-t border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800 focus:bg-zinc-50 dark:focus:bg-zinc-800 focus:outline focus:outline-2 focus:outline-zinc-500 cursor-pointer"
-            @click="$router.push(`/patterns/${row.pattern_id}`)"
-            @keydown.enter="activateRow(row.pattern_id, $event)"
-            @keydown.space="activateRow(row.pattern_id, $event)"
-          >
-            <td class="px-3 py-2 font-mono text-xs text-zinc-900 dark:text-zinc-100">
-              <RouterLink
-                :to="`/patterns/${row.pattern_id}`"
-                class="text-zinc-900 dark:text-zinc-100 hover:underline"
-                @click.stop
+          <template v-for="group in grouped" :key="group.key">
+            <tr v-if="groupKey" data-testid="patterns-group-header">
+              <th
+                colspan="6"
+                scope="rowgroup"
+                class="bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-left text-xs font-medium uppercase tracking-wide text-zinc-600 dark:text-zinc-400"
               >
-                {{ row.pattern_id }}
-              </RouterLink>
-            </td>
-            <td class="px-3 py-2 text-zinc-700 dark:text-zinc-300">{{ row.surface }}</td>
-            <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 max-w-md truncate" :title="row.description">
-              {{ row.description }}
-            </td>
-            <td class="px-3 py-2 text-right tabular-nums">{{ row.blast_radius.toFixed(2) }}</td>
-            <td class="px-3 py-2 text-right tabular-nums">{{ row.evidence_count }}</td>
-            <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 font-mono text-xs">{{ row.top_pack || '—' }}</td>
-          </tr>
+                {{ group.label }}
+              </th>
+            </tr>
+            <tr
+              v-for="row in group.rows"
+              :key="row.pattern_id"
+              tabindex="0"
+              class="border-t border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800 focus:bg-zinc-50 dark:focus:bg-zinc-800 focus:outline focus:outline-2 focus:outline-zinc-500 cursor-pointer"
+              @click="$router.push(`/patterns/${row.pattern_id}`)"
+              @keydown.enter="activateRow(row.pattern_id, $event)"
+              @keydown.space="activateRow(row.pattern_id, $event)"
+            >
+              <td class="px-3 py-2 font-mono text-xs text-zinc-900 dark:text-zinc-100">
+                <RouterLink
+                  :to="`/patterns/${row.pattern_id}`"
+                  class="text-zinc-900 dark:text-zinc-100 hover:underline"
+                  @click.stop
+                >
+                  {{ row.pattern_id }}
+                </RouterLink>
+              </td>
+              <td class="px-3 py-2 text-zinc-700 dark:text-zinc-300">{{ row.surface }}</td>
+              <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 max-w-md truncate" :title="row.description">
+                {{ row.description }}
+              </td>
+              <td class="px-3 py-2 text-right tabular-nums">{{ row.blast_radius.toFixed(2) }}</td>
+              <td class="px-3 py-2 text-right tabular-nums">{{ row.evidence_count }}</td>
+              <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 font-mono text-xs">{{ row.top_pack || '—' }}</td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>

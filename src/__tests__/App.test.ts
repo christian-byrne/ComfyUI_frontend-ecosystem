@@ -52,4 +52,25 @@ describe('App.vue chrome', () => {
     await toggle.trigger('click')
     expect(document.documentElement.classList.contains('dark')).toBe(false)
   })
+
+  it('exposes a primary nav with every top-level route (DASH-FB-7)', async () => {
+    const router = makeRouter()
+    await router.push('/')
+    await router.isReady()
+
+    const wrapper = mount(App, { global: { plugins: [router] } })
+    const nav = wrapper.find('[data-testid="primary-nav"]')
+    expect(nav.exists()).toBe(true)
+    expect(nav.attributes('aria-label')).toBe('Primary')
+
+    const linkLabels = nav.findAll('a').map((a) => a.text())
+    // Acceptance: 'A first-time visitor can name every section.' Every
+    // route flagged `meta.nav: true` must appear by title.
+    const expected = routes
+      .filter((r) => r.meta?.nav)
+      .map((r) => String(r.meta?.title ?? ''))
+    for (const title of expected) {
+      expect(linkLabels).toContain(title)
+    }
+  })
 })
