@@ -5,6 +5,7 @@ import {
 } from 'vue-router'
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
+import ApiDiff from '../pages/ApiDiff.vue'
 import PatternDetail from '../pages/PatternDetail.vue'
 
 /**
@@ -56,7 +57,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/api-diff',
     name: 'api-diff',
-    component: RouteSkeleton,
+    component: ApiDiff,
     meta: { title: 'API Diff', nav: true }
   }
 ]
