@@ -35,3 +35,8 @@ export const starCache: Record<string, StarCacheEntry> = Object.fromEntries(
 export function isInStarCache(repo: string): boolean {
   return Object.prototype.hasOwnProperty.call(starCache, repo)
 }
+
+/** Stars for a given repo, or 0 when not in the cache. */
+export function starsFor(repo: string): number {
+  return starCache[repo]?.stars ?? 0
+}
