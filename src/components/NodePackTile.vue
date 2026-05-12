@@ -96,19 +96,19 @@ const targetPackId = computed(
   >
     <NodePackCard :node-pack="renderedPack" />
     <dl
-      class="mt-1 flex flex-wrap gap-x-3 gap-y-1 px-1 text-xs text-zinc-500"
+      class="mt-1 flex flex-wrap gap-x-3 gap-y-1 px-1 text-xs text-zinc-500 dark:text-zinc-400"
       aria-label="Pattern coverage"
     >
       <div class="flex gap-1">
-        <dt class="text-zinc-400">patterns</dt>
+        <dt class="text-zinc-400 dark:text-zinc-500">patterns</dt>
         <dd class="font-mono">{{ patternHits }}</dd>
       </div>
       <div class="flex gap-1">
-        <dt class="text-zinc-400">hits</dt>
+        <dt class="text-zinc-400 dark:text-zinc-500">hits</dt>
         <dd class="font-mono">{{ totalHits }}</dd>
       </div>
       <div class="flex gap-1">
-        <dt class="text-zinc-400">impact</dt>
+        <dt class="text-zinc-400 dark:text-zinc-500">impact</dt>
         <dd class="font-mono">{{ weightedImpact.toFixed(1) }}</dd>
       </div>
       <span

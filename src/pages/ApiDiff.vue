@@ -27,10 +27,14 @@ import type { MigrationStatus } from '@/data/migration-status'
  * follow-up because the current data path is build-time inlined.
  */
 const STATUS_STYLES: Record<MigrationStatus, string> = {
-  'ECS-native': 'border-emerald-300 bg-emerald-50 text-emerald-800',
-  'strangler-bridge': 'border-amber-300 bg-amber-50 text-amber-800',
-  'unchanged-legacy': 'border-zinc-300 bg-zinc-100 text-zinc-700',
-  'uwf-resolved': 'border-indigo-300 bg-indigo-50 text-indigo-800'
+  'ECS-native':
+    'border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+  'strangler-bridge':
+    'border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+  'unchanged-legacy':
+    'border-zinc-300 bg-zinc-100 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
+  'uwf-resolved':
+    'border-indigo-300 bg-indigo-50 text-indigo-800 dark:border-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300'
 }
 
 const search = ref('')
@@ -97,8 +101,8 @@ function onPickerChange(event: Event) {
     data-testid="api-diff-page"
   >
     <header class="space-y-2">
-      <h1 class="font-mono text-3xl font-semibold text-zinc-900">API Diff</h1>
-      <p class="max-w-3xl text-sm text-zinc-600">
+      <h1 class="font-mono text-3xl font-semibold text-zinc-900 dark:text-zinc-100">API Diff</h1>
+      <p class="max-w-3xl text-sm text-zinc-600 dark:text-zinc-400">
         v1 → v2 surface mapping, one card per pattern, classified by D9
         strangler-fig status. Use search and status filters to narrow the grid;
         use the picker to jump to a specific pattern.
@@ -107,14 +111,14 @@ function onPickerChange(event: Event) {
 
     <!-- Controls -->
     <section
-      class="space-y-3 rounded-md border border-zinc-200 bg-white p-3"
+      class="space-y-3 rounded-md border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900"
       aria-label="Filters"
     >
       <div class="flex flex-wrap items-end gap-4">
         <div class="min-w-[16rem] flex-1">
           <label
             for="api-diff-search"
-            class="block text-xs font-semibold uppercase text-zinc-500"
+            class="block text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400"
           >
             Search
           </label>
@@ -123,7 +127,7 @@ function onPickerChange(event: Event) {
             v-model="search"
             type="search"
             placeholder="filter by name or signature substring"
-            class="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300"
+            class="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
             data-testid="api-diff-search"
           />
         </div>
@@ -131,14 +135,14 @@ function onPickerChange(event: Event) {
         <div class="min-w-[14rem]">
           <label
             for="api-diff-picker"
-            class="block text-xs font-semibold uppercase text-zinc-500"
+            class="block text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400"
           >
             Jump to pattern
           </label>
           <select
             id="api-diff-picker"
             :value="pickerSelection"
-            class="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300"
+            class="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
             data-testid="api-diff-picker"
             @change="onPickerChange"
           >
@@ -155,7 +159,7 @@ function onPickerChange(event: Event) {
       </div>
 
       <fieldset class="space-y-1">
-        <legend class="text-xs font-semibold uppercase text-zinc-500">
+        <legend class="text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">
           Status
         </legend>
         <div
@@ -173,7 +177,7 @@ function onPickerChange(event: Event) {
               'rounded-full border px-3 py-1 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-indigo-300',
               activeStatuses.has(status)
                 ? STATUS_STYLES[status]
-                : 'border-zinc-200 bg-white text-zinc-400 hover:text-zinc-700'
+                : 'border-zinc-200 bg-white text-zinc-400 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-200'
             ]"
             @click="toggleStatus(status)"
           >
@@ -187,14 +191,14 @@ function onPickerChange(event: Event) {
     </section>
 
     <!-- Result summary -->
-    <p class="text-xs text-zinc-500" data-testid="api-diff-count">
+    <p class="text-xs text-zinc-500 dark:text-zinc-400" data-testid="api-diff-count">
       Showing {{ filteredEntries.length }} of {{ migrationEntries.length }} patterns
     </p>
 
     <!-- Empty state -->
     <div
       v-if="filteredEntries.length === 0"
-      class="rounded-md border border-zinc-200 bg-zinc-50 p-6 text-center text-sm text-zinc-500"
+      class="rounded-md border border-zinc-200 bg-zinc-50 p-6 text-center text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400"
       data-testid="api-diff-empty"
     >
       No patterns match the current filters.
@@ -210,13 +214,13 @@ function onPickerChange(event: Event) {
         v-for="entry in filteredEntries"
         :id="`pattern-${entry.id}`"
         :key="entry.id"
-        class="space-y-3 rounded-md border border-zinc-200 bg-white p-4 transition"
+        class="space-y-3 rounded-md border border-zinc-200 bg-white p-4 transition dark:border-zinc-800 dark:bg-zinc-900"
         data-testid="api-diff-card"
       >
         <header class="flex flex-wrap items-baseline gap-3">
-          <h2 class="font-mono text-base font-semibold text-zinc-900">
-            <span class="text-zinc-500">{{ entry.id }}</span>
-            <span class="ml-2 font-sans font-normal text-zinc-700">
+          <h2 class="font-mono text-base font-semibold text-zinc-900 dark:text-zinc-100">
+            <span class="text-zinc-500 dark:text-zinc-400">{{ entry.id }}</span>
+            <span class="ml-2 font-sans font-normal text-zinc-700 dark:text-zinc-300">
               {{ entry.name }}
             </span>
           </h2>
@@ -233,26 +237,26 @@ function onPickerChange(event: Event) {
 
         <div class="grid gap-3 md:grid-cols-2">
           <div>
-            <h3 class="mb-1 text-xs font-semibold uppercase text-zinc-500">
+            <h3 class="mb-1 text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">
               v1 signature
             </h3>
             <pre
-              class="overflow-x-auto rounded border border-zinc-200 bg-zinc-50 p-3 text-[12px] leading-relaxed text-zinc-800"
+              class="overflow-x-auto rounded border border-zinc-200 bg-zinc-50 p-3 text-[12px] leading-relaxed text-zinc-800 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-200"
             ><code data-testid="api-diff-v1">{{ entry.v1Signature }}</code></pre>
           </div>
           <div>
-            <h3 class="mb-1 text-xs font-semibold uppercase text-emerald-700">
+            <h3 class="mb-1 text-xs font-semibold uppercase text-emerald-700 dark:text-emerald-400">
               v2 replacement
             </h3>
             <pre
-              class="overflow-x-auto rounded border border-emerald-200 bg-emerald-50 p-3 text-[12px] leading-relaxed text-emerald-900"
+              class="overflow-x-auto rounded border border-emerald-200 bg-emerald-50 p-3 text-[12px] leading-relaxed text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200"
             ><code data-testid="api-diff-v2">{{ entry.v2Replacement }}</code></pre>
           </div>
         </div>
 
         <p
           v-if="entry.notes"
-          class="text-xs text-zinc-600"
+          class="text-xs text-zinc-600 dark:text-zinc-400"
           data-testid="api-diff-notes"
         >
           {{ entry.notes }}

@@ -17,7 +17,7 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'overview', component: { template: '<div />' } },
     { path: '/node-packs', name: 'node-packs', component: NodePacks },
-    { path: '/packs/:packId', name: 'pack-detail', component: PackDetail },
+    { path: '/node-packs/:packId', name: 'pack-detail', component: PackDetail },
     {
       path: '/patterns/:id',
       name: 'pattern-detail',
@@ -222,7 +222,7 @@ describe('PackDetail page', () => {
     }) as unknown as typeof fetch
     vi.stubGlobal('fetch', fetchMock as unknown)
 
-    await router.push(`/packs/${packId}`)
+    await router.push(`/node-packs/${packId}`)
     await router.isReady()
     const wrapper = mount(PackDetail, { global: { plugins: [router] } })
 
@@ -264,7 +264,7 @@ describe('PackDetail page', () => {
       ) as unknown as typeof fetch
     )
 
-    await router.push('/packs/comfyui-manager')
+    await router.push('/node-packs/comfyui-manager')
     await router.isReady()
     const wrapper = mount(PackDetail, { global: { plugins: [router] } })
 

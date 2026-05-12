@@ -54,9 +54,18 @@ export const useDataStore = defineStore('data', () => {
 
   /**
    * Case-insensitive search across pattern_id / surface_family / surface /
-   * semantic / fingerprint / v2_replacement / test_target.
+   * semantic / fingerprint / v2_replacement / test_target — and across
+   * every evidence row's `repo` (so a query like `rgthree` or
+   * `videohelpersuite` matches every pattern that pack appears in).
    *
    * An empty / whitespace-only query returns the full pattern list.
+   *
+   * Note (DASH-FB-3 / DASH-FB-6): including `evidence[].repo` is what
+   * fixes the user-reported "filter only hits the current page" — the
+   * Patterns table's "Top pack" column was showing pack names that the
+   * search couldn't match, so typing a visible value returned 0 rows
+   * and looked like a scope bug. Search now matches across the full
+   * dataset, including pack names.
    */
   function searchPatterns(q: string): Pattern[] {
     const needle = q.trim().toLowerCase()
@@ -69,7 +78,8 @@ export const useDataStore = defineStore('data', () => {
         p.semantic,
         p.fingerprint,
         p.v2_replacement,
-        p.test_target
+        p.test_target,
+        ...p.evidence.map((e) => e.repo)
       ]
         .filter((s): s is string => typeof s === 'string')
         .join(' ')

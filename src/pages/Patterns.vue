@@ -176,17 +176,17 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
 <template>
   <section class="space-y-6">
     <header class="space-y-1">
-      <h1 class="text-xl font-semibold text-zinc-900">Patterns</h1>
-      <p class="text-sm text-zinc-600">
+      <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Patterns</h1>
+      <p class="text-sm text-zinc-600 dark:text-zinc-400">
         {{ rows.length }} of {{ totalCount }} patterns
-        <span v-if="!rollupHasData" class="text-amber-700">· rollup data missing</span>
+        <span v-if="!rollupHasData" class="text-amber-700 dark:text-amber-300">· rollup data missing</span>
       </p>
     </header>
 
     <div class="space-y-4">
       <!-- Search -->
       <div>
-        <label class="block text-xs uppercase tracking-wide text-zinc-500 mb-1" for="patterns-search">
+        <label class="block text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1" for="patterns-search">
           Search
         </label>
         <input
@@ -194,13 +194,13 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
           v-model="q"
           type="search"
           placeholder="id, surface, semantic, fingerprint…"
-          class="w-full max-w-lg rounded border border-zinc-300 px-3 py-1.5 text-sm focus:border-zinc-500 focus:outline-none"
+          class="w-full max-w-lg rounded border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm focus:border-zinc-500 focus:outline-none"
         />
       </div>
 
       <!-- Family filter -->
       <div>
-        <div id="patterns-family-label" class="text-xs uppercase tracking-wide text-zinc-500 mb-1">
+        <div id="patterns-family-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
           Surface family
         </div>
         <div
@@ -216,8 +216,8 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
             class="px-2 py-0.5 rounded border text-xs"
             :class="
               familySet.has(fam)
-                ? 'border-zinc-900 bg-zinc-900 text-white'
-                : 'border-zinc-300 text-zinc-700 hover:border-zinc-500'
+                ? 'border-zinc-900 dark:border-zinc-100 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
+                : 'border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-zinc-500 dark:hover:border-zinc-500'
             "
             @click="toggleFamily(fam)"
           >
@@ -228,7 +228,7 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
 
       <!-- Behavior filter -->
       <div>
-        <div id="patterns-behavior-label" class="text-xs uppercase tracking-wide text-zinc-500 mb-1">
+        <div id="patterns-behavior-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
           Behavior category
         </div>
         <div
@@ -244,8 +244,8 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
             class="px-2 py-0.5 rounded border text-xs"
             :class="
               behaviorSet.has(b)
-                ? 'border-zinc-900 bg-zinc-900 text-white'
-                : 'border-zinc-300 text-zinc-700 hover:border-zinc-500'
+                ? 'border-zinc-900 dark:border-zinc-100 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
+                : 'border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-zinc-500 dark:hover:border-zinc-500'
             "
             @click="toggleBehavior(b)"
           >
@@ -256,7 +256,7 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
 
       <!-- Blast-radius bin (single-select → radiogroup) -->
       <div>
-        <div id="patterns-blast-label" class="text-xs uppercase tracking-wide text-zinc-500 mb-1">
+        <div id="patterns-blast-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
           Blast radius
         </div>
         <div
@@ -278,8 +278,8 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
             class="px-2 py-0.5 rounded border text-xs"
             :class="
               blastBin === opt.v
-                ? 'border-zinc-900 bg-zinc-900 text-white'
-                : 'border-zinc-300 text-zinc-700 hover:border-zinc-500'
+                ? 'border-zinc-900 dark:border-zinc-100 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
+                : 'border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-zinc-500 dark:hover:border-zinc-500'
             "
             @click="blastBin = opt.v as BlastBin"
           >
@@ -291,7 +291,7 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
       <button
         v-if="q || families.length || behaviors.length || blastBin"
         type="button"
-        class="text-xs text-zinc-500 underline hover:text-zinc-700"
+        class="text-xs text-zinc-500 dark:text-zinc-400 underline hover:text-zinc-700 dark:hover:text-zinc-300"
         @click="resetFilters"
       >
         Reset filters
@@ -299,9 +299,9 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto border border-zinc-200 rounded">
+    <div class="overflow-x-auto border border-zinc-200 dark:border-zinc-800 rounded">
       <table class="w-full text-sm">
-        <thead class="bg-zinc-50 text-zinc-600">
+        <thead class="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
           <tr class="text-left">
             <th class="px-3 py-2 font-medium">ID</th>
             <th class="px-3 py-2 font-medium">Surface</th>
@@ -313,7 +313,7 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
         </thead>
         <tbody>
           <tr v-if="rows.length === 0">
-            <td colspan="6" class="px-3 py-12 text-center text-zinc-500">
+            <td colspan="6" class="px-3 py-12 text-center text-zinc-500 dark:text-zinc-400">
               No patterns match the current filters.
             </td>
           </tr>
@@ -321,27 +321,27 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
             v-for="row in rows"
             :key="row.pattern_id"
             tabindex="0"
-            class="border-t border-zinc-100 hover:bg-zinc-50 focus:bg-zinc-50 focus:outline focus:outline-2 focus:outline-zinc-500 cursor-pointer"
+            class="border-t border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800 focus:bg-zinc-50 dark:focus:bg-zinc-800 focus:outline focus:outline-2 focus:outline-zinc-500 cursor-pointer"
             @click="$router.push(`/patterns/${row.pattern_id}`)"
             @keydown.enter="activateRow(row.pattern_id, $event)"
             @keydown.space="activateRow(row.pattern_id, $event)"
           >
-            <td class="px-3 py-2 font-mono text-xs text-zinc-900">
+            <td class="px-3 py-2 font-mono text-xs text-zinc-900 dark:text-zinc-100">
               <RouterLink
                 :to="`/patterns/${row.pattern_id}`"
-                class="text-zinc-900 hover:underline"
+                class="text-zinc-900 dark:text-zinc-100 hover:underline"
                 @click.stop
               >
                 {{ row.pattern_id }}
               </RouterLink>
             </td>
-            <td class="px-3 py-2 text-zinc-700">{{ row.surface }}</td>
-            <td class="px-3 py-2 text-zinc-600 max-w-md truncate" :title="row.description">
+            <td class="px-3 py-2 text-zinc-700 dark:text-zinc-300">{{ row.surface }}</td>
+            <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 max-w-md truncate" :title="row.description">
               {{ row.description }}
             </td>
             <td class="px-3 py-2 text-right tabular-nums">{{ row.blast_radius.toFixed(2) }}</td>
             <td class="px-3 py-2 text-right tabular-nums">{{ row.evidence_count }}</td>
-            <td class="px-3 py-2 text-zinc-600 font-mono text-xs">{{ row.top_pack || '—' }}</td>
+            <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 font-mono text-xs">{{ row.top_pack || '—' }}</td>
           </tr>
         </tbody>
       </table>
