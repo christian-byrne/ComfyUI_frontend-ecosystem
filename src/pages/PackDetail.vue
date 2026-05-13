@@ -108,12 +108,12 @@ function fmt(n: number | undefined): string {
   <section data-testid="pack-detail-page" :data-pack-id="packId">
     <RouterLink
       :to="{ name: 'node-packs' }"
-      class="mb-4 inline-block text-xs text-zinc-500 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded"
+      class="mb-4 inline-block text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded"
     >
       ← All node packs
     </RouterLink>
 
-    <div class="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+    <div class="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
       <NodePackBanner v-if="primaryRepo" :repo="primaryRepo" />
       <div class="p-4">
         <!--
@@ -122,12 +122,12 @@ function fmt(n: number | undefined): string {
           we deliberately surface the URL slug as last-resort to keep the
           page identifiable even when the registry is offline.
         -->
-        <h1 class="text-xl font-semibold text-zinc-900">
+        <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
           {{ pack.name ?? pack.id ?? packId }}
         </h1>
         <p
           v-if="pack.description"
-          class="mt-2 max-w-prose text-sm text-zinc-600"
+          class="mt-2 max-w-prose text-sm text-zinc-600 dark:text-zinc-400"
         >
           {{ pack.description }}
         </p>
@@ -136,34 +136,34 @@ function fmt(n: number | undefined): string {
           class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-xs sm:grid-cols-4"
         >
           <div>
-            <dt class="text-zinc-400">Pack id</dt>
-            <dd class="font-mono text-zinc-700">{{ pack.id ?? packId }}</dd>
+            <dt class="text-zinc-400 dark:text-zinc-500">Pack id</dt>
+            <dd class="font-mono text-zinc-700 dark:text-zinc-300">{{ pack.id ?? packId }}</dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Publisher</dt>
-            <dd class="text-zinc-700">
+            <dt class="text-zinc-400 dark:text-zinc-500">Publisher</dt>
+            <dd class="text-zinc-700 dark:text-zinc-300">
               {{
                 pack.publisher?.name ?? pack.publisher?.id ?? pack.author ?? '—'
               }}
             </dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Stars</dt>
-            <dd class="text-zinc-700">{{ fmt(pack.github_stars) }}</dd>
+            <dt class="text-zinc-400 dark:text-zinc-500">Stars</dt>
+            <dd class="text-zinc-700 dark:text-zinc-300">{{ fmt(pack.github_stars) }}</dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Downloads</dt>
-            <dd class="text-zinc-700">{{ fmt(pack.downloads) }}</dd>
+            <dt class="text-zinc-400 dark:text-zinc-500">Downloads</dt>
+            <dd class="text-zinc-700 dark:text-zinc-300">{{ fmt(pack.downloads) }}</dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Latest version</dt>
-            <dd class="font-mono text-zinc-700">
+            <dt class="text-zinc-400 dark:text-zinc-500">Latest version</dt>
+            <dd class="font-mono text-zinc-700 dark:text-zinc-300">
               {{ pack.latest_version?.version ?? '—' }}
             </dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Repository</dt>
-            <dd class="truncate text-zinc-700">
+            <dt class="text-zinc-400 dark:text-zinc-500">Repository</dt>
+            <dd class="truncate text-zinc-700 dark:text-zinc-300">
               <a
                 v-if="pack.repository"
                 :href="pack.repository"
@@ -176,25 +176,25 @@ function fmt(n: number | undefined): string {
             </dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Patterns used</dt>
-            <dd class="font-mono text-zinc-700">{{ totals.patternCount }}</dd>
+            <dt class="text-zinc-400 dark:text-zinc-500">Patterns used</dt>
+            <dd class="font-mono text-zinc-700 dark:text-zinc-300">{{ totals.patternCount }}</dd>
           </div>
           <div>
-            <dt class="text-zinc-400">Total evidence rows</dt>
-            <dd class="font-mono text-zinc-700">{{ totals.hits }}</dd>
+            <dt class="text-zinc-400 dark:text-zinc-500">Total evidence rows</dt>
+            <dd class="font-mono text-zinc-700 dark:text-zinc-300">{{ totals.hits }}</dd>
           </div>
         </dl>
 
         <p
           v-if="isLoading"
-          class="mt-3 text-xs text-zinc-400"
+          class="mt-3 text-xs text-zinc-400 dark:text-zinc-500"
           data-testid="registry-loading"
         >
           Loading registry data…
         </p>
         <p
           v-else-if="apiError"
-          class="mt-3 text-xs text-amber-600"
+          class="mt-3 text-xs text-amber-600 dark:text-amber-400"
           data-testid="registry-error"
         >
           Registry lookup failed; showing local data only.
@@ -204,10 +204,10 @@ function fmt(n: number | undefined): string {
 
     <h2
       id="pattern-coverage-heading"
-      class="mt-8 mb-3 text-sm font-medium text-zinc-700"
+      class="mt-8 mb-3 text-sm font-medium text-zinc-700 dark:text-zinc-300"
     >
       Pattern coverage
-      <span class="ml-1 text-xs font-normal text-zinc-400">
+      <span class="ml-1 text-xs font-normal text-zinc-400 dark:text-zinc-500">
         ({{ totals.patternCount }} patterns, weighted impact
         {{ totals.weighted.toFixed(1) }})
       </span>
@@ -219,23 +219,23 @@ function fmt(n: number | undefined): string {
       data-testid="pattern-coverage-table"
       aria-labelledby="pattern-coverage-heading"
     >
-      <thead class="text-left text-xs uppercase tracking-wide text-zinc-400">
+      <thead class="text-left text-xs uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
         <tr>
-          <th scope="col" class="border-b border-zinc-200 py-2 pr-3 font-medium">
+          <th scope="col" class="border-b border-zinc-200 dark:border-zinc-800 py-2 pr-3 font-medium">
             Pattern
           </th>
-          <th scope="col" class="border-b border-zinc-200 py-2 pr-3 font-medium">
+          <th scope="col" class="border-b border-zinc-200 dark:border-zinc-800 py-2 pr-3 font-medium">
             Surface
           </th>
           <th
             scope="col"
-            class="border-b border-zinc-200 py-2 pr-3 text-right font-medium"
+            class="border-b border-zinc-200 dark:border-zinc-800 py-2 pr-3 text-right font-medium"
           >
             Hits
           </th>
           <th
             scope="col"
-            class="border-b border-zinc-200 py-2 pr-3 text-right font-medium"
+            class="border-b border-zinc-200 dark:border-zinc-800 py-2 pr-3 text-right font-medium"
           >
             Blast radius
           </th>
@@ -245,39 +245,39 @@ function fmt(n: number | undefined): string {
         <tr
           v-for="row in aggregateRows"
           :key="row.pattern_id"
-          class="hover:bg-zinc-50"
+          class="hover:bg-zinc-50 dark:hover:bg-zinc-800"
         >
-          <td class="border-b border-zinc-100 py-2 pr-3 align-top">
+          <td class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 align-top">
             <RouterLink
               :to="{ name: 'pattern-detail', params: { id: row.pattern_id } }"
-              class="font-mono text-xs text-zinc-900 hover:underline"
+              class="font-mono text-xs text-zinc-900 dark:text-zinc-100 hover:underline"
               :data-pattern-id="row.pattern_id"
             >
               {{ row.pattern_id }}
             </RouterLink>
-            <div class="mt-0.5 text-xs text-zinc-500">{{ row.name }}</div>
+            <div class="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">{{ row.name }}</div>
           </td>
-          <td class="border-b border-zinc-100 py-2 pr-3 align-top">
+          <td class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 align-top">
             <span
-              class="rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-xs text-zinc-600"
+              class="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 font-mono text-xs text-zinc-600 dark:text-zinc-400"
             >
               {{ row.surface_family }}
             </span>
           </td>
           <td
-            class="border-b border-zinc-100 py-2 pr-3 text-right align-top font-mono text-xs"
+            class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 text-right align-top font-mono text-xs"
           >
             {{ row.hits }}
           </td>
           <td
-            class="border-b border-zinc-100 py-2 pr-3 text-right align-top font-mono text-xs"
+            class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 text-right align-top font-mono text-xs"
           >
             {{ row.blast_radius.toFixed(2) }}
           </td>
         </tr>
       </tbody>
     </table>
-    <p v-else class="text-sm text-zinc-500">
+    <p v-else class="text-sm text-zinc-500 dark:text-zinc-400">
       No touch-points evidence ties this pack to any v1 pattern.
     </p>
   </section>

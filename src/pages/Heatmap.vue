@@ -134,7 +134,7 @@ function truncate(s: string, n = 28): string {
         <h1 class="text-2xl font-semibold tracking-tight">
           Pattern × Pack Heatmap
         </h1>
-        <p class="text-sm text-zinc-600">
+        <p class="text-sm text-zinc-600 dark:text-zinc-400">
           Rows: {{ matrix.patterns.length }} patterns sorted by blast radius (desc).
           Columns: top {{ matrix.packs.length }} packs by total evidence.
           Cell intensity: evidence count
@@ -144,22 +144,22 @@ function truncate(s: string, n = 28): string {
       <div class="flex items-center gap-4">
         <!-- Color legend: gradient bar with 0 → max labels mapping shade to count. -->
         <div
-          class="inline-flex items-center gap-2 text-xs text-zinc-700"
+          class="inline-flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300"
           data-testid="heatmap-legend"
           aria-label="Color legend: lighter shades indicate fewer evidence rows, darker shades indicate more"
         >
-          <span class="font-mono text-zinc-500">0</span>
+          <span class="font-mono text-zinc-500 dark:text-zinc-400">0</span>
           <span
-            class="inline-block h-2 w-32 rounded border border-zinc-200"
+            class="inline-block h-2 w-32 rounded border border-zinc-200 dark:border-zinc-800"
             :style="{
               backgroundImage:
                 'linear-gradient(to right, rgb(250 250 250), rgb(24 24 27))'
             }"
             aria-hidden="true"
           />
-          <span class="font-mono text-zinc-700">{{ matrix.max }}</span>
+          <span class="font-mono text-zinc-700 dark:text-zinc-300">{{ matrix.max }}</span>
         </div>
-        <label class="inline-flex items-center gap-2 text-sm text-zinc-700 print:hidden">
+        <label class="inline-flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300 print:hidden">
           <input
             v-model="logScale"
             type="checkbox"
@@ -171,7 +171,7 @@ function truncate(s: string, n = 28): string {
       </div>
     </header>
 
-    <div class="relative overflow-auto border border-zinc-200 rounded">
+    <div class="relative overflow-auto border border-zinc-200 dark:border-zinc-800 rounded">
       <div
         ref="gridRef"
         class="heatmap-grid inline-grid text-xs"
@@ -181,11 +181,11 @@ function truncate(s: string, n = 28): string {
         data-testid="heatmap-grid"
       >
         <!-- Header row: empty corner + pack labels -->
-        <div class="sticky top-0 left-0 z-20 bg-white border-b border-r border-zinc-200" />
+        <div class="sticky top-0 left-0 z-20 bg-white dark:bg-zinc-900 border-b border-r border-zinc-200 dark:border-zinc-800" />
         <div
           v-for="pack in matrix.packs"
           :key="`h-${pack}`"
-          class="sticky top-0 z-10 bg-white border-b border-zinc-200 p-1.5 text-zinc-700 font-mono text-[10px] leading-tight align-bottom"
+          class="sticky top-0 z-10 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-1.5 text-zinc-700 dark:text-zinc-300 font-mono text-[10px] leading-tight align-bottom"
           :title="pack"
         >
           <div class="origin-bottom-left -rotate-45 whitespace-nowrap translate-y-2">
@@ -196,18 +196,18 @@ function truncate(s: string, n = 28): string {
         <!-- Body rows: pattern label + cells -->
         <template v-for="rv in displayRows" :key="`r-${rv.pattern.pattern_id}`">
           <div
-            class="sticky left-0 z-10 bg-white border-r border-zinc-200 px-2 py-1 font-mono text-[11px] text-zinc-800 whitespace-nowrap"
+            class="sticky left-0 z-10 bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 px-2 py-1 font-mono text-[11px] text-zinc-800 dark:text-zinc-200 whitespace-nowrap"
             :title="`${rv.pattern.pattern_id} — ${rv.pattern.name} (blast ${rv.pattern.blast_radius.toFixed(2)})`"
           >
-            <span class="text-zinc-500">{{ rv.pattern.pattern_id }}</span>
-            <span class="text-zinc-400 mx-1">·</span>
+            <span class="text-zinc-500 dark:text-zinc-400">{{ rv.pattern.pattern_id }}</span>
+            <span class="text-zinc-400 dark:text-zinc-500 mx-1">·</span>
             <span>{{ truncate(rv.pattern.name, 32) }}</span>
           </div>
           <button
             v-for="cv in rv.cells"
             :key="cv.key"
             type="button"
-            class="heatmap-cell h-7 border-b border-r border-zinc-100 cursor-pointer focus:outline-2 focus:outline-zinc-900 focus:z-10 print:bg-white! print:border-zinc-200"
+            class="heatmap-cell h-7 border-b border-r border-zinc-100 dark:border-zinc-800 cursor-pointer focus:outline-2 focus:outline-zinc-900 focus:z-10 print:bg-white! print:border-zinc-200"
             :style="cv.style"
             :data-pattern="rv.pattern.pattern_id"
             :data-pack="cv.pack"
@@ -230,14 +230,14 @@ function truncate(s: string, n = 28): string {
       <!-- Hover tooltip -->
       <div
         v-if="showTooltip && hoveredCell"
-        class="pointer-events-none absolute top-2 right-2 z-30 bg-zinc-900 text-zinc-50 text-xs rounded px-2 py-1.5 shadow-md print:hidden"
+        class="pointer-events-none absolute top-2 right-2 z-30 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 text-xs rounded px-2 py-1.5 shadow-md print:hidden"
         data-testid="heatmap-tooltip"
         role="tooltip"
       >
         <span class="font-mono">{{ hoveredCell.patternId }}</span>
-        <span class="text-zinc-400 mx-1">·</span>
+        <span class="text-zinc-400 dark:text-zinc-500 mx-1">·</span>
         <span class="font-mono">{{ hoveredCell.pack }}</span>
-        <span class="text-zinc-400 mx-1">·</span>
+        <span class="text-zinc-400 dark:text-zinc-500 mx-1">·</span>
         <span>{{ hoveredCell.count }} row{{ hoveredCell.count === 1 ? '' : 's' }}</span>
       </div>
     </div>

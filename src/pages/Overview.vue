@@ -77,9 +77,9 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
       <h1 class="sr-only">Overview</h1>
       <dl class="grid grid-cols-2 gap-x-12 gap-y-8 md:grid-cols-4">
         <div v-for="stat in heroStats" :key="stat.label">
-          <dt class="text-sm text-zinc-500">{{ stat.label }}</dt>
+          <dt class="text-sm text-zinc-500 dark:text-zinc-400">{{ stat.label }}</dt>
           <dd
-            class="text-5xl font-light text-zinc-900 tabular-nums md:text-6xl"
+            class="text-5xl font-light text-zinc-900 dark:text-zinc-100 tabular-nums md:text-6xl"
           >
             {{ stat.value.toLocaleString() }}
           </dd>
@@ -91,14 +91,14 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
     <section aria-labelledby="top-blast-heading" class="space-y-4">
       <h2
         id="top-blast-heading"
-        class="text-sm uppercase tracking-wide text-zinc-500"
+        class="text-sm uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
       >
         Top {{ topPatterns.length }} patterns by blast radius
       </h2>
       <div class="overflow-x-auto">
         <table class="w-full text-sm tabular-nums">
           <thead>
-            <tr class="text-left text-zinc-500">
+            <tr class="text-left text-zinc-500 dark:text-zinc-400">
               <th scope="col" class="py-2 pr-4 font-normal w-8">#</th>
               <th scope="col" class="py-2 pr-4 font-normal">pattern</th>
               <th scope="col" class="py-2 pr-4 font-normal">description</th>
@@ -110,7 +110,7 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
           </thead>
           <tbody>
             <tr v-if="topPatterns.length === 0">
-              <td colspan="5" class="py-4 text-center text-zinc-500">
+              <td colspan="5" class="py-4 text-center text-zinc-500 dark:text-zinc-400">
                 No patterns yet.
               </td>
             </tr>
@@ -118,24 +118,24 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
               v-for="(p, idx) in topPatterns"
               v-else
               :key="p.pattern_id"
-              class="border-t border-zinc-100 hover:bg-zinc-50"
+              class="border-t border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800"
             >
-              <td class="py-2 pr-4 text-zinc-400">{{ idx + 1 }}</td>
+              <td class="py-2 pr-4 text-zinc-400 dark:text-zinc-500">{{ idx + 1 }}</td>
               <td class="py-2 pr-4">
                 <RouterLink
                   :to="patternRoute(p.pattern_id)"
-                  class="text-zinc-900 underline-offset-4 hover:underline"
+                  class="text-zinc-900 dark:text-zinc-100 underline-offset-4 hover:underline"
                 >
                   {{ p.pattern_id }}
                 </RouterLink>
               </td>
-              <td class="py-2 pr-4 text-zinc-700">
+              <td class="py-2 pr-4 text-zinc-700 dark:text-zinc-300">
                 {{ describe(p.pattern_id, p.name) }}
               </td>
-              <td class="py-2 pr-4 text-right text-zinc-900">
+              <td class="py-2 pr-4 text-right text-zinc-900 dark:text-zinc-100">
                 {{ p.blast_radius.toLocaleString() }}
               </td>
-              <td class="py-2 text-right text-zinc-700">
+              <td class="py-2 text-right text-zinc-700 dark:text-zinc-300">
                 {{ evidenceCount(p.pattern_id).toLocaleString() }}
               </td>
             </tr>
@@ -145,7 +145,7 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
     </section>
 
     <!-- Source-of-data footnote -->
-    <footer class="text-xs text-zinc-500">
+    <footer class="text-xs text-zinc-500 dark:text-zinc-400">
       data: yaml mtime
       <time :datetime="yamlMtime">{{ yamlMtime }}</time>
       · build {{ commitSha }}

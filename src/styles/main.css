@@ -1,1 +1,28 @@
 @import 'tailwindcss';
+
+/*
+ * Dark mode (DASH-FB-1).
+ *
+ * Tailwind 4 ships dark-mode utilities behind the `dark` variant, but by
+ * default that variant is media-driven (`prefers-color-scheme: dark`). We
+ * want a user toggle, so we redefine the variant to fire when any
+ * ancestor carries the `.dark` class. `@vueuse/core`'s `useDark`
+ * composable toggles that class on `<html>`, so every `dark:` utility in
+ * a page's template becomes opt-in.
+ *
+ * Keep the override narrow — no parallel stylesheet, no theme tokens.
+ * Pages opt into dark mode by adding `dark:bg-zinc-…` / `dark:text-…`
+ * variants alongside their existing light styles.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Body palette mirrors the App shell so the dark background extends past
+ * the rendered <main> when content is short. Kept here (not in
+ * index.html) so the variant override applies cleanly without inline
+ * style duplication.
+ */
+html.dark body {
+  background-color: rgb(9 9 11); /* zinc-950 */
+  color: rgb(244 244 245); /* zinc-100 */
+}

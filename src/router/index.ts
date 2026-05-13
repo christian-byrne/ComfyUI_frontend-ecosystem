@@ -57,7 +57,13 @@ export const routes: RouteRecordRaw[] = [
     meta: { title: 'Node Packs', nav: true }
   },
   {
-    path: '/node-packs/:id',
+    // The param name is `packId` (not `id`) so it matches what
+    // `NodePackTile` and `PackDetail` already read/write. A previous
+    // mismatch (`:id` here vs `params.packId` in callers) caused
+    // `RouterLink` to silently drop the param, generating `/node-packs/`
+    // and 404'ing — which surfaced to users as the NodePacks page being
+    // unreachable / empty (DASH-FB-4).
+    path: '/node-packs/:packId',
     name: 'pack-detail',
     component: PackDetail,
     meta: { title: 'Pack Detail', nav: false }

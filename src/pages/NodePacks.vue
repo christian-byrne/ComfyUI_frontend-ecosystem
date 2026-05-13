@@ -73,8 +73,8 @@ function onTileFinished(repo: string): void {
 <template>
   <section data-testid="node-packs-page">
     <header class="mb-6">
-      <h1 class="text-2xl font-semibold text-zinc-900">Node Packs</h1>
-      <p class="mt-1 text-sm text-zinc-500">
+      <h1 class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">Node Packs</h1>
+      <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
         Top 20 packs from the touch-points sweep, joined with the Comfy
         Registry. Click a pack for the per-pattern coverage table.
       </p>
@@ -85,7 +85,7 @@ function onTileFinished(repo: string): void {
       role="radiogroup"
       aria-label="Sort packs by"
     >
-      <span class="text-zinc-500">Sort:</span>
+      <span class="text-zinc-500 dark:text-zinc-400">Sort:</span>
       <button
         v-for="opt in SORT_OPTIONS"
         :key="opt.value"
@@ -97,14 +97,14 @@ function onTileFinished(repo: string): void {
         class="rounded-md border px-3 py-1 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
         :class="
           sort === opt.value
-            ? 'border-zinc-900 bg-zinc-900 text-white'
-            : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300'
+            ? 'border-zinc-900 dark:border-zinc-100 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
+            : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-600'
         "
         @click="sort = opt.value"
       >
         {{ opt.label }}
       </button>
-      <span class="ml-1 text-xs text-zinc-400">{{ activeBlurb }}</span>
+      <span class="ml-1 text-xs text-zinc-400 dark:text-zinc-500">{{ activeBlurb }}</span>
     </div>
 
     <ul
@@ -127,7 +127,7 @@ function onTileFinished(repo: string): void {
     </ul>
     <p
       v-else
-      class="text-sm text-zinc-500"
+      class="text-sm text-zinc-500 dark:text-zinc-400"
       data-testid="node-packs-empty"
     >
       No packs in the touch-points evidence yet.
