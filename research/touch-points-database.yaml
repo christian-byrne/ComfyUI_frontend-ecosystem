@@ -233,13 +233,6 @@ patterns:
     excerpt: "// ComfyUI-VideoHelperSuite/web/js/VHS.core.js — one of 5+ independent reimplementations\nfunction chainCallback(object, property, callback) {\n    if (property in object && object[property])\
       \ {\n        const callback_orig = object[property]\n        object[property] = function () {\n            const r = callback_orig.apply(this, arguments);\n            return callback.apply(this,\
       \ arguments) ?? r\n        };\n    } else {\n        object[property] = callback;\n    }\n}\n"
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    file: web/js/VHS.core.js
-    lines:
-    - 909
-    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L909
-    source: local-clone
-    notes: widget.callback chaining, 20+ instances
   evidence_status: swept
 - pattern_id: S4.W2
   surface_family: S4
@@ -6585,12 +6578,6 @@ patterns:
     excerpt: "        return false\n    }\n    let workflow = JSON.parse(await file.text())\n    await app.loadGraphData(workflow)\n    //NOTE: API is not used so workflow data is actually processed\n \
       \   watched_nodes = workflow.tests\n    errors = []\n    let p = new Promise((r) => resolve = r)\n    await app.queuePrompt()\n    //block until execution completes\n    await p\n    watched_nodes\
       \ = {}\n    if (errors.length > 0) {\n        app.ui.dialog.show(\"Failed \" + errors.length + \" tests:\\n\" + errors)\n        return true\n    }"
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    file: web/js/VHS.core.js
-    lines:
-    - 2439
-    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2439
-    source: local-clone
   evidence_status: swept
 - pattern_id: S5.A2
   surface_family: S5
@@ -6955,12 +6942,6 @@ patterns:
     excerpt: "\t\t\ttargetElementId: \"graph-canvas\",\n\t\t},\n\t],\n\tgetCanvasMenuItems() {\n\t\treturn [\n\t\t\t{\n\t\t\t\tcontent: \"KJNodes\",\n\t\t\t\thas_submenu: true,\n\t\t\t\tsubmenu: {\n\t\t\
       \t\t\toptions: [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tcontent: \"Convert outputs on all selected nodes to Set/Get\",\n\t\t\t\t\t\t\tcallback: () => {\n\t\t\t\t\t\t\t\tconst selected = Object.values(app.canvas.selected_nodes\
       \ || {});\n\t\t\t\t\t\t\t\tif (selected.length === 0) return;\n\t\t\t\t\t\t\t\tfor (const n of selected) convertOutputsToSetGet(app.graph, n);"
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    file: web/js/VHS.core.js
-    lines:
-    - 2152
-    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2152
-    source: local-clone
   derived:
     verdict: Keep but redesign — current hook returns mutable array, like P6 menu options. Needs declarative shape with idempotence.
   evidence_status: swept
@@ -7024,12 +7005,6 @@ patterns:
     url: null
     variant: 1-file-our-core
     notes: 1 of 23 core extensions uses this — find which
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    file: web/js/VHS.core.js
-    lines:
-    - 2340
-    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2340
-    source: local-clone
 - pattern_id: S1.H6
   surface_family: S1
   surface: ComfyExtension.registerCustomNodes hook
@@ -13464,12 +13439,6 @@ patterns:
     notes: 30 files iterate graph._nodes; 2 use findNodesByType
     excerpt: "// ComfyUI-KJNodes/web/js/setgetnodes.js\ngraph._nodes.forEach(otherNode => {\n    if (otherNode !== this && otherNode.type === 'SetNode') {\n        existingValues.add(otherNode.widgets[0].value);\n\
       \    }\n});\n// ComfyUI-Impact-Pack — link traversal\nlet src_node = app.graph._nodes_by_id[app.graph.links[input.link].origin_id];\n"
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    file: web/js/VHS.core.js
-    lines:
-    - 2382
-    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2382
-    source: local-clone
 - pattern_id: S12.UI1
   surface_family: S12
   surface: extensionManager / commandManager / toastManager / sidebarTab / bottomPanel registration
@@ -15511,7 +15480,7 @@ patterns:
   evidence_status: swept
   evidence:
   - pattern_id: S16.D1
-    repo: pythongosssss/ComfyUI-Custom-Scripts
+    repo: ComfyUI-Custom-Scripts
     file: web/js/workflowImage.js
     lines:
     - 1
@@ -15520,7 +15489,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: space-nuko/ComfyUI-OpenPose-Editor
+    repo: ComfyUI-OpenPose-Editor
     file: js/fabric.min.js
     lines:
     - 1
@@ -15529,7 +15498,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: AlekPet/ComfyUI_Custom_Nodes_AlekPet
+    repo: ComfyUI_Custom_Nodes_AlekPet
     file: PainterNode/js/painter_node.js
     lines:
     - 1
@@ -15538,7 +15507,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/worker-css.js
     lines:
     - 1
@@ -15547,7 +15516,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/mode-markdown.js
     lines:
     - 1
@@ -15556,7 +15525,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/worker-javascript.js
     lines:
     - 1
@@ -15565,7 +15534,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/ace.js
     lines:
     - 1
@@ -15574,7 +15543,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/mode-html.js
     lines:
     - 1
@@ -15583,7 +15552,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/worker-html.js
     lines:
     - 1
@@ -15592,7 +15561,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: MixLabPro/comfyui-mixlab-nodes
+    repo: comfyui-mixlab-nodes
     file: web/javascript/image_mixlab.js
     lines:
     - 1
@@ -15601,7 +15570,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: MixLabPro/comfyui-mixlab-nodes
+    repo: comfyui-mixlab-nodes
     file: web/javascript/3d_mixlab.js
     lines:
     - 1
@@ -15610,7 +15579,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: MixLabPro/comfyui-mixlab-nodes
+    repo: comfyui-mixlab-nodes
     file: web/javascript/ui_mixlab.js
     lines:
     - 1
@@ -15619,7 +15588,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: MixLabPro/comfyui-mixlab-nodes
+    repo: comfyui-mixlab-nodes
     file: web/javascript/layer_mixlab.js
     lines:
     - 1
@@ -15640,7 +15609,7 @@ patterns:
   evidence_status: swept
   evidence:
   - pattern_id: S16.D3
-    repo: AIGODLIKE/ComfyUI-BlenderAI-node
+    repo: ComfyUI-BlenderAI-node
     file: SDNode/custom_nodes/Cup-ClipBoard/cup_clipboard.js
     lines:
     - 1
@@ -15649,7 +15618,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: kijai/ComfyUI-KJNodes
+    repo: ComfyUI-KJNodes
     file: kjweb_async/marked.min.js
     lines:
     - 1
@@ -15658,7 +15627,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: TinyTerra/ComfyUI_tinyterraNodes
+    repo: ComfyUI_tinyterraNodes
     file: js/ttNembedAC.js
     lines:
     - 1
@@ -15667,7 +15636,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web/extern/shodown.min.js
     lines:
     - 1
@@ -15676,7 +15645,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/ext-emmet.js
     lines:
     - 1
@@ -15685,7 +15654,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/ext-language_tools.js
     lines:
     - 1
@@ -15694,7 +15663,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/ext-prompt.js
     lines:
     - 1
@@ -15703,7 +15672,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/worker-base.js
     lines:
     - 1
@@ -15712,7 +15681,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/worker-json.js
     lines:
     - 1
@@ -15721,7 +15690,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: melMass/comfy_mtb
+    repo: comfy_mtb
     file: web_async/ace/ext-inline_autocomplete.js
     lines:
     - 1
@@ -15742,7 +15711,7 @@ patterns:
   evidence_status: swept
   evidence:
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/controlnet_aux/dsine/models/submodules/efficientnet_repo/setup.py
     lines:
     - 1
@@ -15751,7 +15720,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/controlnet_aux/normalbae/nets/submodules/efficientnet_repo/setup.py
     lines:
     - 1
@@ -15760,7 +15729,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/custom_detectron2/config/lazy.py
     lines:
     - 1
@@ -15769,7 +15738,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/custom_detectron2/utils/tracing.py
     lines:
     - 1
@@ -15778,7 +15747,7 @@ patterns:
     source: security
     variant: B307
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/custom_midas_repo/midas/backbones/utils.py
     lines:
     - 1
@@ -15787,7 +15756,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/custom_midas_repo/midas/backbones/vit.py
     lines:
     - 1
@@ -15796,7 +15765,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/custom_mmpkg/custom_mmcv/ops/nms.py
     lines:
     - 1
@@ -15805,7 +15774,7 @@ patterns:
     source: security
     variant: B307
   - pattern_id: S16.D7
-    repo: Fannovel16/comfyui_controlnet_aux
+    repo: comfyui_controlnet_aux
     file: src/custom_mmpkg/custom_mmseg/core/evaluation/class_names.py
     lines:
     - 1
