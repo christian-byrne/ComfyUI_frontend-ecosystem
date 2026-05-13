@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "rebuild": "bash scripts/rebuild.sh",
     "rebuild:offline": "bash scripts/rebuild.sh --skip-stars",
     "data:rollup": "bash scripts/rebuild.sh rollup",
@@ -25,8 +27,9 @@
     "yaml": "^2.6.1"
   },
   "devDependencies": {
-    "@types/diff": "^5.2.0",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.0.0",
+    "@types/diff": "^5.2.0",
     "@types/node": "^22.0.0",
     "@vitejs/plugin-vue": "^5.1.0",
     "@vue/test-utils": "^2.4.6",
