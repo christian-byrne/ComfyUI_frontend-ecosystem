@@ -4,15 +4,18 @@ import {
   type RouteRecordRaw,
 } from "vue-router";
 
-import ApiDiff from "../pages/ApiDiff.vue";
-import BehaviorCategories from "../pages/BehaviorCategories.vue";
-import CategoryDetail from "../pages/CategoryDetail.vue";
-import Heatmap from "../pages/Heatmap.vue";
-import NodePacks from "../pages/NodePacks.vue";
+// Lazy-load pages to reduce initial bundle size. Overview is eagerly loaded
+// since it's the landing page; others load on navigation.
 import Overview from "../pages/Overview.vue";
-import PackDetail from "../pages/PackDetail.vue";
-import PatternDetail from "../pages/PatternDetail.vue";
-import Patterns from "../pages/Patterns.vue";
+
+const ApiDiff = () => import("../pages/ApiDiff.vue");
+const BehaviorCategories = () => import("../pages/BehaviorCategories.vue");
+const CategoryDetail = () => import("../pages/CategoryDetail.vue");
+const Heatmap = () => import("../pages/Heatmap.vue");
+const NodePacks = () => import("../pages/NodePacks.vue");
+const PackDetail = () => import("../pages/PackDetail.vue");
+const PatternDetail = () => import("../pages/PatternDetail.vue");
+const Patterns = () => import("../pages/Patterns.vue");
 
 /**
  * Dashboard routes. `meta.nav: true` opts a route into the App.vue header

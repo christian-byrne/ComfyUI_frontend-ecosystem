@@ -25,9 +25,11 @@ function patternRoute(patternId: string): RouteLocationRaw {
   if (router.hasRoute("pattern-detail")) {
     return { name: "pattern-detail", params: { id: patternId } };
   }
-  console.warn(
-    `[Overview] route "pattern-detail" not registered; falling back to /patterns/${patternId}`,
-  );
+  if (import.meta.env.DEV) {
+    console.warn(
+      `[Overview] route "pattern-detail" not registered; falling back to /patterns/${patternId}`,
+    );
+  }
   return `/patterns/${patternId}`;
 }
 
