@@ -2,18 +2,29 @@
 
 Visualize and explore the ComfyUI extension API ecosystem — patterns, blast radius, behavior categories, v1↔v2 diff, node-pack heatmap, test runner.
 
-**Status:** scaffolding (Wave 1: research bundle + repo init)
+## Features
 
-## What's here today
+- **Overview** — Hero stats + top patterns by blast radius
+- **Patterns** — Full pattern table with search, sort, pack filter
+- **Pattern Detail** — Per-pattern evidence, category membership, API signatures
+- **Behavior Categories** — 41 categories with stub coverage indicators
+- **Node Packs** — Top 20 packs with Comfy Registry integration (banners, stars)
+- **Heatmap** — Pattern × Pack evidence matrix with click-through drawer
+- **API Diff** — v1→v2 migration status cards with search/filter
+- **Test Runner** — Vitest harness status page
 
-- `research/` — touch-points database (59 patterns, 634 evidence rows), behavior categories (41 cats × 3 stub types), R8 clone-and-grep evidence (887 rows from top-20 ComfyUI custom-node packs), full ECS+Vue API redesign research bundle from the cross-repo workspace.
-- `research/workspace-mirror/` — full mirror of the cross-repo research workspace (decisions, plans, todo, sources).
+## Tech Stack
 
-## What's coming
+- Vue 3 (Composition API) + TypeScript
+- Vite 5 + Tailwind CSS 4
+- Pinia (state management)
+- Vitest (166 unit tests) + Playwright (36 E2E tests)
+- Vercel (preview per PR, prod on `main`)
 
-- `src/` — Vue 3 + Vite + Tailwind 4 + Pinia dashboard
-- Pages: Overview, Patterns, PatternDetail, BehaviorCategories, NodePacks (with banner+photos via Comfy Registry API), Heatmap, ApiDiff, TestRunner
-- Deploy: Vercel (preview per PR, prod on `main`)
+## Data
+
+- `research/` — touch-points database (59 patterns, 634 evidence rows), behavior categories (41 cats × 3 stub types), R8 clone-and-grep evidence (887 rows from top-20 ComfyUI custom-node packs)
+- `research/workspace-mirror/` — full mirror of the cross-repo research workspace
 
 ## Rebuild
 
