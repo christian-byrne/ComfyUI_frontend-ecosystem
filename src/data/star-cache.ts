@@ -1,20 +1,16 @@
 /**
- * Star-cache loader (W3 stub).
+ * Star-cache loader.
  *
- * Reads `research/touch-points-star-cache.yaml` and exposes a repo→entry
- * map. The W2.C `registry-client` branch will replace this with a richer
- * Comfy Registry API client (publisher avatars, install counts, photos);
- * callers should keep going through the `starCache` lookup so the swap is
- * transparent.
+ * Reads pre-parsed JSON star cache and exposes a repo→entry map.
+ * Callers should keep going through the `starCache` lookup so
+ * data source changes are transparent.
  */
-import { parse as parseYaml } from "yaml";
-
-import starCacheRaw from "../../research/touch-points-star-cache.yaml?raw";
+import starCacheData from "./touch-points-star-cache.json";
 import type { StarCacheEntry, StarCacheFile } from "./schema";
 
 export type { StarCacheEntry };
 
-const file = parseYaml(starCacheRaw) as StarCacheFile;
+const file = starCacheData as StarCacheFile;
 
 export const starCache: Record<string, StarCacheEntry> = Object.fromEntries(
   (file.repos ?? []).map((r) => [r.repo, r]),

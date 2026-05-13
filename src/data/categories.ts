@@ -1,13 +1,9 @@
 /**
- * Behavior categories loader (W3 — moves to its own page in W4).
+ * Behavior categories loader.
  *
- * Reads `research/workspace-mirror/research/touch-points/behavior-categories.yaml`
- * via Vite's `?raw` import so it is bundled at build time alongside the rest
- * of the touch-points data.
+ * Reads pre-parsed JSON behavior categories bundled at build time.
  */
-import { parse as parseYaml } from "yaml";
-
-import categoriesRaw from "../../research/workspace-mirror/research/touch-points/behavior-categories.yaml?raw";
+import categoriesData from "./behavior-categories.json";
 import type {
   BehaviorCategory,
   BehaviorCategoriesFile,
@@ -16,7 +12,7 @@ import type {
 
 export type { BehaviorCategory, BehaviorExemplar };
 
-const file = parseYaml(categoriesRaw) as BehaviorCategoriesFile;
+const file = categoriesData as BehaviorCategoriesFile;
 
 export const behaviorCategories: BehaviorCategory[] = file.categories ?? [];
 
