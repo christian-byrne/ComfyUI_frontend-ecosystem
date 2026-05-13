@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 
-import { useDarkMode } from './composables/useDarkMode'
-import { routes } from './router'
+import { useDarkMode } from "./composables/useDarkMode";
+import { routes } from "./router";
 
-const navRoutes = routes.filter((r) => r.meta?.nav)
-const { isDark, toggleDark } = useDarkMode()
+const navRoutes = routes.filter((r) => r.meta?.nav);
+const { isDark, toggleDark } = useDarkMode();
 </script>
 
 <template>
@@ -50,7 +50,7 @@ const { isDark, toggleDark } = useDarkMode()
           data-testid="dark-mode-toggle"
           @click="toggleDark()"
         >
-          {{ isDark ? '☀ light' : '☾ dark' }}
+          {{ isDark ? "☀ light" : "☾ dark" }}
         </button>
       </div>
     </header>

@@ -12,36 +12,36 @@
  * Coverage metrics ride below the card body so the user can see *why* a
  * pack ranked into the top-20 under the current sort.
  */
-import { computed, watch } from 'vue'
-import { RouterLink } from 'vue-router'
+import { computed, watch } from "vue";
+import { RouterLink } from "vue-router";
 
-import { getPackByGithubUrl } from '@/services/registryApi'
-import type { RegistryNode } from '@/types/registry'
-import { repoToPackId } from '@/utils/repoToPackId'
+import { getPackByGithubUrl } from "@/services/registryApi";
+import type { RegistryNode } from "@/types/registry";
+import { repoToPackId } from "@/utils/repoToPackId";
 
-import NodePackCard from './NodePackCard.vue'
+import NodePackCard from "./NodePackCard.vue";
 
 const props = defineProps<{
-  repo: string
-  stars: number
-  patternHits: number
-  weightedImpact: number
-  totalHits: number
-}>()
+  repo: string;
+  stars: number;
+  patternHits: number;
+  weightedImpact: number;
+  totalHits: number;
+}>();
 
 const emit = defineEmits<{
   /** Fires once the registry fetch settles (success *or* error). */
-  (e: 'enrich-finished', repo: string): void
-}>()
+  (e: "enrich-finished", repo: string): void;
+}>();
 
 /** Local fallback so the card renders before the registry call settles. */
 const seedPack = computed<RegistryNode>(() => ({
   id: repoToPackId(props.repo) ?? props.repo,
-  name: props.repo.split('/').pop() ?? props.repo,
-  author: props.repo.split('/')[0],
+  name: props.repo.split("/").pop() ?? props.repo,
+  author: props.repo.split("/")[0],
   github_stars: props.stars || undefined,
-  repository: `https://github.com/${props.repo}`
-}))
+  repository: `https://github.com/${props.repo}`,
+}));
 
 // `getPackByGithubUrl` is a side-effecting cache lookup (it primes a fetch
 // the first time we ask for `props.repo`). `props.repo` is stable per tile,
@@ -50,25 +50,25 @@ const seedPack = computed<RegistryNode>(() => ({
 // TODO(registry-client): when the registry adds `/nodes?ids=…` batching,
 //   plumb a single batched call through `useTopPacks` instead of N
 //   per-tile fetches. See PR #5 review item 5.
-const result = getPackByGithubUrl(props.repo)
+const result = getPackByGithubUrl(props.repo);
 
 const renderedPack = computed<RegistryNode>(() => {
-  const remote = result.data.value
-  return remote ? { ...seedPack.value, ...remote } : seedPack.value
-})
+  const remote = result.data.value;
+  return remote ? { ...seedPack.value, ...remote } : seedPack.value;
+});
 
-const hasError = computed(() => result.error.value !== null)
+const hasError = computed(() => result.error.value !== null);
 
 /** Surface registry errors quietly to the console for debugging (dev only). */
 watch(
   () => result.error.value,
   (err) => {
     if (err && import.meta.env.DEV) {
-      console.warn('[NodePackTile] registry lookup failed', props.repo, err)
+      console.warn("[NodePackTile] registry lookup failed", props.repo, err);
     }
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 
 // Notify the parent grid once the request settles so it can drop
 // `aria-busy`. `useFetch.isFinished` flips to true on both success and
@@ -76,14 +76,14 @@ watch(
 watch(
   () => result.isFinished.value,
   (finished) => {
-    if (finished) emit('enrich-finished', props.repo)
+    if (finished) emit("enrich-finished", props.repo);
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 
 const targetPackId = computed(
-  () => repoToPackId(props.repo) ?? encodeURIComponent(props.repo)
-)
+  () => repoToPackId(props.repo) ?? encodeURIComponent(props.repo),
+);
 </script>
 
 <template>

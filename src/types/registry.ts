@@ -7,28 +7,28 @@
  * actually renders; widen on demand instead of importing everything.
  */
 export interface RegistryPublisher {
-  id?: string
-  name?: string
-  logo?: string
+  id?: string;
+  name?: string;
+  logo?: string;
 }
 
 export interface RegistryNodeVersion {
-  version?: string
-  createdAt?: string
+  version?: string;
+  createdAt?: string;
 }
 
 export interface RegistryNode {
-  id?: string
-  name?: string
-  description?: string
-  author?: string
-  icon?: string
-  banner_url?: string
-  repository?: string
-  downloads?: number
-  rating?: number
-  github_stars?: number
-  publisher?: RegistryPublisher
-  latest_version?: RegistryNodeVersion
-  tags?: string[]
+  id?: string;
+  name?: string;
+  description?: string;
+  author?: string;
+  icon?: string;
+  banner_url?: string;
+  repository?: string;
+  downloads?: number;
+  rating?: number;
+  github_stars?: number;
+  publisher?: RegistryPublisher;
+  latest_version?: RegistryNodeVersion;
+  tags?: string[];
 }

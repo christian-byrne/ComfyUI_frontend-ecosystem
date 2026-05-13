@@ -10,101 +10,101 @@
 
 export interface EvidenceRow {
   /** Backfilled at load time when missing from the source row. */
-  pattern_id?: string
-  repo: string
-  file: string
-  lines?: number[]
-  url?: string
-  variant?: string
-  breakage_class?: string
-  excerpt?: string
-  matched_regex?: string
-  notes?: string
-  rule?: string
-  source?: string
+  pattern_id?: string;
+  repo: string;
+  file: string;
+  lines?: number[];
+  url?: string;
+  variant?: string;
+  breakage_class?: string;
+  excerpt?: string;
+  matched_regex?: string;
+  notes?: string;
+  rule?: string;
+  source?: string;
 }
 
 export interface Pattern {
-  pattern_id: string
-  surface_family: string
-  surface: string
-  fingerprint?: string
-  semantic?: string
-  v2_replacement?: string
-  decision_ref?: string
-  test_target?: string
-  evidence: EvidenceRow[]
-  evidence_status?: string
-  candidate_for_removal?: boolean
-  notes?: string
-  severity?: string
+  pattern_id: string;
+  surface_family: string;
+  surface: string;
+  fingerprint?: string;
+  semantic?: string;
+  v2_replacement?: string;
+  decision_ref?: string;
+  test_target?: string;
+  evidence: EvidenceRow[];
+  evidence_status?: string;
+  candidate_for_removal?: boolean;
+  notes?: string;
+  severity?: string;
 }
 
 export interface PatternFile {
-  meta?: Record<string, unknown>
-  patterns: Pattern[]
+  meta?: Record<string, unknown>;
+  patterns: Pattern[];
 }
 
 export interface TopRepo {
-  repo: string
-  stars: number
+  repo: string;
+  stars: number;
 }
 
 export interface RollupEntry {
-  pattern_id: string
-  surface_family: string
-  name: string
-  occurrences: number
-  unique_repos: number
-  cumulative_stars: number
-  signature_count: number
-  silent_breakage: number
-  lifecycle_coupling: number
-  blast_radius: number
-  top_repos: TopRepo[]
+  pattern_id: string;
+  surface_family: string;
+  name: string;
+  occurrences: number;
+  unique_repos: number;
+  cumulative_stars: number;
+  signature_count: number;
+  silent_breakage: number;
+  lifecycle_coupling: number;
+  blast_radius: number;
+  top_repos: TopRepo[];
 }
 
 export interface RollupFile {
-  meta?: Record<string, unknown>
-  patterns: RollupEntry[]
+  meta?: Record<string, unknown>;
+  patterns: RollupEntry[];
 }
 
 export interface BehaviorExemplar {
-  pattern_id: string
-  repo: string
-  url: string
-  stars: number
+  pattern_id: string;
+  repo: string;
+  url: string;
+  stars: number;
 }
 
 export interface BehaviorCategory {
-  category_id: string
-  name: string
-  intent: string
-  member_pattern_ids: string[]
-  usage_weight: number
-  exemplars?: BehaviorExemplar[]
-  notes?: string
-  mechanism?: string
-  source?: string
-  v1_scope_note?: string
+  category_id: string;
+  name: string;
+  intent: string;
+  member_pattern_ids: string[];
+  usage_weight: number;
+  exemplars?: BehaviorExemplar[];
+  notes?: string;
+  mechanism?: string;
+  source?: string;
+  v1_scope_note?: string;
 }
 
 export interface BehaviorCategoriesFile {
-  meta?: Record<string, unknown>
-  categories: BehaviorCategory[]
+  meta?: Record<string, unknown>;
+  categories: BehaviorCategory[];
 }
 
 export interface StarCacheEntry {
-  repo: string
-  stars: number
-  archived?: boolean
-  forks?: number
-  last_commit?: string
-  asof?: string
+  repo: string;
+  stars: number;
+  archived?: boolean;
+  forks?: number;
+  last_commit?: string;
+  asof?: string;
 }
 
 export interface StarCacheFile {
-  asof?: string
-  populated_via?: string
-  repos: StarCacheEntry[]
+  asof?: string;
+  populated_via?: string;
+  repos: StarCacheEntry[];
 }

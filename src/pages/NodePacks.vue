@@ -16,43 +16,43 @@
  * Comfy Registry — tiles render immediately from local data, then enrich
  * once the request settles. See {@link NodePackTile}.
  */
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
 
-import NodePackTile from '@/components/NodePackTile.vue'
-import { useTopPacks } from '@/composables/useTopPacks'
-import type { TopPackEntry, TopPackSort } from '@/composables/useTopPacks'
+import NodePackTile from "@/components/NodePackTile.vue";
+import { useTopPacks } from "@/composables/useTopPacks";
+import type { TopPackEntry, TopPackSort } from "@/composables/useTopPacks";
 
 interface SortOption {
-  value: TopPackSort
-  label: string
-  blurb: string
+  value: TopPackSort;
+  label: string;
+  blurb: string;
 }
 
 const SORT_OPTIONS: readonly SortOption[] = [
-  { value: 'stars', label: 'Stars', blurb: 'GitHub stars (local cache)' },
+  { value: "stars", label: "Stars", blurb: "GitHub stars (local cache)" },
   {
-    value: 'patternHits',
-    label: 'Pattern hits',
-    blurb: 'Distinct v1 patterns the pack uses'
+    value: "patternHits",
+    label: "Pattern hits",
+    blurb: "Distinct v1 patterns the pack uses",
   },
   {
-    value: 'weightedImpact',
-    label: 'Weighted impact',
-    blurb: 'Σ(hits × pattern blast_radius)'
-  }
-] as const
+    value: "weightedImpact",
+    label: "Weighted impact",
+    blurb: "Σ(hits × pattern blast_radius)",
+  },
+] as const;
 
-const sort = ref<TopPackSort>('stars')
+const sort = ref<TopPackSort>("stars");
 // Sort changes are local-only — the top-N list is recomputed in-memory; no
 // registry refetch happens here. Per-tile fetches were primed on first mount.
-const packs = useTopPacks(sort, 20)
+const packs = useTopPacks(sort, 20);
 
 const activeBlurb = computed(
-  () => SORT_OPTIONS.find((o) => o.value === sort.value)?.blurb ?? ''
-)
+  () => SORT_OPTIONS.find((o) => o.value === sort.value)?.blurb ?? "",
+);
 
 function trackBy(entry: TopPackEntry): string {
-  return entry.repo
+  return entry.repo;
 }
 
 /**
@@ -61,11 +61,13 @@ function trackBy(entry: TopPackEntry): string {
  * still in flight. Tiles emit `enrich-finished` once their request settles
  * (success *or* error).
  */
-const finishedRepos = ref<Set<string>>(new Set())
-const isEnriching = computed(() => finishedRepos.value.size < packs.value.length)
+const finishedRepos = ref<Set<string>>(new Set());
+const isEnriching = computed(
+  () => finishedRepos.value.size < packs.value.length,
+);
 function onTileFinished(repo: string): void {
   if (!finishedRepos.value.has(repo)) {
-    finishedRepos.value = new Set(finishedRepos.value).add(repo)
+    finishedRepos.value = new Set(finishedRepos.value).add(repo);
   }
 }
 </script>
@@ -73,7 +75,9 @@ function onTileFinished(repo: string): void {
 <template>
   <section data-testid="node-packs-page">
     <header class="mb-6">
-      <h1 class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">Node Packs</h1>
+      <h1 class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
+        Node Packs
+      </h1>
       <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
         Top 20 packs from the touch-points sweep, joined with the Comfy
         Registry. Click a pack for the per-pattern coverage table.
@@ -104,7 +108,9 @@ function onTileFinished(repo: string): void {
       >
         {{ opt.label }}
       </button>
-      <span class="ml-1 text-xs text-zinc-400 dark:text-zinc-500">{{ activeBlurb }}</span>
+      <span class="ml-1 text-xs text-zinc-400 dark:text-zinc-500">{{
+        activeBlurb
+      }}</span>
     </div>
 
     <ul
