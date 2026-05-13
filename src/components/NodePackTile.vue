@@ -59,11 +59,11 @@ const renderedPack = computed<RegistryNode>(() => {
 
 const hasError = computed(() => result.error.value !== null)
 
-/** Surface registry errors quietly to the console for debugging. */
+/** Surface registry errors quietly to the console for debugging (dev only). */
 watch(
   () => result.error.value,
   (err) => {
-    if (err) {
+    if (err && import.meta.env.DEV) {
       console.warn('[NodePackTile] registry lookup failed', props.repo, err)
     }
   },

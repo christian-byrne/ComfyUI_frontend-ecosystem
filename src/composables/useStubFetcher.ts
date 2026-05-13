@@ -128,7 +128,10 @@ export function useStubFetcher(
       writeCache(categoryId, variant, entry)
       trio.body[variant] = body
       trio.state[variant] = entryToState(entry)
-    } catch {
+    } catch (err) {
+      if (import.meta.env.DEV) {
+        console.debug('[useStubFetcher] fetch failed', categoryId, variant, err)
+      }
       trio.state[variant] = 'error'
     }
   }

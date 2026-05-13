@@ -54,6 +54,14 @@ const displayRows = computed<RowView[]>(() => {
 const ZINC_50 = [250, 250, 250] as const
 const ZINC_900 = [24, 24, 27] as const
 
+// Truncation limits for axis labels
+const TRUNCATE_ROW_LABEL = 32
+const TRUNCATE_COL_LABEL = 22
+const TRUNCATE_DEFAULT = 28
+
+// Contrast threshold for switching to light text on dark backgrounds
+const CONTRAST_FLIP_THRESHOLD = 0.55
+
 const logScale = ref(false)
 
 function intensity(count: number, max: number): number {
@@ -73,7 +81,7 @@ function rampColor(count: number, max: number): string {
 
 function textColor(count: number, max: number): string {
   // Flip to white once the cell is dark enough to keep contrast readable.
-  return intensity(count, max) > 0.55 ? 'rgb(250 250 250)' : 'rgb(63 63 70)'
+  return intensity(count, max) > CONTRAST_FLIP_THRESHOLD ? 'rgb(250 250 250)' : 'rgb(63 63 70)'
 }
 
 // ──────────────────────────────────────────────────────────────────
@@ -122,7 +130,7 @@ function closeDrawer(): void {
 }
 
 // Truncate long pattern/pack labels for axis cells.
-function truncate(s: string, n = 28): string {
+function truncate(s: string, n = TRUNCATE_DEFAULT): string {
   return s.length > n ? `${s.slice(0, n - 1)}…` : s
 }
 </script>
@@ -189,7 +197,7 @@ function truncate(s: string, n = 28): string {
           :title="pack"
         >
           <div class="origin-bottom-left -rotate-45 whitespace-nowrap translate-y-2">
-            {{ truncate(pack.split('/').pop() ?? pack, 22) }}
+            {{ truncate(pack.split('/').pop() ?? pack, TRUNCATE_COL_LABEL) }}
           </div>
         </div>
 
@@ -201,7 +209,7 @@ function truncate(s: string, n = 28): string {
           >
             <span class="text-zinc-500 dark:text-zinc-400">{{ rv.pattern.pattern_id }}</span>
             <span class="text-zinc-400 dark:text-zinc-500 mx-1">·</span>
-            <span>{{ truncate(rv.pattern.name, 32) }}</span>
+            <span>{{ truncate(rv.pattern.name, TRUNCATE_ROW_LABEL) }}</span>
           </div>
           <button
             v-for="cv in rv.cells"

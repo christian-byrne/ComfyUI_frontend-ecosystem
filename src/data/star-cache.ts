@@ -10,21 +10,9 @@
 import { parse as parseYaml } from 'yaml'
 
 import starCacheRaw from '../../research/touch-points-star-cache.yaml?raw'
+import type { StarCacheEntry, StarCacheFile } from './schema'
 
-export interface StarCacheEntry {
-  repo: string
-  stars: number
-  archived?: boolean
-  forks?: number
-  last_commit?: string
-  asof?: string
-}
-
-interface StarCacheFile {
-  asof?: string
-  populated_via?: string
-  repos: StarCacheEntry[]
-}
+export type { StarCacheEntry }
 
 const file = parseYaml(starCacheRaw) as StarCacheFile
 

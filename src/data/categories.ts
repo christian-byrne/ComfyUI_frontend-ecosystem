@@ -8,33 +8,15 @@
 import { parse as parseYaml } from 'yaml'
 
 import categoriesRaw from '../../research/workspace-mirror/research/touch-points/behavior-categories.yaml?raw'
+import type {
+  BehaviorCategory,
+  BehaviorCategoriesFile,
+  BehaviorExemplar
+} from './schema'
 
-export interface BehaviorExemplar {
-  pattern_id: string
-  repo: string
-  url: string
-  stars: number
-}
+export type { BehaviorCategory, BehaviorExemplar }
 
-export interface BehaviorCategory {
-  category_id: string
-  name: string
-  intent: string
-  member_pattern_ids: string[]
-  usage_weight: number
-  exemplars: BehaviorExemplar[]
-  notes?: string
-  mechanism?: string
-  source?: string
-  v1_scope_note?: string
-}
-
-interface CategoriesFile {
-  meta?: Record<string, unknown>
-  categories: BehaviorCategory[]
-}
-
-const file = parseYaml(categoriesRaw) as CategoriesFile
+const file = parseYaml(categoriesRaw) as BehaviorCategoriesFile
 
 export const behaviorCategories: BehaviorCategory[] = file.categories ?? []
 
