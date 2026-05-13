@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import { computed } from 'vue'
+import { defineStore } from "pinia";
+import { computed } from "vue";
 
 import {
   behaviorCategories,
@@ -16,8 +16,8 @@ import {
   type EvidenceRow,
   type Pattern,
   type RollupEntry,
-  type StarCacheEntry
-} from '@/data'
+  type StarCacheEntry,
+} from "@/data";
 
 /**
  * useDataStore — single Pinia store fronting the bundled research data.
@@ -26,30 +26,30 @@ import {
  * Pages should consume from here rather than reaching into `@/data` directly,
  * so the underlying loader can be swapped (e.g. to lazy chunks) in one place.
  */
-export const useDataStore = defineStore('data', () => {
-  const allPatterns = computed<Pattern[]>(() => patterns)
-  const allRollup = computed<RollupEntry[]>(() => rollup)
-  const allCategories = computed<BehaviorCategory[]>(() => behaviorCategories)
-  const allStarredPacks = computed<StarCacheEntry[]>(() => starredPacks)
-  const evidenceCount = computed<number>(() => totalEvidenceCount)
+export const useDataStore = defineStore("data", () => {
+  const allPatterns = computed<Pattern[]>(() => patterns);
+  const allRollup = computed<RollupEntry[]>(() => rollup);
+  const allCategories = computed<BehaviorCategory[]>(() => behaviorCategories);
+  const allStarredPacks = computed<StarCacheEntry[]>(() => starredPacks);
+  const evidenceCount = computed<number>(() => totalEvidenceCount);
 
   /** Top N patterns by blast_radius (descending). */
   function topByBlastRadius(n: number): RollupEntry[] {
     return [...rollup]
       .sort((a, b) => b.blast_radius - a.blast_radius)
-      .slice(0, n)
+      .slice(0, n);
   }
 
   function getPattern(id: string): Pattern | undefined {
-    return patternById[id] ?? patterns.find((p) => p.pattern_id === id)
+    return patternById[id] ?? patterns.find((p) => p.pattern_id === id);
   }
 
   function getRollup(id: string): RollupEntry | undefined {
-    return rollupByPatternId[id]
+    return rollupByPatternId[id];
   }
 
   function getEvidenceForPattern(id: string): EvidenceRow[] {
-    return evidenceByPatternId[id] ?? []
+    return evidenceByPatternId[id] ?? [];
   }
 
   /**
@@ -68,8 +68,8 @@ export const useDataStore = defineStore('data', () => {
    * dataset, including pack names.
    */
   function searchPatterns(q: string): Pattern[] {
-    const needle = q.trim().toLowerCase()
-    if (!needle) return patterns
+    const needle = q.trim().toLowerCase();
+    if (!needle) return patterns;
     return patterns.filter((p) => {
       const haystack = [
         p.pattern_id,
@@ -79,13 +79,13 @@ export const useDataStore = defineStore('data', () => {
         p.fingerprint,
         p.v2_replacement,
         p.test_target,
-        ...p.evidence.map((e) => e.repo)
+        ...p.evidence.map((e) => e.repo),
       ]
-        .filter((s): s is string => typeof s === 'string')
-        .join(' ')
-        .toLowerCase()
-      return haystack.includes(needle)
-    })
+        .filter((s): s is string => typeof s === "string")
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(needle);
+    });
   }
 
   return {
@@ -100,6 +100,6 @@ export const useDataStore = defineStore('data', () => {
     getPattern,
     getRollup,
     getEvidenceForPattern,
-    searchPatterns
-  }
-})
+    searchPatterns,
+  };
+});

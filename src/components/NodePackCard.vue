@@ -11,25 +11,25 @@
  * Click bubbles via the parent's `@click` if present; the card itself stays
  * a plain div (no router-link inside) so consumers control destination.
  */
-import { computed } from 'vue'
+import { computed } from "vue";
 
-import NodePackBanner from '@/components/NodePackBanner.vue'
-import type { RegistryNode } from '@/types/registry'
+import NodePackBanner from "@/components/NodePackBanner.vue";
+import type { RegistryNode } from "@/types/registry";
 
-const { nodePack } = defineProps<{ nodePack: RegistryNode }>()
+const { nodePack } = defineProps<{ nodePack: RegistryNode }>();
 
 const publisherName = computed(() => {
-  const { publisher, author } = nodePack
-  return publisher?.name ?? publisher?.id ?? author ?? null
-})
+  const { publisher, author } = nodePack;
+  return publisher?.name ?? publisher?.id ?? author ?? null;
+});
 
-const numberFmt = new Intl.NumberFormat()
+const numberFmt = new Intl.NumberFormat();
 const formattedDownloads = computed(() =>
-  nodePack.downloads ? numberFmt.format(nodePack.downloads) : null
-)
+  nodePack.downloads ? numberFmt.format(nodePack.downloads) : null,
+);
 const formattedStars = computed(() =>
-  nodePack.github_stars ? numberFmt.format(nodePack.github_stars) : null
-)
+  nodePack.github_stars ? numberFmt.format(nodePack.github_stars) : null,
+);
 
 /**
  * Derive an `owner/repo` slug for the legacy {@link NodePackBanner} props
@@ -37,13 +37,13 @@ const formattedStars = computed(() =>
  * if the registry lacks a `repository` URL we fall back to the pack id.
  */
 const bannerRepo = computed(() => {
-  const repoUrl = nodePack.repository
+  const repoUrl = nodePack.repository;
   if (repoUrl) {
-    const m = repoUrl.match(/github\.com\/([^/]+\/[^/?#]+)/i)
-    if (m) return m[1].replace(/\.git$/, '')
+    const m = repoUrl.match(/github\.com\/([^/]+\/[^/?#]+)/i);
+    if (m) return m[1].replace(/\.git$/, "");
   }
-  return nodePack.id ?? ''
-})
+  return nodePack.id ?? "";
+});
 </script>
 
 <template>

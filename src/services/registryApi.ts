@@ -19,64 +19,64 @@
  *
  * @see https://docs.comfy.org/registry/overview
  */
-import { ref } from 'vue'
-import type { Ref } from 'vue'
+import { ref } from "vue";
+import type { Ref } from "vue";
 
-import type { RegistryNode } from '@/types/registry'
-import { repoToPackId } from '@/utils/repoToPackId'
+import type { RegistryNode } from "@/types/registry";
+import { repoToPackId } from "@/utils/repoToPackId";
 
-export const REGISTRY_BASE_URL = 'https://api.comfy.org'
+export const REGISTRY_BASE_URL = "https://api.comfy.org";
 
 export interface PackResult {
-  data: Ref<RegistryNode | null>
-  error: Ref<unknown>
-  isFinished: Ref<boolean>
+  data: Ref<RegistryNode | null>;
+  error: Ref<unknown>;
+  isFinished: Ref<boolean>;
 }
 
 /** Process-wide cache of in-flight + resolved pack lookups, keyed on URL. */
-const packCache = new Map<string, PackResult>()
+const packCache = new Map<string, PackResult>();
 
 /** Reset the in-memory cache. Used by tests; safe to call at any time. */
 export function clearRegistryCache(): void {
-  packCache.clear()
+  packCache.clear();
 }
 
 function fetchPack(packId: string): PackResult {
-  const url = `${REGISTRY_BASE_URL}/nodes/${encodeURIComponent(packId)}`
-  const cached = packCache.get(url)
-  if (cached) return cached
+  const url = `${REGISTRY_BASE_URL}/nodes/${encodeURIComponent(packId)}`;
+  const cached = packCache.get(url);
+  if (cached) return cached;
 
-  const data = ref<RegistryNode | null>(null)
-  const error = ref<unknown>(null)
-  const isFinished = ref(false)
+  const data = ref<RegistryNode | null>(null);
+  const error = ref<unknown>(null);
+  const isFinished = ref(false);
 
-  const result: PackResult = { data, error, isFinished }
-  packCache.set(url, result)
+  const result: PackResult = { data, error, isFinished };
+  packCache.set(url, result);
 
-  fetch(url, { headers: { Accept: 'application/json' } })
+  fetch(url, { headers: { Accept: "application/json" } })
     .then(async (res) => {
       if (!res.ok) {
         // Drop the cache entry on failure so a retry can hit the wire again.
-        packCache.delete(url)
-        error.value = new Error(`Registry ${res.status}: ${res.statusText}`)
-        return
+        packCache.delete(url);
+        error.value = new Error(`Registry ${res.status}: ${res.statusText}`);
+        return;
       }
       try {
-        data.value = (await res.json()) as RegistryNode
+        data.value = (await res.json()) as RegistryNode;
       } catch (err) {
-        packCache.delete(url)
-        error.value = err
+        packCache.delete(url);
+        error.value = err;
       }
     })
     .catch((err: unknown) => {
-      packCache.delete(url)
-      error.value = err
+      packCache.delete(url);
+      error.value = err;
     })
     .finally(() => {
-      isFinished.value = true
-    })
+      isFinished.value = true;
+    });
 
-  return result
+  return result;
 }
 
 /**
@@ -89,11 +89,11 @@ export function getPackById(packId: string): PackResult {
   if (!packId) {
     return {
       data: ref<RegistryNode | null>(null) as Ref<RegistryNode | null>,
-      error: ref(new Error('Empty packId')),
-      isFinished: ref(true)
-    }
+      error: ref(new Error("Empty packId")),
+      isFinished: ref(true),
+    };
   }
-  return fetchPack(packId)
+  return fetchPack(packId);
 }
 
 /**
@@ -103,13 +103,13 @@ export function getPackById(packId: string): PackResult {
  * already-finished result with `error` set when the URL can't be parsed.
  */
 export function getPackByGithubUrl(url: string): PackResult {
-  const packId = repoToPackId(url)
+  const packId = repoToPackId(url);
   if (!packId) {
     return {
       data: ref<RegistryNode | null>(null) as Ref<RegistryNode | null>,
       error: ref(new Error(`Could not derive packId from URL: ${url}`)),
-      isFinished: ref(true)
-    }
+      isFinished: ref(true),
+    };
   }
-  return fetchPack(packId)
+  return fetchPack(packId);
 }

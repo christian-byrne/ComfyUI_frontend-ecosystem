@@ -7,12 +7,12 @@
  * afford to inline it. If/when it grows past ~2 MB we should split into
  * lazy-loaded chunks per page.
  */
-import { parse as parseYaml } from 'yaml'
+import { parse as parseYaml } from "yaml";
 
-import behaviorCategoriesRaw from '../../research/workspace-mirror/research/touch-points/behavior-categories.yaml?raw'
-import patternsRaw from '../../research/touch-points-database.yaml?raw'
-import rollupRaw from '../../research/touch-points-rollup.yaml?raw'
-import starCacheRaw from '../../research/touch-points-star-cache.yaml?raw'
+import behaviorCategoriesRaw from "../../research/workspace-mirror/research/touch-points/behavior-categories.yaml?raw";
+import patternsRaw from "../../research/touch-points-database.yaml?raw";
+import rollupRaw from "../../research/touch-points-rollup.yaml?raw";
+import starCacheRaw from "../../research/touch-points-star-cache.yaml?raw";
 
 import type {
   BehaviorCategoriesFile,
@@ -23,91 +23,95 @@ import type {
   RollupEntry,
   RollupFile,
   StarCacheEntry,
-  StarCacheFile
-} from './schema'
+  StarCacheFile,
+} from "./schema";
 
 function parse<T>(raw: string, label: string): T {
   try {
-    return parseYaml(raw) as T
+    return parseYaml(raw) as T;
   } catch (err) {
-    throw new Error(`[data] failed to parse YAML ${label}: ${(err as Error).message}`)
+    throw new Error(
+      `[data] failed to parse YAML ${label}: ${(err as Error).message}`,
+    );
   }
 }
 
-const patternsFile = parse<PatternFile>(patternsRaw, 'touch-points-database.yaml')
-const rollupFile = parse<RollupFile>(rollupRaw, 'touch-points-rollup.yaml')
+const patternsFile = parse<PatternFile>(
+  patternsRaw,
+  "touch-points-database.yaml",
+);
+const rollupFile = parse<RollupFile>(rollupRaw, "touch-points-rollup.yaml");
 const starCacheFile = parse<StarCacheFile>(
   starCacheRaw,
-  'touch-points-star-cache.yaml'
-)
+  "touch-points-star-cache.yaml",
+);
 const behaviorCategoriesFile = parse<BehaviorCategoriesFile>(
   behaviorCategoriesRaw,
-  'behavior-categories.yaml'
-)
+  "behavior-categories.yaml",
+);
 
 export const patterns: Pattern[] = (patternsFile.patterns ?? []).map((p) => ({
   ...p,
-  evidence: p.evidence ?? []
-}))
-export const rollup: RollupEntry[] = rollupFile.patterns ?? []
+  evidence: p.evidence ?? [],
+}));
+export const rollup: RollupEntry[] = rollupFile.patterns ?? [];
 export const behaviorCategories: BehaviorCategory[] =
-  behaviorCategoriesFile.categories ?? []
+  behaviorCategoriesFile.categories ?? [];
 
 /** Star cache entries keyed by repo for O(1) lookup. */
 export const starCache: Record<string, StarCacheEntry> = Object.fromEntries(
-  (starCacheFile.repos ?? []).map((r) => [r.repo, r])
-)
+  (starCacheFile.repos ?? []).map((r) => [r.repo, r]),
+);
 
 /**
  * Repos in the star cache with at least one star — i.e. real, public,
  * still-extant ComfyUI custom-node packs we are tracking.
  */
-export const starredPacks: StarCacheEntry[] = (starCacheFile.repos ?? []).filter(
-  (r) => (r.stars ?? 0) > 0
-)
+export const starredPacks: StarCacheEntry[] = (
+  starCacheFile.repos ?? []
+).filter((r) => (r.stars ?? 0) > 0);
 
 /** Rollup entries keyed by pattern_id for O(1) lookup. */
-export const rollupByPatternId: Record<string, RollupEntry> = Object.fromEntries(
-  rollup.map((r) => [r.pattern_id, r])
-)
+export const rollupByPatternId: Record<string, RollupEntry> =
+  Object.fromEntries(rollup.map((r) => [r.pattern_id, r]));
 
 /** Patterns keyed by pattern_id for O(1) lookup. */
 export const patternById: Record<string, Pattern> = Object.fromEntries(
-  patterns.map((p) => [p.pattern_id, p])
-)
+  patterns.map((p) => [p.pattern_id, p]),
+);
 
 /**
  * Evidence rows grouped by pattern_id with provenance backfilled. Lets
  * consumers flat-map without re-walking the patterns array.
  */
 export const evidenceByPatternId: Record<string, EvidenceRow[]> = (() => {
-  const out: Record<string, EvidenceRow[]> = {}
+  const out: Record<string, EvidenceRow[]> = {};
   for (const p of patterns) {
     out[p.pattern_id] = p.evidence.map((e) => ({
       ...e,
-      pattern_id: e.pattern_id ?? p.pattern_id
-    }))
+      pattern_id: e.pattern_id ?? p.pattern_id,
+    }));
   }
-  return out
-})()
+  return out;
+})();
 
 /** Total evidence-row count per pack (repo). Used by the heatmap to pick top-N. */
 export const evidenceCountByPack: Record<string, number> = (() => {
-  const out: Record<string, number> = {}
+  const out: Record<string, number> = {};
   for (const p of patterns) {
     for (const e of p.evidence) {
-      if (!e.repo) continue
-      out[e.repo] = (out[e.repo] ?? 0) + 1
+      if (!e.repo) continue;
+      out[e.repo] = (out[e.repo] ?? 0) + 1;
     }
   }
-  return out
-})()
+  return out;
+})();
 
 /** Total number of evidence rows across all patterns. */
 export const totalEvidenceCount: number = patterns.reduce(
   (acc, p) => acc + p.evidence.length,
-  0
-)
+  0,
+);
 
 export type {
   BehaviorCategory,
@@ -115,5 +119,5 @@ export type {
   EvidenceRow,
   Pattern,
   RollupEntry,
-  StarCacheEntry
-} from './schema'
+  StarCacheEntry,
+} from "./schema";

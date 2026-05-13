@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useRouteQuery } from '@vueuse/router'
-import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { useRouteQuery } from "@vueuse/router";
+import { storeToRefs } from "pinia";
+import { computed } from "vue";
+import { RouterLink, useRouter } from "vue-router";
 
-import { useDataStore } from '@/stores/data'
-import type { Pattern } from '@/data/schema'
+import { useDataStore } from "@/stores/data";
+import type { Pattern } from "@/data/schema";
 
 /**
  * Patterns — searchable, filterable list of all 59 touch-point patterns.
@@ -23,58 +23,69 @@ import type { Pattern } from '@/data/schema'
  * shareable as a link. URL keys: `q`, `family`, `behavior`, `blast`.
  */
 
-type BlastBin = '' | 'high' | 'mid' | 'low'
+type BlastBin = "" | "high" | "mid" | "low";
 
 // Sortable columns + grouping fields (DASH-FB-5).
-type SortKey = 'pattern_id' | 'surface' | 'blast_radius' | 'evidence_count' | 'top_pack'
-type SortDir = 'asc' | 'desc'
-type GroupKey = '' | 'surface_family' | 'behavior' | 'top_pack'
+type SortKey =
+  | "pattern_id"
+  | "surface"
+  | "blast_radius"
+  | "evidence_count"
+  | "top_pack";
+type SortDir = "asc" | "desc";
+type GroupKey = "" | "surface_family" | "behavior" | "top_pack";
 
-const store = useDataStore()
-const { rollup } = storeToRefs(store)
+const store = useDataStore();
+const { rollup } = storeToRefs(store);
 
 // ── URL-synced filter state ─────────────────────────────────────────────
-const q = useRouteQuery<string>('q', '')
-const familyParam = useRouteQuery<string>('family', '')
-const behaviorParam = useRouteQuery<string>('behavior', '')
-const blastBin = useRouteQuery<BlastBin>('blast', '')
-const packParam = useRouteQuery<string>('pack', '')
+const q = useRouteQuery<string>("q", "");
+const familyParam = useRouteQuery<string>("family", "");
+const behaviorParam = useRouteQuery<string>("behavior", "");
+const blastBin = useRouteQuery<BlastBin>("blast", "");
+const packParam = useRouteQuery<string>("pack", "");
 // Sort + group are URL-synced too, so deep-links reproduce the table view.
-const sortKey = useRouteQuery<SortKey>('sort', 'blast_radius')
-const sortDir = useRouteQuery<SortDir>('dir', 'desc')
-const groupKey = useRouteQuery<GroupKey>('group', '')
+const sortKey = useRouteQuery<SortKey>("sort", "blast_radius");
+const sortDir = useRouteQuery<SortDir>("dir", "desc");
+const groupKey = useRouteQuery<GroupKey>("group", "");
 
 // Single split per param change — both `families`/`behaviors` reads and the
 // `toggle*` mutators reuse this, removing per-keystroke string splits.
 const familySet = computed<Set<string>>(
-  () => new Set(familyParam.value ? familyParam.value.split(',').filter(Boolean) : [])
-)
+  () =>
+    new Set(
+      familyParam.value ? familyParam.value.split(",").filter(Boolean) : [],
+    ),
+);
 const behaviorSet = computed<Set<string>>(
-  () => new Set(behaviorParam.value ? behaviorParam.value.split(',').filter(Boolean) : [])
-)
-const families = computed<string[]>(() => [...familySet.value])
-const behaviors = computed<string[]>(() => [...behaviorSet.value])
+  () =>
+    new Set(
+      behaviorParam.value ? behaviorParam.value.split(",").filter(Boolean) : [],
+    ),
+);
+const families = computed<string[]>(() => [...familySet.value]);
+const behaviors = computed<string[]>(() => [...behaviorSet.value]);
 
 function toggleFamily(val: string): void {
-  const cur = new Set(familySet.value)
-  if (cur.has(val)) cur.delete(val)
-  else cur.add(val)
-  familyParam.value = [...cur].join(',')
+  const cur = new Set(familySet.value);
+  if (cur.has(val)) cur.delete(val);
+  else cur.add(val);
+  familyParam.value = [...cur].join(",");
 }
 
 function toggleBehavior(val: string): void {
-  const cur = new Set(behaviorSet.value)
-  if (cur.has(val)) cur.delete(val)
-  else cur.add(val)
-  behaviorParam.value = [...cur].join(',')
+  const cur = new Set(behaviorSet.value);
+  if (cur.has(val)) cur.delete(val);
+  else cur.add(val);
+  behaviorParam.value = [...cur].join(",");
 }
 
 function resetFilters(): void {
-  q.value = ''
-  familyParam.value = ''
-  behaviorParam.value = ''
-  blastBin.value = ''
-  packParam.value = ''
+  q.value = "";
+  familyParam.value = "";
+  behaviorParam.value = "";
+  blastBin.value = "";
+  packParam.value = "";
 }
 
 /**
@@ -83,28 +94,28 @@ function resetFilters(): void {
  */
 function toggleSort(key: SortKey): void {
   if (sortKey.value === key) {
-    sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
+    sortDir.value = sortDir.value === "asc" ? "desc" : "asc";
   } else {
-    sortKey.value = key
-    sortDir.value = 'desc'
+    sortKey.value = key;
+    sortDir.value = "desc";
   }
 }
 
 function sortIndicator(key: SortKey): string {
-  if (sortKey.value !== key) return ''
-  return sortDir.value === 'asc' ? '▲' : '▼'
+  if (sortKey.value !== key) return "";
+  return sortDir.value === "asc" ? "▲" : "▼";
 }
 
 // ── Facet vocabularies (derived from data) ──────────────────────────────
 const allFamilies = computed<string[]>(() => {
-  const set = new Set<string>()
-  for (const p of store.patterns) set.add(p.surface_family)
+  const set = new Set<string>();
+  for (const p of store.patterns) set.add(p.surface_family);
   return [...set].sort((a, b) => {
-    const na = Number(a.replace(/\D+/g, ''))
-    const nb = Number(b.replace(/\D+/g, ''))
-    return na - nb
-  })
-})
+    const na = Number(a.replace(/\D+/g, ""));
+    const nb = Number(b.replace(/\D+/g, ""));
+    return na - nb;
+  });
+});
 
 /**
  * Behavior category — derived from the dominant `breakage_class` across a
@@ -116,43 +127,44 @@ const allFamilies = computed<string[]>(() => {
  * across `allBehaviors`, `rows`, and re-renders, so per-keystroke filtering
  * does not re-walk every evidence array.
  */
-const behaviorCache = new WeakMap<Pattern, string>()
+const behaviorCache = new WeakMap<Pattern, string>();
 function behaviorOf(p: Pattern): string {
-  const cached = behaviorCache.get(p)
-  if (cached !== undefined) return cached
-  const counts: Record<string, number> = {}
+  const cached = behaviorCache.get(p);
+  if (cached !== undefined) return cached;
+  const counts: Record<string, number> = {};
   for (const e of p.evidence) {
-    if (e.breakage_class) counts[e.breakage_class] = (counts[e.breakage_class] ?? 0) + 1
+    if (e.breakage_class)
+      counts[e.breakage_class] = (counts[e.breakage_class] ?? 0) + 1;
   }
-  let best = ''
-  let bestN = 0
+  let best = "";
+  let bestN = 0;
   for (const [k, n] of Object.entries(counts)) {
     if (n > bestN) {
-      best = k
-      bestN = n
+      best = k;
+      bestN = n;
     }
   }
-  const result = best || 'unspecified'
-  behaviorCache.set(p, result)
-  return result
+  const result = best || "unspecified";
+  behaviorCache.set(p, result);
+  return result;
 }
 
 const allBehaviors = computed<string[]>(() => {
-  const set = new Set<string>()
-  for (const p of store.patterns) set.add(behaviorOf(p))
-  return [...set].sort()
-})
+  const set = new Set<string>();
+  for (const p of store.patterns) set.add(behaviorOf(p));
+  return [...set].sort();
+});
 
 // ── Row composition ─────────────────────────────────────────────────────
 interface Row {
-  pattern_id: string
-  surface_family: string
-  surface: string
-  description: string
-  blast_radius: number
-  evidence_count: number
-  top_pack: string
-  behavior: string
+  pattern_id: string;
+  surface_family: string;
+  surface: string;
+  description: string;
+  blast_radius: number;
+  evidence_count: number;
+  top_pack: string;
+  behavior: string;
 }
 
 /**
@@ -161,60 +173,60 @@ interface Row {
  * native <datalist> means no new chrome.
  */
 const allPacks = computed<string[]>(() => {
-  const set = new Set<string>()
+  const set = new Set<string>();
   for (const p of store.patterns) {
     for (const e of p.evidence) {
-      if (e.repo) set.add(e.repo)
+      if (e.repo) set.add(e.repo);
     }
   }
-  return [...set].sort((a, b) => a.localeCompare(b))
-})
+  return [...set].sort((a, b) => a.localeCompare(b));
+});
 
 const rows = computed<Row[]>(() => {
-  const matches = store.searchPatterns(q.value)
-  const fams = familySet.value
-  const behs = behaviorSet.value
-  const packNeedle = packParam.value.trim().toLowerCase()
-  const out: Row[] = []
+  const matches = store.searchPatterns(q.value);
+  const fams = familySet.value;
+  const behs = behaviorSet.value;
+  const packNeedle = packParam.value.trim().toLowerCase();
+  const out: Row[] = [];
   for (const p of matches) {
-    if (fams.size > 0 && !fams.has(p.surface_family)) continue
-    const behavior = behaviorOf(p)
-    if (behs.size > 0 && !behs.has(behavior)) continue
-    const r = store.getRollup(p.pattern_id)
-    const blast = r?.blast_radius ?? 0
-    if (blastBin.value === 'high' && !(blast > 5)) continue
-    if (blastBin.value === 'mid' && !(blast >= 2 && blast <= 5)) continue
-    if (blastBin.value === 'low' && !(blast < 2)) continue
+    if (fams.size > 0 && !fams.has(p.surface_family)) continue;
+    const behavior = behaviorOf(p);
+    if (behs.size > 0 && !behs.has(behavior)) continue;
+    const r = store.getRollup(p.pattern_id);
+    const blast = r?.blast_radius ?? 0;
+    if (blastBin.value === "high" && !(blast > 5)) continue;
+    if (blastBin.value === "mid" && !(blast >= 2 && blast <= 5)) continue;
+    if (blastBin.value === "low" && !(blast < 2)) continue;
     if (packNeedle) {
       const hit = p.evidence.some((e) =>
-        (e.repo ?? '').toLowerCase().includes(packNeedle)
-      )
-      if (!hit) continue
+        (e.repo ?? "").toLowerCase().includes(packNeedle),
+      );
+      if (!hit) continue;
     }
     out.push({
       pattern_id: p.pattern_id,
       surface_family: p.surface_family,
       surface: p.surface,
-      description: p.semantic ?? p.fingerprint ?? '',
+      description: p.semantic ?? p.fingerprint ?? "",
       blast_radius: blast,
       evidence_count: p.evidence.length,
-      top_pack: r?.top_repos?.[0]?.repo ?? '',
-      behavior
-    })
+      top_pack: r?.top_repos?.[0]?.repo ?? "",
+      behavior,
+    });
   }
 
-  const dir = sortDir.value === 'asc' ? 1 : -1
-  const key = sortKey.value
+  const dir = sortDir.value === "asc" ? 1 : -1;
+  const key = sortKey.value;
   out.sort((a, b) => {
-    const av = a[key]
-    const bv = b[key]
-    if (typeof av === 'number' && typeof bv === 'number') {
-      return (av - bv) * dir
+    const av = a[key];
+    const bv = b[key];
+    if (typeof av === "number" && typeof bv === "number") {
+      return (av - bv) * dir;
     }
-    return String(av ?? '').localeCompare(String(bv ?? '')) * dir
-  })
-  return out
-})
+    return String(av ?? "").localeCompare(String(bv ?? "")) * dir;
+  });
+  return out;
+});
 
 /**
  * Group rows by `groupKey`. When grouping is off we return a single
@@ -223,37 +235,37 @@ const rows = computed<Row[]>(() => {
  * so the chosen sort still drives layout.
  */
 interface RowGroup {
-  key: string
-  label: string
-  rows: Row[]
+  key: string;
+  label: string;
+  rows: Row[];
 }
 const grouped = computed<RowGroup[]>(() => {
-  const list = rows.value
+  const list = rows.value;
   if (!groupKey.value) {
-    return [{ key: '__all__', label: '', rows: list }]
+    return [{ key: "__all__", label: "", rows: list }];
   }
-  const order: string[] = []
-  const buckets = new Map<string, Row[]>()
+  const order: string[] = [];
+  const buckets = new Map<string, Row[]>();
   for (const r of list) {
-    const raw = r[groupKey.value as keyof Row]
-    const k = String(raw ?? '') || '—'
+    const raw = r[groupKey.value as keyof Row];
+    const k = String(raw ?? "") || "—";
     if (!buckets.has(k)) {
-      buckets.set(k, [])
-      order.push(k)
+      buckets.set(k, []);
+      order.push(k);
     }
-    buckets.get(k)!.push(r)
+    buckets.get(k)!.push(r);
   }
   return order.map((k) => ({
     key: k,
     label: `${k} · ${buckets.get(k)!.length}`,
-    rows: buckets.get(k)!
-  }))
-})
+    rows: buckets.get(k)!,
+  }));
+});
 
-const totalCount = computed(() => store.patterns.length)
-const rollupHasData = computed(() => rollup.value.length > 0)
+const totalCount = computed(() => store.patterns.length);
+const rollupHasData = computed(() => rollup.value.length > 0);
 
-const router = useRouter()
+const router = useRouter();
 
 /**
  * Activate a pattern row from the keyboard (Enter or Space). Mirrors the
@@ -262,27 +274,35 @@ const router = useRouter()
  */
 function activateRow(patternId: string, e: KeyboardEvent): void {
   // Don't hijack activation when focus is on a nested link/button.
-  const target = e.target as HTMLElement | null
-  if (target && target !== e.currentTarget && target.closest('a,button,input')) return
-  e.preventDefault()
-  void router.push(`/patterns/${patternId}`)
+  const target = e.target as HTMLElement | null;
+  if (target && target !== e.currentTarget && target.closest("a,button,input"))
+    return;
+  e.preventDefault();
+  void router.push(`/patterns/${patternId}`);
 }
 </script>
 
 <template>
   <section class="space-y-6">
     <header class="space-y-1">
-      <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Patterns</h1>
+      <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+        Patterns
+      </h1>
       <p class="text-sm text-zinc-600 dark:text-zinc-400">
         {{ rows.length }} of {{ totalCount }} patterns
-        <span v-if="!rollupHasData" class="text-amber-700 dark:text-amber-300">· rollup data missing</span>
+        <span v-if="!rollupHasData" class="text-amber-700 dark:text-amber-300"
+          >· rollup data missing</span
+        >
       </p>
     </header>
 
     <div class="space-y-4">
       <!-- Search -->
       <div>
-        <label class="block text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1" for="patterns-search">
+        <label
+          class="block text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1"
+          for="patterns-search"
+        >
           Search
         </label>
         <input
@@ -296,7 +316,10 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
 
       <!-- Family filter -->
       <div>
-        <div id="patterns-family-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
+        <div
+          id="patterns-family-label"
+          class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1"
+        >
           Surface family
         </div>
         <div
@@ -324,7 +347,10 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
 
       <!-- Behavior filter -->
       <div>
-        <div id="patterns-behavior-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
+        <div
+          id="patterns-behavior-label"
+          class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1"
+        >
           Behavior category
         </div>
         <div
@@ -373,7 +399,10 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
 
       <!-- Blast-radius bin (single-select → radiogroup) -->
       <div>
-        <div id="patterns-blast-label" class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1">
+        <div
+          id="patterns-blast-label"
+          class="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1"
+        >
           Blast radius
         </div>
         <div
@@ -386,7 +415,7 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
               { v: '', label: 'any' },
               { v: 'high', label: '> 5' },
               { v: 'mid', label: '2–5' },
-              { v: 'low', label: '< 2' }
+              { v: 'low', label: '< 2' },
             ]"
             :key="opt.v"
             type="button"
@@ -427,7 +456,9 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
         </select>
 
         <button
-          v-if="q || families.length || behaviors.length || blastBin || packParam"
+          v-if="
+            q || families.length || behaviors.length || blastBin || packParam
+          "
           type="button"
           class="text-xs text-zinc-500 dark:text-zinc-400 underline hover:text-zinc-700 dark:hover:text-zinc-300"
           @click="resetFilters"
@@ -438,9 +469,13 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto border border-zinc-200 dark:border-zinc-800 rounded">
+    <div
+      class="overflow-x-auto border border-zinc-200 dark:border-zinc-800 rounded"
+    >
       <table class="w-full text-sm">
-        <thead class="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
+        <thead
+          class="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400"
+        >
           <tr class="text-left">
             <th
               v-for="col in [
@@ -449,10 +484,13 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
                 { key: null, label: 'Description', align: 'left' },
                 { key: 'blast_radius', label: 'Blast', align: 'right' },
                 { key: 'evidence_count', label: 'Evidence', align: 'right' },
-                { key: 'top_pack', label: 'Top pack', align: 'left' }
+                { key: 'top_pack', label: 'Top pack', align: 'left' },
               ]"
               :key="col.label"
-              :class="['px-3 py-2 font-medium', col.align === 'right' ? 'text-right' : '']"
+              :class="[
+                'px-3 py-2 font-medium',
+                col.align === 'right' ? 'text-right' : '',
+              ]"
               :aria-sort="
                 col.key && sortKey === col.key
                   ? sortDir === 'asc'
@@ -469,10 +507,9 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
                 @click="toggleSort(col.key as SortKey)"
               >
                 <span>{{ col.label }}</span>
-                <span
-                  class="text-[10px] tabular-nums"
-                  aria-hidden="true"
-                >{{ sortIndicator(col.key as SortKey) }}</span>
+                <span class="text-[10px] tabular-nums" aria-hidden="true">{{
+                  sortIndicator(col.key as SortKey)
+                }}</span>
               </button>
               <span v-else>{{ col.label }}</span>
             </th>
@@ -480,7 +517,10 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
         </thead>
         <tbody>
           <tr v-if="rows.length === 0">
-            <td colspan="6" class="px-3 py-12 text-center text-zinc-500 dark:text-zinc-400">
+            <td
+              colspan="6"
+              class="px-3 py-12 text-center text-zinc-500 dark:text-zinc-400"
+            >
               No patterns match the current filters.
             </td>
           </tr>
@@ -503,7 +543,9 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
               @keydown.enter="activateRow(row.pattern_id, $event)"
               @keydown.space="activateRow(row.pattern_id, $event)"
             >
-              <td class="px-3 py-2 font-mono text-xs text-zinc-900 dark:text-zinc-100">
+              <td
+                class="px-3 py-2 font-mono text-xs text-zinc-900 dark:text-zinc-100"
+              >
                 <RouterLink
                   :to="`/patterns/${row.pattern_id}`"
                   class="text-zinc-900 dark:text-zinc-100 hover:underline"
@@ -512,13 +554,26 @@ function activateRow(patternId: string, e: KeyboardEvent): void {
                   {{ row.pattern_id }}
                 </RouterLink>
               </td>
-              <td class="px-3 py-2 text-zinc-700 dark:text-zinc-300">{{ row.surface }}</td>
-              <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 max-w-md truncate" :title="row.description">
+              <td class="px-3 py-2 text-zinc-700 dark:text-zinc-300">
+                {{ row.surface }}
+              </td>
+              <td
+                class="px-3 py-2 text-zinc-600 dark:text-zinc-400 max-w-md truncate"
+                :title="row.description"
+              >
                 {{ row.description }}
               </td>
-              <td class="px-3 py-2 text-right tabular-nums">{{ row.blast_radius.toFixed(2) }}</td>
-              <td class="px-3 py-2 text-right tabular-nums">{{ row.evidence_count }}</td>
-              <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400 font-mono text-xs">{{ row.top_pack || '—' }}</td>
+              <td class="px-3 py-2 text-right tabular-nums">
+                {{ row.blast_radius.toFixed(2) }}
+              </td>
+              <td class="px-3 py-2 text-right tabular-nums">
+                {{ row.evidence_count }}
+              </td>
+              <td
+                class="px-3 py-2 text-zinc-600 dark:text-zinc-400 font-mono text-xs"
+              >
+                {{ row.top_pack || "—" }}
+              </td>
             </tr>
           </template>
         </tbody>

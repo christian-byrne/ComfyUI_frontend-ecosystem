@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
-  const component: DefineComponent<object, object, unknown>
-  export default component
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
+  const component: DefineComponent<object, object, unknown>;
+  export default component;
 }
 
 /**
@@ -12,11 +12,11 @@ declare module '*.vue' {
  * footnote so users can see how fresh the dashboard data is.
  */
 declare const __BUILD_INFO__: {
-  commitSha: string
+  commitSha: string;
   yaml: {
-    patterns: string
-    rollup: string
-    starCache: string
-    behaviorCategories: string
-  }
-}
+    patterns: string;
+    rollup: string;
+    starCache: string;
+    behaviorCategories: string;
+  };
+};

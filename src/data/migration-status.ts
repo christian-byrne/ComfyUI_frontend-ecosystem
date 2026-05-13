@@ -22,17 +22,17 @@
  * `unchanged-legacy` at render time. Tracked as a follow-up; do not assume
  * coverage of every pattern_id in `touch-points-database.yaml`.
  */
-import { patterns as allPatterns } from './index'
-import type { Pattern } from './schema'
+import { patterns as allPatterns } from "./index";
+import type { Pattern } from "./schema";
 
 export const MIGRATION_STATUSES = [
-  'ECS-native',
-  'strangler-bridge',
-  'unchanged-legacy',
-  'uwf-resolved'
-] as const
+  "ECS-native",
+  "strangler-bridge",
+  "unchanged-legacy",
+  "uwf-resolved",
+] as const;
 
-export type MigrationStatus = (typeof MIGRATION_STATUSES)[number]
+export type MigrationStatus = (typeof MIGRATION_STATUSES)[number];
 
 /**
  * Sample classification covering the highest-blast-radius patterns from the
@@ -41,34 +41,34 @@ export type MigrationStatus = (typeof MIGRATION_STATUSES)[number]
  */
 export const MIGRATION_STATUS: Record<string, MigrationStatus> = {
   // S6 — App-level execution / serialization hooks
-  'S6.A1': 'uwf-resolved',
-  'S6.A2': 'ECS-native',
-  'S6.A3': 'strangler-bridge',
-  'S6.A4': 'ECS-native',
-  'S6.A5': 'ECS-native',
+  "S6.A1": "uwf-resolved",
+  "S6.A2": "ECS-native",
+  "S6.A3": "strangler-bridge",
+  "S6.A4": "ECS-native",
+  "S6.A5": "ECS-native",
   // S2 — Node lifecycle prototype patching
-  'S2.N1': 'ECS-native',
-  'S2.N15': 'ECS-native',
-  'S2.N16': 'ECS-native',
-  'S2.N9': 'strangler-bridge',
-  'S2.N8': 'unchanged-legacy',
+  "S2.N1": "ECS-native",
+  "S2.N15": "ECS-native",
+  "S2.N16": "ECS-native",
+  "S2.N9": "strangler-bridge",
+  "S2.N8": "unchanged-legacy",
   // S11 — Graph mutation / batching
-  'S11.G2': 'ECS-native',
-  'S11.G3': 'ECS-native',
-  'S11.G4': 'unchanged-legacy',
-  'S11.G1': 'unchanged-legacy',
+  "S11.G2": "ECS-native",
+  "S11.G3": "ECS-native",
+  "S11.G4": "unchanged-legacy",
+  "S11.G1": "unchanged-legacy",
   // S7 — Globals (deprecated mirror)
-  'S7.G1': 'strangler-bridge',
+  "S7.G1": "strangler-bridge",
   // S9 — Structural entities
-  'S9.SG1': 'uwf-resolved',
+  "S9.SG1": "uwf-resolved",
   // S17 — Serialization
-  'S17.WV1': 'uwf-resolved',
+  "S17.WV1": "uwf-resolved",
   // S4 — Widget API
-  'S4.W1': 'ECS-native',
-  'S4.W2': 'ECS-native',
-  'S4.W3': 'ECS-native',
-  'S4.W4': 'ECS-native'
-}
+  "S4.W1": "ECS-native",
+  "S4.W2": "ECS-native",
+  "S4.W3": "ECS-native",
+  "S4.W4": "ECS-native",
+};
 
 /**
  * One row per migration pattern: pattern metadata joined with the D9 status.
@@ -76,27 +76,27 @@ export const MIGRATION_STATUS: Record<string, MigrationStatus> = {
  * shape for a per-pattern card.
  */
 export interface MigrationEntry {
-  id: string
-  name: string
+  id: string;
+  name: string;
   /** v1 surface — the legacy fingerprint extensions monkey-patch today. */
-  v1Signature: string
+  v1Signature: string;
   /** v2 surface — the API consumers should migrate to. */
-  v2Replacement: string
-  status: MigrationStatus
-  notes?: string
+  v2Replacement: string;
+  status: MigrationStatus;
+  notes?: string;
 }
 
-const DEFAULT_STATUS: MigrationStatus = 'unchanged-legacy'
+const DEFAULT_STATUS: MigrationStatus = "unchanged-legacy";
 
 function entryFromPattern(p: Pattern): MigrationEntry {
   return {
     id: p.pattern_id,
     name: p.surface,
-    v1Signature: p.fingerprint ?? '— no fingerprint recorded —',
-    v2Replacement: p.v2_replacement ?? '— no v2 replacement defined —',
+    v1Signature: p.fingerprint ?? "— no fingerprint recorded —",
+    v2Replacement: p.v2_replacement ?? "— no v2 replacement defined —",
     status: MIGRATION_STATUS[p.pattern_id] ?? DEFAULT_STATUS,
-    notes: p.notes ?? p.semantic
-  }
+    notes: p.notes ?? p.semantic,
+  };
 }
 
 /**
@@ -105,4 +105,4 @@ function entryFromPattern(p: Pattern): MigrationEntry {
  */
 export const migrationEntries: MigrationEntry[] = allPatterns
   .map(entryFromPattern)
-  .sort((a, b) => a.id.localeCompare(b.id))
+  .sort((a, b) => a.id.localeCompare(b.id));

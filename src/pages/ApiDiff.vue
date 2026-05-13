@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
 
-import {
-  MIGRATION_STATUSES,
-  migrationEntries
-} from '@/data/migration-status'
-import type { MigrationStatus } from '@/data/migration-status'
+import { MIGRATION_STATUSES, migrationEntries } from "@/data/migration-status";
+import type { MigrationStatus } from "@/data/migration-status";
 
 /**
  * ApiDiff — per-pattern card view of the v1 → v2 surface migration.
@@ -27,71 +24,71 @@ import type { MigrationStatus } from '@/data/migration-status'
  * follow-up because the current data path is build-time inlined.
  */
 const STATUS_STYLES: Record<MigrationStatus, string> = {
-  'ECS-native':
-    'border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
-  'strangler-bridge':
-    'border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
-  'unchanged-legacy':
-    'border-zinc-300 bg-zinc-100 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
-  'uwf-resolved':
-    'border-indigo-300 bg-indigo-50 text-indigo-800 dark:border-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300'
-}
+  "ECS-native":
+    "border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+  "strangler-bridge":
+    "border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+  "unchanged-legacy":
+    "border-zinc-300 bg-zinc-100 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
+  "uwf-resolved":
+    "border-indigo-300 bg-indigo-50 text-indigo-800 dark:border-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+};
 
-const search = ref('')
+const search = ref("");
 const activeStatuses = ref<Set<MigrationStatus>>(
-  new Set<MigrationStatus>(MIGRATION_STATUSES)
-)
-const pickerSelection = ref<string>('')
+  new Set<MigrationStatus>(MIGRATION_STATUSES),
+);
+const pickerSelection = ref<string>("");
 
 function toggleStatus(status: MigrationStatus) {
-  const next = new Set(activeStatuses.value)
-  if (next.has(status)) next.delete(status)
-  else next.add(status)
-  activeStatuses.value = next
+  const next = new Set(activeStatuses.value);
+  if (next.has(status)) next.delete(status);
+  else next.add(status);
+  activeStatuses.value = next;
 }
 
 const filteredEntries = computed(() => {
-  const q = search.value.trim().toLowerCase()
+  const q = search.value.trim().toLowerCase();
   return migrationEntries.filter((e) => {
-    if (!activeStatuses.value.has(e.status)) return false
-    if (!q) return true
+    if (!activeStatuses.value.has(e.status)) return false;
+    if (!q) return true;
     return (
       e.name.toLowerCase().includes(q) ||
       e.id.toLowerCase().includes(q) ||
       e.v1Signature.toLowerCase().includes(q) ||
       e.v2Replacement.toLowerCase().includes(q)
-    )
-  })
-})
+    );
+  });
+});
 
 const statusCounts = computed(() => {
   const counts: Record<MigrationStatus, number> = {
-    'ECS-native': 0,
-    'strangler-bridge': 0,
-    'unchanged-legacy': 0,
-    'uwf-resolved': 0
-  }
-  for (const e of migrationEntries) counts[e.status] += 1
-  return counts
-})
+    "ECS-native": 0,
+    "strangler-bridge": 0,
+    "unchanged-legacy": 0,
+    "uwf-resolved": 0,
+  };
+  for (const e of migrationEntries) counts[e.status] += 1;
+  return counts;
+});
 
 function jumpTo(id: string) {
-  if (!id) return
-  const el = document.getElementById(`pattern-${id}`)
-  if (!el) return
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (!id) return;
+  const el = document.getElementById(`pattern-${id}`);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
   // Briefly highlight the target card so the jump is visually obvious.
-  el.classList.add('ring-2', 'ring-indigo-400')
+  el.classList.add("ring-2", "ring-indigo-400");
   window.setTimeout(
-    () => el.classList.remove('ring-2', 'ring-indigo-400'),
-    1200
-  )
+    () => el.classList.remove("ring-2", "ring-indigo-400"),
+    1200,
+  );
 }
 
 function onPickerChange(event: Event) {
-  const target = event.target as HTMLSelectElement
-  pickerSelection.value = target.value
-  jumpTo(target.value)
+  const target = event.target as HTMLSelectElement;
+  pickerSelection.value = target.value;
+  jumpTo(target.value);
 }
 </script>
 
@@ -101,7 +98,11 @@ function onPickerChange(event: Event) {
     data-testid="api-diff-page"
   >
     <header class="space-y-2">
-      <h1 class="font-mono text-3xl font-semibold text-zinc-900 dark:text-zinc-100">API Diff</h1>
+      <h1
+        class="font-mono text-3xl font-semibold text-zinc-900 dark:text-zinc-100"
+      >
+        API Diff
+      </h1>
       <p class="max-w-3xl text-sm text-zinc-600 dark:text-zinc-400">
         v1 → v2 surface mapping, one card per pattern, classified by D9
         strangler-fig status. Use search and status filters to narrow the grid;
@@ -159,7 +160,9 @@ function onPickerChange(event: Event) {
       </div>
 
       <fieldset class="space-y-1">
-        <legend class="text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">
+        <legend
+          class="text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400"
+        >
           Status
         </legend>
         <div
@@ -177,7 +180,7 @@ function onPickerChange(event: Event) {
               'rounded-full border px-3 py-1 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-indigo-300',
               activeStatuses.has(status)
                 ? STATUS_STYLES[status]
-                : 'border-zinc-200 bg-white text-zinc-400 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-200'
+                : 'border-zinc-200 bg-white text-zinc-400 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-200',
             ]"
             @click="toggleStatus(status)"
           >
@@ -191,8 +194,12 @@ function onPickerChange(event: Event) {
     </section>
 
     <!-- Result summary -->
-    <p class="text-xs text-zinc-500 dark:text-zinc-400" data-testid="api-diff-count">
-      Showing {{ filteredEntries.length }} of {{ migrationEntries.length }} patterns
+    <p
+      class="text-xs text-zinc-500 dark:text-zinc-400"
+      data-testid="api-diff-count"
+    >
+      Showing {{ filteredEntries.length }} of
+      {{ migrationEntries.length }} patterns
     </p>
 
     <!-- Empty state -->
@@ -205,11 +212,7 @@ function onPickerChange(event: Event) {
     </div>
 
     <!-- Cards -->
-    <ul
-      v-else
-      class="grid gap-4"
-      aria-label="Migration patterns"
-    >
+    <ul v-else class="grid gap-4" aria-label="Migration patterns">
       <li
         v-for="entry in filteredEntries"
         :id="`pattern-${entry.id}`"
@@ -218,16 +221,20 @@ function onPickerChange(event: Event) {
         data-testid="api-diff-card"
       >
         <header class="flex flex-wrap items-baseline gap-3">
-          <h2 class="font-mono text-base font-semibold text-zinc-900 dark:text-zinc-100">
+          <h2
+            class="font-mono text-base font-semibold text-zinc-900 dark:text-zinc-100"
+          >
             <span class="text-zinc-500 dark:text-zinc-400">{{ entry.id }}</span>
-            <span class="ml-2 font-sans font-normal text-zinc-700 dark:text-zinc-300">
+            <span
+              class="ml-2 font-sans font-normal text-zinc-700 dark:text-zinc-300"
+            >
               {{ entry.name }}
             </span>
           </h2>
           <span
             :class="[
               'rounded-full border px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide',
-              STATUS_STYLES[entry.status]
+              STATUS_STYLES[entry.status],
             ]"
             data-testid="api-diff-status-badge"
           >
@@ -237,7 +244,9 @@ function onPickerChange(event: Event) {
 
         <div class="grid gap-3 md:grid-cols-2">
           <div>
-            <h3 class="mb-1 text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">
+            <h3
+              class="mb-1 text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400"
+            >
               v1 signature
             </h3>
             <pre
@@ -245,7 +254,9 @@ function onPickerChange(event: Event) {
             ><code data-testid="api-diff-v1">{{ entry.v1Signature }}</code></pre>
           </div>
           <div>
-            <h3 class="mb-1 text-xs font-semibold uppercase text-emerald-700 dark:text-emerald-400">
+            <h3
+              class="mb-1 text-xs font-semibold uppercase text-emerald-700 dark:text-emerald-400"
+            >
               v2 replacement
             </h3>
             <pre

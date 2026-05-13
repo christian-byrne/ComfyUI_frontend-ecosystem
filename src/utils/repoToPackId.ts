@@ -17,30 +17,30 @@
  * card when the registry returns 404.
  */
 export function repoToPackId(input: string): string | null {
-  if (!input) return null
+  if (!input) return null;
 
-  let repoPath = input.trim()
+  let repoPath = input.trim();
 
   // URL-shaped inputs must be GitHub URLs; otherwise we can't trust the
   // path layout to be `/org/repo`.
   if (/^[a-z]+:\/\//i.test(repoPath)) {
     const ghMatch = repoPath.match(
-      /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/\s]+\/[^/\s?#]+)/i
-    )
-    if (!ghMatch) return null
-    repoPath = ghMatch[1]
+      /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/\s]+\/[^/\s?#]+)/i,
+    );
+    if (!ghMatch) return null;
+    repoPath = ghMatch[1];
   }
 
   // Drop trailing .git
-  repoPath = repoPath.replace(/\.git$/i, '')
+  repoPath = repoPath.replace(/\.git$/i, "");
 
   // Worktree flat-key form: org__repo → org/repo
-  if (!repoPath.includes('/') && repoPath.includes('__')) {
-    repoPath = repoPath.replace('__', '/')
+  if (!repoPath.includes("/") && repoPath.includes("__")) {
+    repoPath = repoPath.replace("__", "/");
   }
 
-  const parts = repoPath.split('/').filter(Boolean)
-  if (parts.length < 2) return null
+  const parts = repoPath.split("/").filter(Boolean);
+  if (parts.length < 2) return null;
 
-  return parts[parts.length - 1].toLowerCase()
+  return parts[parts.length - 1].toLowerCase();
 }
