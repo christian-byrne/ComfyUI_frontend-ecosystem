@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 
 import NodePackBanner from '@/components/NodePackBanner.vue'
+import { useTestRunner } from '@/composables/useTestRunner'
 import {
   evidenceByPatternId,
   patternById,
@@ -57,11 +58,14 @@ function lineRange(lines?: number[]): string {
 }
 
 /**
- * Only render the W5.1 "Run v1↔v2 contract test" placeholder in dev/test
- * builds. The real TestRunner lands in W5.1 — until then production users
- * shouldn't see a disabled mystery button.
+ * W5.1 TestRunner integration.
+ * Provides test execution state and controls for v1↔v2 contract tests.
  */
-const showContractTestPlaceholder = import.meta.env.DEV
+const testRunner = useTestRunner(patternId)
+
+async function handleRunTest() {
+  await testRunner.runTest()
+}
 </script>
 
 <template>
@@ -271,30 +275,85 @@ const showContractTestPlaceholder = import.meta.env.DEV
         </ul>
       </section>
 
-      <!--
-        Contract test runner placeholder (W5.1).
-        Gated to dev/test builds so the disabled "W5.1" affordance doesn't leak
-        into production routes before the real TestRunner ships in W5.1.
-      -->
+      <!-- W5.1 Contract test runner -->
       <section
-        v-if="showContractTestPlaceholder"
         data-testid="contract-test"
-        class="border-t border-zinc-200 dark:border-zinc-800 pt-4"
+        class="border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-3"
       >
-        <button
-          type="button"
-          disabled
-          aria-disabled="true"
-          class="cursor-not-allowed rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-500 dark:text-zinc-400"
-          title="Not yet wired — TestRunner ships in W5.1"
-        >
-          ▶ Run v1↔v2 contract test
-          <span
-            class="ml-2 rounded bg-zinc-200 px-1.5 py-0.5 text-[10px] uppercase text-zinc-600 dark:text-zinc-400"
+        <div class="flex items-center gap-3">
+          <button
+            v-if="testRunner.canRun.value"
+            type="button"
+            :disabled="testRunner.state.value === 'running'"
+            class="rounded-md border px-4 py-2 text-sm font-medium transition-colors"
+            :class="[
+              testRunner.state.value === 'running'
+                ? 'cursor-wait border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+                : 'border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50'
+            ]"
+            data-testid="run-test-btn"
+            @click="handleRunTest"
           >
-            W5.1
+            <span v-if="testRunner.state.value === 'running'">⏳ Running...</span>
+            <span v-else>▶ Run v1↔v2 contract test</span>
+          </button>
+          <button
+            v-else
+            type="button"
+            disabled
+            aria-disabled="true"
+            class="cursor-not-allowed rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-500 dark:text-zinc-400"
+            title="No BC test mapping for this pattern"
+          >
+            ▶ No test available
+          </button>
+          <span
+            v-if="testRunner.bcLabel.value !== 'No BC mapping'"
+            class="rounded bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 text-xs font-mono text-indigo-700 dark:text-indigo-300"
+            :title="`Test file: ${testRunner.testFiles.value[0] ?? 'unknown'}`"
+          >
+            {{ testRunner.bcLabel.value }}
           </span>
-        </button>
+        </div>
+
+        <!-- Test result display -->
+        <div
+          v-if="testRunner.result.value"
+          class="rounded-md p-3 text-sm"
+          :class="{
+            'bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200': testRunner.result.value.state === 'passed',
+            'bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200': testRunner.result.value.state === 'failed',
+            'bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200': testRunner.result.value.state === 'skipped'
+          }"
+          data-testid="test-result"
+        >
+          <div class="flex items-center gap-2">
+            <span v-if="testRunner.result.value.state === 'passed'">✅ Passed</span>
+            <span v-else-if="testRunner.result.value.state === 'failed'">❌ Failed</span>
+            <span v-else-if="testRunner.result.value.state === 'skipped'">⏭️ Skipped</span>
+            <span class="text-xs opacity-70">
+              ({{ testRunner.result.value.duration }}ms)
+            </span>
+            <span
+              v-if="testRunner.result.value.assertions"
+              class="text-xs opacity-70"
+            >
+              · {{ testRunner.result.value.assertions }} assertions
+            </span>
+          </div>
+          <p
+            v-if="testRunner.result.value.error"
+            class="mt-1 font-mono text-xs"
+          >
+            {{ testRunner.result.value.error }}
+          </p>
+          <p
+            v-if="testRunner.result.value.testFile"
+            class="mt-1 font-mono text-xs opacity-60"
+          >
+            {{ testRunner.result.value.testFile }}
+          </p>
+        </div>
       </section>
     </template>
   </article>
