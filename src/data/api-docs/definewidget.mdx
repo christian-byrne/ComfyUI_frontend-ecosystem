@@ -1,20 +1,104 @@
 ---
 title: "defineWidget"
-description: "API reference for defineWidget."
+description: "Register a custom widget type with DOM rendering capabilities."
+icon: "sliders"
 ---
 
 ```ts
-function defineWidget(options): WidgetExtensionOptions;
+function defineWidget(options: WidgetExtensionOptions): WidgetExtensionOptions
 ```
 
 Defined in: [src/services/extension-api-service.ts:736](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/services/extension-api-service.ts#L736)
 
+Register a custom widget type that provides its own DOM rendering.
+Use this to create specialized input controls like color pickers, image uploaders, or custom editors.
+
+**Stability:** experimental
+
+## Type Signature
+
+```ts
+interface WidgetExtensionOptions {
+  /** Globally unique extension name */
+  name: string
+
+  /** Widget type string this extension provides, e.g. 'COLOR_PICKER' */
+  type: string
+
+  /**
+   * Called once per widget instance. Return a render/destroy pair for
+   * custom DOM rendering, or void for non-visual widgets.
+   * @param widget - Handle to the widget instance
+   * @param parentNode - Handle to the parent node, or null if standalone
+   * @returns Object with render() and optional destroy() callbacks
+   */
+  created?(
+    widget: WidgetHandle,
+    parentNode: NodeHandle | null
+  ): void | {
+    /** Mount DOM content into the container */
+    render(container: HTMLElement): void
+    /** Cleanup when widget is removed */
+    destroy?(): void
+  }
+}
+```
+
+## Usage Example
+
+```ts
+import { defineWidget } from '@comfyorg/extension-api'
+
+export default defineWidget({
+  name: 'my-org.color-picker',
+  type: 'COLOR_PICKER',
+
+  created(widget, node) {
+    let pickerElement: HTMLElement | null = null
+
+    return {
+      render(container) {
+        // Create color picker DOM
+        pickerElement = document.createElement('input')
+        pickerElement.type = 'color'
+        pickerElement.value = String(widget.getValue() || '#ffffff')
+
+        pickerElement.addEventListener('input', (e) => {
+          const target = e.target as HTMLInputElement
+          widget.setValue(target.value)
+        })
+
+        container.appendChild(pickerElement)
+      },
+
+      destroy() {
+        // Cleanup when widget removed
+        pickerElement?.remove()
+        pickerElement = null
+      }
+    }
+  }
+})
+```
+
+## Widget Handle API
+
+The [`WidgetHandle`](./widgethandle) provides:
+
+| Method | Description |
+| ------ | ------ |
+| `getValue()` | Get current widget value |
+| `setValue(value)` | Set widget value |
+| `setHeight(px)` | Resize widget height in node |
+| `on('valueChanged', handler)` | Subscribe to value changes |
+| `on('beforeSerialize', handler)` | Customize serialization |
+
 ## Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `options` | [`WidgetExtensionOptions`](./widgetextensionoptions) |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options` | [`WidgetExtensionOptions`](./widgetextensionoptions) | Extension configuration with name, type, and created hook |
 
 ## Returns
 
-[`WidgetExtensionOptions`](./widgetextensionoptions)
+[`WidgetExtensionOptions`](./widgetextensionoptions) — The same options object (branded for loader identification)

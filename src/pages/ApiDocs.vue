@@ -65,6 +65,66 @@ renderer.code = ({ text, lang }) => {
 marked.setOptions({ gfm: true, breaks: false });
 marked.use({ renderer });
 
+/**
+ * Map from type names (PascalCase titles) to their slugs.
+ * Used to auto-link type references in rendered code snippets.
+ */
+const typeNameToSlug: Map<string, string> = new Map(
+  apiDocPages
+    .filter((p) => p.slug !== "index") // Skip index page
+    .map((p) => [p.title, p.slug])
+);
+
+/**
+ * Post-process rendered HTML to hyperlink type names in inline <code> elements.
+ * Targets standalone `<code>TypeName</code>` outside of <pre>/<shiki> blocks.
+ * Avoids breaking shiki syntax highlighting by only targeting inline code.
+ */
+function hyperlinkTypeNames(html: string, currentPageSlug: string): string {
+  // Build regex pattern from all type names (sorted by length desc to match longer names first)
+  const typeNames = [...typeNameToSlug.keys()].sort(
+    (a, b) => b.length - a.length
+  );
+  if (typeNames.length === 0) return html;
+
+  // Pattern: <code>TypeName</code> not inside <a> or <pre>
+  // We use a two-pass approach:
+  // 1. Find inline <code> elements (not inside pre/shiki)
+  // 2. Replace type names within them
+
+  // Match inline code: <code>content</code> that's NOT inside <pre> or already linked
+  // Strategy: split on <pre>...</pre> blocks, process non-pre sections only
+  const preSections = html.split(/(<pre[\s\S]*?<\/pre>|<div class="shiki[\s\S]*?<\/div>)/g);
+
+  return preSections
+    .map((section) => {
+      // Skip pre/shiki blocks entirely
+      if (section.startsWith("<pre") || section.startsWith('<div class="shiki')) {
+        return section;
+      }
+
+      // Process inline <code> elements
+      return section.replace(
+        /<code>([^<]+)<\/code>/g,
+        (match, content: string) => {
+          // Check if this code element is already inside an anchor
+          // We can't easily check context, so we check if content matches a type name exactly
+          const trimmed = content.trim();
+
+          // Don't link the current page to itself
+          const slug = typeNameToSlug.get(trimmed);
+          if (!slug || slug === currentPageSlug) {
+            return match;
+          }
+
+          // Wrap in anchor link
+          return `<a href="/api-docs/${slug}" class="api-type-link"><code>${content}</code></a>`;
+        }
+      );
+    })
+    .join("");
+}
+
 const renderedBody = computed<string>(() => {
   // Re-compute when highlighter becomes ready
   void highlighterReady.value;
@@ -78,7 +138,9 @@ const renderedBody = computed<string>(() => {
     (_m, slug: string, anchor?: string) =>
       `](/api-docs/${slug.toLowerCase()}${anchor ?? ""})`,
   );
-  return marked.parse(rewritten) as string;
+  const html = marked.parse(rewritten) as string;
+  // Post-process to hyperlink type names in inline code elements
+  return hyperlinkTypeNames(html, currentSlug.value);
 });
 
 const totalPages = apiDocPages.length;
@@ -319,17 +381,22 @@ const extensionApiPRs = [
                   {{ crossRef.migrationNote }}
                 </p>
               </div>
-              <!-- Blast radius indicator -->
-              <div
-                class="flex items-center gap-2 rounded-md px-2.5 py-1.5"
-                :class="getBlastRadiusBg(totalBlastRadius)"
-              >
-                <svg class="w-4 h-4" :class="getBlastRadiusColor(totalBlastRadius)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                <span class="text-xs font-medium" :class="getBlastRadiusColor(totalBlastRadius)">
-                  {{ totalBlastRadius.toFixed(1) }} blast radius
-                </span>
+              <!-- Blast radius gauge -->
+              <div class="flex items-center gap-2">
+                <div class="relative h-5 w-24 rounded-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden">
+                  <div
+                    class="absolute inset-y-0 left-0 rounded-full transition-all"
+                    :class="{
+                      'bg-green-500': totalBlastRadius < 3,
+                      'bg-yellow-500': totalBlastRadius >= 3 && totalBlastRadius < 5,
+                      'bg-red-500': totalBlastRadius >= 5
+                    }"
+                    :style="{ width: `${Math.min(totalBlastRadius / 10 * 100, 100)}%` }"
+                  />
+                  <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white drop-shadow-sm">
+                    {{ totalBlastRadius.toFixed(1) }}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -441,6 +508,17 @@ const extensionApiPRs = [
 .api-doc-prose :deep(a:hover) {
   text-decoration: underline;
 }
+/* Auto-linked type names in inline code */
+.api-doc-prose :deep(a.api-type-link) {
+  text-decoration: none;
+}
+.api-doc-prose :deep(a.api-type-link code) {
+  color: rgb(29 78 216);
+  border-bottom: 1px dashed rgb(147 197 253);
+}
+.api-doc-prose :deep(a.api-type-link:hover code) {
+  border-bottom-style: solid;
+}
 .api-doc-prose :deep(ul),
 .api-doc-prose :deep(ol) {
   margin: 0.75rem 0;
@@ -480,6 +558,26 @@ const extensionApiPRs = [
   background: transparent;
   padding: 0;
   font-size: 12px;
+}
+/* Placeholder skeleton while shiki loads */
+.api-doc-prose :deep(.shiki-placeholder) {
+  position: relative;
+  color: rgb(113 113 122);
+}
+.api-doc-prose :deep(.shiki-placeholder)::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgb(212 212 216);
+  border-top-color: rgb(113 113 122);
+  border-radius: 50%;
+  animation: shiki-spin 0.8s linear infinite;
+}
+@keyframes shiki-spin {
+  to { transform: rotate(360deg); }
 }
 /* Shiki dual-theme support */
 .api-doc-prose :deep(.shiki),
@@ -539,6 +637,11 @@ const extensionApiPRs = [
   }
   .api-doc-prose :deep(a) {
     color: rgb(96 165 250);
+  }
+  /* Auto-linked type names in dark mode */
+  .api-doc-prose :deep(a.api-type-link code) {
+    color: rgb(96 165 250);
+    border-bottom-color: rgb(59 130 246 / 0.5);
   }
   .api-doc-prose :deep(code) {
     background: rgb(39 39 42);

@@ -238,6 +238,70 @@ const CROSS_REF_MAP: Record<string, {
     categories: ["BC.12"],
     note: "Async handler for beforeSerialize. Supports async widget serialization."
   },
+
+  // Node mode enum
+  nodemode: {
+    patterns: ["S2.N17"],
+    categories: ["BC.04"],
+    note: "String-based node execution mode. Maps to LGraphEventMode enum values."
+  },
+
+  // Identity parsing helpers
+  parsenodeexecutionid: {
+    patterns: ["S14.ID1"],
+    categories: ["BC.29"],
+    note: "Parse NodeExecutionId into component node IDs for execution-time resolution."
+  },
+  parsenodelocatorid: {
+    patterns: ["S14.ID1"],
+    categories: ["BC.29"],
+    note: "Parse NodeLocatorId into subgraph UUID and local node ID."
+  },
+
+  // Geometry primitives
+  point: {
+    patterns: ["S10.D3"],
+    categories: ["BC.09"],
+    note: "2D point tuple. Used for node positioning and slot coordinates."
+  },
+  size: {
+    patterns: ["S10.D3", "S2.N19"],
+    categories: ["BC.09", "BC.04"],
+    note: "2D size tuple. Used for node dimensions and resize events."
+  },
+
+  // Slot types
+  slotdirection: {
+    patterns: ["S10.D1", "S9.S1"],
+    categories: ["BC.09", "BC.27"],
+    note: "Input/output direction discriminator for slot operations."
+  },
+
+  // Toast UI
+  toastmanager: {
+    patterns: ["S12.UI1"],
+    categories: ["BC.25", "BC.26"],
+    note: "Shell UI toast notification manager. Add/remove toast messages."
+  },
+  toastmessageoptions: {
+    patterns: ["S12.UI1"],
+    categories: ["BC.25"],
+    note: "Toast message configuration including severity, lifecycle, and styling."
+  },
+
+  // Event subscription cleanup
+  unsubscribe: {
+    patterns: ["S5.A1", "S5.A2", "S5.A3"],
+    categories: ["BC.17"],
+    note: "Cleanup function returned by on() subscriptions. Call to remove listener."
+  },
+
+  // Widget value type
+  widgetvalue: {
+    patterns: ["S4.W1", "S4.W5"],
+    categories: ["BC.10", "BC.11"],
+    note: "Union of legal widget scalar values. Complex widgets may return custom shapes."
+  },
 };
 
 // Build lookup maps from rollup data

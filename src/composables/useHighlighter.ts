@@ -1,15 +1,16 @@
 /**
- * useHighlighter — async Shiki highlighter for code blocks.
+ * useHighlighter — lazy-loaded async Shiki highlighter for code blocks.
  *
- * Loads shiki once on first use, then caches the instance.
- * Returns highlighted HTML for TypeScript/JavaScript code.
+ * Loads shiki on first highlightCode() call via dynamic import for code splitting.
+ * Returns placeholder/skeleton while loading, then re-renders when ready.
  */
 import { ref, shallowRef } from "vue";
-import { createHighlighter, type Highlighter } from "shiki";
+import type { Highlighter } from "shiki";
 
 const highlighter = shallowRef<Highlighter | null>(null);
 const loading = ref(false);
 const ready = ref(false);
+const initPromise = shallowRef<Promise<Highlighter> | null>(null);
 
 /** Map short lang aliases to full names for shiki */
 const LANG_ALIASES: Record<string, string> = {
@@ -25,25 +26,21 @@ export function normalizeLang(lang: string): string {
 
 export async function ensureHighlighter(): Promise<Highlighter> {
   if (highlighter.value) return highlighter.value;
-  if (loading.value) {
-    // Wait for existing load to complete
-    while (loading.value) {
-      await new Promise((r) => setTimeout(r, 50));
-    }
-    return highlighter.value!;
-  }
+  if (initPromise.value) return initPromise.value;
 
   loading.value = true;
-  try {
+  initPromise.value = (async () => {
+    const { createHighlighter } = await import("shiki");
     highlighter.value = await createHighlighter({
       themes: ["github-light", "github-dark"],
       langs: ["typescript", "javascript", "json", "bash"],
     });
     ready.value = true;
-  } finally {
     loading.value = false;
-  }
-  return highlighter.value!;
+    return highlighter.value;
+  })();
+
+  return initPromise.value;
 }
 
 export function useHighlighter() {
@@ -51,7 +48,26 @@ export function useHighlighter() {
 }
 
 /**
- * Highlight code synchronously if highlighter is ready, else return escaped HTML.
+ * Escape HTML for safe display
+ */
+function escapeHtml(code: string): string {
+  return code
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/**
+ * Generate skeleton placeholder HTML while highlighter loads
+ */
+function getPlaceholderHtml(code: string): string {
+  const escaped = escapeHtml(code);
+  return `<pre class="shiki shiki-placeholder" data-loading="true"><code>${escaped}</code></pre>`;
+}
+
+/**
+ * Highlight code synchronously if highlighter is ready.
+ * If not ready, triggers lazy load and returns placeholder.
  */
 export function highlightCode(
   code: string,
@@ -60,12 +76,12 @@ export function highlightCode(
   const normalizedLang = normalizeLang(lang);
 
   if (!highlighter.value) {
-    // Fallback: escape HTML and wrap in pre/code
-    const escaped = code
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-    return `<pre class="shiki"><code>${escaped}</code></pre>`;
+    // Trigger lazy load on first call (fire and forget)
+    if (!initPromise.value) {
+      ensureHighlighter();
+    }
+    // Return placeholder while loading
+    return getPlaceholderHtml(code);
   }
 
   return highlighter.value.codeToHtml(code, {
