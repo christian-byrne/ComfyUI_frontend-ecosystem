@@ -5,8 +5,10 @@ import { useRoute, RouterLink } from "vue-router";
 import {
   surfaceById,
   consumerByPatternId,
-  deltaBySurface,
   PR_REPO,
+  getConsumerForSurface,
+  getDeltaForSurface,
+  getRelatedConsumers,
 } from "@/data/litegraph-audit-loader";
 import {
   buildCommentMarkdown,
@@ -30,8 +32,11 @@ const route = useRoute();
 
 const surfaceId = computed(() => String(route.params.id ?? ""));
 const verdict = computed(() => surfaceById[surfaceId.value]);
-const consumer = computed(() => consumerByPatternId[surfaceId.value]);
-const delta = computed(() => deltaBySurface[surfaceId.value]);
+// Use helper functions that handle both verdict IDs and pattern IDs
+const consumer = computed(() => getConsumerForSurface(surfaceId.value));
+const delta = computed(() => getDeltaForSurface(surfaceId.value));
+// Get all related consumers for more comprehensive evidence
+const relatedConsumers = computed(() => getRelatedConsumers(surfaceId.value));
 
 function tierBadge(tier?: string): string {
   const map: Record<string, string> = {
@@ -150,15 +155,47 @@ async function openAndCopy(idx: number, prNum?: number) {
             </span>
           </span>
         </div>
-        <div v-if="verdict.prs.length > 0" class="flex flex-wrap gap-2 text-xs">
-          <RouterLink
-            v-for="n in verdict.prs"
-            :key="n"
-            :to="`/audit/pr/${n}`"
-            class="rounded border border-zinc-200 dark:border-zinc-800 px-2 py-1 hover:bg-zinc-50 dark:hover:bg-zinc-800"
-          >
-            #{{ n }}
-          </RouterLink>
+        <div v-if="verdict.prs.length > 0" class="flex flex-wrap items-center gap-3 pt-2">
+          <span class="text-[10px] uppercase tracking-wide text-zinc-500">Related PRs:</span>
+          <div class="flex flex-wrap gap-2">
+            <RouterLink
+              v-for="n in verdict.prs"
+              :key="n"
+              :to="`/audit/pr/${n}`"
+              class="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xs hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+            >
+              <span class="font-mono text-zinc-900 dark:text-zinc-100">#{{ n }}</span>
+              <span class="text-zinc-500">details</span>
+            </RouterLink>
+            <a
+              v-for="n in verdict.prs"
+              :key="`gh-${n}`"
+              :href="`https://github.com/Comfy-Org/ComfyUI_frontend/pull/${n}`"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1.5 rounded-md border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/30 px-2.5 py-1.5 text-xs text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
+              :title="`Open PR #${n} on GitHub`"
+            >
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              <span class="font-mono">#{{ n }}</span>
+            </a>
+            <a
+              v-for="n in verdict.prs"
+              :key="`review-${n}`"
+              :href="`https://github.com/Comfy-Org/ComfyUI_frontend/pull/${n}/files`"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium transition-colors"
+              :title="`Start reviewing PR #${n}`"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Review #{{ n }}
+            </a>
+          </div>
         </div>
       </header>
 
@@ -190,29 +227,33 @@ async function openAndCopy(idx: number, prNum?: number) {
       </section>
 
       <!-- Consumer evidence -->
-      <section v-if="consumer" class="space-y-3">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">
-            Consumer evidence ({{ consumer.evidence.length }})
-          </h2>
-          <span class="text-xs text-zinc-500">family: {{ consumer.surfaceFamily }}</span>
-        </div>
-        <div
-          v-if="consumer.v2Replacement"
-          class="rounded-md border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 p-3 text-sm"
-        >
-          <strong class="text-blue-900 dark:text-blue-300">v2 replacement:</strong>
-          <code class="ml-2 font-mono text-blue-900 dark:text-blue-300">{{ consumer.v2Replacement }}</code>
-          <span v-if="consumer.decisionRef" class="ml-3 text-xs text-blue-700 dark:text-blue-400">
-            ref: <code class="font-mono">{{ consumer.decisionRef }}</code>
-          </span>
-        </div>
-        <ol class="space-y-2">
-          <li
-            v-for="(ev, idx) in consumer.evidence"
-            :key="idx"
-            class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3"
-          >
+      <section v-if="relatedConsumers.length > 0" class="space-y-4">
+        <template v-for="(consumerItem, cIdx) in relatedConsumers" :key="consumerItem.patternId">
+          <div class="space-y-3">
+            <div class="flex items-baseline justify-between">
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">
+                <span class="text-zinc-500 font-mono">{{ consumerItem.patternId }}</span>
+                — {{ consumerItem.surface }}
+                <span class="text-zinc-500 font-normal">({{ consumerItem.evidence.length }} evidence)</span>
+              </h2>
+              <span class="text-xs text-zinc-500">family: {{ consumerItem.surfaceFamily }}</span>
+            </div>
+            <div
+              v-if="consumerItem.v2Replacement"
+              class="rounded-md border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 p-3 text-sm"
+            >
+              <strong class="text-blue-900 dark:text-blue-300">v2 replacement:</strong>
+              <code class="ml-2 font-mono text-blue-900 dark:text-blue-300">{{ consumerItem.v2Replacement }}</code>
+              <span v-if="consumerItem.decisionRef" class="ml-3 text-xs text-blue-700 dark:text-blue-400">
+                ref: <code class="font-mono">{{ consumerItem.decisionRef }}</code>
+              </span>
+            </div>
+            <ol class="space-y-2">
+              <li
+                v-for="(ev, idx) in consumerItem.evidence"
+                :key="`${cIdx}-${idx}`"
+                class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3"
+              >
             <div class="flex items-center justify-between gap-3">
               <div class="min-w-0 flex-1">
                 <a
@@ -238,22 +279,40 @@ async function openAndCopy(idx: number, prNum?: number) {
                   </span>
                 </div>
               </div>
-              <div class="flex flex-col items-end gap-1">
+              <div class="flex flex-col items-end gap-1.5">
+                <a
+                  :href="ev.url ?? `https://github.com/${ev.repo}/blob/HEAD/${ev.file}${ev.line ? `#L${ev.line}` : ''}`"
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-1.5 text-[11px] rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2.5 py-1.5 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+                  title="View source file on GitHub"
+                >
+                  <svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View source
+                </a>
                 <button
                   v-for="prNum in verdict.prs"
                   :key="prNum"
                   type="button"
-                  class="text-[11px] rounded border border-zinc-300 dark:border-zinc-700 px-2 py-1 hover:bg-zinc-50 dark:hover:bg-zinc-800"
-                  :title="`Opens PR #${prNum} files tab in a new tab AND copies a pre-filled markdown review comment to your clipboard. Paste it into the inline-comment compose box on the relevant diff line. (GitHub has no documented URL to auto-open the compose modal — clipboard-paste is the closest UX.)`"
+                  class="inline-flex items-center gap-1.5 text-[11px] rounded-md bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1.5 font-medium transition-colors"
+                  :title="`Opens PR #${prNum} files tab + copies a pre-filled markdown review comment. Paste it into the inline-comment compose box.`"
                   @click="openAndCopy(idx, prNum)"
                 >
-                  Open #{{ prNum }} + copy comment
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                  Comment on #{{ prNum }}
                 </button>
                 <span
                   v-if="copied?.index === idx"
-                  class="text-[10px] text-emerald-600 dark:text-emerald-400"
+                  class="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium"
                 >
-                  ✓ copied
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Copied to clipboard
                 </span>
               </div>
             </div>
@@ -262,8 +321,10 @@ async function openAndCopy(idx: number, prNum?: number) {
               class="mt-2 overflow-x-auto rounded bg-zinc-50 dark:bg-zinc-950 p-2 text-[11px] font-mono text-zinc-700 dark:text-zinc-300"
             ><code>{{ ev.excerpt }}</code></pre>
             <p v-if="ev.notes" class="mt-2 text-xs text-zinc-500">{{ ev.notes }}</p>
-          </li>
-        </ol>
+              </li>
+            </ol>
+          </div>
+        </template>
       </section>
       <p v-else class="text-sm text-zinc-500">
         No consumer-evidence bundle for this surface yet — see

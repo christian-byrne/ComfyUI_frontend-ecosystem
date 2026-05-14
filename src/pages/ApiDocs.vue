@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute, RouterLink } from "vue-router";
-import { marked } from "marked";
+import { marked, Renderer } from "marked";
 
 import {
   apiDocPages,
@@ -9,6 +9,10 @@ import {
   apiDocNav,
   navSlugs,
 } from "@/data/api-docs-loader";
+import {
+  ensureHighlighter,
+  highlightCode,
+} from "@/composables/useHighlighter";
 
 /**
  * ApiDocs — Swagger-style API reference for @comfyorg/extension-api,
@@ -20,6 +24,13 @@ import {
  * Routes: /api-docs (defaults to "index") and /api-docs/:slug.
  */
 const route = useRoute();
+const highlighterReady = ref(false);
+
+// Load syntax highlighter on mount
+onMounted(async () => {
+  await ensureHighlighter();
+  highlighterReady.value = true;
+});
 
 const currentSlug = computed<string>(() => {
   const s = String(route.params.slug ?? "index");
@@ -35,10 +46,21 @@ const uncategorizedPages = computed(() =>
     .map((p) => ({ slug: p.slug, title: p.sidebarTitle ?? p.title })),
 );
 
-// Configure marked: GFM tables, code blocks, internal-link rewriting.
+// Custom renderer with syntax highlighting
+const renderer = new Renderer();
+renderer.code = ({ text, lang }) => {
+  const language = lang || "typescript";
+  return highlightCode(text, language);
+};
+
+// Configure marked: GFM tables, code blocks with syntax highlighting.
 marked.setOptions({ gfm: true, breaks: false });
+marked.use({ renderer });
 
 const renderedBody = computed<string>(() => {
+  // Re-compute when highlighter becomes ready
+  void highlighterReady.value;
+
   const page = currentPage.value;
   if (!page) return "";
   // Rewrite Mintlify-style relative links `./otherpage` -> our router path.
@@ -52,22 +74,75 @@ const renderedBody = computed<string>(() => {
 });
 
 const totalPages = apiDocPages.length;
+
+/** Extract GitHub source link from rendered body (if present) */
+const sourceLink = computed(() => {
+  const page = currentPage.value;
+  if (!page) return null;
+  // Match "Defined in: [path](url)" pattern from TypeDoc output
+  const match = page.body.match(
+    /Defined in: \[([^\]]+)\]\((https:\/\/github\.com\/[^)]+)\)/
+  );
+  if (!match) return null;
+  return { path: match[1], url: match[2] };
+});
+
+/** Extension API PRs for quick navigation */
+const extensionApiPRs = [
+  { num: 12142, label: "foundation", status: "open" },
+  { num: 12143, label: "pkg", status: "open" },
+  { num: 12144, label: "ext", status: "open" },
+  { num: 12145, label: "tf", status: "open" },
+];
 </script>
 
 <template>
   <article class="mx-auto max-w-7xl px-4 py-6">
-    <header class="mb-6 space-y-1">
-      <h1 class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
-        @comfyorg/extension-api — API Reference
-      </h1>
-      <p class="text-sm text-zinc-600 dark:text-zinc-400">
-        TypeScript API reference for ComfyUI custom node extensions. Generated
-        by TypeDoc + typedoc-plugin-markdown via the P2 docgen pipeline.
-      </p>
-      <p class="text-xs text-zinc-500 dark:text-zinc-500">
-        {{ totalPages }} pages · synced from
-        <code class="font-mono">packages/extension-api/docs-build/mintlify</code>
-      </p>
+    <header class="mb-6 space-y-3">
+      <div class="flex items-start justify-between gap-4">
+        <div class="space-y-1">
+          <h1 class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
+            @comfyorg/extension-api — API Reference
+          </h1>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">
+            TypeScript API reference for ComfyUI custom node extensions. Generated
+            by TypeDoc + typedoc-plugin-markdown via the P2 docgen pipeline.
+          </p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-500">
+            {{ totalPages }} pages · synced from
+            <code class="font-mono">packages/extension-api/docs-build/mintlify</code>
+          </p>
+        </div>
+        <!-- PR quick-nav buttons -->
+        <div class="flex flex-col gap-2">
+          <span class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">Extension API PRs</span>
+          <div class="flex flex-wrap gap-1.5">
+            <a
+              v-for="pr in extensionApiPRs"
+              :key="pr.num"
+              :href="`https://github.com/Comfy-Org/ComfyUI_frontend/pull/${pr.num}`"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xs font-medium hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
+              :title="`Open PR #${pr.num} (${pr.label})`"
+            >
+              <span class="text-zinc-500">#{{ pr.num }}</span>
+              <span class="text-zinc-900 dark:text-zinc-100">{{ pr.label }}</span>
+            </a>
+          </div>
+          <a
+            href="https://github.com/Comfy-Org/ComfyUI_frontend/pull/12142/files"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-medium transition-colors"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            Start PR Review
+          </a>
+        </div>
+      </div>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-6">
@@ -136,22 +211,41 @@ const totalPages = apiDocPages.length;
           <code class="font-mono">{{ currentSlug }}</code>.
         </div>
         <template v-else>
-          <header class="mb-4 space-y-1">
-            <div
-              v-if="currentPage.icon"
-              class="inline-block rounded bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[10px] font-mono uppercase text-zinc-600 dark:text-zinc-400"
-            >
-              {{ currentPage.icon }}
+          <header class="mb-4 space-y-2">
+            <div class="flex items-start justify-between gap-4">
+              <div class="space-y-1">
+                <div
+                  v-if="currentPage.icon"
+                  class="inline-block rounded bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[10px] font-mono uppercase text-zinc-600 dark:text-zinc-400"
+                >
+                  {{ currentPage.icon }}
+                </div>
+                <h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+                  {{ currentPage.title }}
+                </h2>
+                <p
+                  v-if="currentPage.description"
+                  class="text-sm text-zinc-600 dark:text-zinc-400"
+                >
+                  {{ currentPage.description }}
+                </p>
+              </div>
+              <!-- Source link button -->
+              <div v-if="sourceLink" class="flex flex-col gap-1.5 shrink-0">
+                <a
+                  :href="sourceLink.url"
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xs hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                  title="View source on GitHub"
+                >
+                  <svg class="w-3.5 h-3.5 text-zinc-500" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                  <span class="font-mono text-zinc-700 dark:text-zinc-300 truncate max-w-[200px]">{{ sourceLink.path }}</span>
+                </a>
+              </div>
             </div>
-            <h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-              {{ currentPage.title }}
-            </h2>
-            <p
-              v-if="currentPage.description"
-              class="text-sm text-zinc-600 dark:text-zinc-400"
-            >
-              {{ currentPage.description }}
-            </p>
           </header>
           <!-- eslint-disable-next-line vue/no-v-html -- rendered from trusted in-tree TypeDoc output -->
           <div class="api-doc-prose" v-html="renderedBody" />
@@ -222,20 +316,26 @@ const totalPages = apiDocPages.length;
   font-size: 11px;
   color: rgb(39 39 42);
 }
-.api-doc-prose :deep(pre) {
+.api-doc-prose :deep(pre),
+.api-doc-prose :deep(.shiki) {
   margin: 0.75rem 0;
   overflow-x: auto;
   border-radius: 6px;
-  background: rgb(250 250 250);
   border: 1px solid rgb(228 228 231);
   padding: 12px;
   font-size: 12px;
 }
-.api-doc-prose :deep(pre code) {
+.api-doc-prose :deep(pre code),
+.api-doc-prose :deep(.shiki code) {
   background: transparent;
   padding: 0;
   font-size: 12px;
-  color: rgb(39 39 42);
+}
+/* Shiki dual-theme support */
+.api-doc-prose :deep(.shiki),
+.api-doc-prose :deep(.shiki span) {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
 }
 .api-doc-prose :deep(table) {
   margin: 1rem 0;
@@ -294,12 +394,20 @@ const totalPages = apiDocPages.length;
     background: rgb(39 39 42);
     color: rgb(228 228 231);
   }
-  .api-doc-prose :deep(pre) {
+  .api-doc-prose :deep(pre),
+  .api-doc-prose :deep(.shiki) {
     background: rgb(9 9 11);
     border-color: rgb(39 39 42);
   }
-  .api-doc-prose :deep(pre code) {
+  .api-doc-prose :deep(pre code),
+  .api-doc-prose :deep(.shiki code) {
     color: rgb(228 228 231);
+  }
+  /* Shiki dark theme */
+  .api-doc-prose :deep(.shiki),
+  .api-doc-prose :deep(.shiki span) {
+    color: var(--shiki-dark) !important;
+    background-color: transparent !important;
   }
   .api-doc-prose :deep(th) {
     background: rgb(24 24 27);
