@@ -1,0 +1,24 @@
+---
+title: "parseNodeExecutionId"
+description: "API reference for parseNodeExecutionId."
+---
+
+```ts
+function parseNodeExecutionId(id): (string | number)[] | null;
+```
+
+Defined in: [src/types/nodeIdentification.ts:108](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/types/nodeIdentification.ts#L108)
+
+Parse a NodeExecutionId into its component node IDs
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `id` | `string` | The NodeExecutionId to parse |
+
+## Returns
+
+(`string` \| `number`)[] \| `null`
+
+Array of node IDs from root to target, or null if not an execution ID

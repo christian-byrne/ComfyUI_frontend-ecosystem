@@ -1,0 +1,22 @@
+---
+title: "SlotInfo"
+description: "Read-only snapshot of a node slot (input or output)."
+---
+
+Defined in: [src/extension-api/node.ts:91](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L91)
+
+Read-only snapshot of a single slot (input or output) on a node.
+
+## Stability
+
+stable
+
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="direction"></a> `direction` | `readonly` | [`SlotDirection`](./slotdirection) | Whether this is an input or output slot. |
+| <a id="entityid"></a> `entityId` | `readonly` | [`SlotEntityId`](./slotentityid) | Branded entity ID for this slot. |
+| <a id="name"></a> `name` | `readonly` | `string` | Slot name as declared in `INPUT_TYPES` or `addInput`/`addOutput`. |
+| <a id="nodeentityid"></a> `nodeEntityId` | `readonly` | [`NodeEntityId`](./nodeentityid) | The node this slot belongs to. |
+| <a id="type"></a> `type` | `readonly` | `string` | Slot type string (e.g. `'IMAGE'`, `'LATENT'`, `'*'`). |

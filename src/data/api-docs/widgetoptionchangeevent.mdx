@@ -1,0 +1,33 @@
+---
+title: "WidgetOptionChangeEvent"
+description: "API reference for WidgetOptionChangeEvent."
+---
+
+Defined in: [src/extension-api/widget.ts:83](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L83)
+
+Payload for `widget.on('optionChange', handler)`.
+
+Fires when a type-specific option is mutated via `setOption(key, value)`.
+The exact set of observable option keys is type-dependent (e.g. `min`,
+`max`, `step` for numeric widgets; `multiline` for strings).
+
+The data model for "options" vs "first-class fields" is defined in D7.
+This event covers the options-bag tier (type-specific, not every-widget).
+
+## Stability
+
+experimental — full semantics deferred to D7
+
+```ts
+widget.on('optionChange', (e) => {
+  if (e.key === 'min') clampValue(e.newValue as number)
+})
+```
+
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="key"></a> `key` | `readonly` | `string` | The option key that changed (e.g. `'min'`, `'max'`, `'multiline'`). |
+| <a id="newvalue"></a> `newValue` | `readonly` | `unknown` | Value after the change. |
+| <a id="oldvalue"></a> `oldValue` | `readonly` | `unknown` | Value before the change. |

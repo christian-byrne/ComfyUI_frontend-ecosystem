@@ -1,0 +1,21 @@
+---
+title: "ToastMessageOptions"
+description: "API reference for ToastMessageOptions."
+---
+
+Defined in: [src/types/extensionTypes.ts:53](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/types/extensionTypes.ts#L53)
+
+Defines message options in Toast component.
+
+## Properties
+
+| Property | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="closable"></a> `closable?` | `boolean` | `true` | Whether the message can be closed manually using the close icon. |
+| <a id="contentstyleclass"></a> `contentStyleClass?` | `string` \| `string`[] \| `Record`\<`string`, `boolean`\> | `undefined` | Style class of the content. Matches PrimeVue Toast API which accepts Vue class bindings. |
+| <a id="detail"></a> `detail?` | `string` | `undefined` | Detail content of the message. |
+| <a id="group"></a> `group?` | `string` | `undefined` | Key of the Toast to display the message. |
+| <a id="life"></a> `life?` | `number` | `undefined` | Delay in milliseconds to close the message automatically. |
+| <a id="severity"></a> `severity?` | `"success"` \| `"info"` \| `"warn"` \| `"error"` \| `"secondary"` \| `"contrast"` | `info` | Severity level of the message. |
+| <a id="styleclass"></a> `styleClass?` | `string` \| `string`[] \| `Record`\<`string`, `boolean`\> | `undefined` | Style class of the message. |
+| <a id="summary"></a> `summary?` | `string` | `undefined` | Summary content of the message. |

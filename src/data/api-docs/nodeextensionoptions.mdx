@@ -1,0 +1,100 @@
+---
+title: "NodeExtensionOptions"
+description: "Options object for defineNodeExtension — node lifecycle hooks."
+---
+
+Defined in: [src/extension-api/types.ts:37](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L37)
+
+Options for `defineNodeExtension`. Describes an extension that reacts to
+node lifecycle events.
+
+## Stability
+
+stable
+
+```ts
+import { defineNodeExtension } from '@comfyorg/extension-api'
+
+export default defineNodeExtension({
+  name: 'my-org.my-extension',
+  nodeTypes: ['KSampler'],
+
+  nodeCreated(node) {
+    node.on('executed', (e) => console.log('done', e.output))
+  }
+})
+```
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="name"></a> `name` | `string` | Globally unique extension name. Used for scope registry keying, hook ordering (D10b lexicographic tie-break), and debug messages. Convention: `'org.extension-name'` or `'Comfy.ExtensionName'`. **Stability** stable |
+| <a id="nodetypes"></a> `nodeTypes?` | `string`[] | Filter to specific `comfyClass` names. When omitted, the extension receives `nodeCreated` / `loadedGraphNode` for every node type. Replaces the v1 `beforeRegisterNodeDef` filtering pattern (DEP1). **Stability** stable **Example** `nodeTypes: ['KSampler', 'KSamplerAdvanced']` |
+
+## Methods
+
+### loadedGraphNode()?
+
+```ts
+optional loadedGraphNode(node): void;
+```
+
+Defined in: [src/extension-api/types.ts:89](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L89)
+
+Called once per node instance when the node is restored from a saved
+workflow. Widget values are already populated when this fires.
+
+Same rules as `nodeCreated`. Exactly one of `nodeCreated` or
+`loadedGraphNode` fires per node entity, never both.
+
+Replaces the v1 `loadedGraphNode` hook (which had near-zero real usage per
+R4-P11) and `nodeType.prototype.onConfigure` patching.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `node` | [`NodeHandle`](./nodehandle) |
+
+#### Returns
+
+`void`
+
+#### Stability
+
+stable
+
+***
+
+### nodeCreated()?
+
+```ts
+optional nodeCreated(node): void;
+```
+
+Defined in: [src/extension-api/types.ts:75](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L75)
+
+Called once per node instance when the node is first created (typed in,
+pasted from clipboard, duplicated, or loaded without an existing workflow).
+
+- Runs inside a Vue `EffectScope`. All `watch` / `computed` / `onNodeMounted`
+  calls made here are captured and disposed automatically on node removal.
+- Must be synchronous (D10c). Kick off async work inside the body; use
+  `loading: ref(true)` for async-dependent state.
+- Called only once per entity ID lifetime. Copy/paste creates a fresh entity
+  and fires `nodeCreated` again on the new entity (D12 reset-to-fresh).
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `node` | [`NodeHandle`](./nodehandle) |
+
+#### Returns
+
+`void`
+
+#### Stability
+
+stable

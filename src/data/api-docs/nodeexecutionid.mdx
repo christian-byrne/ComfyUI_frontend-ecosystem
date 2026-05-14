@@ -1,0 +1,16 @@
+---
+title: "NodeExecutionId"
+description: "Branded string ID for a specific node execution run."
+---
+
+```ts
+type NodeExecutionId = string;
+```
+
+Defined in: [src/types/nodeIdentification.ts:27](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/types/nodeIdentification.ts#L27)
+
+An execution identifier representing a node's position in nested subgraphs.
+Also known as ExecutionId in some contexts.
+
+Format: Colon-separated path of node IDs
+Example: "123:456:789" (node 789 in subgraph 456 in subgraph 123)
