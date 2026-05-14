@@ -11,20 +11,20 @@
       "silent": 0.5,
       "lifecycle": 0.4
     },
-    "patterns_count": 59
+    "patterns_count": 73
   },
   "patterns": [
     {
       "pattern_id": "S6.A1",
       "surface_family": "S6",
       "name": "app.graphToPrompt monkey-patching \u26a0\ufe0f CRITICAL",
-      "occurrences": 15,
-      "unique_repos": 8,
+      "occurrences": 16,
+      "unique_repos": 9,
       "cumulative_stars": 23727,
       "signature_count": 1,
       "silent_breakage": 2.0,
       "lifecycle_coupling": 2.0,
-      "blast_radius": 7.018,
+      "blast_radius": 7.037,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI-Manager",
@@ -86,13 +86,13 @@
       "pattern_id": "S11.G2",
       "surface_family": "S11",
       "name": "graph.add / graph.remove / graph.findNodesByType / graph.findNodeById / graph.serialize / graph.configure",
-      "occurrences": 12,
-      "unique_repos": 7,
+      "occurrences": 14,
+      "unique_repos": 9,
       "cumulative_stars": 21179,
       "signature_count": 1,
       "silent_breakage": 1.5,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 6.256,
+      "blast_radius": 6.299,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI-Manager",
@@ -120,13 +120,13 @@
       "pattern_id": "S11.G3",
       "surface_family": "S11",
       "name": "graph.beforeChange / graph.afterChange \u2014 explicit batching seam for multi-step mutations",
-      "occurrences": 13,
-      "unique_repos": 6,
+      "occurrences": 15,
+      "unique_repos": 8,
       "cumulative_stars": 19072,
       "signature_count": 1,
       "silent_breakage": 1.5,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 6.233,
+      "blast_radius": 6.273,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI-Manager",
@@ -145,7 +145,7 @@
           "stars": 340
         },
         {
-          "repo": "guido-gfv/gfv_pro_upgrade",
+          "repo": "(aggregate \u2014 Notion \u00a72.12)",
           "stars": 0
         }
       ]
@@ -154,13 +154,13 @@
       "pattern_id": "S7.G1",
       "surface_family": "S7",
       "name": "window.LiteGraph / window.comfyAPI.* \u2014 globals as public surface",
-      "occurrences": 14,
-      "unique_repos": 10,
+      "occurrences": 15,
+      "unique_repos": 11,
       "cumulative_stars": 18957,
       "signature_count": 1,
       "silent_breakage": 2.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 6.101,
+      "blast_radius": 6.121,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI-Manager",
@@ -222,13 +222,13 @@
       "pattern_id": "S10.D1",
       "surface_family": "S10",
       "name": "node.addInput / node.removeInput / node.addOutput / node.removeOutput dynamic slot mutation",
-      "occurrences": 11,
-      "unique_repos": 6,
+      "occurrences": 13,
+      "unique_repos": 7,
       "cumulative_stars": 5324,
       "signature_count": 1,
       "silent_breakage": 1.5,
       "lifecycle_coupling": 2.0,
-      "blast_radius": 6.032,
+      "blast_radius": 6.079,
       "top_repos": [
         {
           "repo": "kijai/ComfyUI-KJNodes",
@@ -256,13 +256,13 @@
       "pattern_id": "S10.D2",
       "surface_family": "S10",
       "name": "node.connect / node.disconnectInput / node.disconnectOutput programmatic linking",
-      "occurrences": 14,
-      "unique_repos": 8,
+      "occurrences": 18,
+      "unique_repos": 9,
       "cumulative_stars": 18734,
       "signature_count": 1,
       "silent_breakage": 1.0,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 5.996,
+      "blast_radius": 6.068,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI-Manager",
@@ -287,16 +287,50 @@
       ]
     },
     {
+      "pattern_id": "S2.N16",
+      "surface_family": "S2",
+      "name": "node.widgets array direct access / iteration / mutation",
+      "occurrences": 18,
+      "unique_repos": 9,
+      "cumulative_stars": 7147,
+      "signature_count": 1,
+      "silent_breakage": 1.5,
+      "lifecycle_coupling": 1.0,
+      "blast_radius": 5.899,
+      "top_repos": [
+        {
+          "repo": "Lightricks/ComfyUI-LTXVideo",
+          "stars": 3618
+        },
+        {
+          "repo": "kijai/ComfyUI-KJNodes",
+          "stars": 2587
+        },
+        {
+          "repo": "diodiogod/TTS-Audio-Suite",
+          "stars": 923
+        },
+        {
+          "repo": "r-vage/ComfyUI_Eclipse",
+          "stars": 19
+        },
+        {
+          "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+          "stars": 0
+        }
+      ]
+    },
+    {
       "pattern_id": "S4.W4",
       "surface_family": "S4",
       "name": "widget.options.values mutation (COMBO update at runtime)",
-      "occurrences": 11,
-      "unique_repos": 8,
+      "occurrences": 14,
+      "unique_repos": 9,
       "cumulative_stars": 8021,
       "signature_count": 1,
       "silent_breakage": 1.5,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 5.81,
+      "blast_radius": 5.878,
       "top_repos": [
         {
           "repo": "rgthree/rgthree-comfy",
@@ -317,40 +351,6 @@
         {
           "repo": "EnragedAntelope/EA_LMStudio",
           "stars": 7
-        }
-      ]
-    },
-    {
-      "pattern_id": "S2.N16",
-      "surface_family": "S2",
-      "name": "node.widgets array direct access / iteration / mutation",
-      "occurrences": 13,
-      "unique_repos": 8,
-      "cumulative_stars": 7147,
-      "signature_count": 1,
-      "silent_breakage": 1.5,
-      "lifecycle_coupling": 1.0,
-      "blast_radius": 5.806,
-      "top_repos": [
-        {
-          "repo": "Lightricks/ComfyUI-LTXVideo",
-          "stars": 3618
-        },
-        {
-          "repo": "kijai/ComfyUI-KJNodes",
-          "stars": 2587
-        },
-        {
-          "repo": "diodiogod/TTS-Audio-Suite",
-          "stars": 923
-        },
-        {
-          "repo": "r-vage/ComfyUI_Eclipse",
-          "stars": 19
-        },
-        {
-          "repo": "krismasdev/ComfyUI-Flux-Continuum",
-          "stars": 0
         }
       ]
     },
@@ -448,13 +448,13 @@
       "pattern_id": "S4.W3",
       "surface_family": "S4",
       "name": "widget.serializeValue direct assignment",
-      "occurrences": 14,
-      "unique_repos": 10,
+      "occurrences": 16,
+      "unique_repos": 11,
       "cumulative_stars": 9161,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 2.0,
-      "blast_radius": 5.585,
+      "blast_radius": 5.623,
       "top_repos": [
         {
           "repo": "kijai/ComfyUI-KJNodes",
@@ -475,6 +475,74 @@
         {
           "repo": "melMass/comfy_mtb",
           "stars": 705
+        }
+      ]
+    },
+    {
+      "pattern_id": "S4.W2",
+      "surface_family": "S4",
+      "name": "node.addDOMWidget(name, type, element, options)",
+      "occurrences": 15,
+      "unique_repos": 7,
+      "cumulative_stars": 7445,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 2.0,
+      "blast_radius": 5.515,
+      "top_repos": [
+        {
+          "repo": "Lightricks/ComfyUI-LTXVideo",
+          "stars": 3618
+        },
+        {
+          "repo": "kijai/ComfyUI-KJNodes",
+          "stars": 2587
+        },
+        {
+          "repo": "diodiogod/TTS-Audio-Suite",
+          "stars": 923
+        },
+        {
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
+        },
+        {
+          "repo": "akawana/ComfyUI-Folded-Prompts",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "pattern_id": "S9.L1",
+      "surface_family": "S9",
+      "name": "LLink direct manipulation (link.color, link._pos, link.data, graph.links)",
+      "occurrences": 14,
+      "unique_repos": 7,
+      "cumulative_stars": 14948,
+      "signature_count": 1,
+      "silent_breakage": 1.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 5.498,
+      "top_repos": [
+        {
+          "repo": "Comfy-Org/ComfyUI-Manager",
+          "stars": 14635
+        },
+        {
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
+        },
+        {
+          "repo": "darth-veitcher/comfyui-ollama-model-manager",
+          "stars": 1
+        },
+        {
+          "repo": "Acly/comfyui-tooling-nodes",
+          "stars": 0
+        },
+        {
+          "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+          "stars": 0
         }
       ]
     },
@@ -513,40 +581,6 @@
       ]
     },
     {
-      "pattern_id": "S9.L1",
-      "surface_family": "S9",
-      "name": "LLink direct manipulation (link.color, link._pos, link.data, graph.links)",
-      "occurrences": 13,
-      "unique_repos": 6,
-      "cumulative_stars": 14948,
-      "signature_count": 1,
-      "silent_breakage": 1.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 5.477,
-      "top_repos": [
-        {
-          "repo": "Comfy-Org/ComfyUI-Manager",
-          "stars": 14635
-        },
-        {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
-        },
-        {
-          "repo": "darth-veitcher/comfyui-ollama-model-manager",
-          "stars": 1
-        },
-        {
-          "repo": "Acly/comfyui-tooling-nodes",
-          "stars": 0
-        },
-        {
-          "repo": "chrisgoringe/cg-use-everywhere",
-          "stars": 0
-        }
-      ]
-    },
-    {
       "pattern_id": "S2.N12",
       "surface_family": "S2",
       "name": "nodeType.prototype.onConnectInput patching",
@@ -569,36 +603,36 @@
       ]
     },
     {
-      "pattern_id": "S4.W2",
-      "surface_family": "S4",
-      "name": "node.addDOMWidget(name, type, element, options)",
-      "occurrences": 12,
-      "unique_repos": 6,
-      "cumulative_stars": 7445,
+      "pattern_id": "S10.D3",
+      "surface_family": "S10",
+      "name": "node.setSize(node.computeSize()) \u2014 imperative resize after dynamic mutation",
+      "occurrences": 19,
+      "unique_repos": 11,
+      "cumulative_stars": 7611,
       "signature_count": 1,
-      "silent_breakage": 0.0,
-      "lifecycle_coupling": 2.0,
-      "blast_radius": 5.452,
+      "silent_breakage": 1.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 5.292,
       "top_repos": [
         {
           "repo": "Lightricks/ComfyUI-LTXVideo",
           "stars": 3618
         },
         {
-          "repo": "kijai/ComfyUI-KJNodes",
-          "stars": 2587
+          "repo": "rgthree/rgthree-comfy",
+          "stars": 3066
         },
         {
           "repo": "diodiogod/TTS-Audio-Suite",
           "stars": 923
         },
         {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
+          "repo": "hhayiyuan/ComfyUI-FFmpegURLMedia",
+          "stars": 2
         },
         {
-          "repo": "akawana/ComfyUI-Folded-Prompts",
-          "stars": 4
+          "repo": "pictorialink/ComfyUI-Easy-Use",
+          "stars": 1
         }
       ]
     },
@@ -625,40 +659,6 @@
         {
           "repo": "chrisgoringe/cg-use-everywhere",
           "stars": 0
-        }
-      ]
-    },
-    {
-      "pattern_id": "S10.D3",
-      "surface_family": "S10",
-      "name": "node.setSize(node.computeSize()) \u2014 imperative resize after dynamic mutation",
-      "occurrences": 17,
-      "unique_repos": 9,
-      "cumulative_stars": 7611,
-      "signature_count": 1,
-      "silent_breakage": 1.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 5.26,
-      "top_repos": [
-        {
-          "repo": "Lightricks/ComfyUI-LTXVideo",
-          "stars": 3618
-        },
-        {
-          "repo": "rgthree/rgthree-comfy",
-          "stars": 3066
-        },
-        {
-          "repo": "diodiogod/TTS-Audio-Suite",
-          "stars": 923
-        },
-        {
-          "repo": "hhayiyuan/ComfyUI-FFmpegURLMedia",
-          "stars": 2
-        },
-        {
-          "repo": "pictorialink/ComfyUI-Easy-Use",
-          "stars": 1
         }
       ]
     },
@@ -700,13 +700,13 @@
       "pattern_id": "S2.N4",
       "surface_family": "S2",
       "name": "nodeType.prototype.onRemoved patching (de-facto teardown)",
-      "occurrences": 12,
-      "unique_repos": 8,
+      "occurrences": 13,
+      "unique_repos": 9,
       "cumulative_stars": 9941,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 5.177,
+      "blast_radius": 5.2,
       "top_repos": [
         {
           "repo": "Lightricks/ComfyUI-LTXVideo",
@@ -727,6 +727,40 @@
         {
           "repo": "melMass/comfy_mtb",
           "stars": 705
+        }
+      ]
+    },
+    {
+      "pattern_id": "S6.A2",
+      "surface_family": "S6",
+      "name": "window.app.loadGraphData direct call",
+      "occurrences": 15,
+      "unique_repos": 7,
+      "cumulative_stars": 17941,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 5.097,
+      "top_repos": [
+        {
+          "repo": "Comfy-Org/ComfyUI-Manager",
+          "stars": 14635
+        },
+        {
+          "repo": "Comfy-Org/ComfyUI_frontend",
+          "stars": 1794
+        },
+        {
+          "repo": "BennyKok/comfyui-deploy",
+          "stars": 1510
+        },
+        {
+          "repo": "ketle-man/ComfyUI-Workflow-Studio",
+          "stars": 2
+        },
+        {
+          "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+          "stars": 0
         }
       ]
     },
@@ -756,40 +790,6 @@
         },
         {
           "repo": "chyer/Chye-ComfyUI-Toolset",
-          "stars": 0
-        }
-      ]
-    },
-    {
-      "pattern_id": "S6.A2",
-      "surface_family": "S6",
-      "name": "window.app.loadGraphData direct call",
-      "occurrences": 13,
-      "unique_repos": 6,
-      "cumulative_stars": 17941,
-      "signature_count": 1,
-      "silent_breakage": 0.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 5.056,
-      "top_repos": [
-        {
-          "repo": "Comfy-Org/ComfyUI-Manager",
-          "stars": 14635
-        },
-        {
-          "repo": "Comfy-Org/ComfyUI_frontend",
-          "stars": 1794
-        },
-        {
-          "repo": "BennyKok/comfyui-deploy",
-          "stars": 1510
-        },
-        {
-          "repo": "ketle-man/ComfyUI-Workflow-Studio",
-          "stars": 2
-        },
-        {
-          "repo": "chrisgoringe/cg-use-everywhere",
           "stars": 0
         }
       ]
@@ -863,50 +863,16 @@
       ]
     },
     {
-      "pattern_id": "S2.N19",
-      "surface_family": "S2",
-      "name": "nodeType.prototype.onResize patching",
-      "occurrences": 11,
-      "unique_repos": 8,
-      "cumulative_stars": 4683,
-      "signature_count": 1,
-      "silent_breakage": 1.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 4.926,
-      "top_repos": [
-        {
-          "repo": "yolain/ComfyUI-Easy-Use",
-          "stars": 2514
-        },
-        {
-          "repo": "diodiogod/TTS-Audio-Suite",
-          "stars": 923
-        },
-        {
-          "repo": "melMass/comfy_mtb",
-          "stars": 705
-        },
-        {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
-        },
-        {
-          "repo": "SKBv0/ComfyUI_SKBundle",
-          "stars": 116
-        }
-      ]
-    },
-    {
       "pattern_id": "S2.N11",
       "surface_family": "S2",
       "name": "nodeType.prototype.computeSize patching",
-      "occurrences": 13,
-      "unique_repos": 7,
+      "occurrences": 17,
+      "unique_repos": 8,
       "cumulative_stars": 5051,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 4.906,
+      "blast_radius": 4.982,
       "top_repos": [
         {
           "repo": "rgthree/rgthree-comfy",
@@ -931,16 +897,50 @@
       ]
     },
     {
+      "pattern_id": "S2.N19",
+      "surface_family": "S2",
+      "name": "nodeType.prototype.onResize patching",
+      "occurrences": 12,
+      "unique_repos": 9,
+      "cumulative_stars": 4683,
+      "signature_count": 1,
+      "silent_breakage": 1.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.95,
+      "top_repos": [
+        {
+          "repo": "yolain/ComfyUI-Easy-Use",
+          "stars": 2514
+        },
+        {
+          "repo": "diodiogod/TTS-Audio-Suite",
+          "stars": 923
+        },
+        {
+          "repo": "melMass/comfy_mtb",
+          "stars": 705
+        },
+        {
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
+        },
+        {
+          "repo": "SKBv0/ComfyUI_SKBundle",
+          "stars": 116
+        }
+      ]
+    },
+    {
       "pattern_id": "S2.N7",
       "surface_family": "S2",
       "name": "nodeType.prototype.onConfigure patching (workflow-load-time per-node hook)",
-      "occurrences": 13,
-      "unique_repos": 7,
+      "occurrences": 14,
+      "unique_repos": 8,
       "cumulative_stars": 4857,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 1.0,
-      "blast_radius": 4.889,
+      "blast_radius": 4.91,
       "top_repos": [
         {
           "repo": "Lightricks/ComfyUI-LTXVideo",
@@ -959,8 +959,76 @@
           "stars": 4
         },
         {
-          "repo": "AlexZ1967/ComfyUI_ALEXZ_tools",
+          "repo": "(aggregate \u2014 Notion \u00a72.2)",
           "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S13.SC1",
+      "surface_family": "S13",
+      "name": "ComfyNodeDef inspection (input.required/optional/hidden, output, output_node, category)",
+      "occurrences": 10,
+      "unique_repos": 7,
+      "cumulative_stars": 2260,
+      "signature_count": 1,
+      "silent_breakage": 1.5,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.833,
+      "top_repos": [
+        {
+          "repo": "BennyKok/comfyui-deploy",
+          "stars": 1510
+        },
+        {
+          "repo": "melMass/comfy_mtb",
+          "stars": 705
+        },
+        {
+          "repo": "StableLlama/ComfyUI-basic_data_handling",
+          "stars": 43
+        },
+        {
+          "repo": "IXIWORKS-KIMJUNGHO/comfyui-ixiworks-tools",
+          "stars": 1
+        },
+        {
+          "repo": "xeinherjer-dev/ComfyUI-XENodes",
+          "stars": 1
+        }
+      ]
+    },
+    {
+      "pattern_id": "S3.C1",
+      "surface_family": "S3",
+      "name": "LGraphCanvas.prototype.* monkey-patching",
+      "occurrences": 18,
+      "unique_repos": 12,
+      "cumulative_stars": 8246,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.811,
+      "top_repos": [
+        {
+          "repo": "rgthree/rgthree-comfy",
+          "stars": 3066
+        },
+        {
+          "repo": "kijai/ComfyUI-KJNodes",
+          "stars": 2587
+        },
+        {
+          "repo": "Comfy-Org/ComfyUI_frontend",
+          "stars": 1794
+        },
+        {
+          "repo": "melMass/comfy_mtb",
+          "stars": 705
+        },
+        {
+          "repo": "lucafoscili/lf-nodes",
+          "stars": 34
         }
       ]
     },
@@ -983,36 +1051,36 @@
       ]
     },
     {
-      "pattern_id": "S3.C1",
-      "surface_family": "S3",
-      "name": "LGraphCanvas.prototype.* monkey-patching",
-      "occurrences": 17,
-      "unique_repos": 11,
-      "cumulative_stars": 8246,
+      "pattern_id": "S4.W5",
+      "surface_family": "S4",
+      "name": "direct widget.value writes from extension code",
+      "occurrences": 15,
+      "unique_repos": 8,
+      "cumulative_stars": 2747,
       "signature_count": 1,
-      "silent_breakage": 0.0,
+      "silent_breakage": 1.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 4.795,
+      "blast_radius": 4.782,
       "top_repos": [
         {
-          "repo": "rgthree/rgthree-comfy",
-          "stars": 3066
+          "repo": "BennyKok/comfyui-deploy",
+          "stars": 1510
         },
         {
-          "repo": "kijai/ComfyUI-KJNodes",
-          "stars": 2587
+          "repo": "diodiogod/TTS-Audio-Suite",
+          "stars": 923
         },
         {
-          "repo": "Comfy-Org/ComfyUI_frontend",
-          "stars": 1794
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
         },
         {
-          "repo": "melMass/comfy_mtb",
-          "stars": 705
+          "repo": "Valiant-Cat/ComfyUI-WanMove-Trajectory",
+          "stars": 1
         },
         {
-          "repo": "lucafoscili/lf-nodes",
-          "stars": 34
+          "repo": "darth-veitcher/comfyui-ollama-model-manager",
+          "stars": 1
         }
       ]
     },
@@ -1042,6 +1110,36 @@
         },
         {
           "repo": "linjm8780860/ljm_comfyui",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.D3",
+      "surface_family": "S16",
+      "name": "Obfuscated string-replace pipeline (often PowerShell, but pattern bleeds into JS minifiers)",
+      "occurrences": 10,
+      "unique_repos": 4,
+      "cumulative_stars": 3292,
+      "signature_count": 1,
+      "silent_breakage": 1.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.747,
+      "top_repos": [
+        {
+          "repo": "kijai/ComfyUI-KJNodes",
+          "stars": 2587
+        },
+        {
+          "repo": "melMass/comfy_mtb",
+          "stars": 705
+        },
+        {
+          "repo": "AIGODLIKE/ComfyUI-BlenderAI-node",
+          "stars": 0
+        },
+        {
+          "repo": "TinyTerra/ComfyUI_tinyterraNodes",
           "stars": 0
         }
       ]
@@ -1081,84 +1179,16 @@
       ]
     },
     {
-      "pattern_id": "S13.SC1",
-      "surface_family": "S13",
-      "name": "ComfyNodeDef inspection (input.required/optional/hidden, output, output_node, category)",
-      "occurrences": 7,
-      "unique_repos": 6,
-      "cumulative_stars": 2260,
-      "signature_count": 1,
-      "silent_breakage": 1.5,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 4.736,
-      "top_repos": [
-        {
-          "repo": "BennyKok/comfyui-deploy",
-          "stars": 1510
-        },
-        {
-          "repo": "melMass/comfy_mtb",
-          "stars": 705
-        },
-        {
-          "repo": "StableLlama/ComfyUI-basic_data_handling",
-          "stars": 43
-        },
-        {
-          "repo": "IXIWORKS-KIMJUNGHO/comfyui-ixiworks-tools",
-          "stars": 1
-        },
-        {
-          "repo": "xeinherjer-dev/ComfyUI-XENodes",
-          "stars": 1
-        }
-      ]
-    },
-    {
-      "pattern_id": "S4.W5",
-      "surface_family": "S4",
-      "name": "direct widget.value writes from extension code",
-      "occurrences": 12,
-      "unique_repos": 7,
-      "cumulative_stars": 2747,
-      "signature_count": 1,
-      "silent_breakage": 1.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 4.719,
-      "top_repos": [
-        {
-          "repo": "BennyKok/comfyui-deploy",
-          "stars": 1510
-        },
-        {
-          "repo": "diodiogod/TTS-Audio-Suite",
-          "stars": 923
-        },
-        {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
-        },
-        {
-          "repo": "Valiant-Cat/ComfyUI-WanMove-Trajectory",
-          "stars": 1
-        },
-        {
-          "repo": "darth-veitcher/comfyui-ollama-model-manager",
-          "stars": 1
-        }
-      ]
-    },
-    {
       "pattern_id": "S8.P1",
       "surface_family": "S8",
       "name": "nodeType.prototype.isVirtualNode = true",
-      "occurrences": 13,
-      "unique_repos": 8,
+      "occurrences": 14,
+      "unique_repos": 9,
       "cumulative_stars": 7887,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 4.699,
+      "blast_radius": 4.72,
       "top_repos": [
         {
           "repo": "rgthree/rgthree-comfy",
@@ -1285,6 +1315,40 @@
       ]
     },
     {
+      "pattern_id": "S4.W1",
+      "surface_family": "S4",
+      "name": "widget.callback assignment (chain pattern)",
+      "occurrences": 17,
+      "unique_repos": 9,
+      "cumulative_stars": 4867,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.566,
+      "top_repos": [
+        {
+          "repo": "Lightricks/ComfyUI-LTXVideo",
+          "stars": 3618
+        },
+        {
+          "repo": "diodiogod/TTS-Audio-Suite",
+          "stars": 923
+        },
+        {
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
+        },
+        {
+          "repo": "crom8505/ComfyUI-Dynamic-Sigmas",
+          "stars": 8
+        },
+        {
+          "repo": "834t/ComfyUI_834t_scene_composer",
+          "stars": 5
+        }
+      ]
+    },
+    {
       "pattern_id": "S11.G4",
       "surface_family": "S11",
       "name": "graph.setDirtyCanvas(true, true) \u2014 imperative canvas-redraw trigger",
@@ -1315,36 +1379,36 @@
       ]
     },
     {
-      "pattern_id": "S4.W1",
-      "surface_family": "S4",
-      "name": "widget.callback assignment (chain pattern)",
-      "occurrences": 15,
+      "pattern_id": "S1.H2",
+      "surface_family": "S1",
+      "name": "ComfyExtension.getCustomWidgets hook",
+      "occurrences": 9,
       "unique_repos": 7,
-      "cumulative_stars": 4867,
+      "cumulative_stars": 6550,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 4.53,
+      "blast_radius": 4.516,
       "top_repos": [
         {
-          "repo": "Lightricks/ComfyUI-LTXVideo",
-          "stars": 3618
+          "repo": "yolain/ComfyUI-Easy-Use",
+          "stars": 2514
         },
         {
-          "repo": "diodiogod/TTS-Audio-Suite",
-          "stars": 923
+          "repo": "Comfy-Org/ComfyUI_frontend",
+          "stars": 1794
         },
         {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
+          "repo": "BennyKok/comfyui-deploy",
+          "stars": 1510
         },
         {
-          "repo": "crom8505/ComfyUI-Dynamic-Sigmas",
-          "stars": 8
+          "repo": "melMass/comfy_mtb",
+          "stars": 705
         },
         {
-          "repo": "834t/ComfyUI_834t_scene_composer",
-          "stars": 5
+          "repo": "yolain/ComfyUI-Easy-Use-Frontend",
+          "stars": 27
         }
       ]
     },
@@ -1417,50 +1481,16 @@
       ]
     },
     {
-      "pattern_id": "S1.H2",
-      "surface_family": "S1",
-      "name": "ComfyExtension.getCustomWidgets hook",
-      "occurrences": 8,
-      "unique_repos": 6,
-      "cumulative_stars": 6550,
-      "signature_count": 1,
-      "silent_breakage": 0.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 4.484,
-      "top_repos": [
-        {
-          "repo": "yolain/ComfyUI-Easy-Use",
-          "stars": 2514
-        },
-        {
-          "repo": "Comfy-Org/ComfyUI_frontend",
-          "stars": 1794
-        },
-        {
-          "repo": "BennyKok/comfyui-deploy",
-          "stars": 1510
-        },
-        {
-          "repo": "melMass/comfy_mtb",
-          "stars": 705
-        },
-        {
-          "repo": "yolain/ComfyUI-Easy-Use-Frontend",
-          "stars": 27
-        }
-      ]
-    },
-    {
       "pattern_id": "S2.N1",
       "surface_family": "S2",
       "name": "nodeType.prototype.onNodeCreated patching",
-      "occurrences": 13,
-      "unique_repos": 6,
+      "occurrences": 14,
+      "unique_repos": 7,
       "cumulative_stars": 4552,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 4.461,
+      "blast_radius": 4.482,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI_frontend",
@@ -1481,6 +1511,40 @@
         {
           "repo": "SKBv0/ComfyUI_SpideyReroute",
           "stars": 13
+        }
+      ]
+    },
+    {
+      "pattern_id": "S1.H1",
+      "surface_family": "S1",
+      "name": "ComfyExtension.loadedGraphNode hook",
+      "occurrences": 11,
+      "unique_repos": 6,
+      "cumulative_stars": 4914,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.447,
+      "top_repos": [
+        {
+          "repo": "rgthree/rgthree-comfy",
+          "stars": 3066
+        },
+        {
+          "repo": "Comfy-Org/ComfyUI_frontend",
+          "stars": 1794
+        },
+        {
+          "repo": "sofakid/dandy",
+          "stars": 54
+        },
+        {
+          "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+          "stars": 0
+        },
+        {
+          "repo": "chrisgoringe/cg-use-everywhere",
+          "stars": 0
         }
       ]
     },
@@ -1519,36 +1583,36 @@
       ]
     },
     {
-      "pattern_id": "S1.H1",
-      "surface_family": "S1",
-      "name": "ComfyExtension.loadedGraphNode hook",
-      "occurrences": 10,
-      "unique_repos": 5,
-      "cumulative_stars": 4914,
+      "pattern_id": "S5.A3",
+      "surface_family": "S5",
+      "name": "api.addEventListener('execution_start' | 'execution_success' | 'execution_error' | 'execution_cached' | 'executing' | 'status' | 'reconnecting')",
+      "occurrences": 17,
+      "unique_repos": 11,
+      "cumulative_stars": 443,
       "signature_count": 1,
-      "silent_breakage": 0.0,
+      "silent_breakage": 1.5,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 4.42,
+      "blast_radius": 4.276,
       "top_repos": [
         {
-          "repo": "rgthree/rgthree-comfy",
-          "stars": 3066
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
         },
         {
-          "repo": "Comfy-Org/ComfyUI_frontend",
-          "stars": 1794
+          "repo": "kyuz0/amd-strix-halo-comfyui-toolboxes",
+          "stars": 115
         },
         {
-          "repo": "sofakid/dandy",
-          "stars": 54
+          "repo": "huafitwjb/ComfyUI-GO-Mobile-app",
+          "stars": 7
         },
         {
-          "repo": "chrisgoringe/cg-use-everywhere",
-          "stars": 0
+          "repo": "zzw5516/ComfyUI-zw-tools",
+          "stars": 6
         },
         {
-          "repo": "ltdrdata/ComfyUI-Impact-Pack",
-          "stars": 0
+          "repo": "choovin/comfyui-api",
+          "stars": 3
         }
       ]
     },
@@ -1587,36 +1651,24 @@
       ]
     },
     {
-      "pattern_id": "S5.A3",
-      "surface_family": "S5",
-      "name": "api.addEventListener('execution_start' | 'execution_success' | 'execution_error' | 'execution_cached' | 'executing' | 'status' | 'reconnecting')",
-      "occurrences": 16,
-      "unique_repos": 10,
-      "cumulative_stars": 443,
+      "pattern_id": "S6.A5",
+      "surface_family": "S6",
+      "name": "Frontend widget validation (pre-queue rejection)",
+      "occurrences": 2,
+      "unique_repos": 2,
+      "cumulative_stars": 3066,
       "signature_count": 1,
-      "silent_breakage": 1.5,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 4.259,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 1.0,
+      "blast_radius": 4.221,
       "top_repos": [
         {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
+          "repo": "rgthree/rgthree-comfy",
+          "stars": 3066
         },
         {
-          "repo": "kyuz0/amd-strix-halo-comfyui-toolboxes",
-          "stars": 115
-        },
-        {
-          "repo": "huafitwjb/ComfyUI-GO-Mobile-app",
-          "stars": 7
-        },
-        {
-          "repo": "zzw5516/ComfyUI-zw-tools",
-          "stars": 6
-        },
-        {
-          "repo": "choovin/comfyui-api",
-          "stars": 3
+          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "stars": 0
         }
       ]
     },
@@ -1624,13 +1676,13 @@
       "pattern_id": "S1.H3",
       "surface_family": "S1",
       "name": "ComfyExtension.getCanvasMenuItems hook (the v1 alternative to canvas-prototype patching)",
-      "occurrences": 4,
-      "unique_repos": 4,
+      "occurrences": 5,
+      "unique_repos": 5,
       "cumulative_stars": 4400,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 4.133,
+      "blast_radius": 4.188,
       "top_repos": [
         {
           "repo": "kijai/ComfyUI-KJNodes",
@@ -1645,7 +1697,45 @@
           "stars": 19
         },
         {
+          "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+          "stars": 0
+        },
+        {
           "repo": "chrisgoringe/cg-use-everywhere",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.D1",
+      "surface_family": "S16",
+      "name": "SVG with onload/onerror attribute (XSS-equivalent dynamic JS)",
+      "occurrences": 13,
+      "unique_repos": 5,
+      "cumulative_stars": 705,
+      "signature_count": 1,
+      "silent_breakage": 1.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 4.151,
+      "top_repos": [
+        {
+          "repo": "melMass/comfy_mtb",
+          "stars": 705
+        },
+        {
+          "repo": "AlekPet/ComfyUI_Custom_Nodes_AlekPet",
+          "stars": 0
+        },
+        {
+          "repo": "MixLabPro/comfyui-mixlab-nodes",
+          "stars": 0
+        },
+        {
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
+          "stars": 0
+        },
+        {
+          "repo": "space-nuko/ComfyUI-OpenPose-Editor",
           "stars": 0
         }
       ]
@@ -1677,6 +1767,40 @@
       ]
     },
     {
+      "pattern_id": "S2.N3",
+      "surface_family": "S2",
+      "name": "nodeType.prototype.onConnectionsChange patching",
+      "occurrences": 15,
+      "unique_repos": 10,
+      "cumulative_stars": 1244,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 3.938,
+      "top_repos": [
+        {
+          "repo": "diodiogod/TTS-Audio-Suite",
+          "stars": 923
+        },
+        {
+          "repo": "Azornes/Comfyui-LayerForge",
+          "stars": 312
+        },
+        {
+          "repo": "DumiFlex/ComfyUI-Wildcard-Pipeline",
+          "stars": 4
+        },
+        {
+          "repo": "ComfyUI-Kelin/ComfyUI_Image_Anything",
+          "stars": 3
+        },
+        {
+          "repo": "m3rr/h4_Live",
+          "stars": 2
+        }
+      ]
+    },
+    {
       "pattern_id": "S9.R1",
       "surface_family": "S9",
       "name": "Reroute creation / mutation (LiteGraph.createRerouteOnLink, graph.reroutes, node.connectByRerouteId)",
@@ -1703,50 +1827,16 @@
       ]
     },
     {
-      "pattern_id": "S2.N3",
-      "surface_family": "S2",
-      "name": "nodeType.prototype.onConnectionsChange patching",
-      "occurrences": 14,
-      "unique_repos": 9,
-      "cumulative_stars": 1244,
-      "signature_count": 1,
-      "silent_breakage": 0.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 3.918,
-      "top_repos": [
-        {
-          "repo": "diodiogod/TTS-Audio-Suite",
-          "stars": 923
-        },
-        {
-          "repo": "Azornes/Comfyui-LayerForge",
-          "stars": 312
-        },
-        {
-          "repo": "DumiFlex/ComfyUI-Wildcard-Pipeline",
-          "stars": 4
-        },
-        {
-          "repo": "ComfyUI-Kelin/ComfyUI_Image_Anything",
-          "stars": 3
-        },
-        {
-          "repo": "m3rr/h4_Live",
-          "stars": 2
-        }
-      ]
-    },
-    {
       "pattern_id": "S1.H5",
       "surface_family": "S1",
       "name": "ComfyExtension.addCustomNodeDefs hook",
-      "occurrences": 2,
-      "unique_repos": 2,
+      "occurrences": 3,
+      "unique_repos": 3,
       "cumulative_stars": 1848,
       "signature_count": 1,
       "silent_breakage": 0.0,
       "lifecycle_coupling": 0.0,
-      "blast_radius": 3.601,
+      "blast_radius": 3.688,
       "top_repos": [
         {
           "repo": "Comfy-Org/ComfyUI_frontend",
@@ -1755,6 +1845,32 @@
         {
           "repo": "sofakid/dandy",
           "stars": 54
+        },
+        {
+          "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S17.WV1",
+      "surface_family": "S17",
+      "name": "widgets_values positional array serialization",
+      "occurrences": 2,
+      "unique_repos": 2,
+      "cumulative_stars": 1794,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 3.588,
+      "top_repos": [
+        {
+          "repo": "Comfy-Org/ComfyUI_frontend",
+          "stars": 1794
+        },
+        {
+          "repo": "(first-principles assessment \u2014 Terry Jia)",
+          "stars": 0
         }
       ]
     },
@@ -1785,40 +1901,6 @@
       ]
     },
     {
-      "pattern_id": "S16.D1",
-      "surface_family": "S16",
-      "name": "SVG with onload/onerror attribute (XSS-equivalent dynamic JS)",
-      "occurrences": 13,
-      "unique_repos": 5,
-      "cumulative_stars": 0,
-      "signature_count": 1,
-      "silent_breakage": 1.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 1.302,
-      "top_repos": [
-        {
-          "repo": "ComfyUI-Custom-Scripts",
-          "stars": 0
-        },
-        {
-          "repo": "ComfyUI-OpenPose-Editor",
-          "stars": 0
-        },
-        {
-          "repo": "ComfyUI_Custom_Nodes_AlekPet",
-          "stars": 0
-        },
-        {
-          "repo": "comfy_mtb",
-          "stars": 0
-        },
-        {
-          "repo": "comfyui-mixlab-nodes",
-          "stars": 0
-        }
-      ]
-    },
-    {
       "pattern_id": "S14.ID1",
       "surface_family": "S14",
       "name": "NodeLocatorId / NodeExecutionId parsing/creation",
@@ -1837,36 +1919,6 @@
       ]
     },
     {
-      "pattern_id": "S16.D3",
-      "surface_family": "S16",
-      "name": "Obfuscated string-replace pipeline (often PowerShell, but pattern bleeds into JS minifiers)",
-      "occurrences": 10,
-      "unique_repos": 4,
-      "cumulative_stars": 0,
-      "signature_count": 1,
-      "silent_breakage": 1.0,
-      "lifecycle_coupling": 0.0,
-      "blast_radius": 1.229,
-      "top_repos": [
-        {
-          "repo": "ComfyUI-BlenderAI-node",
-          "stars": 0
-        },
-        {
-          "repo": "ComfyUI-KJNodes",
-          "stars": 0
-        },
-        {
-          "repo": "ComfyUI_tinyterraNodes",
-          "stars": 0
-        },
-        {
-          "repo": "comfy_mtb",
-          "stars": 0
-        }
-      ]
-    },
-    {
       "pattern_id": "S16.D7",
       "surface_family": "S16",
       "name": "Python web/ template uses exec/eval to emit JS",
@@ -1879,7 +1931,223 @@
       "blast_radius": 1.168,
       "top_repos": [
         {
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.VUE1",
+      "surface_family": "S16",
+      "name": "bundled Vue runtime inside DOM widget",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 1.0,
+      "blast_radius": 0.611,
+      "top_repos": [
+        {
+          "repo": "ComfyUI-NKD-Sigmas-Curve",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S17.AM1",
+      "surface_family": "S17",
+      "name": "appModeStore / canvas mode state",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 1.0,
+      "blast_radius": 0.611,
+      "top_repos": [
+        {
+          "repo": "(first-principles assessment \u2014 Terry Jia)",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S17.SB1",
+      "surface_family": "S17",
+      "name": "subgraph boundary event propagation",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 1.0,
+      "blast_radius": 0.611,
+      "top_repos": [
+        {
+          "repo": "(first-principles assessment \u2014 Terry Jia)",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S4.W6",
+      "surface_family": "S4",
+      "name": "DOM widget creation hook (cross-extension observer)",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.5,
+      "blast_radius": 0.411,
+      "top_repos": [
+        {
+          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S12.UI3",
+      "surface_family": "S12",
+      "name": "Settings-integrated custom dialog trigger",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.5,
+      "blast_radius": 0.411,
+      "top_repos": [
+        {
+          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.DOM1",
+      "surface_family": "S16",
+      "name": "document.createElement('style') + head.appendChild",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "(aggregate \u2014 Notion \u00a72.3)",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.DOM2",
+      "surface_family": "S16",
+      "name": "document.body.appendChild (arbitrary DOM)",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "(aggregate \u2014 Notion \u00a72.3)",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.DOM3",
+      "surface_family": "S16",
+      "name": "innerHTML concatenation (potentially user-controlled)",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "(aggregate \u2014 Notion \u00a72.3)",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S16.DOM4",
+      "surface_family": "S16",
+      "name": "direct fetch() bypassing api.fetchApi",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "(aggregate \u2014 Notion \u00a75.3)",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S3.C2",
+      "surface_family": "S3",
+      "name": "LiteGraph.ContextMenu global replacement",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "ComfyUI-Easy-Use",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S12.UI2",
+      "surface_family": "S12",
+      "name": "app.ui.settings.settingsLookup direct mutation",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "ComfyUI-Easy-Use",
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "pattern_id": "S17.FA1",
+      "surface_family": "S17",
+      "name": "file upload / asset URL construction",
+      "occurrences": 1,
+      "unique_repos": 1,
+      "cumulative_stars": 0,
+      "signature_count": 1,
+      "silent_breakage": 0.0,
+      "lifecycle_coupling": 0.0,
+      "blast_radius": 0.211,
+      "top_repos": [
+        {
+          "repo": "(first-principles assessment \u2014 Terry Jia)",
           "stars": 0
         }
       ]

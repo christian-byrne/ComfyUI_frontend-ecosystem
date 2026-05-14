@@ -2,7 +2,7 @@ meta:
   schema_version: 1
   created: 2026-05-06
   sweep_date: '2026-05-08'
-  patterns_count: 59
+  patterns_count: 73
   sweep_status: in-progress
   sweeps_done:
   - bootstrap-from-R4
@@ -19,6 +19,8 @@ meta:
   - evidence-sweep-pass-2
   - evidence-sweep-pass-3-stragglers
   - evidence-sweep-pass-3
+  - notion-api-research
+  - notion-pain-point-s17
   sweeps_remaining:
   - S2.N12/N13 — onConnectInput / onConnectOutput MCP sweep across 40+ packs
   - S2.N14 — onWidgetChanged MCP sweep across 40+ packs
@@ -219,6 +221,25 @@ patterns:
     excerpt: "            }\n        }\n        \n        return originalProcessComplete.call(this, prompt_id, results);\n    };\n}\n\n// Basic execution handler\nfunction handleNodeExecution(message) {\n\
       \    if (!message || !Array.isArray(message) || message.length < 2) return;\n    \n    let vizData = message[1];\n    if (typeof vizData === 'string') {\n        try {\n            vizData = JSON.parse(vizData);\n\
       \        } catch (e) {"
+  - pattern_id: S4.W1
+    repo: (aggregate — Notion §2.2)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: chainCallback independently reimplemented by 5+ packages (VHS, AnimateDiff, KJNodes + 2 more)
+    excerpt: "// ComfyUI-VideoHelperSuite/web/js/VHS.core.js — one of 5+ independent reimplementations\nfunction chainCallback(object, property, callback) {\n    if (property in object && object[property])\
+      \ {\n        const callback_orig = object[property]\n        object[property] = function () {\n            const r = callback_orig.apply(this, arguments);\n            return callback.apply(this,\
+      \ arguments) ?? r\n        };\n    } else {\n        object[property] = callback;\n    }\n}\n"
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 909
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L909
+    source: local-clone
+    notes: widget.callback chaining, 20+ instances
   evidence_status: swept
 - pattern_id: S4.W2
   surface_family: S4
@@ -370,6 +391,47 @@ patterns:
       \  serialize: false, hideOnZoom: false,\n      getMinHeight: () => node[heightKey] || 550,\n      getMaxHeight: () => node[heightKey] || 550,\n      getHeight: () => node[heightKey] || 550,\n    });\n\
       \    node[heightKey] = 550;\n\n    node.contextMenu = createContextMenuElement(menuClassName);\n    node._menuDef = menuItems;\n    const menuEls = Object.entries(menuItems).map(([id, def]) => createMenuItem(id,\
       \ def.label || id));\n    setupMenuItems(node.contextMenu, menuEls);\n    document.body.appendChild(node.contextMenu);"
+  - pattern_id: S4.W2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 852
+    - 864
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L852
+    matched_regex: \.addDOMWidget\s*\(
+    source: clone
+    variant: clone-grep
+    excerpt: "        element.style['width'] = \"100%\"\n        element.style['minHeight'] = \"50px\"\n        const previewNode = this;\n        var previewWidget = this.addDOMWidget(\"audiopreview\"\
+      , \"preview\", element, {\n            serialize: false,\n            hideOnZoom: true,\n            getValue() {\n                return element.value;\n            },\n            setValue(v) {\n\
+      \                element.value = v;\n            },\n        });\n        previewWidget.computeSize = function(width) {\n            return [width, 50];\n        }"
+  - pattern_id: S4.W2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 941
+    - 953
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L941
+    matched_regex: \.addDOMWidget\s*\(
+    source: clone
+    variant: clone-grep
+    excerpt: "    chainCallback(nodeType.prototype, \"onNodeCreated\", function() {\n        var element = document.createElement(\"div\");\n        const previewNode = this;\n        var previewWidget\
+      \ = this.addDOMWidget(\"videopreview\", \"preview\", element, {\n            serialize: false,\n            hideOnZoom: false,\n            getValue() {\n                return element.value;\n  \
+      \          },\n            setValue(v) {\n                element.value = v;\n            },\n        });\n        allowDragFromWidget(previewWidget)\n        previewWidget.computeSize = function(width)\
+      \ {\n            if (this.aspectRatio && !this.parentEl.hidden) {"
+  - pattern_id: S4.W2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2466
+    - 2478
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2466
+    matched_regex: \.addDOMWidget\s*\(
+    source: clone
+    variant: clone-grep
+    excerpt: "        }\n        let canvasEl = document.createElement(\"canvas\")\n        canvasEl.style.width = \"100%\"\n        previewWidget = node.addDOMWidget(\"vhslatentpreview\", \"vhscanvas\"\
+      , canvasEl, {\n            serialize: false,\n            hideOnZoom: false,\n        });\n        previewWidget.serialize = false\n        allowDragFromWidget(previewWidget)\n        canvasEl.addEventListener('contextmenu',\
+      \ (e)  => {\n            e.preventDefault()\n            return app.canvas._mousedown_callback(e)\n        }, true);\n        canvasEl.addEventListener('pointerdown', (e)  => {\n            e.preventDefault()\n\
+      \            return app.canvas._mousedown_callback(e)"
   lifecycle_coupling: 2
   evidence_status: swept
 - pattern_id: S2.N1
@@ -540,6 +602,17 @@ patterns:
       \ arguments) : undefined;\n            setTimeout(() => {\n                ensureDatasetUploadWidgets(this);\n                syncDynamicAudioInputs(this);\n                app.graph.setDirtyCanvas(true);\n\
       \            }, 100);\n            return result;\n        };\n\n        const onConnectionsChange = nodeType.prototype.onConnectionsChange;\n        nodeType.prototype.onConnectionsChange = function(type,\
       \ index, connected, linkInfo) {\n            const result = onConnectionsChange ? onConnectionsChange.apply(this, arguments) : undefined;"
+  - pattern_id: S2.N1
+    repo: (aggregate — Notion §2.2)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 135 occurrences of nodeType.prototype.onNodeCreated across ~58 packages
+    excerpt: "// Standard pattern — save-and-wrap (ComfyUI-AnimateDiff-Evolved/web/js/gif_preview.js)\nconst onExecuted = nodeType.prototype.onExecuted\nnodeType.prototype.onExecuted = function (message)\
+      \ {\n    const r = onExecuted ? onExecuted.apply(this, message) : undefined\n    // ... custom behavior ...\n    return r\n}\n"
   evidence_status: swept
 - pattern_id: S2.N2
   surface_family: S2
@@ -876,6 +949,17 @@ patterns:
     excerpt: "\n\t\tif(nodeData.name == \"ImpactCompare\") {\n\t\t\tconst onConnectionsChange = nodeType.prototype.onConnectionsChange;\n\t\t\tnodeType.prototype.onConnectionsChange = function (type, index,\
       \ connected, link_info) {\n\t\t\t\tif(!link_info || this.inputs[0].type != '*' || type == 2)\n\t\t\t\t\treturn;\n\n\t\t\t\t// assign type\n\t\t\t\tconst node = app.graph.getNodeById(link_info.origin_id);\n\
       \t\t\t\tlet slot_type = node?.outputs[link_info.origin_slot].type;\n\n\t\t\t\tthis.inputs[0].type = slot_type;\n\t\t\t\tthis.inputs[1].type = slot_type;\n\t\t\t}\n\t\t}\n"
+  - pattern_id: S2.N3
+    repo: (aggregate — Notion §2.2)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 88 occurrences of nodeType.prototype.onExecuted — universal 'show backend output' pattern
+    excerpt: "// 88 occurrences: show_text, show_json, previewAny all use this\nnodeType.prototype.onExecuted = function (message) {\n    const r = onExecuted ? onExecuted.apply(this, message) : undefined\n\
+      \    return r\n}\n"
   evidence_status: swept
 - pattern_id: S2.N4
   surface_family: S2
@@ -1012,6 +1096,15 @@ patterns:
     variant: clone-grep
     excerpt: "\n  const onRem = nodeType.prototype.onRemoved\n\n  nodeType.prototype.onRemoved = function () {\n    const r = onRem ? onRem.apply(this, []) : undefined\n\n    if (docElement) {\n      docElement.remove()\n\
       \      docElement = null\n    }\n\n    if (wrapper) {\n      wrapper.remove()\n      wrapper = null\n    }\n    return r"
+  - pattern_id: S2.N4
+    repo: (aggregate — Notion §2.2)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 64 occurrences of nodeType.prototype.onConnectionsChange — six distinct parameter signatures observed
   lifecycle_coupling: 1
   notes: 'F14: no event distinguishes ''removed'' vs ''movedToGraph'' — extensions can''t tell whether to dispose or preserve state during subgraph promotion'
   evidence_status: swept
@@ -1358,6 +1451,17 @@ patterns:
       \     */\n    const drawGroups = LGraphCanvas.prototype.drawGroups;\n    LGraphCanvas.prototype.drawGroups = function (\n      canvasEl: HTMLCanvasElement,\n      ctx: CanvasRenderingContext2D,\n\
       \    ) {\n      drawGroups.apply(this, [...arguments] as any);\n\n      if (\n        !CONFIG_SERVICE.getFeatureValue(\"group_header_fast_toggle.enabled\") ||\n        !rgthree.lastCanvasMouseEvent\n\
       \      ) {\n        return;\n      }"
+  - pattern_id: S3.C1
+    repo: ComfyUI-Easy-Use
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 5 packages patch LGraphCanvas.prototype — rare but maximally destructive; Easy-Use replaces drawNodeShape in 300+ lines
+    excerpt: "// ComfyUI-Easy-Use/web_version/v1/js/easy/easyInterface.js:171\nLGraphCanvas.prototype.drawNodeShape = function(node, ctx, size, fgcolor, bgcolor, selected, mouse_over) {\n    // Completely\
+      \ rewrites the original drawing function (~300 lines)\n}\n// Also: pasteFromClipboard, all mouse events (rgthree), keyboard\n"
   evidence_status: swept
 - pattern_id: S5.A1
   surface_family: S5
@@ -1662,6 +1766,20 @@ patterns:
     excerpt: "export class RgthreeBaseVirtualNode extends RgthreeBaseNode {\n    constructor(title = RgthreeBaseNode.title) {\n        super(title, false);\n        this.isVirtualNode = true;\n    }\n \
       \   static setUp() {\n        if (!this.type) {\n            throw new Error(`Missing type for RgthreeBaseVirtualNode: ${this.title}`);\n        }\n        LiteGraph.registerNodeType(this.type, this);\n\
       \        if (this._category) {\n            this.category = this._category;\n        }\n    }\n}\nexport class RgthreeBaseServerNode extends RgthreeBaseNode {"
+  - pattern_id: S8.P1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2082
+    - 2094
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2082
+    matched_regex: \.isVirtualNode\s*=\s*true
+    source: clone
+    variant: clone-grep
+    excerpt: "            cloneType(nodeType, nodeData)\n        } else if (nodeData?.name == \"VHS_SelectLatest\") {\n            chainCallback(nodeType.prototype, \"onNodeCreated\", function() {\n   \
+      \             this.isVirtualNode = true\n                chainCallback(this, \"onConnectionsChange\", function (contype, slot, iscon, linfo) {\n                    if (iscon) {\n                 \
+      \       this.update_links()\n                    }\n                })\n\n                this.update_links = function(extraLinks = []) {\n                    if (!this.outputs[0].links?.length) return\n\
+      \n                    function get_links(node) {\n                        let links = []\n                        for (const l of node.outputs[0].links) {"
   evidence_status: swept
 - pattern_id: S1.H1
   surface_family: S1
@@ -1792,6 +1910,19 @@ patterns:
     variant: clone-grep
     excerpt: "  registerCustomNodes() {\n    FastGroupsMuter.setUp();\n  },\n  loadedGraphNode(node: LGraphNode) {\n    if (node.type == FastGroupsMuter.title) {\n      (node as FastGroupsMuter).tempSize\
       \ = [...node.size] as Point;\n    }\n  },\n});"
+  - pattern_id: S1.H1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2340
+    - 2352
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2340
+    matched_regex: \bloadedGraphNode\s*[:(]
+    source: clone
+    variant: clone-grep
+    excerpt: "            },\n        }\n    },\n    async loadedGraphNode(node) {\n        //Check and migrate inputs named batch_manager from old workflows\n        if (node.type?.startsWith(\"VHS_\"\
+      ) && node.inputs) {\n            const batchInput = node.inputs.find((i) => i.name == \"batch_manager\")\n            if (batchInput) {\n                batchInput.name = \"meta_batch\"\n        \
+      \    }\n        }\n    },\n    async beforeConfigureGraph(graphData, missingNodeTypes) {\n        if(helpDOM?.node) {\n            helpDOM.node = undefined\n        }"
   derived:
     occurrences: 1
     verdict: Drop without replacement. Risk is minimal.
@@ -2580,6 +2711,20 @@ patterns:
     excerpt: "\napp.registerExtension({\n    name: 'Comfy.EasyUse.CustomWidget',\n    getCustomWidgets: _ => ({\n        EASY_PROMPT_AWAIT_BAR: (node) => {\n            const widgetValue = ref(JSON.stringify({\n\
       \                select: 'now',\n                unlock: true,\n                last_seed:0,\n                seed:0,\n            }))\n            const isEasyUseTheme = ['obsidian','obsidian_dark','milk_white'].includes(getSetting('Comfy.ColorPalette'))\
       \ ? true : false\n            const height = isEasyUseTheme ? 48 : 54\n            return createVueWidget({\n                name:'toolbar',\n                node,"
+  - pattern_id: S1.H2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2152
+    - 2164
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2152
+    matched_regex: \bgetCustomWidgets\s*[:(]
+    source: clone
+    variant: clone-grep
+    excerpt: "            })\n        }\n    },\n    async getCustomWidgets() {\n        return {\n            VHSPATH(node, inputName, inputData) {\n                let w = {\n                    name\
+      \ : inputName,\n                    type : \"VHS.PATH\",\n                    value : \"\",\n                    draw : function(ctx, node, widget_width, y, H) {\n                        //Adapted\
+      \ from litegraph.core.js:drawNodeWidgets\n                        var show_text = app.canvas.ds.scale >= (app.canvas.low_quality_zoom_threshold ?? 0.5)\n                        var margin = 15;\n\
+      \                        var text_color = LiteGraph.WIDGET_TEXT_COLOR;\n                        var secondary_text_color = LiteGraph.WIDGET_SECONDARY_TEXT_COLOR;"
   derived:
     occurrences_wild: 1
     occurrences_our_core: 4
@@ -2829,6 +2974,15 @@ patterns:
       \    node.onConfigure = function (info) {\n        const result = originalOnConfigure ? originalOnConfigure(info) : undefined;\n        restoreVoiceWidgetValueFromConfig(node, voiceWidget, info);\n\
       \        schedulePreviewSync(node, voiceWidget);\n        return result;\n    };\n\n    // Stop on node removal.\n    const originalOnRemoved = node.onRemoved;\n    node.onRemoved = function () {\n\
       \        stopVoicePreview(node);\n        clearDomPlayer(node);\n        if (originalOnRemoved) {"
+  - pattern_id: S2.N7
+    repo: (aggregate — Notion §2.2)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 16 occurrences of nodeType.prototype.onConfigure — previously evidence-light, now substantial
   evidence_status: swept
 - pattern_id: S2.N8
   surface_family: S2
@@ -6014,6 +6168,60 @@ patterns:
       \ null || _b === void 0 ? void 0 : _b.call(_a, width)) || [\n                                    width,\n                                    LiteGraph.NODE_WIDGET_HEIGHT,\n                       \
       \         ];\n                                if (this === node.widgets[node.widgets.length - 1]) {\n                                    size[1] += 10;\n                                }\n       \
       \                         return size;\n                            };\n                        }\n                        this.combos[key].options.values = values;"
+  - pattern_id: S2.N11
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 330
+    - 342
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L330
+    matched_regex: \.computeSize\s*=\s*function
+    source: clone
+    variant: clone-grep
+    excerpt: "        }\n        //Pad computed size for the clickable question mark\n        let originalComputeSize = node.computeSize\n        node.computeSize = function() {\n            let size =\
+      \ originalComputeSize.apply(this, arguments)\n            if (!this.title) {\n                return size\n            }\n            let title_width = helpDOM.calculateTitleLength(this.title)\n \
+      \           size[0] = Math.max(size[0], title_width + LiteGraph.NODE_TITLE_HEIGHT*2)\n            return size\n        }\n\n        node.description = description\n        chainCallback(node, \"onDrawForeground\"\
+      , function (ctx) {\n            if (this?.flags?.collapsed) {"
+  - pattern_id: S2.N11
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 862
+    - 874
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L862
+    matched_regex: \.computeSize\s*=\s*function
+    source: clone
+    variant: clone-grep
+    excerpt: "                element.value = v;\n            },\n        });\n        previewWidget.computeSize = function(width) {\n            return [width, 50];\n        }\n        var timeout = null;\n\
+      \        this.updateParameters = (params, force_update) => {\n            if (!previewWidget.value.params) {\n                if(typeof(previewWidget.value) != 'object') {\n                    previewWidget.value\
+      \ =  {}\n                }\n                previewWidget.value.params = {}\n            }\n            Object.assign(previewWidget.value.params, params)\n            if (!force_update &&"
+  - pattern_id: S2.N11
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 952
+    - 964
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L952
+    matched_regex: \.computeSize\s*=\s*function
+    source: clone
+    variant: clone-grep
+    excerpt: "            },\n        });\n        allowDragFromWidget(previewWidget)\n        previewWidget.computeSize = function(width) {\n            if (this.aspectRatio && !this.parentEl.hidden) {\n\
+      \                let height = (previewNode.size[0]-20)/ this.aspectRatio + 10;\n                if (!(height > 0)) {\n                    height = 0;\n                }\n                this.computedHeight\
+      \ = height + 10;\n                return [width, height];\n            }\n            return [width, -4];//no loaded src, widget should not display\n        }\n        element.addEventListener('contextmenu',\
+      \ (e)  => {\n            e.preventDefault()"
+  - pattern_id: S2.N11
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2493
+    - 2505
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2493
+    matched_regex: \.computeSize\s*=\s*function
+    source: clone
+    variant: clone-grep
+    excerpt: "            return app.canvas._mouseup_callback(e)\n        }, true);\n\n        previewWidget.computeSize = function(width) {\n            if (this.aspectRatio) {\n                let height\
+      \ = (node.size[0]-20)/ this.aspectRatio + 10;\n                if (!(height > 0)) {\n                    height = 0;\n                }\n                this.computedHeight = height + 10;\n      \
+      \          return [width, height];\n            }\n            return [width, -4];//no loaded src, widget should not display\n        }\n    }\n    let canvasEl = previewWidget.element"
   evidence_status: swept
 - pattern_id: S6.A1
   surface_family: S6
@@ -6191,6 +6399,20 @@ patterns:
     variant: clone-grep
     excerpt: "\n    // temporarily hijack graph_to_prompt with a version that restores the old one but returns this prompt\n    const gtp_was = app.graphToPrompt;\n    app.graphToPrompt = () => {\n    \
       \    app.graphToPrompt = gtp_was;\n        return p;\n    }\n    app.queuePrompt(0);\n}\n\nexport { restart_from_here, all_v_nodes }"
+  - pattern_id: S6.A1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2364
+    - 2376
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2364
+    matched_regex: app\.graphToPrompt\s*=
+    source: clone
+    variant: clone-grep
+    excerpt: "            res.workflow.extra['VHS_KeepIntermediate'] = app.ui.settings.getSettingValue(\"VHS.KeepIntermediate\")\n            return res\n        }\n        app.graphToPrompt = graphToPrompt\n\
+      \        //Add a handler for pasting video data\n        document.addEventListener('paste', async (e) => {\n            if (!e.target.classList.contains('litegraph') &&\n                !e.target.classList.contains('graph-canvas-container'))\
+      \ {\n                    return\n                }\n            let data = e.clipboardData || window.clipboardData\n            let filepath = data.getData('text/plain')\n            let video\n \
+      \           for (const item of data.items) {\n                if (item.type.startsWith('video/')) {\n                    video = item"
   evidence_status: swept
 - pattern_id: S6.A2
   surface_family: S6
@@ -6350,6 +6572,25 @@ patterns:
       \ { Logger.log_error(e); }\n                const cvw_was = settingsCache.getSettingValue(\"Comfy.Validation.Workflows\")\n                if (settingsCache.getSettingValue(\"Use Everywhere.Options.block_graph_validation\"\
       )) {\n                    app.ui.settings.setSettingValue(\"Comfy.Validation.Workflows\", false);\n                }\n                await original_loadGraphData.apply(this, arguments);\n       \
       \         app.ui.settings.setSettingValue(\"Comfy.Validation.Workflows\", cvw_was);\n                //return v;\n            }"
+  - pattern_id: S6.A2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: testframework/web/js/testRunner.js
+    lines:
+    - 38
+    - 50
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/testframework/web/js/testRunner.js#L38
+    matched_regex: \.loadGraphData\(
+    source: clone
+    variant: clone-grep
+    excerpt: "        return false\n    }\n    let workflow = JSON.parse(await file.text())\n    await app.loadGraphData(workflow)\n    //NOTE: API is not used so workflow data is actually processed\n \
+      \   watched_nodes = workflow.tests\n    errors = []\n    let p = new Promise((r) => resolve = r)\n    await app.queuePrompt()\n    //block until execution completes\n    await p\n    watched_nodes\
+      \ = {}\n    if (errors.length > 0) {\n        app.ui.dialog.show(\"Failed \" + errors.length + \" tests:\\n\" + errors)\n        return true\n    }"
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2439
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2439
+    source: local-clone
   evidence_status: swept
 - pattern_id: S5.A2
   surface_family: S5
@@ -6635,6 +6876,35 @@ patterns:
       \ = node.widgets.findIndex((w) => w.type === \"customtext\");\n\t\t\t\tif(textarea_widget_index == -1) return\n\t\t\t\tnode.widgets[textarea_widget_index].dynamicPrompts = false\n\t\t\t\tnode.widgets[textarea_widget_index].inputEl.placeholder\
       \ = \"wildcard spec: if kept empty, this option will be ignored\";\n\t\t\t\tnode.widgets[textarea_widget_index].serializeValue = () => {return node.widgets[textarea_widget_index].value};\n\t\t\t\t\
       break\n\t\t\tcase \"easy XYInputs: ModelMergeBlocks\":\n \t\t\t\tlet preset_i = 3;\n\t\t    \tlet vector_i = 4;"
+  - pattern_id: S4.W3
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 632
+    - 644
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L632
+    matched_regex: \.serializeValue\s*=\s*\(
+    source: clone
+    variant: clone-grep
+    excerpt: "function addDateFormatting(nodeType, field, timestamp_widget = false) {\n    chainCallback(nodeType.prototype, \"onNodeCreated\", function() {\n        const widget = this.widgets.find((w)\
+      \ => w.name === field);\n        widget.serializeValue = () => {\n            return applyTextReplacements(app, widget.value);\n        };\n    });\n}\nfunction addTimestampWidget(nodeType, nodeData,\
+      \ targetWidget) {\n    const newWidgets = {};\n    for (let key in nodeData.input.required) {\n        if (key == targetWidget) {\n            //TODO: account for duplicate entries?\n            newWidgets[\"\
+      timestamp_directory\"] = [\"BOOLEAN\", {\"default\": true}]\n        }\n        newWidgets[key] = nodeData.input.required[key];"
+  - pattern_id: S4.W3
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 650
+    - 662
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L650
+    matched_regex: \.serializeValue\s*=\s*\(
+    source: clone
+    variant: clone-grep
+    excerpt: "    chainCallback(nodeType.prototype, \"onNodeCreated\", function () {\n        const directoryWidget = this.widgets.find((w) => w.name === \"directory_name\");\n        const timestampWidget\
+      \ = this.widgets.find((w) => w.name === \"timestamp_directory\");\n        directoryWidget.serializeValue = () => {\n            if (timestampWidget.value) {\n                //ignore actual value\
+      \ and return timestamp\n                return formatDate(\"yyyy-MM-ddThh:mm:ss\", new Date());\n            }\n            return directoryWidget.value\n        };\n        timestampWidget._value\
+      \ = value;\n        Object.definteProperty(timestampWidget, \"value\", {\n            set : function(value) {\n                this._value = value;\n                directoryWidget.disabled = value;\n\
+      \            },"
   evidence_status: swept
 - pattern_id: S1.H3
   surface_family: S1
@@ -6685,6 +6955,12 @@ patterns:
     excerpt: "\t\t\ttargetElementId: \"graph-canvas\",\n\t\t},\n\t],\n\tgetCanvasMenuItems() {\n\t\treturn [\n\t\t\t{\n\t\t\t\tcontent: \"KJNodes\",\n\t\t\t\thas_submenu: true,\n\t\t\t\tsubmenu: {\n\t\t\
       \t\t\toptions: [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tcontent: \"Convert outputs on all selected nodes to Set/Get\",\n\t\t\t\t\t\t\tcallback: () => {\n\t\t\t\t\t\t\t\tconst selected = Object.values(app.canvas.selected_nodes\
       \ || {});\n\t\t\t\t\t\t\t\tif (selected.length === 0) return;\n\t\t\t\t\t\t\t\tfor (const n of selected) convertOutputsToSetGet(app.graph, n);"
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2152
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2152
+    source: local-clone
   derived:
     verdict: Keep but redesign — current hook returns mutable array, like P6 menu options. Needs declarative shape with idempotence.
   evidence_status: swept
@@ -6748,6 +7024,12 @@ patterns:
     url: null
     variant: 1-file-our-core
     notes: 1 of 23 core extensions uses this — find which
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2340
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2340
+    source: local-clone
 - pattern_id: S1.H6
   surface_family: S1
   surface: ComfyExtension.registerCustomNodes hook
@@ -9853,6 +10135,75 @@ patterns:
     variant: clone-grep
     excerpt: "    }\n\n    // Position each of the widgets\n    for (const w of node.widgets) {\n        w.y = y;\n        if (w.type === \"customCanvas\") {\n            y += freeSpace;\n        } else\
       \ if (w.computeSize) {\n            y += w.computeSize()[1] + 4;\n        } else {\n            y += NODE_WIDGET_HEIGHT + 4;\n        }\n    }\n\n    node.canvasHeight = freeSpace;\n}"
+  - pattern_id: S2.N16
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 706
+    - 718
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L706
+    matched_regex: for\s*\(\s*(const|let|var)\s+\w+\s+of\s+node\.widgets
+    source: clone
+    variant: clone-grep
+    excerpt: "            if ('frames' in format) {\n                format.frame_load_cap = {'step': format.frames[0], 'mod': format.frames[1]}\n            }\n            for (let widget of node.widgets)\
+      \ {\n                if (widget.name in base) {\n                    let wasDefault = widget.options?.reset == widget.value\n                    widget.options = Object.assign({}, base[widget.name],\
+      \ format[widget.name])\n                    if (wasDefault && widget.options.reset != undefined) {\n                        widget.value = widget.options.reset\n                    }\n           \
+      \         widget.callback(widget.value)\n                }\n            }\n\n        });\n        let capWidget = this.widgets.find((w) => w.name === \"frame_load_cap\")"
+  - pattern_id: S2.N16
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2211
+    - 2223
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2211
+    matched_regex: node\.widgets\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                if (!node.widgets) {\n                    node.widgets = [];\n                }\n                node.widgets.push(w);\n                return w;\n            },\n        \
+      \    VHSFLOAT(node, inputName, inputData) {\n                let w = {\n                    name: inputName,\n                    type: \"VHS.ANNOTATED\",\n                    value: inputData[1]?.default\
+      \ ?? 0,\n                    draw: drawAnnotated,\n                    mouse: mouseAnnotated,\n                    computeSize(width) {\n                        return [width, 20]\n              \
+      \      },"
+  - pattern_id: S2.N16
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2247
+    - 2259
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2247
+    matched_regex: node\.widgets\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                if (!node.widgets) {\n                    node.widgets = []\n                }\n                node.widgets.push(w)\n                return w\n            },\n           \
+      \ VHSINT(node, inputName, inputData) {\n                let w = {\n                    name: inputName,\n                    type: \"VHS.ANNOTATED\",\n                    value: inputData[1]?.default\
+      \ ?? 0,\n                    draw: drawAnnotated,\n                    mouse: mouseAnnotated,\n                    computeSize(width) {\n                        return [width, 20]\n              \
+      \      },"
+  - pattern_id: S2.N16
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2283
+    - 2295
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2283
+    matched_regex: node\.widgets\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                if (!node.widgets) {\n                    node.widgets = []\n                }\n                node.widgets.push(w)\n                return w\n            },\n           \
+      \ VHSTIMESTAMP(node, inputName, inputData) {\n                let w = {\n                    name: inputName,\n                    type: \"VHS.TIMESTAMP\",\n                    value: inputData[1]?.default\
+      \ ?? 0,\n                    draw: drawAnnotated,\n                    mouse: mouseAnnotated,\n                    computeSize(width) {\n                        return [width, 20]\n              \
+      \      },"
+  - pattern_id: S2.N16
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2335
+    - 2347
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2335
+    matched_regex: node\.widgets\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                if (!node.widgets) {\n                    node.widgets = []\n                }\n                node.widgets.push(w)\n                return w\n            },\n        }\n\
+      \    },\n    async loadedGraphNode(node) {\n        //Check and migrate inputs named batch_manager from old workflows\n        if (node.type?.startsWith(\"VHS_\") && node.inputs) {\n            const\
+      \ batchInput = node.inputs.find((i) => i.name == \"batch_manager\")\n            if (batchInput) {\n                batchInput.name = \"meta_batch\"\n            }\n        }"
 - pattern_id: S2.N17
   surface_family: S2
   surface: nodeType.prototype.onSelected / onDeselected patching
@@ -11855,6 +12206,16 @@ patterns:
     variant: clone-grep
     excerpt: "\t\tnode[InfoSymbol] = 1;\n\t\tconst onResize = (node[InfoResizeSymbol] = node.onResize);\n\n\t\tnode.onResize = function (size) {\n\t\t\tcomputeSize(size);\n\n\t\t\t// Call original resizer\
       \ handler\n\t\t\tif (onResize) {\n\t\t\t\tconsole.log(this, arguments)\n\t\t\t\tonResize.apply(this, arguments);\n\t\t\t}\n\t\t};\n\t}\n\n\treturn { widget };\n}"
+  - pattern_id: S2.N19
+    repo: (aggregate — Notion §2.7)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 24 files patch onResize — previously evidence-light
+    excerpt: "// ComfyUI-Easy-Use\nconst onResize = node.onResize;\nnode.onResize = function (size) {\n    computeSize(size);\n    if (onResize) onResize.apply(this, arguments);\n};\n"
 - pattern_id: S9.R1
   surface_family: S9
   surface: Reroute creation / mutation (LiteGraph.createRerouteOnLink, graph.reroutes, node.connectByRerouteId)
@@ -12227,6 +12588,21 @@ patterns:
     excerpt: "\nfunction fix_star_inputs(node) {\n    node.inputs.filter((input)=>(input.type=='*' && input.link)).forEach((input)=>{\n        const llink = node.graph.links[input.link]\n        if (llink.type)\
       \ input.type = llink.type\n    })\n}\n\nexport function fix_inputs(node, message) {\n    fix_call_message = message\n    if (!node.graph) return // node has been deleted prior to the fix\n    if (shared.graph_being_configured)\
       \ return\n    if (node.properties.ue_properties.fixed_inputs) return\n\n    fix_unconnected_inputs(node)\n    fix_star_inputs(node)"
+  - pattern_id: S9.L1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 595
+    - 607
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L595
+    matched_regex: graph\.links\[
+    source: clone
+    variant: clone-grep
+    excerpt: "                    }\n                    let removed_links = []\n                    for (let link_id of this.outputs[0].links) {\n                        let link = app.graph.links[link_id]\n\
+      \                        if (!link)\n                            debugger\n                        let target_node = app.graph.getNodeById(link.target_id)\n                        let target_input\
+      \ = target_node.inputs[link.target_slot]\n                        let keep = LiteGraph.isValidConnection(new_type, target_input.type)\n                        if (!keep) {\n                      \
+      \      link.disconnect(app.graph, 'input')\n                            removed_links.push(link_id)\n                        }\n                        target_node.onConnectionsChange?.(LiteGraph.INPUT,\n\
+      \                            link.target_slot, keep, link, target_input)\n                    }"
 - pattern_id: S9.S1
   surface_family: S9
   surface: Slot direct mutation (slot.color_on, slot.color_off, slot.shape, slot.localized_name)
@@ -12587,6 +12963,34 @@ patterns:
       \t\t\t\t});\n\t\t\t\t}\n\t\t\t\tbreak;\n\t\t\tcase \"ImageConcatMulti\":\n\t\t\t\t// Split out from the IMAGE-only case so dynamic slots accept MASK too.\n\t\t\t\tnodeType.prototype.onNodeCreated\
       \ = function () {\n\t\t\t\tthis._type = \"IMAGE,MASK\"\n\t\t\t\tconst acceptedTypes = [\"IMAGE\", \"IMAGE,MASK\"];\n\t\t\t\tthis.addWidget(\"button\", \"Update inputs\", null, () => {\n\t\t\t\t\t\
       if (!this.inputs) {"
+  - pattern_id: S10.D1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 1288
+    - 1300
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L1288
+    matched_regex: \.removeInput\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                //I do not like the performance of this, but it's safe\n                let slot = this.inputs.findIndex((i) => i.name == w.name)\n                if (slot >= 0) {\n      \
+      \              this.removeInput(slot)\n                }\n            }\n            for (let w of newWidgets) {\n                let existingInput = this.inputs.find((i) => i.name == w.name)\n  \
+      \              if (existingInput) {\n                    setWidgetConfig(existingInput, w.config)\n                    //TODO: Consider forcing disconnection if props change?\n                } else\
+      \ {\n                    //NOTE: config is applied in wrapped addInput call\n                    this.addInput(w.name, w.config[0], {widget: {name: w.name}})\n                }\n            }"
+  - pattern_id: S10.D1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 1298
+    - 1310
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L1298
+    matched_regex: \.addInput\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                    //TODO: Consider forcing disconnection if props change?\n                } else {\n                    //NOTE: config is applied in wrapped addInput call\n            \
+      \        this.addInput(w.name, w.config[0], {widget: {name: w.name}})\n                }\n            }\n            fitHeight(this);\n            formatWidgetsCount = newWidgets.length;\n       \
+      \ });\n    });\n}\nfunction addLoadCommon(nodeType, nodeData) {\n    addVideoPreview(nodeType);\n    initializeLoadFormat(nodeType, nodeData)\n    addPreviewOptions(nodeType);\n    chainCallback(nodeType.prototype,\
+      \ \"onNodeCreated\", function() {"
 - pattern_id: S10.D2
   surface_family: S10
   surface: node.connect / node.disconnectInput / node.disconnectOutput programmatic linking
@@ -12754,6 +13158,62 @@ patterns:
       \tif (node.outputs) {\n\t\tfor (let o = node.outputs.length - 1; o >= 0; o--) {\n\t\t\tif (node.outputs[o].links?.length) node.disconnectOutput(o);\n\t\t}\n\t}\n}\n\n// Map each snapshot entry → a\
       \ new-node slot. Name matches win first, then sameIndex,\n// then first compatible. Each slot is claimed at most once so fallbacks can't stomp matches.\nfunction resolveAssignments(snapshots, slots,\
       \ isFree) {"
+  - pattern_id: S10.D2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 531
+    - 543
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L531
+    matched_regex: \.disconnectOutput\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                            return\n                        }\n                        this.linkTimeout = false\n                        this.disconnectOutput(0);\n                    }, 50)\n\
+      \                }\n                this.outputs[0].name = 'LATENT';\n                this.outputs[0].type = 'LATENT';\n            } else{\n                if (this.outputs[0].type == \"LATENT\"\
+      ) {\n                    this.linkTimeout = setTimeout(() => {\n                        this.linkTimeout = false\n                        this.disconnectOutput(0);\n                    }, 50)\n  \
+      \              }\n                this.outputs[0].name = \"IMAGE\";"
+  - pattern_id: S10.D2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 540
+    - 552
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L540
+    matched_regex: \.disconnectOutput\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                if (this.outputs[0].type == \"LATENT\") {\n                    this.linkTimeout = setTimeout(() => {\n                        this.linkTimeout = false\n                   \
+      \     this.disconnectOutput(0);\n                    }, 50)\n                }\n                this.outputs[0].name = \"IMAGE\";\n                this.outputs[0].type = \"IMAGE\";\n            }\n\
+      \        }\n    });\n}\nfunction addVAEInputToggle(nodeType, nodeData) {\n    chainCallback(nodeType.prototype, \"onNodeCreated\", function() {\n        this.reject_ue_connection = (input) => input?.name\
+      \ == \"vae\"\n    })"
+  - pattern_id: S10.D2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 566
+    - 578
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L566
+    matched_regex: \.disconnectInput\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                            return\n                        }\n                        this.linkTimeout = false\n                        this.disconnectInput(0);\n                    }, 50)\n\
+      \                }\n                this.inputs[0].type = 'LATENT';\n            } else {\n                if (this.inputs[0].type == \"LATENT\") {\n                    this.linkTimeout = setTimeout(()\
+      \ => {\n                        this.linkTimeout = false\n                        this.disconnectInput(0);\n                    }, 50)\n                }\n                this.inputs[0].type = \"\
+      IMAGE\";\n            }"
+  - pattern_id: S10.D2
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 574
+    - 586
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L574
+    matched_regex: \.disconnectInput\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                if (this.inputs[0].type == \"LATENT\") {\n                    this.linkTimeout = setTimeout(() => {\n                        this.linkTimeout = false\n                    \
+      \    this.disconnectInput(0);\n                    }, 50)\n                }\n                this.inputs[0].type = \"IMAGE\";\n            }\n        }\n    });\n}\nfunction cloneType(nodeType, nodeData)\
+      \ {\n    chainCallback(nodeType.prototype, \"onNodeCreated\", function() {\n        this.changeOutputType = function (new_type) {\n            this.linkTimeout = setTimeout(() => {\n             \
+      \   this.linkTimeout = false"
 - pattern_id: S11.G1
   surface_family: S11
   surface: graph._version mutation / read for change-tracking
@@ -12993,6 +13453,23 @@ patterns:
       \                    tn.title = `${this.widgets[0].value} (Positive)`\n                    tn.widgets[0].value = style[0]\n                  } else {\n                    window.MTB?.notify?.(\n \
       \                     `No positive to extract for ${this.widgets[0].value}`,\n                    )\n                  }\n                }\n              },\n            },\n            {\n     \
       \         content: 'Extract Negative to Text node',"
+  - pattern_id: S11.G2
+    repo: (aggregate — Notion §2.8)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 30 files iterate graph._nodes; 2 use findNodesByType
+    excerpt: "// ComfyUI-KJNodes/web/js/setgetnodes.js\ngraph._nodes.forEach(otherNode => {\n    if (otherNode !== this && otherNode.type === 'SetNode') {\n        existingValues.add(otherNode.widgets[0].value);\n\
+      \    }\n});\n// ComfyUI-Impact-Pack — link traversal\nlet src_node = app.graph._nodes_by_id[app.graph.links[input.link].origin_id];\n"
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2382
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2382
+    source: local-clone
 - pattern_id: S12.UI1
   surface_family: S12
   surface: extensionManager / commandManager / toastManager / sidebarTab / bottomPanel registration
@@ -13211,6 +13688,48 @@ patterns:
     excerpt: "    // const rinputs = nodeData.input?.required\n\n    let has_custom = false\n    if (nodeData.input?.required) {\n      for (const i of Object.keys(nodeData.input.required)) {\n        const\
       \ input_type = nodeData.input.required[i][0]\n\n        if (newTypes.includes(input_type)) {\n          has_custom = true\n          break\n        }\n      }\n    }\n    if (has_custom) {\n     \
       \ //- Add widgets on node creation\n      const onNodeCreated = nodeType.prototype.onNodeCreated"
+  - pattern_id: S13.SC1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 639
+    - 651
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L639
+    matched_regex: nodeData\.input\.required
+    source: clone
+    variant: clone-grep
+    excerpt: "}\nfunction addTimestampWidget(nodeType, nodeData, targetWidget) {\n    const newWidgets = {};\n    for (let key in nodeData.input.required) {\n        if (key == targetWidget) {\n       \
+      \     //TODO: account for duplicate entries?\n            newWidgets[\"timestamp_directory\"] = [\"BOOLEAN\", {\"default\": true}]\n        }\n        newWidgets[key] = nodeData.input.required[key];\n\
+      \    }\n    nodeDta.input.required = newWidgets;\n    chainCallback(nodeType.prototype, \"onNodeCreated\", function () {\n        const directoryWidget = this.widgets.find((w) => w.name === \"directory_name\"\
+      );\n        const timestampWidget = this.widgets.find((w) => w.name === \"timestamp_directory\");\n        directoryWidget.serializeValue = () => {\n            if (timestampWidget.value) {"
+  - pattern_id: S13.SC1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 644
+    - 656
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L644
+    matched_regex: nodeData\.input\.required
+    source: clone
+    variant: clone-grep
+    excerpt: "            //TODO: account for duplicate entries?\n            newWidgets[\"timestamp_directory\"] = [\"BOOLEAN\", {\"default\": true}]\n        }\n        newWidgets[key] = nodeData.input.required[key];\n\
+      \    }\n    nodeDta.input.required = newWidgets;\n    chainCallback(nodeType.prototype, \"onNodeCreated\", function () {\n        const directoryWidget = this.widgets.find((w) => w.name === \"directory_name\"\
+      );\n        const timestampWidget = this.widgets.find((w) => w.name === \"timestamp_directory\");\n        directoryWidget.serializeValue = () => {\n            if (timestampWidget.value) {\n    \
+      \            //ignore actual value and return timestamp\n                return formatDate(\"yyyy-MM-ddThh:mm:ss\", new Date());\n            }\n            return directoryWidget.value\n        };"
+  - pattern_id: S13.SC1
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 1918
+    - 1930
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L1918
+    matched_regex: nodeData\.input\?\.required
+    source: clone
+    variant: clone-grep
+    excerpt: "                })\n            }\n            //set widgetType to use VHS widgets where possible\n            for(let inp of Object.values({...nodeData.input?.required, ...nodeData.input?.optional}))\
+      \ {\n                if ([\"INT\", \"FLOAT\"].includes(inp[0])) {\n                    if (!inp[1]) {\n                        inp[1] = {}\n                    }\n                    inp[1].widgetType\
+      \ ??= \"VHS\" + inp[0]\n                }\n            }\n            chainCallback(nodeType.prototype, \"onNodeCreated\", function () {\n                let new_widgets = []\n                if (this.widgets)\
+      \ {\n                    for (let w of this.widgets) {\n                        let input = this.constructor.nodeData.input"
 - pattern_id: S14.ID1
   surface_family: S14
   surface: NodeLocatorId / NodeExecutionId parsing/creation
@@ -13495,6 +14014,47 @@ patterns:
     excerpt: "          const data = await resp.json();\n\n          if (!this.image.options.values.includes(data.name)) {\n            this.image.options.values.push(data.name);\n          }\n\n      \
       \    this.image.value = data.name;\n          this.updateHistoryData();\n        } else {\n          alert(resp.status + \" - \" + resp.statusText);\n        }\n      } catch (error) {\n        console.error(error);\n\
       \      }\n    };\n"
+  - pattern_id: S4.W4
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 786
+    - 798
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L786
+    matched_regex: \.options\.values\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                        }\n                    }\n                    this.progress = undefined\n                    pathWidget.options.values.push(path);\n                    pathWidget.value\
+      \ = path;\n                    if (pathWidget.callback) {\n                        pathWidget.callback(path)\n                    }\n                },\n            });\n        } else {\n       \
+      \     let accept = {'video': [\"video/webm\",\"video/mp4\",\"video/x-matroska\",\"image/gif\"],\n                          'audio': [\"audio/mpeg\",\"audio/wav\",\"audio/x-wav\",\"audio/ogg\"]}[type]\n\
+      \            async function doUpload(file) {\n                let resp = await uploadFile(file, (p) => node.progress = p)\n                node.progress = undefined"
+  - pattern_id: S4.W4
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 803
+    - 815
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L803
+    matched_regex: \.options\.values\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                    return false\n                }\n                const filename = JSON.parse(resp.responseText).name;\n                pathWidget.options.values.push(filename);\n     \
+      \           pathWidget.value = filename;\n                if (pathWidget.callback) {\n                    pathWidget.callback(filename)\n                }\n                return true\n          \
+      \  }\n            Object.assign(fileInput, {\n                type: \"file\",\n                accept: accept.join(','),\n                style: \"display: none\",\n                onchange: async\
+      \ () => {\n                    if (fileInput.files.length) {"
+  - pattern_id: S4.W4
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2404
+    - 2416
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2404
+    matched_regex: \.options\.values\.push\(
+    source: clone
+    variant: clone-grep
+    excerpt: "                    return;\n                }\n                const filename = (await resp.json()).name;\n                pathWidget.options.values.push(filename);\n                pathWidget.value\
+      \ = filename;\n                pathWidget.callback?.(filename)\n            } else {\n                return\n            }\n            e.preventDefault()\n            e.stopImmediatePropagation()\n\
+      \            return false\n        }, true)\n    },\n    async init() {\n        if (app.ui.settings.getSettingValue(\"VHS.AdvancedPreviews\") == true) {"
 - pattern_id: S4.W5
   surface_family: S4
   surface: direct widget.value writes from extension code
@@ -13658,6 +14218,49 @@ patterns:
     variant: clone-grep
     excerpt: "    if (!widget) {\n        return;\n    }\n    widget.value = value;\n    widget.callback?.(widget.value);\n}\n\nfunction setWidgetHeightSafe(widget, height) {\n    if (!widget) {\n     \
       \   return;\n    }\n    try {\n        widget.height = height;\n    } catch {\n        // Some ComfyUI builds expose BaseWidget.height as getter-only.\n    }"
+  - pattern_id: S4.W5
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 711
+    - 723
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L711
+    matched_regex: widget\.value\s*=
+    source: clone
+    variant: clone-grep
+    excerpt: "                    let wasDefault = widget.options?.reset == widget.value\n                    widget.options = Object.assign({}, base[widget.name], format[widget.name])\n               \
+      \     if (wasDefault && widget.options.reset != undefined) {\n                        widget.value = widget.options.reset\n                    }\n                    widget.callback(widget.value)\n\
+      \                }\n            }\n\n        });\n        let capWidget = this.widgets.find((w) => w.name === \"frame_load_cap\")\n        capWidget.annotation = (value, width) => {\n            let\
+      \ max_frames = this.video_query?.loaded?.frames\n            if (!max_frames || value && value < max_frames) {\n                return\n            }"
+  - pattern_id: S4.W5
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 1610
+    - 1622
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L1610
+    matched_regex: widget\.value\s*=
+    source: clone
+    variant: clone-grep
+    excerpt: "    return strnum\n}\nfunction inner_value_change(widget, value, node, pos) {\n  widget.value = value\n  if (widget.options?.property && widget.options.property in node.properties) {\n   \
+      \ node.setProperty(widget.options.property, value)\n  }\n  if (widget.callback) {\n    widget.callback(widget.value, app.canvas, node, event)\n  }\n}\nfunction drawAnnotated(ctx, node, widget_width,\
+      \ y, H) {\n  const litegraph_base = LiteGraph\n  // In vueNodes mode, always show text since Vue renders at 1:1 scale\n  const show_text = LiteGraph.vueNodesMode || app.canvas.ds.scale >= (app.canvas.low_quality_zoom_threshold\
+      \ ?? 0.5)\n  const margin = 15"
+  - pattern_id: S4.W5
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2122
+    - 2134
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2122
+    matched_regex: widget\.value\s*=
+    source: clone
+    variant: clone-grep
+    excerpt: "                        const widgetName = input.widget.name\n                        const widget = node.widgets.find((w) => w.name === widgetName)\n                        if (widget) {\n\
+      \                            widget.value = v\n                            if (widget.callback) {\n                                widget.callback( widget.value, app.canvas,\n                    \
+      \                node, app.canvas.graph_mouse, {})\n                            }\n                        }\n                    }\n                }\n                let fetch_files = async () =>\
+      \ {\n                    let [path, remainder] = path_stem(this.widgets[0].value)\n                    let params = {path : path}\n                    let optionsURL = api.apiURL('/vhs/getpath?' +\
+      \ new URLSearchParams(params));\n                    let options = []"
 - pattern_id: S6.A3
   surface_family: S6
   surface: api.fetchApi — extensions hit backend HTTP endpoints
@@ -14149,6 +14752,19 @@ patterns:
     excerpt: "      this.updateDisplay(this.menuDisplayOption);\n    }, false);\n\n    api.addEventListener('execution_start', ({_detail}: any) => {\n      this.currentStatus = EStatus.executing;\n    \
       \  this.timeStart = Date.now();\n\n      this.updateDisplay(this.menuDisplayOption);\n    }, false);\n\n    api.addEventListener('execution_error', ({_detail}: any) => {\n      this.currentStatus\
       \ = EStatus.execution_error;\n\n      this.updateDisplay(this.menuDisplayOption);\n    }, false);\n  };"
+  - pattern_id: S5.A3
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 2439
+    - 2451
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L2439
+    matched_regex: addEventListener\(\s*['\"]executing['\"]
+    source: clone
+    variant: clone-grep
+    excerpt: "    },\n});\nlet previewImages = []\napi.addEventListener('executing', ({ detail }) => {\n    if (detail === null) {\n        for (let graph of [app.graph, ...app.graph.subgraphs.values()])\
+      \ {\n            for (let node of graph._nodes) {\n                if (node.type.startsWith(\"VHS_\")) {\n                    node.onPromptExecuted?.()\n                }\n            }\n        }\n\
+      \    }\n})\nfunction getLatentPreviewCtx(id, width, height) {\n    const node = getNodeById(id)"
 - pattern_id: S11.G3
   surface_family: S11
   surface: graph.beforeChange / graph.afterChange — explicit batching seam for multi-step mutations
@@ -14304,6 +14920,37 @@ patterns:
     excerpt: "        });\n\n        graph.remove(oldNode);\n        app.graph.afterChange();\n        requestAnimationFrame(() => app.canvas.setDirty(true, true));\n        return newNode;\n    } catch\
       \ (err) {\n        console.error(\"[KJNodes.FixNode] Aborting, rolling back:\", err);\n        try { graph.remove(newNode); } catch {}\n        return null;\n    }\n}\n\nwindow.kjNodes = window.kjNodes\
       \ || {};\nwindow.kjNodes.recreateNode = fixNode;"
+  - pattern_id: S11.G3
+    repo: (aggregate — Notion §2.12)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 8 files manually call graph.beforeChange/afterChange
+    excerpt: '// rgthree-comfy
+
+      app.graph.beforeChange();
+
+      this.renameContextInput(slotIndex, value);
+
+      app.graph.afterChange();
+
+      '
+  - pattern_id: S11.G3
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 440
+    - 452
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L440
+    matched_regex: \.beforeChange\(
+    source: clone
+    variant: clone-grep
+    excerpt: "}\nfunction startDraggingItems(node, pointer) {\n    app.canvas.emitBeforeChange()\n    app.canvas.graph?.beforeChange()\n    // Ensure that dragging is properly cleaned up, on success or\
+      \ failure.\n    pointer.finally = () => {\n      app.canvas.isDragging = false\n      app.canvas.graph?.afterChange()\n      app.canvas.emitAfterChange()\n    }\n    app.canvas.processSelect(node,\
+      \ pointer.eDown, true)\n    app.canvas.isDragging = true\n}\nfunction processDraggedItems(e) {\n    if (e.shiftKey || LiteGraph.alwaysSnapToGrid)\n      app.canvas?.graph?.snapToGrid(app.canvas.selectedItems)"
 - pattern_id: S7.G1
   surface_family: S7
   surface: window.LiteGraph / window.comfyAPI.* — globals as public surface
@@ -14462,6 +15109,32 @@ patterns:
     excerpt: "    canvas.height = height;\n    ctx.drawImage(img, 0, 0, width, height);\n\n    const { app } = window.comfyAPI.app;\n    const embed = app.ui.settings.getSettingValue(\"KJNodes.editors.embedBackgroundImage\"\
       ) ?? false;\n\n    // Use the downscaled canvas directly as bgImage — drawImage accepts canvas elements,\n    // avoids a data URL round-trip, and is immediately available (no async decode).\n   \
       \ const onStored = () => {\n      if (resize) {\n        this.handleImageLoad(img, canvas);\n      } else {\n        this.bgImage = canvas;\n        this.render();\n      }\n    };"
+  - pattern_id: S7.G1
+    repo: (aggregate — Notion §2.5)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 313 occurrences of LiteGraph.* access; 95 packages use window.*; some mutate global constants
+    excerpt: '// READ (reasonable):
+
+      LiteGraph.NODE_TEXT_SIZE
+
+      LiteGraph.NODE_TITLE_HEIGHT
+
+      LiteGraph.NODE_COLORS
+
+      // WRITE (critical severity):
+
+      LiteGraph.NODE_TEXT_SIZE = 13
+
+      LiteGraph.DEFAULT_BACKGROUND_IMAGE = ui.colors.litegraph_base.BACKGROUND_IMAGE
+
+      LGraphCanvas.link_type_colors["PIPE_LINE"] = customPipeLineLink
+
+      '
 - pattern_id: S11.G4
   surface_family: S11
   surface: graph.setDirtyCanvas(true, true) — imperative canvas-redraw trigger
@@ -14801,6 +15474,30 @@ patterns:
       \     this.setDirtyCanvas(true, true);\n    }\n    setIsPointerDown(down = this.isPointerDown) {\n        const newIsDown = down && !!app.canvas.pointer_is_down;\n        if (this.isPointerDown !==\
       \ newIsDown) {\n            this.isPointerDown = newIsDown;\n            this.setDirtyCanvas(true, false);\n        }\n        this.imageIndex = this.isPointerDown ? 1 : 0;\n        if (this.isPointerDown)\
       \ {\n            requestAnimationFrame(() => {\n                this.setIsPointerDown();"
+  - pattern_id: S10.D3
+    repo: (aggregate — Notion §2.7)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: 57 files manipulate node.size[] directly
+    excerpt: "node.setSize([node.size[0], node.computeSize()[1]])\nwidget.computeSize = function(width) {\n    const ratio = this.inputRatio || 1\n    return [width, (width / ratio + 10)]\n}\n"
+  - pattern_id: S10.D3
+    repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    file: web/js/VHS.core.js
+    lines:
+    - 1914
+    - 1926
+    url: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/blob/HEAD/web/js/VHS.core.js#L1914
+    matched_regex: \.setSize\(\s*\w*\.computeSize
+    source: clone
+    variant: clone-grep
+    excerpt: "                }\n                chainCallback(nodeType.prototype, \"onNodeCreated\", function () {\n                    helpDOM.addHelp(this, nodeType, description)\n                  \
+      \  this.setSize(this.computeSize())\n                })\n            }\n            //set widgetType to use VHS widgets where possible\n            for(let inp of Object.values({...nodeData.input?.required,\
+      \ ...nodeData.input?.optional})) {\n                if ([\"INT\", \"FLOAT\"].includes(inp[0])) {\n                    if (!inp[1]) {\n                        inp[1] = {}\n                    }\n \
+      \                   inp[1].widgetType ??= \"VHS\" + inp[0]\n                }\n            }\n            chainCallback(nodeType.prototype, \"onNodeCreated\", function () {"
 - pattern_id: S16.D1
   surface_family: S16
   surface: SVG with onload/onerror attribute (XSS-equivalent dynamic JS)
@@ -14814,7 +15511,7 @@ patterns:
   evidence_status: swept
   evidence:
   - pattern_id: S16.D1
-    repo: ComfyUI-Custom-Scripts
+    repo: pythongosssss/ComfyUI-Custom-Scripts
     file: web/js/workflowImage.js
     lines:
     - 1
@@ -14823,7 +15520,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: ComfyUI-OpenPose-Editor
+    repo: space-nuko/ComfyUI-OpenPose-Editor
     file: js/fabric.min.js
     lines:
     - 1
@@ -14832,7 +15529,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: ComfyUI_Custom_Nodes_AlekPet
+    repo: AlekPet/ComfyUI_Custom_Nodes_AlekPet
     file: PainterNode/js/painter_node.js
     lines:
     - 1
@@ -14841,7 +15538,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/worker-css.js
     lines:
     - 1
@@ -14850,7 +15547,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/mode-markdown.js
     lines:
     - 1
@@ -14859,7 +15556,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/worker-javascript.js
     lines:
     - 1
@@ -14868,7 +15565,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/ace.js
     lines:
     - 1
@@ -14877,7 +15574,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/mode-html.js
     lines:
     - 1
@@ -14886,7 +15583,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/worker-html.js
     lines:
     - 1
@@ -14895,7 +15592,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfyui-mixlab-nodes
+    repo: MixLabPro/comfyui-mixlab-nodes
     file: web/javascript/image_mixlab.js
     lines:
     - 1
@@ -14904,7 +15601,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfyui-mixlab-nodes
+    repo: MixLabPro/comfyui-mixlab-nodes
     file: web/javascript/3d_mixlab.js
     lines:
     - 1
@@ -14913,7 +15610,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfyui-mixlab-nodes
+    repo: MixLabPro/comfyui-mixlab-nodes
     file: web/javascript/ui_mixlab.js
     lines:
     - 1
@@ -14922,7 +15619,7 @@ patterns:
     source: security
     variant: svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23
   - pattern_id: S16.D1
-    repo: comfyui-mixlab-nodes
+    repo: MixLabPro/comfyui-mixlab-nodes
     file: web/javascript/layer_mixlab.js
     lines:
     - 1
@@ -14943,7 +15640,7 @@ patterns:
   evidence_status: swept
   evidence:
   - pattern_id: S16.D3
-    repo: ComfyUI-BlenderAI-node
+    repo: AIGODLIKE/ComfyUI-BlenderAI-node
     file: SDNode/custom_nodes/Cup-ClipBoard/cup_clipboard.js
     lines:
     - 1
@@ -14952,7 +15649,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: ComfyUI-KJNodes
+    repo: kijai/ComfyUI-KJNodes
     file: kjweb_async/marked.min.js
     lines:
     - 1
@@ -14961,7 +15658,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: ComfyUI_tinyterraNodes
+    repo: TinyTerra/ComfyUI_tinyterraNodes
     file: js/ttNembedAC.js
     lines:
     - 1
@@ -14970,7 +15667,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web/extern/shodown.min.js
     lines:
     - 1
@@ -14979,7 +15676,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/ext-emmet.js
     lines:
     - 1
@@ -14988,7 +15685,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/ext-language_tools.js
     lines:
     - 1
@@ -14997,7 +15694,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/ext-prompt.js
     lines:
     - 1
@@ -15006,7 +15703,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/worker-base.js
     lines:
     - 1
@@ -15015,7 +15712,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/worker-json.js
     lines:
     - 1
@@ -15024,7 +15721,7 @@ patterns:
     source: security
     variant: powershell_obfuscation/OBFUS_PowerShell_Common_Replace
   - pattern_id: S16.D3
-    repo: comfy_mtb
+    repo: melMass/comfy_mtb
     file: web_async/ace/ext-inline_autocomplete.js
     lines:
     - 1
@@ -15045,7 +15742,7 @@ patterns:
   evidence_status: swept
   evidence:
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/controlnet_aux/dsine/models/submodules/efficientnet_repo/setup.py
     lines:
     - 1
@@ -15054,7 +15751,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/controlnet_aux/normalbae/nets/submodules/efficientnet_repo/setup.py
     lines:
     - 1
@@ -15063,7 +15760,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/custom_detectron2/config/lazy.py
     lines:
     - 1
@@ -15072,7 +15769,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/custom_detectron2/utils/tracing.py
     lines:
     - 1
@@ -15081,7 +15778,7 @@ patterns:
     source: security
     variant: B307
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/custom_midas_repo/midas/backbones/utils.py
     lines:
     - 1
@@ -15090,7 +15787,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/custom_midas_repo/midas/backbones/vit.py
     lines:
     - 1
@@ -15099,7 +15796,7 @@ patterns:
     source: security
     variant: B102
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/custom_mmpkg/custom_mmcv/ops/nms.py
     lines:
     - 1
@@ -15108,7 +15805,7 @@ patterns:
     source: security
     variant: B307
   - pattern_id: S16.D7
-    repo: comfyui_controlnet_aux
+    repo: Fannovel16/comfyui_controlnet_aux
     file: src/custom_mmpkg/custom_mmseg/core/evaluation/class_names.py
     lines:
     - 1
@@ -15116,3 +15813,465 @@ patterns:
     rule: B307
     source: security
     variant: B307
+- pattern_id: S4.W6
+  surface_family: S4
+  surface: DOM widget creation hook (cross-extension observer)
+  fingerprint: onDOMWidgetCreated / hook on any DOM widget created by any extension
+  semantic: observe widget creation events cross-extension to attach listeners (e.g. Autocomplete input handler)
+  severity: medium
+  lifecycle_coupling: low
+  silent_breakage: false
+  v2_replacement: onDOMWidgetCreated(handler) in defineExtension setup context
+  decision_ref: D7
+  test_target: DOM_WIDGET_CREATION_OBSERVER
+  evidence_status: single-source
+  source: notion-COM-3668
+  notes: 'Identified by Simon Tranter (COM-3668) as an API needed by Custom Scripts Autocomplete feature. Distinct from S4.W2 (which is the *creator* calling addDOMWidget): this is a *different* extension
+    observing all DOM widget creations. Gap confirmed: no v1 hook for cross-extension widget observation.'
+  evidence:
+  - repo: goodtab/ComfyUI-Custom-Scripts
+    file: web/js/autocomplete.js
+    lines: []
+    url: https://github.com/goodtab/ComfyUI-Custom-Scripts
+    variant: inferred-from-requirements
+    breakage_class: silent
+    source: notion-COM-3668
+- pattern_id: S12.UI3
+  surface_family: S12
+  surface: Settings-integrated custom dialog trigger
+  fingerprint: app.ui.openDialog / settings entry type dialog-trigger / custom modal from settings panel
+  semantic: extensions open custom modal dialogs triggered from the settings panel
+  severity: low
+  lifecycle_coupling: low
+  silent_breakage: false
+  v2_replacement: settings entry with type 'dialog-trigger' or app.ui.openDialog(Component)
+  decision_ref: D6
+  test_target: SETTINGS_CUSTOM_DIALOG
+  evidence_status: single-source
+  source: notion-COM-3668
+  notes: 'Identified by Simon Tranter (COM-3668) as an API needed by Custom Scripts Autocomplete feature. Currently implemented via raw DOM injection (S16.DOM3 innerHTML). Distinct gap: settings-panel integration
+    point for modal dialogs is missing from v1 and not addressed in S12.UI1/UI2.'
+  evidence:
+  - repo: goodtab/ComfyUI-Custom-Scripts
+    file: web/js/autocomplete.js
+    lines: []
+    url: https://github.com/goodtab/ComfyUI-Custom-Scripts
+    variant: inferred-from-requirements
+    breakage_class: silent
+    source: notion-COM-3668
+- pattern_id: S6.A5
+  surface_family: S6
+  surface: Frontend widget validation (pre-queue rejection)
+  fingerprint: widget.on('beforeQueue') / node.on('beforeQueue') / validation hook before queuePrompt
+  semantic: validate widget values before workflow submission and surface errors to the user
+  severity: medium
+  lifecycle_coupling: medium
+  silent_breakage: true
+  v2_replacement: widget.on('beforeQueue', event => { if (invalid) event.reject('message') })
+  decision_ref: D5
+  test_target: WIDGET_VALIDATION_PRE_QUEUE
+  evidence_status: single-source
+  source: notion-COM-3668
+  notes: 'Identified by Simon Tranter (COM-3668) as an API needed by Custom Scripts Preset text feature. Currently extensions patch app.queuePrompt (S6.A4) to intercept and validate — a destructive monkey-patch.
+    Distinct from beforeSerialize (D5): validation rejects submission rather than transforming values. silent_breakage=true because current S6.A4 patches silently fail if another extension also patches
+    queuePrompt. v2 needs explicit pre-queue validation event with typed rejection mechanism.'
+  evidence:
+  - repo: goodtab/ComfyUI-Custom-Scripts
+    file: web/js/presetText.js
+    lines: []
+    url: https://github.com/goodtab/ComfyUI-Custom-Scripts
+    variant: inferred-from-requirements
+    breakage_class: silent
+    source: notion-COM-3668
+  - pattern_id: S6.A5
+    repo: rgthree/rgthree-comfy
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: rgthree redirects /rgthree/* routes. Global patch — only last-writer wins.
+    excerpt: "// rgthree-comfy — modifies api.apiURL globally\nconst apiURL = api.apiURL;\napi.apiURL = function (route) {\n    if (route.includes(\"rgthree/\")) {\n        return (this.api_base + \"/\"\
+      \ + route).replace(/\\/\\//g, \"/\");\n    }\n    return apiURL.apply(this, arguments);\n};\n"
+- pattern_id: S16.DOM1
+  surface_family: S16
+  surface: document.createElement('style') + head.appendChild
+  fingerprint: createElement.*style.*head\.appendChild|createElement\('style'\)
+  semantic: inject CSS into document head for custom node/widget styling
+  severity: moderate
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: 354
+  packages_affected: 81
+  v2_replacement: extensionManager.injectStyles(css) — proposed; not yet designed
+  notes: No cleanup mechanism — styles persist after extension disable. Injected styles may conflict with host.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S16.DOM1
+    repo: (aggregate — Notion §2.3)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: No cleanup mechanism — styles persist after extension disable. Injected styles may conflict with host.
+    excerpt: '// ComfyUI-KJNodes/web/js/help_popup.js
+
+      styleTag = document.createElement(''style'')
+
+      styleTag.innerHTML = `.kj-documentation-popup { background: var(--comfy-menu-bg); ... }`
+
+      document.head.appendChild(styleTag)
+
+      '
+- pattern_id: S16.DOM2
+  surface_family: S16
+  surface: document.body.appendChild (arbitrary DOM)
+  fingerprint: document\.body\.appendChild
+  semantic: inject UI panels, toolbars, preview elements into document body
+  severity: moderate
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: 364
+  packages_affected: 81
+  v2_replacement: extensionManager.addPanel() / addToolbarItem() — proposed
+  notes: Breaks when frontend DOM structure changes. No cleanup on extension disable.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S16.DOM2
+    repo: (aggregate — Notion §2.3)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: Breaks when frontend DOM structure changes. No cleanup on extension disable.
+    excerpt: '// ComfyUI-Easy-Use/web_version/v1/js/easy/easy.js
+
+      div = document.createElement(''div'')
+
+      btn = document.createElement(''div'')
+
+      document.body.appendChild(toolbar)
+
+      '
+- pattern_id: S16.DOM3
+  surface_family: S16
+  surface: innerHTML concatenation (potentially user-controlled)
+  fingerprint: \.innerHTML\s*=
+  semantic: render HTML content (help text, previews, dynamic content) via innerHTML
+  severity: high
+  lifecycle_coupling: false
+  silent_breakage: false
+  occurrences: 443
+  packages_affected: ~81
+  v2_replacement: safe HTML rendering API; Vue component mounting
+  notes: XSS risk when content includes user-supplied data or backend output. 443 occurrences is highest DOM count.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S16.DOM3
+    repo: (aggregate — Notion §2.3)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: XSS risk when content includes user-supplied data or backend output. 443 occurrences is highest DOM count.
+- pattern_id: S16.DOM4
+  surface_family: S16
+  surface: direct fetch() bypassing api.fetchApi
+  fingerprint: fetch\(['"]/
+  semantic: call backend HTTP endpoints without going through the authenticated api.fetchApi wrapper
+  severity: moderate
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: 232
+  v2_replacement: api.fetchApi() typed wrapper (S6.A3); formal custom-route registration (S6.A5 direction)
+  notes: Bypasses auth headers and error normalization. Related to S6.A3 but distinct — no ComfyAPI instance involved.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S16.DOM4
+    repo: (aggregate — Notion §5.3)
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: Bypasses auth headers and error normalization. Related to S6.A3 but distinct — no ComfyAPI instance involved.
+- pattern_id: S16.VUE1
+  surface_family: S16
+  surface: bundled Vue runtime inside DOM widget
+  fingerprint: createApp\(|vueApp\.mount\(
+  semantic: mount a Vue application inside addDOMWidget, bundling own copy of Vue runtime
+  severity: moderate
+  lifecycle_coupling: true
+  silent_breakage: false
+  occurrences: 9
+  packages_affected: 9
+  v2_replacement: registerVueWidget(nodeType, name, Component) sharing host Vue instance
+  notes: Each package ships own Vue runtime (bundle bloat). Cannot access host stores, i18n, theme. Manual mount/unmount is error-prone.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S16.VUE1
+    repo: ComfyUI-NKD-Sigmas-Curve
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: Each package ships own Vue runtime (bundle bloat). Cannot access host stores, i18n, theme. Manual mount/unmount is error-prone.
+    excerpt: "// ComfyUI-NKD-Sigmas-Curve — 7000+ line single file includes full Vue runtime\nconst vueApp = createApp(SigmaCurveWidget, { onChange: (json) => { ... } });\nconst instance = vueApp.mount(container);\n\
+      const domWidget = this.addDOMWidget(\"sigma_curve_editor\", \"CURVE_EDITOR\", container, {\n    getValue: () => instance.serialise(),\n    setValue: (val) => { instance.deserialise(val); }\n});\n"
+- pattern_id: S3.C2
+  surface_family: S3
+  surface: LiteGraph.ContextMenu global replacement
+  fingerprint: LiteGraph\.ContextMenu\s*=
+  semantic: replace the global ContextMenu constructor to customize all right-click menus
+  severity: critical
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: 1
+  packages_affected: 1
+  v2_replacement: declarative menu contribution API; getExtraMenuOptions hook (already exists for node scope)
+  notes: Only last-writer wins. Cannot be detected or managed by frontend. ComfyUI-Easy-Use is sole evidenced user.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S3.C2
+    repo: ComfyUI-Easy-Use
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: Only last-writer wins. Cannot be detected or managed by frontend. ComfyUI-Easy-Use is sole evidenced user.
+    excerpt: "// ComfyUI-Easy-Use/web_version/v1/js/easy/easyQuick.js\nLiteGraph.ContextMenu = function(values, options) {\n    // Completely replaces the global ContextMenu constructor\n}\n"
+- pattern_id: S12.UI2
+  surface_family: S12
+  surface: app.ui.settings.settingsLookup direct mutation
+  fingerprint: settingsLookup\[|settingsLookup\?\.
+  semantic: reach into another extension's registered setting and replace its onChange handler
+  severity: high
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: 1
+  packages_affected: 1
+  v2_replacement: settings isolation — registered settings should have immutable handles
+  notes: ComfyUI-Easy-Use replaces Comfy.UseNewMenu onChange. Cross-extension state corruption. Silently breaks the target extension.
+  evidence_status: swept
+  evidence:
+  - pattern_id: S12.UI2
+    repo: ComfyUI-Easy-Use
+    file: notion-api-usage-research
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692
+    source: notion-api-research
+    variant: aggregate-count
+    notes: ComfyUI-Easy-Use replaces Comfy.UseNewMenu onChange. Cross-extension state corruption. Silently breaks the target extension.
+    excerpt: '// ComfyUI-Easy-Use — accesses internal settingsLookup and replaces onChange handler
+
+      const changeNewMenuPosition = app.ui.settings.settingsLookup?.[''Comfy.UseNewMenu'']
+
+      if(changeNewMenuPosition) changeNewMenuPosition.onChange = v => { ... }
+
+      '
+- pattern_id: S17.AM1
+  surface_family: S17
+  surface: appModeStore / canvas mode state
+  fingerprint: appModeStore|useAppMode|getMode|canvasMode
+  semantic: Detect or react to ComfyUI canvas mode changes (graph / app / builder:inputs / builder:outputs / builder:arrange). Custom nodes need to adapt rendering, widget resize behavior, and read-only
+    state when mode changes.
+  severity: moderate
+  lifecycle_coupling: true
+  silent_breakage: true
+  occurrences: null
+  packages_affected: all
+  v2_replacement: 'node.on(''canvasModeChanged'', handler) on NodeHandle — a separate event from the existing NodeModeChangedEvent (which covers execution mode: muted/bypass/always). Or app-level event:
+    app.on(''canvasModeChanged'', handler). IMPORTANT: NodeModeChangedEvent already in node.ts covers execution mode only; canvas mode is a distinct concept.'
+  notes: 'appModeStore is a Pinia store only accessible via useAppMode() composable — JS extensions cannot use Vue composables. In App mode, canvas is read-only and widgets have special resize behavior,
+    but custom node widgets do not automatically adapt. No event fires when mode transitions. Extensions must poll or use heuristics. Flagged in Terry''s DX walkthrough appendix A.1. PKG2 surface impact:
+    add canvasModeChanged to NodeHandle event overloads, or document as known gap.'
+  evidence_status: single-source
+  evidence:
+  - pattern_id: S17.AM1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.1 — App Mode Support. No public API for extensions to detect or react to mode changes.
+    excerpt: '// Mode state lives in a Vue Pinia store (appModeStore), only accessible via useAppMode()
+
+      // composable — external JS extensions cannot use Vue composables.
+
+      // In App mode the canvas is read-only and widgets have special resize behavior,
+
+      // but custom node widgets do not automatically adapt.
+
+      // There is no event like node.on(''modeChange'') or app.on(''modeChange'').
+
+      // Custom nodes that render differently in editor vs app mode must resort to polling or heuristics.
+
+      '
+- pattern_id: S17.SB1
+  surface_family: S17
+  surface: subgraph boundary event propagation
+  fingerprint: SubgraphNode|subgraph.*onExecuted|onExecuted.*subgraph|MatchType.*subgraph|autogrow.*subgraph
+  semantic: Custom node callbacks (onExecuted, onConnectionsChange autogrow, MatchType) that work inside subgraphs but fail to propagate across the subgraph boundary. Four distinct failure modes when custom
+    nodes are placed inside subgraphs.
+  severity: high
+  lifecycle_coupling: true
+  silent_breakage: true
+  occurrences: null
+  packages_affected: all_with_dynamic_io
+  v2_replacement: 'Requires D9 Phase B (post-Alex rebase on #11939). ECS substrate must emit SubgraphNode execution events that forward from internal nodes. MatchType and autogrow propagation require subgraph
+    boundary awareness in the World dispatcher. Tag as blocked: I-PG.B1. Short-term: document as known limitation with @experimental on affected NodeHandle events; add subgraphCompatible flag to NodeExtensionOptions.'
+  notes: 'Four failure modes: (1) onExecuted fires on internal node; SubgraphNode does not re-emit — external observers are blind. (2) MatchType freezes type as string on initial connection; runtime type
+    changes not propagated to boundary. (3) Autogrow (new inputs from onConnectionsChange) never mirrored to SubgraphNode external slots. (4) Promoted widget callbacks fire on internal node, invisible to
+    external code. Flagged in Terry''s DX walkthrough appendix A.2. Also intersects ADR 0006 (PrimitiveNode copy/paste, I-NEW.1) and Austin''s fix-linked-widget-promotion branch. Documented partially in
+    docs/architecture/ecs-lifecycle-scenarios.md on branch.'
+  evidence_status: single-source
+  evidence:
+  - pattern_id: S17.SB1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.2 — Subgraph Support. Four distinct failure modes when custom nodes inside subgraphs.
+    excerpt: '// 1. onExecuted fires on internal node but SubgraphNode does not re-emit it.
+
+      //    External observers cannot detect when an internal node executes.
+
+      // 2. MatchType breaks — SubgraphInputNode.connectByType freezes the type as a
+
+      //    string on initial connection. Runtime type changes NOT propagated to boundary.
+
+      // 3. Autogrow breaks — new inputs added by onConnectionsChange inside subgraph
+
+      //    are never mirrored to SubgraphNode''s external slots.
+
+      // 4. Widget promotion gotcha — when a widget is promoted from internal node to
+
+      //    SubgraphNode, widget callback still fires on internal node, invisible externally.
+
+      '
+- pattern_id: S17.FA1
+  surface_family: S17
+  surface: file upload / asset URL construction
+  fingerprint: fetchApi.*upload|upload.*image|FormData.*upload|view\?filename|subfolder.*type.*input
+  semantic: Upload files to ComfyUI backend and construct retrieval URLs. No helper API exists; each extension manually builds FormData, calls api.fetchApi('/upload/image', ...), and constructs /view?filename=...&type=input&subfolder=...
+    URLs by hand.
+  severity: moderate
+  lifecycle_coupling: false
+  silent_breakage: false
+  occurrences: null
+  packages_affected: 32
+  v2_replacement: comfyAPI.uploadFile(file, { subfolder, type }) + comfyAPI.getFileUrl(filename, type, subfolder). Out of scope for @comfyorg/extension-api (node extension surface). Belongs in a future
+    @comfyorg/comfy-api package covering backend communication helpers. Document as gap in src/extension-api/README.md.
+  notes: '32+ packages implement image preview; 9 implement video — each builds upload/URL helpers from scratch. Upload timeout hardcoded at 120s; large 3D/video files fail silently. No frontend-side asset
+    browsing, delete, or rename. No temporary file lifecycle management (files in temp/ never cleaned up by frontend). Scale: 32+ packages duplicating this wheel makes it a P1 API surface gap even though
+    it''s outside the node-extension scope. Flagged in Terry''s DX walkthrough appendix A.3.'
+  evidence_status: single-source
+  evidence:
+  - pattern_id: S17.FA1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.3 — File Storage / Asset API. 32+ packages build upload helpers from scratch.
+    excerpt: "// Each extension manually builds FormData and calls api.fetchApi with hardcoded params:\nasync function uploadFileToComfyUI(file, subfolder) {\n  const formData = new FormData()\n  formData.append('image',\
+      \ file)\n  formData.append('subfolder', subfolder)\n  formData.append('type', 'input')\n  const response = await api.fetchApi('/upload/image', {\n    method: 'POST', body: formData\n  })\n  const\
+      \ { name } = await response.json()\n  return `/view?filename=${name}&type=input&subfolder=${subfolder}`\n}\n// Upload timeout hardcoded 120s. Large 3D/video files fail silently.\n// No comfyAPI.uploadFile()\
+      \ or comfyAPI.getFileUrl() helpers exist.\n"
+- pattern_id: S17.WV1
+  surface_family: S17
+  surface: widgets_values positional array serialization
+  fingerprint: widgets_values|sortWidgetValuesByInputOrder|input_order|fallbackWidgetsValuesNames
+  semantic: 'Widget values serialized as positional array [v1, v2, v3] rather than named dict. Any input definition change (add, reorder, rename, remove, required→optional) causes values to misalign when
+    loading existing workflows. Root cause of #1 user complaint: "my workflow broke after I updated the custom node."'
+  severity: high
+  lifecycle_coupling: false
+  silent_breakage: true
+  occurrences: null
+  packages_affected: all
+  v2_replacement: 'D7 Part 4 (4→2 serialization collapse) + beforeSerialize event as partial mitigation: extensions can remap widgets_values in the beforeSerialize handler. Long-term fix is named dict format
+    { widgetName: value } — a breaking workflow JSON schema change requiring versioning + migrateWidgetValues(oldVersion, values) callback. PR #10392 added widgets_values_named as opt-in fallback in /object_info
+    schema (see research/architecture/widget-serialization-historical-analysis.md). PR #11884 added null guard. Tag: blocked on workflow-schema-migration (out of v2 surface scope). Document positional contract
+    clearly in widget.ts TSDoc.'
+  notes: 'Serialization format is widgets_values: [30, 12345, ''test''] not { seed: 12345, steps: 30, prompt: ''test'' }. Deserialization uses input_order to align positions, but many custom nodes don''t
+    define input_order (rely on JS object key order, not guaranteed). Frontend has sortWidgetValuesByInputOrder() in nodeDefOrderingUtil.ts but only works when input_order is present. Breaking scenarios:
+    add required input in middle (all subsequent shift), reorder inputs (wrong values), rename input (old workflow has value at wrong position), remove input (subsequent shift forward), required→optional
+    transition (position changes completely). Self-described as #1 source of "my workflow stopped working after I updated the custom node" reports. Also deeply related to ADR 0006 (PrimitiveNode copy/paste),
+    widget-serialization- historical-analysis.md, and Austin''s fix-linked-widget-promotion work. Flagged in Terry''s DX walkthrough appendix A.4.'
+  evidence_status: multi-source
+  evidence:
+  - pattern_id: S17.WV1
+    repo: (first-principles assessment — Terry Jia)
+    file: notion-pain-point-assessment
+    lines:
+    - 1
+    url: https://www.notion.so/comfy-org/Develop-a-custom-node-from-scratch-pain-point-assessment-33c6d73d365080f49126c0b5affa7559
+    source: notion-pain-point-assessment
+    variant: first-principles
+    notes: Appendix A.4. Positional array serialization fragility. Self-described
+    excerpt: '// widgets_values is a positional array, not a named dict:
+
+      // { widgets_values: [30, 12345, ''test prompt''] }
+
+      // instead of: { seed: 12345, steps: 30, prompt: ''test prompt'' }
+
+      //
+
+      // Breaking scenarios (all cause silent value misalignment):
+
+      //   Add a new required input in the middle → all subsequent values shift +1
+
+      //   Reorder existing inputs → wrong values assigned
+
+      //   Change required→optional → position changes completely
+
+      //   Remove an input → subsequent values shift forward
+
+      //   Rename an input → old workflow value at wrong position
+
+      //
+
+      // frontend sortWidgetValuesByInputOrder() only works when input_order present.
+
+      // Many custom nodes don''t define input_order.
+
+      '
+  - pattern_id: S17.WV1
+    repo: Comfy-Org/ComfyUI_frontend
+    file: src/utils/nodeDefOrderingUtil.ts
+    lines:
+    - 1
+    url: https://github.com/Comfy-Org/ComfyUI_frontend
+    source: internal-analysis
+    variant: code-reference
+    notes: 'sortWidgetValuesByInputOrder() exists but is conditional on input_order presence. PR #10392 added widgets_values_named opt-in; PR #11884 added null guard. See research/architecture/widget-serialization-historical-analysis.md
+      for full history.'
+    excerpt: '// src/utils/nodeDefOrderingUtil.ts
+
+      // sortWidgetValuesByInputOrder(node, widgetValues) — aligns positional array
+
+      // with current input_order, but ONLY when input_order is defined in node schema.
+
+      // Absent input_order: falls back to JS object key order (not spec-guaranteed).
+
+      '
