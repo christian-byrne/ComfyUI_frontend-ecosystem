@@ -4,19 +4,15 @@ description: "Controlled access to node state, mutations, slots, and events."
 icon: "circle-nodes"
 ---
 
-Defined in: [src/extension-api/node.ts:273](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L273)
+Defined in: [src/extension-api/node.ts:234](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L234)
 
 Controlled surface for node access. Reads query the ECS World; writes
 dispatch commands. Events are Vue-reactive watches on World components.
 
-## Stability
-
-stable
-
 ```ts
-import { defineNodeExtension } from '@comfyorg/extension-api'
+import { defineNode } from '@comfyorg/extension-api'
 
-export default defineNodeExtension({
+export default defineNode({
   name: 'my-size-enforcer',
   nodeTypes: ['MyCustomNode'],
 
@@ -35,9 +31,9 @@ export default defineNodeExtension({
 
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
-| <a id="comfyclass"></a> `comfyClass` | `readonly` | `string` | The ComfyUI backend class name (e.g. `'KSampler'`). Equal to `type` for most nodes; differs for reroute/virtual nodes. Read-only invariant. **Stability** stable |
-| <a id="entityid"></a> `entityId` | `readonly` | [`NodeEntityId`](./nodeentityid) | Stable entity ID for this node. Branded to prevent mixing with `WidgetEntityId` at compile time. **Stability** stable |
-| <a id="type"></a> `type` | `readonly` | `string` | The LiteGraph node type string (e.g. `'KSampler'`). Read-only invariant: set at construction, never changes. **Stability** stable |
+| <a id="comfyclass"></a> `comfyClass` | `readonly` | `string` | The ComfyUI backend class name (e.g. `'KSampler'`). Equal to `type` for most nodes; differs for reroute/virtual nodes. Read-only invariant. |
+| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this node. Stable for the lifetime of the node entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [NodeHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `NodeEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
+| <a id="type"></a> `type` | `readonly` | `string` | The LiteGraph node type string (e.g. `'KSampler'`). Read-only invariant: set at construction, never changes. |
 
 ## Methods
 
@@ -47,7 +43,7 @@ export default defineNodeExtension({
 addDOMWidget(opts): WidgetHandle;
 ```
 
-Defined in: [src/extension-api/node.ts:456](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L456)
+Defined in: [src/extension-api/node.ts:413](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L413)
 
 Adds a DOM-backed widget to this node.
 
@@ -55,7 +51,7 @@ Replaces the v1 `node.addDOMWidget(name, type, element, opts)` pattern.
 The runtime automatically:
 - Reserves node height for the element (via auto-computeSize integration).
 - Removes the element from the DOM when the node is removed.
-- Includes the widget in `NodeHandle.widgets()`.
+- Includes the widget in `NodeHandle.getWidgets()`.
 
 Use `WidgetHandle.setHeight(px)` to resize the reservation after initial mount.
 
@@ -87,7 +83,7 @@ addWidget(
    options?): WidgetHandle;
 ```
 
-Defined in: [src/extension-api/node.ts:432](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L432)
+Defined in: [src/extension-api/node.ts:389](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L389)
 
 Adds a new widget to this node.
 
@@ -106,9 +102,30 @@ Adds a new widget to this node.
 
 The new `WidgetHandle`.
 
-#### Stability
+***
 
-stable
+### equals()
+
+```ts
+equals(other): boolean;
+```
+
+Defined in: [src/extension-api/node.ts:256](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L256)
+
+Returns `true` if `other` represents the same node entity as this one.
+Equivalent to `this.id === other.id` but the canonical comparator —
+prefer `equals` over manual string comparison so future changes to the
+identity scheme remain transparent.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `other` | `NodeHandle` |
+
+#### Returns
+
+`boolean`
 
 ***
 
@@ -118,17 +135,13 @@ stable
 getMode(): NodeMode;
 ```
 
-Defined in: [src/extension-api/node.ts:361](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L361)
+Defined in: [src/extension-api/node.ts:325](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L325)
 
 Returns the node's current execution mode.
 
 #### Returns
 
 [`NodeMode`](./nodemode)
-
-#### Stability
-
-stable
 
 ***
 
@@ -138,17 +151,13 @@ stable
 getPosition(): Point;
 ```
 
-Defined in: [src/extension-api/node.ts:308](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L308)
+Defined in: [src/extension-api/node.ts:279](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L279)
 
 Returns the node's current canvas position as `[x, y]`.
 
 #### Returns
 
 [`Point`](./point)
-
-#### Stability
-
-stable
 
 ***
 
@@ -158,17 +167,13 @@ stable
 getProperties(): Record<string, unknown>;
 ```
 
-Defined in: [src/extension-api/node.ts:388](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L388)
+Defined in: [src/extension-api/node.ts:349](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L349)
 
 Returns a copy of all per-node-instance properties.
 
 #### Returns
 
 `Record`\<`string`, `unknown`\>
-
-#### Stability
-
-stable
 
 ***
 
@@ -178,7 +183,7 @@ stable
 getProperty<T>(key): T | undefined;
 ```
 
-Defined in: [src/extension-api/node.ts:381](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L381)
+Defined in: [src/extension-api/node.ts:343](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L343)
 
 Returns a per-node-instance property by key.
 
@@ -202,10 +207,6 @@ for v1 extensions that used it for per-instance widget config (e.g. min/max).
 
 `T` \| `undefined`
 
-#### Stability
-
-stable
-
 ***
 
 ### getSize()
@@ -214,17 +215,13 @@ stable
 getSize(): Size;
 ```
 
-Defined in: [src/extension-api/node.ts:322](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L322)
+Defined in: [src/extension-api/node.ts:291](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L291)
 
 Returns the node's current size as `[width, height]`.
 
 #### Returns
 
 [`Size`](./size)
-
-#### Stability
-
-stable
 
 ***
 
@@ -234,7 +231,7 @@ stable
 getTitle(): string;
 ```
 
-Defined in: [src/extension-api/node.ts:338](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L338)
+Defined in: [src/extension-api/node.ts:305](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L305)
 
 Returns the node's display title. Defaults to the node type string.
 
@@ -242,9 +239,54 @@ Returns the node's display title. Defaults to the node type string.
 
 `string`
 
-#### Stability
+***
 
-stable
+### getWidget()
+
+```ts
+getWidget(name): 
+  | WidgetHandle<WidgetValue>
+  | undefined;
+```
+
+Defined in: [src/extension-api/node.ts:372](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L372)
+
+Returns a `WidgetHandle` for the named widget, or `undefined` if no such
+widget exists on this node.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `name` | `string` |
+
+#### Returns
+
+  \| [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>
+  \| `undefined`
+
+#### Example
+
+```ts
+const steps = node.getWidget('steps')
+if (steps) steps.setValue(20)
+```
+
+***
+
+### getWidgets()
+
+```ts
+getWidgets(): readonly WidgetHandle<WidgetValue>[];
+```
+
+Defined in: [src/extension-api/node.ts:378](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L378)
+
+Returns all widgets on this node as `WidgetHandle` instances.
+
+#### Returns
+
+readonly [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>[]
 
 ***
 
@@ -254,17 +296,13 @@ stable
 inputs(): readonly SlotInfo[];
 ```
 
-Defined in: [src/extension-api/node.ts:465](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L465)
+Defined in: [src/extension-api/node.ts:421](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L421)
 
 Returns all input slots on this node.
 
 #### Returns
 
 readonly [`SlotInfo`](./slotinfo)[]
-
-#### Stability
-
-stable
 
 ***
 
@@ -274,17 +312,13 @@ stable
 isSelected(): boolean;
 ```
 
-Defined in: [src/extension-api/node.ts:352](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L352)
+Defined in: [src/extension-api/node.ts:317](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L317)
 
 Returns `true` if the node is currently selected on the canvas.
 
 #### Returns
 
 `boolean`
-
-#### Stability
-
-stable
 
 ***
 
@@ -296,13 +330,13 @@ stable
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:486](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L486)
+Defined in: [src/extension-api/node.ts:440](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L440)
 
 Subscribe to node removal (graph deletion, not subgraph promotion).
 
 Replaces the v1 `nodeType.prototype.onRemoved` patching pattern.
 Does NOT fire on subgraph promotion — the node's entity ID is preserved
-across promotion (see D9 Phase A notes and D12).
+across promotion.
 
 ##### Parameters
 
@@ -317,17 +351,13 @@ across promotion (see D9 Phase A notes and D12).
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:497](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L497)
+Defined in: [src/extension-api/node.ts:450](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L450)
 
 Subscribe to backend execution completion for this node.
 
@@ -347,17 +377,13 @@ most widely used anti-pattern per R4-P3; 5+ confirmed repos).
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:508](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L508)
+Defined in: [src/extension-api/node.ts:460](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L460)
 
 Subscribe to workflow hydration (node loaded from a saved workflow).
 
@@ -377,17 +403,13 @@ patterns. Fires after all widget values are restored from the workflow JSON.
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:520](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L520)
+Defined in: [src/extension-api/node.ts:471](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L471)
 
 Subscribe to slot connection events.
 
@@ -408,17 +430,13 @@ in the wild — this single typed event resolves the confusion).
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:528](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L528)
+Defined in: [src/extension-api/node.ts:478](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L478)
 
 Subscribe to slot disconnection events.
 
@@ -435,17 +453,13 @@ Subscribe to slot disconnection events.
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:539](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L539)
+Defined in: [src/extension-api/node.ts:488](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L488)
 
 Subscribe to canvas position changes.
 
@@ -462,17 +476,13 @@ Subscribe to canvas position changes.
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:550](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L550)
+Defined in: [src/extension-api/node.ts:498](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L498)
 
 Subscribe to node size changes.
 
@@ -489,17 +499,13 @@ Subscribe to node size changes.
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:558](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L558)
+Defined in: [src/extension-api/node.ts:505](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L505)
 
 Subscribe to execution mode changes.
 
@@ -516,22 +522,15 @@ Subscribe to execution mode changes.
 
 A cleanup function to remove the listener.
 
-##### Stability
-
-stable
-
 #### Call Signature
 
 ```ts
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:569](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L569)
+Defined in: [src/extension-api/node.ts:531](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L531)
 
 Subscribe to node serialization. Async-capable.
-
-Replaces `nodeType.prototype.onSerialize` and `nodeType.prototype.serialize`
-patching patterns. Collapses four v1 serialization surfaces to one (D7 Part 4).
 
 ##### Parameters
 
@@ -546,6 +545,26 @@ patching patterns. Collapses four v1 serialization surfaces to one (D7 Part 4).
 
 A cleanup function to remove the listener.
 
+##### Deprecated
+
+Node-level serialization control will be removed in v1.0.
+Use widget-level `widget.on('beforeSerialize')` instead — store extension
+state in widgets rather than arbitrary node fields. See ADR-0010.
+
+**Migration example:**
+```ts
+// BEFORE (deprecated)
+node.on('beforeSerialize', (e) => {
+  e.data['my_extension_state'] = computeState()
+})
+
+// AFTER (recommended)
+const stateWidget = node.addWidget('STRING', '_my_state', '', { hidden: true })
+stateWidget.on('beforeSerialize', (e) => {
+  e.setSerializedValue(JSON.stringify(computeState()))
+})
+```
+
 ##### Stability
 
 experimental
@@ -558,17 +577,13 @@ experimental
 outputs(): readonly SlotInfo[];
 ```
 
-Defined in: [src/extension-api/node.ts:472](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L472)
+Defined in: [src/extension-api/node.ts:427](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L427)
 
 Returns all output slots on this node.
 
 #### Returns
 
 readonly [`SlotInfo`](./slotinfo)[]
-
-#### Stability
-
-stable
 
 ***
 
@@ -578,7 +593,7 @@ stable
 setMode(mode): void;
 ```
 
-Defined in: [src/extension-api/node.ts:368](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L368)
+Defined in: [src/extension-api/node.ts:331](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L331)
 
 Sets the node's execution mode. Dispatches a `SetNodeMode` command.
 
@@ -592,10 +607,6 @@ Sets the node's execution mode. Dispatches a `SetNodeMode` command.
 
 `void`
 
-#### Stability
-
-stable
-
 ***
 
 ### setPosition()
@@ -604,7 +615,7 @@ stable
 setPosition(pos): void;
 ```
 
-Defined in: [src/extension-api/node.ts:315](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L315)
+Defined in: [src/extension-api/node.ts:285](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L285)
 
 Moves the node to a new canvas position. Dispatches a `MoveNode` command.
 
@@ -618,10 +629,6 @@ Moves the node to a new canvas position. Dispatches a `MoveNode` command.
 
 `void`
 
-#### Stability
-
-stable
-
 ***
 
 ### setProperty()
@@ -630,7 +637,7 @@ stable
 setProperty(key, value): void;
 ```
 
-Defined in: [src/extension-api/node.ts:398](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L398)
+Defined in: [src/extension-api/node.ts:358](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L358)
 
 Sets a per-node-instance property. Dispatches a `SetNodeProperty` command.
 
@@ -648,10 +655,6 @@ config (it persists to the `widget_options` sidecar in the workflow JSON).
 
 `void`
 
-#### Stability
-
-stable
-
 ***
 
 ### setSize()
@@ -660,7 +663,7 @@ stable
 setSize(size): void;
 ```
 
-Defined in: [src/extension-api/node.ts:329](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L329)
+Defined in: [src/extension-api/node.ts:297](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L297)
 
 Resizes the node. Dispatches a `ResizeNode` command.
 
@@ -674,10 +677,6 @@ Resizes the node. Dispatches a `ResizeNode` command.
 
 `void`
 
-#### Stability
-
-stable
-
 ***
 
 ### setTitle()
@@ -686,7 +685,7 @@ stable
 setTitle(title): void;
 ```
 
-Defined in: [src/extension-api/node.ts:345](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L345)
+Defined in: [src/extension-api/node.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L311)
 
 Sets the node's display title. Dispatches a `SetNodeVisual` command.
 
@@ -699,64 +698,3 @@ Sets the node's display title. Dispatches a `SetNodeVisual` command.
 #### Returns
 
 `void`
-
-#### Stability
-
-stable
-
-***
-
-### widget()
-
-```ts
-widget(name): 
-  | WidgetHandle<WidgetValue>
-  | undefined;
-```
-
-Defined in: [src/extension-api/node.ts:413](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L413)
-
-Returns a `WidgetHandle` for the named widget, or `undefined` if no such
-widget exists on this node.
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `name` | `string` |
-
-#### Returns
-
-  \| [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>
-  \| `undefined`
-
-#### Stability
-
-stable
-
-#### Example
-
-```ts
-const steps = node.widget('steps')
-if (steps) steps.setValue(20)
-```
-
-***
-
-### widgets()
-
-```ts
-widgets(): readonly WidgetHandle<WidgetValue>[];
-```
-
-Defined in: [src/extension-api/node.ts:420](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L420)
-
-Returns all widgets on this node as `WidgetHandle` instances.
-
-#### Returns
-
-readonly [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>[]
-
-#### Stability
-
-stable

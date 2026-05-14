@@ -3,15 +3,11 @@ title: "NodeExecutedEvent"
 description: "Payload fired when a node finishes execution."
 ---
 
-Defined in: [src/extension-api/node.ts:127](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L127)
+Defined in: [src/extension-api/node.ts:112](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L112)
 
 Payload for `node.on('executed', handler)`.
 
 Replaces the v1 `nodeType.prototype.onExecuted` patching pattern.
-
-## Stability
-
-stable
 
 ```ts
 node.on('executed', (e) => {

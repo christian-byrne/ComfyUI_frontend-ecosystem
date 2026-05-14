@@ -3,50 +3,43 @@ title: "NodeBeforeSerializeEvent"
 description: "Pre-serialization hook payload — override or skip node data."
 ---
 
-Defined in: [src/extension-api/node.ts:212](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L212)
+Defined in: [src/extension-api/node.ts:178](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L178)
 
 Payload for `node.on('beforeSerialize', handler)`.
 
-The node-level equivalent of `WidgetBeforeSerializeEvent`. Replaces both
-`node.onSerialize` and `nodeType.prototype.serialize` patching patterns
-(v1 S2.N6, S2.N15 touch-points).
+## Deprecated
 
-Mutate `event.data` in place to append extra fields (replaces `onSerialize`).
-Call `event.replace(fn)` to wrap the entire serialized object (replaces
-`prototype.serialize = function(){ const r = orig.call(this); … }`).
+Node-level serialization control will be removed in v1.0.
+Use widget-level `widget.on('beforeSerialize')` instead. Store extension
+state in widgets rather than arbitrary node fields.
+
+**Why widget-level is better:**
+- Widget values are visible at predictable locations in workflow JSON
+- Cleaner separation between framework and extension concerns
+- Widget serialization hooks support async operations
+
+See ADR-0010 for full migration guidance.
 
 ## Stability
 
 experimental
 
-```ts
-// Append a field
-node.on('beforeSerialize', (e) => {
-  e.data['my_extra'] = computeExtra()
-})
-
-// Wrap the serialized object
-node.on('beforeSerialize', (e) => {
-  e.replace((orig) => ({ ...orig, wrapped: true }))
-})
-```
-
 ## Properties
 
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
-| <a id="context"></a> `context` | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this. |
-| <a id="data"></a> `data` | `readonly` | `Record`\<`string`, `unknown`\> | The mutable serialized node object. Mutate in place to append fields. Type intentionally loose — the exact shape is `ISerialisedNode`. |
+| <a id="context"></a> ~~`context`~~ | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this. |
+| <a id="data"></a> ~~`data`~~ | `readonly` | `Record`\<`string`, `unknown`\> | The mutable serialized node object. Mutate in place to append fields. Type intentionally loose — the exact shape is `ISerialisedNode`. |
 
 ## Methods
 
-### replace()
+### ~~replace()~~
 
 ```ts
 replace(fn): void;
 ```
 
-Defined in: [src/extension-api/node.ts:228](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L228)
+Defined in: [src/extension-api/node.ts:194](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L194)
 
 Replace the serialized object by providing a transform function.
 `fn` receives the current `data` and should return the replacement.

@@ -3,18 +3,17 @@ title: "WidgetPropertyChangeEvent"
 description: "API reference for WidgetPropertyChangeEvent."
 ---
 
-Defined in: [src/extension-api/widget.ts:108](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L108)
+Defined in: [src/extension-api/widget.ts:91](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L91)
 
 Payload for `widget.on('propertyChange', handler)`.
 
 Fires when a first-class every-widget property is mutated — specifically
-`hidden`, `disabled`, and `serialize` (the non-value first-class fields
-defined in D7 Part 1). Does NOT fire for `value` changes (use `valueChange`)
-or for options-bag mutations (use `optionChange`).
+`hidden`, `disabled`, and `serialize`. Does NOT fire for `value` changes
+(use `valueChange`) or for options-bag mutations (use `optionChange`).
 
 ## Stability
 
-experimental — property enumeration finalised in D7
+experimental
 
 ```ts
 widget.on('propertyChange', (e) => {

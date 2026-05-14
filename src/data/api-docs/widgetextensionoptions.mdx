@@ -3,9 +3,9 @@ title: "WidgetExtensionOptions"
 description: "Options object for defineWidgetExtension — custom widget rendering."
 ---
 
-Defined in: [src/extension-api/types.ts:176](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L176)
+Defined in: [src/extension-api/types.ts:144](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L144)
 
-Options for `defineWidgetExtension`. Describes an extension that provides a
+Options for `defineWidget`. Describes an extension that provides a
 custom widget type with its own DOM rendering.
 
 ## Stability
@@ -13,13 +13,13 @@ custom widget type with its own DOM rendering.
 experimental
 
 ```ts
-import { defineWidgetExtension } from '@comfyorg/extension-api'
+import { defineWidget } from '@comfyorg/extension-api'
 
-export default defineWidgetExtension({
+export default defineWidget({
   name: 'my-org.color-picker',
   type: 'COLOR_PICKER',
 
-  widgetCreated(widget, node) {
+  created(widget, node) {
     return {
       // mount color picker DOM
       render(container) {},
@@ -39,10 +39,10 @@ export default defineWidgetExtension({
 
 ## Methods
 
-### widgetCreated()?
+### created()?
 
 ```ts
-optional widgetCreated(widget, parentNode): 
+optional created(widget, parentNode): 
   | void
   | {
   destroy?: void;
@@ -50,7 +50,7 @@ optional widgetCreated(widget, parentNode):
 };
 ```
 
-Defined in: [src/extension-api/types.ts:188](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L188)
+Defined in: [src/extension-api/types.ts:156](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L156)
 
 Called once per widget instance. Return a `{ render, destroy }` pair for
 custom DOM rendering, or `void` for non-visual widgets.

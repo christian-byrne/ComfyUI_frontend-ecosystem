@@ -3,7 +3,7 @@ title: "WidgetBeforeQueueEvent"
 description: "Pre-queue validation payload — call reject() to cancel queue."
 ---
 
-Defined in: [src/extension-api/widget.ts:227](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L227)
+Defined in: [src/extension-api/widget.ts:209](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L209)
 
 Payload for `widget.on('beforeQueue', handler)`.
 
@@ -46,7 +46,7 @@ widget.on('beforeQueue', (e) => {
 reject(message): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:235](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L235)
+Defined in: [src/extension-api/widget.ts:217](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L217)
 
 Reject the queue attempt, showing `message` to the user.
 Once any handler calls `reject`, the queue is cancelled — subsequent

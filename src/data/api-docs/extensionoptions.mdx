@@ -3,14 +3,10 @@ title: "ExtensionOptions"
 description: "Options object for defineExtension — app-wide lifecycle and shell UI."
 ---
 
-Defined in: [src/extension-api/types.ts:109](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L109)
+Defined in: [src/extension-api/types.ts:99](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L99)
 
 Options for the global `defineExtension` entry point. Covers extension-wide
 lifecycle and shell UI contributions.
-
-## Stability
-
-stable
 
 ```ts
 import { defineExtension } from '@comfyorg/extension-api'
@@ -27,8 +23,7 @@ export default defineExtension({
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="apiversion"></a> `apiVersion?` | `string` | Declared API version of this extension. Used by the telemetry system to track v1 → v2 adoption (D6 Phase D gate: "\<5% v1 usage before dropping the v1 bridge"). Set to `'2'` for extensions written against this API. Optional in Phase A (no runtime enforcement). The runtime reads this field via `getExtensionVersionReport()` to produce adoption metrics. **Stability** stable **Example** `defineExtension({ name: 'my-ext', apiVersion: '2', setup() { … } })` |
-| <a id="name"></a> `name` | `string` | Globally unique extension name. Matches the format of `NodeExtensionOptions.name`. **Stability** stable |
+| <a id="name"></a> `name` | `string` | Globally unique extension name. Matches the format of `NodeExtensionOptions.name`. |
 
 ## Methods
 
@@ -38,7 +33,7 @@ export default defineExtension({
 optional init(): void | Promise<void>;
 ```
 
-Defined in: [src/extension-api/types.ts:140](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L140)
+Defined in: [src/extension-api/types.ts:110](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L110)
 
 Runs once during app initialization (after the app is mounted but before
 the first workflow is loaded). Equivalent to the v1 `ComfyExtension.init`.
@@ -46,10 +41,6 @@ the first workflow is loaded). Equivalent to the v1 `ComfyExtension.init`.
 #### Returns
 
 `void` \| `Promise`\<`void`\>
-
-#### Stability
-
-stable
 
 ***
 
@@ -59,7 +50,7 @@ stable
 optional setup(): void | Promise<void>;
 ```
 
-Defined in: [src/extension-api/types.ts:149](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L149)
+Defined in: [src/extension-api/types.ts:117](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L117)
 
 Runs once after the app and all core extensions are initialized. Equivalent
 to the v1 `ComfyExtension.setup`. Safe to call shell UI registration APIs
@@ -68,7 +59,3 @@ to the v1 `ComfyExtension.setup`. Safe to call shell UI registration APIs
 #### Returns
 
 `void` \| `Promise`\<`void`\>
-
-#### Stability
-
-stable

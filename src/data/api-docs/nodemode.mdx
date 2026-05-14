@@ -4,30 +4,25 @@ description: "API reference for NodeMode."
 ---
 
 ```ts
-type NodeMode = 0 | 1 | 2 | 3 | 4;
+type NodeMode = "always" | "never" | "bypass" | "once" | "onTrigger";
 ```
 
-Defined in: [src/extension-api/node.ts:75](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L75)
+Defined in: [src/extension-api/node.ts:56](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L56)
 
 LiteGraph node execution mode.
 
-Numeric values match `LGraphEventMode` in the LiteGraph runtime.
+String values map to the underlying `LGraphEventMode` numeric enum
+(`ALWAYS=0`, `ON_EVENT=1`, `NEVER=2`, `ON_TRIGGER=3`, `BYPASS=4`).
 
-- `0` — `ALWAYS`: execute every run (default).
-- `1` — `ON_EVENT`: legacy slot for the dead trigger/action subsystem;
-  has no behavioural effect in the current scheduler. Reserved for ABI
-  compatibility — do not use in new extensions.
-- `2` — `NEVER`: muted; node is skipped during execution.
-- `3` — `ON_TRIGGER`: legacy slot for the dead trigger/action subsystem;
-  gated behind `LiteGraph.do_add_triggers_slots` (always `false`). Reserved
-  for ABI compatibility — do not use in new extensions.
-- `4` — `BYPASS`: passthrough; inputs are forwarded to outputs without
-  running the node.
+- `'always'` — Execute every run (default).
+- `'never'` — Muted; node is skipped during execution.
+- `'bypass'` — Passthrough; inputs forwarded to outputs without running.
+- `'once'` — Execute once then mute.
+- `'onTrigger'` — Legacy ABI-reserved slot for the dead trigger/action
+  subsystem; gated behind `LiteGraph.do_add_triggers_slots` (always
+  `false`). Has no behavioural effect in the current scheduler. Reserved
+  for compatibility — **do not use in new extensions**. Flagged for removal
+  by AUDIT-LG.4 / AUDIT-LG.5.
 
-Practical extension code should use `0` (always) or `2` (never/muted) or
-`4` (bypass). Slots `1` and `3` are documented for completeness but their
-runtime semantics are pending the AUDIT-LG trigger-subsystem cleanup.
-
-## Stability
-
-stable
+Cross-ref: research/architecture/audit-litegraph-pruning.md
+§AUDIT-LG.4 §AUDIT-LG.5
