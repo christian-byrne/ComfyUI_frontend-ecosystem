@@ -16,6 +16,9 @@ const NodePacks = () => import("../pages/NodePacks.vue");
 const PackDetail = () => import("../pages/PackDetail.vue");
 const PatternDetail = () => import("../pages/PatternDetail.vue");
 const Patterns = () => import("../pages/Patterns.vue");
+const LitegraphAudit = () => import("../pages/LitegraphAudit.vue");
+const AuditSurfaceDetail = () => import("../pages/AuditSurfaceDetail.vue");
+const AuditPRDetail = () => import("../pages/AuditPRDetail.vue");
 
 /**
  * Dashboard routes. `meta.nav: true` opts a route into the App.vue header
@@ -82,6 +85,24 @@ export const routes: RouteRecordRaw[] = [
     name: "api-diff",
     component: ApiDiff,
     meta: { title: "API Diff", nav: true },
+  },
+  {
+    path: "/audit",
+    name: "litegraph-audit",
+    component: LitegraphAudit,
+    meta: { title: "Audit", nav: true },
+  },
+  {
+    path: "/audit/surface/:id",
+    name: "audit-surface-detail",
+    component: AuditSurfaceDetail,
+    meta: { title: "Audit Surface", nav: false },
+  },
+  {
+    path: "/audit/pr/:num",
+    name: "audit-pr-detail",
+    component: AuditPRDetail,
+    meta: { title: "Audit PR", nav: false },
   },
 ];
 
