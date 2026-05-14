@@ -1,0 +1,33 @@
+---
+title: "AsyncHandler"
+description: "API reference for AsyncHandler."
+---
+
+```ts
+type AsyncHandler<E> = (event) => void | Promise<void>;
+```
+
+Defined in: [src/extension-api/events.ts:29](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/events.ts#L29)
+
+A typed async-capable event handler. Only valid for events that explicitly
+support async handling (currently only `beforeSerialize`).
+
+## Type Parameters
+
+| Type Parameter | Description |
+| ------ | ------ |
+| `E` | The event payload type. |
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `E` |
+
+## Returns
+
+`void` \| `Promise`\<`void`\>
+
+## Stability
+
+stable

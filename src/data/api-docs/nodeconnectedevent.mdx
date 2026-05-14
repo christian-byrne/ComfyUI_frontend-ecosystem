@@ -1,0 +1,22 @@
+---
+title: "NodeConnectedEvent"
+description: "Payload fired when a slot connection is made."
+---
+
+Defined in: [src/extension-api/node.ts:140](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L140)
+
+Payload for `node.on('connected', handler)`.
+
+Replaces `nodeType.prototype.onConnectInput` / `onConnectOutput` and
+`nodeType.prototype.onConnectionsChange` patching.
+
+## Stability
+
+stable
+
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="remote"></a> `remote` | `readonly` | [`SlotInfo`](./slotinfo) | The remote slot on the other node. |
+| <a id="slot"></a> `slot` | `readonly` | [`SlotInfo`](./slotinfo) | The local slot that was connected. |

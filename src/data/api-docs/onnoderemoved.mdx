@@ -1,0 +1,25 @@
+---
+title: "onNodeRemoved"
+sidebarTitle: "onNodeRemoved"
+description: "Implicit-context lifecycle hook: fires when a node is removed from the graph."
+---
+
+```ts
+function onNodeRemoved(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:592](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/services/extension-api-service.ts#L592)
+
+Register a callback that fires when the node entity is removed from the graph.
+Does NOT fire on subgraph promotion (DOM-move, not unmount).
+Must be called synchronously inside nodeCreated / loadedGraphNode (D10a).
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`

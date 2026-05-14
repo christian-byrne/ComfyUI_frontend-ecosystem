@@ -1,0 +1,63 @@
+---
+title: "WidgetBeforeQueueEvent"
+description: "Pre-queue validation payload — call reject() to cancel queue."
+---
+
+Defined in: [src/extension-api/widget.ts:227](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L227)
+
+Payload for `widget.on('beforeQueue', handler)`.
+
+Fires when the user triggers a prompt queue (before `graphToPrompt` runs).
+Call `event.reject(message)` to cancel the queue attempt with a user-visible
+error. Do not call `reject` to allow the queue to proceed.
+
+Replaces the v1 `app.queuePrompt` monkey-patching pattern (S6.A4/S6.A5)
+for per-widget validation (e.g. required field empty, value out of range).
+For cross-node/graph-wide rejection, see the app-level `beforePrompt` event
+(I-UWF.4 — not yet in the API).
+
+## Stability
+
+experimental
+
+```ts
+// Reject if a required field is empty
+widget.on('beforeQueue', (e) => {
+  if (!widget.getValue()) {
+    e.reject('Prompt text is required before queueing.')
+  }
+})
+
+// Reject with a dynamic message
+widget.on('beforeQueue', (e) => {
+  const val = widget.getValue<number>()
+  const min = widget.getOption<number>('min') ?? 0
+  if (val < min) {
+    e.reject(`Value ${val} is below the minimum of ${min}.`)
+  }
+})
+```
+
+## Methods
+
+### reject()
+
+```ts
+reject(message): void;
+```
+
+Defined in: [src/extension-api/widget.ts:235](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L235)
+
+Reject the queue attempt, showing `message` to the user.
+Once any handler calls `reject`, the queue is cancelled — subsequent
+handlers still run but their `reject` calls are no-ops.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `message` | `string` | Human-readable reason shown in the UI toast. |
+
+#### Returns
+
+`void`

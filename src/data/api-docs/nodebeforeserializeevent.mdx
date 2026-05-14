@@ -1,0 +1,64 @@
+---
+title: "NodeBeforeSerializeEvent"
+description: "Pre-serialization hook payload — override or skip node data."
+---
+
+Defined in: [src/extension-api/node.ts:212](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L212)
+
+Payload for `node.on('beforeSerialize', handler)`.
+
+The node-level equivalent of `WidgetBeforeSerializeEvent`. Replaces both
+`node.onSerialize` and `nodeType.prototype.serialize` patching patterns
+(v1 S2.N6, S2.N15 touch-points).
+
+Mutate `event.data` in place to append extra fields (replaces `onSerialize`).
+Call `event.replace(fn)` to wrap the entire serialized object (replaces
+`prototype.serialize = function(){ const r = orig.call(this); … }`).
+
+## Stability
+
+experimental
+
+```ts
+// Append a field
+node.on('beforeSerialize', (e) => {
+  e.data['my_extra'] = computeExtra()
+})
+
+// Wrap the serialized object
+node.on('beforeSerialize', (e) => {
+  e.replace((orig) => ({ ...orig, wrapped: true }))
+})
+```
+
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="context"></a> `context` | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this. |
+| <a id="data"></a> `data` | `readonly` | `Record`\<`string`, `unknown`\> | The mutable serialized node object. Mutate in place to append fields. Type intentionally loose — the exact shape is `ISerialisedNode`. |
+
+## Methods
+
+### replace()
+
+```ts
+replace(fn): void;
+```
+
+Defined in: [src/extension-api/node.ts:228](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/node.ts#L228)
+
+Replace the serialized object by providing a transform function.
+`fn` receives the current `data` and should return the replacement.
+Calling this multiple times chains: each call's `fn` receives the
+previous call's output.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | (`orig`) => `Record`\<`string`, `unknown`\> |
+
+#### Returns
+
+`void`

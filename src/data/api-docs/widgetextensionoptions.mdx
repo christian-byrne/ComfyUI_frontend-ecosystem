@@ -1,0 +1,75 @@
+---
+title: "WidgetExtensionOptions"
+description: "Options object for defineWidgetExtension — custom widget rendering."
+---
+
+Defined in: [src/extension-api/types.ts:176](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L176)
+
+Options for `defineWidgetExtension`. Describes an extension that provides a
+custom widget type with its own DOM rendering.
+
+## Stability
+
+experimental
+
+```ts
+import { defineWidgetExtension } from '@comfyorg/extension-api'
+
+export default defineWidgetExtension({
+  name: 'my-org.color-picker',
+  type: 'COLOR_PICKER',
+
+  widgetCreated(widget, node) {
+    return {
+      // mount color picker DOM
+      render(container) {},
+      // cleanup
+      destroy() {}
+    }
+  }
+})
+```
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="name"></a> `name` | `string` | Globally unique extension name. |
+| <a id="type"></a> `type` | `string` | Widget type string this extension provides (e.g. `'COLOR_PICKER'`). |
+
+## Methods
+
+### widgetCreated()?
+
+```ts
+optional widgetCreated(widget, parentNode): 
+  | void
+  | {
+  destroy?: void;
+  render: void;
+};
+```
+
+Defined in: [src/extension-api/types.ts:188](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/types.ts#L188)
+
+Called once per widget instance. Return a `{ render, destroy }` pair for
+custom DOM rendering, or `void` for non-visual widgets.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `widget` | [`WidgetHandle`](./widgethandle) |
+| `parentNode` | [`NodeHandle`](./nodehandle) \| `null` |
+
+#### Returns
+
+  \| `void`
+  \| \{
+  `destroy?`: `void`;
+  `render`: `void`;
+\}
+
+#### Stability
+
+experimental

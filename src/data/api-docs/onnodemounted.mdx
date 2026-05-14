@@ -1,0 +1,25 @@
+---
+title: "onNodeMounted"
+sidebarTitle: "onNodeMounted"
+description: "Implicit-context lifecycle hook: fires when a node is fully mounted."
+---
+
+```ts
+function onNodeMounted(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:571](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/services/extension-api-service.ts#L571)
+
+Register a callback that fires after setup() completes for this node entity
+(post-flush, still within the active EffectScope).
+Must be called synchronously inside nodeCreated / loadedGraphNode (D10a).
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`

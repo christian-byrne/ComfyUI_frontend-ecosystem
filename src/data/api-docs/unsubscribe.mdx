@@ -1,0 +1,26 @@
+---
+title: "Unsubscribe"
+description: "API reference for Unsubscribe."
+---
+
+```ts
+type Unsubscribe = () => void;
+```
+
+Defined in: [src/extension-api/events.ts:42](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/events.ts#L42)
+
+Cleanup function returned by `on()` — call to remove the listener.
+
+## Returns
+
+`void`
+
+## Stability
+
+stable
+
+```ts
+const off = node.on('executed', handler)
+// later:
+off()
+```

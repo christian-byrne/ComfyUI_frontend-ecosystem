@@ -1,0 +1,38 @@
+---
+title: "Handler"
+description: "API reference for Handler."
+---
+
+```ts
+type Handler<E> = (event) => void;
+```
+
+Defined in: [src/extension-api/events.ts:20](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/events.ts#L20)
+
+A typed event handler function.
+
+## Type Parameters
+
+| Type Parameter | Description |
+| ------ | ------ |
+| `E` | The event payload type. |
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `E` |
+
+## Returns
+
+`void`
+
+## Stability
+
+stable
+
+```ts
+const handler: Handler<WidgetValueChangeEvent<number>> = (e) => {
+  console.log(e.oldValue, '->', e.newValue)
+}
+```

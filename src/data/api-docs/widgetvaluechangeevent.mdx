@@ -1,0 +1,33 @@
+---
+title: "WidgetValueChangeEvent"
+description: "Payload fired when a widget value changes."
+---
+
+Defined in: [src/extension-api/widget.ts:58](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/extension-api/widget.ts#L58)
+
+Payload for `widget.on('valueChange', handler)`.
+
+Replaces the v1 `widget.callback` pattern.
+
+## Stability
+
+stable
+
+```ts
+widget.on('valueChange', (e) => {
+  console.log('changed from', e.oldValue, 'to', e.newValue)
+})
+```
+
+## Type Parameters
+
+| Type Parameter | Default type | Description |
+| ------ | ------ | ------ |
+| `T` | [`WidgetValue`](./widgetvalue) | The widget's value type. |
+
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="newvalue"></a> `newValue` | `readonly` | `T` | Value after the change. |
+| <a id="oldvalue"></a> `oldValue` | `readonly` | `T` | Value before the change. |

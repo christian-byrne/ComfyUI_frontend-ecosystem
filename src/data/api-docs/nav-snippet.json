@@ -1,0 +1,83 @@
+{
+  "group": "Extensions API",
+  "pages": [
+    "extensions/api/index",
+    {
+      "group": "Registration",
+      "pages": [
+        "extensions/api/defineextension",
+        "extensions/api/definenodeextension",
+        "extensions/api/definewidgetextension",
+        "extensions/api/extensionoptions",
+        "extensions/api/nodeextensionoptions",
+        "extensions/api/widgetextensionoptions",
+        "extensions/api/onnoderemoved",
+        "extensions/api/onnodemounted",
+        "extensions/api/createnodeexecutionid",
+        "extensions/api/createnodelocatorid",
+        "extensions/api/isnodeexecutionid",
+        "extensions/api/isnodelocatorid",
+        "extensions/api/parsenodeexecutionid",
+        "extensions/api/parsenodelocatorid",
+        "extensions/api/customextension",
+        "extensions/api/domwidgetoptions",
+        "extensions/api/toastmessageoptions",
+        "extensions/api/vueextension",
+        "extensions/api/widgetoptionchangeevent",
+        "extensions/api/widgetoptions",
+        "extensions/api/widgetpropertychangeevent",
+        "extensions/api/asynchandler",
+        "extensions/api/handler",
+        "extensions/api/nodeentityid",
+        "extensions/api/nodemode",
+        "extensions/api/point",
+        "extensions/api/size",
+        "extensions/api/slotdirection",
+        "extensions/api/slotentityid",
+        "extensions/api/unsubscribe",
+        "extensions/api/widgetentityid",
+        "extensions/api/widgetvalue"
+      ]
+    },
+    {
+      "group": "Handles",
+      "pages": [
+        "extensions/api/nodehandle",
+        "extensions/api/widgethandle",
+        "extensions/api/slotinfo"
+      ]
+    },
+    {
+      "group": "Events",
+      "pages": [
+        "extensions/api/nodeexecutedevent",
+        "extensions/api/nodeconnectedevent",
+        "extensions/api/nodedisconnectedevent",
+        "extensions/api/nodepositionchangedevent",
+        "extensions/api/nodesizechangedevent",
+        "extensions/api/nodemodechangedevent",
+        "extensions/api/nodebeforeserializeevent",
+        "extensions/api/widgetvaluechangeevent",
+        "extensions/api/widgetbeforeserializeevent",
+        "extensions/api/widgetbeforequeueevent"
+      ]
+    },
+    {
+      "group": "Shell UI",
+      "pages": [
+        "extensions/api/sidebartabextension",
+        "extensions/api/bottompanelextension",
+        "extensions/api/toastmanager",
+        "extensions/api/commandmanager",
+        "extensions/api/extensionmanager"
+      ]
+    },
+    {
+      "group": "Identity",
+      "pages": [
+        "extensions/api/nodelocatorid",
+        "extensions/api/nodeexecutionid"
+      ]
+    }
+  ]
+}

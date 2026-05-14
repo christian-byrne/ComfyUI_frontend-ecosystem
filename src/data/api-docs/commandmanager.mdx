@@ -1,0 +1,35 @@
+---
+title: "CommandManager"
+description: "Register keyboard shortcuts and command palette entries."
+---
+
+Defined in: [src/types/extensionTypes.ts:132](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/types/extensionTypes.ts#L132)
+
+## Properties
+
+| Property | Type |
+| ------ | ------ |
+| <a id="commands"></a> `commands` | `ComfyCommand`[] |
+
+## Methods
+
+### execute()
+
+```ts
+execute(command, options?): void;
+```
+
+Defined in: [src/types/extensionTypes.ts:134](https://github.com/Comfy-Org/ComfyUI_frontend/blob/809a5c473cd52c4ad4e04cbfc063bedfba9cd05d/src/types/extensionTypes.ts#L134)
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `command` | `string` |
+| `options?` | \{ `errorHandler?`: (`error`) => `void`; `metadata?`: `Record`\<`string`, `unknown`\>; \} |
+| `options.errorHandler?` | (`error`) => `void` |
+| `options.metadata?` | `Record`\<`string`, `unknown`\> |
+
+#### Returns
+
+`void`

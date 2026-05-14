@@ -19,6 +19,7 @@ const Patterns = () => import("../pages/Patterns.vue");
 const LitegraphAudit = () => import("../pages/LitegraphAudit.vue");
 const AuditSurfaceDetail = () => import("../pages/AuditSurfaceDetail.vue");
 const AuditPRDetail = () => import("../pages/AuditPRDetail.vue");
+const ApiDocs = () => import("../pages/ApiDocs.vue");
 
 /**
  * Dashboard routes. `meta.nav: true` opts a route into the App.vue header
@@ -103,6 +104,18 @@ export const routes: RouteRecordRaw[] = [
     name: "audit-pr-detail",
     component: AuditPRDetail,
     meta: { title: "Audit PR", nav: false },
+  },
+  {
+    path: "/api-docs",
+    name: "api-docs",
+    component: ApiDocs,
+    meta: { title: "API Docs", nav: true },
+  },
+  {
+    path: "/api-docs/:slug",
+    name: "api-docs-page",
+    component: ApiDocs,
+    meta: { title: "API Docs Page", nav: false },
   },
 ];
 
