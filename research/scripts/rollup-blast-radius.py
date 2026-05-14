@@ -64,7 +64,16 @@ def main() -> int:
         h = p.get("heuristics") or {}
         sev_map = {"CRITICAL": 2, "HIGH": 1.5, "MEDIUM": 1, "LOW": 0.5}
         silent_w = float(h.get("silent_breakage", sev_map.get(p.get("severity", ""), 0)))
-        life_w = float(h.get("lifecycle_coupling", p.get("lifecycle_coupling", 0)))
+
+        # Handle lifecycle_coupling: can be int, float, bool, or string like 'low'/'medium'/'high'
+        life_raw = h.get("lifecycle_coupling", p.get("lifecycle_coupling", 0))
+        life_map = {"low": 0.5, "medium": 1.0, "high": 1.5, True: 1.0, False: 0.0}
+        if isinstance(life_raw, (int, float)):
+            life_w = float(life_raw)
+        elif life_raw in life_map:
+            life_w = life_map[life_raw]
+        else:
+            life_w = 0.0
 
         br = (
             math.log10(1 + cum_stars) * W["stars"]
