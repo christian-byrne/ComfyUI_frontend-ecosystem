@@ -338,6 +338,12 @@ repos:
     forks: 292
     last_commit: 2026-05-08
     asof: 2026-05-08
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1621
+    archived: false
+    forks: 317
+    last_commit: 2026-05-11
+    asof: 2026-05-12
   - repo: koshimazaki/ComfyUI-Koshi-Nodes
     stars: 0
     archived: false
