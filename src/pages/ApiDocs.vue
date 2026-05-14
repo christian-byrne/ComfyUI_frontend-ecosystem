@@ -13,6 +13,14 @@ import {
   ensureHighlighter,
   highlightCode,
 } from "@/composables/useHighlighter";
+import {
+  getCrossRef,
+  getTotalBlastRadius,
+  getAffectedRepos,
+  getBlastRadiusColor,
+  getBlastRadiusBg,
+  type CrossRefData,
+} from "@/data/api-docs-cross-ref";
 
 /**
  * ApiDocs — Swagger-style API reference for @comfyorg/extension-api,
@@ -108,6 +116,19 @@ const prReviewUrl = computed(() => {
   // Use file filter to show only this file in the diff
   const encoded = encodeURIComponent(src.filePath);
   return `${base}?file-filters[]=${encoded}`;
+});
+
+/** Cross-reference to v1 patterns and behavior categories */
+const crossRef = computed<CrossRefData | null>(() => {
+  return getCrossRef(currentSlug.value);
+});
+
+const totalBlastRadius = computed(() => {
+  return crossRef.value ? getTotalBlastRadius(crossRef.value) : 0;
+});
+
+const affectedRepos = computed(() => {
+  return crossRef.value ? getAffectedRepos(crossRef.value) : [];
 });
 
 /** Extension API PRs for quick navigation */
@@ -283,6 +304,99 @@ const extensionApiPRs = [
               </div>
             </div>
           </header>
+
+          <!-- Cross-reference: Related patterns & blast radius -->
+          <div
+            v-if="crossRef"
+            class="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50 p-4"
+          >
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+                  Migration Impact
+                </h3>
+                <p v-if="crossRef.migrationNote" class="text-xs text-zinc-600 dark:text-zinc-400">
+                  {{ crossRef.migrationNote }}
+                </p>
+              </div>
+              <!-- Blast radius indicator -->
+              <div
+                class="flex items-center gap-2 rounded-md px-2.5 py-1.5"
+                :class="getBlastRadiusBg(totalBlastRadius)"
+              >
+                <svg class="w-4 h-4" :class="getBlastRadiusColor(totalBlastRadius)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="text-xs font-medium" :class="getBlastRadiusColor(totalBlastRadius)">
+                  {{ totalBlastRadius.toFixed(1) }} blast radius
+                </span>
+              </div>
+            </div>
+
+            <!-- Related patterns -->
+            <div v-if="crossRef.patterns.length > 0" class="mb-3">
+              <div class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5">
+                Replaces v1 Patterns
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <RouterLink
+                  v-for="p in crossRef.patterns.slice(0, 5)"
+                  :key="p.pattern_id"
+                  :to="`/patterns/${p.pattern_id}`"
+                  class="inline-flex items-center gap-1 rounded border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-900 px-2 py-1 text-[11px] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+                  :title="p.name"
+                >
+                  <span class="font-mono font-medium text-zinc-700 dark:text-zinc-300">{{ p.pattern_id }}</span>
+                  <span
+                    class="rounded px-1 py-0.5 text-[9px] font-medium"
+                    :class="getBlastRadiusBg(p.blast_radius) + ' ' + getBlastRadiusColor(p.blast_radius)"
+                  >
+                    {{ p.blast_radius.toFixed(1) }}
+                  </span>
+                </RouterLink>
+              </div>
+            </div>
+
+            <!-- Behavior categories -->
+            <div v-if="crossRef.categories.length > 0" class="mb-3">
+              <div class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5">
+                Behavior Categories
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <RouterLink
+                  v-for="c in crossRef.categories"
+                  :key="c.category_id"
+                  :to="`/behavior-categories/${c.category_id}`"
+                  class="inline-flex items-center gap-1 rounded border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-900 px-2 py-1 text-[11px] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+                  :title="c.intent"
+                >
+                  <span class="font-mono font-medium text-zinc-700 dark:text-zinc-300">{{ c.category_id }}</span>
+                  <span class="text-zinc-500 dark:text-zinc-400 truncate max-w-[150px]">{{ c.name }}</span>
+                </RouterLink>
+              </div>
+            </div>
+
+            <!-- Affected repos mini-list -->
+            <div v-if="affectedRepos.length > 0">
+              <div class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5">
+                Top Affected Repos
+              </div>
+              <div class="flex flex-wrap gap-x-3 gap-y-1">
+                <a
+                  v-for="r in affectedRepos"
+                  :key="r.repo"
+                  :href="`https://github.com/${r.repo}`"
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-1 text-[11px] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+                >
+                  <span class="font-mono">{{ r.repo.split('/')[1] }}</span>
+                  <span class="text-zinc-400 dark:text-zinc-500">{{ (r.stars / 1000).toFixed(1) }}k</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
           <!-- eslint-disable-next-line vue/no-v-html -- rendered from trusted in-tree TypeDoc output -->
           <div class="api-doc-prose" v-html="renderedBody" />
         </template>
