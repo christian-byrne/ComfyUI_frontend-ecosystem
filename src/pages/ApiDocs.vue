@@ -80,11 +80,34 @@ const sourceLink = computed(() => {
   const page = currentPage.value;
   if (!page) return null;
   // Match "Defined in: [path](url)" pattern from TypeDoc output
+  // e.g. "Defined in: [src/types/nodeIdentification.ts:96](https://github.com/...)"
   const match = page.body.match(
     /Defined in: \[([^\]]+)\]\((https:\/\/github\.com\/[^)]+)\)/
   );
   if (!match) return null;
-  return { path: match[1], url: match[2] };
+
+  // Parse file path and line number
+  const fullPath = match[1]; // e.g. "src/types/nodeIdentification.ts:96"
+  const [filePath, lineStr] = fullPath.split(":");
+  const line = lineStr ? parseInt(lineStr, 10) : undefined;
+
+  return {
+    path: fullPath,
+    filePath,
+    line,
+    url: match[2]
+  };
+});
+
+/** Build PR diff URL that jumps to the file (and line if available) */
+const prReviewUrl = computed(() => {
+  const base = "https://github.com/Comfy-Org/ComfyUI_frontend/pull/12142/files";
+  const src = sourceLink.value;
+  if (!src?.filePath) return base;
+
+  // Use file filter to show only this file in the diff
+  const encoded = encodeURIComponent(src.filePath);
+  return `${base}?file-filters[]=${encoded}`;
 });
 
 /** Extension API PRs for quick navigation */
@@ -131,15 +154,16 @@ const extensionApiPRs = [
             </a>
           </div>
           <a
-            href="https://github.com/Comfy-Org/ComfyUI_frontend/pull/12142/files"
+            :href="prReviewUrl"
             target="_blank"
             rel="noopener"
             class="inline-flex items-center justify-center gap-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-medium transition-colors"
+            :title="sourceLink ? `Review changes to ${sourceLink.filePath}` : 'Review PR #12142 diff'"
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-            Start PR Review
+            {{ sourceLink ? 'Review This File' : 'Start PR Review' }}
           </a>
         </div>
       </div>
@@ -230,19 +254,31 @@ const extensionApiPRs = [
                   {{ currentPage.description }}
                 </p>
               </div>
-              <!-- Source link button -->
-              <div v-if="sourceLink" class="flex flex-col gap-1.5 shrink-0">
+              <!-- Source + Review buttons -->
+              <div v-if="sourceLink" class="flex flex-col gap-2 shrink-0">
                 <a
                   :href="sourceLink.url"
                   target="_blank"
                   rel="noopener"
-                  class="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xs hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
-                  title="View source on GitHub"
+                  class="inline-flex items-center justify-center gap-1.5 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs font-medium hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                  :title="`View source: ${sourceLink.path}`"
                 >
                   <svg class="w-3.5 h-3.5 text-zinc-500" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                   </svg>
-                  <span class="font-mono text-zinc-700 dark:text-zinc-300 truncate max-w-[200px]">{{ sourceLink.path }}</span>
+                  <span class="text-zinc-700 dark:text-zinc-300">View Source</span>
+                </a>
+                <a
+                  :href="prReviewUrl"
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center justify-center gap-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-medium transition-colors"
+                  :title="`Review changes to ${sourceLink.filePath} in PR #12142`"
+                >
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  <span>Review in PR</span>
                 </a>
               </div>
             </div>

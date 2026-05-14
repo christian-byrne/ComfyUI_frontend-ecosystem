@@ -11,6 +11,18 @@ const highlighter = shallowRef<Highlighter | null>(null);
 const loading = ref(false);
 const ready = ref(false);
 
+/** Map short lang aliases to full names for shiki */
+const LANG_ALIASES: Record<string, string> = {
+  ts: "typescript",
+  js: "javascript",
+  sh: "bash",
+  shell: "bash",
+};
+
+export function normalizeLang(lang: string): string {
+  return LANG_ALIASES[lang] || lang;
+}
+
 export async function ensureHighlighter(): Promise<Highlighter> {
   if (highlighter.value) return highlighter.value;
   if (loading.value) {
@@ -45,6 +57,8 @@ export function highlightCode(
   code: string,
   lang: string = "typescript"
 ): string {
+  const normalizedLang = normalizeLang(lang);
+
   if (!highlighter.value) {
     // Fallback: escape HTML and wrap in pre/code
     const escaped = code
@@ -55,7 +69,7 @@ export function highlightCode(
   }
 
   return highlighter.value.codeToHtml(code, {
-    lang,
+    lang: normalizedLang,
     themes: {
       light: "github-light",
       dark: "github-dark",
