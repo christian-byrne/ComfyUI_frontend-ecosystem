@@ -15,22 +15,22 @@ patterns:
   name: "app.graphToPrompt monkey-patching \u26A0\uFE0F CRITICAL"
   occurrences: 16
   unique_repos: 9
-  cumulative_stars: 23727
+  cumulative_stars: 26331
   signature_count: 1
   silent_breakage: 2.0
   lifecycle_coupling: 2.0
-  blast_radius: 7.037
+  blast_radius: 7.082
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: rgthree/rgthree-comfy
     stars: 3066
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: yolain/ComfyUI-Easy-Use
     stars: 2514
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
 - pattern_id: S2.N15
   surface_family: S2
   name: nodeType.prototype.serialize / node.serialize direct method patching
@@ -57,390 +57,412 @@ patterns:
   name: graph.add / graph.remove / graph.findNodesByType / graph.findNodeById / graph.serialize / graph.configure
   occurrences: 14
   unique_repos: 9
-  cumulative_stars: 21179
+  cumulative_stars: 22804
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 1.0
-  blast_radius: 6.299
+  blast_radius: 6.331
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: yolain/ComfyUI-Easy-Use
     stars: 2514
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: BennyKok/comfyui-deploy
     stars: 1510
-  - repo: melMass/comfy_mtb
-    stars: 705
 - pattern_id: S11.G3
   surface_family: S11
   name: "graph.beforeChange / graph.afterChange \u2014 explicit batching seam for multi-step mutations"
   occurrences: 15
   unique_repos: 8
-  cumulative_stars: 19072
+  cumulative_stars: 20698
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 1.0
-  blast_radius: 6.273
+  blast_radius: 6.309
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: BennyKok/comfyui-deploy
     stars: 1510
   - repo: nodetool-ai/nodetool
     stars: 340
-  - repo: "(aggregate \u2014 Notion \xA72.12)"
-    stars: 0
-- pattern_id: S7.G1
-  surface_family: S7
-  name: "window.LiteGraph / window.comfyAPI.* \u2014 globals as public surface"
-  occurrences: 15
-  unique_repos: 11
-  cumulative_stars: 18957
+- pattern_id: S10.D1
+  surface_family: S10
+  name: node.addInput / node.removeInput / node.addOutput / node.removeOutput dynamic slot mutation
+  occurrences: 13
+  unique_repos: 7
+  cumulative_stars: 7926
   signature_count: 1
-  silent_breakage: 2.0
-  lifecycle_coupling: 0.0
-  blast_radius: 6.121
+  silent_breakage: 1.5
+  lifecycle_coupling: 2.0
+  blast_radius: 6.251
   top_repos:
-  - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
-  - repo: ryanontheinside/ComfyUI_RyanOnTheInside
-    stars: 804
-  - repo: ArtHommage/HommageTools
-    stars: 4
 - pattern_id: S6.A4
   surface_family: S6
   name: app.queuePrompt / app.api.queuePrompt patching or direct call
   occurrences: 11
   unique_repos: 6
-  cumulative_stars: 3479
+  cumulative_stars: 4457
   signature_count: 1
   silent_breakage: 2.0
   lifecycle_coupling: 2.0
-  blast_radius: 6.097
+  blast_radius: 6.205
   top_repos:
   - repo: rgthree/rgthree-comfy
     stars: 3066
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
   - repo: MajoorWaldi/ComfyUI-Majoor-AssetsManager
     stars: 100
   - repo: gigici/ComfyUI_BlendPack
     stars: 1
-  - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
-- pattern_id: S10.D1
-  surface_family: S10
-  name: node.addInput / node.removeInput / node.addOutput / node.removeOutput dynamic slot mutation
-  occurrences: 13
-  unique_repos: 7
-  cumulative_stars: 5324
+- pattern_id: S7.G1
+  surface_family: S7
+  name: "window.LiteGraph / window.comfyAPI.* \u2014 globals as public surface"
+  occurrences: 15
+  unique_repos: 11
+  cumulative_stars: 20823
   signature_count: 1
-  silent_breakage: 1.5
-  lifecycle_coupling: 2.0
-  blast_radius: 6.079
+  silent_breakage: 2.0
+  lifecycle_coupling: 0.0
+  blast_radius: 6.161
   top_repos:
+  - repo: Comfy-Org/ComfyUI-Manager
+    stars: 14637
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
+    stars: 2588
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
-  - repo: r-vage/ComfyUI_Eclipse
-    stars: 19
-  - repo: zhupeter010903/ComfyUI-XYZ-prompt-library
-    stars: 1
+  - repo: ryanontheinside/ComfyUI_RyanOnTheInside
+    stars: 804
 - pattern_id: S10.D2
   surface_family: S10
   name: node.connect / node.disconnectInput / node.disconnectOutput programmatic linking
   occurrences: 18
   unique_repos: 9
-  cumulative_stars: 18734
+  cumulative_stars: 21338
   signature_count: 1
   silent_breakage: 1.0
   lifecycle_coupling: 1.0
-  blast_radius: 6.068
+  blast_radius: 6.124
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: BennyKok/comfyui-deploy
     stars: 1510
-  - repo: MockbaTheBorg/ComfyUI-Mockba
-    stars: 1
-  - repo: vjumpkung/comfyui-infinitetalk-native-sampler
-    stars: 1
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
 - pattern_id: S2.N16
   surface_family: S2
   name: node.widgets array direct access / iteration / mutation
   occurrences: 18
   unique_repos: 9
-  cumulative_stars: 7147
+  cumulative_stars: 11880
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 1.0
-  blast_radius: 5.899
+  blast_radius: 6.12
   top_repos:
   - repo: Lightricks/ComfyUI-LTXVideo
     stars: 3618
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
-  - repo: r-vage/ComfyUI_Eclipse
-    stars: 19
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    stars: 0
 - pattern_id: S4.W4
   surface_family: S4
   name: widget.options.values mutation (COMBO update at runtime)
   occurrences: 14
   unique_repos: 9
-  cumulative_stars: 8021
+  cumulative_stars: 10622
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 1.0
-  blast_radius: 5.878
+  blast_radius: 6.0
   top_repos:
   - repo: rgthree/rgthree-comfy
     stars: 3066
   - repo: yolain/ComfyUI-Easy-Use
     stars: 2514
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: BennyKok/comfyui-deploy
     stars: 1510
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: EnragedAntelope/EA_LMStudio
-    stars: 7
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+- pattern_id: S15.OS1
+  surface_family: S15
+  name: dynamic output mutation vs schema-declared outputs
+  occurrences: 8
+  unique_repos: 4
+  cumulative_stars: 4710
+  signature_count: 1
+  silent_breakage: 1.5
+  lifecycle_coupling: 2.0
+  blast_radius: 5.891
+  top_repos:
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
+  - repo: yorkane/ComfyUI-KYNode
+    stars: 10
+- pattern_id: S4.W3
+  surface_family: S4
+  name: widget.serializeValue direct assignment
+  occurrences: 16
+  unique_repos: 11
+  cumulative_stars: 13894
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 2.0
+  blast_radius: 5.804
+  top_repos:
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: yolain/ComfyUI-Easy-Use
+    stars: 2514
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
 - pattern_id: S6.A3
   surface_family: S6
   name: "api.fetchApi \u2014 extensions hit backend HTTP endpoints"
   occurrences: 13
   unique_repos: 7
-  cumulative_stars: 16746
+  cumulative_stars: 17404
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 0.0
-  blast_radius: 5.776
+  blast_radius: 5.793
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
   - repo: akawana/ComfyUI-Folded-Prompts
     stars: 4
-  - repo: zhupeter010903/ComfyUI-XYZ-prompt-library
-    stars: 1
 - pattern_id: S9.SG1
   surface_family: S9
   name: Subgraph "set/get virtual node" pattern (KJNodes-style)
   occurrences: 5
   unique_repos: 3
-  cumulative_stars: 2587
+  cumulative_stars: 2588
   signature_count: 1
   silent_breakage: 2.0
   lifecycle_coupling: 2.0
   blast_radius: 5.758
   top_repos:
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: SpaceWarpStudio/ComfyUI-SetInputGetOutput
     stars: 0
   - repo: krismasdev/ComfyUI-Flux-Continuum
     stars: 0
-- pattern_id: S15.OS1
-  surface_family: S15
-  name: dynamic output mutation vs schema-declared outputs
-  occurrences: 8
-  unique_repos: 4
-  cumulative_stars: 3076
-  signature_count: 1
-  silent_breakage: 1.5
-  lifecycle_coupling: 2.0
-  blast_radius: 5.706
-  top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: yorkane/ComfyUI-KYNode
-    stars: 10
-  - repo: Acly/comfyui-tooling-nodes
-    stars: 0
-  - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
-- pattern_id: S4.W3
-  surface_family: S4
-  name: widget.serializeValue direct assignment
-  occurrences: 16
-  unique_repos: 11
-  cumulative_stars: 9161
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 2.0
-  blast_radius: 5.623
-  top_repos:
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: yolain/ComfyUI-Easy-Use
-    stars: 2514
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
-  - repo: melMass/comfy_mtb
-    stars: 705
 - pattern_id: S4.W2
   surface_family: S4
   name: node.addDOMWidget(name, type, element, options)
   occurrences: 15
   unique_repos: 7
-  cumulative_stars: 7445
+  cumulative_stars: 9069
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 2.0
-  blast_radius: 5.515
+  blast_radius: 5.6
   top_repos:
   - repo: Lightricks/ComfyUI-LTXVideo
     stars: 3618
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
-  - repo: akawana/ComfyUI-Folded-Prompts
-    stars: 4
 - pattern_id: S9.L1
   surface_family: S9
   name: LLink direct manipulation (link.color, link._pos, link.data, graph.links)
   occurrences: 14
   unique_repos: 7
-  cumulative_stars: 14948
+  cumulative_stars: 18207
   signature_count: 1
   silent_breakage: 1.0
   lifecycle_coupling: 0.0
-  blast_radius: 5.498
+  blast_radius: 5.584
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
-  - repo: darth-veitcher/comfyui-ollama-model-manager
-    stars: 1
-  - repo: Acly/comfyui-tooling-nodes
-    stars: 0
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    stars: 0
+- pattern_id: S2.N9
+  surface_family: S2
+  name: nodeType.prototype.onDrawForeground patching (custom canvas drawing per node)
+  occurrences: 14
+  unique_repos: 9
+  cumulative_stars: 8369
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 2.0
+  blast_radius: 5.546
+  top_repos:
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 923
+  - repo: melMass/comfy_mtb
+    stars: 705
 - pattern_id: S12.UI1
   surface_family: S12
   name: extensionManager / commandManager / toastManager / sidebarTab / bottomPanel registration
   occurrences: 11
   unique_repos: 7
-  cumulative_stars: 17006
+  cumulative_stars: 17664
   signature_count: 1
   silent_breakage: 1.0
   lifecycle_coupling: 0.0
-  blast_radius: 5.486
+  blast_radius: 5.503
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: BennyKok/comfyui-deploy
     stars: 1510
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
   - repo: robertvoy/ComfyUI-Distributed
     stars: 549
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
-  - repo: Acly/comfyui-tooling-nodes
-    stars: 0
 - pattern_id: S2.N12
   surface_family: S2
   name: nodeType.prototype.onConnectInput patching
   occurrences: 8
   unique_repos: 2
-  cumulative_stars: 4381
+  cumulative_stars: 4382
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 1.0
   blast_radius: 5.46
   top_repos:
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
-- pattern_id: S10.D3
-  surface_family: S10
-  name: "node.setSize(node.computeSize()) \u2014 imperative resize after dynamic mutation"
-  occurrences: 19
-  unique_repos: 11
-  cumulative_stars: 7611
-  signature_count: 1
-  silent_breakage: 1.0
-  lifecycle_coupling: 0.0
-  blast_radius: 5.292
-  top_repos:
-  - repo: Lightricks/ComfyUI-LTXVideo
-    stars: 3618
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: hhayiyuan/ComfyUI-FFmpegURLMedia
-    stars: 2
-  - repo: pictorialink/ComfyUI-Easy-Use
-    stars: 1
 - pattern_id: S2.N13
   surface_family: S2
   name: nodeType.prototype.onConnectOutput patching
   occurrences: 7
   unique_repos: 3
-  cumulative_stars: 3066
+  cumulative_stars: 4700
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 1.0
-  blast_radius: 5.269
+  blast_radius: 5.454
   top_repos:
   - repo: rgthree/rgthree-comfy
     stars: 3066
-  - repo: Acly/comfyui-tooling-nodes
-    stars: 0
   - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
-- pattern_id: S2.N9
-  surface_family: S2
-  name: nodeType.prototype.onDrawForeground patching (custom canvas drawing per node)
-  occurrences: 14
-  unique_repos: 9
-  cumulative_stars: 4281
+    stars: 978
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
+- pattern_id: S10.D3
+  surface_family: S10
+  name: "node.setSize(node.computeSize()) \u2014 imperative resize after dynamic mutation"
+  occurrences: 19
+  unique_repos: 11
+  cumulative_stars: 9234
   signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 2.0
-  blast_radius: 5.255
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 5.376
   top_repos:
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+  - repo: Lightricks/ComfyUI-LTXVideo
+    stars: 3618
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: Raykosan/ComfyUI_RaykoStudio
-    stars: 46
-  - repo: Damkohler/jlc-comfyui-nodes
-    stars: 16
+  - repo: hhayiyuan/ComfyUI-FFmpegURLMedia
+    stars: 2
+- pattern_id: S5.A3
+  surface_family: S5
+  name: api.addEventListener('execution_start' | 'execution_success' | 'execution_error' | 'execution_cached' | 'executing'
+    | 'status' | 'reconnecting')
+  occurrences: 17
+  unique_repos: 11
+  cumulative_stars: 4907
+  signature_count: 1
+  silent_breakage: 1.5
+  lifecycle_coupling: 0.0
+  blast_radius: 5.32
+  top_repos:
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+  - repo: kyuz0/amd-strix-halo-comfyui-toolboxes
+    stars: 115
 - pattern_id: S2.N4
   surface_family: S2
   name: nodeType.prototype.onRemoved patching (de-facto teardown)
   occurrences: 13
   unique_repos: 9
-  cumulative_stars: 9941
+  cumulative_stars: 9942
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 1.0
@@ -449,34 +471,118 @@ patterns:
   - repo: Lightricks/ComfyUI-LTXVideo
     stars: 3618
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
   - repo: melMass/comfy_mtb
     stars: 705
+- pattern_id: S2.N19
+  surface_family: S2
+  name: nodeType.prototype.onResize patching
+  occurrences: 12
+  unique_repos: 9
+  cumulative_stars: 7792
+  signature_count: 1
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 5.171
+  top_repos:
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: yolain/ComfyUI-Easy-Use
+    stars: 2514
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 923
+  - repo: melMass/comfy_mtb
+    stars: 705
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+- pattern_id: S16.D1
+  surface_family: S16
+  name: SVG with onload/onerror attribute (XSS-equivalent dynamic JS)
+  occurrences: 13
+  unique_repos: 5
+  cumulative_stars: 7363
+  signature_count: 1
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 5.169
+  top_repos:
+  - repo: pythongosssss/ComfyUI-Custom-Scripts
+    stars: 3075
+  - repo: MixLabPro/comfyui-mixlab-nodes
+    stars: 1842
+  - repo: AlekPet/ComfyUI_Custom_Nodes_AlekPet
+    stars: 1497
+  - repo: melMass/comfy_mtb
+    stars: 705
+  - repo: space-nuko/ComfyUI-OpenPose-Editor
+    stars: 244
 - pattern_id: S6.A2
   surface_family: S6
   name: window.app.loadGraphData direct call
   occurrences: 15
   unique_repos: 7
-  cumulative_stars: 17941
+  cumulative_stars: 20544
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 5.097
+  blast_radius: 5.156
   top_repos:
   - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
+    stars: 14637
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: BennyKok/comfyui-deploy
     stars: 1510
-  - repo: ketle-man/ComfyUI-Workflow-Studio
-    stars: 2
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+- pattern_id: S4.W5
+  surface_family: S4
+  name: direct widget.value writes from extension code
+  occurrences: 15
+  unique_repos: 8
+  cumulative_stars: 6233
+  signature_count: 1
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 5.138
+  top_repos:
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
   - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    stars: 0
+    stars: 1623
+  - repo: BennyKok/comfyui-deploy
+    stars: 1510
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 923
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+- pattern_id: S2.N11
+  surface_family: S2
+  name: nodeType.prototype.computeSize patching
+  occurrences: 17
+  unique_repos: 8
+  cumulative_stars: 6674
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 1.0
+  blast_radius: 5.103
+  top_repos:
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 923
+  - repo: melMass/comfy_mtb
+    stars: 705
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
 - pattern_id: S2.N14
   surface_family: S2
   name: nodeType.prototype.onWidgetChanged patching
@@ -496,122 +602,19 @@ patterns:
     stars: 2
   - repo: chyer/Chye-ComfyUI-Toolset
     stars: 0
-- pattern_id: S5.A1
-  surface_family: S5
-  name: "app.api.addEventListener \u2014 the existence-proof of events-everywhere"
-  occurrences: 12
-  unique_repos: 8
-  cumulative_stars: 16478
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.997
-  top_repos:
-  - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: ShakerSmith/ShakerNodesSuite
-    stars: 8
-  - repo: yardimli/SafetensorViewer
-    stars: 7
-- pattern_id: S2.N5
-  surface_family: S2
-  name: nodeType.prototype.getExtraMenuOptions patching
-  occurrences: 11
-  unique_repos: 6
-  cumulative_stars: 17181
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.991
-  top_repos:
-  - repo: Comfy-Org/ComfyUI-Manager
-    stars: 14635
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: r-vage/ComfyUI_Eclipse
-    stars: 19
-- pattern_id: S2.N11
-  surface_family: S2
-  name: nodeType.prototype.computeSize patching
-  occurrences: 17
-  unique_repos: 8
-  cumulative_stars: 5051
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 1.0
-  blast_radius: 4.982
-  top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: o-l-l-i/ComfyUI-Olm-ImageAdjust
-    stars: 45
-- pattern_id: S2.N19
-  surface_family: S2
-  name: nodeType.prototype.onResize patching
-  occurrences: 12
-  unique_repos: 9
-  cumulative_stars: 4683
-  signature_count: 1
-  silent_breakage: 1.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.95
-  top_repos:
-  - repo: yolain/ComfyUI-Easy-Use
-    stars: 2514
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: SKBv0/ComfyUI_SKBundle
-    stars: 116
-- pattern_id: S2.N7
-  surface_family: S2
-  name: nodeType.prototype.onConfigure patching (workflow-load-time per-node hook)
-  occurrences: 14
-  unique_repos: 8
-  cumulative_stars: 4857
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 1.0
-  blast_radius: 4.91
-  top_repos:
-  - repo: Lightricks/ComfyUI-LTXVideo
-    stars: 3618
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: akawana/ComfyUI-Folded-Prompts
-    stars: 4
-  - repo: "(aggregate \u2014 Notion \xA72.2)"
-    stars: 0
 - pattern_id: S13.SC1
   surface_family: S13
   name: ComfyNodeDef inspection (input.required/optional/hidden, output, output_node, category)
   occurrences: 10
   unique_repos: 7
-  cumulative_stars: 2260
+  cumulative_stars: 3883
   signature_count: 1
   silent_breakage: 1.5
   lifecycle_coupling: 0.0
-  blast_radius: 4.833
+  blast_radius: 5.068
   top_repos:
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
   - repo: BennyKok/comfyui-deploy
     stars: 1510
   - repo: melMass/comfy_mtb
@@ -620,29 +623,170 @@ patterns:
     stars: 43
   - repo: IXIWORKS-KIMJUNGHO/comfyui-ixiworks-tools
     stars: 1
-  - repo: xeinherjer-dev/ComfyUI-XENodes
-    stars: 1
+- pattern_id: S2.N5
+  surface_family: S2
+  name: nodeType.prototype.getExtraMenuOptions patching
+  occurrences: 11
+  unique_repos: 6
+  cumulative_stars: 20292
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 5.063
+  top_repos:
+  - repo: Comfy-Org/ComfyUI-Manager
+    stars: 14637
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: BennyKok/comfyui-deploy
+    stars: 1510
+  - repo: melMass/comfy_mtb
+    stars: 705
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+- pattern_id: S2.N7
+  surface_family: S2
+  name: nodeType.prototype.onConfigure patching (workflow-load-time per-node hook)
+  occurrences: 14
+  unique_repos: 8
+  cumulative_stars: 6720
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 1.0
+  blast_radius: 5.051
+  top_repos:
+  - repo: Lightricks/ComfyUI-LTXVideo
+    stars: 3618
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 923
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+  - repo: akawana/ComfyUI-Folded-Prompts
+    stars: 4
+- pattern_id: S5.A1
+  surface_family: S5
+  name: "app.api.addEventListener \u2014 the existence-proof of events-everywhere"
+  occurrences: 12
+  unique_repos: 8
+  cumulative_stars: 17136
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 5.014
+  top_repos:
+  - repo: Comfy-Org/ComfyUI-Manager
+    stars: 14637
+  - repo: BennyKok/comfyui-deploy
+    stars: 1510
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+  - repo: ShakerSmith/ShakerNodesSuite
+    stars: 8
+- pattern_id: S16.D3
+  surface_family: S16
+  name: Obfuscated string-replace pipeline (often PowerShell, but pattern bleeds into JS minifiers)
+  occurrences: 10
+  unique_repos: 4
+  cumulative_stars: 5370
+  signature_count: 1
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.959
+  top_repos:
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: AIGODLIKE/ComfyUI-BlenderAI-node
+    stars: 1485
+  - repo: melMass/comfy_mtb
+    stars: 705
+  - repo: TinyTerra/ComfyUI_tinyterraNodes
+    stars: 592
+- pattern_id: S9.G1
+  surface_family: S9
+  name: LGraphGroup creation / mutation (graph.groups, group.color, group.font, group.children)
+  occurrences: 12
+  unique_repos: 4
+  cumulative_stars: 4044
+  signature_count: 1
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.887
+  top_repos:
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: guido-gfv/gfv_pro_upgrade
+    stars: 0
+  - repo: linjm8780860/ljm_comfyui
+    stars: 0
+- pattern_id: S8.P1
+  surface_family: S8
+  name: nodeType.prototype.isVirtualNode = true
+  occurrences: 14
+  unique_repos: 9
+  cumulative_stars: 11374
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.879
+  top_repos:
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: BennyKok/comfyui-deploy
+    stars: 1510
 - pattern_id: S3.C1
   surface_family: S3
   name: LGraphCanvas.prototype.* monkey-patching
   occurrences: 18
   unique_repos: 12
-  cumulative_stars: 8246
+  cumulative_stars: 9225
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 4.811
+  blast_radius: 4.86
   top_repos:
   - repo: rgthree/rgthree-comfy
     stars: 3066
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
   - repo: melMass/comfy_mtb
     stars: 705
-  - repo: lucafoscili/lf-nodes
-    stars: 34
+- pattern_id: S1.H6
+  surface_family: S1
+  name: ComfyExtension.registerCustomNodes hook
+  occurrences: 11
+  unique_repos: 7
+  cumulative_stars: 11580
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.819
+  top_repos:
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: BennyKok/comfyui-deploy
+    stars: 1510
 - pattern_id: S2.N18
   surface_family: S2
   name: nodeType.prototype.onPropertyChanged patching
@@ -656,107 +800,103 @@ patterns:
   top_repos:
   - repo: rgthree/rgthree-comfy
     stars: 3066
-- pattern_id: S4.W5
-  surface_family: S4
-  name: direct widget.value writes from extension code
-  occurrences: 15
-  unique_repos: 8
-  cumulative_stars: 2747
+- pattern_id: S9.S1
+  surface_family: S9
+  name: Slot direct mutation (slot.color_on, slot.color_off, slot.shape, slot.localized_name)
+  occurrences: 12
+  unique_repos: 6
+  cumulative_stars: 5772
   signature_count: 1
-  silent_breakage: 1.0
+  silent_breakage: 0.5
+  lifecycle_coupling: 0.0
+  blast_radius: 4.791
+  top_repos:
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: nodetool-ai/nodetool
+    stars: 340
+  - repo: Stibo/comfyui-nifty-nodes
+    stars: 3
+- pattern_id: S1.H1
+  surface_family: S1
+  name: ComfyExtension.loadedGraphNode hook
+  occurrences: 11
+  unique_repos: 6
+  cumulative_stars: 10624
+  signature_count: 1
+  silent_breakage: 0.0
   lifecycle_coupling: 0.0
   blast_radius: 4.782
   top_repos:
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+- pattern_id: S2.N2
+  surface_family: S2
+  name: nodeType.prototype.onExecuted patching
+  occurrences: 13
+  unique_repos: 10
+  cumulative_stars: 9307
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.771
+  top_repos:
+  - repo: Lightricks/ComfyUI-LTXVideo
+    stars: 3618
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
-  - repo: Valiant-Cat/ComfyUI-WanMove-Trajectory
-    stars: 1
-  - repo: darth-veitcher/comfyui-ollama-model-manager
-    stars: 1
-- pattern_id: S9.G1
-  surface_family: S9
-  name: LGraphGroup creation / mutation (graph.groups, group.color, group.font, group.children)
-  occurrences: 12
-  unique_repos: 4
-  cumulative_stars: 3066
-  signature_count: 1
-  silent_breakage: 1.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.766
-  top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
-  - repo: guido-gfv/gfv_pro_upgrade
-    stars: 0
-  - repo: linjm8780860/ljm_comfyui
-    stars: 0
-- pattern_id: S16.D3
+- pattern_id: S16.D7
   surface_family: S16
-  name: Obfuscated string-replace pipeline (often PowerShell, but pattern bleeds into JS minifiers)
-  occurrences: 10
-  unique_repos: 4
-  cumulative_stars: 3292
+  name: Python web/ template uses exec/eval to emit JS
+  occurrences: 8
+  unique_repos: 1
+  cumulative_stars: 3991
   signature_count: 1
   silent_breakage: 1.0
   lifecycle_coupling: 0.0
-  blast_radius: 4.747
+  blast_radius: 4.769
   top_repos:
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: AIGODLIKE/ComfyUI-BlenderAI-node
-    stars: 0
-  - repo: TinyTerra/ComfyUI_tinyterraNodes
-    stars: 0
-- pattern_id: S1.H6
-  surface_family: S1
-  name: ComfyExtension.registerCustomNodes hook
-  occurrences: 11
-  unique_repos: 7
-  cumulative_stars: 9716
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.743
-  top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
-  - repo: melMass/comfy_mtb
-    stars: 705
-- pattern_id: S8.P1
-  surface_family: S8
-  name: nodeType.prototype.isVirtualNode = true
-  occurrences: 14
+  - repo: Fannovel16/comfyui_controlnet_aux
+    stars: 3991
+- pattern_id: S4.W1
+  surface_family: S4
+  name: widget.callback assignment (chain pattern)
+  occurrences: 17
   unique_repos: 9
-  cumulative_stars: 7887
+  cumulative_stars: 6490
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 4.72
+  blast_radius: 4.691
   top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: r-vage/ComfyUI_Eclipse
-    stars: 19
+  - repo: Lightricks/ComfyUI-LTXVideo
+    stars: 3618
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: diodiogod/TTS-Audio-Suite
+    stars: 923
+  - repo: Azornes/Comfyui-LayerForge
+    stars: 312
+  - repo: crom8505/ComfyUI-Dynamic-Sigmas
+    stars: 8
 - pattern_id: S11.G1
   surface_family: S11
   name: graph._version mutation / read for change-tracking
@@ -778,40 +918,19 @@ patterns:
     stars: 0
   - repo: coeuskoalemoss/comfyUI-layerstyle-custom
     stars: 0
-- pattern_id: S2.N2
-  surface_family: S2
-  name: nodeType.prototype.onExecuted patching
-  occurrences: 13
-  unique_repos: 10
-  cumulative_stars: 7443
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.674
-  top_repos:
-  - repo: Lightricks/ComfyUI-LTXVideo
-    stars: 3618
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: andreszs/ComfyUI-Ultralytics-Studio
-    stars: 3
 - pattern_id: S2.N10
   surface_family: S2
   name: nodeType.prototype.onMouseDown patching
   occurrences: 14
   unique_repos: 8
-  cumulative_stars: 6962
+  cumulative_stars: 6963
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
   blast_radius: 4.666
   top_repos:
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: yolain/ComfyUI-Easy-Use
     stars: 2514
   - repo: diodiogod/TTS-Audio-Suite
@@ -820,27 +939,86 @@ patterns:
     stars: 705
   - repo: pixaroma/ComfyUI-Pixaroma
     stars: 159
-- pattern_id: S4.W1
-  surface_family: S4
-  name: widget.callback assignment (chain pattern)
-  occurrences: 17
-  unique_repos: 9
-  cumulative_stars: 4867
+- pattern_id: S2.N17
+  surface_family: S2
+  name: nodeType.prototype.onSelected / onDeselected patching
+  occurrences: 8
+  unique_repos: 3
+  cumulative_stars: 3110
+  signature_count: 1
+  silent_breakage: 1.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.661
+  top_repos:
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: MockbaTheBorg/ComfyUI-Mockba
+    stars: 1
+  - repo: nodelee733/ComfyUI-mxToolkit
+    stars: 0
+- pattern_id: S5.A2
+  surface_family: S5
+  name: "app.api.addEventListener('progress', \u2026) and progress variants"
+  occurrences: 10
+  unique_repos: 8
+  cumulative_stars: 7856
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 4.566
+  blast_radius: 4.624
   top_repos:
-  - repo: Lightricks/ComfyUI-LTXVideo
-    stars: 3618
+  - repo: rgthree/rgthree-comfy
+    stars: 3066
+  - repo: yolain/ComfyUI-Easy-Use
+    stars: 2514
+  - repo: crystian/ComfyUI-Crystools
+    stars: 1863
+  - repo: AIGODLIKE/AIGODLIKE-ComfyUI-Studio
+    stars: 405
+  - repo: Firetheft/ComfyUI-Animate-Progress
+    stars: 3
+- pattern_id: S2.N3
+  surface_family: S2
+  name: nodeType.prototype.onConnectionsChange patching
+  occurrences: 15
+  unique_repos: 10
+  cumulative_stars: 5987
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.62
+  top_repos:
+  - repo: ltdrdata/ComfyUI-Impact-Pack
+    stars: 3109
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
   - repo: diodiogod/TTS-Audio-Suite
     stars: 923
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
-  - repo: crom8505/ComfyUI-Dynamic-Sigmas
-    stars: 8
-  - repo: 834t/ComfyUI_834t_scene_composer
-    stars: 5
+- pattern_id: S1.H2
+  surface_family: S1
+  name: ComfyExtension.getCustomWidgets hook
+  occurrences: 9
+  unique_repos: 7
+  cumulative_stars: 8173
+  signature_count: 1
+  silent_breakage: 0.0
+  lifecycle_coupling: 0.0
+  blast_radius: 4.612
+  top_repos:
+  - repo: yolain/ComfyUI-Easy-Use
+    stars: 2514
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: BennyKok/comfyui-deploy
+    stars: 1510
+  - repo: melMass/comfy_mtb
+    stars: 705
 - pattern_id: S11.G4
   surface_family: S11
   name: "graph.setDirtyCanvas(true, true) \u2014 imperative canvas-redraw trigger"
@@ -859,69 +1037,6 @@ patterns:
   - repo: akawana/ComfyUI-Folded-Prompts
     stars: 4
   - repo: AlexZ1967/ComfyUI_ALEXZ_tools
-    stars: 0
-- pattern_id: S1.H2
-  surface_family: S1
-  name: ComfyExtension.getCustomWidgets hook
-  occurrences: 9
-  unique_repos: 7
-  cumulative_stars: 6550
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.516
-  top_repos:
-  - repo: yolain/ComfyUI-Easy-Use
-    stars: 2514
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
-  - repo: BennyKok/comfyui-deploy
-    stars: 1510
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: yolain/ComfyUI-Easy-Use-Frontend
-    stars: 27
-- pattern_id: S5.A2
-  surface_family: S5
-  name: "app.api.addEventListener('progress', \u2026) and progress variants"
-  occurrences: 10
-  unique_repos: 8
-  cumulative_stars: 5993
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.507
-  top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: yolain/ComfyUI-Easy-Use
-    stars: 2514
-  - repo: AIGODLIKE/AIGODLIKE-ComfyUI-Studio
-    stars: 405
-  - repo: Firetheft/ComfyUI-Animate-Progress
-    stars: 3
-  - repo: Comfy-Org/ComfyUI-test-framework
-    stars: 2
-- pattern_id: S9.S1
-  surface_family: S9
-  name: Slot direct mutation (slot.color_on, slot.color_off, slot.shape, slot.localized_name)
-  occurrences: 12
-  unique_repos: 6
-  cumulative_stars: 2930
-  signature_count: 1
-  silent_breakage: 0.5
-  lifecycle_coupling: 0.0
-  blast_radius: 4.497
-  top_repos:
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: nodetool-ai/nodetool
-    stars: 340
-  - repo: Stibo/comfyui-nifty-nodes
-    stars: 3
-  - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
-  - repo: crystian/ComfyUI-Crystools
     stars: 0
 - pattern_id: S2.N1
   surface_family: S2
@@ -944,27 +1059,6 @@ patterns:
     stars: 312
   - repo: SKBv0/ComfyUI_SpideyReroute
     stars: 13
-- pattern_id: S1.H1
-  surface_family: S1
-  name: ComfyExtension.loadedGraphNode hook
-  occurrences: 11
-  unique_repos: 6
-  cumulative_stars: 4914
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.447
-  top_repos:
-  - repo: rgthree/rgthree-comfy
-    stars: 3066
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
-  - repo: sofakid/dandy
-    stars: 54
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    stars: 0
-  - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
 - pattern_id: S2.N6
   surface_family: S2
   name: nodeType.prototype.onSerialize patching
@@ -986,49 +1080,48 @@ patterns:
     stars: 0
   - repo: Sunwood-ai-labs/ComfyUI-LTXLongAudio
     stars: 0
-- pattern_id: S5.A3
-  surface_family: S5
-  name: api.addEventListener('execution_start' | 'execution_success' | 'execution_error' | 'execution_cached' | 'executing'
-    | 'status' | 'reconnecting')
-  occurrences: 17
-  unique_repos: 11
-  cumulative_stars: 443
+- pattern_id: S1.H3
+  surface_family: S1
+  name: ComfyExtension.getCanvasMenuItems hook (the v1 alternative to canvas-prototype patching)
+  occurrences: 5
+  unique_repos: 5
+  cumulative_stars: 7002
   signature_count: 1
-  silent_breakage: 1.5
+  silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 4.276
+  blast_radius: 4.39
   top_repos:
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: kyuz0/amd-strix-halo-comfyui-toolboxes
-    stars: 115
-  - repo: huafitwjb/ComfyUI-GO-Mobile-app
-    stars: 7
-  - repo: zzw5516/ComfyUI-zw-tools
-    stars: 6
-  - repo: choovin/comfyui-api
-    stars: 3
+  - repo: kijai/ComfyUI-KJNodes
+    stars: 2588
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: chrisgoringe/cg-use-everywhere
+    stars: 978
+  - repo: r-vage/ComfyUI_Eclipse
+    stars: 19
 - pattern_id: S2.N8
   surface_family: S2
   name: nodeType.prototype.onAdded patching
   occurrences: 14
   unique_repos: 8
-  cumulative_stars: 2830
+  cumulative_stars: 3486
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 4.275
+  blast_radius: 4.366
   top_repos:
   - repo: yolain/ComfyUI-Easy-Use
     stars: 2514
+  - repo: Acly/comfyui-tooling-nodes
+    stars: 656
   - repo: Azornes/Comfyui-LayerForge
     stars: 312
   - repo: SparknightLLC/ComfyUI-EnumCombo
     stars: 2
   - repo: m3rr/h4_Live
     stars: 2
-  - repo: Acly/comfyui-tooling-nodes
-    stars: 0
 - pattern_id: S6.A5
   surface_family: S6
   name: Frontend widget validation (pre-queue rejection)
@@ -1044,86 +1137,40 @@ patterns:
     stars: 3066
   - repo: goodtab/ComfyUI-Custom-Scripts
     stars: 0
-- pattern_id: S1.H3
-  surface_family: S1
-  name: ComfyExtension.getCanvasMenuItems hook (the v1 alternative to canvas-prototype patching)
-  occurrences: 5
-  unique_repos: 5
-  cumulative_stars: 4400
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.188
-  top_repos:
-  - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
-  - repo: r-vage/ComfyUI_Eclipse
-    stars: 19
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    stars: 0
-  - repo: chrisgoringe/cg-use-everywhere
-    stars: 0
-- pattern_id: S16.D1
-  surface_family: S16
-  name: SVG with onload/onerror attribute (XSS-equivalent dynamic JS)
-  occurrences: 13
-  unique_repos: 5
-  cumulative_stars: 705
-  signature_count: 1
-  silent_breakage: 1.0
-  lifecycle_coupling: 0.0
-  blast_radius: 4.151
-  top_repos:
-  - repo: melMass/comfy_mtb
-    stars: 705
-  - repo: AlekPet/ComfyUI_Custom_Nodes_AlekPet
-    stars: 0
-  - repo: MixLabPro/comfyui-mixlab-nodes
-    stars: 0
-  - repo: pythongosssss/ComfyUI-Custom-Scripts
-    stars: 0
-  - repo: space-nuko/ComfyUI-OpenPose-Editor
-    stars: 0
 - pattern_id: S1.H4
   surface_family: S1
   name: ComfyExtension.getNodeMenuItems hook
   occurrences: 3
   unique_repos: 3
-  cumulative_stars: 4400
+  cumulative_stars: 4401
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
   blast_radius: 4.065
   top_repos:
   - repo: kijai/ComfyUI-KJNodes
-    stars: 2587
+    stars: 2588
   - repo: Comfy-Org/ComfyUI_frontend
     stars: 1794
   - repo: r-vage/ComfyUI_Eclipse
     stars: 19
-- pattern_id: S2.N3
-  surface_family: S2
-  name: nodeType.prototype.onConnectionsChange patching
-  occurrences: 15
-  unique_repos: 10
-  cumulative_stars: 1244
+- pattern_id: S1.H5
+  surface_family: S1
+  name: ComfyExtension.addCustomNodeDefs hook
+  occurrences: 3
+  unique_repos: 3
+  cumulative_stars: 3471
   signature_count: 1
   silent_breakage: 0.0
   lifecycle_coupling: 0.0
-  blast_radius: 3.938
+  blast_radius: 3.962
   top_repos:
-  - repo: diodiogod/TTS-Audio-Suite
-    stars: 923
-  - repo: Azornes/Comfyui-LayerForge
-    stars: 312
-  - repo: DumiFlex/ComfyUI-Wildcard-Pipeline
-    stars: 4
-  - repo: ComfyUI-Kelin/ComfyUI_Image_Anything
-    stars: 3
-  - repo: m3rr/h4_Live
-    stars: 2
+  - repo: Comfy-Org/ComfyUI_frontend
+    stars: 1794
+  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
+    stars: 1623
+  - repo: sofakid/dandy
+    stars: 54
 - pattern_id: S9.R1
   surface_family: S9
   name: Reroute creation / mutation (LiteGraph.createRerouteOnLink, graph.reroutes, node.connectByRerouteId)
@@ -1141,23 +1188,6 @@ patterns:
     stars: 0
   - repo: linjm8780860/ljm_comfyui
     stars: 0
-- pattern_id: S1.H5
-  surface_family: S1
-  name: ComfyExtension.addCustomNodeDefs hook
-  occurrences: 3
-  unique_repos: 3
-  cumulative_stars: 1848
-  signature_count: 1
-  silent_breakage: 0.0
-  lifecycle_coupling: 0.0
-  blast_radius: 3.688
-  top_repos:
-  - repo: Comfy-Org/ComfyUI_frontend
-    stars: 1794
-  - repo: sofakid/dandy
-    stars: 54
-  - repo: Kosinkadink/ComfyUI-VideoHelperSuite
-    stars: 0
 - pattern_id: S17.WV1
   surface_family: S17
   name: widgets_values positional array serialization
@@ -1173,23 +1203,6 @@ patterns:
     stars: 1794
   - repo: "(first-principles assessment \u2014 Terry Jia)"
     stars: 0
-- pattern_id: S2.N17
-  surface_family: S2
-  name: nodeType.prototype.onSelected / onDeselected patching
-  occurrences: 8
-  unique_repos: 3
-  cumulative_stars: 1
-  signature_count: 1
-  silent_breakage: 1.0
-  lifecycle_coupling: 0.0
-  blast_radius: 1.469
-  top_repos:
-  - repo: MockbaTheBorg/ComfyUI-Mockba
-    stars: 1
-  - repo: ltdrdata/ComfyUI-Impact-Pack
-    stars: 0
-  - repo: nodelee733/ComfyUI-mxToolkit
-    stars: 0
 - pattern_id: S14.ID1
   surface_family: S14
   name: NodeLocatorId / NodeExecutionId parsing/creation
@@ -1202,19 +1215,6 @@ patterns:
   blast_radius: 1.234
   top_repos:
   - repo: shrimbly/willie-comfy-frontend
-    stars: 0
-- pattern_id: S16.D7
-  surface_family: S16
-  name: Python web/ template uses exec/eval to emit JS
-  occurrences: 8
-  unique_repos: 1
-  cumulative_stars: 0
-  signature_count: 1
-  silent_breakage: 1.0
-  lifecycle_coupling: 0.0
-  blast_radius: 1.168
-  top_repos:
-  - repo: Fannovel16/comfyui_controlnet_aux
     stars: 0
 - pattern_id: S16.VUE1
   surface_family: S16
