@@ -11,7 +11,8 @@ Visualize and explore the ComfyUI extension API ecosystem — patterns, blast ra
 - **Node Packs** — Top 20 packs with Comfy Registry integration (banners, stars)
 - **Heatmap** — Pattern × Pack evidence matrix with click-through drawer
 - **API Diff** — v1→v2 migration status cards with search/filter
-- **Test Runner** — Vitest harness status page
+- **Audit** — LiteGraph pruning audit dashboard (AUDIT-LG.10 verdict table, W2F-1 re-audit deltas, sunset gates, PR drill-down)
+- **API Docs** — Swagger-style reference for @comfyorg/extension-api (TypeDoc → Mintlify MDX pipeline)
 
 ## Tech Stack
 

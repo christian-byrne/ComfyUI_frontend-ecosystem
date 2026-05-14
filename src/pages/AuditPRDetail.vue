@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute, RouterLink } from "vue-router";
+import { marked } from "marked";
 
 import {
   prByNum,
@@ -8,6 +9,9 @@ import {
   PR_REPO,
   deltaBySurface,
 } from "@/data/litegraph-audit-loader";
+
+// Configure marked for inline rendering (no <p> wrappers)
+marked.setOptions({ gfm: true, breaks: false });
 
 /**
  * AuditPRDetail — drill-down for one pruning PR.
@@ -50,6 +54,23 @@ const totalReauditConsumers = computed(() => {
   }
   return t;
 });
+
+/**
+ * Deduplicated description: if description starts with title text,
+ * show only description to avoid visual repetition.
+ */
+const showTitle = computed(() => {
+  if (!pr.value) return false;
+  const desc = pr.value.description ?? "";
+  const title = pr.value.title ?? "";
+  // Don't show title if description starts with same text
+  return !desc.startsWith(title);
+});
+
+/** Render description as markdown (inline, no wrapping <p>) */
+function renderDescription(desc: string): string {
+  return marked.parseInline(desc) as string;
+}
 </script>
 
 <template>
@@ -89,13 +110,12 @@ const totalReauditConsumers = computed(() => {
             {{ pr.status }}
           </span>
         </div>
-        <p class="text-sm text-zinc-700 dark:text-zinc-300">{{ pr.title }}</p>
+        <p v-if="showTitle" class="text-sm text-zinc-700 dark:text-zinc-300">{{ pr.title }}</p>
         <p
           v-if="pr.description"
-          class="text-xs text-zinc-500 dark:text-zinc-400 max-w-3xl"
-        >
-          {{ pr.description }}
-        </p>
+          class="text-xs text-zinc-500 dark:text-zinc-400 max-w-3xl prose prose-xs dark:prose-invert prose-code:text-[10px]"
+          v-html="renderDescription(pr.description)"
+        />
         <div class="flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400 tabular-nums">
           <span>{{ pr.symbolCount }} symbols deleted/changed</span>
           <span>{{ surfaces.length }} mapped surfaces</span>

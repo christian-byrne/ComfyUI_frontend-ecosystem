@@ -348,7 +348,7 @@ const maxDelta = computed(() => {
               </template>
               <template v-else>
                 <span class="text-zinc-700 dark:text-zinc-300">{{ row.external }}</span>
-                <span class="text-[10px] text-zinc-500 ml-1">no re-audit</span>
+                <span class="text-[10px] text-zinc-500 ml-1.5"> no re-audit</span>
               </template>
             </td>
             <td class="px-3 py-2">
