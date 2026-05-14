@@ -1,5 +1,5 @@
 {
-  "asof": "2026-05-08",
+  "asof": "2026-05-13",
   "populated_via": "scripts/fetch-stars.sh",
   "repos": [
     {
@@ -8,7 +8,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2024-10-16",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "834t/ComfyUI_834t_scene_composer",
@@ -16,7 +16,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-03",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "aicocoa981/WhatDreamsCost-ComfyUI-private",
@@ -24,7 +24,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-30",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "AIGODLIKE/AIGODLIKE-ComfyUI-Studio",
@@ -32,7 +32,7 @@
       "archived": false,
       "forks": 25,
       "last_commit": "2025-10-27",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "akawana/ComfyUI-Folded-Prompts",
@@ -40,7 +40,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-04-30",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "AkihaTatsu/ComfyUI-Simple-Utility-Nodes",
@@ -48,7 +48,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-11",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "alankent/ComfyUI-OA-360-Clip",
@@ -56,7 +56,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-11-16",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "AlexZ1967/ComfyUI_ALEXZ_tools",
@@ -64,7 +64,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "ameliacode/comfyui-face3d",
@@ -72,15 +72,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "andreszs/ComfyUI-Ultralytics-Studio",
       "stars": 3,
       "archived": false,
       "forks": 1,
-      "last_commit": "2026-04-13",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-11",
+      "asof": "2026-05-13"
     },
     {
       "repo": "ArtHommage/HommageTools",
@@ -88,7 +88,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-05-20",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Azornes/Comfyui-LayerForge",
@@ -96,7 +96,7 @@
       "archived": false,
       "forks": 16,
       "last_commit": "2026-05-01",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "becky3/comfyui-workspace",
@@ -104,15 +104,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-13",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "BennyKok/comfyui-deploy",
-      "stars": 1508,
+      "stars": 1510,
       "archived": false,
-      "forks": 222,
+      "forks": 224,
       "last_commit": "2025-11-13",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "brycecovert/ComfyUI-compass-images",
@@ -120,7 +120,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "choovin/comfyui-api",
@@ -128,7 +128,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "chyer/Chye-ComfyUI-Toolset",
@@ -136,7 +136,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-10",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "coeuskoalemoss/comfyUI-layerstyle-custom",
@@ -144,7 +144,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-06-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "ComfyNodePRs/PR-comfyui-pkg39-ccab78b5",
@@ -152,23 +152,23 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2024-07-31",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Comfy-Org/ComfyUI_frontend",
-      "stars": 1787,
+      "stars": 1794,
       "archived": false,
-      "forks": 563,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "forks": 573,
+      "last_commit": "2026-05-14",
+      "asof": "2026-05-13"
     },
     {
       "repo": "Comfy-Org/ComfyUI-Manager",
-      "stars": 14564,
+      "stars": 14635,
       "archived": false,
-      "forks": 2187,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "forks": 2195,
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "Comfy-Org/ComfyUI-test-framework",
@@ -176,7 +176,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "ComfyUI-Kelin/ComfyUI_Image_Anything",
@@ -184,7 +184,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-20",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Creepybits/ComfyUI-Creepy_nodes",
@@ -192,7 +192,7 @@
       "archived": false,
       "forks": 5,
       "last_commit": "2026-04-14",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "criskb/Comfypencil",
@@ -200,7 +200,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-13",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "criskb/Fancy_Grid",
@@ -208,7 +208,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-13",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "crom8505/ComfyUI-Dynamic-Sigmas",
@@ -216,7 +216,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-03-30",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Damkohler/jlc-comfyui-nodes",
@@ -224,7 +224,7 @@
       "archived": false,
       "forks": 4,
       "last_commit": "2026-04-17",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "darth-veitcher/comfyui-ollama-model-manager",
@@ -232,7 +232,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-11-05",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "DazzleNodes/ComfyUI-Smart-Resolution-Calc",
@@ -240,15 +240,15 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-04-22",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "diodiogod/TTS-Audio-Suite",
-      "stars": 911,
+      "stars": 923,
       "archived": false,
-      "forks": 101,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "forks": 103,
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "dorpxam/ComfyUI-LTX2-Microscope",
@@ -256,7 +256,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "DumiFlex/ComfyUI-Wildcard-Pipeline",
@@ -264,7 +264,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-04-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "egormly/ComfyUI-EG_Tools",
@@ -272,7 +272,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-11-19",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "EmanuelRiquelme/comfyui-art-venture",
@@ -280,7 +280,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2024-09-04",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "EnragedAntelope/EA_LMStudio",
@@ -288,7 +288,7 @@
       "archived": false,
       "forks": 4,
       "last_commit": "2026-04-22",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Firetheft/ComfyUI-Animate-Progress",
@@ -296,7 +296,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-09-09",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "FloyoAI/ComfyUI-SoundFlow",
@@ -304,7 +304,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-11-21",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "flymyd/koishi-plugin-comfyui-client",
@@ -312,7 +312,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-08-21",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "FunnyFinger/Dynamic_Sliders_stack",
@@ -320,15 +320,15 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2025-04-22",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "gigici/ComfyUI_BlendPack",
       "stars": 1,
       "archived": false,
       "forks": 0,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "goodtab/ComfyUI-Custom-Scripts",
@@ -336,7 +336,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2024-09-02",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "guido-gfv/gfv_pro_upgrade",
@@ -344,7 +344,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-20",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "haohaocreates/PR-rk-comfy-nodes-36d8f0a5",
@@ -352,7 +352,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2024-05-22",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "hernantech/comfymcp",
@@ -360,7 +360,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-01-03",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "hhayiyuan/ComfyUI-FFmpegURLMedia",
@@ -368,31 +368,31 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-01-02",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "huafitwjb/ComfyUI-GO-Mobile-app",
-      "stars": 6,
+      "stars": 7,
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-04",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "ialhabbal/compare",
       "stars": 1,
-      "archived": false,
+      "archived": true,
       "forks": 2,
-      "last_commit": "2026-03-31",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-12",
+      "asof": "2026-05-13"
     },
     {
       "repo": "IAMCCS/IAMCCS-nodes",
-      "stars": 92,
+      "stars": 94,
       "archived": false,
       "forks": 6,
-      "last_commit": "2026-05-04",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-12",
+      "asof": "2026-05-13"
     },
     {
       "repo": "IXIWORKS-KIMJUNGHO/comfyui-ixiworks-tools",
@@ -400,7 +400,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-03-15",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "JichaoLiang/Immortal_comfyui_public",
@@ -408,15 +408,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-12-05",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "jiekouai/ComfyUI-JieKou-API",
-      "stars": 1,
+      "stars": 2,
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-25",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "jonstreeter/comfyui-compressed-metadata",
@@ -424,23 +424,23 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-10-12",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "ketle-man/ComfyUI-Workflow-Studio",
       "stars": 2,
       "archived": false,
-      "forks": 0,
-      "last_commit": "2026-04-28",
-      "asof": "2026-05-08"
+      "forks": 1,
+      "last_commit": "2026-05-11",
+      "asof": "2026-05-13"
     },
     {
       "repo": "kijai/ComfyUI-KJNodes",
-      "stars": 2569,
+      "stars": 2587,
       "archived": false,
       "forks": 292,
       "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "koshimazaki/ComfyUI-Koshi-Nodes",
@@ -448,7 +448,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-12",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "krismasdev/ComfyUI-Flux-Continuum",
@@ -456,7 +456,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-08-04",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "KumihoIO/kumiho-plugins",
@@ -464,15 +464,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-28",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "kyuz0/amd-strix-halo-comfyui-toolboxes",
-      "stars": 109,
+      "stars": 115,
       "archived": false,
       "forks": 14,
       "last_commit": "2026-02-13",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "LaoMaoBoss/ComfyUI-WBLESS",
@@ -480,15 +480,15 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-07",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Lightricks/ComfyUI-LTXVideo",
-      "stars": 3587,
+      "stars": 3618,
       "archived": false,
-      "forks": 390,
-      "last_commit": "2026-04-26",
-      "asof": "2026-05-08"
+      "forks": 397,
+      "last_commit": "2026-05-11",
+      "asof": "2026-05-13"
     },
     {
       "repo": "linjm8780860/ljm_comfyui",
@@ -496,7 +496,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-29",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "lordwedggie/xcpNodes",
@@ -504,7 +504,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "lucafoscili/lf-nodes",
@@ -512,23 +512,23 @@
       "archived": false,
       "forks": 3,
       "last_commit": "2025-12-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "m3rr/h4_Live",
       "stars": 2,
       "archived": false,
       "forks": 2,
-      "last_commit": "2026-05-07",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-09",
+      "asof": "2026-05-13"
     },
     {
       "repo": "MajoorWaldi/ComfyUI-Majoor-AssetsManager",
-      "stars": 97,
+      "stars": 100,
       "archived": false,
       "forks": 6,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-11",
+      "asof": "2026-05-13"
     },
     {
       "repo": "max-dingsda/ComfyUI-AllinOne-LazyNode",
@@ -536,23 +536,21 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-30",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "maxi45274/ComfyUI_LinkFX",
-      "stars": 3,
-      "archived": false,
-      "forks": 0,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "stars": null,
+      "error": "gh api failed (rate limit / repo missing / network)",
+      "asof": "2026-05-13"
     },
     {
       "repo": "melMass/comfy_mtb",
-      "stars": 702,
+      "stars": 705,
       "archived": false,
       "forks": 82,
       "last_commit": "2026-03-19",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "MockbaTheBorg/ComfyUI-Mockba",
@@ -560,7 +558,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-13",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "mudknight/comfyui-mudknight-utils",
@@ -568,7 +566,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "MuhammadMuradKhan/efficiency-nodes-comfyui",
@@ -576,7 +574,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2024-02-11",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "niknah/presentation-ComfyUI",
@@ -584,7 +582,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-04-21",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "nodelee733/ComfyUI-mxToolkit",
@@ -592,15 +590,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-27",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "nodetool-ai/nodetool",
-      "stars": 332,
+      "stars": 340,
       "archived": false,
-      "forks": 40,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "forks": 43,
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "nvmax/aspect-ratio-resizer",
@@ -608,7 +606,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "o-l-l-i/ComfyUI-Olm-ImageAdjust",
@@ -616,15 +614,15 @@
       "archived": false,
       "forks": 4,
       "last_commit": "2025-08-09",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "PGCRT/CRT-Nodes",
-      "stars": 108,
+      "stars": 109,
       "archived": false,
       "forks": 14,
-      "last_commit": "2026-05-03",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "philippjbauer/devint25-comfyui-api-demo",
@@ -632,7 +630,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-10-09",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "pictorialink/ComfyUI-Easy-Use",
@@ -640,7 +638,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-07-15",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "PioneerMNDR/ComfyUI-Polza",
@@ -648,15 +646,15 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "pixaroma/ComfyUI-Pixaroma",
-      "stars": 146,
+      "stars": 159,
       "archived": false,
-      "forks": 9,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "forks": 10,
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "PROJECTMAD/PROJECT-MAD-NODES",
@@ -664,31 +662,31 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-04-01",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Raykosan/ComfyUI_RaykoStudio",
-      "stars": 45,
+      "stars": 46,
       "archived": false,
       "forks": 2,
       "last_commit": "2026-05-05",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "rgthree/rgthree-comfy",
-      "stars": 3054,
+      "stars": 3066,
       "archived": false,
-      "forks": 226,
-      "last_commit": "2026-04-07",
-      "asof": "2026-05-08"
+      "forks": 228,
+      "last_commit": "2026-05-09",
+      "asof": "2026-05-13"
     },
     {
       "repo": "robertvoy/ComfyUI-Distributed",
-      "stars": 544,
+      "stars": 549,
       "archived": false,
-      "forks": 57,
+      "forks": 59,
       "last_commit": "2026-04-26",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "rohapa/comfyui-replay",
@@ -696,23 +694,23 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-27",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "r-vage/ComfyUI_Eclipse",
       "stars": 19,
       "archived": false,
       "forks": 2,
-      "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "ryanontheinside/ComfyUI_RyanOnTheInside",
-      "stars": 801,
+      "stars": 804,
       "archived": false,
-      "forks": 50,
+      "forks": 51,
       "last_commit": "2026-03-20",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "sammykumar/ComfyUI-SwissArmyKnife",
@@ -720,7 +718,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-01-14",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "SaturMars/ComfyUI-NVVFR",
@@ -728,7 +726,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-08-05",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "ShakerSmith/ShakerNodesSuite",
@@ -736,15 +734,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-02-18",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "shrimbly/willie-comfy-frontend",
       "stars": 0,
       "archived": false,
       "forks": 0,
-      "last_commit": "2026-04-28",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "SKBv0/ComfyUI_SKBundle",
@@ -752,7 +750,7 @@
       "archived": false,
       "forks": 7,
       "last_commit": "2026-04-23",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "SKBv0/ComfyUI_SpideyReroute",
@@ -760,7 +758,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2025-12-19",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "sofakid/dandy",
@@ -768,7 +766,7 @@
       "archived": false,
       "forks": 4,
       "last_commit": "2025-12-15",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "SpaceWarpStudio/ComfyUI-SetInputGetOutput",
@@ -776,7 +774,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-30",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "SparknightLLC/ComfyUI-EnumCombo",
@@ -784,7 +782,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-05-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "StableLlama/ComfyUI-basic_data_handling",
@@ -792,7 +790,7 @@
       "archived": false,
       "forks": 7,
       "last_commit": "2026-05-07",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "stavzszn/comfyui-teskors-utils",
@@ -800,7 +798,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-29",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Stibo/comfyui-nifty-nodes",
@@ -808,7 +806,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-21",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Sunwood-ai-labs/ComfyUI-LTXLongAudio",
@@ -816,7 +814,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-01",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "sypex6/ComfyUI_InstaRAW_Nodes",
@@ -824,7 +822,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-07",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "tavyra/ComfyUI_Curves",
@@ -832,7 +830,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-05-08",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "tetsuoo-online/Comfyui-TOO-Pack",
@@ -840,7 +838,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-04-02",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "touge/ComfyUI-NCE_Utils",
@@ -848,7 +846,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-01-25",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "treforyan-hue/comfyui-deploy",
@@ -856,7 +854,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-05-05",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Valiant-Cat/ComfyUI-WanMove-Trajectory",
@@ -864,7 +862,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-12-12",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "viswamohankomati/ComfyUI-Copilot",
@@ -872,7 +870,7 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-09-17",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "vjumpkung/comfyui-infinitetalk-native-sampler",
@@ -880,7 +878,7 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-03-31",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "Winnougan/WINT8-ComfyUI",
@@ -888,15 +886,15 @@
       "archived": false,
       "forks": 2,
       "last_commit": "2026-04-17",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "xeinherjer-dev/ComfyUI-XENodes",
       "stars": 1,
       "archived": false,
       "forks": 1,
-      "last_commit": "2026-05-07",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-12",
+      "asof": "2026-05-13"
     },
     {
       "repo": "yardimli/SafetensorViewer",
@@ -904,15 +902,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2025-02-19",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "yolain/ComfyUI-Easy-Use",
-      "stars": 2504,
+      "stars": 2514,
       "archived": false,
-      "forks": 195,
+      "forks": 196,
       "last_commit": "2026-04-29",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "yolain/ComfyUI-Easy-Use-Frontend",
@@ -920,7 +918,7 @@
       "archived": false,
       "forks": 9,
       "last_commit": "2026-04-01",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "yorkane/ComfyUI-KYNode",
@@ -928,7 +926,7 @@
       "archived": false,
       "forks": 4,
       "last_commit": "2026-02-04",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "zhupeter010903/ComfyUI-XYZ-prompt-library",
@@ -936,15 +934,15 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-04-26",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     },
     {
       "repo": "zzggi2024/shaobkj",
       "stars": 1,
       "archived": false,
       "forks": 0,
-      "last_commit": "2026-04-27",
-      "asof": "2026-05-08"
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
     },
     {
       "repo": "zzw5516/ComfyUI-zw-tools",
@@ -952,7 +950,7 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2025-12-03",
-      "asof": "2026-05-08"
+      "asof": "2026-05-13"
     }
   ]
 }
