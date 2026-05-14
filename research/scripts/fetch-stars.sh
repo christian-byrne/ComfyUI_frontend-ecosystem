@@ -13,8 +13,8 @@ if ! command -v gh >/dev/null 2>&1; then
   exit 1
 fi
 
-# Extract unique repo: entries from database
-repos=$(grep -E '^\s*-\s*repo:\s' "$DB" | sed -E 's/^\s*-\s*repo:\s*//' | sort -u | grep -v '^$' || true)
+# Extract unique repo: entries from database (handles both "- repo:" list items and "repo:" nested keys)
+repos=$(grep -oE 'repo:\s*[A-Za-z0-9_-]+/[A-Za-z0-9_.-]+' "$DB" | sed -E 's/repo:\s*//' | sort -u | grep -v '^$' || true)
 
 today=$(date +%Y-%m-%d)
 
