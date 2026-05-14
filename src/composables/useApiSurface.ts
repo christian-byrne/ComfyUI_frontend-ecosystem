@@ -20,14 +20,21 @@ export const V1_SOURCE: ApiSource = {
 };
 
 /**
- * v2 surface is split across four declaration files on the
- * `ext-api/i-foundation` branch.
+ * v2 surface is split across the public-API files on the
+ * `ext-api/i-foundation-restratify` branch (the canonical v2 branch per
+ * AGENTS.md "Reconciliation history" table — wave-4 reconciliation
+ * 2026-05-13 made `restratify` canonical and merged it into the older
+ * `ext-api/i-foundation-v2` branch).
+ *
+ * `index.ts` is included so the api-diff view shows the barrel — which
+ * is the published-package contract surface (not just the per-module
+ * type declarations).
  */
 export const V2_SOURCES: ApiSource[] = (
-  ["lifecycle", "node", "widget", "events"] as const
+  ["index", "lifecycle", "node", "widget", "events", "shell", "identifiers"] as const
 ).map((name) => ({
   label: `${name}.ts`,
-  url: `https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/ext-api/i-foundation/src/extension-api/${name}.ts`,
+  url: `https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/ext-api/i-foundation-restratify/src/extension-api/${name}.ts`,
 }));
 
 const CACHE_PREFIX = "apidiff:v1:";
