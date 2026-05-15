@@ -2,6 +2,17 @@
 
 Visualize and explore the ComfyUI extension API ecosystem — patterns, blast radius, behavior categories, v1↔v2 diff, node-pack heatmap, test runner.
 
+## Quick Start
+
+```bash
+git clone https://github.com/christian-byrne/ComfyUI_frontend-ecosystem.git
+cd ComfyUI_frontend-ecosystem
+pnpm install
+pnpm dev
+```
+
+Open http://localhost:5173 to view the dashboard.
+
 ## Features
 
 - **Overview** — Hero stats + top patterns by blast radius
@@ -41,12 +52,12 @@ pnpm rebuild              # equivalent
 
 Pipeline (in order):
 
-| Step | Target | Inputs | Output |
-|---|---|---|---|
-| 1 | `make stars`  | `research/touch-points-database.yaml` + `gh api`     | `research/touch-points-star-cache.yaml` |
-| 2 | `make rollup` | database + star-cache                                | `research/touch-points-rollup.yaml` |
-| 3 | `make data`   | all four YAMLs (db, rollup, stars, behavior-cats)    | (verifies parseability — no transform) |
-| 4 | `make build`  | YAMLs (read by Vite via `?raw` import) + `src/`      | `dist/` |
+| Step | Target        | Inputs                                            | Output                                  |
+| ---- | ------------- | ------------------------------------------------- | --------------------------------------- |
+| 1    | `make stars`  | `research/touch-points-database.yaml` + `gh api`  | `research/touch-points-star-cache.yaml` |
+| 2    | `make rollup` | database + star-cache                             | `research/touch-points-rollup.yaml`     |
+| 3    | `make data`   | all four YAMLs (db, rollup, stars, behavior-cats) | (verifies parseability — no transform)  |
+| 4    | `make build`  | YAMLs (read by Vite via `?raw` import) + `src/`   | `dist/`                                 |
 
 Granular targets — run any single step:
 
@@ -84,4 +95,5 @@ Required tools: `bash`, `python3` (with `pyyaml`), `gh` (authenticated), `jq`, `
 - Cross-repo workspace: `/home/c_byrne/cross-repo-tasks/ecs-vue-hoisted-client-state-hook-api`
 
 ## License
+
 MIT
