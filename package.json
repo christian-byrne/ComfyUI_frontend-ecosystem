@@ -49,5 +49,14 @@
     "vite": "^5.4.0",
     "vitest": "^2.0.0",
     "vue-tsc": "^2.1.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   }
 }
