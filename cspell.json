@@ -1,0 +1,15 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "comfyui",
+    "pnpm",
+    "vitest",
+    "vite",
+    "pinia",
+    "composables",
+    "mintlify",
+    "typedoc",
+    "tailwindcss"
+  ]
+}
