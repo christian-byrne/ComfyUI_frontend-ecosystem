@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { CommentContext } from '@/composables/useEvidenceComment'
+import { useClipboard } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
 import { RouterLink, useRoute } from 'vue-router'
@@ -57,12 +58,8 @@ function verdictBadge(v?: string): string {
   return 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
 }
 
-interface CopyState {
-  index: number
-  ts: number
-}
-
-const copied = ref<CopyState | null>(null)
+const { copy, copied } = useClipboard()
+const copiedIndex = ref<number | null>(null)
 
 async function openAndCopy(idx: number, prNum?: number) {
   if (!consumer.value) return
@@ -76,15 +73,11 @@ async function openAndCopy(idx: number, prNum?: number) {
     prNum
   }
   const markdown = buildCommentMarkdown(ctx)
-  try {
-    await navigator.clipboard.writeText(markdown)
-    copied.value = { index: idx, ts: Date.now() }
-    setTimeout(() => {
-      if (copied.value?.index === idx) copied.value = null
-    }, 2500)
-  } catch (e) {
-    console.warn('clipboard write failed', e)
-  }
+  await copy(markdown)
+  copiedIndex.value = idx
+  setTimeout(() => {
+    if (copiedIndex.value === idx) copiedIndex.value = null
+  }, 2500)
   // Open the PR (or repo) in a new tab.
   const url = prNum
     ? `https://github.com/${PR_REPO}/pull/${prNum}/files`
@@ -354,7 +347,7 @@ async function openAndCopy(idx: number, prNum?: number) {
                       Comment on #{{ prNum }}
                     </button>
                     <span
-                      v-if="copied?.index === idx"
+                      v-if="copied && copiedIndex === idx"
                       class="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium"
                     >
                       <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
