@@ -1,4 +1,9 @@
 import type { Pattern } from './schema'
+
+import { parse as parseYaml } from 'yaml'
+import migrationCoverageYaml from '../../research/migration-coverage.yaml?raw'
+import { patterns as allPatterns } from './index'
+
 /**
  * MIGRATION_STATUS — per-pattern classification under the D9 strangler-fig
  * taxonomy.
@@ -15,15 +20,10 @@ import type { Pattern } from './schema'
  *                           materialization, NOT a v2 extension API. v2
  *                           bridges are transitional only.
  *
- * NOTE (N16b): the canonical source of truth for these classifications lives
- * in `research/workspace-mirror/research/architecture/P3-migration-coverage-matrix.md`
- * (markdown). Until that table is normalised into machine-readable YAML this
- * file is a hand-curated representative sample covering the highest-blast-
- * radius surfaces. Patterns absent from the map are treated as
- * `unchanged-legacy` at render time. Tracked as a follow-up; do not assume
- * coverage of every pattern_id in `touch-points-database.yaml`.
+ * Data is derived from `research/migration-coverage.yaml` which contains the
+ * canonical machine-readable classification for all patterns in the
+ * touch-points-database.
  */
-import { patterns as allPatterns } from './index'
 
 export const MIGRATION_STATUSES = [
   'ECS-native',
@@ -35,40 +35,42 @@ export const MIGRATION_STATUSES = [
 export type MigrationStatus = (typeof MIGRATION_STATUSES)[number]
 
 /**
- * Sample classification covering the highest-blast-radius patterns from the
- * P3 coverage matrix. Extend as the matrix is normalised; render layer
- * defaults missing entries to `unchanged-legacy`.
+ * YAML entry shape for a single pattern in migration-coverage.yaml.
  */
-export const MIGRATION_STATUS: Record<string, MigrationStatus> = {
-  // S6 — App-level execution / serialization hooks
-  'S6.A1': 'uwf-resolved',
-  'S6.A2': 'ECS-native',
-  'S6.A3': 'strangler-bridge',
-  'S6.A4': 'ECS-native',
-  'S6.A5': 'ECS-native',
-  // S2 — Node lifecycle prototype patching
-  'S2.N1': 'ECS-native',
-  'S2.N15': 'ECS-native',
-  'S2.N16': 'ECS-native',
-  'S2.N9': 'strangler-bridge',
-  'S2.N8': 'unchanged-legacy',
-  // S11 — Graph mutation / batching
-  'S11.G2': 'ECS-native',
-  'S11.G3': 'ECS-native',
-  'S11.G4': 'unchanged-legacy',
-  'S11.G1': 'unchanged-legacy',
-  // S7 — Globals (deprecated mirror)
-  'S7.G1': 'strangler-bridge',
-  // S9 — Structural entities
-  'S9.SG1': 'uwf-resolved',
-  // S17 — Serialization
-  'S17.WV1': 'uwf-resolved',
-  // S4 — Widget API
-  'S4.W1': 'ECS-native',
-  'S4.W2': 'ECS-native',
-  'S4.W3': 'ECS-native',
-  'S4.W4': 'ECS-native'
+interface MigrationCoverageEntry {
+  status: MigrationStatus
+  v1_api: string
+  v2_api: string
+  notes?: string
 }
+
+/**
+ * Parse the YAML and build the MIGRATION_STATUS map.
+ * Validates that every pattern has a recognized status.
+ */
+function parseMigrationCoverage(): Record<string, MigrationStatus> {
+  const data = parseYaml(migrationCoverageYaml) as Record<string, MigrationCoverageEntry>
+  const result: Record<string, MigrationStatus> = {}
+
+  for (const [patternId, entry] of Object.entries(data)) {
+    if (!MIGRATION_STATUSES.includes(entry.status)) {
+      console.warn(
+        `[migration-status] Unknown status "${entry.status}" for pattern ${patternId}, defaulting to unchanged-legacy`
+      )
+      result[patternId] = 'unchanged-legacy'
+    } else {
+      result[patternId] = entry.status
+    }
+  }
+
+  return result
+}
+
+/**
+ * Per-pattern migration status derived from research/migration-coverage.yaml.
+ * All patterns from the touch-points database are covered; no runtime fallback needed.
+ */
+export const MIGRATION_STATUS: Record<string, MigrationStatus> = parseMigrationCoverage()
 
 /**
  * One row per migration pattern: pattern metadata joined with the D9 status.

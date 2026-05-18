@@ -1,0 +1,468 @@
+# Migration Coverage — D9 Strangler-Fig Status by Pattern
+#
+# Canonical source for per-pattern v2 migration status. Derived from
+# P3-migration-coverage-matrix.md dispositions mapped to D9 taxonomy:
+#
+#   replaced / re-implemented  ->  ECS-native
+#   strangler-figged           ->  strangler-bridge
+#   dropped                    ->  unchanged-legacy
+#   uwf-resolved               ->  uwf-resolved
+#   security-policy (+ replaced) -> ECS-native (has v2 API)
+#   security-policy (no v2 API)  -> unchanged-legacy
+#
+# Schema: pattern_id -> { status, v1_api, v2_api, notes? }
+# Status values: ECS-native | strangler-bridge | unchanged-legacy | uwf-resolved
+
+# S1 — ComfyExtension hook slots
+S1.H1:
+  status: strangler-bridge
+  v1_api: 'loadedGraphNode hook'
+  v2_api: 'defineNodeExtension({ loadedGraphNode })'
+  notes: 'v1 hook fires translated to LoadedFromWorkflow tag dispatch'
+
+S1.H2:
+  status: strangler-bridge
+  v1_api: 'getCustomWidgets hook'
+  v2_api: 'defineWidgetExtension({ widgetType, setup, dispose })'
+  notes: 'v1 hook kept alive via strangler until Phase D'
+
+S1.H3:
+  status: strangler-bridge
+  v1_api: 'getCanvasMenuItems hook'
+  v2_api: 'defineCanvasExtension({ menuItems: [...] })'
+  notes: 'v1 hook kept alive; items merged into menu'
+
+S1.H4:
+  status: strangler-bridge
+  v1_api: 'getNodeMenuItems hook'
+  v2_api: 'defineNodeExtension({ menuItems: [...] })'
+
+S1.H5:
+  status: unchanged-legacy
+  v1_api: 'addCustomNodeDefs hook'
+  v2_api: '— no v2 replacement —'
+  notes: 'BLOCKER D4-G2: needs registerNodeDef(spec) equivalent'
+
+S1.H6:
+  status: unchanged-legacy
+  v1_api: 'registerCustomNodes hook'
+  v2_api: '— no v2 replacement —'
+  notes: 'BLOCKER D4-G2: pure-frontend node registration not in v2'
+
+# S2 — Node lifecycle prototype patching
+S2.N1:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onNodeCreated patching'
+  v2_api: 'defineNodeExtension({ nodeTypes: [...], setup(node) {...} })'
+  notes: 'Canonical v2 per-instance setup path'
+
+S2.N2:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onExecuted patching'
+  v2_api: "node.on('executed', (msg) => {...})"
+  notes: 'Typed message contract per output kind'
+
+S2.N3:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onConnectionsChange patching'
+  v2_api: "node.on('connectionChanged', ...)"
+  notes: 'Covers connect and disconnect; connected bool in payload'
+
+S2.N4:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onRemoved patching'
+  v2_api: 'defineNodeExtension({ setup(node) { return { dispose() {...} } } })'
+  notes: 'dispose() called on graph deletion, survives subgraph promotion'
+
+S2.N5:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.getExtraMenuOptions patching'
+  v2_api: 'defineNodeExtension({ menuItems: [{label, action, when}] })'
+  notes: 'when predicate receives node handle'
+
+S2.N6:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onSerialize patching'
+  v2_api: "node.on('beforeSerialize', event => event.setSerializedValue(key, val))"
+  notes: 'Same v2 event as S2.N15'
+
+S2.N7:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onConfigure patching'
+  v2_api: 'defineNodeExtension({ loadedGraphNode(node) {...} })'
+  notes: 'loadedGraphNode fires only with LoadedFromWorkflow tag'
+
+S2.N8:
+  status: unchanged-legacy
+  v1_api: 'nodeType.prototype.onAdded patching'
+  v2_api: '— no v2 replacement —'
+  notes: 'Use nodeCreated + LoadedFromWorkflow tag instead; no after-graph-attach hook in v2'
+
+S2.N9:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onDrawForeground patching'
+  v2_api: 'defineNodeExtension({ onDraw(node, ctx2d) {...} })'
+  notes: 'Phase A: strangler-figged; Phase B: ECS render pass'
+
+S2.N10:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onMouseDown patching'
+  v2_api: "node.on('mouseDown', (event, pos) => {...})"
+  notes: 'Widget-level pointer events also available'
+
+S2.N11:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.computeSize patching'
+  v2_api: 'defineNodeExtension({ minSize: [w, h] })'
+  notes: 'Declarative; v2 enforces calling super first'
+
+S2.N12:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onConnectInput patching'
+  v2_api: "node.on('connectionChanged', { slot, connected, link, direction: 'input' })"
+  notes: 'Return-false to refuse: event.preventDefault()'
+
+S2.N13:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onConnectOutput patching'
+  v2_api: "node.on('connectionChanged', { ..., direction: 'output' })"
+  notes: 'Same event shape as S2.N12'
+
+S2.N14:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onWidgetChanged patching'
+  v2_api: "widget.on('valueChange', fn)"
+  notes: 'Fires only on true value change, not option mutations'
+
+S2.N15:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.serialize patching'
+  v2_api: "node.on('beforeSerialize', (event) => {...})"
+  notes: 'setSerializedValue / skip typed mutators on event object'
+
+S2.N16:
+  status: ECS-native
+  v1_api: 'node.widgets array direct access'
+  v2_api: 'nodeHandle.widgets() iterator + nodeHandle.widget(name)'
+  notes: 'Named lookup aligns with widgets_values_named'
+
+S2.N17:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onSelected / onDeselected patching'
+  v2_api: "node.on('selected', fn) / node.on('deselected', fn)"
+  notes: 'Low blast_radius; straightforward event'
+
+S2.N18:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onPropertyChanged patching'
+  v2_api: "node.on('propertyChange', ({ key, value, prev }) => {...})"
+  notes: 'Low occurrence (rgthree-only); @experimental'
+
+S2.N19:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.onResize patching'
+  v2_api: "node.on('resize', (newSize) => {...})"
+  notes: 'Reactive layout system fires after reflow'
+
+# S3 — Canvas-level monkey-patching
+S3.C1:
+  status: ECS-native
+  v1_api: 'LGraphCanvas.prototype.* monkey-patching'
+  v2_api: 'defineCanvasExtension({ keyBindings, menuItems, visibilityPredicate, onDraw })'
+  notes: 'Covers keyboard, context menu, visibility predicates, drawing overrides'
+
+S3.C2:
+  status: unchanged-legacy
+  v1_api: 'LiteGraph.ContextMenu global replacement'
+  v2_api: '— no v2 replacement —'
+  notes: 'Must migrate to menuItems declarative API'
+
+# S4 — Widget API
+S4.W1:
+  status: ECS-native
+  v1_api: 'widget.callback chain pattern'
+  v2_api: "widget.on('valueChange', fn)"
+  notes: 'Phase C strangler: callback setter traps to event listener'
+
+S4.W2:
+  status: ECS-native
+  v1_api: 'node.addDOMWidget'
+  v2_api: 'defineWidgetExtension({ widgetType, setup, dispose })'
+  notes: 'dispose mandatory per D4-G7'
+
+S4.W3:
+  status: ECS-native
+  v1_api: 'widget.serializeValue direct assignment'
+  v2_api: 'widget.setSerializeValue(fn)'
+  notes: 'Already in WidgetHandle'
+
+S4.W4:
+  status: ECS-native
+  v1_api: 'widget.options.values mutation (COMBO update)'
+  v2_api: "widget.setOption('values', [...])"
+  notes: 'Phase A already implemented in WidgetHandle'
+
+S4.W5:
+  status: ECS-native
+  v1_api: 'direct widget.value writes'
+  v2_api: 'widget.setValue(newValue)'
+  notes: 'Unified set+notify'
+
+S4.W6:
+  status: unchanged-legacy
+  v1_api: 'DOM widget creation hook (cross-ext observer)'
+  v2_api: '— no v2 replacement —'
+  notes: "GAP BC.33; use graph.on('widgetAdded', ...) when implemented"
+
+# S5 — Backend event subscriptions
+S5.A1:
+  status: ECS-native
+  v1_api: 'app.api.addEventListener'
+  v2_api: "ctx.execution.on('executed' | 'start' | 'success' | 'error' | 'cached', ...)"
+  notes: 'v1 addEventListener shim stays; events re-emitted on v2 bus'
+
+S5.A2:
+  status: ECS-native
+  v1_api: "app.api.addEventListener('progress')"
+  v2_api: "node.on('progress', ...) AND app.on('progress', ...)"
+  notes: 'Both per-node and global surfaces provided'
+
+S5.A3:
+  status: ECS-native
+  v1_api: 'api.addEventListener execution lifecycle events'
+  v2_api: "ctx.execution.on('start' | 'success' | 'error' | 'cached', ...)"
+  notes: 'v1 string event names mapped to typed v2 enum'
+
+# S6 — App-level execution / serialization hooks
+S6.A1:
+  status: uwf-resolved
+  v1_api: 'app.graphToPrompt monkey-patching'
+  v2_api: "ctx.on('beforePrompt', event => {...})"
+  notes: 'UWF Phase 3 handles virtual-node resolution; v2 beforePrompt is transitional'
+
+S6.A2:
+  status: ECS-native
+  v1_api: 'window.app.loadGraphData direct call'
+  v2_api: 'app.loadWorkflow(json)'
+  notes: 'Existing load codepath preserved'
+
+S6.A3:
+  status: ECS-native
+  v1_api: 'api.fetchApi — HTTP endpoint calls'
+  v2_api: 'ctx.api.fetch(path, init)'
+  notes: 'Same semantics; shim can forward fetchApi to ctx.api.fetch'
+
+S6.A4:
+  status: ECS-native
+  v1_api: 'app.queuePrompt / queuePrompt patching'
+  v2_api: "graph.run({ batch }) + app.on('beforeRun', payload => {...})"
+  notes: 'beforeRun fires before queuePrompt is called'
+
+S6.A5:
+  status: ECS-native
+  v1_api: 'Frontend pre-queue validation'
+  v2_api: "ctx.on('beforeQueue', event => event.reject(msg))"
+  notes: 'D5 EVT2'
+
+# S7 — Global namespace
+S7.G1:
+  status: strangler-bridge
+  v1_api: 'window.LiteGraph / window.comfyAPI.* globals'
+  v2_api: "import { app, graph, LiteGraph } from '@comfyorg/extension-api'"
+  notes: 'window.* remains deprecated read-only mirror until Phase D'
+
+# S8 — Node prototype properties
+S8.P1:
+  status: ECS-native
+  v1_api: 'nodeType.prototype.isVirtualNode = true'
+  v2_api: "defineNodeExtension({ kind: 'virtual' })"
+  notes: 'Phase A: isVirtualNode property still read; no breaking change'
+
+# S9 — Structural entities
+S9.R1:
+  status: ECS-native
+  v1_api: 'Reroute creation / mutation'
+  v2_api: 'graph.addReroute(linkId) / rerouteHandle.setPosition(...)'
+  notes: 'Phase A: strangler-figged'
+
+S9.G1:
+  status: ECS-native
+  v1_api: 'LGraphGroup creation / mutation'
+  v2_api: 'graph.addGroup(spec) / groupHandle.setColor(...)'
+  notes: 'Phase A: strangler-figged'
+
+S9.L1:
+  status: unchanged-legacy
+  v1_api: 'LLink direct mutation'
+  v2_api: '— no v2 replacement —'
+  notes: 'Links are ECS entities in Phase B; use nodeHandle.connect/disconnect'
+
+S9.S1:
+  status: unchanged-legacy
+  v1_api: 'Slot direct mutation'
+  v2_api: '— no v2 replacement —'
+  notes: 'Slot appearance declared at registration; runtime via defineCanvasExtension'
+
+S9.SG1:
+  status: uwf-resolved
+  v1_api: 'Subgraph set/get virtual node pattern'
+  v2_api: "defineNodeExtension({ kind: 'virtual', resolveConnections(...) })"
+  notes: "UWF Phase 3; needs ctx.on('beforePrompt') bridge"
+
+# S10 — Dynamic slot / link mutation
+S10.D1:
+  status: ECS-native
+  v1_api: 'node.addInput / removeInput / addOutput / removeOutput'
+  v2_api: 'nodeHandle.addInput(spec) / nodeHandle.removeInput(name)'
+  notes: 'Phase A: thin shim; Phase B: ECS dispatch'
+
+S10.D2:
+  status: ECS-native
+  v1_api: 'node.connect / disconnectInput / disconnectOutput'
+  v2_api: 'nodeHandle.connect(...) / nodeHandle.disconnect(...)'
+  notes: 'Phase B dispatches ConnectNodes / DisconnectNodes ECS commands'
+
+S10.D3:
+  status: unchanged-legacy
+  v1_api: 'node.setSize(computeSize()) imperative resize'
+  v2_api: '— no v2 replacement —'
+  notes: 'Implicit reactive layout; escape hatch: nodeHandle.requestLayout()'
+
+# S11 — Graph mutation and batching
+S11.G1:
+  status: unchanged-legacy
+  v1_api: 'graph._version mutation/read'
+  v2_api: '— no v2 replacement —'
+  notes: "Internal; listen to graph.on('changed', fn) for change notification"
+
+S11.G2:
+  status: ECS-native
+  v1_api: 'graph.add/remove/findNodesByType/findNodeById/serialize/configure'
+  v2_api: 'graph.nodes() iterator + graph.findNodes({ type, ... })'
+  notes: 'graph.configure() replaced by app.loadWorkflow(json)'
+
+S11.G3:
+  status: ECS-native
+  v1_api: 'graph.beforeChange / graph.afterChange batching'
+  v2_api: 'world.batch(() => { ...mutations... })'
+  notes: 'ECS World batch coalesces undo/dirty/re-render'
+
+S11.G4:
+  status: unchanged-legacy
+  v1_api: 'graph.setDirtyCanvas imperative redraw'
+  v2_api: '— no v2 replacement —'
+  notes: 'Implicit reactive system; escape hatch: world.markDirty()'
+
+# S12 — Shell UI contributions
+S12.UI1:
+  status: ECS-native
+  v1_api: 'extensionManager / commandManager / toastManager / sidebarTab / bottomPanel'
+  v2_api: 'Same surface kept; ID/structure refinements in v2'
+  notes: 'Highest blast_radius shell-UI pattern; no migration burden'
+
+S12.UI2:
+  status: unchanged-legacy
+  v1_api: 'app.ui.settings.settingsLookup direct mutation'
+  v2_api: '— no v2 replacement —'
+  notes: 'Private; use app.ui.settings.addSetting() public API'
+
+S12.UI3:
+  status: ECS-native
+  v1_api: 'Settings-integrated custom dialog'
+  v2_api: 'app.ui.dialog.open(component, options)'
+  notes: 'Phase B shell API'
+
+# S13 — Schema inspection
+S13.SC1:
+  status: ECS-native
+  v1_api: 'ComfyNodeDef inspection'
+  v2_api: 'ctx.inspectNodeDef(nodeData) + node.kind'
+  notes: 'v2 provides typed wrapper'
+
+# S14 — Identity encoding
+S14.ID1:
+  status: ECS-native
+  v1_api: 'NodeLocatorId / NodeExecutionId parsing'
+  v2_api: 'NodeHandle is opaque; locator helpers stay public'
+  notes: 'Very low blast_radius'
+
+# S15 — Output schema / dynamic outputs
+S15.OS1:
+  status: ECS-native
+  v1_api: 'dynamic output mutation at runtime'
+  v2_api: 'node.declareOutputs(spec)'
+  notes: 'Phase B ECS dispatch; high lifecycle coupling'
+
+# S16 — Security / DOM injection patterns
+S16.D1:
+  status: unchanged-legacy
+  v1_api: 'SVG with inline event handlers'
+  v2_api: '— no v2 replacement —'
+  notes: 'Disallowed; use addEventListener at mount'
+
+S16.D3:
+  status: unchanged-legacy
+  v1_api: 'Obfuscated string-replace pipeline'
+  v2_api: '— no v2 replacement —'
+  notes: 'Flag for human review; blocked at publish gate'
+
+S16.D7:
+  status: unchanged-legacy
+  v1_api: 'Python web/ template uses exec/eval'
+  v2_api: '— no v2 replacement —'
+  notes: 'Static templating only in v2'
+
+S16.DOM1:
+  status: ECS-native
+  v1_api: "document.createElement('style') CSS injection"
+  v2_api: 'extensionManager.injectStyles(css)'
+  notes: 'Scoped to extension lifetime; auto-removed on dispose'
+
+S16.DOM2:
+  status: ECS-native
+  v1_api: 'document.body.appendChild arbitrary DOM'
+  v2_api: 'extensionManager.mountPanel(element, options)'
+  notes: 'Lifecycle-managed mount'
+
+S16.DOM3:
+  status: unchanged-legacy
+  v1_api: 'innerHTML concatenation'
+  v2_api: '— no v2 replacement —'
+  notes: 'Disallowed; use template literals with sanitization or Vue'
+
+S16.DOM4:
+  status: unchanged-legacy
+  v1_api: 'direct fetch() bypassing api.fetchApi'
+  v2_api: '— no v2 replacement —'
+  notes: 'Disallowed; ctx.api.fetch() is only sanctioned surface'
+
+S16.VUE1:
+  status: ECS-native
+  v1_api: 'bundled Vue runtime inside DOM widget'
+  v2_api: 'defineWidgetExtension shares host Vue instance'
+  notes: 'Bundling own Vue disallowed; causes version conflicts'
+
+# S17 — Newly-identified gaps
+S17.AM1:
+  status: ECS-native
+  v1_api: 'appModeStore / canvas mode state'
+  v2_api: "app.on('modeChanged', ({ from, to }) => {...})"
+  notes: 'v2 introduces this gap filler; Phase B'
+
+S17.FA1:
+  status: ECS-native
+  v1_api: 'File upload / asset URL construction'
+  v2_api: 'ctx.api.uploadFile(file, options)'
+  notes: 'Hides FormData, /upload/image, /view URL construction'
+
+S17.SB1:
+  status: unchanged-legacy
+  v1_api: 'Subgraph boundary event propagation'
+  v2_api: '— no v2 replacement —'
+  notes: 'Phase B: ECS ADR 0008 Six-Entity model makes boundary explicit'
+
+S17.WV1:
+  status: uwf-resolved
+  v1_api: 'widgets_values positional array serialization'
+  v2_api: 'widgets_values_named key-value pairs'
+  notes: 'UWF Phase 1; v2 WidgetHandle uses name-based identity'
