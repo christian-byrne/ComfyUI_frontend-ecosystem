@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useRoute, RouterLink } from "vue-router";
+import type { EvidenceRow } from '@/data'
+import { computed, ref } from 'vue'
 
-import NodePackBanner from "@/components/NodePackBanner.vue";
-import { useTestRunner } from "@/composables/useTestRunner";
-import { evidenceByPatternId, patternById, rollupByPatternId } from "@/data";
-import type { EvidenceRow } from "@/data";
-import { categoriesByPatternId } from "@/data/categories";
-import { isInStarCache } from "@/data/star-cache";
+import { RouterLink, useRoute } from 'vue-router'
+import NodePackBanner from '@/components/NodePackBanner.vue'
+import { useTestRunner } from '@/composables/useTestRunner'
+import { evidenceByPatternId, patternById, rollupByPatternId } from '@/data'
+import { categoriesByPatternId } from '@/data/categories'
+import { isInStarCache } from '@/data/star-cache'
 
 /**
  * PatternDetail — the deepest view in the explorer: one pattern's full story.
@@ -26,41 +26,39 @@ import { isInStarCache } from "@/data/star-cache";
  *   - test runner   : disabled "Run v1↔v2 contract test" button — the real
  *                     wire-up lands in W5.1 TestRunner.
  */
-const route = useRoute();
+const route = useRoute()
 
-const patternId = computed(() => String(route.params.id ?? ""));
+const patternId = computed(() => String(route.params.id ?? ''))
 
-const pattern = computed(() => patternById[patternId.value]);
-const rollup = computed(() => rollupByPatternId[patternId.value]);
-const evidence = computed<EvidenceRow[]>(
-  () => evidenceByPatternId[patternId.value] ?? [],
-);
-const categories = computed(() => categoriesByPatternId[patternId.value] ?? []);
+const pattern = computed(() => patternById[patternId.value])
+const rollup = computed(() => rollupByPatternId[patternId.value])
+const evidence = computed<EvidenceRow[]>(() => evidenceByPatternId[patternId.value] ?? [])
+const categories = computed(() => categoriesByPatternId[patternId.value] ?? [])
 
 const surfaceFamily = computed(
-  () => pattern.value?.surface_family ?? rollup.value?.surface_family ?? "—",
-);
+  () => pattern.value?.surface_family ?? rollup.value?.surface_family ?? '—'
+)
 
 /** Tracks which evidence rows have their excerpt expanded. Default = collapsed. */
-const expanded = ref<Record<number, boolean>>({});
+const expanded = ref<Record<number, boolean>>({})
 function toggle(idx: number) {
-  expanded.value[idx] = !expanded.value[idx];
+  expanded.value[idx] = !expanded.value[idx]
 }
 
 function lineRange(lines?: number[]): string {
-  if (!lines || lines.length === 0) return "";
-  if (lines.length === 1) return `L${lines[0]}`;
-  return `L${lines[0]}–L${lines[lines.length - 1]}`;
+  if (!lines || lines.length === 0) return ''
+  if (lines.length === 1) return `L${lines[0]}`
+  return `L${lines[0]}–L${lines[lines.length - 1]}`
 }
 
 /**
  * W5.1 TestRunner integration.
  * Provides test execution state and controls for v1↔v2 contract tests.
  */
-const testRunner = useTestRunner(patternId);
+const testRunner = useTestRunner(patternId)
 
 async function handleRunTest() {
-  await testRunner.runTest();
+  await testRunner.runTest()
 }
 </script>
 
@@ -79,9 +77,7 @@ async function handleRunTest() {
     <template v-else>
       <!-- Header -->
       <header class="space-y-2" data-testid="pattern-header">
-        <div
-          class="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400"
-        >
+        <div class="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
           <RouterLink
             to="/patterns"
             class="font-mono uppercase tracking-wide hover:text-zinc-700 dark:hover:text-zinc-300"
@@ -100,16 +96,11 @@ async function handleRunTest() {
           >
             blast {{ rollup.blast_radius.toFixed(2) }}
           </span>
-          <span
-            v-if="pattern.severity"
-            class="font-medium text-rose-600 dark:text-rose-400"
-          >
+          <span v-if="pattern.severity" class="font-medium text-rose-600 dark:text-rose-400">
             {{ pattern.severity }}
           </span>
         </div>
-        <h1
-          class="font-mono text-3xl font-semibold text-zinc-900 dark:text-zinc-100"
-        >
+        <h1 class="font-mono text-3xl font-semibold text-zinc-900 dark:text-zinc-100">
           {{ pattern.pattern_id }}
         </h1>
         <p class="text-base text-zinc-700 dark:text-zinc-300">
@@ -149,9 +140,7 @@ async function handleRunTest() {
       <!-- v1 / v2 surface side-by-side -->
       <section class="grid gap-4 md:grid-cols-2" data-testid="surface-pair">
         <div>
-          <h2
-            class="mb-2 text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400"
-          >
+          <h2 class="mb-2 text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400">
             v1 surface
           </h2>
           <pre
@@ -159,9 +148,7 @@ async function handleRunTest() {
           ><code data-testid="surface-v1">{{ pattern.fingerprint ?? '— no fingerprint recorded —' }}</code></pre>
         </div>
         <div>
-          <h2 class="mb-2 text-sm font-semibold uppercase text-emerald-700">
-            v2 surface
-          </h2>
+          <h2 class="mb-2 text-sm font-semibold uppercase text-emerald-700">v2 surface</h2>
           <pre
             class="overflow-x-auto rounded-md border border-emerald-200 bg-emerald-50 dark:bg-emerald-900/30 p-3 text-[12px] leading-relaxed text-emerald-900"
           ><code data-testid="surface-v2">{{ pattern.v2_replacement ?? '— no v2 replacement defined —' }}</code></pre>
@@ -170,36 +157,19 @@ async function handleRunTest() {
 
       <!-- Migration guidance -->
       <section data-testid="migration-path" class="space-y-2">
-        <h2
-          class="text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400"
-        >
+        <h2 class="text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400">
           Migration guidance
         </h2>
-        <p
-          v-if="pattern.semantic"
-          class="text-sm text-zinc-700 dark:text-zinc-300"
-        >
-          <span class="font-medium text-zinc-900 dark:text-zinc-100"
-            >Intent:</span
-          >
+        <p v-if="pattern.semantic" class="text-sm text-zinc-700 dark:text-zinc-300">
+          <span class="font-medium text-zinc-900 dark:text-zinc-100">Intent:</span>
           {{ pattern.semantic }}
         </p>
-        <p
-          v-if="pattern.decision_ref"
-          class="text-sm text-zinc-700 dark:text-zinc-300"
-        >
-          <span class="font-medium text-zinc-900 dark:text-zinc-100"
-            >Decision ref:</span
-          >
+        <p v-if="pattern.decision_ref" class="text-sm text-zinc-700 dark:text-zinc-300">
+          <span class="font-medium text-zinc-900 dark:text-zinc-100">Decision ref:</span>
           <code class="ml-1 font-mono text-xs">{{ pattern.decision_ref }}</code>
         </p>
-        <p
-          v-if="pattern.test_target"
-          class="text-sm text-zinc-700 dark:text-zinc-300"
-        >
-          <span class="font-medium text-zinc-900 dark:text-zinc-100"
-            >Test target:</span
-          >
+        <p v-if="pattern.test_target" class="text-sm text-zinc-700 dark:text-zinc-300">
+          <span class="font-medium text-zinc-900 dark:text-zinc-100">Test target:</span>
           <code class="ml-1 font-mono text-xs">{{ pattern.test_target }}</code>
         </p>
         <p
@@ -211,14 +181,8 @@ async function handleRunTest() {
       </section>
 
       <!-- Behavior categories -->
-      <section
-        v-if="categories.length > 0"
-        data-testid="categories"
-        class="space-y-2"
-      >
-        <h2
-          class="text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400"
-        >
+      <section v-if="categories.length > 0" data-testid="categories" class="space-y-2">
+        <h2 class="text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400">
           Behavior categories ({{ categories.length }})
         </h2>
         <div class="flex flex-wrap gap-2">
@@ -236,15 +200,10 @@ async function handleRunTest() {
 
       <!-- Evidence rows -->
       <section data-testid="evidence" class="space-y-3">
-        <h2
-          class="text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400"
-        >
+        <h2 class="text-sm font-semibold uppercase text-zinc-500 dark:text-zinc-400">
           Evidence ({{ evidence.length }})
         </h2>
-        <div
-          v-if="evidence.length === 0"
-          class="text-sm italic text-zinc-400 dark:text-zinc-500"
-        >
+        <div v-if="evidence.length === 0" class="text-sm italic text-zinc-400 dark:text-zinc-500">
           No evidence rows.
         </div>
         <ul v-else class="space-y-3">
@@ -264,12 +223,8 @@ async function handleRunTest() {
               >
                 {{ ev.repo }}
               </a>
-              <span v-else class="font-mono text-zinc-900 dark:text-zinc-100">{{
-                ev.repo
-              }}</span>
-              <span class="font-mono text-zinc-500 dark:text-zinc-400">{{
-                ev.file
-              }}</span>
+              <span v-else class="font-mono text-zinc-900 dark:text-zinc-100">{{ ev.repo }}</span>
+              <span class="font-mono text-zinc-500 dark:text-zinc-400">{{ ev.file }}</span>
               <span class="font-mono text-zinc-400 dark:text-zinc-500">{{
                 lineRange(ev.lines)
               }}</span>
@@ -287,17 +242,9 @@ async function handleRunTest() {
               </span>
             </div>
 
-            <NodePackBanner
-              v-if="isInStarCache(ev.repo)"
-              :repo="ev.repo"
-              dense
-              class="mt-2"
-            />
+            <NodePackBanner v-if="isInStarCache(ev.repo)" :repo="ev.repo" dense class="mt-2" />
 
-            <p
-              v-if="ev.notes"
-              class="mt-2 text-xs text-zinc-600 dark:text-zinc-400"
-            >
+            <p v-if="ev.notes" class="mt-2 text-xs text-zinc-600 dark:text-zinc-400">
               {{ ev.notes }}
             </p>
 
@@ -310,7 +257,7 @@ async function handleRunTest() {
                 :aria-controls="`excerpt-${idx}`"
                 @click="toggle(idx)"
               >
-                {{ expanded[idx] ? "hide excerpt" : "show excerpt" }}
+                {{ expanded[idx] ? 'hide excerpt' : 'show excerpt' }}
               </button>
               <pre
                 v-if="expanded[idx]"
@@ -337,14 +284,12 @@ async function handleRunTest() {
             :class="[
               testRunner.state.value === 'running'
                 ? 'cursor-wait border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
-                : 'border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50',
+                : 'border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50'
             ]"
             data-testid="run-test-btn"
             @click="handleRunTest"
           >
-            <span v-if="testRunner.state.value === 'running'"
-              >⏳ Running...</span
-            >
+            <span v-if="testRunner.state.value === 'running'">⏳ Running...</span>
             <span v-else>▶ Run v1↔v2 contract test</span>
           </button>
           <button
@@ -376,40 +321,23 @@ async function handleRunTest() {
             'bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200':
               testRunner.result.value.state === 'failed',
             'bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200':
-              testRunner.result.value.state === 'skipped',
+              testRunner.result.value.state === 'skipped'
           }"
           data-testid="test-result"
         >
           <div class="flex items-center gap-2">
-            <span v-if="testRunner.result.value.state === 'passed'"
-              >✅ Passed</span
-            >
-            <span v-else-if="testRunner.result.value.state === 'failed'"
-              >❌ Failed</span
-            >
-            <span v-else-if="testRunner.result.value.state === 'skipped'"
-              >⏭️ Skipped</span
-            >
-            <span class="text-xs opacity-70">
-              ({{ testRunner.result.value.duration }}ms)
-            </span>
-            <span
-              v-if="testRunner.result.value.assertions"
-              class="text-xs opacity-70"
-            >
+            <span v-if="testRunner.result.value.state === 'passed'">✅ Passed</span>
+            <span v-else-if="testRunner.result.value.state === 'failed'">❌ Failed</span>
+            <span v-else-if="testRunner.result.value.state === 'skipped'">⏭️ Skipped</span>
+            <span class="text-xs opacity-70"> ({{ testRunner.result.value.duration }}ms) </span>
+            <span v-if="testRunner.result.value.assertions" class="text-xs opacity-70">
               · {{ testRunner.result.value.assertions }} assertions
             </span>
           </div>
-          <p
-            v-if="testRunner.result.value.error"
-            class="mt-1 font-mono text-xs"
-          >
+          <p v-if="testRunner.result.value.error" class="mt-1 font-mono text-xs">
             {{ testRunner.result.value.error }}
           </p>
-          <p
-            v-if="testRunner.result.value.testFile"
-            class="mt-1 font-mono text-xs opacity-60"
-          >
+          <p v-if="testRunner.result.value.testFile" class="mt-1 font-mono text-xs opacity-60">
             {{ testRunner.result.value.testFile }}
           </p>
         </div>

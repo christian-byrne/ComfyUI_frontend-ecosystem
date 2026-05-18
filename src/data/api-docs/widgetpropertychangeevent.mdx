@@ -1,6 +1,6 @@
 ---
-title: "WidgetPropertyChangeEvent"
-description: "API reference for WidgetPropertyChangeEvent."
+title: 'WidgetPropertyChangeEvent'
+description: 'API reference for WidgetPropertyChangeEvent.'
 ---
 
 Defined in: [src/extension-api/widget.ts:91](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L91)
@@ -23,8 +23,8 @@ widget.on('propertyChange', (e) => {
 
 ## Properties
 
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="newvalue"></a> `newValue` | `readonly` | `boolean` | Value after the change. |
-| <a id="oldvalue"></a> `oldValue` | `readonly` | `boolean` | Value before the change. |
+| Property                         | Modifier   | Type                                        | Description                                                                                                                                                                                                          |
+| -------------------------------- | ---------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="newvalue"></a> `newValue` | `readonly` | `boolean`                                   | Value after the change.                                                                                                                                                                                              |
+| <a id="oldvalue"></a> `oldValue` | `readonly` | `boolean`                                   | Value before the change.                                                                                                                                                                                             |
 | <a id="property"></a> `property` | `readonly` | `"hidden"` \| `"disabled"` \| `"serialize"` | Which first-class property changed. - `'hidden'` — visibility toggled via `setHidden()` - `'disabled'` — enabled/disabled via `setDisabled()` - `'serialize'` — serialization opt-in/out via `setSerializeEnabled()` |

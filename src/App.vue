@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView } from 'vue-router'
 
-import { useDarkMode } from "./composables/useDarkMode";
-import { routes } from "./router";
+import { useDarkMode } from './composables/useDarkMode'
+import { routes } from './router'
 
-const navRoutes = routes.filter((r) => r.meta?.nav);
-const { isDark, toggleDark } = useDarkMode();
+const navRoutes = routes.filter((r) => r.meta?.nav)
+const { isDark, toggleDark } = useDarkMode()
 </script>
 
 <template>
-  <div
-    class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
-  >
+  <div class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
     <!--
       Sticky header so navigation stays reachable from anywhere in a long
       table or detail view (DASH-FB-7). `backdrop-blur` keeps the chrome
@@ -50,7 +48,7 @@ const { isDark, toggleDark } = useDarkMode();
           data-testid="dark-mode-toggle"
           @click="toggleDark()"
         >
-          {{ isDark ? "☀ light" : "☾ dark" }}
+          {{ isDark ? '☀ light' : '☾ dark' }}
         </button>
       </div>
     </header>

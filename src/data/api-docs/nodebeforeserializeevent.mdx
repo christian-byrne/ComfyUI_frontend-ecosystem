@@ -1,6 +1,6 @@
 ---
-title: "NodeBeforeSerializeEvent"
-description: "Pre-serialization hook payload — override or skip node data."
+title: 'NodeBeforeSerializeEvent'
+description: 'Pre-serialization hook payload — override or skip node data.'
 ---
 
 Defined in: [src/extension-api/node.ts:178](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L178)
@@ -14,6 +14,7 @@ Use widget-level `widget.on('beforeSerialize')` instead. Store extension
 state in widgets rather than arbitrary node fields.
 
 **Why widget-level is better:**
+
 - Widget values are visible at predictable locations in workflow JSON
 - Cleaner separation between framework and extension concerns
 - Widget serialization hooks support async operations
@@ -26,10 +27,10 @@ experimental
 
 ## Properties
 
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="context"></a> ~~`context`~~ | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this. |
-| <a id="data"></a> ~~`data`~~ | `readonly` | `Record`\<`string`, `unknown`\> | The mutable serialized node object. Mutate in place to append fields. Type intentionally loose — the exact shape is `ISerialisedNode`. |
+| Property                           | Modifier   | Type                                                            | Description                                                                                                                            |
+| ---------------------------------- | ---------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="context"></a> ~~`context`~~ | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this.                                                                                               |
+| <a id="data"></a> ~~`data`~~       | `readonly` | `Record`\<`string`, `unknown`\>                                 | The mutable serialized node object. Mutate in place to append fields. Type intentionally loose — the exact shape is `ISerialisedNode`. |
 
 ## Methods
 
@@ -48,9 +49,9 @@ previous call's output.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `fn` | (`orig`) => `Record`\<`string`, `unknown`\> |
+| Parameter | Type                                        |
+| --------- | ------------------------------------------- |
+| `fn`      | (`orig`) => `Record`\<`string`, `unknown`\> |
 
 #### Returns
 

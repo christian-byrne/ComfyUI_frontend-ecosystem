@@ -48,9 +48,7 @@
       "risk": "med",
       "migration": "decide-with-Alex",
       "notes": "[trigger-cluster]",
-      "prs": [
-        12234
-      ]
+      "prs": [12234]
     },
     {
       "id": "lgraph_on_after_execute",
@@ -62,9 +60,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12228
-      ]
+      "prs": [12228]
     },
     {
       "id": "lgraph_on_after_execute_node_dispatch",
@@ -77,9 +73,7 @@
       "risk": "low",
       "migration": "delete-immediately",
       "notes": "[trigger-cluster]",
-      "prs": [
-        12234
-      ]
+      "prs": [12234]
     },
     {
       "id": "lgraph_on_after_step",
@@ -91,9 +85,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12228
-      ]
+      "prs": [12228]
     },
     {
       "id": "lgraph_on_before_change",
@@ -105,9 +97,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12230
-      ]
+      "prs": [12230]
     },
     {
       "id": "lgraph_on_before_step",
@@ -119,9 +109,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12228
-      ]
+      "prs": [12228]
     },
     {
       "id": "lgraph_on_execute_step",
@@ -133,9 +121,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12228
-      ]
+      "prs": [12228]
     },
     {
       "id": "lgraph_on_get_node_menu_options",
@@ -147,9 +133,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12230
-      ]
+      "prs": [12230]
     },
     {
       "id": "lgraph_on_play_event",
@@ -161,9 +145,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12228
-      ]
+      "prs": [12228]
     },
     {
       "id": "lgraph_on_stop_event",
@@ -175,9 +157,7 @@
       "verdict": "DELETE-NOW",
       "risk": "low",
       "migration": "delete-immediately",
-      "prs": [
-        12228
-      ]
+      "prs": [12228]
     },
     {
       "id": "lgraph_set_callback",
@@ -190,9 +170,7 @@
       "risk": "low",
       "migration": "delete-immediately",
       "notes": "[trigger-cluster]",
-      "prs": [
-        12234
-      ]
+      "prs": [12234]
     },
     {
       "id": "lgraph_trigger_input",
@@ -205,9 +183,7 @@
       "risk": "low",
       "migration": "delete-immediately",
       "notes": "[trigger-cluster]",
-      "prs": [
-        12234
-      ]
+      "prs": [12234]
     },
     {
       "id": "lgraphnode_on_add_property_to_panel",
@@ -232,9 +208,7 @@
       "risk": "low",
       "migration": "delete-immediately",
       "notes": "[trigger-cluster]",
-      "prs": [
-        12234
-      ]
+      "prs": [12234]
     },
     {
       "id": "lgraphnode_exec_version",
@@ -247,9 +221,7 @@
       "risk": "low",
       "migration": "delete-immediately",
       "notes": "[trigger-cluster]",
-      "prs": [
-        12234
-      ]
+      "prs": [12234]
     },
     {
       "id": "lgraphnode_on_before_connect_input",
@@ -562,9 +534,7 @@
       "risk": "med",
       "migration": "keep-permanent",
       "notes": "[audit-correction]",
-      "prs": [
-        12235
-      ]
+      "prs": [12235]
     },
     {
       "id": "llink_last_time",
@@ -642,9 +612,7 @@
       "risk": "med",
       "migration": "decide-with-Alex",
       "notes": "[D12]",
-      "prs": [
-        12232
-      ]
+      "prs": [12232]
     },
     {
       "id": "subgraph_empty_output_class",
@@ -657,9 +625,7 @@
       "risk": "med",
       "migration": "decide-with-Alex",
       "notes": "[D12]",
-      "prs": [
-        12232
-      ]
+      "prs": [12232]
     },
     {
       "id": "subgraph_find_used_subgraph_ids",
@@ -906,9 +872,7 @@
       "risk": "med",
       "migration": "decide-with-Alex",
       "notes": "[D12]",
-      "prs": [
-        12232
-      ]
+      "prs": [12232]
     },
     {
       "id": "subgraph_promoted_widget_view_manager_class",
@@ -921,9 +885,7 @@
       "risk": "med",
       "migration": "decide-with-Alex",
       "notes": "[D12]",
-      "prs": [
-        12232
-      ]
+      "prs": [12232]
     },
     {
       "id": "subgraph_split_positionables",
@@ -1098,9 +1060,7 @@
       "verdict": "KEEP",
       "risk": "high",
       "migration": "keep-permanent",
-      "prs": [
-        12230
-      ]
+      "prs": [12230]
     },
     {
       "id": "lgraphcanvas_on_draw_link_tooltip",

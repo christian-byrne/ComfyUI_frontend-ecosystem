@@ -1,7 +1,7 @@
 ---
-title: "defineWidget"
-description: "Register a custom widget type with DOM rendering capabilities."
-icon: "sliders"
+title: 'defineWidget'
+description: 'Register a custom widget type with DOM rendering capabilities.'
+icon: 'sliders'
 ---
 
 ```ts
@@ -85,18 +85,18 @@ export default defineWidget({
 
 The [`WidgetHandle`](./widgethandle) provides:
 
-| Method | Description |
-| ------ | ------ |
-| `getValue()` | Get current widget value |
-| `setValue(value)` | Set widget value |
-| `setHeight(px)` | Resize widget height in node |
-| `on('valueChanged', handler)` | Subscribe to value changes |
-| `on('beforeSerialize', handler)` | Customize serialization |
+| Method                           | Description                  |
+| -------------------------------- | ---------------------------- |
+| `getValue()`                     | Get current widget value     |
+| `setValue(value)`                | Set widget value             |
+| `setHeight(px)`                  | Resize widget height in node |
+| `on('valueChanged', handler)`    | Subscribe to value changes   |
+| `on('beforeSerialize', handler)` | Customize serialization      |
 
 ## Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
+| Parameter | Type                                                 | Description                                               |
+| --------- | ---------------------------------------------------- | --------------------------------------------------------- |
 | `options` | [`WidgetExtensionOptions`](./widgetextensionoptions) | Extension configuration with name, type, and created hook |
 
 ## Returns

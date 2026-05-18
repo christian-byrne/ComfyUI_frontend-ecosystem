@@ -8,3 +8,12 @@ exports[`Heatmap.vue > renders rows × cols matching the synthetic dataset (snap
   "rows": 2,
 }
 `;
+
+exports[`heatmap.vue > renders rows × cols matching the synthetic dataset (snapshot-style dimensions) 1`] = `
+{
+  "cellCount": 6,
+  "cols": 3,
+  "gridTemplateColumns": "grid-template-columns: minmax(220px, max-content) repeat(3, minmax(28px, 1fr));",
+  "rows": 2,
+}
+`;

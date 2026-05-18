@@ -1,7 +1,7 @@
 ---
-title: "defineNode"
-description: "Register a node-scoped extension with lifecycle hooks for specific node types."
-icon: "circle-nodes"
+title: 'defineNode'
+description: 'Register a node-scoped extension with lifecycle hooks for specific node types.'
+icon: 'circle-nodes'
 ---
 
 ```ts
@@ -86,22 +86,22 @@ export default defineNode({
 
 The [`NodeHandle`](./nodehandle) provides these event subscriptions via `node.on()`:
 
-| Event | Payload | Description |
-| ------ | ------ | ------ |
-| `'executed'` | [`NodeExecutedEvent`](./nodeexecutedevent) | Backend execution completed |
-| `'configured'` | `void` | Node loaded from workflow |
-| `'removed'` | `void` | Node deleted from graph |
-| `'connected'` | [`NodeConnectedEvent`](./nodeconnectedevent) | Slot connected |
-| `'disconnected'` | [`NodeDisconnectedEvent`](./nodedisconnectedevent) | Slot disconnected |
-| `'positionChanged'` | [`NodePositionChangedEvent`](./nodepositionchangedevent) | Canvas position changed |
-| `'sizeChanged'` | [`NodeSizeChangedEvent`](./nodesizechangedevent) | Node resized |
-| `'modeChanged'` | [`NodeModeChangedEvent`](./nodemodechangedevent) | Execution mode changed |
+| Event               | Payload                                                  | Description                     |
+| ------------------- | -------------------------------------------------------- | ------------------------------- |
+| `'executed'`        | [`NodeExecutedEvent`](./nodeexecutedevent)               | Backend execution completed     |
+| `'configured'`      | `void`                                                   | Node loaded from workflow       |
+| `'removed'`         | `void`                                                   | Node deleted from graph         |
+| `'connected'`       | [`NodeConnectedEvent`](./nodeconnectedevent)             | Slot connected                  |
+| `'disconnected'`    | [`NodeDisconnectedEvent`](./nodedisconnectedevent)       | Slot disconnected               |
+| `'positionChanged'` | [`NodePositionChangedEvent`](./nodepositionchangedevent) | Canvas position changed         |
+| `'sizeChanged'`     | [`NodeSizeChangedEvent`](./nodesizechangedevent)         | Node resized                    |
+| `'modeChanged'`     | [`NodeModeChangedEvent`](./nodemodechangedevent)         | Execution mode changed          |
 | `'beforeSerialize'` | [`NodeBeforeSerializeEvent`](./nodebeforeserializeevent) | About to serialize (deprecated) |
 
 ## Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
+| Parameter | Type                                             | Description                                                               |
+| --------- | ------------------------------------------------ | ------------------------------------------------------------------------- |
 | `options` | [`NodeExtensionOptions`](./nodeextensionoptions) | Extension configuration with name, node types filter, and lifecycle hooks |
 
 ## Returns

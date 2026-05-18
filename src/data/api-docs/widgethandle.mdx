@@ -1,7 +1,7 @@
 ---
-title: "WidgetHandle"
-description: "Controlled access to widget state, mutations, and events."
-icon: "sliders"
+title: 'WidgetHandle'
+description: 'Controlled access to widget state, mutations, and events.'
+icon: 'sliders'
 ---
 
 Defined in: [src/extension-api/widget.ts:246](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L246)
@@ -31,18 +31,18 @@ export default defineNode({
 
 ## Type Parameters
 
-| Type Parameter | Default type | Description |
-| ------ | ------ | ------ |
-| `T` | [`WidgetValue`](./widgetvalue) | The type of `getValue()` / `setValue()`. Defaults to `WidgetValue`. |
+| Type Parameter | Default type                   | Description                                                         |
+| -------------- | ------------------------------ | ------------------------------------------------------------------- |
+| `T`            | [`WidgetValue`](./widgetvalue) | The type of `getValue()` / `setValue()`. Defaults to `WidgetValue`. |
 
 ## Properties
 
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
-| <a id="label"></a> `label` | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). To override at construction, pass `label` to `addWidget()` options. |
-| <a id="name"></a> `name` | `readonly` | `string` | The widget's name as registered in `INPUT_TYPES` or `addWidget`. Stable for the lifetime of the node; never changes after creation. |
-| <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation. |
+| Property                             | Modifier   | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------ | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="id"></a> `id`                 | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
+| <a id="label"></a> `label`           | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). To override at construction, pass `label` to `addWidget()` options.                                                                                                                                                                                                                                  |
+| <a id="name"></a> `name`             | `readonly` | `string` | The widget's name as registered in `INPUT_TYPES` or `addWidget`. Stable for the lifetime of the node; never changes after creation.                                                                                                                                                                                                                                                                                                         |
+| <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation.                                                                                                                                                                                                                                                                                                                          |
 
 ## Methods
 
@@ -61,15 +61,15 @@ the identity scheme remain transparent.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `other` | `WidgetHandle` |
+| Parameter | Type           |
+| --------- | -------------- |
+| `other`   | `WidgetHandle` |
 
 #### Returns
 
 `boolean`
 
-***
+---
 
 ### getOption()
 
@@ -89,14 +89,14 @@ Type-specific option names: `min`, `max`, `step` (INT/FLOAT); `multiline`,
 #### Type Parameters
 
 | Type Parameter | Default type |
-| ------ | ------ |
-| `K` | `unknown` |
+| -------------- | ------------ |
+| `K`            | `unknown`    |
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `key` | `string` |
+| Parameter | Type     |
+| --------- | -------- |
+| `key`     | `string` |
 
 #### Returns
 
@@ -108,7 +108,7 @@ Type-specific option names: `min`, `max`, `step` (INT/FLOAT); `multiline`,
 const min = widget.getOption<number>('min') ?? 0
 ```
 
-***
+---
 
 ### getValue()
 
@@ -130,7 +130,7 @@ Returns the widget's current user-edited value.
 const steps = node.getWidget('steps')!.getValue<number>()
 ```
 
-***
+---
 
 ### isDisabled()
 
@@ -146,7 +146,7 @@ Returns `true` if the widget is disabled (read-only in the UI).
 
 `boolean`
 
-***
+---
 
 ### isHidden()
 
@@ -162,7 +162,7 @@ Returns `true` if the widget is currently hidden from the node UI.
 
 `boolean`
 
-***
+---
 
 ### isSerializeEnabled()
 
@@ -179,7 +179,7 @@ serialization. Defaults to `true` for all widget types.
 
 `boolean`
 
-***
+---
 
 ### on()
 
@@ -198,9 +198,9 @@ Fires synchronously after the value is committed.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"valueChange"` |
+| Parameter | Type                                                                                  |
+| --------- | ------------------------------------------------------------------------------------- |
+| `event`   | `"valueChange"`                                                                       |
 | `handler` | [`Handler`](./handler)\<[`WidgetValueChangeEvent`](./widgetvaluechangeevent)\<`T`\>\> |
 
 ##### Returns
@@ -224,9 +224,9 @@ Does NOT fire for value changes or first-class field changes.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"optionChange"` |
+| Parameter | Type                                                                             |
+| --------- | -------------------------------------------------------------------------------- |
+| `event`   | `"optionChange"`                                                                 |
 | `handler` | [`Handler`](./handler)\<[`WidgetOptionChangeEvent`](./widgetoptionchangeevent)\> |
 
 ##### Returns
@@ -255,9 +255,9 @@ Does NOT fire for `setValue` (use `valueChange`) or options-bag mutations
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"propertyChange"` |
+| Parameter | Type                                                                                 |
+| --------- | ------------------------------------------------------------------------------------ |
+| `event`   | `"propertyChange"`                                                                   |
 | `handler` | [`Handler`](./handler)\<[`WidgetPropertyChangeEvent`](./widgetpropertychangeevent)\> |
 
 ##### Returns
@@ -286,9 +286,9 @@ the serialization payload is sent.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"beforeSerialize"` |
+| Parameter | Type                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| `event`   | `"beforeSerialize"`                                                                                     |
 | `handler` | [`AsyncHandler`](./asynchandler)\<[`WidgetBeforeSerializeEvent`](./widgetbeforeserializeevent)\<`T`\>\> |
 
 ##### Returns
@@ -315,9 +315,9 @@ Handlers are sync-only — use for validation logic only, not I/O.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"beforeQueue"` |
+| Parameter | Type                                                                           |
+| --------- | ------------------------------------------------------------------------------ |
+| `event`   | `"beforeQueue"`                                                                |
 | `handler` | [`Handler`](./handler)\<[`WidgetBeforeQueueEvent`](./widgetbeforequeueevent)\> |
 
 ##### Returns
@@ -330,7 +330,7 @@ A cleanup function to remove the listener.
 
 experimental
 
-***
+---
 
 ### setDisabled()
 
@@ -344,15 +344,15 @@ Enable or disable the widget.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
+| Parameter  | Type      |
+| ---------- | --------- |
 | `disabled` | `boolean` |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setHeight()
 
@@ -372,9 +372,9 @@ height whenever the embedded element resizes.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `px` | `number` | New reserved height in pixels. |
+| Parameter | Type     | Description                    |
+| --------- | -------- | ------------------------------ |
+| `px`      | `number` | New reserved height in pixels. |
 
 #### Returns
 
@@ -384,7 +384,7 @@ height whenever the embedded element resizes.
 
 experimental
 
-***
+---
 
 ### setHidden()
 
@@ -398,9 +398,9 @@ Show or hide the widget. Dispatches a `SetWidgetHidden` command.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `hidden` | `boolean` |
+| Parameter | Type      |
+| --------- | --------- |
+| `hidden`  | `boolean` |
 
 #### Returns
 
@@ -414,7 +414,7 @@ toggle.on('valueChange', (e) => {
 })
 ```
 
-***
+---
 
 ### setOption()
 
@@ -431,10 +431,10 @@ backend prompt schema unless the extension explicitly opts in via
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `key` | `string` |
-| `value` | `unknown` |
+| Parameter | Type      |
+| --------- | --------- |
+| `key`     | `string`  |
+| `value`   | `unknown` |
 
 #### Returns
 
@@ -449,7 +449,7 @@ widget.setOption('max', 100)
 widget.setOption('step', 1)
 ```
 
-***
+---
 
 ### setSerializeEnabled()
 
@@ -466,15 +466,15 @@ pattern.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
+| Parameter | Type      |
+| --------- | --------- |
 | `enabled` | `boolean` |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setValue()
 
@@ -490,8 +490,8 @@ Triggers `valueChange` handlers on all views.
 #### Parameters
 
 | Parameter | Type |
-| ------ | ------ |
-| `value` | `T` |
+| --------- | ---- |
+| `value`   | `T`  |
 
 #### Returns
 

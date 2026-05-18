@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-
-const route = useRoute();
+import { useRoute } from 'vue-router'
 
 defineProps<{
   /** Optional override; falls back to route meta.title or route name. */
-  title?: string;
-}>();
+  title?: string
+}>()
+
+const route = useRoute()
 </script>
 
 <template>

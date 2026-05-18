@@ -1,3 +1,4 @@
+import type { EvidenceRow, RollupEntry } from '@/data/schema'
 /**
  * Per-pack pattern coverage derived from the touch-points evidence.
  *
@@ -10,53 +11,52 @@
  * All sources are static module-level data, so the result is memoised once
  * per process.
  */
-import { evidenceCountByPack, patterns, rollupByPatternId } from "@/data";
-import type { EvidenceRow, RollupEntry } from "@/data/schema";
+import { evidenceCountByPack, patterns, rollupByPatternId } from '@/data'
 
 export interface PackPatternRow {
-  pattern_id: string;
-  surface_family: string;
-  name: string;
+  pattern_id: string
+  surface_family: string
+  name: string
   /** Number of evidence rows this pack contributes for the pattern. */
-  hits: number;
-  blast_radius: number;
-  evidence: EvidenceRow[];
-  rollup?: RollupEntry;
+  hits: number
+  blast_radius: number
+  evidence: EvidenceRow[]
+  rollup?: RollupEntry
 }
 
 export interface PackCoverage {
-  repo: string;
+  repo: string
   /** Total evidence rows across all patterns. */
-  totalHits: number;
+  totalHits: number
   /** Distinct pattern_ids touched by this pack. */
-  patternHits: number;
+  patternHits: number
   /** Σ (hits × blast_radius) across patterns this pack uses. */
-  weightedImpact: number;
-  rows: PackPatternRow[];
+  weightedImpact: number
+  rows: PackPatternRow[]
 }
 
 /** Build the per-pack coverage map once and memoise. */
-let cache: Map<string, PackCoverage> | null = null;
+let cache: Map<string, PackCoverage> | null = null
 function buildIndex(): Map<string, PackCoverage> {
-  if (cache) return cache;
-  const out = new Map<string, PackCoverage>();
+  if (cache) return cache
+  const out = new Map<string, PackCoverage>()
   for (const p of patterns) {
-    const rollup = rollupByPatternId[p.pattern_id];
-    const blast = rollup?.blast_radius ?? 0;
+    const rollup = rollupByPatternId[p.pattern_id]
+    const blast = rollup?.blast_radius ?? 0
     for (const ev of p.evidence) {
-      if (!ev.repo) continue;
-      let cov = out.get(ev.repo);
+      if (!ev.repo) continue
+      let cov = out.get(ev.repo)
       if (!cov) {
         cov = {
           repo: ev.repo,
           totalHits: 0,
           patternHits: 0,
           weightedImpact: 0,
-          rows: [],
-        };
-        out.set(ev.repo, cov);
+          rows: []
+        }
+        out.set(ev.repo, cov)
       }
-      let row = cov.rows.find((r) => r.pattern_id === p.pattern_id);
+      let row = cov.rows.find((r) => r.pattern_id === p.pattern_id)
       if (!row) {
         row = {
           pattern_id: p.pattern_id,
@@ -65,15 +65,15 @@ function buildIndex(): Map<string, PackCoverage> {
           hits: 0,
           blast_radius: blast,
           evidence: [],
-          rollup,
-        };
-        cov.rows.push(row);
-        cov.patternHits++;
+          rollup
+        }
+        cov.rows.push(row)
+        cov.patternHits++
       }
-      row.hits++;
-      row.evidence.push({ ...ev, pattern_id: ev.pattern_id ?? p.pattern_id });
-      cov.totalHits++;
-      cov.weightedImpact += blast;
+      row.hits++
+      row.evidence.push({ ...ev, pattern_id: ev.pattern_id ?? p.pattern_id })
+      cov.totalHits++
+      cov.weightedImpact += blast
     }
   }
   for (const cov of out.values()) {
@@ -81,16 +81,16 @@ function buildIndex(): Map<string, PackCoverage> {
       (a, b) =>
         b.blast_radius - a.blast_radius ||
         b.hits - a.hits ||
-        a.pattern_id.localeCompare(b.pattern_id),
-    );
+        a.pattern_id.localeCompare(b.pattern_id)
+    )
   }
-  cache = out;
-  return out;
+  cache = out
+  return out
 }
 
 /** Lookup pack coverage by repo identifier (`org/repo`). */
 export function getPackCoverage(repo: string): PackCoverage | undefined {
-  return buildIndex().get(repo);
+  return buildIndex().get(repo)
 }
 
 /** Top-N packs by raw evidence count (used to pick the browse list). */
@@ -98,10 +98,10 @@ export function topPacksByEvidence(n: number): string[] {
   return Object.entries(evidenceCountByPack)
     .sort((a, b) => b[1] - a[1])
     .slice(0, n)
-    .map(([repo]) => repo);
+    .map(([repo]) => repo)
 }
 
 /** Reset memoised data — used by tests; safe to call any time. */
 export function _resetPackCoverageCache(): void {
-  cache = null;
+  cache = null
 }

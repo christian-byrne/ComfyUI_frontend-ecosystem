@@ -69,10 +69,7 @@
     },
     {
       "group": "Identity",
-      "pages": [
-        "extensions/api/nodelocatorid",
-        "extensions/api/nodeexecutionid"
-      ]
+      "pages": ["extensions/api/nodelocatorid", "extensions/api/nodeexecutionid"]
     }
   ]
 }

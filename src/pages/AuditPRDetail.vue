@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute, RouterLink } from "vue-router";
-import { marked } from "marked";
+import { marked } from 'marked'
+import { computed } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
-import {
-  prByNum,
-  surfacesByPr,
-  PR_REPO,
-  deltaBySurface,
-} from "@/data/litegraph-audit-loader";
+import { deltaBySurface, PR_REPO, prByNum, surfacesByPr } from '@/data/litegraph-audit-loader'
 
 // Configure marked for inline rendering (no <p> wrappers)
-marked.setOptions({ gfm: true, breaks: false });
+marked.setOptions({ gfm: true, breaks: false })
 
 /**
  * AuditPRDetail — drill-down for one pruning PR.
@@ -19,57 +14,56 @@ marked.setOptions({ gfm: true, breaks: false });
  * Shows: PR header (number, branch, status, title) + linked surfaces
  *        with re-audit-aware consumer impact.
  */
-const route = useRoute();
+const route = useRoute()
 
-const prNum = computed(() => Number(route.params.num));
-const pr = computed(() => prByNum[prNum.value]);
-const surfaces = computed(() => surfacesByPr[prNum.value] ?? []);
+const prNum = computed(() => Number(route.params.num))
+const pr = computed(() => prByNum[prNum.value])
+const surfaces = computed(() => surfacesByPr[prNum.value] ?? [])
 
 function tierBadge(tier: string): string {
   const map: Record<string, string> = {
     critical:
-      "bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-300 border border-red-300 dark:border-red-700",
-    high: "bg-orange-100 text-orange-900 dark:bg-orange-900/40 dark:text-orange-300",
-    med: "bg-yellow-100 text-yellow-900 dark:bg-yellow-900/40 dark:text-yellow-300",
-    low: "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
-  };
-  return map[tier] ?? map.low;
+      'bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-300 border border-red-300 dark:border-red-700',
+    high: 'bg-orange-100 text-orange-900 dark:bg-orange-900/40 dark:text-orange-300',
+    med: 'bg-yellow-100 text-yellow-900 dark:bg-yellow-900/40 dark:text-yellow-300',
+    low: 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+  }
+  return map[tier] ?? map.low
 }
 
 function statusBadge(s: string): string {
-  if (s === "MERGED")
-    return "bg-purple-100 text-purple-900 dark:bg-purple-900/40 dark:text-purple-300";
-  if (s === "DRAFT")
-    return "bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200";
-  if (s === "OPEN")
-    return "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300";
-  return "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
+  if (s === 'MERGED')
+    return 'bg-purple-100 text-purple-900 dark:bg-purple-900/40 dark:text-purple-300'
+  if (s === 'DRAFT') return 'bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200'
+  if (s === 'OPEN')
+    return 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300'
+  return 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
 }
 
 const totalReauditConsumers = computed(() => {
-  let t = 0;
+  let t = 0
   for (const s of surfaces.value) {
-    const d = deltaBySurface[s.id];
-    t += d?.reauditTotal ?? s.external;
+    const d = deltaBySurface[s.id]
+    t += d?.reauditTotal ?? s.external
   }
-  return t;
-});
+  return t
+})
 
 /**
  * Deduplicated description: if description starts with title text,
  * show only description to avoid visual repetition.
  */
 const showTitle = computed(() => {
-  if (!pr.value) return false;
-  const desc = pr.value.description ?? "";
-  const title = pr.value.title ?? "";
+  if (!pr.value) return false
+  const desc = pr.value.description ?? ''
+  const title = pr.value.title ?? ''
   // Don't show title if description starts with same text
-  return !desc.startsWith(title);
-});
+  return !desc.startsWith(title)
+})
 
 /** Render description as markdown (inline, no wrapping <p>) */
 function renderDescription(desc: string): string {
-  return marked.parseInline(desc) as string;
+  return marked.parseInline(desc) as string
 }
 </script>
 
@@ -110,7 +104,9 @@ function renderDescription(desc: string): string {
             {{ pr.status }}
           </span>
         </div>
-        <p v-if="showTitle" class="text-sm text-zinc-700 dark:text-zinc-300">{{ pr.title }}</p>
+        <p v-if="showTitle" class="text-sm text-zinc-700 dark:text-zinc-300">
+          {{ pr.title }}
+        </p>
         <p
           v-if="pr.description"
           class="text-xs text-zinc-500 dark:text-zinc-400 max-w-3xl prose prose-xs dark:prose-invert prose-code:text-[10px]"
@@ -128,10 +124,7 @@ function renderDescription(desc: string): string {
         <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">
           Mapped surfaces
         </h2>
-        <div
-          v-if="surfaces.length === 0"
-          class="text-sm text-zinc-500"
-        >
+        <div v-if="surfaces.length === 0" class="text-sm text-zinc-500">
           No surfaces mapped to this PR in the audit bundle.
         </div>
         <ol class="space-y-2">
@@ -156,7 +149,10 @@ function renderDescription(desc: string): string {
                     {{ s.risk }}
                   </span>
                 </div>
-                <div class="font-mono text-xs text-zinc-700 dark:text-zinc-300 truncate" :title="s.symbol">
+                <div
+                  class="font-mono text-xs text-zinc-700 dark:text-zinc-300 truncate"
+                  :title="s.symbol"
+                >
                   {{ s.symbol }}
                 </div>
                 <p v-if="s.notes" class="text-xs text-zinc-500 dark:text-zinc-400">
@@ -183,9 +179,7 @@ function renderDescription(desc: string): string {
                     {{ deltaBySurface[s.id].growth.toFixed(1) }}×
                   </span>
                 </div>
-                <div v-else class="tabular-nums text-zinc-500">
-                  {{ s.external }} external refs
-                </div>
+                <div v-else class="tabular-nums text-zinc-500">{{ s.external }} external refs</div>
               </div>
             </div>
           </li>

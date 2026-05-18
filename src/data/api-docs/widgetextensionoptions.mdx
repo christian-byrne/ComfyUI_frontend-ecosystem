@@ -1,6 +1,6 @@
 ---
-title: "WidgetExtensionOptions"
-description: "Options object for defineWidgetExtension — custom widget rendering."
+title: 'WidgetExtensionOptions'
+description: 'Options object for defineWidgetExtension — custom widget rendering.'
 ---
 
 Defined in: [src/extension-api/types.ts:144](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L144)
@@ -32,9 +32,9 @@ export default defineWidget({
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="name"></a> `name` | `string` | Globally unique extension name. |
+| Property                 | Type     | Description                                                         |
+| ------------------------ | -------- | ------------------------------------------------------------------- |
+| <a id="name"></a> `name` | `string` | Globally unique extension name.                                     |
 | <a id="type"></a> `type` | `string` | Widget type string this extension provides (e.g. `'COLOR_PICKER'`). |
 
 ## Methods
@@ -42,7 +42,7 @@ export default defineWidget({
 ### created()?
 
 ```ts
-optional created(widget, parentNode): 
+optional created(widget, parentNode):
   | void
   | {
   destroy?: void;
@@ -57,17 +57,17 @@ custom DOM rendering, or `void` for non-visual widgets.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `widget` | [`WidgetHandle`](./widgethandle) |
+| Parameter    | Type                                   |
+| ------------ | -------------------------------------- |
+| `widget`     | [`WidgetHandle`](./widgethandle)       |
 | `parentNode` | [`NodeHandle`](./nodehandle) \| `null` |
 
 #### Returns
 
-  \| `void`
-  \| \{
-  `destroy?`: `void`;
-  `render`: `void`;
+\| `void`
+\| \{
+`destroy?`: `void`;
+`render`: `void`;
 \}
 
 #### Stability

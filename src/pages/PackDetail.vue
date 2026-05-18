@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { PackPatternRow } from '@/composables/usePackCoverage'
+import type { RegistryNode } from '@/types/registry'
+
 /**
  * PackDetail page (W3).
  *
@@ -13,94 +16,85 @@
  * with one row per pattern this pack uses, each row linking to
  * {@link PatternDetail} (`/patterns/:id`).
  */
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import NodePackBanner from '@/components/NodePackBanner.vue'
+import { getPackCoverage } from '@/composables/usePackCoverage'
+import { evidenceCountByPack } from '@/data'
+import { starCache } from '@/data/star-cache'
+import { getPackById } from '@/services/registryApi'
+import { repoToPackId } from '@/utils/repoToPackId'
 
-import NodePackBanner from "@/components/NodePackBanner.vue";
-import { evidenceCountByPack } from "@/data";
-import { starCache } from "@/data/star-cache";
-import { getPackCoverage } from "@/composables/usePackCoverage";
-import type { PackPatternRow } from "@/composables/usePackCoverage";
-import { getPackById } from "@/services/registryApi";
-import type { RegistryNode } from "@/types/registry";
-import { repoToPackId } from "@/utils/repoToPackId";
-
-const route = useRoute();
-const packId = computed(() => String(route.params.packId ?? ""));
+const route = useRoute()
+const packId = computed(() => String(route.params.packId ?? ''))
 
 /** Every evidence repo whose registry id matches the route. Usually one. */
 const matchingRepos = computed<string[]>(() =>
-  Object.keys(evidenceCountByPack).filter(
-    (repo) => repoToPackId(repo) === packId.value,
-  ),
-);
+  Object.keys(evidenceCountByPack).filter((repo) => repoToPackId(repo) === packId.value)
+)
 
 /** Pick a canonical repo for banner/metadata fallbacks: highest stars wins. */
 const primaryRepo = computed<string | null>(() => {
-  const repos = matchingRepos.value;
-  if (!repos.length) return null;
-  return [...repos].sort(
-    (a, b) => (starCache[b]?.stars ?? 0) - (starCache[a]?.stars ?? 0),
-  )[0];
-});
+  const repos = matchingRepos.value
+  if (!repos.length) return null
+  return [...repos].sort((a, b) => (starCache[b]?.stars ?? 0) - (starCache[a]?.stars ?? 0))[0]
+})
 
-const apiResult = computed(() => getPackById(packId.value));
+const apiResult = computed(() => getPackById(packId.value))
 
 /** Synthesised pack: registry response + local fallbacks merged. */
 const pack = computed<RegistryNode>(() => {
-  const remote = apiResult.value.data.value;
-  const repo = primaryRepo.value;
+  const remote = apiResult.value.data.value
+  const repo = primaryRepo.value
   const fallback: RegistryNode = repo
     ? {
         id: packId.value,
-        name: repo.split("/").pop() ?? repo,
-        author: repo.split("/")[0],
+        name: repo.split('/').pop() ?? repo,
+        author: repo.split('/')[0],
         github_stars: starCache[repo]?.stars,
-        repository: `https://github.com/${repo}`,
+        repository: `https://github.com/${repo}`
       }
-    : { id: packId.value };
-  return remote ? { ...fallback, ...remote } : fallback;
-});
+    : { id: packId.value }
+  return remote ? { ...fallback, ...remote } : fallback
+})
 
-const isLoading = computed(() => !apiResult.value.isFinished.value);
-const apiError = computed(() => apiResult.value.error.value);
+const isLoading = computed(() => !apiResult.value.isFinished.value)
+const apiError = computed(() => apiResult.value.error.value)
 
 const aggregateRows = computed<PackPatternRow[]>(() => {
-  const rows = new Map<string, PackPatternRow>();
+  const rows = new Map<string, PackPatternRow>()
   for (const repo of matchingRepos.value) {
-    const cov = getPackCoverage(repo);
-    if (!cov) continue;
+    const cov = getPackCoverage(repo)
+    if (!cov) continue
     for (const r of cov.rows) {
-      const existing = rows.get(r.pattern_id);
+      const existing = rows.get(r.pattern_id)
       if (existing) {
-        existing.hits += r.hits;
-        existing.evidence = existing.evidence.concat(r.evidence);
+        existing.hits += r.hits
+        existing.evidence = existing.evidence.concat(r.evidence)
       } else {
-        rows.set(r.pattern_id, { ...r, evidence: [...r.evidence] });
+        rows.set(r.pattern_id, { ...r, evidence: [...r.evidence] })
       }
     }
   }
   return [...rows.values()].sort(
     (a, b) =>
-      b.blast_radius - a.blast_radius ||
-      b.hits - a.hits ||
-      a.pattern_id.localeCompare(b.pattern_id),
-  );
-});
+      b.blast_radius - a.blast_radius || b.hits - a.hits || a.pattern_id.localeCompare(b.pattern_id)
+  )
+})
 
 const totals = computed(() => {
-  let hits = 0;
-  let weighted = 0;
+  let hits = 0
+  let weighted = 0
   for (const r of aggregateRows.value) {
-    hits += r.hits;
-    weighted += r.hits * r.blast_radius;
+    hits += r.hits
+    weighted += r.hits * r.blast_radius
   }
-  return { patternCount: aggregateRows.value.length, hits, weighted };
-});
+  return { patternCount: aggregateRows.value.length, hits, weighted }
+})
 
-const numberFmt = new Intl.NumberFormat();
+const numberFmt = new Intl.NumberFormat()
 function fmt(n: number | undefined): string {
-  return typeof n === "number" ? numberFmt.format(n) : "—";
+  return typeof n === 'number' ? numberFmt.format(n) : '—'
 }
 </script>
 
@@ -134,9 +128,7 @@ function fmt(n: number | undefined): string {
           {{ pack.description }}
         </p>
 
-        <dl
-          class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-xs sm:grid-cols-4"
-        >
+        <dl class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-xs sm:grid-cols-4">
           <div>
             <dt class="text-zinc-400 dark:text-zinc-500">Pack id</dt>
             <dd class="font-mono text-zinc-700 dark:text-zinc-300">
@@ -146,9 +138,7 @@ function fmt(n: number | undefined): string {
           <div>
             <dt class="text-zinc-400 dark:text-zinc-500">Publisher</dt>
             <dd class="text-zinc-700 dark:text-zinc-300">
-              {{
-                pack.publisher?.name ?? pack.publisher?.id ?? pack.author ?? "—"
-              }}
+              {{ pack.publisher?.name ?? pack.publisher?.id ?? pack.author ?? '—' }}
             </dd>
           </div>
           <div>
@@ -166,7 +156,7 @@ function fmt(n: number | undefined): string {
           <div>
             <dt class="text-zinc-400 dark:text-zinc-500">Latest version</dt>
             <dd class="font-mono text-zinc-700 dark:text-zinc-300">
-              {{ pack.latest_version?.version ?? "—" }}
+              {{ pack.latest_version?.version ?? '—' }}
             </dd>
           </div>
           <div>
@@ -190,9 +180,7 @@ function fmt(n: number | undefined): string {
             </dd>
           </div>
           <div>
-            <dt class="text-zinc-400 dark:text-zinc-500">
-              Total evidence rows
-            </dt>
+            <dt class="text-zinc-400 dark:text-zinc-500">Total evidence rows</dt>
             <dd class="font-mono text-zinc-700 dark:text-zinc-300">
               {{ totals.hits }}
             </dd>
@@ -222,8 +210,7 @@ function fmt(n: number | undefined): string {
     >
       Pattern coverage
       <span class="ml-1 text-xs font-normal text-zinc-400 dark:text-zinc-500">
-        ({{ totals.patternCount }} patterns, weighted impact
-        {{ totals.weighted.toFixed(1) }})
+        ({{ totals.patternCount }} patterns, weighted impact {{ totals.weighted.toFixed(1) }})
       </span>
     </h2>
 
@@ -233,9 +220,7 @@ function fmt(n: number | undefined): string {
       data-testid="pattern-coverage-table"
       aria-labelledby="pattern-coverage-heading"
     >
-      <thead
-        class="text-left text-xs uppercase tracking-wide text-zinc-400 dark:text-zinc-500"
-      >
+      <thead class="text-left text-xs uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
         <tr>
           <th
             scope="col"
@@ -269,9 +254,7 @@ function fmt(n: number | undefined): string {
           :key="row.pattern_id"
           class="hover:bg-zinc-50 dark:hover:bg-zinc-800"
         >
-          <td
-            class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 align-top"
-          >
+          <td class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 align-top">
             <RouterLink
               :to="{ name: 'pattern-detail', params: { id: row.pattern_id } }"
               class="font-mono text-xs text-zinc-900 dark:text-zinc-100 hover:underline"
@@ -283,9 +266,7 @@ function fmt(n: number | undefined): string {
               {{ row.name }}
             </div>
           </td>
-          <td
-            class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 align-top"
-          >
+          <td class="border-b border-zinc-100 dark:border-zinc-800 py-2 pr-3 align-top">
             <span
               class="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 font-mono text-xs text-zinc-600 dark:text-zinc-400"
             >

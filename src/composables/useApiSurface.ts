@@ -1,4 +1,5 @@
-import { ref, type Ref } from "vue";
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 
 /**
  * Source of an API surface document fetched from GitHub raw content.
@@ -7,17 +8,17 @@ import { ref, type Ref } from "vue";
  * `url`   — full https://raw.githubusercontent.com URL.
  */
 export interface ApiSource {
-  label: string;
-  url: string;
+  label: string
+  url: string
 }
 
 /**
  * v1 ComfyExtension interface lives in a single file on `main`.
  */
 export const V1_SOURCE: ApiSource = {
-  label: "v1 ComfyExtension (main)",
-  url: "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/main/src/types/comfy.ts",
-};
+  label: 'v1 ComfyExtension (main)',
+  url: 'https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/main/src/types/comfy.ts'
+}
 
 /**
  * v2 surface is split across the public-API files on the
@@ -31,18 +32,18 @@ export const V1_SOURCE: ApiSource = {
  * type declarations).
  */
 export const V2_SOURCES: ApiSource[] = (
-  ["index", "lifecycle", "node", "widget", "events", "shell", "identifiers"] as const
+  ['index', 'lifecycle', 'node', 'widget', 'events', 'shell', 'identifiers'] as const
 ).map((name) => ({
   label: `${name}.ts`,
-  url: `https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/ext-api/i-foundation-restratify/src/extension-api/${name}.ts`,
-}));
+  url: `https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/ext-api/i-foundation-restratify/src/extension-api/${name}.ts`
+}))
 
-const CACHE_PREFIX = "apidiff:v1:";
-const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const CACHE_PREFIX = 'apidiff:v1:'
+const ONE_DAY_MS = 24 * 60 * 60 * 1000
 
 interface CacheEntry {
-  fetchedAt: number;
-  body: string;
+  fetchedAt: number
+  body: string
 }
 
 /**
@@ -52,17 +53,17 @@ interface CacheEntry {
 export function readCache(
   url: string,
   now: number = Date.now(),
-  storage: Storage | undefined = globalThis.localStorage,
+  storage: Storage | undefined = globalThis.localStorage
 ): string | null {
-  if (!storage) return null;
-  const raw = storage.getItem(CACHE_PREFIX + url);
-  if (!raw) return null;
+  if (!storage) return null
+  const raw = storage.getItem(CACHE_PREFIX + url)
+  if (!raw) return null
   try {
-    const entry = JSON.parse(raw) as CacheEntry;
-    if (now - entry.fetchedAt > ONE_DAY_MS) return null;
-    return entry.body;
+    const entry = JSON.parse(raw) as CacheEntry
+    if (now - entry.fetchedAt > ONE_DAY_MS) return null
+    return entry.body
   } catch {
-    return null;
+    return null
   }
 }
 
@@ -70,14 +71,14 @@ function writeCache(
   url: string,
   body: string,
   now: number = Date.now(),
-  storage: Storage | undefined = globalThis.localStorage,
+  storage: Storage | undefined = globalThis.localStorage
 ): void {
-  if (!storage) return;
+  if (!storage) return
   try {
     storage.setItem(
       CACHE_PREFIX + url,
-      JSON.stringify({ fetchedAt: now, body } satisfies CacheEntry),
-    );
+      JSON.stringify({ fetchedAt: now, body } satisfies CacheEntry)
+    )
   } catch {
     // Quota exceeded or disabled — silently skip caching.
   }
@@ -87,22 +88,22 @@ function writeCache(
  * Fetch one source, preferring localStorage cache (1 day TTL).
  */
 export async function fetchSource(source: ApiSource): Promise<string> {
-  const cached = readCache(source.url);
-  if (cached !== null) return cached;
-  const res = await fetch(source.url);
+  const cached = readCache(source.url)
+  if (cached !== null) return cached
+  const res = await fetch(source.url)
   if (!res.ok) {
-    throw new Error(`Fetch failed for ${source.url}: ${res.status}`);
+    throw new Error(`Fetch failed for ${source.url}: ${res.status}`)
   }
-  const body = await res.text();
-  writeCache(source.url, body);
-  return body;
+  const body = await res.text()
+  writeCache(source.url, body)
+  return body
 }
 
 export interface ApiDiffPayload {
-  v1: string;
-  v2: string;
+  v1: string
+  v2: string
   /** Concatenated label for v2 (e.g. "lifecycle.ts + node.ts + ..."). */
-  v2Label: string;
+  v2Label: string
 }
 
 /**
@@ -113,37 +114,35 @@ export interface ApiDiffPayload {
  * as a single scrollable text block.
  */
 export function useApiSurface(): {
-  loading: Ref<boolean>;
-  error: Ref<Error | null>;
-  data: Ref<ApiDiffPayload | null>;
-  load: () => Promise<void>;
+  loading: Ref<boolean>
+  error: Ref<Error | null>
+  data: Ref<ApiDiffPayload | null>
+  load: () => Promise<void>
 } {
-  const loading = ref(false);
-  const error = ref<Error | null>(null);
-  const data = ref<ApiDiffPayload | null>(null);
+  const loading = ref(false)
+  const error = ref<Error | null>(null)
+  const data = ref<ApiDiffPayload | null>(null)
 
   const load = async () => {
-    loading.value = true;
-    error.value = null;
+    loading.value = true
+    error.value = null
     try {
       const [v1, ...v2Parts] = await Promise.all([
         fetchSource(V1_SOURCE),
-        ...V2_SOURCES.map(fetchSource),
-      ]);
-      const v2 = V2_SOURCES.map(
-        (src, i) => `// ─── ${src.label} ───\n${v2Parts[i]}`,
-      ).join("\n\n");
+        ...V2_SOURCES.map(fetchSource)
+      ])
+      const v2 = V2_SOURCES.map((src, i) => `// ─── ${src.label} ───\n${v2Parts[i]}`).join('\n\n')
       data.value = {
         v1,
         v2,
-        v2Label: V2_SOURCES.map((s) => s.label).join(" + "),
-      };
+        v2Label: V2_SOURCES.map((s) => s.label).join(' + ')
+      }
     } catch (e) {
-      error.value = e instanceof Error ? e : new Error(String(e));
+      error.value = e instanceof Error ? e : new Error(String(e))
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
-  return { loading, error, data, load };
+  return { loading, error, data, load }
 }

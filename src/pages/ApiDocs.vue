@@ -1,31 +1,23 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useRoute, RouterLink } from "vue-router";
-import { marked, Renderer } from "marked";
-import { useHead } from "@unhead/vue";
+import type { CrossRefData } from '@/data/api-docs-cross-ref'
+import { useHead } from '@unhead/vue'
+import { marked, Renderer } from 'marked'
+import { computed, onMounted, ref } from 'vue'
 
+import { RouterLink, useRoute } from 'vue-router'
+import { ensureHighlighter, highlightCode } from '@/composables/useHighlighter'
 import {
-  apiDocPages,
-  apiDocBySlug,
-  apiDocNav,
-  navSlugs,
-} from "@/data/api-docs-loader";
-import {
-  ensureHighlighter,
-  highlightCode,
-} from "@/composables/useHighlighter";
-import {
-  getCrossRef,
-  getTotalBlastRadius,
   getAffectedRepos,
-  getBlastRadiusColor,
   getBlastRadiusBg,
-  type CrossRefData,
-} from "@/data/api-docs-cross-ref";
+  getBlastRadiusColor,
+  getCrossRef,
+  getTotalBlastRadius
+} from '@/data/api-docs-cross-ref'
+import { apiDocBySlug, apiDocNav, apiDocPages, navSlugs } from '@/data/api-docs-loader'
 
 useHead({
-  title: "API Docs - ComfyUI Frontend Ecosystem",
-});
+  title: 'API Docs - ComfyUI Frontend Ecosystem'
+})
 
 /**
  * ApiDocs — Swagger-style API reference for @comfyorg/extension-api,
@@ -36,39 +28,39 @@ useHead({
  *
  * Routes: /api-docs (defaults to "index") and /api-docs/:slug.
  */
-const route = useRoute();
-const highlighterReady = ref(false);
+const route = useRoute()
+const highlighterReady = ref(false)
 
 // Load syntax highlighter on mount
 onMounted(async () => {
-  await ensureHighlighter();
-  highlighterReady.value = true;
-});
+  await ensureHighlighter()
+  highlighterReady.value = true
+})
 
 const currentSlug = computed<string>(() => {
-  const s = String(route.params.slug ?? "index");
-  return s.toLowerCase();
-});
+  const s = String(route.params.slug ?? 'index')
+  return s.toLowerCase()
+})
 
-const currentPage = computed(() => apiDocBySlug[currentSlug.value]);
+const currentPage = computed(() => apiDocBySlug[currentSlug.value])
 
 // Pages that exist on disk but are not in the nav snippet — show under "Other".
 const uncategorizedPages = computed(() =>
   apiDocPages
     .filter((p) => !navSlugs.has(p.slug))
-    .map((p) => ({ slug: p.slug, title: p.sidebarTitle ?? p.title })),
-);
+    .map((p) => ({ slug: p.slug, title: p.sidebarTitle ?? p.title }))
+)
 
 // Custom renderer with syntax highlighting
-const renderer = new Renderer();
+const renderer = new Renderer()
 renderer.code = ({ text, lang }) => {
-  const language = lang || "typescript";
-  return highlightCode(text, language);
-};
+  const language = lang || 'typescript'
+  return highlightCode(text, language)
+}
 
 // Configure marked: GFM tables, code blocks with syntax highlighting.
-marked.setOptions({ gfm: true, breaks: false });
-marked.use({ renderer });
+marked.setOptions({ gfm: true, breaks: false })
+marked.use({ renderer })
 
 /**
  * Map from type names (PascalCase titles) to their slugs.
@@ -76,9 +68,9 @@ marked.use({ renderer });
  */
 const typeNameToSlug: Map<string, string> = new Map(
   apiDocPages
-    .filter((p) => p.slug !== "index") // Skip index page
+    .filter((p) => p.slug !== 'index') // Skip index page
     .map((p) => [p.title, p.slug])
-);
+)
 
 /**
  * Post-process rendered HTML to hyperlink type names in inline <code> elements.
@@ -87,10 +79,8 @@ const typeNameToSlug: Map<string, string> = new Map(
  */
 function hyperlinkTypeNames(html: string, currentPageSlug: string): string {
   // Build regex pattern from all type names (sorted by length desc to match longer names first)
-  const typeNames = [...typeNameToSlug.keys()].sort(
-    (a, b) => b.length - a.length
-  );
-  if (typeNames.length === 0) return html;
+  const typeNames = [...typeNameToSlug.keys()].sort((a, b) => b.length - a.length)
+  if (typeNames.length === 0) return html
 
   // Pattern: <code>TypeName</code> not inside <a> or <pre>
   // We use a two-pass approach:
@@ -99,112 +89,106 @@ function hyperlinkTypeNames(html: string, currentPageSlug: string): string {
 
   // Match inline code: <code>content</code> that's NOT inside <pre> or already linked
   // Strategy: split on <pre>...</pre> blocks, process non-pre sections only
-  const preSections = html.split(/(<pre[\s\S]*?<\/pre>|<div class="shiki[\s\S]*?<\/div>)/g);
+  const preSections = html.split(/(<pre[\s\S]*?<\/pre>|<div class="shiki[\s\S]*?<\/div>)/g)
 
   return preSections
     .map((section) => {
       // Skip pre/shiki blocks entirely
-      if (section.startsWith("<pre") || section.startsWith('<div class="shiki')) {
-        return section;
+      if (section.startsWith('<pre') || section.startsWith('<div class="shiki')) {
+        return section
       }
 
       // Process inline <code> elements
-      return section.replace(
-        /<code>([^<]+)<\/code>/g,
-        (match, content: string) => {
-          // Check if this code element is already inside an anchor
-          // We can't easily check context, so we check if content matches a type name exactly
-          const trimmed = content.trim();
+      return section.replace(/<code>([^<]+)<\/code>/g, (match, content: string) => {
+        // Check if this code element is already inside an anchor
+        // We can't easily check context, so we check if content matches a type name exactly
+        const trimmed = content.trim()
 
-          // Don't link the current page to itself
-          const slug = typeNameToSlug.get(trimmed);
-          if (!slug || slug === currentPageSlug) {
-            return match;
-          }
-
-          // Wrap in anchor link
-          return `<a href="/api-docs/${slug}" class="api-type-link"><code>${content}</code></a>`;
+        // Don't link the current page to itself
+        const slug = typeNameToSlug.get(trimmed)
+        if (!slug || slug === currentPageSlug) {
+          return match
         }
-      );
+
+        // Wrap in anchor link
+        return `<a href="/api-docs/${slug}" class="api-type-link"><code>${content}</code></a>`
+      })
     })
-    .join("");
+    .join('')
 }
 
 const renderedBody = computed<string>(() => {
   // Re-compute when highlighter becomes ready
-  void highlighterReady.value;
+  void highlighterReady.value
 
-  const page = currentPage.value;
-  if (!page) return "";
+  const page = currentPage.value
+  if (!page) return ''
   // Rewrite Mintlify-style relative links `./otherpage` -> our router path.
   // Pattern: ](./slug) or ](./slug#anchor)
   const rewritten = page.body.replace(
-    /\]\(\.\/([a-zA-Z0-9_-]+)(#[^)]+)?\)/g,
-    (_m, slug: string, anchor?: string) =>
-      `](/api-docs/${slug.toLowerCase()}${anchor ?? ""})`,
-  );
-  const html = marked.parse(rewritten) as string;
+    /\]\(\.\/([\w-]+)(#[^)]+)?\)/g,
+    (_m, slug: string, anchor?: string) => `](/api-docs/${slug.toLowerCase()}${anchor ?? ''})`
+  )
+  const html = marked.parse(rewritten) as string
   // Post-process to hyperlink type names in inline code elements
-  return hyperlinkTypeNames(html, currentSlug.value);
-});
+  return hyperlinkTypeNames(html, currentSlug.value)
+})
 
-const totalPages = apiDocPages.length;
+const totalPages = apiDocPages.length
 
 /** Extract GitHub source link from rendered body (if present) */
 const sourceLink = computed(() => {
-  const page = currentPage.value;
-  if (!page) return null;
+  const page = currentPage.value
+  if (!page) return null
   // Match "Defined in: [path](url)" pattern from TypeDoc output
   // e.g. "Defined in: [src/types/nodeIdentification.ts:96](https://github.com/...)"
-  const match = page.body.match(
-    /Defined in: \[([^\]]+)\]\((https:\/\/github\.com\/[^)]+)\)/
-  );
-  if (!match) return null;
+  const match = page.body.match(/Defined in: \[([^\]]+)\]\((https:\/\/github\.com\/[^)]+)\)/)
+  if (!match) return null
 
   // Parse file path and line number
-  const fullPath = match[1]; // e.g. "src/types/nodeIdentification.ts:96"
-  const [filePath, lineStr] = fullPath.split(":");
-  const line = lineStr ? parseInt(lineStr, 10) : undefined;
+  const fullPath = match[1] // e.g. "src/types/nodeIdentification.ts:96"
+  const [filePath, lineStr] = fullPath.split(':')
+  const line = lineStr ? Number.parseInt(lineStr, 10) : undefined
 
   return {
     path: fullPath,
     filePath,
     line,
     url: match[2]
-  };
-});
+  }
+})
 
 /** Build PR diff URL that jumps to the file (and line if available) */
 const prReviewUrl = computed(() => {
-  const base = "https://github.com/Comfy-Org/ComfyUI_frontend/pull/12142/files";
-  const src = sourceLink.value;
-  if (!src?.filePath) return base;
+  const base = 'https://github.com/Comfy-Org/ComfyUI_frontend/pull/12142/files'
+  const src = sourceLink.value
+  if (!src?.filePath) return base
 
   // Use file filter to show only this file in the diff
-  const encoded = encodeURIComponent(src.filePath);
-  return `${base}?file-filters[]=${encoded}`;
-});
+  const encoded = encodeURIComponent(src.filePath)
+  return `${base}?file-filters[]=${encoded}`
+})
 
 /** Cross-reference to v1 patterns and behavior categories */
 const crossRef = computed<CrossRefData | null>(() => {
-  return getCrossRef(currentSlug.value);
-});
+  return getCrossRef(currentSlug.value)
+})
 
 const totalBlastRadius = computed(() => {
-  return crossRef.value ? getTotalBlastRadius(crossRef.value) : 0;
-});
+  return crossRef.value ? getTotalBlastRadius(crossRef.value) : 0
+})
 
 const affectedRepos = computed(() => {
-  return crossRef.value ? getAffectedRepos(crossRef.value) : [];
-});
+  return crossRef.value ? getAffectedRepos(crossRef.value) : []
+})
 
 /** Extension API PRs for quick navigation */
 const extensionApiPRs = [
-  { num: 12142, label: "foundation", status: "open" },
-  { num: 12143, label: "pkg", status: "open" },
-  { num: 12144, label: "ext", status: "open" },
-  { num: 12145, label: "tf", status: "open" },
-];
+  { num: 12142, label: 'foundation', status: 'open' },
+  { num: 12143, label: 'pkg', status: 'open' },
+  { num: 12144, label: 'ext', status: 'open' },
+  { num: 12145, label: 'tf', status: 'open' }
+]
 </script>
 
 <template>
@@ -216,8 +200,8 @@ const extensionApiPRs = [
             @comfyorg/extension-api — API Reference
           </h1>
           <p class="text-sm text-zinc-600 dark:text-zinc-400">
-            TypeScript API reference for ComfyUI custom node extensions. Generated
-            by TypeDoc + typedoc-plugin-markdown via the P2 docgen pipeline.
+            TypeScript API reference for ComfyUI custom node extensions. Generated by TypeDoc +
+            typedoc-plugin-markdown via the P2 docgen pipeline.
           </p>
           <p class="text-xs text-zinc-500 dark:text-zinc-500">
             {{ totalPages }} pages · synced from
@@ -226,7 +210,9 @@ const extensionApiPRs = [
         </div>
         <!-- PR quick-nav buttons -->
         <div class="flex flex-col gap-2">
-          <span class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">Extension API PRs</span>
+          <span class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
+            >Extension API PRs</span
+          >
           <div class="flex flex-wrap gap-1.5">
             <a
               v-for="pr in extensionApiPRs"
@@ -246,10 +232,17 @@ const extensionApiPRs = [
             target="_blank"
             rel="noopener"
             class="inline-flex items-center justify-center gap-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-medium transition-colors"
-            :title="sourceLink ? `Review changes to ${sourceLink.filePath}` : 'Review PR #12142 diff'"
+            :title="
+              sourceLink ? `Review changes to ${sourceLink.filePath}` : 'Review PR #12142 diff'
+            "
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
             </svg>
             {{ sourceLink ? 'Review This File' : 'Start PR Review' }}
           </a>
@@ -278,8 +271,7 @@ const extensionApiPRs = [
                   :class="{
                     'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold':
                       p.slug === currentSlug,
-                    'text-zinc-700 dark:text-zinc-300':
-                      p.slug !== currentSlug,
+                    'text-zinc-700 dark:text-zinc-300': p.slug !== currentSlug
                   }"
                 >
                   {{ p.title }}
@@ -301,8 +293,7 @@ const extensionApiPRs = [
                   :class="{
                     'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold':
                       p.slug === currentSlug,
-                    'text-zinc-700 dark:text-zinc-300':
-                      p.slug !== currentSlug,
+                    'text-zinc-700 dark:text-zinc-300': p.slug !== currentSlug
                   }"
                 >
                   {{ p.title }}
@@ -320,7 +311,8 @@ const extensionApiPRs = [
           class="rounded-md border border-amber-200 bg-amber-50 dark:bg-amber-900/30 p-4 text-sm"
         >
           No API doc page with slug
-          <code class="font-mono">{{ currentSlug }}</code>.
+          <code class="font-mono">{{ currentSlug }}</code
+          >.
         </div>
         <template v-else>
           <header class="mb-4 space-y-2">
@@ -335,10 +327,7 @@ const extensionApiPRs = [
                 <h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
                   {{ currentPage.title }}
                 </h2>
-                <p
-                  v-if="currentPage.description"
-                  class="text-sm text-zinc-600 dark:text-zinc-400"
-                >
+                <p v-if="currentPage.description" class="text-sm text-zinc-600 dark:text-zinc-400">
                   {{ currentPage.description }}
                 </p>
               </div>
@@ -352,7 +341,9 @@ const extensionApiPRs = [
                   :title="`View source: ${sourceLink.path}`"
                 >
                   <svg class="w-3.5 h-3.5 text-zinc-500" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    <path
+                      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                    />
                   </svg>
                   <span class="text-zinc-700 dark:text-zinc-300">View Source</span>
                 </a>
@@ -364,7 +355,12 @@ const extensionApiPRs = [
                   :title="`Review changes to ${sourceLink.filePath} in PR #12142`"
                 >
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    />
                   </svg>
                   <span>Review in PR</span>
                 </a>
@@ -388,7 +384,9 @@ const extensionApiPRs = [
               </div>
               <!-- Blast radius gauge -->
               <div class="flex items-center gap-2">
-                <div class="relative h-5 w-24 rounded-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden">
+                <div
+                  class="relative h-5 w-24 rounded-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden"
+                >
                   <div
                     class="absolute inset-y-0 left-0 rounded-full transition-all"
                     :class="{
@@ -396,9 +394,11 @@ const extensionApiPRs = [
                       'bg-yellow-500': totalBlastRadius >= 3 && totalBlastRadius < 5,
                       'bg-red-500': totalBlastRadius >= 5
                     }"
-                    :style="{ width: `${Math.min(totalBlastRadius / 10 * 100, 100)}%` }"
+                    :style="{ width: `${Math.min((totalBlastRadius / 10) * 100, 100)}%` }"
                   />
-                  <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white drop-shadow-sm">
+                  <span
+                    class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white drop-shadow-sm"
+                  >
                     {{ totalBlastRadius.toFixed(1) }}
                   </span>
                 </div>
@@ -407,7 +407,9 @@ const extensionApiPRs = [
 
             <!-- Related patterns -->
             <div v-if="crossRef.patterns.length > 0" class="mb-3">
-              <div class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5">
+              <div
+                class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5"
+              >
                 Replaces v1 Patterns
               </div>
               <div class="flex flex-wrap gap-1.5">
@@ -418,10 +420,12 @@ const extensionApiPRs = [
                   class="inline-flex items-center gap-1 rounded border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-900 px-2 py-1 text-[11px] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
                   :title="p.name"
                 >
-                  <span class="font-mono font-medium text-zinc-700 dark:text-zinc-300">{{ p.pattern_id }}</span>
+                  <span class="font-mono font-medium text-zinc-700 dark:text-zinc-300">{{
+                    p.pattern_id
+                  }}</span>
                   <span
                     class="rounded px-1 py-0.5 text-[9px] font-medium"
-                    :class="getBlastRadiusBg(p.blast_radius) + ' ' + getBlastRadiusColor(p.blast_radius)"
+                    :class="`${getBlastRadiusBg(p.blast_radius)} ${getBlastRadiusColor(p.blast_radius)}`"
                   >
                     {{ p.blast_radius.toFixed(1) }}
                   </span>
@@ -431,7 +435,9 @@ const extensionApiPRs = [
 
             <!-- Behavior categories -->
             <div v-if="crossRef.categories.length > 0" class="mb-3">
-              <div class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5">
+              <div
+                class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5"
+              >
                 Behavior Categories
               </div>
               <div class="flex flex-wrap gap-1.5">
@@ -442,15 +448,21 @@ const extensionApiPRs = [
                   class="inline-flex items-center gap-1 rounded border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-900 px-2 py-1 text-[11px] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
                   :title="c.intent"
                 >
-                  <span class="font-mono font-medium text-zinc-700 dark:text-zinc-300">{{ c.category_id }}</span>
-                  <span class="text-zinc-500 dark:text-zinc-400 truncate max-w-[150px]">{{ c.name }}</span>
+                  <span class="font-mono font-medium text-zinc-700 dark:text-zinc-300">{{
+                    c.category_id
+                  }}</span>
+                  <span class="text-zinc-500 dark:text-zinc-400 truncate max-w-[150px]">{{
+                    c.name
+                  }}</span>
                 </RouterLink>
               </div>
             </div>
 
             <!-- Affected repos mini-list -->
             <div v-if="affectedRepos.length > 0">
-              <div class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5">
+              <div
+                class="text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400 mb-1.5"
+              >
                 Top Affected Repos
               </div>
               <div class="flex flex-wrap gap-x-3 gap-y-1">
@@ -463,7 +475,9 @@ const extensionApiPRs = [
                   class="inline-flex items-center gap-1 text-[11px] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
                 >
                   <span class="font-mono">{{ r.repo.split('/')[1] }}</span>
-                  <span class="text-zinc-400 dark:text-zinc-500">{{ (r.stars / 1000).toFixed(1) }}k</span>
+                  <span class="text-zinc-400 dark:text-zinc-500"
+                    >{{ (r.stars / 1000).toFixed(1) }}k</span
+                  >
                 </a>
               </div>
             </div>
@@ -570,7 +584,7 @@ const extensionApiPRs = [
   color: rgb(113 113 122);
 }
 .api-doc-prose :deep(.shiki-placeholder)::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 8px;
   right: 8px;
@@ -582,7 +596,9 @@ const extensionApiPRs = [
   animation: shiki-spin 0.8s linear infinite;
 }
 @keyframes shiki-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 /* Shiki dual-theme support */
 .api-doc-prose :deep(.shiki),

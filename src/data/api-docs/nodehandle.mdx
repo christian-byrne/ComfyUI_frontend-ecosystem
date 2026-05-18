@@ -1,7 +1,7 @@
 ---
-title: "NodeHandle"
-description: "Controlled access to node state, mutations, slots, and events."
-icon: "circle-nodes"
+title: 'NodeHandle'
+description: 'Controlled access to node state, mutations, slots, and events.'
+icon: 'circle-nodes'
 ---
 
 Defined in: [src/extension-api/node.ts:234](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L234)
@@ -29,11 +29,11 @@ export default defineNode({
 
 ## Properties
 
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="comfyclass"></a> `comfyClass` | `readonly` | `string` | The ComfyUI backend class name (e.g. `'KSampler'`). Equal to `type` for most nodes; differs for reroute/virtual nodes. Read-only invariant. |
-| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this node. Stable for the lifetime of the node entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [NodeHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `NodeEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
-| <a id="type"></a> `type` | `readonly` | `string` | The LiteGraph node type string (e.g. `'KSampler'`). Read-only invariant: set at construction, never changes. |
+| Property                             | Modifier   | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------ | ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="comfyclass"></a> `comfyClass` | `readonly` | `string` | The ComfyUI backend class name (e.g. `'KSampler'`). Equal to `type` for most nodes; differs for reroute/virtual nodes. Read-only invariant.                                                                                                                                                                                                                                                                                         |
+| <a id="id"></a> `id`                 | `readonly` | `string` | Opaque identifier for this node. Stable for the lifetime of the node entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [NodeHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `NodeEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
+| <a id="type"></a> `type`             | `readonly` | `string` | The LiteGraph node type string (e.g. `'KSampler'`). Read-only invariant: set at construction, never changes.                                                                                                                                                                                                                                                                                                                        |
 
 ## Methods
 
@@ -49,6 +49,7 @@ Adds a DOM-backed widget to this node.
 
 Replaces the v1 `node.addDOMWidget(name, type, element, opts)` pattern.
 The runtime automatically:
+
 - Reserves node height for the element (via auto-computeSize integration).
 - Removes the element from the DOM when the node is removed.
 - Includes the widget in `NodeHandle.getWidgets()`.
@@ -57,9 +58,9 @@ Use `WidgetHandle.setHeight(px)` to resize the reservation after initial mount.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `opts` | [`DOMWidgetOptions`](./domwidgetoptions) |
+| Parameter | Type                                     |
+| --------- | ---------------------------------------- |
+| `opts`    | [`DOMWidgetOptions`](./domwidgetoptions) |
 
 #### Returns
 
@@ -71,15 +72,15 @@ A `WidgetHandle` for the registered DOM widget.
 
 experimental
 
-***
+---
 
 ### addWidget()
 
 ```ts
 addWidget(
-   type, 
-   name, 
-   defaultValue, 
+   type,
+   name,
+   defaultValue,
    options?): WidgetHandle;
 ```
 
@@ -89,12 +90,12 @@ Adds a new widget to this node.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `type` | `string` | Widget type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`). |
-| `name` | `string` | Unique widget name on this node. |
-| `defaultValue` | `unknown` | Initial value. |
-| `options?` | `Partial`\<[`WidgetOptions`](./widgetoptions)\> | Optional type-specific options. |
+| Parameter      | Type                                            | Description                                               |
+| -------------- | ----------------------------------------------- | --------------------------------------------------------- |
+| `type`         | `string`                                        | Widget type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`). |
+| `name`         | `string`                                        | Unique widget name on this node.                          |
+| `defaultValue` | `unknown`                                       | Initial value.                                            |
+| `options?`     | `Partial`\<[`WidgetOptions`](./widgetoptions)\> | Optional type-specific options.                           |
 
 #### Returns
 
@@ -102,7 +103,7 @@ Adds a new widget to this node.
 
 The new `WidgetHandle`.
 
-***
+---
 
 ### equals()
 
@@ -119,15 +120,15 @@ identity scheme remain transparent.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `other` | `NodeHandle` |
+| Parameter | Type         |
+| --------- | ------------ |
+| `other`   | `NodeHandle` |
 
 #### Returns
 
 `boolean`
 
-***
+---
 
 ### getMode()
 
@@ -143,7 +144,7 @@ Returns the node's current execution mode.
 
 [`NodeMode`](./nodemode)
 
-***
+---
 
 ### getPosition()
 
@@ -159,7 +160,7 @@ Returns the node's current canvas position as `[x, y]`.
 
 [`Point`](./point)
 
-***
+---
 
 ### getProperties()
 
@@ -175,7 +176,7 @@ Returns a copy of all per-node-instance properties.
 
 `Record`\<`string`, `unknown`\>
 
-***
+---
 
 ### getProperty()
 
@@ -194,20 +195,20 @@ for v1 extensions that used it for per-instance widget config (e.g. min/max).
 #### Type Parameters
 
 | Type Parameter | Default type |
-| ------ | ------ |
-| `T` | `unknown` |
+| -------------- | ------------ |
+| `T`            | `unknown`    |
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `key` | `string` |
+| Parameter | Type     |
+| --------- | -------- |
+| `key`     | `string` |
 
 #### Returns
 
 `T` \| `undefined`
 
-***
+---
 
 ### getSize()
 
@@ -223,7 +224,7 @@ Returns the node's current size as `[width, height]`.
 
 [`Size`](./size)
 
-***
+---
 
 ### getTitle()
 
@@ -239,12 +240,12 @@ Returns the node's display title. Defaults to the node type string.
 
 `string`
 
-***
+---
 
 ### getWidget()
 
 ```ts
-getWidget(name): 
+getWidget(name):
   | WidgetHandle<WidgetValue>
   | undefined;
 ```
@@ -256,14 +257,14 @@ widget exists on this node.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `name` | `string` |
+| Parameter | Type     |
+| --------- | -------- |
+| `name`    | `string` |
 
 #### Returns
 
-  \| [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>
-  \| `undefined`
+\| [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>
+\| `undefined`
 
 #### Example
 
@@ -272,7 +273,7 @@ const steps = node.getWidget('steps')
 if (steps) steps.setValue(20)
 ```
 
-***
+---
 
 ### getWidgets()
 
@@ -288,7 +289,7 @@ Returns all widgets on this node as `WidgetHandle` instances.
 
 readonly [`WidgetHandle`](./widgethandle)\<[`WidgetValue`](./widgetvalue)\>[]
 
-***
+---
 
 ### inputs()
 
@@ -304,7 +305,7 @@ Returns all input slots on this node.
 
 readonly [`SlotInfo`](./slotinfo)[]
 
-***
+---
 
 ### isSelected()
 
@@ -320,7 +321,7 @@ Returns `true` if the node is currently selected on the canvas.
 
 `boolean`
 
-***
+---
 
 ### on()
 
@@ -340,9 +341,9 @@ across promotion.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"removed"` |
+| Parameter | Type                             |
+| --------- | -------------------------------- |
+| `event`   | `"removed"`                      |
 | `handler` | [`Handler`](./handler)\<`void`\> |
 
 ##### Returns
@@ -366,9 +367,9 @@ most widely used anti-pattern per R4-P3; 5+ confirmed repos).
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"executed"` |
+| Parameter | Type                                                                 |
+| --------- | -------------------------------------------------------------------- |
+| `event`   | `"executed"`                                                         |
 | `handler` | [`Handler`](./handler)\<[`NodeExecutedEvent`](./nodeexecutedevent)\> |
 
 ##### Returns
@@ -392,9 +393,9 @@ patterns. Fires after all widget values are restored from the workflow JSON.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"configured"` |
+| Parameter | Type                             |
+| --------- | -------------------------------- |
+| `event`   | `"configured"`                   |
 | `handler` | [`Handler`](./handler)\<`void`\> |
 
 ##### Returns
@@ -419,9 +420,9 @@ in the wild — this single typed event resolves the confusion).
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"connected"` |
+| Parameter | Type                                                                   |
+| --------- | ---------------------------------------------------------------------- |
+| `event`   | `"connected"`                                                          |
 | `handler` | [`Handler`](./handler)\<[`NodeConnectedEvent`](./nodeconnectedevent)\> |
 
 ##### Returns
@@ -442,9 +443,9 @@ Subscribe to slot disconnection events.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"disconnected"` |
+| Parameter | Type                                                                         |
+| --------- | ---------------------------------------------------------------------------- |
+| `event`   | `"disconnected"`                                                             |
 | `handler` | [`Handler`](./handler)\<[`NodeDisconnectedEvent`](./nodedisconnectedevent)\> |
 
 ##### Returns
@@ -465,9 +466,9 @@ Subscribe to canvas position changes.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"positionChanged"` |
+| Parameter | Type                                                                               |
+| --------- | ---------------------------------------------------------------------------------- |
+| `event`   | `"positionChanged"`                                                                |
 | `handler` | [`Handler`](./handler)\<[`NodePositionChangedEvent`](./nodepositionchangedevent)\> |
 
 ##### Returns
@@ -488,9 +489,9 @@ Subscribe to node size changes.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"sizeChanged"` |
+| Parameter | Type                                                                       |
+| --------- | -------------------------------------------------------------------------- |
+| `event`   | `"sizeChanged"`                                                            |
 | `handler` | [`Handler`](./handler)\<[`NodeSizeChangedEvent`](./nodesizechangedevent)\> |
 
 ##### Returns
@@ -511,9 +512,9 @@ Subscribe to execution mode changes.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"modeChanged"` |
+| Parameter | Type                                                                       |
+| --------- | -------------------------------------------------------------------------- |
+| `event`   | `"modeChanged"`                                                            |
 | `handler` | [`Handler`](./handler)\<[`NodeModeChangedEvent`](./nodemodechangedevent)\> |
 
 ##### Returns
@@ -534,9 +535,9 @@ Subscribe to node serialization. Async-capable.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"beforeSerialize"` |
+| Parameter | Type                                                                                         |
+| --------- | -------------------------------------------------------------------------------------------- |
+| `event`   | `"beforeSerialize"`                                                                          |
 | `handler` | [`AsyncHandler`](./asynchandler)\<[`NodeBeforeSerializeEvent`](./nodebeforeserializeevent)\> |
 
 ##### Returns
@@ -552,6 +553,7 @@ Use widget-level `widget.on('beforeSerialize')` instead — store extension
 state in widgets rather than arbitrary node fields. See ADR-0010.
 
 **Migration example:**
+
 ```ts
 // BEFORE (deprecated)
 node.on('beforeSerialize', (e) => {
@@ -569,7 +571,7 @@ stateWidget.on('beforeSerialize', (e) => {
 
 experimental
 
-***
+---
 
 ### outputs()
 
@@ -585,7 +587,7 @@ Returns all output slots on this node.
 
 readonly [`SlotInfo`](./slotinfo)[]
 
-***
+---
 
 ### setMode()
 
@@ -599,15 +601,15 @@ Sets the node's execution mode. Dispatches a `SetNodeMode` command.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `mode` | [`NodeMode`](./nodemode) |
+| Parameter | Type                     |
+| --------- | ------------------------ |
+| `mode`    | [`NodeMode`](./nodemode) |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setPosition()
 
@@ -621,15 +623,15 @@ Moves the node to a new canvas position. Dispatches a `MoveNode` command.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `pos` | [`Point`](./point) |
+| Parameter | Type               |
+| --------- | ------------------ |
+| `pos`     | [`Point`](./point) |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setProperty()
 
@@ -646,16 +648,16 @@ config (it persists to the `widget_options` sidecar in the workflow JSON).
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `key` | `string` |
-| `value` | `unknown` |
+| Parameter | Type      |
+| --------- | --------- |
+| `key`     | `string`  |
+| `value`   | `unknown` |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setSize()
 
@@ -669,15 +671,15 @@ Resizes the node. Dispatches a `ResizeNode` command.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `size` | [`Size`](./size) |
+| Parameter | Type             |
+| --------- | ---------------- |
+| `size`    | [`Size`](./size) |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setTitle()
 
@@ -691,9 +693,9 @@ Sets the node's display title. Dispatches a `SetNodeVisual` command.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `title` | `string` |
+| Parameter | Type     |
+| --------- | -------- |
+| `title`   | `string` |
 
 #### Returns
 

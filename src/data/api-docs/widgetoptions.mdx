@@ -1,6 +1,6 @@
 ---
-title: "WidgetOptions"
-description: "API reference for WidgetOptions."
+title: 'WidgetOptions'
+description: 'API reference for WidgetOptions.'
 ---
 
 Defined in: [src/extension-api/widget.ts:497](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L497)
@@ -20,17 +20,17 @@ Any additional type-specific option.
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="default"></a> `default?` | `unknown` | Default value at construction time. |
+| Property                                      | Type      | Description                                                                                                                           |
+| --------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="default"></a> `default?`               | `unknown` | Default value at construction time.                                                                                                   |
 | <a id="dynamicprompts"></a> `dynamicPrompts?` | `boolean` | When `true`, the widget value is processed for dynamic prompt syntax at serialize time. (STRING widgets with `dynamicPrompts: true`.) |
-| <a id="hidden"></a> `hidden?` | `boolean` | If `true`, the widget is hidden from the node UI on creation. |
-| <a id="label"></a> `label?` | `string` | Display label override. Defaults to the widget `name`. |
-| <a id="labeloff"></a> `labelOff?` | `string` | Toggle label shown when value is `false` (BOOLEAN widgets). |
-| <a id="labelon"></a> `labelOn?` | `string` | Toggle label shown when value is `true` (BOOLEAN widgets). |
-| <a id="max"></a> `max?` | `number` | Max value for numeric widgets. |
-| <a id="min"></a> `min?` | `number` | Min value for numeric widgets (INT, FLOAT). |
-| <a id="multiline"></a> `multiline?` | `boolean` | Multiline text input (STRING widgets). |
-| <a id="readonly"></a> `readonly?` | `boolean` | If `true`, the widget is rendered read-only (no user editing). |
-| <a id="serialize"></a> `serialize?` | `boolean` | If `false`, this widget is excluded from workflow/prompt serialization. |
-| <a id="step"></a> `step?` | `number` | Step size for numeric widgets. |
+| <a id="hidden"></a> `hidden?`                 | `boolean` | If `true`, the widget is hidden from the node UI on creation.                                                                         |
+| <a id="label"></a> `label?`                   | `string`  | Display label override. Defaults to the widget `name`.                                                                                |
+| <a id="labeloff"></a> `labelOff?`             | `string`  | Toggle label shown when value is `false` (BOOLEAN widgets).                                                                           |
+| <a id="labelon"></a> `labelOn?`               | `string`  | Toggle label shown when value is `true` (BOOLEAN widgets).                                                                            |
+| <a id="max"></a> `max?`                       | `number`  | Max value for numeric widgets.                                                                                                        |
+| <a id="min"></a> `min?`                       | `number`  | Min value for numeric widgets (INT, FLOAT).                                                                                           |
+| <a id="multiline"></a> `multiline?`           | `boolean` | Multiline text input (STRING widgets).                                                                                                |
+| <a id="readonly"></a> `readonly?`             | `boolean` | If `true`, the widget is rendered read-only (no user editing).                                                                        |
+| <a id="serialize"></a> `serialize?`           | `boolean` | If `false`, this widget is excluded from workflow/prompt serialization.                                                               |
+| <a id="step"></a> `step?`                     | `number`  | Step size for numeric widgets.                                                                                                        |

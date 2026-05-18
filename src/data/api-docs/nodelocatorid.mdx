@@ -1,10 +1,10 @@
 ---
-title: "NodeLocatorId"
-description: "Branded string ID that uniquely locates a node across graph snapshots."
+title: 'NodeLocatorId'
+description: 'Branded string ID that uniquely locates a node across graph snapshots.'
 ---
 
 ```ts
-type NodeLocatorId = string;
+type NodeLocatorId = string
 ```
 
 Defined in: [src/types/nodeIdentification.ts:18](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/types/nodeIdentification.ts#L18)
@@ -13,10 +13,12 @@ A globally unique identifier for nodes that maintains consistency across
 multiple instances of the same subgraph.
 
 Format:
+
 - For subgraph nodes: `<immediate-contained-subgraph-uuid>:<local-node-id>`
 - For root graph nodes: `<local-node-id>`
 
 Examples:
+
 - "a1b2c3d4-e5f6-7890-abcd-ef1234567890:123" (node in subgraph)
 - "456" (node in root graph)
 

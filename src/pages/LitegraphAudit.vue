@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { RouterLink } from "vue-router";
+import type { VerdictRow } from '@/data/litegraph-audit-loader'
+import { computed, ref } from 'vue'
 
+import { RouterLink } from 'vue-router'
 import {
-  surfaces,
+  auditMeta,
+  deltaBySurface,
   prs,
   reauditDelta,
   sunsetGates,
-  auditMeta,
-  verdictCounts,
-  deltaBySurface,
-} from "@/data/litegraph-audit-loader";
-import type { VerdictRow } from "@/data/litegraph-audit-loader";
+  surfaces,
+  verdictCounts
+} from '@/data/litegraph-audit-loader'
 
 /**
  * LitegraphAudit — entry page for the LiteGraph pruning audit dashboard.
@@ -28,136 +28,129 @@ import type { VerdictRow } from "@/data/litegraph-audit-loader";
  * read-mostly dashboard for sharing audit findings with teammates.
  */
 
-type SortKey = "id" | "symbol" | "external" | "tier" | "verdict";
-type SortDir = "asc" | "desc";
+type SortKey = 'id' | 'symbol' | 'external' | 'tier' | 'verdict'
+type SortDir = 'asc' | 'desc'
 
-const sortKey = ref<SortKey>("external");
-const sortDir = ref<SortDir>("desc");
-const filterVerdict = ref<string>("");
-const filterTier = ref<string>("");
-const filterText = ref<string>("");
+const sortKey = ref<SortKey>('external')
+const sortDir = ref<SortDir>('desc')
+const filterVerdict = ref<string>('')
+const filterTier = ref<string>('')
+const filterText = ref<string>('')
 
 const tierOrder: Record<string, number> = {
   critical: 4,
   high: 3,
   med: 2,
-  low: 1,
-};
+  low: 1
+}
 
 const verdictOrder: Record<string, number> = {
-  "DELETE-NOW": 0,
-  "DELETE-LATER": 1,
-  KEEP: 2,
-};
+  'DELETE-NOW': 0,
+  'DELETE-LATER': 1,
+  KEEP: 2
+}
 
 function toggleSort(key: SortKey) {
   if (sortKey.value === key) {
-    sortDir.value = sortDir.value === "asc" ? "desc" : "asc";
+    sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
   } else {
-    sortKey.value = key;
-    sortDir.value = "desc";
+    sortKey.value = key
+    sortDir.value = 'desc'
   }
 }
 
 function sortIndicator(key: SortKey): string {
-  if (sortKey.value !== key) return "";
-  return sortDir.value === "asc" ? "▲" : "▼";
+  if (sortKey.value !== key) return ''
+  return sortDir.value === 'asc' ? '▲' : '▼'
 }
 
-const allVerdicts = computed<string[]>(() =>
-  [...new Set(surfaces.map((s) => s.verdict))].sort(),
-);
+const allVerdicts = computed<string[]>(() => [...new Set(surfaces.map((s) => s.verdict))].sort())
 const allTiers = computed<string[]>(() =>
   [...new Set(surfaces.map((s) => s.risk))].sort(
-    (a, b) => (tierOrder[b] ?? 0) - (tierOrder[a] ?? 0),
-  ),
-);
+    (a, b) => (tierOrder[b] ?? 0) - (tierOrder[a] ?? 0)
+  )
+)
 
 const filteredRows = computed<VerdictRow[]>(() => {
-  let rows = surfaces.slice();
+  let rows = surfaces.slice()
   if (filterVerdict.value) {
-    rows = rows.filter((r) => r.verdict === filterVerdict.value);
+    rows = rows.filter((r) => r.verdict === filterVerdict.value)
   }
   if (filterTier.value) {
-    rows = rows.filter((r) => r.risk === filterTier.value);
+    rows = rows.filter((r) => r.risk === filterTier.value)
   }
   if (filterText.value) {
-    const q = filterText.value.toLowerCase();
+    const q = filterText.value.toLowerCase()
     rows = rows.filter(
       (r) =>
         r.id.toLowerCase().includes(q) ||
         r.symbol.toLowerCase().includes(q) ||
-        (r.notes ?? "").toLowerCase().includes(q),
-    );
+        (r.notes ?? '').toLowerCase().includes(q)
+    )
   }
   rows.sort((a, b) => {
-    const dir = sortDir.value === "asc" ? 1 : -1;
+    const dir = sortDir.value === 'asc' ? 1 : -1
     switch (sortKey.value) {
-      case "id":
-        return a.id.localeCompare(b.id) * dir;
-      case "symbol":
-        return a.symbol.localeCompare(b.symbol) * dir;
-      case "external":
-        return (a.external - b.external) * dir;
-      case "tier":
-        return ((tierOrder[a.risk] ?? 0) - (tierOrder[b.risk] ?? 0)) * dir;
-      case "verdict":
-        return (
-          ((verdictOrder[a.verdict] ?? 99) -
-            (verdictOrder[b.verdict] ?? 99)) *
-          dir
-        );
+      case 'id':
+        return a.id.localeCompare(b.id) * dir
+      case 'symbol':
+        return a.symbol.localeCompare(b.symbol) * dir
+      case 'external':
+        return (a.external - b.external) * dir
+      case 'tier':
+        return ((tierOrder[a.risk] ?? 0) - (tierOrder[b.risk] ?? 0)) * dir
+      case 'verdict':
+        return ((verdictOrder[a.verdict] ?? 99) - (verdictOrder[b.verdict] ?? 99)) * dir
       default:
-        return 0;
+        return 0
     }
-  });
-  return rows;
-});
+  })
+  return rows
+})
 
 function tierBadge(tier: string): string {
   const map: Record<string, string> = {
     critical:
-      "bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-300 border border-red-300 dark:border-red-700",
-    high: "bg-orange-100 text-orange-900 dark:bg-orange-900/40 dark:text-orange-300",
-    med: "bg-yellow-100 text-yellow-900 dark:bg-yellow-900/40 dark:text-yellow-300",
-    low: "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
-  };
-  return map[tier] ?? map.low;
+      'bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-300 border border-red-300 dark:border-red-700',
+    high: 'bg-orange-100 text-orange-900 dark:bg-orange-900/40 dark:text-orange-300',
+    med: 'bg-yellow-100 text-yellow-900 dark:bg-yellow-900/40 dark:text-yellow-300',
+    low: 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+  }
+  return map[tier] ?? map.low
 }
 
 function verdictBadge(v: string): string {
-  if (v.startsWith("DELETE-NOW"))
-    return "bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-300";
-  if (v.startsWith("DELETE-LATER"))
-    return "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-300";
-  if (v.startsWith("KEEP"))
-    return "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300";
-  return "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
+  if (v.startsWith('DELETE-NOW'))
+    return 'bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-300'
+  if (v.startsWith('DELETE-LATER'))
+    return 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-300'
+  if (v.startsWith('KEEP'))
+    return 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300'
+  return 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
 }
 
 function prStatusBadge(s: string): string {
-  if (s === "MERGED")
-    return "bg-purple-100 text-purple-900 dark:bg-purple-900/40 dark:text-purple-300";
-  if (s === "DRAFT")
-    return "bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200";
-  if (s === "OPEN")
-    return "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300";
-  return "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
+  if (s === 'MERGED')
+    return 'bg-purple-100 text-purple-900 dark:bg-purple-900/40 dark:text-purple-300'
+  if (s === 'DRAFT') return 'bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200'
+  if (s === 'OPEN')
+    return 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300'
+  return 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
 }
 
 function deltaFor(id: string): { baseline: number; reauditTotal: number; growth: number } | null {
-  const d = deltaBySurface[id];
-  if (!d) return null;
-  return { baseline: d.baseline, reauditTotal: d.reauditTotal, growth: d.growth };
+  const d = deltaBySurface[id]
+  if (!d) return null
+  return { baseline: d.baseline, reauditTotal: d.reauditTotal, growth: d.growth }
 }
 
 const maxDelta = computed(() => {
-  let m = 0;
+  let m = 0
   for (const d of reauditDelta) {
-    if (d.reauditTotal > m) m = d.reauditTotal;
+    if (d.reauditTotal > m) m = d.reauditTotal
   }
-  return m || 1;
-});
+  return m || 1
+})
 </script>
 
 <template>
@@ -168,13 +161,12 @@ const maxDelta = computed(() => {
         LiteGraph Pruning Audit
       </h1>
       <p class="text-sm text-zinc-600 dark:text-zinc-400">
-        AUDIT-LG.10 verdict table + W2F-1 listener-variant re-audit findings
-        from the ECS + Vue hoisted client state research workspace.
+        AUDIT-LG.10 verdict table + W2F-1 listener-variant re-audit findings from the ECS + Vue
+        hoisted client state research workspace.
       </p>
       <p class="text-xs text-zinc-500 dark:text-zinc-500">
-        Generated {{ auditMeta.generatedAt }} ·
-        {{ surfaces.length }} surfaces · {{ prs.length }} PRs ·
-        {{ reauditDelta.length }} re-audited surfaces
+        Generated {{ auditMeta.generatedAt }} · {{ surfaces.length }} surfaces ·
+        {{ prs.length }} PRs · {{ reauditDelta.length }} re-audited surfaces
       </p>
     </header>
 
@@ -232,14 +224,18 @@ const maxDelta = computed(() => {
         class="rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 text-sm"
       >
         <option value="">All verdicts</option>
-        <option v-for="v in allVerdicts" :key="v" :value="v">{{ v }}</option>
+        <option v-for="v in allVerdicts" :key="v" :value="v">
+          {{ v }}
+        </option>
       </select>
       <select
         v-model="filterTier"
         class="rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 text-sm"
       >
         <option value="">All severities</option>
-        <option v-for="t in allTiers" :key="t" :value="t">{{ t }}</option>
+        <option v-for="t in allTiers" :key="t" :value="t">
+          {{ t }}
+        </option>
       </select>
       <span class="text-xs text-zinc-500 dark:text-zinc-400 tabular-nums">
         {{ filteredRows.length }} / {{ surfaces.length }}
@@ -257,7 +253,7 @@ const maxDelta = computed(() => {
                 class="font-medium hover:text-zinc-900 dark:hover:text-zinc-100"
                 @click="toggleSort('id')"
               >
-                ID {{ sortIndicator("id") }}
+                ID {{ sortIndicator('id') }}
               </button>
             </th>
             <th class="px-3 py-2">
@@ -266,7 +262,7 @@ const maxDelta = computed(() => {
                 class="font-medium hover:text-zinc-900 dark:hover:text-zinc-100"
                 @click="toggleSort('symbol')"
               >
-                Symbol {{ sortIndicator("symbol") }}
+                Symbol {{ sortIndicator('symbol') }}
               </button>
             </th>
             <th class="px-3 py-2 text-right">
@@ -275,7 +271,7 @@ const maxDelta = computed(() => {
                 class="font-medium hover:text-zinc-900 dark:hover:text-zinc-100"
                 @click="toggleSort('external')"
               >
-                Consumers (pre→post) {{ sortIndicator("external") }}
+                Consumers (pre→post) {{ sortIndicator('external') }}
               </button>
             </th>
             <th class="px-3 py-2">
@@ -284,7 +280,7 @@ const maxDelta = computed(() => {
                 class="font-medium hover:text-zinc-900 dark:hover:text-zinc-100"
                 @click="toggleSort('tier')"
               >
-                Severity {{ sortIndicator("tier") }}
+                Severity {{ sortIndicator('tier') }}
               </button>
             </th>
             <th class="px-3 py-2">
@@ -293,7 +289,7 @@ const maxDelta = computed(() => {
                 class="font-medium hover:text-zinc-900 dark:hover:text-zinc-100"
                 @click="toggleSort('verdict')"
               >
-                Verdict {{ sortIndicator("verdict") }}
+                Verdict {{ sortIndicator('verdict') }}
               </button>
             </th>
             <th class="px-3 py-2">PRs</th>
@@ -320,7 +316,10 @@ const maxDelta = computed(() => {
                 {{ row.id }}
               </RouterLink>
             </td>
-            <td class="px-3 py-2 font-mono text-xs text-zinc-700 dark:text-zinc-300 max-w-xs truncate" :title="row.symbol">
+            <td
+              class="px-3 py-2 font-mono text-xs text-zinc-700 dark:text-zinc-300 max-w-xs truncate"
+              :title="row.symbol"
+            >
               {{ row.symbol }}
             </td>
             <td class="px-3 py-2 text-right tabular-nums">
@@ -337,12 +336,10 @@ const maxDelta = computed(() => {
                 >
                   {{ deltaFor(row.id)!.growth.toFixed(1) }}×
                 </span>
-                <div
-                  class="mt-1 h-1 rounded bg-zinc-100 dark:bg-zinc-800 overflow-hidden"
-                >
+                <div class="mt-1 h-1 rounded bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
                   <div
                     class="h-full bg-blue-500 dark:bg-blue-600"
-                    :style="{ width: ((deltaFor(row.id)!.reauditTotal / maxDelta) * 100) + '%' }"
+                    :style="{ width: `${(deltaFor(row.id)!.reauditTotal / maxDelta) * 100}%` }"
                   />
                 </div>
               </template>
@@ -369,11 +366,7 @@ const maxDelta = computed(() => {
             </td>
             <td class="px-3 py-2 font-mono text-xs text-zinc-500">
               <span v-for="(n, i) in row.prs" :key="n">
-                <RouterLink
-                  :to="`/audit/pr/${n}`"
-                  class="hover:underline"
-                  @click.stop
-                >
+                <RouterLink :to="`/audit/pr/${n}`" class="hover:underline" @click.stop>
                   #{{ n }}
                 </RouterLink>
                 <span v-if="i < row.prs.length - 1">, </span>
@@ -408,7 +401,9 @@ const maxDelta = computed(() => {
               {{ g.status }}
             </span>
           </div>
-          <p class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{{ g.summary }}</p>
+          <p class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+            {{ g.summary }}
+          </p>
         </li>
       </ol>
     </section>

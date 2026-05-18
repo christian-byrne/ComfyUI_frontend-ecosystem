@@ -1,6 +1,6 @@
 ---
-title: "NodeExtensionOptions"
-description: "Options object for defineNodeExtension — node lifecycle hooks."
+title: 'NodeExtensionOptions'
+description: 'Options object for defineNodeExtension — node lifecycle hooks.'
 ---
 
 Defined in: [src/extension-api/types.ts:35](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/types.ts#L35)
@@ -23,9 +23,9 @@ export default defineNode({
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="name"></a> `name` | `string` | Globally unique extension name. Used for scope registry keying, hook ordering (lexicographic tie-break), and debug messages. Convention: `'org.extension-name'` or `'Comfy.ExtensionName'`. |
+| Property                            | Type       | Description                                                                                                                                                                                                                                             |
+| ----------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="name"></a> `name`            | `string`   | Globally unique extension name. Used for scope registry keying, hook ordering (lexicographic tie-break), and debug messages. Convention: `'org.extension-name'` or `'Comfy.ExtensionName'`.                                                             |
 | <a id="nodetypes"></a> `nodeTypes?` | `string`[] | Filter to specific `comfyClass` names. When omitted, the extension receives `nodeCreated` / `loadedGraphNode` for every node type. Replaces the v1 `beforeRegisterNodeDef` filtering pattern. **Example** `nodeTypes: ['KSampler', 'KSamplerAdvanced']` |
 
 ## Methods
@@ -49,15 +49,15 @@ patching.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `node` | [`NodeHandle`](./nodehandle) |
+| Parameter | Type                         |
+| --------- | ---------------------------- |
+| `node`    | [`NodeHandle`](./nodehandle) |
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### nodeCreated()?
 
@@ -79,9 +79,9 @@ pasted from clipboard, duplicated, or loaded without an existing workflow).
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `node` | [`NodeHandle`](./nodehandle) |
+| Parameter | Type                         |
+| --------- | ---------------------------- |
+| `node`    | [`NodeHandle`](./nodehandle) |
 
 #### Returns
 

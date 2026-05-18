@@ -1,12 +1,12 @@
 ---
-title: "Extension API Overview"
-description: "TypeScript API reference for ComfyUI custom node extensions."
-icon: "puzzle-piece"
+title: 'Extension API Overview'
+description: 'TypeScript API reference for ComfyUI custom node extensions.'
+icon: 'puzzle-piece'
 ---
 
 **@comfyorg/comfyui-frontend**
 
-***
+---
 
 # @comfyorg/comfyui-frontend
 
@@ -23,17 +23,17 @@ import { defineNode, defineExtension } from '@comfyorg/extension-api'
 
 ## API surface overview
 
-| Export | Purpose |
-|--------|---------|
-| `defineNode` | Register a node-scoped extension (the primary entry point) |
-| `defineExtension` | Register an app-scoped extension (init, setup, shell UI) |
-| `onNodeMounted`, `onNodeRemoved` | Implicit-context lifecycle hooks (call inside nodeCreated) |
-| `NodeHandle` | Controlled access to node state and events |
-| `WidgetHandle` | Controlled access to widget state and events |
-| `WidgetBeforeQueueEvent` | Pre-queue validation event — call `reject(msg)` to cancel |
-| `SlotInfo` | Read-only slot snapshot |
-| Shell UI types | `SidebarTabExtension`, `BottomPanelExtension`, `CommandManager`, etc. |
-| Identity helpers | `NodeLocatorId`, `NodeExecutionId`, parsers, type guards |
+| Export                           | Purpose                                                               |
+| -------------------------------- | --------------------------------------------------------------------- |
+| `defineNode`                     | Register a node-scoped extension (the primary entry point)            |
+| `defineExtension`                | Register an app-scoped extension (init, setup, shell UI)              |
+| `onNodeMounted`, `onNodeRemoved` | Implicit-context lifecycle hooks (call inside nodeCreated)            |
+| `NodeHandle`                     | Controlled access to node state and events                            |
+| `WidgetHandle`                   | Controlled access to widget state and events                          |
+| `WidgetBeforeQueueEvent`         | Pre-queue validation event — call `reject(msg)` to cancel             |
+| `SlotInfo`                       | Read-only slot snapshot                                               |
+| Shell UI types                   | `SidebarTabExtension`, `BottomPanelExtension`, `CommandManager`, etc. |
+| Identity helpers                 | `NodeLocatorId`, `NodeExecutionId`, parsers, type guards              |
 
 ## Identity (D20)
 
@@ -63,62 +63,62 @@ re-export — and is the explicit exception documented in AGENTS.md.
 
 ## Interfaces
 
-| Interface | Description |
-| ------ | ------ |
-| [CommandManager](interfaces/CommandManager.md) | - |
-| [DOMWidgetOptions](interfaces/DOMWidgetOptions.md) | Options for `NodeHandle.addDOMWidget()`. |
-| [ExtensionManager](interfaces/ExtensionManager.md) | - |
-| [ExtensionOptions](interfaces/ExtensionOptions.md) | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions. |
-| [~~NodeBeforeSerializeEvent~~](interfaces/NodeBeforeSerializeEvent.md) | Payload for `node.on('beforeSerialize', handler)`. |
-| [NodeConnectedEvent](interfaces/NodeConnectedEvent.md) | Payload for `node.on('connected', handler)`. |
-| [NodeDisconnectedEvent](interfaces/NodeDisconnectedEvent.md) | Payload for `node.on('disconnected', handler)`. |
-| [NodeExecutedEvent](interfaces/NodeExecutedEvent.md) | Payload for `node.on('executed', handler)`. |
-| [NodeExtensionOptions](interfaces/NodeExtensionOptions.md) | Options for `defineNode`. Describes an extension that reacts to node lifecycle events. |
-| [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components. |
-| [NodeModeChangedEvent](interfaces/NodeModeChangedEvent.md) | Payload for `node.on('modeChanged', handler)`. |
-| [NodePositionChangedEvent](interfaces/NodePositionChangedEvent.md) | Payload for `node.on('positionChanged', handler)`. |
-| [NodeSizeChangedEvent](interfaces/NodeSizeChangedEvent.md) | Payload for `node.on('sizeChanged', handler)`. |
-| [SlotInfo](interfaces/SlotInfo.md) | Read-only snapshot of a single slot (input or output) on a node. |
-| [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. |
-| [WidgetBeforeQueueEvent](interfaces/WidgetBeforeQueueEvent.md) | Payload for `widget.on('beforeQueue', handler)`. |
-| [WidgetBeforeSerializeEvent](interfaces/WidgetBeforeSerializeEvent.md) | Payload for `widget.on('beforeSerialize', handler)`. |
-| [WidgetExtensionOptions](interfaces/WidgetExtensionOptions.md) | Options for `defineWidget`. Describes an extension that provides a custom widget type with its own DOM rendering. |
-| [WidgetHandle](interfaces/WidgetHandle.md) | Controlled surface for widget access. Backed by ECS `WidgetValue` and `WidgetIdentity` components in the World. Reads query components directly; writes dispatch commands (undo-able, serializable, validatable). |
-| [WidgetOptionChangeEvent](interfaces/WidgetOptionChangeEvent.md) | Payload for `widget.on('optionChange', handler)`. |
-| [WidgetOptions](interfaces/WidgetOptions.md) | Options passed to `node.addWidget()` when creating a new widget. |
-| [WidgetPropertyChangeEvent](interfaces/WidgetPropertyChangeEvent.md) | Payload for `widget.on('propertyChange', handler)`. |
-| [WidgetValueChangeEvent](interfaces/WidgetValueChangeEvent.md) | Payload for `widget.on('valueChange', handler)`. |
+| Interface                                                              | Description                                                                                                                                                                                                       |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CommandManager](interfaces/CommandManager.md)                         | -                                                                                                                                                                                                                 |
+| [DOMWidgetOptions](interfaces/DOMWidgetOptions.md)                     | Options for `NodeHandle.addDOMWidget()`.                                                                                                                                                                          |
+| [ExtensionManager](interfaces/ExtensionManager.md)                     | -                                                                                                                                                                                                                 |
+| [ExtensionOptions](interfaces/ExtensionOptions.md)                     | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions.                                                                                                 |
+| [~~NodeBeforeSerializeEvent~~](interfaces/NodeBeforeSerializeEvent.md) | Payload for `node.on('beforeSerialize', handler)`.                                                                                                                                                                |
+| [NodeConnectedEvent](interfaces/NodeConnectedEvent.md)                 | Payload for `node.on('connected', handler)`.                                                                                                                                                                      |
+| [NodeDisconnectedEvent](interfaces/NodeDisconnectedEvent.md)           | Payload for `node.on('disconnected', handler)`.                                                                                                                                                                   |
+| [NodeExecutedEvent](interfaces/NodeExecutedEvent.md)                   | Payload for `node.on('executed', handler)`.                                                                                                                                                                       |
+| [NodeExtensionOptions](interfaces/NodeExtensionOptions.md)             | Options for `defineNode`. Describes an extension that reacts to node lifecycle events.                                                                                                                            |
+| [NodeHandle](interfaces/NodeHandle.md)                                 | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components.                                                                     |
+| [NodeModeChangedEvent](interfaces/NodeModeChangedEvent.md)             | Payload for `node.on('modeChanged', handler)`.                                                                                                                                                                    |
+| [NodePositionChangedEvent](interfaces/NodePositionChangedEvent.md)     | Payload for `node.on('positionChanged', handler)`.                                                                                                                                                                |
+| [NodeSizeChangedEvent](interfaces/NodeSizeChangedEvent.md)             | Payload for `node.on('sizeChanged', handler)`.                                                                                                                                                                    |
+| [SlotInfo](interfaces/SlotInfo.md)                                     | Read-only snapshot of a single slot (input or output) on a node.                                                                                                                                                  |
+| [ToastMessageOptions](interfaces/ToastMessageOptions.md)               | Defines message options in Toast component.                                                                                                                                                                       |
+| [WidgetBeforeQueueEvent](interfaces/WidgetBeforeQueueEvent.md)         | Payload for `widget.on('beforeQueue', handler)`.                                                                                                                                                                  |
+| [WidgetBeforeSerializeEvent](interfaces/WidgetBeforeSerializeEvent.md) | Payload for `widget.on('beforeSerialize', handler)`.                                                                                                                                                              |
+| [WidgetExtensionOptions](interfaces/WidgetExtensionOptions.md)         | Options for `defineWidget`. Describes an extension that provides a custom widget type with its own DOM rendering.                                                                                                 |
+| [WidgetHandle](interfaces/WidgetHandle.md)                             | Controlled surface for widget access. Backed by ECS `WidgetValue` and `WidgetIdentity` components in the World. Reads query components directly; writes dispatch commands (undo-able, serializable, validatable). |
+| [WidgetOptionChangeEvent](interfaces/WidgetOptionChangeEvent.md)       | Payload for `widget.on('optionChange', handler)`.                                                                                                                                                                 |
+| [WidgetOptions](interfaces/WidgetOptions.md)                           | Options passed to `node.addWidget()` when creating a new widget.                                                                                                                                                  |
+| [WidgetPropertyChangeEvent](interfaces/WidgetPropertyChangeEvent.md)   | Payload for `widget.on('propertyChange', handler)`.                                                                                                                                                               |
+| [WidgetValueChangeEvent](interfaces/WidgetValueChangeEvent.md)         | Payload for `widget.on('valueChange', handler)`.                                                                                                                                                                  |
 
 ## Type Aliases
 
-| Type Alias | Description |
-| ------ | ------ |
-| [AsyncHandler](type-aliases/AsyncHandler.md) | A typed async-capable event handler. Only valid for events that explicitly support async handling (currently only `beforeSerialize`). |
-| [BottomPanelExtension](type-aliases/BottomPanelExtension.md) | - |
-| [Handler](type-aliases/Handler.md) | A typed event handler function. |
-| [NodeExecutionId](type-aliases/NodeExecutionId.md) | An execution identifier representing a node's position in nested subgraphs. Also known as ExecutionId in some contexts. |
-| [NodeLocatorId](type-aliases/NodeLocatorId.md) | A globally unique identifier for nodes that maintains consistency across multiple instances of the same subgraph. |
-| [NodeMode](type-aliases/NodeMode.md) | LiteGraph node execution mode. |
-| [Point](type-aliases/Point.md) | A 2D point as `[x, y]`. |
-| [SidebarTabExtension](type-aliases/SidebarTabExtension.md) | - |
-| [Size](type-aliases/Size.md) | A 2D size as `[width, height]`. |
-| [SlotDirection](type-aliases/SlotDirection.md) | Direction of a slot on a node. |
-| [ToastManager](type-aliases/ToastManager.md) | - |
-| [Unsubscribe](type-aliases/Unsubscribe.md) | Cleanup function returned by `on()` — call to remove the listener. |
-| [WidgetValue](type-aliases/WidgetValue.md) | The union of all legal widget scalar values. Complex widgets (DOM, canvas) may return their own serializable shapes. |
+| Type Alias                                                   | Description                                                                                                                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| [AsyncHandler](type-aliases/AsyncHandler.md)                 | A typed async-capable event handler. Only valid for events that explicitly support async handling (currently only `beforeSerialize`). |
+| [BottomPanelExtension](type-aliases/BottomPanelExtension.md) | -                                                                                                                                     |
+| [Handler](type-aliases/Handler.md)                           | A typed event handler function.                                                                                                       |
+| [NodeExecutionId](type-aliases/NodeExecutionId.md)           | An execution identifier representing a node's position in nested subgraphs. Also known as ExecutionId in some contexts.               |
+| [NodeLocatorId](type-aliases/NodeLocatorId.md)               | A globally unique identifier for nodes that maintains consistency across multiple instances of the same subgraph.                     |
+| [NodeMode](type-aliases/NodeMode.md)                         | LiteGraph node execution mode.                                                                                                        |
+| [Point](type-aliases/Point.md)                               | A 2D point as `[x, y]`.                                                                                                               |
+| [SidebarTabExtension](type-aliases/SidebarTabExtension.md)   | -                                                                                                                                     |
+| [Size](type-aliases/Size.md)                                 | A 2D size as `[width, height]`.                                                                                                       |
+| [SlotDirection](type-aliases/SlotDirection.md)               | Direction of a slot on a node.                                                                                                        |
+| [ToastManager](type-aliases/ToastManager.md)                 | -                                                                                                                                     |
+| [Unsubscribe](type-aliases/Unsubscribe.md)                   | Cleanup function returned by `on()` — call to remove the listener.                                                                    |
+| [WidgetValue](type-aliases/WidgetValue.md)                   | The union of all legal widget scalar values. Complex widgets (DOM, canvas) may return their own serializable shapes.                  |
 
 ## Functions
 
-| Function | Description |
-| ------ | ------ |
-| [createNodeExecutionId](functions/createNodeExecutionId.md) | Create a NodeExecutionId from an array of node IDs |
-| [createNodeLocatorId](functions/createNodeLocatorId.md) | Create a NodeLocatorId from components |
-| [defineExtension](functions/defineExtension.md) | - |
-| [defineNode](functions/defineNode.md) | - |
-| [defineWidget](functions/defineWidget.md) | - |
-| [isNodeExecutionId](functions/isNodeExecutionId.md) | Type guard to check if a value is a NodeExecutionId |
-| [isNodeLocatorId](functions/isNodeLocatorId.md) | Type guard to check if a value is a NodeLocatorId |
-| [onNodeMounted](functions/onNodeMounted.md) | Register a callback that fires after setup() completes for this node entity (post-flush, still within the active EffectScope). Must be called synchronously inside nodeCreated / loadedGraphNode (D10a). |
-| [onNodeRemoved](functions/onNodeRemoved.md) | Register a callback that fires when the node entity is removed from the graph. Does NOT fire on subgraph promotion (DOM-move, not unmount). Must be called synchronously inside nodeCreated / loadedGraphNode (D10a). |
-| [parseNodeExecutionId](functions/parseNodeExecutionId.md) | Parse a NodeExecutionId into its component node IDs |
-| [parseNodeLocatorId](functions/parseNodeLocatorId.md) | Parse a NodeLocatorId into its components |
+| Function                                                    | Description                                                                                                                                                                                                           |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [createNodeExecutionId](functions/createNodeExecutionId.md) | Create a NodeExecutionId from an array of node IDs                                                                                                                                                                    |
+| [createNodeLocatorId](functions/createNodeLocatorId.md)     | Create a NodeLocatorId from components                                                                                                                                                                                |
+| [defineExtension](functions/defineExtension.md)             | -                                                                                                                                                                                                                     |
+| [defineNode](functions/defineNode.md)                       | -                                                                                                                                                                                                                     |
+| [defineWidget](functions/defineWidget.md)                   | -                                                                                                                                                                                                                     |
+| [isNodeExecutionId](functions/isNodeExecutionId.md)         | Type guard to check if a value is a NodeExecutionId                                                                                                                                                                   |
+| [isNodeLocatorId](functions/isNodeLocatorId.md)             | Type guard to check if a value is a NodeLocatorId                                                                                                                                                                     |
+| [onNodeMounted](functions/onNodeMounted.md)                 | Register a callback that fires after setup() completes for this node entity (post-flush, still within the active EffectScope). Must be called synchronously inside nodeCreated / loadedGraphNode (D10a).              |
+| [onNodeRemoved](functions/onNodeRemoved.md)                 | Register a callback that fires when the node entity is removed from the graph. Does NOT fire on subgraph promotion (DOM-move, not unmount). Must be called synchronously inside nodeCreated / loadedGraphNode (D10a). |
+| [parseNodeExecutionId](functions/parseNodeExecutionId.md)   | Parse a NodeExecutionId into its component node IDs                                                                                                                                                                   |
+| [parseNodeLocatorId](functions/parseNodeLocatorId.md)       | Parse a NodeLocatorId into its components                                                                                                                                                                             |

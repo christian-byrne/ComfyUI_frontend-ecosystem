@@ -1,9 +1,6 @@
 {
   "meta": {
-    "generated_from": [
-      "database.yaml",
-      "star-cache.yaml"
-    ],
+    "generated_from": ["database.yaml", "star-cache.yaml"],
     "weights": {
       "stars": 1.0,
       "occ": 0.7,

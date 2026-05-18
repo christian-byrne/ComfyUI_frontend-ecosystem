@@ -1,11 +1,7 @@
 {
   "meta": {
     "schema_version": 1,
-    "generated_from": [
-      "database.yaml",
-      "rollup.yaml",
-      "star-cache.yaml"
-    ],
+    "generated_from": ["database.yaml", "rollup.yaml", "star-cache.yaml"],
     "generated_by": "scripts/build-behavior-categories.py (I-TF.1)",
     "source_pattern_count": 62,
     "category_count": 37,
@@ -32,10 +28,7 @@
       "name": "Node lifecycle: creation",
       "intent": "Hooks fired when a node is constructed or attached to the graph (per-instance setup).",
       "notes": "nodeCreated fires BEFORE the VueNode Vue component mounts. Extensions that need to access VueNode-backed state (DOM widgets, Three.js renderers, etc.) must defer to onNodeMounted (v2) or waitForLoad3d-style callbacks (v1). See BC.37 for the deferred-mount bridge pattern. Source: Notion Frontend Architecture page (2026-05-08).",
-      "member_pattern_ids": [
-        "S2.N1",
-        "S2.N8"
-      ],
+      "member_pattern_ids": ["S2.N1", "S2.N8"],
       "usage_weight": 37.56,
       "exemplars": [
         {
@@ -62,9 +55,7 @@
       "category_id": "BC.02",
       "name": "Node lifecycle: teardown",
       "intent": "Single de-facto teardown surface for cleaning up DOM widgets, intervals, and observers when a node is removed.",
-      "member_pattern_ids": [
-        "S2.N4"
-      ],
+      "member_pattern_ids": ["S2.N4"],
       "usage_weight": 29.35,
       "exemplars": [
         {
@@ -91,10 +82,7 @@
       "category_id": "BC.03",
       "name": "Node lifecycle: hydration from saved workflows",
       "intent": "React when a node is rehydrated from a stored workflow; the working replacement for the unused loadedGraphNode hook.",
-      "member_pattern_ids": [
-        "S1.H1",
-        "S2.N7"
-      ],
+      "member_pattern_ids": ["S1.H1", "S2.N7"],
       "usage_weight": 15.42,
       "exemplars": [
         {
@@ -121,11 +109,7 @@
       "category_id": "BC.04",
       "name": "Node interaction: pointer, selection, resize",
       "intent": "User-driven per-node events: mouse down for custom click regions, selection focus, and resize feedback for relayout.",
-      "member_pattern_ids": [
-        "S2.N10",
-        "S2.N17",
-        "S2.N19"
-      ],
+      "member_pattern_ids": ["S2.N10", "S2.N17", "S2.N19"],
       "usage_weight": 38.07,
       "exemplars": [
         {
@@ -152,10 +136,7 @@
       "category_id": "BC.05",
       "name": "Custom DOM widgets and node sizing",
       "intent": "Contribute DOM-backed widgets and override computeSize so the node reserves the right area for them.",
-      "member_pattern_ids": [
-        "S4.W2",
-        "S2.N11"
-      ],
+      "member_pattern_ids": ["S4.W2", "S2.N11"],
       "usage_weight": 33.35,
       "exemplars": [
         {
@@ -183,11 +164,7 @@
       "name": "Custom canvas drawing (per-node and canvas-level)",
       "intent": "Per-node onDrawForeground and full LGraphCanvas.prototype overrides for badges, indicators, keyboard, and custom render passes. Includes global ContextMenu replacement (S3.C2) as the most destructive canvas-level override.",
       "v1_scope_note": "Simon Tranter (COM-3668, 2025-05-12) explicitly vetoed canvas drawing overrides as \"too hacky/specific to implement APIs for\". Confirmed out of v2 v1 scope. S3.C* patterns remain in DB for blast-radius tracking and strangler-fig planning but v2 need not replace them 1:1. Supports D9 Phase C deferral.",
-      "member_pattern_ids": [
-        "S2.N9",
-        "S3.C1",
-        "S3.C2"
-      ],
+      "member_pattern_ids": ["S2.N9", "S3.C1", "S3.C2"],
       "usage_weight": 58.97,
       "exemplars": [
         {
@@ -214,11 +191,7 @@
       "category_id": "BC.07",
       "name": "Connection observation, intercept, and veto",
       "intent": "Subscribe to link connect/disconnect events on a node and intercept incoming/outgoing connections before they are wired to refuse them, mutate slots, or coerce types.",
-      "member_pattern_ids": [
-        "S2.N3",
-        "S2.N12",
-        "S2.N13"
-      ],
+      "member_pattern_ids": ["S2.N3", "S2.N12", "S2.N13"],
       "usage_weight": 51.08,
       "exemplars": [
         {
@@ -245,9 +218,7 @@
       "category_id": "BC.08",
       "name": "Programmatic linking",
       "intent": "Extensions wire connections from code (workflow templates, auto-routing).",
-      "member_pattern_ids": [
-        "S10.D2"
-      ],
+      "member_pattern_ids": ["S10.D2"],
       "usage_weight": 11.81,
       "exemplars": [
         {
@@ -274,11 +245,7 @@
       "category_id": "BC.09",
       "name": "Dynamic slot and output mutation",
       "intent": "Grow/shrink inputs and outputs at runtime, with the obligatory computeSize+setSize reflow that follows.",
-      "member_pattern_ids": [
-        "S10.D1",
-        "S10.D3",
-        "S15.OS1"
-      ],
+      "member_pattern_ids": ["S10.D1", "S10.D3", "S15.OS1"],
       "usage_weight": 38.63,
       "exemplars": [
         {
@@ -305,10 +272,7 @@
       "category_id": "BC.10",
       "name": "Widget value subscription",
       "intent": "Subscribe to widget value changes either at the widget (callback chain) or node (onWidgetChanged) level.",
-      "member_pattern_ids": [
-        "S4.W1",
-        "S2.N14"
-      ],
+      "member_pattern_ids": ["S4.W1", "S2.N14"],
       "usage_weight": 32.22,
       "exemplars": [
         {
@@ -335,11 +299,7 @@
       "category_id": "BC.11",
       "name": "Widget imperative state writes",
       "intent": "Imperatively mutate widget value, COMBO option lists, or the node.widgets array (insert/remove/reorder).",
-      "member_pattern_ids": [
-        "S4.W4",
-        "S4.W5",
-        "S2.N16"
-      ],
+      "member_pattern_ids": ["S4.W4", "S4.W5", "S2.N16"],
       "usage_weight": 28.42,
       "exemplars": [
         {
@@ -367,9 +327,7 @@
       "name": "Per-widget serialization transform",
       "intent": "Transform a widget's value at workflow-serialization time (dynamic prompts, hidden state, expand-on-save).",
       "notes": "widget.options.serialize===false widgets (e.g. control_after_generate) still occupy a widgets_values slot and still fire serializeValue — excluded only from the backend prompt by graphToPrompt(). Test triple must cover this case explicitly. PR #10392 widgets_values_named is the v2 migration path; WidgetHandle identity must be by name not position. See research/architecture/widget-serialization-historical-analysis.md.",
-      "member_pattern_ids": [
-        "S4.W3"
-      ],
+      "member_pattern_ids": ["S4.W3"],
       "usage_weight": 27.94,
       "exemplars": [
         {
@@ -397,10 +355,7 @@
       "name": "Per-node serialization interception",
       "intent": "Intercept node-level serialize/onSerialize to inject custom workflow JSON fields.",
       "notes": "Root cause: widgets_values is positional — prototype.serialize patchers consume/produce this array directly. Three index-drift sources: control_after_generate slot occupancy, extension-injected widgets, V3 IO.MultiType topology-dependent widget count. NaN→null pipeline produces silent corruption (backend crash is first visible symptom). Test triple must cover: (a) positional v1 compat, (b) named-map v2 round-trip parity, (c) null-in-numeric-widget logs warning + substitutes default. PR #11884 guard, PR #10392 named map. See research/architecture/widget-serialization-historical-analysis.md.",
-      "member_pattern_ids": [
-        "S2.N6",
-        "S2.N15"
-      ],
+      "member_pattern_ids": ["S2.N6", "S2.N15"],
       "usage_weight": 47.07,
       "exemplars": [
         {
@@ -427,9 +382,7 @@
       "category_id": "BC.14",
       "name": "Workflow → API serialization interception (graphToPrompt)",
       "intent": "Patch app.graphToPrompt to resolve virtual nodes, inject custom metadata, or rewrite the API payload before submit.",
-      "member_pattern_ids": [
-        "S6.A1"
-      ],
+      "member_pattern_ids": ["S6.A1"],
       "usage_weight": 46.66,
       "exemplars": [
         {
@@ -456,9 +409,7 @@
       "category_id": "BC.15",
       "name": "Workflow loading into the editor",
       "intent": "External/embed scenario where a workflow JSON is pushed into the running editor via app.loadGraphData.",
-      "member_pattern_ids": [
-        "S6.A2"
-      ],
+      "member_pattern_ids": ["S6.A2"],
       "usage_weight": 20.31,
       "exemplars": [
         {
@@ -485,9 +436,7 @@
       "category_id": "BC.16",
       "name": "Execution output consumption (per-node)",
       "intent": "Consume backend execution output on a specific node (text, JSON, image) to drive display.",
-      "member_pattern_ids": [
-        "S2.N2"
-      ],
+      "member_pattern_ids": ["S2.N2"],
       "usage_weight": 5.74,
       "exemplars": [
         {
@@ -514,11 +463,7 @@
       "category_id": "BC.17",
       "name": "Backend execution lifecycle and progress events",
       "intent": "Subscribe to api.addEventListener for execution_*, progress, status, and reconnecting events.",
-      "member_pattern_ids": [
-        "S5.A1",
-        "S5.A2",
-        "S5.A3"
-      ],
+      "member_pattern_ids": ["S5.A1", "S5.A2", "S5.A3"],
       "usage_weight": 51.25,
       "exemplars": [
         {
@@ -545,9 +490,7 @@
       "category_id": "BC.18",
       "name": "Backend HTTP calls",
       "intent": "Call ComfyAPI.fetchApi as the canonical authenticated path to backend HTTP endpoints.",
-      "member_pattern_ids": [
-        "S6.A3"
-      ],
+      "member_pattern_ids": ["S6.A3"],
       "usage_weight": 22.74,
       "exemplars": [
         {
@@ -574,9 +517,7 @@
       "category_id": "BC.19",
       "name": "Workflow execution trigger",
       "intent": "Trigger or intercept queuePrompt for sidebar Run buttons, auth tokens, or payload mutation.",
-      "member_pattern_ids": [
-        "S6.A4"
-      ],
+      "member_pattern_ids": ["S6.A4"],
       "usage_weight": 12.65,
       "exemplars": [
         {
@@ -603,11 +544,7 @@
       "category_id": "BC.20",
       "name": "Custom node-type registration (frontend-only / virtual)",
       "intent": "Register pure-frontend or fully virtual node types and mark them with isVirtualNode so the backend ignores them.",
-      "member_pattern_ids": [
-        "S1.H5",
-        "S1.H6",
-        "S8.P1"
-      ],
+      "member_pattern_ids": ["S1.H5", "S1.H6", "S8.P1"],
       "usage_weight": 27.49,
       "exemplars": [
         {
@@ -634,9 +571,7 @@
       "category_id": "BC.21",
       "name": "Custom widget-type registration",
       "intent": "Register new widget types (color picker, file uploader, custom inputs) via getCustomWidgets.",
-      "member_pattern_ids": [
-        "S1.H2"
-      ],
+      "member_pattern_ids": ["S1.H2"],
       "usage_weight": 7.17,
       "exemplars": [
         {
@@ -657,11 +592,7 @@
       "category_id": "BC.22",
       "name": "Context menu contributions (node and canvas)",
       "intent": "Contribute right-click menu items at both the node and canvas scope, including legacy prototype patches and the supported v1 hooks.",
-      "member_pattern_ids": [
-        "S2.N5",
-        "S1.H3",
-        "S1.H4"
-      ],
+      "member_pattern_ids": ["S2.N5", "S1.H3", "S1.H4"],
       "usage_weight": 19.53,
       "exemplars": [
         {
@@ -688,9 +619,7 @@
       "category_id": "BC.23",
       "name": "Node property bag mutations",
       "intent": "React to mutations of node.properties — the persistent property bag that survives serialization.",
-      "member_pattern_ids": [
-        "S2.N18"
-      ],
+      "member_pattern_ids": ["S2.N18"],
       "usage_weight": 14.42,
       "exemplars": [
         {
@@ -717,9 +646,7 @@
       "category_id": "BC.24",
       "name": "Node-def schema inspection",
       "intent": "Branch on ComfyNodeDef shape (input.required/optional/hidden, output, output_node, category) to drive UI.",
-      "member_pattern_ids": [
-        "S13.SC1"
-      ],
+      "member_pattern_ids": ["S13.SC1"],
       "usage_weight": 22.43,
       "exemplars": [
         {
@@ -746,9 +673,7 @@
       "category_id": "BC.25",
       "name": "Shell UI registration (commands, sidebars, toasts)",
       "intent": "Declarative shell-UI contributions through extensionManager / commandManager / sidebarTab / bottomPanel.",
-      "member_pattern_ids": [
-        "S12.UI1"
-      ],
+      "member_pattern_ids": ["S12.UI1"],
       "usage_weight": 10.98,
       "exemplars": [
         {
@@ -775,9 +700,7 @@
       "category_id": "BC.26",
       "name": "Globals as ABI (window.LiteGraph, window.comfyAPI)",
       "intent": "Reach into the global namespace for LiteGraph constructors/enums or the module-as-global comfyAPI registry.",
-      "member_pattern_ids": [
-        "S7.G1"
-      ],
+      "member_pattern_ids": ["S7.G1"],
       "usage_weight": 27.0,
       "exemplars": [
         {
@@ -804,12 +727,7 @@
       "category_id": "BC.27",
       "name": "LiteGraph entity direct manipulation (reroute, group, link, slot)",
       "intent": "Direct read/mutation of reroutes, groups, links, and slots — no public extension API exists today.",
-      "member_pattern_ids": [
-        "S9.R1",
-        "S9.G1",
-        "S9.L1",
-        "S9.S1"
-      ],
+      "member_pattern_ids": ["S9.R1", "S9.G1", "S9.L1", "S9.S1"],
       "usage_weight": 39.37,
       "exemplars": [
         {
@@ -836,9 +754,7 @@
       "category_id": "BC.28",
       "name": "Subgraph fan-out via set/get virtual nodes",
       "intent": "Fan out a single named value across the graph without explicit links (KJNodes-style Set/Get nodes).",
-      "member_pattern_ids": [
-        "S9.SG1"
-      ],
+      "member_pattern_ids": ["S9.SG1"],
       "usage_weight": 16.89,
       "exemplars": [
         {
@@ -865,10 +781,7 @@
       "category_id": "BC.29",
       "name": "Graph enumeration, mutation, and cross-scope identity",
       "intent": "Enumerate or mutate the node set (graph.add/remove/findNodesByType/serialize/configure) and resolve cross-subgraph references via NodeLocatorId / NodeExecutionId.",
-      "member_pattern_ids": [
-        "S11.G2",
-        "S14.ID1"
-      ],
+      "member_pattern_ids": ["S11.G2", "S14.ID1"],
       "usage_weight": 23.56,
       "exemplars": [
         {
@@ -895,11 +808,7 @@
       "category_id": "BC.30",
       "name": "Graph change tracking, batching, and reactivity flush",
       "intent": "Coordinate graph-level change: graph._version monotonic counter, beforeChange/afterChange batching, and the imperative setDirtyCanvas redraw flush.",
-      "member_pattern_ids": [
-        "S11.G1",
-        "S11.G3",
-        "S11.G4"
-      ],
+      "member_pattern_ids": ["S11.G1", "S11.G3", "S11.G4"],
       "usage_weight": 34.38,
       "exemplars": [
         {
@@ -926,12 +835,7 @@
       "category_id": "BC.31",
       "name": "DOM injection and style management",
       "intent": "Extensions add UI chrome, toolbars, and style overrides directly into the document outside any provided API — style tags into head, arbitrary elements into body, innerHTML rendering, and external script loading.",
-      "member_pattern_ids": [
-        "S16.DOM1",
-        "S16.DOM2",
-        "S16.DOM3",
-        "S16.DOM4"
-      ],
+      "member_pattern_ids": ["S16.DOM1", "S16.DOM2", "S16.DOM3", "S16.DOM4"],
       "usage_weight": 0.0,
       "notes": "usage_weight pending rollup-blast-radius.py re-run after database.yaml merge (I-N4.1). Notion counts: DOM1=354 occ, DOM2=364 occ, DOM3=443 occ, DOM4=232 occ across ~81 packages — among the highest raw occurrence counts in the entire dataset. v2 replacements: injectStyles(), addPanel(), addToolbarItem(), safe HTML rendering API.",
       "exemplars": [
@@ -959,9 +863,7 @@
       "category_id": "BC.32",
       "name": "Embedded framework runtimes and Vue widget bundling",
       "intent": "Extensions bundle their own copy of Vue (or another framework) inside a DOM widget, bypassing the host app instance and losing access to shared stores, i18n, and theme.",
-      "member_pattern_ids": [
-        "S16.VUE1"
-      ],
+      "member_pattern_ids": ["S16.VUE1"],
       "usage_weight": 0.0,
       "notes": "usage_weight pending rollup-blast-radius.py re-run. 9 packages confirmed (Notion §2.9). v2 replacement: registerVueWidget(nodeType, name, Component) sharing host Vue instance — already in plans/P1 §5 Custom widget type. This BC provides the evidence base for that P1 design decision.",
       "exemplars": [
@@ -983,9 +885,7 @@
       "category_id": "BC.33",
       "name": "Cross-extension DOM widget creation observation",
       "intent": "An extension observes when *any* DOM widget is created (by any other extension) so it can attach its own listeners — the mechanism the Autocomplete extension needs to wire its input handler to every text widget.",
-      "member_pattern_ids": [
-        "S4.W6"
-      ],
+      "member_pattern_ids": ["S4.W6"],
       "usage_weight": 0.0,
       "notes": "Identified from COM-3668. Distinct from BC.05 (creating DOM widgets) and BC.10 (subscribing to value changes). Gap: no v1 hook fires for cross-extension widget creation observation. v2 shape: onDOMWidgetCreated(handler) in defineExtension setup context. usage_weight pending blast-radius re-run.",
       "source": "notion-COM-3668",
@@ -1002,9 +902,7 @@
       "category_id": "BC.34",
       "name": "Settings-panel custom dialog integration",
       "intent": "Extensions open custom modal dialogs triggered from the settings panel, rather than injecting raw DOM.",
-      "member_pattern_ids": [
-        "S12.UI3"
-      ],
+      "member_pattern_ids": ["S12.UI3"],
       "usage_weight": 0.0,
       "notes": "Identified from COM-3668. Currently worked around via S16.DOM3 innerHTML injection. Distinct from S12.UI1 (sidebar/command registration) — this is about dialog lifecycle tied to settings entries. v2 shape: app.ui.openDialog(Component) or settings entry type 'dialog-trigger'. usage_weight pending blast-radius re-run.",
       "source": "notion-COM-3668",
@@ -1021,9 +919,7 @@
       "category_id": "BC.35",
       "name": "Pre-queue widget validation",
       "intent": "Validate widget values before a workflow is submitted and surface typed errors to the user — rejecting the queue rather than silently mutating or failing.",
-      "member_pattern_ids": [
-        "S6.A5"
-      ],
+      "member_pattern_ids": ["S6.A5"],
       "usage_weight": 0.0,
       "notes": "Identified from COM-3668. Currently worked around via S6.A4 queuePrompt monkey-patching (silent_breakage=true when multiple extensions patch). Distinct from D5 beforeSerialize (transforms values) and BC.19 (triggers execution). v2 needs explicit beforeQueue event with event.reject(message). usage_weight pending re-run.",
       "source": "notion-COM-3668",
@@ -1040,11 +936,7 @@
       "category_id": "BC.36",
       "name": "PrimeVue widget component API surface",
       "intent": "Custom node authors configuring widget behavior via per-component prop subsets — the v2 replacement for direct widget.options mutation (S4.W4, S4.W1) and DOM widget construction (S4.W5, S4.W6). 15 PrimeVue components are the authoritative widget-kind enumeration for v2.",
-      "member_pattern_ids": [
-        "S4.W1",
-        "S4.W4",
-        "S4.W5"
-      ],
+      "member_pattern_ids": ["S4.W1", "S4.W4", "S4.W5"],
       "notes": "Source: Notion page \"Widget Component APIs\" (2026-05-08). 15 components: Button, InputText, Select, ColorPicker, MultiSelect, SelectButton, Slider, Textarea, ToggleSwitch, Chart, Image, ImageCompare, Galleria, FileUpload, TreeSelect. Exclusion rule (Pablo): strip style/class/dt/pt/*Class/*Style. ToggleSwitch is the only component with completed Pick<> types so far (WIP). Informs: D7 typed options bags (future pivot), I-TF.2 widget-kind test triples, PKG2 WidgetHandle.getOption key surface. disabled/readonly map to D7 first-class fields, not options bag.",
       "usage_weight": 0.0,
       "exemplars": [
@@ -1060,9 +952,7 @@
       "category_id": "BC.37",
       "name": "VueNode bridge timing — deferred mount access",
       "intent": "Extensions that register in nodeCreated but need to access Vue-component-backed state (Three.js renderer, DOM widget, ComponentWidgetImpl value) must defer until the Vue component's onMounted fires. The v1 pattern is waitForLoad3d(node, cb); the v2 pattern is onNodeMounted(() => { ... }) inside defineNodeExtension.",
-      "member_pattern_ids": [
-        "S4.W5"
-      ],
+      "member_pattern_ids": ["S4.W5"],
       "notes": "Source: Notion Frontend Architecture page 3536d73d (2026-05-08). nodeCreated gives the LiteGraph node; the VueNode Vue component has NOT mounted yet. waitForLoad3d in src/extensions/core/Load3D is the canonical v1 fixture. ComponentWidgetImpl dual-identity: LiteGraph side (value/callback/name) vs Vue side (props/emits/lifecycle). v2 contract: onNodeMounted() hook fires after Vue component mount — this is the correct timing for accessing VueNode-backed resources. Informs: I-SR.2.B2 (NodeInstanceScope must not sync-access VueNode at setup time), I-TF.3.C1 (harness must simulate two-phase mount), I-TF.2 test triple for BC.37. D8 relevance: app.rootGraph is not reactive (confirmed by this doc) — the exact gap D8 solves.",
       "usage_weight": 0.0,
       "source": "notion-frontend-architecture-3536d73d",
@@ -1079,9 +969,7 @@
       "category_id": "BC.38",
       "name": "Canvas mode observation",
       "intent": "Detect and react to ComfyUI canvas mode transitions (graph / app / builder:inputs / builder:outputs / builder:arrange). Custom nodes that adapt rendering, widget resize behavior, or read-only state across modes need a stable event — not polling or heuristics against internal Pinia store state.",
-      "member_pattern_ids": [
-        "S17.AM1"
-      ],
+      "member_pattern_ids": ["S17.AM1"],
       "mechanism": "absent-api",
       "notes": "appModeStore is a Pinia composable; JS extensions cannot use Vue composables. v2 gap: no node.on('canvasModeChanged') exists yet in node.ts — distinct from NodeModeChangedEvent (execution mode only). v2 contract: app-level or node-level canvasModeChanged event. Flagged: Terry DX walkthrough A.1. Informs: node.ts overloads (add canvasModeChanged or document as known gap), I-TF.2 test triple for BC.38.",
       "usage_weight": 0.0,
@@ -1099,9 +987,7 @@
       "category_id": "BC.39",
       "name": "Subgraph boundary event propagation",
       "intent": "Custom node callbacks (onExecuted, MatchType, autogrow onConnectionsChange, promoted widget callbacks) that must propagate across subgraph boundaries. Four distinct silent-failure modes when custom nodes are placed inside subgraphs.",
-      "member_pattern_ids": [
-        "S17.SB1"
-      ],
+      "member_pattern_ids": ["S17.SB1"],
       "mechanism": "absent-api",
       "notes": "Requires D9 Phase B (post-Alex rebase on #11939). ECS substrate must forward SubgraphNode execution events from internal nodes. MatchType and autogrow propagation require subgraph boundary awareness in World dispatcher. Blocked: I-PG.B1. Short-term: @experimental on affected NodeHandle events; subgraphCompatible flag in NodeExtensionOptions. Intersects: ADR 0006 (I-NEW.1), Austin's fix-linked-widget-promotion. Flagged: Terry DX walkthrough A.2.",
       "usage_weight": 0.0,
@@ -1119,9 +1005,7 @@
       "category_id": "BC.40",
       "name": "File upload and asset URL construction",
       "intent": "Upload files to ComfyUI backend and construct retrieval URLs. 32+ packages duplicate this pattern from scratch — FormData construction, fetchApi('/upload/image'), /view?filename URL assembly. A helper API would collapse this to comfyAPI.uploadFile() + comfyAPI.getFileUrl().",
-      "member_pattern_ids": [
-        "S17.FA1"
-      ],
+      "member_pattern_ids": ["S17.FA1"],
       "mechanism": "absent-api",
       "notes": "Out of scope for @comfyorg/extension-api (node extension surface). Belongs in future @comfyorg/comfy-api package. 32+ packages affected; 9 implement video upload variants. Upload timeout hardcoded 120s; large 3D/video fail silently. No temp file lifecycle. Document as known gap in src/extension-api/README.md. Flagged: Terry DX walkthrough A.3.",
       "usage_weight": 0.0,
@@ -1139,9 +1023,7 @@
       "category_id": "BC.41",
       "name": "Widget values positional serialization fragility",
       "intent": "Widget values serialized as positional array [v1, v2, v3] instead of named dict. Any input definition change (add, reorder, rename, remove, required→optional) silently misaligns values when loading existing workflows. Root cause of #1 user complaint: \"my workflow broke after I updated the custom node.\"",
-      "member_pattern_ids": [
-        "S17.WV1"
-      ],
+      "member_pattern_ids": ["S17.WV1"],
       "mechanism": "positional-array",
       "notes": "Blocked on workflow-schema-migration (out of v2 surface scope). D7 Part 4 (4→2 serialization collapse) + beforeSerialize as partial mitigation. Long-term fix: named dict format { widgetName: value } — breaking JSON schema change requiring versioning + migrateWidgetValues() callback. PR #10392 added widgets_values_named opt-in; PR #11884 null guard. v2 contract: name-keyed identity (WidgetHandle by name not position). Intersects: ADR 0006, widget-serialization-historical-analysis.md, Austin's work. Flagged: Terry DX walkthrough A.4.",
       "usage_weight": 0.0,

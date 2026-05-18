@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRouter, type RouteLocationRaw } from "vue-router";
-import { useHead } from "@unhead/vue";
+import type { RouteLocationRaw } from 'vue-router'
+import { useHead } from '@unhead/vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { useDataStore } from "@/stores/data";
+import { useDataStore } from '@/stores/data'
 
 useHead({
-  title: "Overview - ComfyUI Frontend Ecosystem",
-});
+  title: 'Overview - ComfyUI Frontend Ecosystem'
+})
 
 /**
  * Overview — top-level dashboard.
@@ -15,8 +16,8 @@ useHead({
  * Hero numbers + top-12 patterns by blast_radius. The "executive summary"
  * for everyone landing on the ecosystem dashboard.
  */
-const data = useDataStore();
-const router = useRouter();
+const data = useDataStore()
+const router = useRouter()
 
 /**
  * Defensive named-route helper for pattern-detail links.
@@ -27,25 +28,25 @@ const router = useRouter();
  * loudly in dev rather than 404'ing silently.
  */
 function patternRoute(patternId: string): RouteLocationRaw {
-  if (router.hasRoute("pattern-detail")) {
-    return { name: "pattern-detail", params: { id: patternId } };
+  if (router.hasRoute('pattern-detail')) {
+    return { name: 'pattern-detail', params: { id: patternId } }
   }
   if (import.meta.env.DEV) {
     console.warn(
-      `[Overview] route "pattern-detail" not registered; falling back to /patterns/${patternId}`,
-    );
+      `[Overview] route "pattern-detail" not registered; falling back to /patterns/${patternId}`
+    )
   }
-  return `/patterns/${patternId}`;
+  return `/patterns/${patternId}`
 }
 
 const heroStats = computed(() => [
-  { label: "patterns", value: data.patterns.length },
-  { label: "evidence rows", value: data.totalEvidenceCount },
-  { label: "behavior categories", value: data.behaviorCategories.length },
-  { label: "starred packs", value: data.starredPacks.length },
-]);
+  { label: 'patterns', value: data.patterns.length },
+  { label: 'evidence rows', value: data.totalEvidenceCount },
+  { label: 'behavior categories', value: data.behaviorCategories.length },
+  { label: 'starred packs', value: data.starredPacks.length }
+])
 
-const topPatterns = computed(() => data.topByBlastRadius(12));
+const topPatterns = computed(() => data.topByBlastRadius(12))
 
 /**
  * Per-pattern evidence count, looked up from the loaded patterns array.
@@ -53,9 +54,9 @@ const topPatterns = computed(() => data.topByBlastRadius(12));
  * back-filled with evidence rows during a sweep-in-progress.
  */
 function evidenceCount(patternId: string): number {
-  const p = data.getPattern(patternId);
-  if (p && p.evidence.length > 0) return p.evidence.length;
-  return data.getRollup(patternId)?.occurrences ?? 0;
+  const p = data.getPattern(patternId)
+  if (p && p.evidence.length > 0) return p.evidence.length
+  return data.getRollup(patternId)?.occurrences ?? 0
 }
 
 /**
@@ -64,17 +65,17 @@ function evidenceCount(patternId: string): number {
  * when available; fall back to the rollup name.
  */
 function describe(patternId: string, fallback: string): string {
-  return data.getPattern(patternId)?.semantic?.trim() || fallback;
+  return data.getPattern(patternId)?.semantic?.trim() || fallback
 }
 
 const yamlMtime = computed(() => {
-  const mtimes = Object.values(__BUILD_INFO__.yaml).filter(Boolean);
-  if (mtimes.length === 0) return "unknown";
+  const mtimes = Object.values(__BUILD_INFO__.yaml).filter(Boolean)
+  if (mtimes.length === 0) return 'unknown'
   // Most recent yaml mtime — that's "how fresh is the data".
-  return mtimes.sort().at(-1) ?? "unknown";
-});
+  return mtimes.sort().at(-1) ?? 'unknown'
+})
 
-const commitSha = computed(() => __BUILD_INFO__.commitSha || "unknown");
+const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
 </script>
 
 <template>
@@ -87,9 +88,7 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || "unknown");
           <dt class="text-sm text-zinc-500 dark:text-zinc-400">
             {{ stat.label }}
           </dt>
-          <dd
-            class="text-5xl font-light text-zinc-900 dark:text-zinc-100 tabular-nums md:text-6xl"
-          >
+          <dd class="text-5xl font-light text-zinc-900 dark:text-zinc-100 tabular-nums md:text-6xl">
             {{ stat.value.toLocaleString() }}
           </dd>
         </div>
@@ -111,18 +110,13 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || "unknown");
               <th scope="col" class="py-2 pr-4 font-normal w-8">#</th>
               <th scope="col" class="py-2 pr-4 font-normal">pattern</th>
               <th scope="col" class="py-2 pr-4 font-normal">description</th>
-              <th scope="col" class="py-2 pr-4 font-normal text-right">
-                blast
-              </th>
+              <th scope="col" class="py-2 pr-4 font-normal text-right">blast</th>
               <th scope="col" class="py-2 font-normal text-right">evidence</th>
             </tr>
           </thead>
           <tbody>
             <tr v-if="topPatterns.length === 0">
-              <td
-                colspan="5"
-                class="py-4 text-center text-zinc-500 dark:text-zinc-400"
-              >
+              <td colspan="5" class="py-4 text-center text-zinc-500 dark:text-zinc-400">
                 No patterns yet.
               </td>
             </tr>
