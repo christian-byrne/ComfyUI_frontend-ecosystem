@@ -4,7 +4,8 @@ import path from 'node:path'
 
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig, type PluginOption } from 'vite'
 
 /**
  * Best-effort build-info: yaml source mtimes + current git sha.
@@ -41,8 +42,21 @@ const buildInfo = {
   }
 }
 
+const plugins: PluginOption[] = [vue(), tailwindcss()]
+
+if (process.env.ANALYZE) {
+  plugins.push(
+    visualizer({
+      filename: 'dist/stats.html',
+      open: true,
+      gzipSize: true,
+      brotliSize: true
+    })
+  )
+}
+
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
+  plugins,
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
@@ -50,6 +64,17 @@ export default defineConfig({
   },
   define: {
     __BUILD_INFO__: JSON.stringify(buildInfo)
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Code-split large dependencies for smaller initial bundle
+          shiki: ['shiki'],
+          'litegraph-audit': ['./src/data/litegraph-audit.json']
+        }
+      }
+    }
   },
   test: {
     environment: 'happy-dom',
