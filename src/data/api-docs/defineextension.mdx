@@ -1,69 +1,21 @@
 ---
-title: 'defineExtension'
-description: 'Register an app-scoped extension for init, setup, and shell UI contributions.'
-icon: 'code'
+title: "defineExtension"
+description: "Register an app-scoped extension for init, setup, and shell UI contributions."
+icon: "code"
 ---
 
 ```ts
-function defineExtension(options: ExtensionOptions): ExtensionOptions
+function defineExtension(options): ExtensionOptions;
 ```
 
-Defined in: [src/services/extension-api-service.ts:722](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/services/extension-api-service.ts#L722)
-
-Register an app-wide extension with lifecycle hooks and shell UI contributions.
-Use this for global initialization, registering commands, sidebar tabs, and bottom panels.
-
-## Type Signature
-
-```ts
-interface ExtensionOptions {
-  /** Globally unique extension name, e.g. 'my-org.my-extension' */
-  name: string
-
-  /**
-   * Runs once during app initialization (after mount, before first workflow).
-   * Equivalent to v1 `ComfyExtension.init`.
-   */
-  init?(): void | Promise<void>
-
-  /**
-   * Runs once after app and all core extensions are initialized.
-   * Safe to call shell UI registration APIs here.
-   * Equivalent to v1 `ComfyExtension.setup`.
-   */
-  setup?(): void | Promise<void>
-}
-```
-
-## Usage Example
-
-```ts
-import { defineExtension } from '@comfyorg/extension-api'
-
-export default defineExtension({
-  name: 'my-org.my-extension',
-
-  // Early initialization — app mounted but no workflow yet
-  async init() {
-    console.log('Extension initializing...')
-  },
-
-  // App ready — register commands, sidebar tabs, bottom panels
-  async setup() {
-    // Register commands via CommandManager
-    // Add sidebar tabs via ExtensionManager
-    // Configure bottom panels
-    console.log('Extension setup complete')
-  }
-})
-```
+Defined in: [src/services/extension-api-service.ts:756](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/services/extension-api-service.ts#L756)
 
 ## Parameters
 
-| Parameter | Type                                     | Description                                           |
-| --------- | ---------------------------------------- | ----------------------------------------------------- |
-| `options` | [`ExtensionOptions`](./extensionoptions) | Extension configuration with name and lifecycle hooks |
+| Parameter | Type |
+| ------ | ------ |
+| `options` | [`ExtensionOptions`](./extensionoptions) |
 
 ## Returns
 
-[`ExtensionOptions`](./extensionoptions) — The same options object (branded for loader identification)
+[`ExtensionOptions`](./extensionoptions)

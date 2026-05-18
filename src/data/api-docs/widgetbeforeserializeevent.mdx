@@ -1,9 +1,9 @@
 ---
-title: 'WidgetBeforeSerializeEvent'
-description: 'Pre-serialization hook payload — override or skip widget value.'
+title: "WidgetBeforeSerializeEvent"
+description: "Pre-serialization hook payload — override or skip widget value."
 ---
 
-Defined in: [src/extension-api/widget.ts:141](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L141)
+Defined in: [src/extension-api/widget.ts:142](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L142)
 
 Payload for `widget.on('beforeSerialize', handler)`.
 
@@ -40,16 +40,16 @@ widget.on('beforeSerialize', async (e) => {
 
 ## Type Parameters
 
-| Type Parameter | Default type                   | Description              |
-| -------------- | ------------------------------ | ------------------------ |
-| `T`            | [`WidgetValue`](./widgetvalue) | The widget's value type. |
+| Type Parameter | Default type | Description |
+| ------ | ------ | ------ |
+| `T` | [`WidgetValue`](./widgetvalue) | The widget's value type. |
 
 ## Properties
 
-| Property                       | Modifier   | Type                                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ------------------------------ | ---------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
 | <a id="context"></a> `context` | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this handler. - `'workflow'` — user is saving the workflow to disk (full round-trip). - `'prompt'` — user is queueing a run (only prompt-relevant data sent to backend). - `'clone'` — a copy/paste is happening; the framework already populated the cloned entity's widget value from the source. Override only if the clone should differ from the source. - `'subgraph-promote'` — the widget is being promoted to a subgraph IO slot. |
-| <a id="value"></a> `value`     | `readonly` | `T`                                                             | The widget's current value at the time of serialization (before any override). Equivalent to calling `widget.getValue()`.                                                                                                                                                                                                                                                                                                                                                     |
+| <a id="value"></a> `value` | `readonly` | `T` | The widget's current value at the time of serialization (before any override). Equivalent to calling `widget.getValue()`. |
 
 ## Methods
 
@@ -59,7 +59,7 @@ widget.on('beforeSerialize', async (e) => {
 setSerializedValue(v): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:167](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L167)
+Defined in: [src/extension-api/widget.ts:168](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L168)
 
 Override the serialized value. The provided value is written to
 `widgets_values[i]` (and to the API prompt for `context='prompt'`).
@@ -67,15 +67,15 @@ Calling this multiple times keeps the last call's value.
 
 #### Parameters
 
-| Parameter | Type      | Description                                        |
-| --------- | --------- | -------------------------------------------------- |
-| `v`       | `unknown` | The value to serialize. Must be JSON-serializable. |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `v` | `unknown` | The value to serialize. Must be JSON-serializable. |
 
 #### Returns
 
 `void`
 
----
+***
 
 ### skip()
 
@@ -83,7 +83,7 @@ Calling this multiple times keeps the last call's value.
 skip(): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:174](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L174)
+Defined in: [src/extension-api/widget.ts:175](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L175)
 
 Exclude this widget from the API prompt entirely.
 Only meaningful for `context='prompt'`; no-ops on other contexts.

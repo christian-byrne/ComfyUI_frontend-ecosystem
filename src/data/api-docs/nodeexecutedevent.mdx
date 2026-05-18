@@ -1,9 +1,9 @@
 ---
-title: 'NodeExecutedEvent'
-description: 'Payload fired when a node finishes execution.'
+title: "NodeExecutedEvent"
+description: "Payload fired when a node finishes execution."
 ---
 
-Defined in: [src/extension-api/node.ts:112](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/node.ts#L112)
+Defined in: [src/extension-api/node.ts:120](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L120)
 
 Payload for `node.on('executed', handler)`.
 
@@ -18,6 +18,6 @@ node.on('executed', (e) => {
 
 ## Properties
 
-| Property                     | Modifier   | Type                            | Description                                                            |
-| ---------------------------- | ---------- | ------------------------------- | ---------------------------------------------------------------------- |
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
 | <a id="output"></a> `output` | `readonly` | `Record`\<`string`, `unknown`\> | The backend execution output for this node. Shape varies by node type. |

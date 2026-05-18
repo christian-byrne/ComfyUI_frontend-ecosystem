@@ -1,10 +1,10 @@
 ---
-title: 'WidgetHandle'
-description: 'Controlled access to widget state, mutations, and events.'
-icon: 'sliders'
+title: "WidgetHandle"
+description: "Controlled access to widget state, mutations, and events."
+icon: "sliders"
 ---
 
-Defined in: [src/extension-api/widget.ts:246](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L246)
+Defined in: [src/extension-api/widget.ts:247](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L247)
 
 Controlled surface for widget access. Backed by ECS `WidgetValue` and
 `WidgetIdentity` components in the World. Reads query components directly;
@@ -31,18 +31,20 @@ export default defineNode({
 
 ## Type Parameters
 
-| Type Parameter | Default type                   | Description                                                         |
-| -------------- | ------------------------------ | ------------------------------------------------------------------- |
-| `T`            | [`WidgetValue`](./widgetvalue) | The type of `getValue()` / `setValue()`. Defaults to `WidgetValue`. |
+| Type Parameter | Default type | Description |
+| ------ | ------ | ------ |
+| `T` | [`WidgetValue`](./widgetvalue) | The type of `getValue()` / `setValue()`. Defaults to `WidgetValue`. |
 
 ## Properties
 
-| Property                             | Modifier   | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------ | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a id="id"></a> `id`                 | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
-| <a id="label"></a> `label`           | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). To override at construction, pass `label` to `addWidget()` options.                                                                                                                                                                                                                                  |
-| <a id="name"></a> `name`             | `readonly` | `string` | The widget's name as registered in `INPUT_TYPES` or `addWidget`. Stable for the lifetime of the node; never changes after creation.                                                                                                                                                                                                                                                                                                         |
-| <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation.                                                                                                                                                                                                                                                                                                                          |
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
+| <a id="label"></a> `label` | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). To override at construction, pass `label` to `addWidget()` options. |
+| <a id="name"></a> `name` | `readonly` | `string` | The widget's name as registered in `INPUT_TYPES` or `addWidget`. Stable for the lifetime of the node; never changes after creation. |
+| <a id="options"></a> `options` | `readonly` | `Readonly`\<[`WidgetOptions`](./widgetoptions)\> | Read-only snapshot of the full options bag for this widget. **Immutable per D-immutability-enforcement (Hybrid C).** The returned object is `Readonly<WidgetOptions>` — `widget.options.min = 0`, `widget.options = {...}`, and `widget.options.values = [...]` all raise TypeScript errors at compile time. To mutate, use [WidgetHandle.setOption](#setoption) per-key. Note: this is an accessor pair on the v2 surface. Reading is free; the setter intentionally does not exist on the public type. v1 patterns like `widget.options.serialize = false` should migrate to [WidgetHandle.setSerializeEnabled](#setserializeenabled); `widget.options.values = [...]` (combo refresh) migrates to a future `setValues` mutator (tracked under W6.P8.UNMIGRATABLE). **Example** `// ❌ TS-ERR — every option write raises a compile-time error widget.options.min = 0 widget.options = { min: 0, max: 100 } widget.options.serialize = false // ✅ Read freely const min = widget.options.min ?? 0 // ✅ Mutate via typed setters widget.setOption('min', 0) widget.setSerializeEnabled(false)` |
+| <a id="serializevalue"></a> ~~`serializeValue`~~ | `readonly` | ((...`args`) => `unknown`) \| `undefined` | The widget's current `serializeValue` function (or `undefined` if none is registered). **Accessor-only per D-immutability-enforcement (Hybrid C).** The setter intentionally does not exist on the public type — assignment (`widget.serializeValue = fn`) raises a TypeScript error. The v2 migration target is the [\`on('beforeSerialize', fn)\`](#on) event (per D5), which is typed, async-capable, and composable across multiple extensions on the same widget. **Deprecated** v1 callers reading `widget.serializeValue` to invoke the function directly should subscribe to `'beforeSerialize'` instead. This read-only accessor exists for debugging / introspection only and may be removed once the v1 surface is fully retired. **Example** `// ❌ TS-ERR — direct assignment no longer compiles widget.serializeValue = () => 'static value' // ✅ Subscribe to the typed event (D5) widget.on('beforeSerialize', (e) => { if (e.context === 'prompt') e.setSerializedValue('static value') })` **Stability** experimental |
+| <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation. |
 
 ## Methods
 
@@ -52,7 +54,7 @@ export default defineNode({
 equals(other): boolean;
 ```
 
-Defined in: [src/extension-api/widget.ts:268](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L268)
+Defined in: [src/extension-api/widget.ts:269](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L269)
 
 Returns `true` if `other` represents the same widget entity as this
 one. Equivalent to `this.id === other.id` but the canonical comparator
@@ -61,15 +63,15 @@ the identity scheme remain transparent.
 
 #### Parameters
 
-| Parameter | Type           |
-| --------- | -------------- |
-| `other`   | `WidgetHandle` |
+| Parameter | Type |
+| ------ | ------ |
+| `other` | `WidgetHandle` |
 
 #### Returns
 
 `boolean`
 
----
+***
 
 ### getOption()
 
@@ -77,7 +79,7 @@ the identity scheme remain transparent.
 getOption<K>(key): K | undefined;
 ```
 
-Defined in: [src/extension-api/widget.ts:397](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L397)
+Defined in: [src/extension-api/widget.ts:434](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L434)
 
 Returns the per-instance override for `key`, or the class-default value
 from `INPUT_TYPES` if no override has been set, or `undefined` if the key
@@ -89,14 +91,14 @@ Type-specific option names: `min`, `max`, `step` (INT/FLOAT); `multiline`,
 #### Type Parameters
 
 | Type Parameter | Default type |
-| -------------- | ------------ |
-| `K`            | `unknown`    |
+| ------ | ------ |
+| `K` | `unknown` |
 
 #### Parameters
 
-| Parameter | Type     |
-| --------- | -------- |
-| `key`     | `string` |
+| Parameter | Type |
+| ------ | ------ |
+| `key` | `string` |
 
 #### Returns
 
@@ -108,7 +110,7 @@ Type-specific option names: `min`, `max`, `step` (INT/FLOAT); `multiline`,
 const min = widget.getOption<number>('min') ?? 0
 ```
 
----
+***
 
 ### getValue()
 
@@ -116,7 +118,7 @@ const min = widget.getOption<number>('min') ?? 0
 getValue(): T;
 ```
 
-Defined in: [src/extension-api/widget.ts:295](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L295)
+Defined in: [src/extension-api/widget.ts:296](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L296)
 
 Returns the widget's current user-edited value.
 
@@ -130,7 +132,7 @@ Returns the widget's current user-edited value.
 const steps = node.getWidget('steps')!.getValue<number>()
 ```
 
----
+***
 
 ### isDisabled()
 
@@ -138,7 +140,7 @@ const steps = node.getWidget('steps')!.getValue<number>()
 isDisabled(): boolean;
 ```
 
-Defined in: [src/extension-api/widget.ts:330](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L330)
+Defined in: [src/extension-api/widget.ts:331](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L331)
 
 Returns `true` if the widget is disabled (read-only in the UI).
 
@@ -146,7 +148,7 @@ Returns `true` if the widget is disabled (read-only in the UI).
 
 `boolean`
 
----
+***
 
 ### isHidden()
 
@@ -154,7 +156,7 @@ Returns `true` if the widget is disabled (read-only in the UI).
 isHidden(): boolean;
 ```
 
-Defined in: [src/extension-api/widget.ts:310](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L310)
+Defined in: [src/extension-api/widget.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L311)
 
 Returns `true` if the widget is currently hidden from the node UI.
 
@@ -162,7 +164,7 @@ Returns `true` if the widget is currently hidden from the node UI.
 
 `boolean`
 
----
+***
 
 ### isSerializeEnabled()
 
@@ -170,7 +172,7 @@ Returns `true` if the widget is currently hidden from the node UI.
 isSerializeEnabled(): boolean;
 ```
 
-Defined in: [src/extension-api/widget.ts:371](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L371)
+Defined in: [src/extension-api/widget.ts:375](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L375)
 
 Returns `true` if this widget is included in workflow and prompt
 serialization. Defaults to `true` for all widget types.
@@ -179,7 +181,7 @@ serialization. Defaults to `true` for all widget types.
 
 `boolean`
 
----
+***
 
 ### on()
 
@@ -189,7 +191,7 @@ serialization. Defaults to `true` for all widget types.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:425](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L425)
+Defined in: [src/extension-api/widget.ts:495](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L495)
 
 Subscribe to the widget's value changes.
 
@@ -198,9 +200,9 @@ Fires synchronously after the value is committed.
 
 ##### Parameters
 
-| Parameter | Type                                                                                  |
-| --------- | ------------------------------------------------------------------------------------- |
-| `event`   | `"valueChange"`                                                                       |
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `"valueChange"` |
 | `handler` | [`Handler`](./handler)\<[`WidgetValueChangeEvent`](./widgetvaluechangeevent)\<`T`\>\> |
 
 ##### Returns
@@ -215,7 +217,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:439](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L439)
+Defined in: [src/extension-api/widget.ts:509](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L509)
 
 Subscribe to type-specific option mutations (`setOption(key, value)`).
 
@@ -224,9 +226,9 @@ Does NOT fire for value changes or first-class field changes.
 
 ##### Parameters
 
-| Parameter | Type                                                                             |
-| --------- | -------------------------------------------------------------------------------- |
-| `event`   | `"optionChange"`                                                                 |
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `"optionChange"` |
 | `handler` | [`Handler`](./handler)\<[`WidgetOptionChangeEvent`](./widgetoptionchangeevent)\> |
 
 ##### Returns
@@ -245,7 +247,7 @@ experimental
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:454](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L454)
+Defined in: [src/extension-api/widget.ts:524](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L524)
 
 Subscribe to first-class property mutations (`setHidden`, `setDisabled`,
 `setSerializeEnabled`).
@@ -255,9 +257,9 @@ Does NOT fire for `setValue` (use `valueChange`) or options-bag mutations
 
 ##### Parameters
 
-| Parameter | Type                                                                                 |
-| --------- | ------------------------------------------------------------------------------------ |
-| `event`   | `"propertyChange"`                                                                   |
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `"propertyChange"` |
 | `handler` | [`Handler`](./handler)\<[`WidgetPropertyChangeEvent`](./widgetpropertychangeevent)\> |
 
 ##### Returns
@@ -276,7 +278,7 @@ experimental
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:468](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L468)
+Defined in: [src/extension-api/widget.ts:538](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L538)
 
 Subscribe to widget serialization. The only async-allowed event.
 
@@ -286,9 +288,9 @@ the serialization payload is sent.
 
 ##### Parameters
 
-| Parameter | Type                                                                                                    |
-| --------- | ------------------------------------------------------------------------------------------------------- |
-| `event`   | `"beforeSerialize"`                                                                                     |
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `"beforeSerialize"` |
 | `handler` | [`AsyncHandler`](./asynchandler)\<[`WidgetBeforeSerializeEvent`](./widgetbeforeserializeevent)\<`T`\>\> |
 
 ##### Returns
@@ -303,7 +305,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:485](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L485)
+Defined in: [src/extension-api/widget.ts:555](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L555)
 
 Subscribe to pre-queue validation. Fires before `graphToPrompt` runs.
 
@@ -315,9 +317,9 @@ Handlers are sync-only — use for validation logic only, not I/O.
 
 ##### Parameters
 
-| Parameter | Type                                                                           |
-| --------- | ------------------------------------------------------------------------------ |
-| `event`   | `"beforeQueue"`                                                                |
+| Parameter | Type |
+| ------ | ------ |
+| `event` | `"beforeQueue"` |
 | `handler` | [`Handler`](./handler)\<[`WidgetBeforeQueueEvent`](./widgetbeforequeueevent)\> |
 
 ##### Returns
@@ -330,7 +332,7 @@ A cleanup function to remove the listener.
 
 experimental
 
----
+***
 
 ### setDisabled()
 
@@ -338,21 +340,21 @@ experimental
 setDisabled(disabled): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:336](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L336)
+Defined in: [src/extension-api/widget.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L337)
 
 Enable or disable the widget.
 
 #### Parameters
 
-| Parameter  | Type      |
-| ---------- | --------- |
+| Parameter | Type |
+| ------ | ------ |
 | `disabled` | `boolean` |
 
 #### Returns
 
 `void`
 
----
+***
 
 ### setHeight()
 
@@ -360,21 +362,24 @@ Enable or disable the widget.
 setHeight(px): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:362](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L362)
+Defined in: [src/extension-api/widget.ts:366](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L366)
 
-Updates the reserved height for this DOM widget and triggers a node relayout.
+Updates the reserved height for this widget and triggers a node relayout.
 
-Only meaningful for widgets registered via `NodeHandle.addDOMWidget()`.
-For non-DOM widgets this is a no-op.
+Meaningful for widgets registered via [defineWidget](./definewidget) with a
+[WidgetMountFn](./widgetmountfn) `mount()` body — the reserved height bounds the
+runtime-owned host `<div>` that the mount body renders into. For widgets
+that render through the native widget renderer (no `mount`), this is a
+no-op.
 
 Replaces the v1 pattern of re-assigning `node.computeSize` to return a new
 height whenever the embedded element resizes.
 
 #### Parameters
 
-| Parameter | Type     | Description                    |
-| --------- | -------- | ------------------------------ |
-| `px`      | `number` | New reserved height in pixels. |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `px` | `number` | New reserved height in pixels. |
 
 #### Returns
 
@@ -384,7 +389,7 @@ height whenever the embedded element resizes.
 
 experimental
 
----
+***
 
 ### setHidden()
 
@@ -392,15 +397,15 @@ experimental
 setHidden(hidden): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:322](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L322)
+Defined in: [src/extension-api/widget.ts:323](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L323)
 
 Show or hide the widget. Dispatches a `SetWidgetHidden` command.
 
 #### Parameters
 
-| Parameter | Type      |
-| --------- | --------- |
-| `hidden`  | `boolean` |
+| Parameter | Type |
+| ------ | ------ |
+| `hidden` | `boolean` |
 
 #### Returns
 
@@ -414,7 +419,7 @@ toggle.on('valueChange', (e) => {
 })
 ```
 
----
+***
 
 ### setOption()
 
@@ -422,7 +427,7 @@ toggle.on('valueChange', (e) => {
 setOption(key, value): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:413](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L413)
+Defined in: [src/extension-api/widget.ts:450](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L450)
 
 Set a per-instance option override. Persisted as a `widget_options` sidecar
 in the workflow JSON (additive, backward-compatible). Does not change the
@@ -431,10 +436,10 @@ backend prompt schema unless the extension explicitly opts in via
 
 #### Parameters
 
-| Parameter | Type      |
-| --------- | --------- |
-| `key`     | `string`  |
-| `value`   | `unknown` |
+| Parameter | Type |
+| ------ | ------ |
+| `key` | `string` |
+| `value` | `unknown` |
 
 #### Returns
 
@@ -449,7 +454,7 @@ widget.setOption('max', 100)
 widget.setOption('step', 1)
 ```
 
----
+***
 
 ### setSerializeEnabled()
 
@@ -457,7 +462,7 @@ widget.setOption('step', 1)
 setSerializeEnabled(enabled): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:380](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L380)
+Defined in: [src/extension-api/widget.ts:384](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L384)
 
 Enable or disable serialization for this widget. When disabled, the widget
 is excluded from both `widgets_values` in the workflow JSON and the API
@@ -466,15 +471,15 @@ pattern.
 
 #### Parameters
 
-| Parameter | Type      |
-| --------- | --------- |
+| Parameter | Type |
+| ------ | ------ |
 | `enabled` | `boolean` |
 
 #### Returns
 
 `void`
 
----
+***
 
 ### setValue()
 
@@ -482,7 +487,7 @@ pattern.
 setValue(value): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:302](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/extension-api/widget.ts#L302)
+Defined in: [src/extension-api/widget.ts:303](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L303)
 
 Sets the widget's value. Dispatches a `SetWidgetValue` command (undo-able).
 Triggers `valueChange` handlers on all views.
@@ -490,8 +495,8 @@ Triggers `valueChange` handlers on all views.
 #### Parameters
 
 | Parameter | Type |
-| --------- | ---- |
-| `value`   | `T`  |
+| ------ | ------ |
+| `value` | `T` |
 
 #### Returns
 

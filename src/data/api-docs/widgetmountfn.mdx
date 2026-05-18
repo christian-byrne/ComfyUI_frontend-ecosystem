@@ -1,0 +1,32 @@
+---
+title: "WidgetMountFn"
+description: "API reference for WidgetMountFn."
+---
+
+```ts
+type WidgetMountFn = (host, ctx) => void | WidgetCleanup;
+```
+
+Defined in: [src/extension-api/widget.ts:631](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L631)
+
+Mount function for a widget. Called once when the widget is first attached
+to a node host in the DOM. Returns an optional cleanup function that fires
+on widget destruction.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `host` | `HTMLElement` | A runtime-owned empty `<div>` for the widget to mount into. The widget MAY append children, set inline styles, attach event listeners, etc. It MUST NOT replace or remove the host itself. |
+| `ctx` | [`WidgetMountContext`](./widgetmountcontext) | Mount context with the widget/node handles and remount hooks. |
+
+## Returns
+
+`void` \| [`WidgetCleanup`](./widgetcleanup)
+
+Optional cleanup function called on widget destruction. Host
+  remount fires `ctx.onBeforeRemount` / `ctx.onAfterRemount` instead.
+
+## Stability
+
+experimental

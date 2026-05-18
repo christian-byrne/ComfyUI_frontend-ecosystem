@@ -19,8 +19,8 @@
         "extensions/api/isnodelocatorid",
         "extensions/api/parsenodeexecutionid",
         "extensions/api/parsenodelocatorid",
-        "extensions/api/domwidgetoptions",
         "extensions/api/toastmessageoptions",
+        "extensions/api/widgetmountcontext",
         "extensions/api/widgetoptionchangeevent",
         "extensions/api/widgetoptions",
         "extensions/api/widgetpropertychangeevent",
@@ -31,6 +31,8 @@
         "extensions/api/size",
         "extensions/api/slotdirection",
         "extensions/api/unsubscribe",
+        "extensions/api/widgetcleanup",
+        "extensions/api/widgetmountfn",
         "extensions/api/widgetvalue"
       ]
     },
@@ -69,7 +71,10 @@
     },
     {
       "group": "Identity",
-      "pages": ["extensions/api/nodelocatorid", "extensions/api/nodeexecutionid"]
+      "pages": [
+        "extensions/api/nodelocatorid",
+        "extensions/api/nodeexecutionid"
+      ]
     }
   ]
 }

@@ -1,0 +1,24 @@
+---
+title: "WidgetCleanup"
+description: "API reference for WidgetCleanup."
+---
+
+```ts
+type WidgetCleanup = () => void;
+```
+
+Defined in: [src/extension-api/widget.ts:572](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/widget.ts#L572)
+
+Cleanup function returned from a widget's `mount()`. Fires exactly once,
+when the widget entity is destroyed. **Does NOT fire on host remount**
+(graph↔app mode, subgraph promotion, `<KeepAlive>` shuffle) — use
+[WidgetMountContext.onBeforeRemount](../interfaces/WidgetMountContext.md#onbeforeremount) / [WidgetMountContext.onAfterRemount](../interfaces/WidgetMountContext.md#onafterremount)
+for those.
+
+## Returns
+
+`void`
+
+## Stability
+
+experimental

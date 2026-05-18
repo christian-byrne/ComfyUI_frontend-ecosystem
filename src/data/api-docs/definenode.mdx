@@ -1,109 +1,20 @@
 ---
-title: 'defineNode'
-description: 'Register a node-scoped extension with lifecycle hooks for specific node types.'
-icon: 'circle-nodes'
+title: "defineNode"
+description: "API reference for defineNode."
 ---
 
 ```ts
-function defineNode(options: NodeExtensionOptions): NodeExtensionOptions
+function defineNode(options): NodeExtensionOptions;
 ```
 
-Defined in: [src/services/extension-api-service.ts:728](https://github.com/Comfy-Org/ComfyUI_frontend/blob/574a23209c2f8feec71375980a977e8d1fba89ec/src/services/extension-api-service.ts#L728)
-
-Register an extension that reacts to node lifecycle events. Use this to add widgets,
-subscribe to events, or modify node behavior for specific node types.
-
-## Type Signature
-
-```ts
-interface NodeExtensionOptions {
-  /** Globally unique extension name, e.g. 'my-org.my-extension' */
-  name: string
-
-  /**
-   * Filter to specific node types by comfyClass name.
-   * When omitted, receives events for ALL node types.
-   * @example nodeTypes: ['KSampler', 'KSamplerAdvanced']
-   */
-  nodeTypes?: string[]
-
-  /**
-   * Called once per node when first created (typed in, pasted, duplicated).
-   * Runs in a Vue EffectScope — all watch/computed calls are auto-cleaned on removal.
-   * Must be synchronous; kick off async work inside the body.
-   * @param node - Handle to the created node
-   */
-  nodeCreated?(node: NodeHandle): void
-
-  /**
-   * Called once per node when restored from a saved workflow.
-   * Widget values are already populated. Exactly one of nodeCreated or
-   * loadedGraphNode fires per node, never both.
-   * @param node - Handle to the restored node
-   */
-  loadedGraphNode?(node: NodeHandle): void
-}
-```
-
-## Usage Example
-
-```ts
-import { defineNode } from '@comfyorg/extension-api'
-
-export default defineNode({
-  name: 'my-org.sampler-enhancer',
-  nodeTypes: ['KSampler', 'KSamplerAdvanced'],
-
-  nodeCreated(node) {
-    // Add a custom widget
-    const myWidget = node.addWidget('INT', 'custom_steps', 20, {
-      min: 1,
-      max: 100
-    })
-
-    // Subscribe to execution events
-    node.on('executed', (e) => {
-      console.log('Node executed with output:', e.output)
-    })
-
-    // React to widget changes
-    const stepsWidget = node.getWidget('steps')
-    if (stepsWidget) {
-      stepsWidget.on('valueChanged', (e) => {
-        console.log('Steps changed to:', e.newValue)
-      })
-    }
-  },
-
-  loadedGraphNode(node) {
-    // Restore state from saved workflow
-    console.log('Node restored:', node.id)
-  }
-})
-```
-
-## Available Node Events
-
-The [`NodeHandle`](./nodehandle) provides these event subscriptions via `node.on()`:
-
-| Event               | Payload                                                  | Description                     |
-| ------------------- | -------------------------------------------------------- | ------------------------------- |
-| `'executed'`        | [`NodeExecutedEvent`](./nodeexecutedevent)               | Backend execution completed     |
-| `'configured'`      | `void`                                                   | Node loaded from workflow       |
-| `'removed'`         | `void`                                                   | Node deleted from graph         |
-| `'connected'`       | [`NodeConnectedEvent`](./nodeconnectedevent)             | Slot connected                  |
-| `'disconnected'`    | [`NodeDisconnectedEvent`](./nodedisconnectedevent)       | Slot disconnected               |
-| `'positionChanged'` | [`NodePositionChangedEvent`](./nodepositionchangedevent) | Canvas position changed         |
-| `'sizeChanged'`     | [`NodeSizeChangedEvent`](./nodesizechangedevent)         | Node resized                    |
-| `'modeChanged'`     | [`NodeModeChangedEvent`](./nodemodechangedevent)         | Execution mode changed          |
-| `'beforeSerialize'` | [`NodeBeforeSerializeEvent`](./nodebeforeserializeevent) | About to serialize (deprecated) |
+Defined in: [src/services/extension-api-service.ts:762](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/services/extension-api-service.ts#L762)
 
 ## Parameters
 
-| Parameter | Type                                             | Description                                                               |
-| --------- | ------------------------------------------------ | ------------------------------------------------------------------------- |
-| `options` | [`NodeExtensionOptions`](./nodeextensionoptions) | Extension configuration with name, node types filter, and lifecycle hooks |
+| Parameter | Type |
+| ------ | ------ |
+| `options` | [`NodeExtensionOptions`](./nodeextensionoptions) |
 
 ## Returns
 
-[`NodeExtensionOptions`](./nodeextensionoptions) — The same options object (branded for loader identification)
+[`NodeExtensionOptions`](./nodeextensionoptions)
