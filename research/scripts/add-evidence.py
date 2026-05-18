@@ -65,8 +65,7 @@ APPEND = {
     "S11.G1": [
         ev("FloyoAI/ComfyUI-SoundFlow", "js/PreviewAudio.js", 293, variant="post-mutation-bump", breakage_class="silent", notes="bumps version after node-internal mutation to trigger redraw"),
         ev("krismasdev/ComfyUI-Flux-Continuum", "web/outputgetnode.js", 84, variant="post-mutation-bump", breakage_class="silent"),
-        ev("coeuskoalemoss/comfyUI-layerstyle-custom", "js/dz_mtb_widgets.js", 292, variant="post-mutation-bump", breakage_class="silent"),
-        ev("40740/ComfyUI_LayerStyle_Bmss", "js/dz_mtb_widgets.js", 292, variant="post-mutation-bump", breakage_class="silent", notes="duplicate-of-coeuskoalemoss pattern — fork"),
+        ev("chflame163/ComfyUI_LayerStyle", "js/dz_mtb_widgets.js", 292, variant="post-mutation-bump", breakage_class="silent", notes="canonical upstream; forks coeuskoalemoss/comfyUI-layerstyle-custom and 40740/ComfyUI_LayerStyle_Bmss merged"),
     ],
     "S11.G2": [
         ev("yolain/ComfyUI-Easy-Use", "web_version/v1/js/easy/easyExtraMenu.js", 439, variant="add+createNode", breakage_class="loud", notes="Easy-Use is a major pack; uses graph.add(LiteGraph.createNode(...))"),

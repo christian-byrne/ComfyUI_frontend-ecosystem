@@ -8,7 +8,7 @@ asof: 2026-05-08
 populated_via: scripts/fetch-stars.sh
 
 repos:
-  - repo: 40740/ComfyUI_LayerStyle_Bmss
+  - repo: chflame163/ComfyUI_LayerStyle
     stars: 0
     archived: false
     forks: 0
@@ -110,7 +110,7 @@ repos:
     forks: 1
     last_commit: 2026-03-10
     asof: 2026-05-08
-  - repo: coeuskoalemoss/comfyUI-layerstyle-custom
+  - repo: chflame163/ComfyUI_LayerStyle
     stars: 0
     archived: false
     forks: 0
@@ -254,7 +254,7 @@ repos:
     forks: 0
     last_commit: 2026-05-08
     asof: 2026-05-08
-  - repo: goodtab/ComfyUI-Custom-Scripts
+  - repo: pythongosssss/ComfyUI-Custom-Scripts
     stars: 0
     archived: false
     forks: 0
