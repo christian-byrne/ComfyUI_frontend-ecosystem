@@ -80,6 +80,7 @@ export default defineConfig({
     environment: 'happy-dom',
     globals: true,
     include: ['src/**/*.{test,spec}.ts'],
+    setupFiles: ['src/test-setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],

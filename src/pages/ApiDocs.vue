@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 import { marked, Renderer } from "marked";
+import { useHead } from "@unhead/vue";
 
 import {
   apiDocPages,
@@ -21,6 +22,10 @@ import {
   getBlastRadiusBg,
   type CrossRefData,
 } from "@/data/api-docs-cross-ref";
+
+useHead({
+  title: "API Docs - ComfyUI Frontend Ecosystem",
+});
 
 /**
  * ApiDocs — Swagger-style API reference for @comfyorg/extension-api,

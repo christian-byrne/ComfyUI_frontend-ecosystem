@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, useTemplateRef } from "vue";
 import { useElementHover } from "@vueuse/core";
+import { useHead } from "@unhead/vue";
 
 import EvidenceDrawer from "@/components/EvidenceDrawer.vue";
 import { useHeatmap, type HeatmapCell } from "@/composables/useHeatmap";
+
+useHead({
+  title: "Heatmap - ComfyUI Frontend Ecosystem",
+});
 
 const { matrix, cellAt, cellsByRowCol, cellKey } = useHeatmap();
 

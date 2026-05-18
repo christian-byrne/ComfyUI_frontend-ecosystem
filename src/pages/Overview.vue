@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRouter, type RouteLocationRaw } from "vue-router";
+import { useHead } from "@unhead/vue";
 
 import { useDataStore } from "@/stores/data";
+
+useHead({
+  title: "Overview - ComfyUI Frontend Ecosystem",
+});
 
 /**
  * Overview — top-level dashboard.

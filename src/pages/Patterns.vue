@@ -3,9 +3,14 @@ import { useRouteQuery } from "@vueuse/router";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import { RouterLink, useRouter } from "vue-router";
+import { useHead } from "@unhead/vue";
 
 import { useDataStore } from "@/stores/data";
 import type { Pattern } from "@/data/schema";
+
+useHead({
+  title: "Patterns - ComfyUI Frontend Ecosystem",
+});
 
 /**
  * Patterns — searchable, filterable list of all 59 touch-point patterns.

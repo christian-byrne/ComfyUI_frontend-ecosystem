@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { useHead } from "@unhead/vue";
 
 import { MIGRATION_STATUSES, migrationEntries } from "@/data/migration-status";
 import type { MigrationStatus } from "@/data/migration-status";
+
+useHead({
+  title: "API Diff - ComfyUI Frontend Ecosystem",
+});
 
 /**
  * ApiDiff — per-pattern card view of the v1 → v2 surface migration.
