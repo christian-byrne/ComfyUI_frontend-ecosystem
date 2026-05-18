@@ -54,6 +54,24 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,
-    include: ['src/**/*.{test,spec}.ts']
+    include: ['src/**/*.{test,spec}.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      exclude: [
+        'node_modules',
+        'dist',
+        '**/*.test.ts',
+        '**/*.spec.ts',
+        'src/main.ts',
+        'e2e/**'
+      ],
+      thresholds: {
+        statements: 60,
+        branches: 50,
+        functions: 60,
+        lines: 60
+      }
+    }
   }
 })
