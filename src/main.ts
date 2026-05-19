@@ -11,4 +11,11 @@ const head = createHead()
 app.use(createPinia())
 app.use(head)
 app.use(router)
+
+if (import.meta.env.DEV) {
+  import('vue-axe').then(({ default: VueAxe }) => {
+    app.use(VueAxe)
+  })
+}
+
 app.mount('#app')
