@@ -1,0 +1,33 @@
+---
+title: "ToolbarButtonExtension"
+description: "API reference for ToolbarButtonExtension."
+---
+
+Defined in: [types/extensionTypes.ts:250](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/types/extensionTypes.ts#L250)
+
+Public arg type for [defineToolbarButton](./definetoolbarbutton). A button that appears in
+the action bar (top of the canvas area). Wraps the v1
+`extension.actionBarButtons[]` shape with an `id` so each registration is
+independently disposable.
+
+**Net-new surface**: no v1 registration path existed for toolbar buttons
+(action-bar buttons were possible but undocumented and never had a
+`defineToolbarButton` equivalent). Per W6.P5 evidence sweep this surface
+had 0 hits across the 138-repo corpus — any first-mover use is greenfield.
+
+## Public API
+
+## Stability
+
+experimental
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="class"></a> `class?` | `string` | Optional CSS class string applied to the button element. |
+| <a id="icon"></a> `icon` | `string` | Icon class to display (e.g. `'icon-[lucide--message-circle-question-mark]'`). |
+| <a id="id"></a> `id` | `string` | Stable id for the button — used by `dispose()` to unregister. |
+| <a id="label"></a> `label?` | `string` | Optional label text shown next to the icon. |
+| <a id="onclick"></a> `onClick` | () => `void` | Click handler invoked when the button is pressed. |
+| <a id="tooltip"></a> `tooltip?` | `string` | Optional tooltip shown on hover. |

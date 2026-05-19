@@ -1,0 +1,25 @@
+---
+title: "NotifyOptions"
+description: "API reference for NotifyOptions."
+---
+
+Defined in: [extension-api/imperatives.ts:50](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/imperatives.ts#L50)
+
+Optional shape for [notify](./notify) — a thinner convenience API over
+[toast](./toast). `kind` maps onto PrimeVue toast severities; `message` maps
+to `summary`; `detail` is optional supplementary text.
+
+## Public API
+
+## Stability
+
+experimental
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="detail"></a> `detail?` | `string` | Optional supplementary detail line. |
+| <a id="kind"></a> `kind?` | `"success"` \| `"info"` \| `"warn"` \| `"error"` | Severity kind. Default `'info'`. |
+| <a id="life"></a> `life?` | `number` | Auto-dismiss delay in ms. Defaults to PrimeVue's `life`. |
+| <a id="message"></a> `message` | `string` | Primary message text. |

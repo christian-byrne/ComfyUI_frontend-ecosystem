@@ -4,7 +4,7 @@ description: "Controlled access to widget state, mutations, and events."
 icon: "sliders"
 ---
 
-Defined in: [src/extension-api/widget.ts:247](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L247)
+Defined in: [extension-api/widget.ts:249](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L249)
 
 Controlled surface for widget access. Backed by ECS `WidgetValue` and
 `WidgetIdentity` components in the World. Reads query components directly;
@@ -54,7 +54,7 @@ export default defineNode({
 equals(other): boolean;
 ```
 
-Defined in: [src/extension-api/widget.ts:269](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L269)
+Defined in: [extension-api/widget.ts:271](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L271)
 
 Returns `true` if `other` represents the same widget entity as this
 one. Equivalent to `this.id === other.id` but the canonical comparator
@@ -79,7 +79,7 @@ the identity scheme remain transparent.
 getOption<K>(key): K | undefined;
 ```
 
-Defined in: [src/extension-api/widget.ts:434](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L434)
+Defined in: [extension-api/widget.ts:412](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L412)
 
 Returns the per-instance override for `key`, or the class-default value
 from `INPUT_TYPES` if no override has been set, or `undefined` if the key
@@ -118,7 +118,7 @@ const min = widget.getOption<number>('min') ?? 0
 getValue(): T;
 ```
 
-Defined in: [src/extension-api/widget.ts:296](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L296)
+Defined in: [extension-api/widget.ts:298](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L298)
 
 Returns the widget's current user-edited value.
 
@@ -134,45 +134,13 @@ const steps = node.getWidget('steps')!.getValue<number>()
 
 ***
 
-### isDisabled()
-
-```ts
-isDisabled(): boolean;
-```
-
-Defined in: [src/extension-api/widget.ts:331](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L331)
-
-Returns `true` if the widget is disabled (read-only in the UI).
-
-#### Returns
-
-`boolean`
-
-***
-
-### isHidden()
-
-```ts
-isHidden(): boolean;
-```
-
-Defined in: [src/extension-api/widget.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L311)
-
-Returns `true` if the widget is currently hidden from the node UI.
-
-#### Returns
-
-`boolean`
-
-***
-
 ### isSerializeEnabled()
 
 ```ts
 isSerializeEnabled(): boolean;
 ```
 
-Defined in: [src/extension-api/widget.ts:375](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L375)
+Defined in: [extension-api/widget.ts:353](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L353)
 
 Returns `true` if this widget is included in workflow and prompt
 serialization. Defaults to `true` for all widget types.
@@ -191,7 +159,7 @@ serialization. Defaults to `true` for all widget types.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:495](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L495)
+Defined in: [extension-api/widget.ts:473](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L473)
 
 Subscribe to the widget's value changes.
 
@@ -217,7 +185,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:509](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L509)
+Defined in: [extension-api/widget.ts:487](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L487)
 
 Subscribe to type-specific option mutations (`setOption(key, value)`).
 
@@ -247,10 +215,12 @@ experimental
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:524](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L524)
+Defined in: [extension-api/widget.ts:504](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L504)
 
-Subscribe to first-class property mutations (`setHidden`, `setDisabled`,
-`setSerializeEnabled`).
+Subscribe to first-class property mutations (`setSerializeEnabled`).
+
+PHASE_A_EXCLUDED per AXIOMS.md A14: `setHidden`, `setDisabled` deferred
+pending serialization convergence.
 
 Does NOT fire for `setValue` (use `valueChange`) or options-bag mutations
 (use `optionChange`).
@@ -278,7 +248,7 @@ experimental
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:538](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L538)
+Defined in: [extension-api/widget.ts:518](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L518)
 
 Subscribe to widget serialization. The only async-allowed event.
 
@@ -305,7 +275,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/widget.ts:555](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L555)
+Defined in: [extension-api/widget.ts:535](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L535)
 
 Subscribe to pre-queue validation. Fires before `graphToPrompt` runs.
 
@@ -334,35 +304,13 @@ experimental
 
 ***
 
-### setDisabled()
-
-```ts
-setDisabled(disabled): void;
-```
-
-Defined in: [src/extension-api/widget.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L337)
-
-Enable or disable the widget.
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `disabled` | `boolean` |
-
-#### Returns
-
-`void`
-
-***
-
 ### setHeight()
 
 ```ts
 setHeight(px): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:366](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L366)
+Defined in: [extension-api/widget.ts:344](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L344)
 
 Updates the reserved height for this widget and triggers a node relayout.
 
@@ -391,43 +339,13 @@ experimental
 
 ***
 
-### setHidden()
-
-```ts
-setHidden(hidden): void;
-```
-
-Defined in: [src/extension-api/widget.ts:323](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L323)
-
-Show or hide the widget. Dispatches a `SetWidgetHidden` command.
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `hidden` | `boolean` |
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-toggle.on('valueChange', (e) => {
-  detail.setHidden(!e.newValue)
-})
-```
-
-***
-
 ### setOption()
 
 ```ts
 setOption(key, value): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:450](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L450)
+Defined in: [extension-api/widget.ts:428](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L428)
 
 Set a per-instance option override. Persisted as a `widget_options` sidecar
 in the workflow JSON (additive, backward-compatible). Does not change the
@@ -462,7 +380,7 @@ widget.setOption('step', 1)
 setSerializeEnabled(enabled): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:384](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L384)
+Defined in: [extension-api/widget.ts:362](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L362)
 
 Enable or disable serialization for this widget. When disabled, the widget
 is excluded from both `widgets_values` in the workflow JSON and the API
@@ -487,7 +405,7 @@ pattern.
 setValue(value): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:303](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L303)
+Defined in: [extension-api/widget.ts:305](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L305)
 
 Sets the widget's value. Dispatches a `SetWidgetValue` command (undo-able).
 Triggers `valueChange` handlers on all views.

@@ -3,7 +3,7 @@ title: "WidgetPropertyChangeEvent"
 description: "API reference for WidgetPropertyChangeEvent."
 ---
 
-Defined in: [src/extension-api/widget.ts:92](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L92)
+Defined in: [extension-api/widget.ts:92](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L92)
 
 Payload for `widget.on('propertyChange', handler)`.
 
@@ -27,4 +27,4 @@ widget.on('propertyChange', (e) => {
 | ------ | ------ | ------ | ------ |
 | <a id="newvalue"></a> `newValue` | `readonly` | `boolean` | Value after the change. |
 | <a id="oldvalue"></a> `oldValue` | `readonly` | `boolean` | Value before the change. |
-| <a id="property"></a> `property` | `readonly` | `"hidden"` \| `"serialize"` \| `"disabled"` | Which first-class property changed. - `'hidden'` — visibility toggled via `setHidden()` - `'disabled'` — enabled/disabled via `setDisabled()` - `'serialize'` — serialization opt-in/out via `setSerializeEnabled()` |
+| <a id="property"></a> `property` | `readonly` | `"serialize"` | Which first-class property changed. - `'serialize'` — serialization opt-in/out via `setSerializeEnabled()` PHASE_A_EXCLUDED per AXIOMS.md A14: - `'hidden'` — visibility toggled via `setHidden()` (deferred) - `'disabled'` — enabled/disabled via `setDisabled()` (deferred) |

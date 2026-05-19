@@ -1,0 +1,37 @@
+---
+title: "notify"
+description: "API reference for notify."
+---
+
+```ts
+function notify(opts): void;
+```
+
+Defined in: [extension-api/imperatives.ts:110](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/imperatives.ts#L110)
+
+Convenience notification API — a thinner wrapper over [toast](./toast) that
+accepts a `{ kind, message, detail }` shape closer to OS notification
+vocabulary. Use whichever shape you prefer; they share the same
+underlying transport.
+
+Fire-and-forget.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | [`NotifyOptions`](./notifyoptions) |
+
+## Returns
+
+`void`
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+notify({ kind: 'error', message: 'Workflow failed', detail: err.message })
+```

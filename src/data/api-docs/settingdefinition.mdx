@@ -1,0 +1,31 @@
+---
+title: "SettingDefinition"
+description: "API reference for SettingDefinition."
+---
+
+```ts
+type SettingDefinition<TValue> = SettingParams<TValue>;
+```
+
+Defined in: [types/extensionTypes.ts:234](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/types/extensionTypes.ts#L234)
+
+Public arg type for [defineSetting](./definesetting). Re-surfaces the existing
+`SettingParams` shape (from `@/platform/settings/types`) under a public name
+so authors do not import from the internal `platform/` path.
+
+Note: the underlying `SettingParams.id` is typed against the `Settings`
+keymap; for ecosystem extension settings, authors widen the id type via
+`as keyof Settings` or rely on TS module augmentation of `Settings` (a
+follow-on RFC will formalize the augmentation path).
+
+## Type Parameters
+
+| Type Parameter | Default type |
+| ------ | ------ |
+| `TValue` | `unknown` |
+
+## Public API
+
+## Stability
+
+experimental

@@ -1,0 +1,35 @@
+---
+title: "toast"
+description: "API reference for toast."
+---
+
+```ts
+const toast: object;
+```
+
+Defined in: [extension-api/imperatives.ts:76](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/imperatives.ts#L76)
+
+Toast surface — call `toast.show(...)` from any setup body or hook
+closure.
+
+Fire-and-forget. The toast is rendered by the global Toast component
+mounted at app root; the call is a no-op if the app is not yet mounted
+(the message is silently dropped rather than queued).
+
+## Type Declaration
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `remove()` | (`opts`) => `void` | Remove a previously-shown toast (matches by reference). |
+| `removeAll()` | () => `void` | Clear every toast currently visible. |
+| `show()` | (`opts`) => `void` | Show a toast. Severity defaults to `'info'`. |
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+toast.show({ severity: 'info', summary: 'Saved', life: 2000 })
+```

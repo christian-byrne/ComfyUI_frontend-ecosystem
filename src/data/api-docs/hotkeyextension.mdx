@@ -1,0 +1,29 @@
+---
+title: "HotkeyExtension"
+description: "API reference for HotkeyExtension."
+---
+
+Defined in: [types/extensionTypes.ts:184](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/types/extensionTypes.ts#L184)
+
+Public arg type for [defineHotkey](./definehotkey). A hotkey binds a key combination
+(already-registered command) to fire on press. Mirrors v1
+`extension.keybindings[]` which used the internal `Keybinding` shape.
+
+`keys` accepts a human-readable combo string (e.g. `'mod+k'`, `'ctrl+shift+f'`)
+matching the Vue/PrimeVue keybinding convention. `mod` resolves to `cmd` on
+macOS and `ctrl` elsewhere. The runtime parses this into the underlying
+`KeyCombo` shape used by the keybinding store.
+
+## Public API
+
+## Stability
+
+experimental
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="commandid"></a> `commandId` | `string` | The id of an already-registered command. Use [defineCommand](./definecommand) to register the command before (or alongside) the hotkey. |
+| <a id="keys"></a> `keys` | `string` | Key combination to listen for. Examples: `'mod+k'`, `'ctrl+shift+f'`, `'alt+enter'`. `mod` resolves to `cmd` on macOS and `ctrl` elsewhere. |
+| <a id="targetelementid"></a> `targetElementId?` | `string` | Optional id of the DOM element that must be focused for the hotkey to fire. When omitted, the hotkey is global. |

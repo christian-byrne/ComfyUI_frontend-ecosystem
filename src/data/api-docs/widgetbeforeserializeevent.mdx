@@ -3,7 +3,7 @@ title: "WidgetBeforeSerializeEvent"
 description: "Pre-serialization hook payload — override or skip widget value."
 ---
 
-Defined in: [src/extension-api/widget.ts:142](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L142)
+Defined in: [extension-api/widget.ts:144](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L144)
 
 Payload for `widget.on('beforeSerialize', handler)`.
 
@@ -59,7 +59,7 @@ widget.on('beforeSerialize', async (e) => {
 setSerializedValue(v): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:168](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L168)
+Defined in: [extension-api/widget.ts:170](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L170)
 
 Override the serialized value. The provided value is written to
 `widgets_values[i]` (and to the API prompt for `context='prompt'`).
@@ -83,7 +83,7 @@ Calling this multiple times keeps the last call's value.
 skip(): void;
 ```
 
-Defined in: [src/extension-api/widget.ts:175](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/widget.ts#L175)
+Defined in: [extension-api/widget.ts:177](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/widget.ts#L177)
 
 Exclude this widget from the API prompt entirely.
 Only meaningful for `context='prompt'`; no-ops on other contexts.

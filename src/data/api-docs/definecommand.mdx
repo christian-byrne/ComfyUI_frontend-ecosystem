@@ -1,0 +1,39 @@
+---
+title: "defineCommand"
+description: "API reference for defineCommand."
+---
+
+```ts
+function defineCommand(opts): DisposableHandle;
+```
+
+Defined in: [extension-api/registrations.ts:294](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/registrations.ts#L294)
+
+Register a command. Returns a [DisposableHandle](./disposablehandle) — call
+`handle.dispose()` to unregister the command.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | `ComfyCommand` |
+
+## Returns
+
+[`DisposableHandle`](./disposablehandle)
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { defineCommand } from '@comfyorg/extension-api'
+
+defineCommand({
+  id: 'my-org.my-command',
+  label: 'Do The Thing',
+  function: () => { console.log('doing the thing') }
+})
+```

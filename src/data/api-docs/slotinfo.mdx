@@ -3,42 +3,6 @@ title: "SlotInfo"
 description: "Read-only snapshot of a node slot (input or output)."
 ---
 
-Defined in: [src/extension-api/node.ts:77](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L77)
-
-Read-only snapshot of a single slot (input or output) on a node.
-
-Identity is opaque per D20: use `slot.id` and `slot.equals(other)` for
-comparisons; do not parse the string format.
-
-## Properties
-
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="direction"></a> `direction` | `readonly` | [`SlotDirection`](./slotdirection) | Whether this is an input or output slot. |
-| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this slot. Treat as a string token; do not parse. |
-| <a id="name"></a> `name` | `readonly` | `string` | Slot name as declared in `INPUT_TYPES` or `addInput`/`addOutput`. |
-| <a id="nodeid"></a> `nodeId` | `readonly` | `string` | Opaque identifier of the node this slot belongs to. |
-| <a id="type"></a> `type` | `readonly` | `string` | Slot type string (e.g. `'IMAGE'`, `'LATENT'`, `'*'`). |
-
-## Methods
-
-### equals()
-
 ```ts
-equals(other): boolean;
+type SlotInfo = any;
 ```
-
-Defined in: [src/extension-api/node.ts:92](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L92)
-
-Returns `true` if `other` represents the same slot entity as this one.
-Equivalent to `this.id === other.id` but the canonical comparator.
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `other` | `SlotInfo` |
-
-#### Returns
-
-`boolean`

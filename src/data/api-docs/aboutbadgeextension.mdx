@@ -1,0 +1,25 @@
+---
+title: "AboutBadgeExtension"
+description: "API reference for AboutBadgeExtension."
+---
+
+Defined in: [types/extensionTypes.ts:210](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/types/extensionTypes.ts#L210)
+
+Public arg type for [defineAboutBadge](./defineaboutbadge). A badge that appears on the
+About page (linked label + icon + optional severity). Mirrors v1
+`extension.aboutPageBadges[]`.
+
+## Public API
+
+## Stability
+
+experimental
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="icon"></a> `icon` | `string` | Icon class (e.g. `'pi-github'`) shown next to the label. |
+| <a id="label"></a> `label` | `string` | Display label for the badge. |
+| <a id="severity"></a> `severity?` | `"warn"` \| `"danger"` | Optional severity tint; defaults to neutral. |
+| <a id="url"></a> `url` | `string` | URL the badge links to on click. |

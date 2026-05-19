@@ -3,7 +3,7 @@ title: "NodeBeforeSerializeEvent"
 description: "Pre-serialization hook payload — override or skip node data."
 ---
 
-Defined in: [src/extension-api/node.ts:186](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L186)
+Defined in: [extension-api/node.ts:98](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/node.ts#L98)
 
 Payload for `node.on('beforeSerialize', handler)`.
 
@@ -39,7 +39,7 @@ experimental
 replace(fn): void;
 ```
 
-Defined in: [src/extension-api/node.ts:202](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L202)
+Defined in: [extension-api/node.ts:114](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/node.ts#L114)
 
 Replace the serialized object by providing a transform function.
 `fn` receives the current `data` and should return the replacement.

@@ -65,23 +65,20 @@ re-export — and is the explicit exception documented in AGENTS.md.
 
 | Interface | Description |
 | ------ | ------ |
-| [CommandManager](interfaces/CommandManager.md) | - |
+| [AboutBadgeExtension](interfaces/AboutBadgeExtension.md) | Public arg type for [defineAboutBadge](functions/defineAboutBadge.md). A badge that appears on the About page (linked label + icon + optional severity). Mirrors v1 `extension.aboutPageBadges[]`. |
+| [DisposableHandle](interfaces/DisposableHandle.md) | Handle returned by every `defineX`. Call `dispose()` to remove the registration. Idempotent and synchronous — see module-level "Dispose contract" notes. |
 | [ExecutionEventPayloads](interfaces/ExecutionEventPayloads.md) | - |
-| [ExtensionManager](interfaces/ExtensionManager.md) | - |
 | [ExtensionOptions](interfaces/ExtensionOptions.md) | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions. |
 | [GraphEventPayloads](interfaces/GraphEventPayloads.md) | Per-namespace event payload map. **Augment via TS module augmentation** to narrow payloads for canonical events. Until D5 ships, all payloads default to `unknown`. |
+| [HotkeyExtension](interfaces/HotkeyExtension.md) | Public arg type for [defineHotkey](functions/defineHotkey.md). A hotkey binds a key combination (already-registered command) to fire on press. Mirrors v1 `extension.keybindings[]` which used the internal `Keybinding` shape. |
 | [~~NodeBeforeSerializeEvent~~](interfaces/NodeBeforeSerializeEvent.md) | Payload for `node.on('beforeSerialize', handler)`. |
-| [NodeConnectedEvent](interfaces/NodeConnectedEvent.md) | Payload for `node.on('connected', handler)`. |
-| [NodeDisconnectedEvent](interfaces/NodeDisconnectedEvent.md) | Payload for `node.on('disconnected', handler)`. |
 | [NodeExecutedEvent](interfaces/NodeExecutedEvent.md) | Payload for `node.on('executed', handler)`. |
 | [NodeExtensionOptions](interfaces/NodeExtensionOptions.md) | Options for `defineNode`. Describes an extension that reacts to node lifecycle events. |
 | [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components. |
-| [NodeModeChangedEvent](interfaces/NodeModeChangedEvent.md) | Payload for `node.on('modeChanged', handler)`. |
-| [NodePositionChangedEvent](interfaces/NodePositionChangedEvent.md) | Payload for `node.on('positionChanged', handler)`. |
-| [NodeSizeChangedEvent](interfaces/NodeSizeChangedEvent.md) | Payload for `node.on('sizeChanged', handler)`. |
+| [NotifyOptions](interfaces/NotifyOptions.md) | Optional shape for [notify](functions/notify.md) — a thinner convenience API over [toast](variables/toast.md). `kind` maps onto PrimeVue toast severities; `message` maps to `summary`; `detail` is optional supplementary text. |
 | [ServerEventPayloads](interfaces/ServerEventPayloads.md) | - |
-| [SlotInfo](interfaces/SlotInfo.md) | Read-only snapshot of a single slot (input or output) on a node. |
 | [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. |
+| [ToolbarButtonExtension](interfaces/ToolbarButtonExtension.md) | Public arg type for [defineToolbarButton](functions/defineToolbarButton.md). A button that appears in the action bar (top of the canvas area). Wraps the v1 `extension.actionBarButtons[]` shape with an `id` so each registration is independently disposable. |
 | [WidgetBeforeQueueEvent](interfaces/WidgetBeforeQueueEvent.md) | Payload for `widget.on('beforeQueue', handler)`. |
 | [WidgetBeforeSerializeEvent](interfaces/WidgetBeforeSerializeEvent.md) | Payload for `widget.on('beforeSerialize', handler)`. |
 | [WidgetExtensionOptions](interfaces/WidgetExtensionOptions.md) | Options for `defineWidget`. Registers a custom widget type that renders through the mount-lifecycle seam (Axiom A12 / D-widget-converge). |
@@ -99,14 +96,15 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | ------ | ------ |
 | [AsyncHandler](type-aliases/AsyncHandler.md) | A typed async-capable event handler. Only valid for events that explicitly support async handling (currently only `beforeSerialize`). |
 | [BottomPanelExtension](type-aliases/BottomPanelExtension.md) | - |
+| [CommandDefinition](type-aliases/CommandDefinition.md) | Public arg type for [defineCommand](functions/defineCommand.md). Alias of the v1 `ComfyCommand` shape exported from `@/stores/commandStore`, re-surfaced under a public name so authors do not import from the internal `stores/` path. |
 | [Handler](type-aliases/Handler.md) | A typed event handler function. |
 | [NodeExecutionId](type-aliases/NodeExecutionId.md) | An execution identifier representing a node's position in nested subgraphs. Also known as ExecutionId in some contexts. |
 | [NodeLocatorId](type-aliases/NodeLocatorId.md) | A globally unique identifier for nodes that maintains consistency across multiple instances of the same subgraph. |
-| [NodeMode](type-aliases/NodeMode.md) | LiteGraph node execution mode. |
 | [Point](type-aliases/Point.md) | A 2D point as `[x, y]`. |
+| [SettingDefinition](type-aliases/SettingDefinition.md) | Public arg type for [defineSetting](functions/defineSetting.md). Re-surfaces the existing `SettingParams` shape (from `@/platform/settings/types`) under a public name so authors do not import from the internal `platform/` path. |
 | [SidebarTabExtension](type-aliases/SidebarTabExtension.md) | - |
 | [Size](type-aliases/Size.md) | A 2D size as `[width, height]`. |
-| [SlotDirection](type-aliases/SlotDirection.md) | Direction of a slot on a node. |
+| [SlotInfo](type-aliases/SlotInfo.md) | - |
 | [ToastManager](type-aliases/ToastManager.md) | - |
 | [Unsubscribe](type-aliases/Unsubscribe.md) | Cleanup function returned by `on()` — call to remove the listener. |
 | [WidgetCleanup](type-aliases/WidgetCleanup.md) | Cleanup function returned from a widget's `mount()`. Fires exactly once, when the widget entity is destroyed. **Does NOT fire on host remount** (graph↔app mode, subgraph promotion, `<KeepAlive>` shuffle) — use [WidgetMountContext.onBeforeRemount](interfaces/WidgetMountContext.md#onbeforeremount) / [WidgetMountContext.onAfterRemount](interfaces/WidgetMountContext.md#onafterremount) for those. |
@@ -120,6 +118,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [execution](variables/execution.md) | Prompt-run lifecycle events (backend-dispatched). |
 | [graph](variables/graph.md) | Graph-mutation events (frontend-dispatched). |
 | [server](variables/server.md) | Non-execution backend events + custom-node events. |
+| [toast](variables/toast.md) | Toast surface — call `toast.show(...)` from any setup body or hook closure. |
 | [workbench](variables/workbench.md) | UI shell events. |
 
 ## Functions
@@ -128,11 +127,19 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | ------ | ------ |
 | [createNodeExecutionId](functions/createNodeExecutionId.md) | Create a NodeExecutionId from an array of node IDs |
 | [createNodeLocatorId](functions/createNodeLocatorId.md) | Create a NodeLocatorId from components |
+| [defineAboutBadge](functions/defineAboutBadge.md) | Register an About-page badge. Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to remove the badge. |
+| [defineBottomPanelTab](functions/defineBottomPanelTab.md) | Register a bottom-panel tab. Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to remove the tab. |
+| [defineCommand](functions/defineCommand.md) | Register a command. Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to unregister the command. |
 | [defineExtension](functions/defineExtension.md) | - |
+| [defineHotkey](functions/defineHotkey.md) | Register a hotkey binding. Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to unbind. |
 | [defineNode](functions/defineNode.md) | - |
+| [defineSetting](functions/defineSetting.md) | Register a setting. Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to remove the setting from the settings menu. |
+| [defineSidebarTab](functions/defineSidebarTab.md) | Register a sidebar tab. Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to remove the tab. |
+| [defineToolbarButton](functions/defineToolbarButton.md) | Register a toolbar button (action-bar button). Returns a [DisposableHandle](interfaces/DisposableHandle.md) — call `handle.dispose()` to remove the button. |
 | [defineWidget](functions/defineWidget.md) | - |
 | [isNodeExecutionId](functions/isNodeExecutionId.md) | Type guard to check if a value is a NodeExecutionId |
 | [isNodeLocatorId](functions/isNodeLocatorId.md) | Type guard to check if a value is a NodeLocatorId |
+| [notify](functions/notify.md) | Convenience notification API — a thinner wrapper over [toast](variables/toast.md) that accepts a `{ kind, message, detail }` shape closer to OS notification vocabulary. Use whichever shape you prefer; they share the same underlying transport. |
 | [onActivated](functions/onActivated.md) | Register a callback to fire when the surrounding tab/panel is shown. |
 | [onBeforeMount](functions/onBeforeMount.md) | Register a callback to fire just before the surrounding instance is mounted. |
 | [onDeactivated](functions/onDeactivated.md) | Register a callback to fire when the surrounding tab/panel is hidden. |
@@ -142,3 +149,45 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [onUnmounted](functions/onUnmounted.md) | Register a callback to fire when the surrounding instance is unmounted. |
 | [parseNodeExecutionId](functions/parseNodeExecutionId.md) | Parse a NodeExecutionId into its component node IDs |
 | [parseNodeLocatorId](functions/parseNodeLocatorId.md) | Parse a NodeLocatorId into its components |
+
+## References
+
+### NodeConnectedEvent
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)
+
+***
+
+### NodeDisconnectedEvent
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)
+
+***
+
+### NodeMode
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)
+
+***
+
+### NodeModeChangedEvent
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)
+
+***
+
+### NodePositionChangedEvent
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)
+
+***
+
+### NodeSizeChangedEvent
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)
+
+***
+
+### SlotDirection
+
+Renames and re-exports [SlotInfo](type-aliases/SlotInfo.md)

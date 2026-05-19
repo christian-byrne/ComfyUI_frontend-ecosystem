@@ -1,0 +1,43 @@
+---
+title: "defineToolbarButton"
+description: "API reference for defineToolbarButton."
+---
+
+```ts
+function defineToolbarButton(opts): DisposableHandle;
+```
+
+Defined in: [extension-api/registrations.ts:505](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/registrations.ts#L505)
+
+Register a toolbar button (action-bar button). Returns a
+[DisposableHandle](./disposablehandle) — call `handle.dispose()` to remove the button.
+
+**Net-new surface**: no v1 registration path existed. Authors using this
+are first-movers; the API may evolve before stabilizing.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | [`ToolbarButtonExtension`](./toolbarbuttonextension) |
+
+## Returns
+
+[`DisposableHandle`](./disposablehandle)
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { defineToolbarButton } from '@comfyorg/extension-api'
+
+defineToolbarButton({
+  id: 'my.help',
+  icon: 'pi-question-circle',
+  tooltip: 'Get help',
+  onClick: () => openHelp()
+})
+```

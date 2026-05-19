@@ -1,0 +1,40 @@
+---
+title: "defineHotkey"
+description: "API reference for defineHotkey."
+---
+
+```ts
+function defineHotkey(opts): DisposableHandle;
+```
+
+Defined in: [extension-api/registrations.ts:328](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/registrations.ts#L328)
+
+Register a hotkey binding. Returns a [DisposableHandle](./disposablehandle) — call
+`handle.dispose()` to unbind.
+
+The hotkey targets a command id; register the command separately via
+[defineCommand](./definecommand). The `keys` string is parsed via the standard
+key-combo grammar (`mod+k`, `ctrl+shift+f`, etc.).
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | [`HotkeyExtension`](./hotkeyextension) |
+
+## Returns
+
+[`DisposableHandle`](./disposablehandle)
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { defineCommand, defineHotkey } from '@comfyorg/extension-api'
+
+defineCommand({ id: 'my.cmd', function: () => {} })
+defineHotkey({ keys: 'mod+k', commandId: 'my.cmd' })
+```

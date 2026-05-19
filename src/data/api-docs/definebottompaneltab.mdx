@@ -1,0 +1,40 @@
+---
+title: "defineBottomPanelTab"
+description: "API reference for defineBottomPanelTab."
+---
+
+```ts
+function defineBottomPanelTab(opts): DisposableHandle;
+```
+
+Defined in: [extension-api/registrations.ts:259](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/registrations.ts#L259)
+
+Register a bottom-panel tab. Returns a [DisposableHandle](./disposablehandle) — call
+`handle.dispose()` to remove the tab.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | [`BottomPanelExtension`](./bottompanelextension) |
+
+## Returns
+
+[`DisposableHandle`](./disposablehandle)
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { defineBottomPanelTab } from '@comfyorg/extension-api'
+
+defineBottomPanelTab({
+  id: 'my-logs',
+  title: 'My Logs',
+  type: 'vue',
+  component: MyLogsComponent
+})
+```

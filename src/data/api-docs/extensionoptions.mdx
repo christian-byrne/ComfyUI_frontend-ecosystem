@@ -3,7 +3,7 @@ title: "ExtensionOptions"
 description: "Options object for defineExtension — app-wide lifecycle and shell UI."
 ---
 
-Defined in: [src/extension-api/types.ts:99](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/types.ts#L99)
+Defined in: [extension-api/types.ts:99](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/types.ts#L99)
 
 Options for the global `defineExtension` entry point. Covers extension-wide
 lifecycle and shell UI contributions.
@@ -33,7 +33,7 @@ export default defineExtension({
 optional init(): void | Promise<void>;
 ```
 
-Defined in: [src/extension-api/types.ts:117](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/types.ts#L117)
+Defined in: [extension-api/types.ts:117](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/types.ts#L117)
 
 Runs once during app initialization (after the app is mounted but before
 the first workflow is loaded). Equivalent to the v1 `ComfyExtension.init`.
@@ -59,7 +59,7 @@ The v1 hook is retained for back-compat during the deprecation window.
 optional setup(): void | Promise<void>;
 ```
 
-Defined in: [src/extension-api/types.ts:142](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/types.ts#L142)
+Defined in: [extension-api/types.ts:142](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/types.ts#L142)
 
 Runs once after the app and all core extensions are initialized. Equivalent
 to the v1 `ComfyExtension.setup`. Safe to call shell UI registration APIs

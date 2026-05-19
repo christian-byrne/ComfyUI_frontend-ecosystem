@@ -1,0 +1,48 @@
+---
+title: "defineSidebarTab"
+description: "API reference for defineSidebarTab."
+---
+
+```ts
+function defineSidebarTab(opts): DisposableHandle;
+```
+
+Defined in: [extension-api/registrations.ts:231](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/registrations.ts#L231)
+
+Register a sidebar tab. Returns a [DisposableHandle](./disposablehandle) — call
+`handle.dispose()` to remove the tab.
+
+The tab spec is a thin POJO (see [SidebarTabExtension](./sidebartabextension)); the runtime
+mounts it via the workspace sidebar-tab store at app bootstrap time. May
+be called at module-evaluation time; mount is deferred until the system
+starts.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | [`SidebarTabExtension`](./sidebartabextension) |
+
+## Returns
+
+[`DisposableHandle`](./disposablehandle)
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { defineSidebarTab } from '@comfyorg/extension-api'
+
+const tab = defineSidebarTab({
+  id: 'my-tab',
+  title: 'My Tab',
+  type: 'vue',
+  component: MyTabComponent
+})
+
+// Later: remove the tab
+tab.dispose()
+```

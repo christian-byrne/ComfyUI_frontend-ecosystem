@@ -7,10 +7,10 @@ description: "API reference for Point."
 type Point = readonly [number, number];
 ```
 
-Defined in: [src/extension-api/node.ts:34](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L34)
+Defined in: [extension-api/node.ts:34](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/node.ts#L34)
 
 A 2D point as `[x, y]`.
 
 **Immutable tuple per D-immutability-enforcement (Hybrid C).** Attempts to
 mutate via `node.getPosition()[0] = X` raise a TypeScript error. Use
-[NodeHandle.setPosition](../interfaces/NodeHandle.md#setposition) to move the node.
+NodeHandle.setPosition to move the node.

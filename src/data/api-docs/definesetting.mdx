@@ -1,0 +1,46 @@
+---
+title: "defineSetting"
+description: "API reference for defineSetting."
+---
+
+```ts
+function defineSetting<TValue>(opts): DisposableHandle;
+```
+
+Defined in: [extension-api/registrations.ts:418](https://github.com/Comfy-Org/ComfyUI_frontend/blob/b87f7ea06725d1939dfa675334f7394cb9a5c0d2/src/extension-api/registrations.ts#L418)
+
+Register a setting. Returns a [DisposableHandle](./disposablehandle) — call
+`handle.dispose()` to remove the setting from the settings menu.
+
+## Type Parameters
+
+| Type Parameter | Default type |
+| ------ | ------ |
+| `TValue` | `unknown` |
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `opts` | [`SettingDefinition`](./settingdefinition)\<`TValue`\> |
+
+## Returns
+
+[`DisposableHandle`](./disposablehandle)
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { defineSetting } from '@comfyorg/extension-api'
+
+defineSetting({
+  id: 'my.option' as never,    // widen until Settings is augmented
+  name: 'My Option',
+  type: 'boolean',
+  defaultValue: false
+})
+```
