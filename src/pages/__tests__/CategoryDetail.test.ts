@@ -18,13 +18,16 @@ describe('categoryDetail', () => {
     useRouteMock.mockReturnValue({ params: { id: 'BC.01' } })
 
     // Mock the upstream raw fetcher.
-    globalThis.fetch = vi.fn(async (url: string | URL | Request) => {
-      const u = String(url)
-      if (u.endsWith('bc-01.v2.test.ts')) {
-        return new Response(STUB_BODY, { status: 200 })
-      }
-      return new Response('', { status: 404 })
-    }) as typeof fetch
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string | URL | Request) => {
+        const u = String(url)
+        if (u.endsWith('bc-01.v2.test.ts')) {
+          return new Response(STUB_BODY, { status: 200 })
+        }
+        return new Response('', { status: 404 })
+      })
+    )
   })
 
   it('mounts and renders the BC.01 category, member patterns, and stub-trio panes', async () => {
