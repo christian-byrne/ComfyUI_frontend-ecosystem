@@ -1,0 +1,23 @@
+---
+title: "execution"
+description: "API reference for execution."
+---
+
+```ts
+const execution: EventNamespace<ExecutionEventPayloads>;
+```
+
+Defined in: [src/extension-api/events.ts:185](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/events.ts#L185)
+
+Prompt-run lifecycle events (backend-dispatched).
+
+Canonical events: `'start'`, `'end'`, `'error'`, `'interrupted'`, `'cached'`,
+`'executing'`, `'progress'`, `'preview'`. The wire-name mapping rewrites
+`'start'` → `'execution_start'`, etc., matching the legacy
+`api.addEventListener('execution_start', ...)` shape.
+
+## Public API
+
+## Stability
+
+experimental

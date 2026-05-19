@@ -1,0 +1,31 @@
+---
+title: "graph"
+description: "API reference for graph."
+---
+
+```ts
+const graph: EventNamespace<GraphEventPayloads>;
+```
+
+Defined in: [src/extension-api/events.ts:170](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/events.ts#L170)
+
+Graph-mutation events (frontend-dispatched).
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { onMounted, graph } from '@comfyorg/extension-api'
+
+defineExtension({
+  name: 'my-ext',
+  setup() {
+    onMounted(() => {
+      graph.on('changed', (e) => console.log('graph changed', e))
+    })
+  }
+})
+```

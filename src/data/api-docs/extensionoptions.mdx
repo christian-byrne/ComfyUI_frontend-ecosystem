@@ -3,7 +3,7 @@ title: "ExtensionOptions"
 description: "Options object for defineExtension — app-wide lifecycle and shell UI."
 ---
 
-Defined in: [src/extension-api/types.ts:99](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/types.ts#L99)
+Defined in: [src/extension-api/types.ts:99](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/types.ts#L99)
 
 Options for the global `defineExtension` entry point. Covers extension-wide
 lifecycle and shell UI contributions.
@@ -27,13 +27,13 @@ export default defineExtension({
 
 ## Methods
 
-### init()?
+### ~~init()?~~
 
 ```ts
 optional init(): void | Promise<void>;
 ```
 
-Defined in: [src/extension-api/types.ts:110](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/types.ts#L110)
+Defined in: [src/extension-api/types.ts:117](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/types.ts#L117)
 
 Runs once during app initialization (after the app is mounted but before
 the first workflow is loaded). Equivalent to the v1 `ComfyExtension.init`.
@@ -42,15 +42,24 @@ the first workflow is loaded). Equivalent to the v1 `ComfyExtension.init`.
 
 `void` \| `Promise`\<`void`\>
 
+#### Deprecated
+
+Per D-bootstrap-hooks (W6.P6.C, ACCEPTED 2026-05-14): move the
+`init` body into `setup()`. The body of `setup()` runs at the same point
+`init` used to run (early lifecycle); use `onMounted(() => ...)` inside
+`setup()` for what `init` did via late-lifecycle assumptions. A codemod
+ships in `@comfyorg/extension-api` to perform the rewrite mechanically.
+The v1 hook is retained for back-compat during the deprecation window.
+
 ***
 
-### setup()?
+### ~~setup()?~~
 
 ```ts
 optional setup(): void | Promise<void>;
 ```
 
-Defined in: [src/extension-api/types.ts:117](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/types.ts#L117)
+Defined in: [src/extension-api/types.ts:142](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/types.ts#L142)
 
 Runs once after the app and all core extensions are initialized. Equivalent
 to the v1 `ComfyExtension.setup`. Safe to call shell UI registration APIs
@@ -59,3 +68,23 @@ to the v1 `ComfyExtension.setup`. Safe to call shell UI registration APIs
 #### Returns
 
 `void` \| `Promise`\<`void`\>
+
+#### Deprecated
+
+Per D-bootstrap-hooks (W6.P6.C, ACCEPTED 2026-05-14): the
+`setup` property name is retained, but the v1 semantic "fires after all
+core extensions ready" now lives in `onMounted(() => ...)` *inside* the
+`setup()` body. The `setup()` body itself now runs at the earlier
+registration-equivalent point (where v1 `init` used to run). Use
+`onBeforeMount` / `onMounted` / `onUnmounted` / `onActivated` /
+`onDeactivated` for fine-grained lifecycle hooks.
+
+Migration:
+```ts
+// v1
+setup() { api.addEventListener('execution_start', fn) }
+// v2
+setup() { onMounted(() => execution.on('start', fn)) }
+```
+
+A codemod ships in `@comfyorg/extension-api`.

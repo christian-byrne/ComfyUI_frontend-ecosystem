@@ -1,0 +1,23 @@
+---
+title: "workbench"
+description: "API reference for workbench."
+---
+
+```ts
+const workbench: EventNamespace<WorkbenchEventPayloads>;
+```
+
+Defined in: [src/extension-api/events.ts:215](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/events.ts#L215)
+
+UI shell events.
+
+Canonical events today: `'notification'`. Future: `'themeChanged'`,
+`'panelToggled'`, `'commandInvoked'`. NOT a DI container — see
+D-bootstrap-hooks §Decision for the "thin event-namespace handle only"
+scope-back.
+
+## Public API
+
+## Stability
+
+experimental

@@ -66,8 +66,10 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | Interface | Description |
 | ------ | ------ |
 | [CommandManager](interfaces/CommandManager.md) | - |
+| [ExecutionEventPayloads](interfaces/ExecutionEventPayloads.md) | - |
 | [ExtensionManager](interfaces/ExtensionManager.md) | - |
 | [ExtensionOptions](interfaces/ExtensionOptions.md) | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions. |
+| [GraphEventPayloads](interfaces/GraphEventPayloads.md) | Per-namespace event payload map. **Augment via TS module augmentation** to narrow payloads for canonical events. Until D5 ships, all payloads default to `unknown`. |
 | [~~NodeBeforeSerializeEvent~~](interfaces/NodeBeforeSerializeEvent.md) | Payload for `node.on('beforeSerialize', handler)`. |
 | [NodeConnectedEvent](interfaces/NodeConnectedEvent.md) | Payload for `node.on('connected', handler)`. |
 | [NodeDisconnectedEvent](interfaces/NodeDisconnectedEvent.md) | Payload for `node.on('disconnected', handler)`. |
@@ -77,6 +79,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [NodeModeChangedEvent](interfaces/NodeModeChangedEvent.md) | Payload for `node.on('modeChanged', handler)`. |
 | [NodePositionChangedEvent](interfaces/NodePositionChangedEvent.md) | Payload for `node.on('positionChanged', handler)`. |
 | [NodeSizeChangedEvent](interfaces/NodeSizeChangedEvent.md) | Payload for `node.on('sizeChanged', handler)`. |
+| [ServerEventPayloads](interfaces/ServerEventPayloads.md) | - |
 | [SlotInfo](interfaces/SlotInfo.md) | Read-only snapshot of a single slot (input or output) on a node. |
 | [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. |
 | [WidgetBeforeQueueEvent](interfaces/WidgetBeforeQueueEvent.md) | Payload for `widget.on('beforeQueue', handler)`. |
@@ -88,6 +91,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [WidgetOptions](interfaces/WidgetOptions.md) | Options passed to `node.addWidget()` when creating a new widget. |
 | [WidgetPropertyChangeEvent](interfaces/WidgetPropertyChangeEvent.md) | Payload for `widget.on('propertyChange', handler)`. |
 | [WidgetValueChangeEvent](interfaces/WidgetValueChangeEvent.md) | Payload for `widget.on('valueChange', handler)`. |
+| [WorkbenchEventPayloads](interfaces/WorkbenchEventPayloads.md) | - |
 
 ## Type Aliases
 
@@ -109,6 +113,15 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [WidgetMountFn](type-aliases/WidgetMountFn.md) | Mount function for a widget. Called once when the widget is first attached to a node host in the DOM. Returns an optional cleanup function that fires on widget destruction. |
 | [WidgetValue](type-aliases/WidgetValue.md) | The union of all legal widget scalar values. Complex widgets (DOM, canvas) may return their own serializable shapes. |
 
+## Variables
+
+| Variable | Description |
+| ------ | ------ |
+| [execution](variables/execution.md) | Prompt-run lifecycle events (backend-dispatched). |
+| [graph](variables/graph.md) | Graph-mutation events (frontend-dispatched). |
+| [server](variables/server.md) | Non-execution backend events + custom-node events. |
+| [workbench](variables/workbench.md) | UI shell events. |
+
 ## Functions
 
 | Function | Description |
@@ -120,7 +133,12 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [defineWidget](functions/defineWidget.md) | - |
 | [isNodeExecutionId](functions/isNodeExecutionId.md) | Type guard to check if a value is a NodeExecutionId |
 | [isNodeLocatorId](functions/isNodeLocatorId.md) | Type guard to check if a value is a NodeLocatorId |
+| [onActivated](functions/onActivated.md) | Register a callback to fire when the surrounding tab/panel is shown. |
+| [onBeforeMount](functions/onBeforeMount.md) | Register a callback to fire just before the surrounding instance is mounted. |
+| [onDeactivated](functions/onDeactivated.md) | Register a callback to fire when the surrounding tab/panel is hidden. |
+| [onMounted](functions/onMounted.md) | Register a callback to fire when the surrounding instance is mounted. |
 | [onNodeMounted](functions/onNodeMounted.md) | Register a callback that fires after setup() completes for this node entity (post-flush, still within the active EffectScope). Must be called synchronously inside nodeCreated / loadedGraphNode (D10a). |
 | [onNodeRemoved](functions/onNodeRemoved.md) | Register a callback that fires when the node entity is removed from the graph. Does NOT fire on subgraph promotion (DOM-move, not unmount). Must be called synchronously inside nodeCreated / loadedGraphNode (D10a). |
+| [onUnmounted](functions/onUnmounted.md) | Register a callback to fire when the surrounding instance is unmounted. |
 | [parseNodeExecutionId](functions/parseNodeExecutionId.md) | Parse a NodeExecutionId into its component node IDs |
 | [parseNodeLocatorId](functions/parseNodeLocatorId.md) | Parse a NodeLocatorId into its components |

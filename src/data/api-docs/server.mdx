@@ -1,0 +1,23 @@
+---
+title: "server"
+description: "API reference for server."
+---
+
+```ts
+const server: EventNamespace<ServerEventPayloads>;
+```
+
+Defined in: [src/extension-api/events.ts:200](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/events.ts#L200)
+
+Non-execution backend events + custom-node events.
+
+Canonical events: `'status'`, `'logs'`, `'reconnected'`, `'feature_flags'`,
+`'assets'`. Custom-node events ride this channel with arbitrary string
+(e.g. `server.on('rayko.inspline.show', ...)`). Module-augment
+`ServerEventPayloads` to type custom events.
+
+## Public API
+
+## Stability
+
+experimental

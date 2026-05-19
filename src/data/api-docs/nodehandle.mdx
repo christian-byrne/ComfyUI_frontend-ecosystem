@@ -4,7 +4,7 @@ description: "Controlled access to node state, mutations, slots, and events."
 icon: "circle-nodes"
 ---
 
-Defined in: [src/extension-api/node.ts:228](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L228)
+Defined in: [src/extension-api/node.ts:228](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L228)
 
 Controlled surface for node access. Reads query the ECS World; writes
 dispatch commands. Events are Vue-reactive watches on World components.
@@ -47,7 +47,7 @@ addWidget(
    options?): WidgetHandle;
 ```
 
-Defined in: [src/extension-api/node.ts:400](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L400)
+Defined in: [src/extension-api/node.ts:435](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L435)
 
 Adds a new widget to this node.
 
@@ -74,7 +74,7 @@ The new `WidgetHandle`.
 equals(other): boolean;
 ```
 
-Defined in: [src/extension-api/node.ts:250](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L250)
+Defined in: [src/extension-api/node.ts:250](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L250)
 
 Returns `true` if `other` represents the same node entity as this one.
 Equivalent to `this.id === other.id` but the canonical comparator —
@@ -99,7 +99,7 @@ identity scheme remain transparent.
 getInputs(): readonly Readonly<SlotInfo>[];
 ```
 
-Defined in: [src/extension-api/node.ts:436](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L436)
+Defined in: [src/extension-api/node.ts:471](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L471)
 
 Returns all input slots on this node.
 
@@ -133,7 +133,7 @@ const types = node.getInputs().map((s) => s.type)
 getMode(): NodeMode;
 ```
 
-Defined in: [src/extension-api/node.ts:319](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L319)
+Defined in: [src/extension-api/node.ts:354](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L354)
 
 Returns the node's current execution mode.
 
@@ -149,7 +149,7 @@ Returns the node's current execution mode.
 getOutputs(): readonly Readonly<SlotInfo>[];
 ```
 
-Defined in: [src/extension-api/node.ts:445](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L445)
+Defined in: [src/extension-api/node.ts:480](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L480)
 
 Returns all output slots on this node.
 
@@ -169,13 +169,28 @@ readonly `Readonly`\<[`SlotInfo`](./slotinfo)\>[]
 getPosition(): Point;
 ```
 
-Defined in: [src/extension-api/node.ts:273](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L273)
+Defined in: [src/extension-api/node.ts:292](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L292)
 
-Returns the node's current canvas position as `[x, y]`.
+Returns the node's current position as `[x, y]` in **canvas units**.
+
+Canvas units are the LiteGraph internal coordinate space — independent
+of zoom, pan, or `devicePixelRatio`. To position a DOM overlay aligned
+with the node visually on screen, use [defineWidget](./definewidget)'s
+`mount(host, ctx)` seam (host is pre-positioned by the runtime). For
+legitimate screen-space needs (custom hit-testing, hi-DPI math,
+floating overlays anchored to absolute browser coordinates), the
+documented escape-hatch is `window.app.canvas.ds.scale` /
+`window.app.canvas.ds.offset` + `window.app.canvas.canvas
+.getBoundingClientRect()`. The escape-hatch is `@stability escape-hatch`
+(deliberately fragile) — see `D-coord-space.md § Documentation contract`.
 
 #### Returns
 
 [`Point`](./point)
+
+#### Stability
+
+stable
 
 ***
 
@@ -185,7 +200,7 @@ Returns the node's current canvas position as `[x, y]`.
 getProperties(): Record<string, unknown>;
 ```
 
-Defined in: [src/extension-api/node.ts:343](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L343)
+Defined in: [src/extension-api/node.ts:378](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L378)
 
 Returns a copy of all per-node-instance properties.
 
@@ -201,7 +216,7 @@ Returns a copy of all per-node-instance properties.
 getProperty<T>(key): T | undefined;
 ```
 
-Defined in: [src/extension-api/node.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L337)
+Defined in: [src/extension-api/node.ts:372](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L372)
 
 Returns a per-node-instance property by key.
 
@@ -233,13 +248,23 @@ for v1 extensions that used it for per-instance widget config (e.g. min/max).
 getSize(): Size;
 ```
 
-Defined in: [src/extension-api/node.ts:285](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L285)
+Defined in: [src/extension-api/node.ts:318](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L318)
 
-Returns the node's current size as `[width, height]`.
+Returns the node's current size as `[width, height]` in **canvas units**.
+
+Same coordinate-space semantics as [getPosition](#getposition): zoom and
+`devicePixelRatio` are NOT applied. A 200-canvas-unit-wide node will
+appear as 100 CSS px wide at 50% zoom or 400 CSS px wide at 200% zoom.
+For DOM-overlay sizing, prefer the [defineWidget](./definewidget) `mount` seam
+which provides a pre-positioned host.
 
 #### Returns
 
 [`Size`](./size)
+
+#### Stability
+
+stable
 
 ***
 
@@ -249,7 +274,7 @@ Returns the node's current size as `[width, height]`.
 getTitle(): string;
 ```
 
-Defined in: [src/extension-api/node.ts:299](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L299)
+Defined in: [src/extension-api/node.ts:334](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L334)
 
 Returns the node's display title. Defaults to the node type string.
 
@@ -267,7 +292,7 @@ getWidget(name):
   | undefined;
 ```
 
-Defined in: [src/extension-api/node.ts:366](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L366)
+Defined in: [src/extension-api/node.ts:401](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L401)
 
 Returns a `WidgetHandle` for the named widget, or `undefined` if no such
 widget exists on this node.
@@ -298,7 +323,7 @@ if (steps) steps.setValue(20)
 getWidgets(): readonly Readonly<WidgetHandle<WidgetValue>>[];
 ```
 
-Defined in: [src/extension-api/node.ts:389](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L389)
+Defined in: [src/extension-api/node.ts:424](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L424)
 
 Returns all widgets on this node as `WidgetHandle` instances.
 
@@ -333,7 +358,7 @@ const labels = node.getWidgets().map((w) => w.label)
 inputs(): readonly Readonly<SlotInfo>[];
 ```
 
-Defined in: [src/extension-api/node.ts:452](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L452)
+Defined in: [src/extension-api/node.ts:487](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L487)
 
 #### Returns
 
@@ -353,7 +378,7 @@ Will be removed in v1.0.
 isSelected(): boolean;
 ```
 
-Defined in: [src/extension-api/node.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L311)
+Defined in: [src/extension-api/node.ts:346](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L346)
 
 Returns `true` if the node is currently selected on the canvas.
 
@@ -371,7 +396,7 @@ Returns `true` if the node is currently selected on the canvas.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:472](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L472)
+Defined in: [src/extension-api/node.ts:507](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L507)
 
 Subscribe to node removal (graph deletion, not subgraph promotion).
 
@@ -398,7 +423,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:482](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L482)
+Defined in: [src/extension-api/node.ts:517](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L517)
 
 Subscribe to backend execution completion for this node.
 
@@ -424,7 +449,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:492](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L492)
+Defined in: [src/extension-api/node.ts:527](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L527)
 
 Subscribe to workflow hydration (node loaded from a saved workflow).
 
@@ -450,7 +475,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:503](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L503)
+Defined in: [src/extension-api/node.ts:538](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L538)
 
 Subscribe to slot connection events.
 
@@ -477,7 +502,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:510](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L510)
+Defined in: [src/extension-api/node.ts:545](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L545)
 
 Subscribe to slot disconnection events.
 
@@ -500,7 +525,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:520](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L520)
+Defined in: [src/extension-api/node.ts:555](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L555)
 
 Subscribe to canvas position changes.
 
@@ -523,7 +548,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:530](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L530)
+Defined in: [src/extension-api/node.ts:565](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L565)
 
 Subscribe to node size changes.
 
@@ -546,7 +571,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:537](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L537)
+Defined in: [src/extension-api/node.ts:572](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L572)
 
 Subscribe to execution mode changes.
 
@@ -569,7 +594,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [src/extension-api/node.ts:563](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L563)
+Defined in: [src/extension-api/node.ts:598](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L598)
 
 Subscribe to node serialization. Async-capable.
 
@@ -618,7 +643,7 @@ experimental
 outputs(): readonly Readonly<SlotInfo>[];
 ```
 
-Defined in: [src/extension-api/node.ts:459](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L459)
+Defined in: [src/extension-api/node.ts:494](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L494)
 
 #### Returns
 
@@ -638,7 +663,7 @@ Will be removed in v1.0.
 setMode(mode): void;
 ```
 
-Defined in: [src/extension-api/node.ts:325](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L325)
+Defined in: [src/extension-api/node.ts:360](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L360)
 
 Sets the node's execution mode. Dispatches a `SetNodeMode` command.
 
@@ -660,9 +685,15 @@ Sets the node's execution mode. Dispatches a `SetNodeMode` command.
 setPosition(pos): void;
 ```
 
-Defined in: [src/extension-api/node.ts:279](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L279)
+Defined in: [src/extension-api/node.ts:305](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L305)
 
-Moves the node to a new canvas position. Dispatches a `MoveNode` command.
+Moves the node to a new position. **Argument is in canvas units.**
+Dispatches a `MoveNode` command.
+
+No conversion is performed — passing screen pixels here will move
+the node by screen-pixel amounts in canvas space (almost always a
+bug). To convert a screen-space pointer event to canvas units before
+calling this, use the escape-hatch — see [getPosition](#getposition) JSDoc.
 
 #### Parameters
 
@@ -674,6 +705,10 @@ Moves the node to a new canvas position. Dispatches a `MoveNode` command.
 
 `void`
 
+#### Stability
+
+stable
+
 ***
 
 ### setProperty()
@@ -682,7 +717,7 @@ Moves the node to a new canvas position. Dispatches a `MoveNode` command.
 setProperty(key, value): void;
 ```
 
-Defined in: [src/extension-api/node.ts:352](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L352)
+Defined in: [src/extension-api/node.ts:387](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L387)
 
 Sets a per-node-instance property. Dispatches a `SetNodeProperty` command.
 
@@ -708,9 +743,10 @@ config (it persists to the `widget_options` sidecar in the workflow JSON).
 setSize(size): void;
 ```
 
-Defined in: [src/extension-api/node.ts:291](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L291)
+Defined in: [src/extension-api/node.ts:326](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L326)
 
-Resizes the node. Dispatches a `ResizeNode` command.
+Resizes the node. **Argument is in canvas units.**
+Dispatches a `ResizeNode` command.
 
 #### Parameters
 
@@ -722,6 +758,10 @@ Resizes the node. Dispatches a `ResizeNode` command.
 
 `void`
 
+#### Stability
+
+stable
+
 ***
 
 ### setTitle()
@@ -730,7 +770,7 @@ Resizes the node. Dispatches a `ResizeNode` command.
 setTitle(title): void;
 ```
 
-Defined in: [src/extension-api/node.ts:305](https://github.com/Comfy-Org/ComfyUI_frontend/blob/719d193be0202984922f7cb01f9ef667d3729ea0/src/extension-api/node.ts#L305)
+Defined in: [src/extension-api/node.ts:340](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L340)
 
 Sets the node's display title. Dispatches a `SetNodeVisual` command.
 

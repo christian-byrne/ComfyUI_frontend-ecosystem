@@ -1,0 +1,34 @@
+---
+title: "onBeforeMount"
+description: "API reference for onBeforeMount."
+---
+
+```ts
+function onBeforeMount(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:782](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/services/extension-api-service.ts#L782)
+
+Register a callback to fire just before the surrounding instance is mounted.
+
+Symmetry partner of [onMounted](./onmounted). Rarely needed — most use cases want
+`onMounted`. Use this when you need to schedule pre-mount work (e.g.
+preparing a reactive sentinel) that the mount-time code depends on.
+
+Must be called synchronously inside a `setup()` body.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`
+
+## Public API
+
+## Stability
+
+experimental

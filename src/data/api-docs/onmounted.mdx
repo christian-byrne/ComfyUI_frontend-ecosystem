@@ -1,0 +1,36 @@
+---
+title: "onMounted"
+description: "API reference for onMounted."
+---
+
+```ts
+function onMounted(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:762](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/services/extension-api-service.ts#L762)
+
+Register a callback to fire when the surrounding instance is mounted.
+
+- Inside `defineExtension.setup`: fires after the app is fully mounted.
+- Inside `defineSidebarTab.setup`: fires when the tab's DOM is created.
+- Inside `defineBottomPanelTab.setup`: fires when the panel's DOM is created.
+
+Must be called synchronously inside the surrounding `setup()` body. Calling
+after an `await` (or outside any setup context) throws in development and
+silently no-ops in production.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`
+
+## Public API
+
+## Stability
+
+experimental

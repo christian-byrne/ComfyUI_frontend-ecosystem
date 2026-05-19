@@ -1,0 +1,36 @@
+---
+title: "onUnmounted"
+description: "API reference for onUnmounted."
+---
+
+```ts
+function onUnmounted(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:805](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/services/extension-api-service.ts#L805)
+
+Register a callback to fire when the surrounding instance is unmounted.
+
+- Inside `defineExtension.setup`: fires at app teardown (rare).
+- Inside `defineSidebarTab.setup`: fires when the tab is removed.
+- Inside `defineBottomPanelTab.setup`: fires when the panel is removed.
+
+Use for cleanup: close connections, abort fetches, release resources.
+
+Must be called synchronously inside a `setup()` body.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`
+
+## Public API
+
+## Stability
+
+experimental

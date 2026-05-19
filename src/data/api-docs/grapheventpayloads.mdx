@@ -1,0 +1,25 @@
+---
+title: "GraphEventPayloads"
+description: "API reference for GraphEventPayloads."
+---
+
+Defined in: [src/extension-api/events.ts:78](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/events.ts#L78)
+
+Per-namespace event payload map. **Augment via TS module augmentation** to
+narrow payloads for canonical events. Until D5 ships, all payloads default
+to `unknown`.
+
+```ts
+declare module '@comfyorg/extension-api' {
+  interface ExecutionEventPayloads {
+    start: { promptId: string }
+    progress: { value: number; max: number }
+  }
+}
+```
+
+## Indexable
+
+```ts
+[event: string]: unknown
+```

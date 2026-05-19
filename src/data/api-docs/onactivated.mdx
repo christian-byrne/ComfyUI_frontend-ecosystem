@@ -1,0 +1,34 @@
+---
+title: "onActivated"
+description: "API reference for onActivated."
+---
+
+```ts
+function onActivated(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:825](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/services/extension-api-service.ts#L825)
+
+Register a callback to fire when the surrounding tab/panel is shown.
+
+Only valid inside `defineSidebarTab.setup` or `defineBottomPanelTab.setup` —
+the lifecycle has no "shown" semantic for app-level `defineExtension`. Throws
+in dev / no-ops in prod when called inside `defineExtension.setup`.
+
+Must be called synchronously inside a `setup()` body.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`
+
+## Public API
+
+## Stability
+
+experimental

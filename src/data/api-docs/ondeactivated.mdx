@@ -1,0 +1,32 @@
+---
+title: "onDeactivated"
+description: "API reference for onDeactivated."
+---
+
+```ts
+function onDeactivated(fn): void;
+```
+
+Defined in: [src/services/extension-api-service.ts:852](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/services/extension-api-service.ts#L852)
+
+Register a callback to fire when the surrounding tab/panel is hidden.
+
+Symmetry partner of [onActivated](./onactivated). Same kind restrictions apply.
+
+Must be called synchronously inside a `setup()` body.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fn` | () => `void` |
+
+## Returns
+
+`void`
+
+## Public API
+
+## Stability
+
+experimental
