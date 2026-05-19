@@ -1,11 +1,15 @@
+import type { PluginOption } from 'vite'
 import { execSync } from 'node:child_process'
 import { statSync } from 'node:fs'
 import path from 'node:path'
 
+import process from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { defineConfig, type PluginOption } from 'vite'
+import { defineConfig } from 'vite'
+import checker from 'vite-plugin-checker'
+import compression from 'vite-plugin-compression'
 
 /**
  * Best-effort build-info: yaml source mtimes + current git sha.
@@ -22,9 +26,7 @@ function ymlMtime(rel: string): string {
 
 function gitSha(): string {
   try {
-    return execSync('git rev-parse --short HEAD', { cwd: __dirname })
-      .toString()
-      .trim()
+    return execSync('git rev-parse --short HEAD', { cwd: __dirname }).toString().trim()
   } catch {
     return ''
   }
@@ -42,7 +44,14 @@ const buildInfo = {
   }
 }
 
-const plugins: PluginOption[] = [vue(), tailwindcss()]
+const plugins: PluginOption[] = [
+  vue(),
+  tailwindcss(),
+  checker({ vueTsc: true }),
+  ...(process.env.NODE_ENV === 'production'
+    ? [compression({ algorithm: 'gzip' }), compression({ algorithm: 'brotliCompress', ext: '.br' })]
+    : [])
+]
 
 if (process.env.ANALYZE) {
   plugins.push(
@@ -84,14 +93,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      exclude: [
-        'node_modules',
-        'dist',
-        '**/*.test.ts',
-        '**/*.spec.ts',
-        'src/main.ts',
-        'e2e/**'
-      ],
+      exclude: ['node_modules', 'dist', '**/*.test.ts', '**/*.spec.ts', 'src/main.ts', 'e2e/**'],
       thresholds: {
         statements: 60,
         branches: 50,
