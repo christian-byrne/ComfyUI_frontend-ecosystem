@@ -1,0 +1,30 @@
+---
+title: "WidgetPropertyChangeEvent"
+description: "API reference for WidgetPropertyChangeEvent."
+---
+
+Defined in: [extension-api/widget.ts:92](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L92)
+
+Payload for `widget.on('propertyChange', handler)`.
+
+Fires when a first-class every-widget property is mutated — specifically
+`hidden`, `disabled`, and `serialize`. Does NOT fire for `value` changes
+(use `valueChange`) or for options-bag mutations (use `optionChange`).
+
+## Stability
+
+experimental
+
+```ts
+widget.on('propertyChange', (e) => {
+  if (e.property === 'hidden') updateLayout(e.newValue as boolean)
+})
+```
+
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="newvalue"></a> `newValue` | `readonly` | `boolean` | Value after the change. |
+| <a id="oldvalue"></a> `oldValue` | `readonly` | `boolean` | Value before the change. |
+| <a id="property"></a> `property` | `readonly` | `"serialize"` | Which first-class property changed. - `'serialize'` — serialization opt-in/out via `setSerializeEnabled()` PHASE_A_EXCLUDED per AXIOMS.md A14: - `'hidden'` — visibility toggled via `setHidden()` (deferred) - `'disabled'` — enabled/disabled via `setDisabled()` (deferred) |

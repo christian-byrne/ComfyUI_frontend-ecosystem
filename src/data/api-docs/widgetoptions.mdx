@@ -3,12 +3,17 @@ title: "WidgetOptions"
 description: "API reference for WidgetOptions."
 ---
 
-Defined in: [extension-api/widget.ts:604](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L604)
+Defined in: [extension-api/widget.ts:610](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L610)
 
-Options passed to `node.addWidget()` when creating a new widget.
+Options surfaced on each widget instance. Type-specific keys (e.g. `min`,
+`max`, `step` for numeric widgets; `multiline`, `dynamicPrompts` for
+strings) are passed through from the node's `INPUT_TYPES` schema as-is.
 
-Type-specific keys (e.g. `min`, `max`, `step` for numeric widgets;
-`multiline`, `dynamicPrompts` for strings) are passed through as-is.
+Runtime widget addition is forbidden per AXIOMS.md A15 (Widget
+Declarativity) / `decisions/D-ban-runtime-addwidget.md` — every widget
+originates from the Python `INPUT_TYPES` declaration; this type
+describes the options surfaced on the resulting `WidgetHandle`, not a
+constructor argument bag.
 
 ## Indexable
 

@@ -85,7 +85,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [WidgetHandle](interfaces/WidgetHandle.md) | Controlled surface for widget access. Backed by ECS `WidgetValue` and `WidgetIdentity` components in the World. Reads query components directly; writes dispatch commands (undo-able, serializable, validatable). |
 | [WidgetMountContext](interfaces/WidgetMountContext.md) | Context passed to a widget's `mount()` function. |
 | [WidgetOptionChangeEvent](interfaces/WidgetOptionChangeEvent.md) | Payload for `widget.on('optionChange', handler)`. |
-| [WidgetOptions](interfaces/WidgetOptions.md) | Options passed to `node.addWidget()` when creating a new widget. |
+| [WidgetOptions](interfaces/WidgetOptions.md) | Options surfaced on each widget instance. Type-specific keys (e.g. `min`, `max`, `step` for numeric widgets; `multiline`, `dynamicPrompts` for strings) are passed through from the node's `INPUT_TYPES` schema as-is. |
 | [WidgetValueChangeEvent](interfaces/WidgetValueChangeEvent.md) | Payload for `widget.on('valueChange', handler)`. |
 | [WorkbenchEventPayloads](interfaces/WorkbenchEventPayloads.md) | - |
 

@@ -3,17 +3,21 @@ title: "WidgetExtensionOptions"
 description: "Options object for defineWidgetExtension — custom widget rendering."
 ---
 
-Defined in: [extension-api/types.ts:180](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/types.ts#L180)
+Defined in: [extension-api/types.ts:184](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/types.ts#L184)
 
 Options for `defineWidget`. Registers a custom widget type that renders
 through the mount-lifecycle seam (Axiom A12 / D-widget-converge).
 
-Once registered, the widget can be instantiated on any node via
-`node.addWidget(type, name, defaultValue, opts?)`. The runtime allocates
-a per-widget host `<div>` and invokes the registered `mount(host, ctx)`
-hook against it. The widget's mount body captures the host (and any DOM
-it constructs) via closure — there is no `widget.element` accessor on
-the handle.
+Once registered, the widget type can be referenced from Python
+`INPUT_TYPES` schema declarations. The runtime allocates a per-widget
+host `<div>` and invokes the registered `mount(host, ctx)` hook against
+it. The widget's mount body captures the host (and any DOM it
+constructs) via closure — there is no `widget.element` accessor on the
+handle.
+
+Runtime widget addition (`node.addWidget(...)`) is forbidden per
+AXIOMS.md A15 / `decisions/D-ban-runtime-addwidget.md` — widgets are
+schema-declared, never created at runtime by extensions.
 
 `mount` is optional: omit it for value-only widgets (numeric, combo, etc.)
 that render through the native widget renderer with no custom DOM.

@@ -4,7 +4,7 @@ description: "Controlled access to widget state, mutations, and events."
 icon: "sliders"
 ---
 
-Defined in: [extension-api/widget.ts:234](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L234)
+Defined in: [extension-api/widget.ts:234](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L234)
 
 Controlled surface for widget access. Backed by ECS `WidgetValue` and
 `WidgetIdentity` components in the World. Reads query components directly;
@@ -43,8 +43,8 @@ export default defineWidget({
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
 | <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
-| <a id="label"></a> `label` | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). To override at construction, pass `label` to `addWidget()` options. |
-| <a id="name"></a> `name` | `readonly` | `string` | The widget's name as registered in `INPUT_TYPES` or `addWidget`. Stable for the lifetime of the node; never changes after creation. |
+| <a id="label"></a> `label` | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). The label is set by the Python node's `INPUT_TYPES` schema (e.g. via the `label` key on the input options dict). |
+| <a id="name"></a> `name` | `readonly` | `string` | The widget's name as registered in the node's `INPUT_TYPES` schema. Stable for the lifetime of the node; never changes after creation. |
 | <a id="options"></a> `options` | `readonly` | `Readonly`\<[`WidgetOptions`](./widgetoptions)\> | Read-only snapshot of the full options bag for this widget. **Immutable per D-immutability-enforcement (Hybrid C).** The returned object is `Readonly<WidgetOptions>` — `widget.options.min = 0`, `widget.options = {...}`, and `widget.options.values = [...]` all raise TypeScript errors at compile time. To mutate, use [WidgetHandle.setOption](#setoption) per-key. Note: this is an accessor pair on the v2 surface. Reading is free; the setter intentionally does not exist on the public type. Per AXIOMS.md §A16, `serialize` is no longer a writable option (and no longer a key on this bag) — there is no widget-level serialization disable. `widget.options.values = [...]` (combo refresh) migrates to a future `setValues` mutator (tracked under W6.P8.UNMIGRATABLE). **Example** `// ❌ TS-ERR — every option write raises a compile-time error widget.options.min = 0 widget.options = { min: 0, max: 100 } // ✅ Read freely const min = widget.options.min ?? 0 // ✅ Mutate via typed setters widget.setOption('min', 0)` |
 | <a id="serializevalue"></a> ~~`serializeValue`~~ | `readonly` | ((...`args`) => `unknown`) \| `undefined` | The widget's current `serializeValue` function (or `undefined` if none is registered). **Accessor-only per D-immutability-enforcement (Hybrid C).** The setter intentionally does not exist on the public type — assignment (`widget.serializeValue = fn`) raises a TypeScript error. The v2 migration target is the [\`on('beforeSerialize', fn)\`](#on) event (per D5), which is typed, async-capable, and composable across multiple extensions on the same widget. **Deprecated** v1 callers reading `widget.serializeValue` to invoke the function directly should subscribe to `'beforeSerialize'` instead. This read-only accessor exists for debugging / introspection only and may be removed once the v1 surface is fully retired. **Example** `// ❌ TS-ERR — direct assignment no longer compiles widget.serializeValue = () => 'static value' // ✅ Subscribe to the typed event (D5). Per A16 the hook fires once // and the framework writes the resulting payload to every transport; // there is no transport discriminator. widget.on('beforeSerialize', (e) => { e.setSerializedValue('static value') })` **Stability** experimental |
 | <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation. |
@@ -57,7 +57,7 @@ export default defineWidget({
 equals(other): boolean;
 ```
 
-Defined in: [extension-api/widget.ts:256](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L256)
+Defined in: [extension-api/widget.ts:256](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L256)
 
 Returns `true` if `other` represents the same widget entity as this
 one. Equivalent to `this.id === other.id` but the canonical comparator
@@ -82,7 +82,7 @@ the identity scheme remain transparent.
 getOption<K>(key): K | undefined;
 ```
 
-Defined in: [extension-api/widget.ts:392](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L392)
+Defined in: [extension-api/widget.ts:393](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L393)
 
 Returns the per-instance override for `key`, or the class-default value
 from `INPUT_TYPES` if no override has been set, or `undefined` if the key
@@ -121,7 +121,7 @@ const min = widget.getOption<number>('min') ?? 0
 getValue(): T;
 ```
 
-Defined in: [extension-api/widget.ts:286](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L286)
+Defined in: [extension-api/widget.ts:286](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L286)
 
 Returns the widget's current user-edited value.
 
@@ -148,7 +148,7 @@ const value = widget.getValue<number>()
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:455](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L455)
+Defined in: [extension-api/widget.ts:456](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L456)
 
 Subscribe to the widget's value changes.
 
@@ -174,7 +174,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:469](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L469)
+Defined in: [extension-api/widget.ts:470](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L470)
 
 Subscribe to type-specific option mutations (`setOption(key, value)`).
 
@@ -204,7 +204,7 @@ experimental
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:500](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L500)
+Defined in: [extension-api/widget.ts:501](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L501)
 
 Subscribe to widget serialization. The only async-allowed event.
 
@@ -237,7 +237,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:517](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L517)
+Defined in: [extension-api/widget.ts:518](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L518)
 
 Subscribe to pre-queue validation. Fires before `graphToPrompt` runs.
 
@@ -272,7 +272,7 @@ experimental
 setHeight(px): void;
 ```
 
-Defined in: [extension-api/widget.ts:332](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L332)
+Defined in: [extension-api/widget.ts:333](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L333)
 
 Updates the reserved height for this widget and triggers a node relayout.
 
@@ -307,7 +307,7 @@ experimental
 setOption(key, value): void;
 ```
 
-Defined in: [extension-api/widget.ts:408](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L408)
+Defined in: [extension-api/widget.ts:409](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L409)
 
 Set a per-instance option override. Persisted as a `widget_options` sidecar
 in the workflow JSON (additive, backward-compatible). Does not change the
@@ -342,7 +342,7 @@ widget.setOption('step', 1)
 setValue(value): void;
 ```
 
-Defined in: [extension-api/widget.ts:293](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L293)
+Defined in: [extension-api/widget.ts:293](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/widget.ts#L293)
 
 Sets the widget's value. Dispatches a `SetWidgetValue` command (undo-able).
 Triggers `valueChange` handlers on all views.
