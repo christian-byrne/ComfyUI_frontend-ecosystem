@@ -4,7 +4,7 @@ description: "Controlled access to node state, mutations, slots, and events."
 icon: "circle-nodes"
 ---
 
-Defined in: [extension-api/node.ts:140](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L140)
+Defined in: [extension-api/node.ts:140](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L140)
 
 Controlled surface for node access. Reads query the ECS World; writes
 dispatch commands. Events are Vue-reactive watches on World components.
@@ -43,7 +43,7 @@ export default defineNode({
 equals(other): boolean;
 ```
 
-Defined in: [extension-api/node.ts:162](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L162)
+Defined in: [extension-api/node.ts:162](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L162)
 
 Returns `true` if `other` represents the same node entity as this one.
 Equivalent to `this.id === other.id` but the canonical comparator —
@@ -68,7 +68,7 @@ identity scheme remain transparent.
 getInputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:301](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L301)
+Defined in: [extension-api/node.ts:301](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L301)
 
 Returns all input slots on this node.
 
@@ -102,7 +102,7 @@ const types = node.getInputs().map((s) => s.type)
 getOutputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:310](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L310)
+Defined in: [extension-api/node.ts:310](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L310)
 
 Returns all output slots on this node.
 
@@ -122,7 +122,7 @@ readonly `SlotInfo`[]
 getProperties(): Record<string, unknown>;
 ```
 
-Defined in: [extension-api/node.ts:213](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L213)
+Defined in: [extension-api/node.ts:213](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L213)
 
 Returns a copy of all per-node-instance properties.
 
@@ -138,7 +138,7 @@ Returns a copy of all per-node-instance properties.
 getProperty<T>(key): T | undefined;
 ```
 
-Defined in: [extension-api/node.ts:207](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L207)
+Defined in: [extension-api/node.ts:207](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L207)
 
 Returns a per-node-instance property by key.
 
@@ -170,7 +170,7 @@ for v1 extensions that used it for per-instance widget config (e.g. min/max).
 inputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:317](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L317)
+Defined in: [extension-api/node.ts:317](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L317)
 
 #### Returns
 
@@ -192,7 +192,7 @@ Will be removed in v1.0.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L337)
+Defined in: [extension-api/node.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L337)
 
 Subscribe to node removal (graph deletion, not subgraph promotion).
 
@@ -219,7 +219,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:347](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L347)
+Defined in: [extension-api/node.ts:347](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L347)
 
 Subscribe to backend execution completion for this node.
 
@@ -245,7 +245,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:357](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L357)
+Defined in: [extension-api/node.ts:357](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L357)
 
 Subscribe to workflow hydration (node loaded from a saved workflow).
 
@@ -271,7 +271,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:394](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L394)
+Defined in: [extension-api/node.ts:394](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L394)
 
 Subscribe to node serialization. Async-capable.
 
@@ -320,7 +320,7 @@ experimental
 outputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:324](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L324)
+Defined in: [extension-api/node.ts:324](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L324)
 
 #### Returns
 
@@ -340,7 +340,7 @@ Will be removed in v1.0.
 setProperty(key, value): void;
 ```
 
-Defined in: [extension-api/node.ts:222](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/node.ts#L222)
+Defined in: [extension-api/node.ts:222](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/node.ts#L222)
 
 Sets a per-node-instance property. Dispatches a `SetNodeProperty` command.
 

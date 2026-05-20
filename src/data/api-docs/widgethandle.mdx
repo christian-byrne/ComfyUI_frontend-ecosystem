@@ -4,7 +4,7 @@ description: "Controlled access to widget state, mutations, and events."
 icon: "sliders"
 ---
 
-Defined in: [extension-api/widget.ts:252](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L252)
+Defined in: [extension-api/widget.ts:234](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L234)
 
 Controlled surface for widget access. Backed by ECS `WidgetValue` and
 `WidgetIdentity` components in the World. Reads query components directly;
@@ -45,8 +45,8 @@ export default defineWidget({
 | <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
 | <a id="label"></a> `label` | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). To override at construction, pass `label` to `addWidget()` options. |
 | <a id="name"></a> `name` | `readonly` | `string` | The widget's name as registered in `INPUT_TYPES` or `addWidget`. Stable for the lifetime of the node; never changes after creation. |
-| <a id="options"></a> `options` | `readonly` | `Readonly`\<[`WidgetOptions`](./widgetoptions)\> | Read-only snapshot of the full options bag for this widget. **Immutable per D-immutability-enforcement (Hybrid C).** The returned object is `Readonly<WidgetOptions>` — `widget.options.min = 0`, `widget.options = {...}`, and `widget.options.values = [...]` all raise TypeScript errors at compile time. To mutate, use [WidgetHandle.setOption](#setoption) per-key. Note: this is an accessor pair on the v2 surface. Reading is free; the setter intentionally does not exist on the public type. v1 patterns like `widget.options.serialize = false` should migrate to [WidgetHandle.setSerializeEnabled](#setserializeenabled); `widget.options.values = [...]` (combo refresh) migrates to a future `setValues` mutator (tracked under W6.P8.UNMIGRATABLE). **Example** `// ❌ TS-ERR — every option write raises a compile-time error widget.options.min = 0 widget.options = { min: 0, max: 100 } widget.options.serialize = false // ✅ Read freely const min = widget.options.min ?? 0 // ✅ Mutate via typed setters widget.setOption('min', 0) widget.setSerializeEnabled(false)` |
-| <a id="serializevalue"></a> ~~`serializeValue`~~ | `readonly` | ((...`args`) => `unknown`) \| `undefined` | The widget's current `serializeValue` function (or `undefined` if none is registered). **Accessor-only per D-immutability-enforcement (Hybrid C).** The setter intentionally does not exist on the public type — assignment (`widget.serializeValue = fn`) raises a TypeScript error. The v2 migration target is the [\`on('beforeSerialize', fn)\`](#on) event (per D5), which is typed, async-capable, and composable across multiple extensions on the same widget. **Deprecated** v1 callers reading `widget.serializeValue` to invoke the function directly should subscribe to `'beforeSerialize'` instead. This read-only accessor exists for debugging / introspection only and may be removed once the v1 surface is fully retired. **Example** `// ❌ TS-ERR — direct assignment no longer compiles widget.serializeValue = () => 'static value' // ✅ Subscribe to the typed event (D5) widget.on('beforeSerialize', (e) => { if (e.context === 'prompt') e.setSerializedValue('static value') })` **Stability** experimental |
+| <a id="options"></a> `options` | `readonly` | `Readonly`\<[`WidgetOptions`](./widgetoptions)\> | Read-only snapshot of the full options bag for this widget. **Immutable per D-immutability-enforcement (Hybrid C).** The returned object is `Readonly<WidgetOptions>` — `widget.options.min = 0`, `widget.options = {...}`, and `widget.options.values = [...]` all raise TypeScript errors at compile time. To mutate, use [WidgetHandle.setOption](#setoption) per-key. Note: this is an accessor pair on the v2 surface. Reading is free; the setter intentionally does not exist on the public type. Per AXIOMS.md §A16, `serialize` is no longer a writable option (and no longer a key on this bag) — there is no widget-level serialization disable. `widget.options.values = [...]` (combo refresh) migrates to a future `setValues` mutator (tracked under W6.P8.UNMIGRATABLE). **Example** `// ❌ TS-ERR — every option write raises a compile-time error widget.options.min = 0 widget.options = { min: 0, max: 100 } // ✅ Read freely const min = widget.options.min ?? 0 // ✅ Mutate via typed setters widget.setOption('min', 0)` |
+| <a id="serializevalue"></a> ~~`serializeValue`~~ | `readonly` | ((...`args`) => `unknown`) \| `undefined` | The widget's current `serializeValue` function (or `undefined` if none is registered). **Accessor-only per D-immutability-enforcement (Hybrid C).** The setter intentionally does not exist on the public type — assignment (`widget.serializeValue = fn`) raises a TypeScript error. The v2 migration target is the [\`on('beforeSerialize', fn)\`](#on) event (per D5), which is typed, async-capable, and composable across multiple extensions on the same widget. **Deprecated** v1 callers reading `widget.serializeValue` to invoke the function directly should subscribe to `'beforeSerialize'` instead. This read-only accessor exists for debugging / introspection only and may be removed once the v1 surface is fully retired. **Example** `// ❌ TS-ERR — direct assignment no longer compiles widget.serializeValue = () => 'static value' // ✅ Subscribe to the typed event (D5). Per A16 the hook fires once // and the framework writes the resulting payload to every transport; // there is no transport discriminator. widget.on('beforeSerialize', (e) => { e.setSerializedValue('static value') })` **Stability** experimental |
 | <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation. |
 
 ## Methods
@@ -57,7 +57,7 @@ export default defineWidget({
 equals(other): boolean;
 ```
 
-Defined in: [extension-api/widget.ts:274](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L274)
+Defined in: [extension-api/widget.ts:256](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L256)
 
 Returns `true` if `other` represents the same widget entity as this
 one. Equivalent to `this.id === other.id` but the canonical comparator
@@ -82,7 +82,7 @@ the identity scheme remain transparent.
 getOption<K>(key): K | undefined;
 ```
 
-Defined in: [extension-api/widget.ts:418](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L418)
+Defined in: [extension-api/widget.ts:392](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L392)
 
 Returns the per-instance override for `key`, or the class-default value
 from `INPUT_TYPES` if no override has been set, or `undefined` if the key
@@ -121,7 +121,7 @@ const min = widget.getOption<number>('min') ?? 0
 getValue(): T;
 ```
 
-Defined in: [extension-api/widget.ts:304](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L304)
+Defined in: [extension-api/widget.ts:286](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L286)
 
 Returns the widget's current user-edited value.
 
@@ -140,23 +140,6 @@ const value = widget.getValue<number>()
 
 ***
 
-### isSerializeEnabled()
-
-```ts
-isSerializeEnabled(): boolean;
-```
-
-Defined in: [extension-api/widget.ts:359](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L359)
-
-Returns `true` if this widget is included in workflow and prompt
-serialization. Defaults to `true` for all widget types.
-
-#### Returns
-
-`boolean`
-
-***
-
 ### on()
 
 #### Call Signature
@@ -165,7 +148,7 @@ serialization. Defaults to `true` for all widget types.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:479](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L479)
+Defined in: [extension-api/widget.ts:455](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L455)
 
 Subscribe to the widget's value changes.
 
@@ -191,7 +174,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:493](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L493)
+Defined in: [extension-api/widget.ts:469](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L469)
 
 Subscribe to type-specific option mutations (`setOption(key, value)`).
 
@@ -221,45 +204,18 @@ experimental
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:510](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L510)
-
-Subscribe to first-class property mutations (`setSerializeEnabled`).
-
-PHASE_A_EXCLUDED per AXIOMS.md A14: `setHidden`, `setDisabled` deferred
-pending serialization convergence.
-
-Does NOT fire for `setValue` (use `valueChange`) or options-bag mutations
-(use `optionChange`).
-
-##### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"propertyChange"` |
-| `handler` | [`Handler`](./handler)\<[`WidgetPropertyChangeEvent`](./widgetpropertychangeevent)\> |
-
-##### Returns
-
-[`Unsubscribe`](./unsubscribe)
-
-A cleanup function to remove the listener.
-
-##### Stability
-
-experimental
-
-#### Call Signature
-
-```ts
-on(event, handler): Unsubscribe;
-```
-
-Defined in: [extension-api/widget.ts:524](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L524)
+Defined in: [extension-api/widget.ts:500](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L500)
 
 Subscribe to widget serialization. The only async-allowed event.
 
-Replaces `widget.serializeValue = fn` and the v1 `widget.options.serialize`
-flag. The handler may be sync or async; async handlers are awaited before
+Per AXIOMS.md §A16 this is the **sole** extension-author interface
+to serialization. The hook fires once per serialization and the
+framework writes the resulting payload to every transport (workflow
+JSON `widgets_values`, API prompt, clone target, subgraph promotion).
+Replaces the v1 `widget.serializeValue = fn` /
+`widget.options.serialize` patterns.
+
+The handler may be sync or async; async handlers are awaited before
 the serialization payload is sent.
 
 ##### Parameters
@@ -281,7 +237,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/widget.ts:541](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L541)
+Defined in: [extension-api/widget.ts:517](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L517)
 
 Subscribe to pre-queue validation. Fires before `graphToPrompt` runs.
 
@@ -316,7 +272,7 @@ experimental
 setHeight(px): void;
 ```
 
-Defined in: [extension-api/widget.ts:350](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L350)
+Defined in: [extension-api/widget.ts:332](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L332)
 
 Updates the reserved height for this widget and triggers a node relayout.
 
@@ -351,7 +307,7 @@ experimental
 setOption(key, value): void;
 ```
 
-Defined in: [extension-api/widget.ts:434](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L434)
+Defined in: [extension-api/widget.ts:408](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L408)
 
 Set a per-instance option override. Persisted as a `widget_options` sidecar
 in the workflow JSON (additive, backward-compatible). Does not change the
@@ -380,38 +336,13 @@ widget.setOption('step', 1)
 
 ***
 
-### setSerializeEnabled()
-
-```ts
-setSerializeEnabled(enabled): void;
-```
-
-Defined in: [extension-api/widget.ts:368](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L368)
-
-Enable or disable serialization for this widget. When disabled, the widget
-is excluded from both `widgets_values` in the workflow JSON and the API
-prompt payload. Equivalent to the v1 `widget.options.serialize = false`
-pattern.
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `enabled` | `boolean` |
-
-#### Returns
-
-`void`
-
-***
-
 ### setValue()
 
 ```ts
 setValue(value): void;
 ```
 
-Defined in: [extension-api/widget.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L311)
+Defined in: [extension-api/widget.ts:293](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L293)
 
 Sets the widget's value. Dispatches a `SetWidgetValue` command (undo-able).
 Triggers `valueChange` handlers on all views.

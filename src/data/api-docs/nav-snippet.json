@@ -44,7 +44,6 @@
         "extensions/api/widgetmountcontext",
         "extensions/api/widgetoptionchangeevent",
         "extensions/api/widgetoptions",
-        "extensions/api/widgetpropertychangeevent",
         "extensions/api/workbencheventpayloads",
         "extensions/api/asynchandler",
         "extensions/api/commanddefinition",

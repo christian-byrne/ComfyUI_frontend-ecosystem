@@ -3,7 +3,7 @@ title: "WidgetMountContext"
 description: "API reference for WidgetMountContext."
 ---
 
-Defined in: [extension-api/widget.ts:570](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L570)
+Defined in: [extension-api/widget.ts:546](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L546)
 
 Context passed to a widget's `mount()` function.
 
@@ -31,7 +31,7 @@ experimental
 onAfterRemount(fn): void;
 ```
 
-Defined in: [extension-api/widget.ts:600](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L600)
+Defined in: [extension-api/widget.ts:576](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L576)
 
 Register a callback that fires immediately **after** the widget's host
 `<div>` has been moved to a new location. Receives the new host element
@@ -55,7 +55,7 @@ so authors can re-attach observers, restore scroll position, etc.
 onBeforeRemount(fn): void;
 ```
 
-Defined in: [extension-api/widget.ts:593](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L593)
+Defined in: [extension-api/widget.ts:569](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L569)
 
 Register a callback that fires immediately **before** the widget's host
 `<div>` is moved to a new location (graph↔app mode, subgraph promotion,
@@ -83,7 +83,7 @@ The widget's mount body is NOT re-invoked across a remount; only
 onUnmount(fn): void;
 ```
 
-Defined in: [extension-api/widget.ts:582](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L582)
+Defined in: [extension-api/widget.ts:558](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L558)
 
 Register a callback that fires when the widget entity is destroyed.
 Equivalent to returning a cleanup function from `mount()`; provided as

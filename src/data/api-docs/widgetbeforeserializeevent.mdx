@@ -3,38 +3,40 @@ title: "WidgetBeforeSerializeEvent"
 description: "Pre-serialization hook payload — override or skip widget value."
 ---
 
-Defined in: [extension-api/widget.ts:144](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L144)
+Defined in: [extension-api/widget.ts:128](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L128)
 
 Payload for `widget.on('beforeSerialize', handler)`.
 
-This is the **only async-allowed event** in the API.
-Replaces `widget.serializeValue`, `widget.options.serialize = false`, and
-the v1 `widget.serializeValue = (workflowNode, widgetIndex) => ...` pattern.
+This is the **only async-allowed event** in the API and, per AXIOMS.md
+§A16 (Unified Serialization Target), the **sole** extension-author
+interface to serialization. Replaces every v1 serialization hook:
+`widget.serializeValue = fn`, `widget.options.serialize = false`,
+`nodeType.prototype.serialize`.
 
-Call `event.setSerializedValue(v)` to override what is written to
-`widgets_values[i]` and the API prompt. Call `event.skip()` to exclude this
-widget from the prompt entirely. Do not call either to pass through the
-widget's current `getValue()` unchanged.
+The hook fires **once per serialization**. The framework writes the
+resulting payload to every transport (workflow JSON `widgets_values[i]`,
+API prompt, clone target, subgraph promotion). Extensions do not see and
+cannot branch on the transport — that is a framework concern (A16).
+
+Call `event.setSerializedValue(v)` to override what is written. Do not
+call it to pass through the widget's current `getValue()` unchanged.
+
+Per A16 there is no `skip()` and no `context` discriminator. Per A15
+(Widget Declarativity) there is no way to exclude a widget from
+serialization — if a widget should not contribute to the payload, it
+should not be a widget (use a boxed widget, a non-widget UI primitive,
+or a schema input).
 
 ```ts
 // Dynamic prompts: replace value at serialize time
 widget.on('beforeSerialize', (e) => {
-  if (e.context === 'prompt') {
-    e.setSerializedValue(processDynamicPrompt(widget.getValue()))
-  }
+  e.setSerializedValue(processDynamicPrompt(widget.getValue()))
 })
 
-// Preview widget: exclude from prompt
-widget.on('beforeSerialize', (e) => {
-  if (e.context === 'prompt') e.skip()
-})
-
-// Async: webcam capture — materialize frame before prompt builds
+// Async: webcam capture — materialize frame before serialization
 widget.on('beforeSerialize', async (e) => {
-  if (e.context === 'prompt') {
-    const frame = await captureFrame()
-    e.setSerializedValue(frame)
-  }
+  const frame = await captureFrame()
+  e.setSerializedValue(frame)
 })
 ```
 
@@ -48,7 +50,6 @@ widget.on('beforeSerialize', async (e) => {
 
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
-| <a id="context"></a> `context` | `readonly` | `"workflow"` \| `"prompt"` \| `"clone"` \| `"subgraph-promote"` | Which serialization path triggered this handler. - `'workflow'` — user is saving the workflow to disk (full round-trip). - `'prompt'` — user is queueing a run (only prompt-relevant data sent to backend). - `'clone'` — a copy/paste is happening; the framework already populated the cloned entity's widget value from the source. Override only if the clone should differ from the source. - `'subgraph-promote'` — the widget is being promoted to a subgraph IO slot. |
 | <a id="value"></a> `value` | `readonly` | `T` | The widget's current value at the time of serialization (before any override). Equivalent to calling `widget.getValue()`. |
 
 ## Methods
@@ -59,35 +60,18 @@ widget.on('beforeSerialize', async (e) => {
 setSerializedValue(v): void;
 ```
 
-Defined in: [extension-api/widget.ts:170](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L170)
+Defined in: [extension-api/widget.ts:152](https://github.com/Comfy-Org/ComfyUI_frontend/blob/166953175c61d7070aeff1b7857ec743d7de9982/src/extension-api/widget.ts#L152)
 
-Override the serialized value. The provided value is written to
-`widgets_values[i]` (and to the API prompt for `context='prompt'`).
-Calling this multiple times keeps the last call's value.
+Override the serialized value. The provided value is written to every
+transport (workflow JSON `widgets_values[i]`, API prompt, clone target,
+subgraph promotion). Calling this multiple times keeps the last call's
+value.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `v` | `unknown` | The value to serialize. Must be JSON-serializable. |
-
-#### Returns
-
-`void`
-
-***
-
-### skip()
-
-```ts
-skip(): void;
-```
-
-Defined in: [extension-api/widget.ts:177](https://github.com/Comfy-Org/ComfyUI_frontend/blob/5e926d87ed99b4706b48fb5daff90168b2f1ddff/src/extension-api/widget.ts#L177)
-
-Exclude this widget from the API prompt entirely.
-Only meaningful for `context='prompt'`; no-ops on other contexts.
-Replaces `widget.options.serialize = false` and `() => undefined` patterns.
 
 #### Returns
 
