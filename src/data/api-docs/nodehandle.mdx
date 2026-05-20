@@ -4,7 +4,7 @@ description: "Controlled access to node state, mutations, slots, and events."
 icon: "circle-nodes"
 ---
 
-Defined in: [extension-api/node.ts:140](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L140)
+Defined in: [extension-api/node.ts:139](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L139)
 
 Controlled surface for node access. Reads query the ECS World; writes
 dispatch commands. Events are Vue-reactive watches on World components.
@@ -32,7 +32,7 @@ export default defineNode({
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
 | <a id="comfyclass"></a> `comfyClass` | `readonly` | `string` | The ComfyUI backend class name (e.g. `'KSampler'`). Equal to `type` for most nodes; differs for reroute/virtual nodes. Read-only invariant. |
-| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this node. Stable for the lifetime of the node entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [NodeHandle.equals](#equals) to compare with another handle. **Remarks** Per D20, the underlying value is a branded `NodeEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
+| <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this node. Stable for the lifetime of the node entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [NodeHandle.equals](#equals) to compare with another handle. **Remarks** The underlying value is a branded `NodeEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
 | <a id="type"></a> `type` | `readonly` | `string` | The LiteGraph node type string (e.g. `'KSampler'`). Read-only invariant: set at construction, never changes. |
 
 ## Methods
@@ -43,7 +43,7 @@ export default defineNode({
 equals(other): boolean;
 ```
 
-Defined in: [extension-api/node.ts:162](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L162)
+Defined in: [extension-api/node.ts:159](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L159)
 
 Returns `true` if `other` represents the same node entity as this one.
 Equivalent to `this.id === other.id` but the canonical comparator —
@@ -68,16 +68,16 @@ identity scheme remain transparent.
 getInputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:301](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L301)
+Defined in: [extension-api/node.ts:288](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L288)
 
 Returns all input slots on this node.
 
-**Immutable view per D-immutability-enforcement (Hybrid C).** The returned
+**Immutable view.** The returned
 array and each slot are `Readonly` — `node.getInputs().push(...)`,
 `node.getInputs()[i] = X`, and `node.getInputs()[i].name = "x"` all raise
 TypeScript errors at compile time. Per-slot mutators (`setInputName`,
 `replaceInput`, bulk field setters) are tracked under
-W6.P8.UNMIGRATABLE / D-input-output-shape.
+  *
 
 #### Returns
 
@@ -102,13 +102,13 @@ const types = node.getInputs().map((s) => s.type)
 getOutputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:310](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L310)
+Defined in: [extension-api/node.ts:297](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L297)
 
 Returns all output slots on this node.
 
-**Immutable view per D-immutability-enforcement (Hybrid C).** Same
+**Immutable view.** Same
 read-only semantics as [NodeHandle.getInputs](#getinputs). Per-slot mutators
-tracked under W6.P8.UNMIGRATABLE / D-input-output-shape.
+tracked separately.
 
 #### Returns
 
@@ -122,7 +122,7 @@ readonly `SlotInfo`[]
 getProperties(): Record<string, unknown>;
 ```
 
-Defined in: [extension-api/node.ts:213](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L213)
+Defined in: [extension-api/node.ts:205](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L205)
 
 Returns a copy of all per-node-instance properties.
 
@@ -138,7 +138,7 @@ Returns a copy of all per-node-instance properties.
 getProperty<T>(key): T | undefined;
 ```
 
-Defined in: [extension-api/node.ts:207](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L207)
+Defined in: [extension-api/node.ts:199](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L199)
 
 Returns a per-node-instance property by key.
 
@@ -170,7 +170,7 @@ for v1 extensions that used it for per-instance widget config (e.g. min/max).
 inputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:317](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L317)
+Defined in: [extension-api/node.ts:304](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L304)
 
 #### Returns
 
@@ -179,7 +179,7 @@ readonly `SlotInfo`[]
 #### Deprecated
 
 Use [NodeHandle.getInputs](#getinputs) instead. Renamed to align
-with the `getX()` accessor convention (D11/D-immutability-enforcement).
+with the `getX()` accessor convention.
 Will be removed in v1.0.
 
 ***
@@ -192,7 +192,7 @@ Will be removed in v1.0.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L337)
+Defined in: [extension-api/node.ts:322](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L322)
 
 Subscribe to node removal (graph deletion, not subgraph promotion).
 
@@ -219,7 +219,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:347](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L347)
+Defined in: [extension-api/node.ts:332](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L332)
 
 Subscribe to backend execution completion for this node.
 
@@ -245,7 +245,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:357](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L357)
+Defined in: [extension-api/node.ts:342](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L342)
 
 Subscribe to workflow hydration (node loaded from a saved workflow).
 
@@ -271,7 +271,7 @@ A cleanup function to remove the listener.
 on(event, handler): Unsubscribe;
 ```
 
-Defined in: [extension-api/node.ts:400](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L400)
+Defined in: [extension-api/node.ts:385](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L385)
 
 Subscribe to node serialization. Async-capable.
 
@@ -326,7 +326,7 @@ experimental
 outputs(): readonly SlotInfo[];
 ```
 
-Defined in: [extension-api/node.ts:324](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L324)
+Defined in: [extension-api/node.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L311)
 
 #### Returns
 
@@ -335,7 +335,7 @@ readonly `SlotInfo`[]
 #### Deprecated
 
 Use [NodeHandle.getOutputs](#getoutputs) instead. Renamed to align
-with the `getX()` accessor convention (D11/D-immutability-enforcement).
+with the `getX()` accessor convention.
 Will be removed in v1.0.
 
 ***
@@ -346,7 +346,7 @@ Will be removed in v1.0.
 setProperty(key, value): void;
 ```
 
-Defined in: [extension-api/node.ts:222](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L222)
+Defined in: [extension-api/node.ts:214](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L214)
 
 Sets a per-node-instance property. Dispatches a `SetNodeProperty` command.
 

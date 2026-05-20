@@ -7,10 +7,10 @@ description: "API reference for Size."
 type Size = readonly [number, number];
 ```
 
-Defined in: [extension-api/node.ts:43](https://github.com/Comfy-Org/ComfyUI_frontend/blob/7c4d713ce489ed71668a803ad9def70ed372929a/src/extension-api/node.ts#L43)
+Defined in: [extension-api/node.ts:42](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L42)
 
 A 2D size as `[width, height]`.
 
-**Immutable tuple per D-immutability-enforcement (Hybrid C).** Attempts to
+**Immutable tuple.** Attempts to
 mutate via `node.getSize()[0] = X` raise a TypeScript error. Use
 NodeHandle.setSize to resize the node.
