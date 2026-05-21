@@ -3,7 +3,7 @@ title: "DisposableHandle"
 description: "API reference for DisposableHandle."
 ---
 
-Defined in: [extension-api/registrations.ts:63](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/registrations.ts#L63)
+Defined in: [extension-api/registrations.ts:77](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/registrations.ts#L77)
 
 Handle returned by every `defineX`. Call `dispose()` to remove the
 registration. Idempotent and synchronous — see module-level "Dispose
@@ -15,6 +15,20 @@ contract" notes.
 
 experimental
 
+```ts
+import { defineSidebarTab, type DisposableHandle } from '@comfyorg/extension-api'
+
+const handle: DisposableHandle = defineSidebarTab({
+  id: 'my-tab',
+  title: 'My Tab',
+  type: 'vue',
+  component: MyTab
+})
+
+// Later: tear down
+handle.dispose()
+```
+
 ## Methods
 
 ### dispose()
@@ -23,7 +37,7 @@ experimental
 dispose(): void;
 ```
 
-Defined in: [extension-api/registrations.ts:64](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/registrations.ts#L64)
+Defined in: [extension-api/registrations.ts:78](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/registrations.ts#L78)
 
 #### Returns
 

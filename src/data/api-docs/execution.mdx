@@ -7,7 +7,7 @@ description: "API reference for execution."
 const execution: EventNamespace<ExecutionEventPayloads>;
 ```
 
-Defined in: [extension-api/events.ts:183](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/events.ts#L183)
+Defined in: [extension-api/events.ts:219](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/events.ts#L219)
 
 Prompt-run lifecycle events (backend-dispatched).
 
@@ -21,3 +21,18 @@ Canonical events: `'start'`, `'end'`, `'error'`, `'interrupted'`, `'cached'`,
 ## Stability
 
 experimental
+
+```ts
+import { defineExtension, onMounted, execution } from '@comfyorg/extension-api'
+
+defineExtension({
+  name: 'my-ext',
+  setup() {
+    onMounted(() => {
+      execution.on('start', (e) => console.log('run started', e))
+      execution.on('progress', (e) => console.log('progress', e))
+      execution.on('end', () => console.log('run done'))
+    })
+  }
+})
+```

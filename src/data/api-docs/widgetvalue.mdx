@@ -7,7 +7,15 @@ description: "API reference for WidgetValue."
 type WidgetValue = string | number | boolean | null;
 ```
 
-Defined in: [extension-api/widget.ts:29](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/widget.ts#L29)
+Defined in: [extension-api/widget.ts:38](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/widget.ts#L38)
 
 The union of all legal widget scalar values. Complex widgets (DOM, canvas)
 may return their own serializable shapes.
+
+```ts
+import type { WidgetValue } from '@comfyorg/extension-api'
+
+// `WidgetValue` is `string | number | boolean | null` — the four
+// primitive-widget value shapes.
+const val: WidgetValue = 42
+```

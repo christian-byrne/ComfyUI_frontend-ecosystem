@@ -7,7 +7,7 @@ description: "API reference for WidgetMountFn."
 type WidgetMountFn = (host, ctx) => void | WidgetCleanup;
 ```
 
-Defined in: [extension-api/widget.ts:575](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/widget.ts#L575)
+Defined in: [extension-api/widget.ts:609](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/widget.ts#L609)
 
 Mount function for a widget. Called once when the widget is first attached
 to a node host in the DOM. Returns an optional cleanup function that fires
@@ -30,3 +30,14 @@ Optional cleanup function called on widget destruction. Host
 ## Stability
 
 experimental
+
+```ts
+import type { WidgetMountFn } from '@comfyorg/extension-api'
+
+const mount: WidgetMountFn = (host, ctx) => {
+  const el = document.createElement('div')
+  el.textContent = String(ctx.widget.getValue() ?? '')
+  host.appendChild(el)
+  return () => el.remove()
+}
+```

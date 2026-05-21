@@ -67,15 +67,14 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | ------ | ------ |
 | [AboutBadgeExtension](interfaces/AboutBadgeExtension.md) | Public arg type for [defineAboutBadge](functions/defineAboutBadge.md). A badge that appears on the About page (linked label + icon + optional severity). Mirrors v1 `extension.aboutPageBadges[]`. |
 | [DisposableHandle](interfaces/DisposableHandle.md) | Handle returned by every `defineX`. Call `dispose()` to remove the registration. Idempotent and synchronous — see module-level "Dispose contract" notes. |
-| [ExecutionEventPayloads](interfaces/ExecutionEventPayloads.md) | - |
+| [ExecutionEventPayloads](interfaces/ExecutionEventPayloads.md) | See [the augmentation example](interfaces/GraphEventPayloads.md) — augment this interface the same way to narrow `execution.*` payloads. |
 | [ExtensionOptions](interfaces/ExtensionOptions.md) | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions. |
 | [GraphEventPayloads](interfaces/GraphEventPayloads.md) | Per-namespace event payload map. **Augment via TS module augmentation** to narrow payloads for canonical events. Until D5 ships, all payloads default to `unknown`. |
 | [HotkeyExtension](interfaces/HotkeyExtension.md) | Public arg type for [defineHotkey](functions/defineHotkey.md). A hotkey binds a key combination (already-registered command) to fire on press. Mirrors v1 `extension.keybindings[]` which used the internal `Keybinding` shape. |
 | [NodeExecutedEvent](interfaces/NodeExecutedEvent.md) | Payload for `node.on('executed', handler)`. |
 | [NodeExtensionOptions](interfaces/NodeExtensionOptions.md) | Options for `defineNode`. Describes an extension that reacts to node lifecycle events. |
 | [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components. |
-| [NotifyOptions](interfaces/NotifyOptions.md) | Optional shape for [notify](functions/notify.md) — a thinner convenience API over [toast](variables/toast.md). `kind` maps onto PrimeVue toast severities; `message` maps to `summary`; `detail` is optional supplementary text. |
-| [ServerEventPayloads](interfaces/ServerEventPayloads.md) | - |
+| [ServerEventPayloads](interfaces/ServerEventPayloads.md) | See [the augmentation example](interfaces/GraphEventPayloads.md) — augment this interface the same way to narrow `server.*` payloads. |
 | [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. |
 | [ToolbarButtonExtension](interfaces/ToolbarButtonExtension.md) | Public arg type for [defineToolbarButton](functions/defineToolbarButton.md). A button that appears in the action bar (top of the canvas area). Wraps the v1 `extension.actionBarButtons[]` shape with an `id` so each registration is independently disposable. |
 | [WidgetBeforeQueueEvent](interfaces/WidgetBeforeQueueEvent.md) | Payload for `widget.on('beforeQueue', handler)`. |
@@ -86,7 +85,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [WidgetOptionChangeEvent](interfaces/WidgetOptionChangeEvent.md) | Payload for `widget.on('optionChange', handler)`. |
 | [WidgetOptions](interfaces/WidgetOptions.md) | Options surfaced on each widget instance. Type-specific keys (e.g. `min`, `max`, `step` for numeric widgets; `multiline`, `dynamicPrompts` for strings) are passed through from the node's `INPUT_TYPES` schema as-is. |
 | [WidgetValueChangeEvent](interfaces/WidgetValueChangeEvent.md) | Payload for `widget.on('valueChange', handler)`. |
-| [WorkbenchEventPayloads](interfaces/WorkbenchEventPayloads.md) | - |
+| [WorkbenchEventPayloads](interfaces/WorkbenchEventPayloads.md) | See [the augmentation example](interfaces/GraphEventPayloads.md) — augment this interface the same way to narrow `workbench.*` payloads. |
 
 ## Type Aliases
 
@@ -137,7 +136,6 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [defineWidget](functions/defineWidget.md) | - |
 | [isNodeExecutionId](functions/isNodeExecutionId.md) | Type guard to check if a value is a NodeExecutionId |
 | [isNodeLocatorId](functions/isNodeLocatorId.md) | Type guard to check if a value is a NodeLocatorId |
-| [notify](functions/notify.md) | Convenience notification API — a thinner wrapper over [toast](variables/toast.md) that accepts a `{ kind, message, detail }` shape closer to OS notification vocabulary. Use whichever shape you prefer; they share the same underlying transport. |
 | [onActivated](functions/onActivated.md) | Register a callback to fire when the surrounding tab/panel is shown. |
 | [onBeforeMount](functions/onBeforeMount.md) | Register a callback to fire just before the surrounding instance is mounted. |
 | [onDeactivated](functions/onDeactivated.md) | Register a callback to fire when the surrounding tab/panel is hidden. |

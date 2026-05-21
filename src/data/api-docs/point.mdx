@@ -7,10 +7,17 @@ description: "API reference for Point."
 type Point = readonly [number, number];
 ```
 
-Defined in: [extension-api/node.ts:33](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L33)
+Defined in: [extension-api/node.ts:41](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/node.ts#L41)
 
 A 2D point as `[x, y]`.
 
 **Immutable tuple.** Attempts to
 mutate via `node.getPosition()[0] = X` raise a TypeScript error. Use
 NodeHandle.setPosition to move the node.
+
+```ts
+import type { Point } from '@comfyorg/extension-api'
+
+// Per-pixel mouse coordinate from a canvas event
+const cursor: Point = [event.canvasX, event.canvasY]
+```

@@ -3,18 +3,20 @@ title: "ExtensionOptions"
 description: "Options object for defineExtension — app-wide lifecycle and shell UI."
 ---
 
-Defined in: [extension-api/types.ts:99](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/types.ts#L99)
+Defined in: [extension-api/types.ts:101](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/types.ts#L101)
 
 Options for the global `defineExtension` entry point. Covers extension-wide
 lifecycle and shell UI contributions.
 
 ```ts
-import { defineExtension } from '@comfyorg/extension-api'
+import { defineExtension, onMounted } from '@comfyorg/extension-api'
 
 export default defineExtension({
   name: 'my-org.my-extension',
-  async setup() {
-    // App is ready; register commands, sidebar tabs, etc.
+  setup() {
+    onMounted(() => {
+      // App is ready; register commands, sidebar tabs, etc.
+    })
   }
 })
 ```

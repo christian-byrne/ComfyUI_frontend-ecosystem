@@ -7,7 +7,7 @@ description: "API reference for WidgetCleanup."
 type WidgetCleanup = () => void;
 ```
 
-Defined in: [extension-api/widget.ts:516](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/widget.ts#L516)
+Defined in: [extension-api/widget.ts:539](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/extension-api/widget.ts#L539)
 
 Cleanup function returned from a widget's `mount()`. Fires exactly once,
 when the widget entity is destroyed. **Does NOT fire on host remount**
@@ -22,3 +22,17 @@ for those.
 ## Stability
 
 experimental
+
+```ts
+import { defineWidget, type WidgetCleanup } from '@comfyorg/extension-api'
+
+defineWidget({
+  name: 'my-ext',
+  type: 'STRING',
+  mount(host): WidgetCleanup {
+    const input = document.createElement('input')
+    host.appendChild(input)
+    return () => input.remove()
+  }
+})
+```
