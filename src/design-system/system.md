@@ -73,8 +73,8 @@ Use the primitives in `src/components/ui/`. Don't roll your own.
 | Status / tag        | `<Badge>`                                                   |
 | Boxed content       | `<Card>`                                                    |
 | Inline code         | `<CodeChip>`                                                |
-| Long-form markdown  | `<Prose>` (W18.F)                                           |
-| Heading nav         | `<Toc>` (W18.F)                                             |
+| Long-form markdown  | `<Prose :html="…" :dropCap="false" :density="comfortable">` (W18.F) |
+| Heading nav         | `<Toc :items="tocItems" :sticky="true">` (W18.F)            |
 | Planned-surface tag | `<Badge variant="planned">` (or back-compat `<PlannedBadge>`) |
 
 Each primitive accepts a pass-through `class` prop merged via

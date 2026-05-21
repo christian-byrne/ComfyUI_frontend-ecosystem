@@ -2,9 +2,19 @@
 import { marked, Renderer } from 'marked'
 import { computed, onMounted, ref } from 'vue'
 
+import Prose from '@/components/ui/Prose.vue'
 import { ensureHighlighter, highlightCode } from '@/composables/useHighlighter'
 
-const { source } = defineProps<{ source: string }>()
+const { source, prose = false } = defineProps<{
+  source: string
+  /**
+   * Opt-in: wrap rendered HTML in `<Prose>` for max-w-prose vertical
+   * rhythm + heading styling (Wave-18 W18.F). Default `false` keeps
+   * the legacy `prose-zinc` Tailwind-typography output so existing
+   * call sites are byte-identical until pages opt in (W18.G/H).
+   */
+  prose?: boolean
+}>()
 
 const ready = ref(false)
 onMounted(async () => {
@@ -45,7 +55,9 @@ const html = computed(() => {
 </script>
 
 <template>
+  <Prose v-if="prose" :html="html" />
   <article
+    v-else
     class="prose prose-zinc max-w-none dark:prose-invert prose-pre:!bg-zinc-950 prose-pre:!text-zinc-100 dark:prose-pre:!bg-black prose-code:before:hidden prose-code:after:hidden prose-a:text-blue-600 hover:prose-a:underline dark:prose-a:text-blue-400"
     v-html="html"
   />
