@@ -17,6 +17,12 @@ const LitegraphAudit = () => import('../pages/LitegraphAudit.vue')
 const AuditSurfaceDetail = () => import('../pages/AuditSurfaceDetail.vue')
 const AuditPRDetail = () => import('../pages/AuditPRDetail.vue')
 const ApiDocs = () => import('../pages/ApiDocs.vue')
+const Handoff = () => import('../pages/Handoff.vue')
+const Decisions = () => import('../pages/Decisions.vue')
+const DecisionDetail = () => import('../pages/DecisionDetail.vue')
+const Axioms = () => import('../pages/Axioms.vue')
+const KnowledgeGraph = () => import('../pages/KnowledgeGraph.vue')
+const RootDoc = () => import('../pages/RootDoc.vue')
 
 /**
  * Dashboard routes. `meta.nav: true` opts a route into the App.vue header
@@ -113,6 +119,42 @@ export const routes: RouteRecordRaw[] = [
     name: 'api-docs-page',
     component: ApiDocs,
     meta: { title: 'API Docs Page', nav: false }
+  },
+  {
+    path: '/handoff',
+    name: 'handoff',
+    component: Handoff,
+    meta: { title: 'Handoff', nav: true }
+  },
+  {
+    path: '/handoff/root/:slug',
+    name: 'handoff-root-doc',
+    component: RootDoc,
+    meta: { title: 'Handoff Document', nav: false }
+  },
+  {
+    path: '/decisions',
+    name: 'decisions',
+    component: Decisions,
+    meta: { title: 'Decisions', nav: true }
+  },
+  {
+    path: '/decisions/:slug',
+    name: 'decision-detail',
+    component: DecisionDetail,
+    meta: { title: 'Decision Detail', nav: false }
+  },
+  {
+    path: '/axioms',
+    name: 'axioms',
+    component: Axioms,
+    meta: { title: 'Axioms', nav: true }
+  },
+  {
+    path: '/knowledge-graph',
+    name: 'knowledge-graph',
+    component: KnowledgeGraph,
+    meta: { title: 'Knowledge Graph', nav: true }
   }
 ]
 

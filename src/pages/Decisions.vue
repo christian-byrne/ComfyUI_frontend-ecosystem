@@ -1,0 +1,113 @@
+<script setup lang="ts">
+import { useHead } from '@unhead/vue'
+import { computed, ref } from 'vue'
+import { RouterLink } from 'vue-router'
+
+import { decisionsSorted, decisionsByStatus, manifest } from '@/data/knowledge-loader'
+
+useHead({ title: 'Decisions — ComfyUI Frontend Ecosystem' })
+
+const filterStatus = ref<string>('all')
+const filterAxiom = ref<string>('all')
+const search = ref<string>('')
+
+const statuses = computed(() => ['all', ...Object.keys(decisionsByStatus).sort()])
+
+const allAxioms = computed(() =>
+  Object.keys(manifest.axiomIndex).sort(
+    (a, b) => Number(a.slice(1)) - Number(b.slice(1))
+  )
+)
+
+const filtered = computed(() => {
+  const q = search.value.trim().toLowerCase()
+  return decisionsSorted.filter((d) => {
+    if (filterStatus.value !== 'all' && (d.status ?? '') !== filterStatus.value)
+      return false
+    if (filterAxiom.value !== 'all' && !d.axioms.includes(filterAxiom.value))
+      return false
+    if (q && !d.slug.includes(q) && !d.title.toLowerCase().includes(q))
+      return false
+    return true
+  })
+})
+
+const statusColor: Record<string, string> = {
+  accepted: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200',
+  shipped: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200',
+  proposed: 'bg-blue-100 text-blue-900 dark:bg-blue-900/40 dark:text-blue-200',
+  deferred: 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200',
+  superseded: 'bg-zinc-200 text-zinc-700 line-through dark:bg-zinc-800 dark:text-zinc-400',
+  unknown: 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+}
+
+function colorFor(status: string | null): string {
+  const key = (status ?? 'unknown').split(/\s|—|\(/)[0].toLowerCase()
+  return statusColor[key] ?? statusColor.unknown
+}
+</script>
+
+<template>
+  <div class="mx-auto max-w-6xl">
+    <header class="mb-6">
+      <h1 class="mb-2 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+        Architecture Decisions
+      </h1>
+      <p class="text-zinc-600 dark:text-zinc-400">
+        {{ manifest.decisions.length }} ADRs covering the v2 extension API surface, axiom system, lifecycle, serialization, and rebase strategy.
+      </p>
+    </header>
+
+    <div class="mb-6 flex flex-wrap gap-3" data-testid="decisions-filters">
+      <input
+        v-model="search"
+        type="search"
+        placeholder="Search by slug or title…"
+        aria-label="Search decisions"
+        class="flex-1 min-w-[12rem] rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+      />
+      <select
+        v-model="filterStatus"
+        aria-label="Filter by status"
+        class="rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+      >
+        <option v-for="s in statuses" :key="s" :value="s">{{ s === 'all' ? 'All statuses' : s }}</option>
+      </select>
+      <select
+        v-model="filterAxiom"
+        aria-label="Filter by axiom"
+        class="rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+      >
+        <option value="all">All axioms</option>
+        <option v-for="a in allAxioms" :key="a" :value="a">{{ a }}</option>
+      </select>
+    </div>
+
+    <p class="mb-3 text-xs text-zinc-500" data-testid="decisions-result-count">
+      Showing {{ filtered.length }} of {{ manifest.decisions.length }} decisions
+    </p>
+
+    <ul class="divide-y divide-zinc-200 dark:divide-zinc-800" data-testid="decisions-list">
+      <li v-for="d in filtered" :key="d.slug" class="py-3">
+        <div class="flex flex-wrap items-baseline gap-2">
+          <RouterLink
+            :to="`/decisions/${d.slug}`"
+            class="text-sm font-mono font-semibold text-blue-600 hover:underline dark:text-blue-400"
+          >
+            {{ d.slug }}
+          </RouterLink>
+          <span
+            :class="['rounded px-2 py-0.5 text-[10px] uppercase tracking-wide', colorFor(d.status)]"
+          >
+            {{ d.status ?? 'unknown' }}
+          </span>
+          <span class="text-sm text-zinc-700 dark:text-zinc-300">{{ d.title }}</span>
+        </div>
+        <div v-if="d.axioms.length || d.adrs.length" class="mt-1 flex flex-wrap gap-1 text-xs text-zinc-500">
+          <span v-for="a in d.axioms" :key="a" class="rounded bg-violet-100 px-1.5 py-0.5 text-violet-800 dark:bg-violet-900/40 dark:text-violet-200">{{ a }}</span>
+          <span v-if="d.adrs.length" class="ml-2">refs: {{ d.adrs.length }} other ADR(s)</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</template>

@@ -29,7 +29,8 @@
     "data:rollup": "bash scripts/rebuild.sh rollup",
     "data:stars": "bash scripts/rebuild.sh stars",
     "data:verify": "bash scripts/rebuild.sh data",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sync:knowledge": "bash scripts/sync-knowledge.sh"
   },
   "dependencies": {
     "@unhead/vue": "^3.1.0",
