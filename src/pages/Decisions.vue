@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import { decisionsSorted, decisionsByStatus, manifest } from '@/data/knowledge-loader'
+import Badge from '@/components/ui/Badge.vue'
 
 useHead({ title: 'Decisions — ComfyUI Frontend Ecosystem' })
 
@@ -32,18 +33,36 @@ const filtered = computed(() => {
   })
 })
 
-const statusColor: Record<string, string> = {
-  accepted: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200',
-  shipped: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200',
-  proposed: 'bg-blue-100 text-blue-900 dark:bg-blue-900/40 dark:text-blue-200',
-  deferred: 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200',
-  superseded: 'bg-zinc-200 text-zinc-700 line-through dark:bg-zinc-800 dark:text-zinc-400',
-  unknown: 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+// Map ADR status strings to the shared <Badge variant=…> palette.
+// `proposed` keeps the blue/in-flight feel via a `neutral` badge plus an
+// explicit `text-blue-*` override so callers reading the page still see the
+// in-flight tone the dashboard has used since Wave-15.
+type BadgeVariant = 'neutral' | 'success' | 'warning' | 'planned' | 'danger'
+
+interface StatusStyle {
+  variant: BadgeVariant
+  /** Extra utility classes layered on the Badge for status-specific tone. */
+  extra?: string
 }
 
-function colorFor(status: string | null): string {
+const statusStyle: Record<string, StatusStyle> = {
+  accepted: { variant: 'success' },
+  shipped: { variant: 'success' },
+  proposed: {
+    variant: 'neutral',
+    extra: 'bg-blue-100 text-blue-900 dark:bg-blue-900/40 dark:text-blue-200'
+  },
+  deferred: { variant: 'warning' },
+  superseded: {
+    variant: 'neutral',
+    extra: 'line-through bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400'
+  },
+  unknown: { variant: 'neutral' }
+}
+
+function styleFor(status: string | null): StatusStyle {
   const key = (status ?? 'unknown').split(/\s|—|\(/)[0].toLowerCase()
-  return statusColor[key] ?? statusColor.unknown
+  return statusStyle[key] ?? statusStyle.unknown
 }
 </script>
 
@@ -96,11 +115,9 @@ function colorFor(status: string | null): string {
           >
             {{ d.slug }}
           </RouterLink>
-          <span
-            :class="['rounded px-2 py-0.5 text-[10px] uppercase tracking-wide', colorFor(d.status)]"
-          >
+          <Badge :variant="styleFor(d.status).variant" :class="styleFor(d.status).extra">
             {{ d.status ?? 'unknown' }}
-          </span>
+          </Badge>
           <span class="text-sm text-zinc-700 dark:text-zinc-300">{{ d.title }}</span>
         </div>
         <div v-if="d.axioms.length || d.adrs.length" class="mt-1 flex flex-wrap gap-1 text-xs text-zinc-500">

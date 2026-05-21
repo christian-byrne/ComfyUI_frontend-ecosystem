@@ -15,6 +15,7 @@ import type { RegistryNode } from '@/types/registry'
  */
 import { computed } from 'vue'
 import NodePackBanner from '@/components/NodePackBanner.vue'
+import Card from '@/components/ui/Card.vue'
 
 const { nodePack } = defineProps<{ nodePack: RegistryNode }>()
 
@@ -47,8 +48,11 @@ const bannerRepo = computed(() => {
 </script>
 
 <template>
-  <article
-    class="flex size-full flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-colors duration-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 select-none"
+  <Card
+    as="article"
+    variant="outlined"
+    padding="none"
+    class="flex size-full flex-col overflow-hidden bg-white dark:bg-zinc-900 transition-colors duration-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 select-none"
   >
     <NodePackBanner v-if="bannerRepo" :repo="bannerRepo" />
 
@@ -95,5 +99,5 @@ const bannerRepo = computed(() => {
         <span>{{ formattedDownloads }}</span>
       </span>
     </div>
-  </article>
+  </Card>
 </template>

@@ -17,6 +17,45 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
+ * Wave-18 W18.D — semantic color tokens.
+ *
+ * Tailwind v4 supports CSS-first theming via `@theme`. We expose the
+ * design-system role names (`fg-default`, `bg-elevated`, `accent`, etc.)
+ * so future authors can write `text-fg-muted` instead of `text-zinc-500`.
+ *
+ * Light values are the defaults. Dark variants are wired through the
+ * `.dark` class on `<html>` via the `@custom-variant dark` above; the
+ * `-dark` suffixed vars below act as the source of truth for that swap.
+ * Mirror of `src/design-system/design-tokens.ts` — keep in sync.
+ */
+@theme {
+  --color-fg-default: theme(colors.zinc.900);
+  --color-fg-default-dark: theme(colors.zinc.100);
+  --color-fg-muted: theme(colors.zinc.500);
+  --color-fg-muted-dark: theme(colors.zinc.400);
+  --color-fg-subtle: theme(colors.zinc.600);
+  --color-fg-subtle-dark: theme(colors.zinc.300);
+  --color-bg-page: theme(colors.zinc.50);
+  --color-bg-page-dark: theme(colors.zinc.950);
+  --color-bg-elevated: theme(colors.zinc.100);
+  --color-bg-elevated-dark: theme(colors.zinc.900);
+  --color-bg-sunken: theme(colors.zinc.200);
+  --color-bg-sunken-dark: theme(colors.zinc.800);
+  --color-border: theme(colors.zinc.200);
+  --color-border-dark: theme(colors.zinc.800);
+  --color-accent: theme(colors.blue.600);
+  --color-accent-dark: theme(colors.blue.400);
+  --color-success: theme(colors.emerald.700);
+  --color-success-dark: theme(colors.emerald.300);
+  --color-warning: theme(colors.amber.700);
+  --color-warning-dark: theme(colors.amber.300);
+  --color-danger: theme(colors.red.700);
+  --color-danger-dark: theme(colors.red.300);
+  --color-planned: theme(colors.violet.700);
+  --color-planned-dark: theme(colors.violet.300);
+}
+
+/*
  * Body palette mirrors the App shell so the dark background extends past
  * the rendered <main> when content is short. Kept here (not in
  * index.html) so the variant override applies cleanly without inline

@@ -36,9 +36,11 @@
     "@unhead/vue": "^3.1.0",
     "@vueuse/core": "^11.2.0",
     "@vueuse/router": "^11.2.0",
+    "clsx": "^2.1.1",
     "marked": "^18.0.3",
     "pinia": "^2.2.0",
     "shiki": "^4.0.2",
+    "tailwind-merge": "^3.6.0",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0",
     "yaml": "^2.6.1"
