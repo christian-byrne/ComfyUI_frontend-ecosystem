@@ -3,6 +3,7 @@ import type { MigrationStatus } from '@/data/migration-status'
 import { useHead } from '@unhead/vue'
 
 import { computed, ref } from 'vue'
+import PlannedBadge from '@/components/PlannedBadge.vue'
 import { MIGRATION_STATUSES, migrationEntries } from '@/data/migration-status'
 
 useHead({
@@ -228,9 +229,18 @@ function onPickerChange(event: Event) {
             ><code data-testid="api-diff-v1">{{ entry.v1Signature }}</code></pre>
           </div>
           <div>
-            <h3 class="mb-1 text-xs font-semibold uppercase text-emerald-700 dark:text-emerald-400">
-              v2 replacement
-            </h3>
+            <div class="mb-1 flex flex-wrap items-center gap-2">
+              <h3 class="text-xs font-semibold uppercase text-emerald-700 dark:text-emerald-400">
+                v2 replacement
+              </h3>
+              <PlannedBadge
+                v-if="entry.planned"
+                :variant="entry.planned.variant"
+                :tooltip="entry.planned.tooltip"
+                :href="entry.planned.href"
+                data-testid="api-diff-planned-badge"
+              />
+            </div>
             <pre
               class="overflow-x-auto rounded border border-emerald-200 bg-emerald-50 p-3 text-[12px] leading-relaxed text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200"
             ><code data-testid="api-diff-v2">{{ entry.v2Replacement }}</code></pre>
