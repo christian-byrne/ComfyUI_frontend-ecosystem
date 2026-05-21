@@ -1,4 +1,4 @@
-# <a href="/decisions/D20-id-type-convergence" class="wiki-link">D20</a> — Identity type convergence
+# D20 — Identity type convergence
 
 **Status**: ACCEPTED — 2026-05-14 (verdict: keep five branded ID types; demote three to "advanced API"; expose `node.equals(other)` and `node.id` as the 90%-case affordance)
 
@@ -12,7 +12,7 @@
 | `WidgetEntityId` | ECS world | per workflow instance |
 | `SlotEntityId` | ECS world | per workflow instance |
 | `NodeLocatorId` | LiteGraph subgraph traversal | stable across re-render |
-| `NodeExecutionId` | Backend <a href="/api-docs/execution" class="wiki-link">execution</a> correlation | per prompt submission |
+| `NodeExecutionId` | Backend execution correlation | per prompt submission |
 
 Design-review rows #3 ("Identity Complexity — Encapsulation") and #8
 ("Entity ID Exposure — Too Complicated") flagged this as leakage:
@@ -43,11 +43,11 @@ DrJKL: "I think we can solve most cases without it."
 
 W2F-1 re-audit (research/meta/sourcegraph-mcp-coverage-investigation.md)
 shows the actual ecosystem touchpoints: of the 240+ evidence rows in the
-touch-points DB, **only S14.ID1 (<a href="/api-docs/nodelocatorid" class="wiki-link">NodeLocatorId</a> real usage) had to be
+touch-points DB, **only S14.ID1 (NodeLocatorId real usage) had to be
 re-classified from "rare" to "still rare"** in the bulk-clone sweep. Two
 real call sites total across 138 repos — a vendor type re-declaration
 (willie-comfy-frontend) and a cookiecutter template. Conversely, the
-backend `execution_*` event vocabulary (S5.<a href="/axioms#a3-refs" class="wiki-link">A3</a>) flows
+backend `execution_*` event vocabulary (S5.A3) flows
 `NodeExecutionId`-shaped strings through `api.addEventListener('executed', …)`
 to dozens of consumers (show_text, show_json, previewAny, KJNodes, …).
 
@@ -151,12 +151,12 @@ api.addEventListener('executed', e => {
 })
 ```
 
-### Migration impact for v1 / pre-<a href="/decisions/D20-id-type-convergence" class="wiki-link">D20</a> v2 consumers
+### Migration impact for v1 / pre-D20 v2 consumers
 
 - Pre-v1.0; only `src/extensions/core/*.v2.ts` consume the renamed
   fields. Will be updated atomically with this ADR's implementation
   (PR #12142 force-push).
-- v1 path uses raw LiteGraph node IDs and is unaffected by <a href="/decisions/D20-id-type-convergence" class="wiki-link">D20</a>.
+- v1 path uses raw LiteGraph node IDs and is unaffected by D20.
 
 ### Test framework impact
 
@@ -190,15 +190,15 @@ api.addEventListener('executed', e => {
 | 6 | Update `src/extensions/core/*.v2.ts` and `src/extension-api/__tests__/*` and `src/extension-api/__contracts__/*` to use `.id` | this session (P1) | all tests pass |
 | 7 | Append `@internal` JSDoc to the three demoted brand types in `./node` and `./widget` | this session (P1) | TypeDoc rebuilds without them |
 | 8 | Migration guide stub: add "Working with identity" section | follow-up | manual |
-| 9 | Force-push PR #12142 with `--force-with-lease` and PR comment summarizing <a href="/decisions/D19-vueextension-disposition" class="wiki-link">D19</a> + D20 | this session (P1) | PR diff visible |
+| 9 | Force-push PR #12142 with `--force-with-lease` and PR comment summarizing D19 + D20 | this session (P1) | PR diff visible |
 | 10 | Refresh dashboard JSON (DASH-REFRESH-1) | this session (P2) | `/api-docs` no longer lists the three demoted brands |
 
 ## References
 
 - design-review-12142.md rows #3 and #8 (the open-research items this ADR closes)
 - Audit: `research/architecture/public-api-surface-audit-2026-05-14.md` §F2
-- W2F-1 re-audit: `research/meta/sourcegraph-mcp-coverage-investigation.md` (S14.ID1 evidence supports demoting `*EntityId`; S5.<a href="/axioms#a3-refs" class="wiki-link">A3</a> evidence supports keeping `NodeExecutionId`)
-- <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.4 — events and commands reconciled (handles ARE the command/query API; this ADR strengthens that by removing the branded-ID escape hatch from the public surface)
-- <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> — widget state categories (handles own the state; identity is opaque)
-- <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> — pure functions + loader registration (orthogonal: <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> changes the *registration mechanism*; D20 changes the *identity surface*)
+- W2F-1 re-audit: `research/meta/sourcegraph-mcp-coverage-investigation.md` (S14.ID1 evidence supports demoting `*EntityId`; S5.A3 evidence supports keeping `NodeExecutionId`)
+- D3.4 — events and commands reconciled (handles ARE the command/query API; this ADR strengthens that by removing the branded-ID escape hatch from the public surface)
+- D14 — widget state categories (handles own the state; identity is opaque)
+- D18 — pure functions + loader registration (orthogonal: D18 changes the *registration mechanism*; D20 changes the *identity surface*)
 - AGENTS.md "Decision propagation rules" — D20 must reach (a) commit on PR #12142, (b) this ADR, (c) dashboard JSON

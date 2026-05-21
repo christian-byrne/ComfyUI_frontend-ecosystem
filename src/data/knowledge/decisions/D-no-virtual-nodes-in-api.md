@@ -1,4 +1,4 @@
-# <a href="/decisions/D-no-virtual-nodes-in-api" class="wiki-link">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept
+# D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept
 
 **Status**: ACCEPTED — 2026-05-20 (wave-13, user direction)
 **Closes**: `D-uwf-drafting-board.md` §N12
@@ -6,7 +6,7 @@
 ## Context
 
 `D-uwf-drafting-board.md` §N12 asked how virtual nodes (nodes that
-exist in the editor <a href="/api-docs/graph" class="wiki-link">graph</a> but do not correspond to a backend Python
+exist in the editor graph but do not correspond to a backend Python
 node — i.e. they get rewritten away during workflow → prompt
 conversion) should declare their wiring. Three options were sketched:
 
@@ -16,9 +16,9 @@ conversion) should declare their wiring. Three options were sketched:
 
 Virtual node examples that triggered the question:
 - The built-in **Reroute** node (passes value through a single slot
-  with no backend <a href="/api-docs/execution" class="wiki-link">execution</a>)
+  with no backend execution)
 - The built-in **Primitive** node (lifts a widget value into a
-  reusable <a href="/api-docs/graph" class="wiki-link">graph</a> node)
+  reusable graph node)
 - Hypothetical extension-authored "math expression" nodes that
   resolve client-side
 - Hypothetical "conditional" / "branching" nodes that select between
@@ -44,16 +44,16 @@ extension authors.
 
 ## Rationale
 
-Virtual nodes break the WorkflowSpec axiom (<a href="/axioms#a7-refs" class="wiki-link">A7</a>):
+Virtual nodes break the WorkflowSpec axiom (A7):
 
 > "WorkflowSpec is canonical for semantics. Layout never affects
-> <a href="/api-docs/execution" class="wiki-link">execution</a>. Prompt is derived, never authored directly."
+> execution. Prompt is derived, never authored directly."
 
 A virtual node sits in the WorkflowSpec but resolves to a different
 shape in the ExecutionPrompt — which means either:
 - The WorkflowSpec is not canonical for semantics (some semantics
-  live in the resolver, not the spec), violating <a href="/axioms#a7-refs" class="wiki-link">A7</a>.
-- The Prompt is partly authored (by the resolver), violating <a href="/axioms#a7-refs" class="wiki-link">A7</a>.
+  live in the resolver, not the spec), violating A7.
+- The Prompt is partly authored (by the resolver), violating A7.
 
 Either way, the round-trip invariant breaks: replaying a
 RunSnapshot may produce different output than the original run
@@ -71,7 +71,7 @@ Additional failure modes:
    loses the user's authored intent on round-trip).
 4. **Type safety** — virtual nodes erase backend type guarantees;
    the frontend has to recreate / validate the resolved shape.
-5. **Composition with subgraphs (<a href="/axioms#a3-refs" class="wiki-link">A3</a>)** — virtual-node resolvers
+5. **Composition with subgraphs (A3)** — virtual-node resolvers
    running inside linked subgraphs (blueprints) compound all the
    above failure modes per-instance.
 
@@ -99,17 +99,17 @@ corresponds to a backend Python node**.
 ### Migration
 - v1 extensions using virtual-node patterns (e.g.
   `nodeType.prototype.serialize` returning a different shape) stay
-  on the v1 path through the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths window. Migration
+  on the v1 path through the D6 parallel-paths window. Migration
   guide documents the v2 alternative as: "If you need client-side
   evaluation, declare a real backend node with the evaluation logic
   in Python; the frontend only sees real nodes."
 - Extension authors who today ship virtual-node patterns are
   pointed at:
   - Real backend node + Python eval (preferred)
-  - Boxed widget with embedded UI (per <a href="/axioms#a15-refs" class="wiki-link">A15</a>) for "lift one widget
+  - Boxed widget with embedded UI (per A15) for "lift one widget
     to its own card"
   - `defineNode({nodeCreated})` + author-managed store for
-    cross-node observation (per <a href="/decisions/D-cross-node-observation" class="wiki-link">D-cross-node-observation</a>, N13)
+    cross-node observation (per D-cross-node-observation, N13)
 
 ### Internal Reroute + Primitive
 - Stay functional for now; no migration deadline set in this ADR.
@@ -133,7 +133,7 @@ This decision re-opens only if:
    (resolver ordering, backend/frontend sync, serialization
    semantics, type safety across the resolver, subgraph composition).
 3. An axiom amendment to A7 is proposed and accepted to permit
-   workflow-time <a href="/api-docs/graph" class="wiki-link">graph</a> rewriting.
+   workflow-time graph rewriting.
 
 Bar set deliberately high — virtual nodes are an A7 violation
 class, not a missing-feature class.

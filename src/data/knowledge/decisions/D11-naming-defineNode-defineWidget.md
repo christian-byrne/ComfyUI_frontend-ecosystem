@@ -1,4 +1,4 @@
-# <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> — Naming: `defineNode` / `defineWidget` (short form)
+# D11 — Naming: `defineNode` / `defineWidget` (short form)
 
 **Status**: ACCEPTED — 2026-05-12 (already implemented on `*-restratify` branches; reconciled into `*-v2` branches in wave-4 reconciliation 2026-05-13)
 
@@ -30,7 +30,7 @@ registration entry points exposed from `@comfyorg/extension-api`.
   shows the short form as canonical.
 - **Migration impact for v1 consumers**: irrelevant — v1 `app.registerExtension`
   remains the v1 entry point. v2 is opt-in via the new `@comfyorg/extension-api`
-  package; consumers choose their entry point at import time per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.
+  package; consumers choose their entry point at import time per D6.
 
 ## Alternatives considered
 
@@ -39,12 +39,12 @@ registration entry points exposed from `@comfyorg/extension-api`.
 | `defineNodeExtension` / `defineWidgetExtension` (original) | Mirrors v1 verbosity | `Extension` suffix redundant; longer to type | Rejected |
 | `defineNode` / `defineWidget` (chosen) | Matches Vue/React/Solid idiom; less typing | None significant | **Accepted** |
 | `node()` / `widget()` (very short) | Shortest | Loses the "this defines a thing" verb-noun affordance | Rejected |
-| `createNodeExtension` / `createWidgetExtension` | Aligns with `createApp`-style factories | `create` implies returning a value; v2 entry points still register via side effect (until <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> lands) | Rejected |
+| `createNodeExtension` / `createWidgetExtension` | Aligns with `createApp`-style factories | `create` implies returning a value; v2 entry points still register via side effect (until D18 lands) | Rejected |
 
 ## References
 
 - design-review-12142.md row #5 (decision logged 2026-05-12)
 - restratify cleanup commit `8da221b5db refactor(ext-api): rename defineNodeExtension → defineNode, defineWidgetExtension → defineWidget`
-- <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> — parallel-paths migration (<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.2 sunset criteria pin Gate 2 to "absorb-or-disown" of every v1 export, including these short-form replacements)
-- <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> — pure-functions + loader registration (orthogonal: <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> may change the *registration mechanism* but keeps these names)
+- D6 — parallel-paths migration (D6.2 sunset criteria pin Gate 2 to "absorb-or-disown" of every v1 export, including these short-form replacements)
+- D18 — pure-functions + loader registration (orthogonal: D18 may change the *registration mechanism* but keeps these names)
 - AGENTS.md "Decision propagation rules" section (added wave-4 to prevent the original drift where this rename landed on `*-restratify` but not `*-v2` for ~1 day)

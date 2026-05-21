@@ -1,4 +1,4 @@
-# <a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a> — ECS Alignment Audit
+# D13 — ECS Alignment Audit
 
 > Status: **draft** — living document, updated as ECS branch evolves
 > Last updated: 2026-05-13
@@ -311,7 +311,7 @@ has NO ECS backing and NO reactivity.
 
 **NOT centralized** (still on `LGraphNode` instance):
 - Node title
-- Node mode (<a href="/api-docs/execution" class="wiki-link">execution</a> mode)
+- Node mode (execution mode)
 - Node properties
 
 ECS slice-1 covers:

@@ -1,4 +1,4 @@
-# <a href="/decisions/D19-vueextension-disposition" class="wiki-link">D19</a> — `VueExtension` / `CustomExtension` disposition
+# D19 — `VueExtension` / `CustomExtension` disposition
 
 **Status**: ACCEPTED — 2026-05-14 (verdict: remove from public barrel; keep internal as discriminated-union ingredient)
 
@@ -65,7 +65,7 @@ unless an extension author would conceivably write `const x: VueExtension
 | Keep public, document as type-ingredient | Maximum flexibility | Pollutes the surface; dashboard renders two stub pages; adds 2 names authors must mentally filter | Rejected |
 | Remove from public barrel (chosen) | Cleaner surface; fewer names to scan; no real loss | Authors who *do* want to type a bare `VueExtension` lose the import path from `@comfyorg/extension-api` | **Accepted** |
 | Delete the interfaces entirely and inline into the unions | Smallest type definitions | Inlined-union duplication makes `extensionTypes.ts` harder to read; no win | Rejected |
-| Mark with `@internal` JSDoc tag and let TypeDoc filter | Keeps the import path alive while hiding from docs | Type still appears in IDE autocomplete from the package; <a href="/decisions/D19-vueextension-disposition" class="wiki-link">D19</a> wants stronger guarantee | Rejected |
+| Mark with `@internal` JSDoc tag and let TypeDoc filter | Keeps the import path alive while hiding from docs | Type still appears in IDE autocomplete from the package; D19 wants stronger guarantee | Rejected |
 
 ## Implementation plan
 
@@ -81,7 +81,7 @@ unless an extension author would conceivably write `const x: VueExtension
 ## References
 
 - Audit: `research/architecture/public-api-surface-audit-2026-05-14.md` §F1
-- <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> — naming convention (sets the bar for "public means deliberate")
-- <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.1 — entry-point shape (only `define*` should be the front door)
+- D11 — naming convention (sets the bar for "public means deliberate")
+- D6.1 — entry-point shape (only `define*` should be the front door)
 - design-review-12142.md (no row directly; this is a no-decision discovery)
-- AGENTS.md "Decision propagation rules" — <a href="/decisions/D19-vueextension-disposition" class="wiki-link">D19</a> must reach (a) commit on PR #12142, (b) this ADR, (c) dashboard JSON
+- AGENTS.md "Decision propagation rules" — D19 must reach (a) commit on PR #12142, (b) this ADR, (c) dashboard JSON

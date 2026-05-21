@@ -1,5 +1,25 @@
 # ECS + Vue Hoisted Client State & Hook API — Tasks
 
+## 2026-05-21 PM — Wave-18 closeout (deploy + live-validate)
+
+**Status**: ✅ All 15 Wave-18 items shipped + live-validated. Final dashboard HEAD: `1746f6e` (CI green ✅, deployed to Vercel production at 22:53:30Z).
+
+### Post-handoff verification (this thread)
+
+- ✅ Vercel production deploys confirmed for: `374eb93`, `0b29849`, `27807e8`, `d90279a`, `09f1d55`, `5d9dbb0`, `6632d4d`, `1746f6e`.
+- ✅ Live URL spot-checks: `/api-docs/extensionoptions` renders `onMounted` pattern (not `async setup`); `/decisions/d13-ecs-alignment-audit` has unique `### Action Items` slugs per W18.M fix; `/decisions` rows render.
+- ✅ **Live-Vercel e2e**: `PLAYWRIGHT_BASE_URL=https://comfyui-frontend-ecosystem.vercel.app pnpm test:e2e -- e2e/nav-smoke.spec.ts` → **21/21 passed in 2.2s** on chromium.
+- ✅ **CI fix shipped** (`1746f6e`): manifest-drift gate was failing on every push due to two unrelated bugs:
+  1. `src/data/knowledge/root/todo.md` was silently blocked by user's global `~/.gitignore_global` (line: `todo.md`). Committed manifest referenced it; CI's fresh checkout didn't have the file → manifest rebuild diverged by ~220 lines.
+  2. `generatedAt` wall-clock timestamp made the `git diff --exit-code` gate structurally impossible to satisfy.
+  Fixed in `1746f6e`: `git add -f src/data/knowledge/root/todo.md`, repo-level `.gitignore` negation, `ci.yml` uses `git diff -I '"generatedAt":'`. CI green on first attempt after fix.
+- ✅ **Playwright config enhancement** (`5d9dbb0`): `PLAYWRIGHT_BASE_URL` env var override + auto-skip webServer block when set. Documented in commit body.
+
+### Items
+- [x] W18.deploy — All 13 Wave-18 commits + 3 follow-up fixes (`5d9dbb0`, `6632d4d`, `1746f6e`) deployed to Vercel production, CI green at HEAD.
+- [x] W18.live-e2e — 21/21 nav-smoke against live Vercel deployment.
+- [x] W18.ci-fix — manifest-drift gate failures resolved (todo.md tracked + generatedAt ignored). Future `sync.sh` runs won't surface red CI on the dashboard.
+
 ## 2026-05-21 PM — Wave-17 Dashboard accuracy + completeness sweep
 
 **Context**: User audit of https://comfyui-frontend-ecosystem.vercel.app surfaced four
