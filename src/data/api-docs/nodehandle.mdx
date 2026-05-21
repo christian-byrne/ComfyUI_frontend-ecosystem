@@ -177,7 +177,7 @@ on(event, handler): Unsubscribe;
 
 Defined in: [extension-api/node.ts:337](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/extension-api/node.ts#L337)
 
-Subscribe to node removal (graph deletion, not subgraph promotion).
+Subscribe to node removal (<a href="/api-docs/graph" class="wiki-link">graph</a> deletion, not subgraph promotion).
 
 Replaces the v1 `nodeType.prototype.onRemoved` patching pattern.
 Does NOT fire on subgraph promotion — the node's entity ID is preserved
@@ -204,7 +204,7 @@ on(event, handler): Unsubscribe;
 
 Defined in: [extension-api/node.ts:347](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/extension-api/node.ts#L347)
 
-Subscribe to backend execution completion for this node.
+Subscribe to backend <a href="/api-docs/execution" class="wiki-link">execution</a> completion for this node.
 
 Replaces the v1 `nodeType.prototype.onExecuted` patching pattern (the
 most widely used anti-pattern per R4-P3; 5+ confirmed repos).

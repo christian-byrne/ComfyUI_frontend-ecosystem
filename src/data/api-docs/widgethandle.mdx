@@ -45,7 +45,7 @@ export default defineWidget({
 | <a id="id"></a> `id` | `readonly` | `string` | Opaque identifier for this widget. Stable for the lifetime of the widget entity. Treat as a string token: do not parse, slice, or compare its internal structure. Use [WidgetHandle.equals](#equals) to compare with another handle. **Remarks** The underlying value is a branded `WidgetEntityId` at runtime but is narrowed to `string` on the public surface so authors never need to import a brand to type a local variable. |
 | <a id="label"></a> `label` | `readonly` | `string` | The widget's display label shown to the user. Defaults to the widget name. Read-only invariant (set at creation, never changes after). The label is set by the Python node's `INPUT_TYPES` schema (e.g. via the `label` key on the input options dict). |
 | <a id="name"></a> `name` | `readonly` | `string` | The widget's name as registered in the node's `INPUT_TYPES` schema. Stable for the lifetime of the node; never changes after creation. |
-| <a id="options"></a> `options` | `readonly` | `Readonly`\<[`WidgetOptions`](./widgetoptions)\> | Read-only snapshot of the full options bag for this widget. **Immutable.** The returned object is `Readonly<WidgetOptions>` — `widget.options.min = 0`, `widget.options = {...}`, and `widget.options.values = [...]` all raise TypeScript errors at compile time. To mutate, use [WidgetHandle.setOption](#setoption) per-key. Note: this is an accessor pair on the v2 surface. Reading is free; the setter intentionally does not exist on the public type. Per AXIOMS.md §A16, `serialize` is no longer a writable option (and no longer a key on this bag) — there is no widget-level serialization disable. `widget.options.values = [...]` (combo refresh) migrates to a future `setValues` mutator. **Example** `// ❌ TS-ERR — every option write raises a compile-time error widget.options.min = 0 widget.options = { min: 0, max: 100 } // ✅ Read freely const min = widget.options.min ?? 0 // ✅ Mutate via typed setters widget.setOption('min', 0)` |
+| <a id="options"></a> `options` | `readonly` | `Readonly`\<[`WidgetOptions`](./widgetoptions)\> | Read-only snapshot of the full options bag for this widget. **Immutable.** The returned object is `Readonly<WidgetOptions>` — `widget.options.min = 0`, `widget.options = {...}`, and `widget.options.values = [...]` all raise TypeScript errors at compile time. To mutate, use [WidgetHandle.setOption](#setoption) per-key. Note: this is an accessor pair on the v2 surface. Reading is free; the setter intentionally does not exist on the public type. Per AXIOMS.md §<a href="/axioms#a16-refs" class="wiki-link">A16</a>, `serialize` is no longer a writable option (and no longer a key on this bag) — there is no widget-level serialization disable. `widget.options.values = [...]` (combo refresh) migrates to a future `setValues` mutator. **Example** `// ❌ TS-ERR — every option write raises a compile-time error widget.options.min = 0 widget.options = { min: 0, max: 100 } // ✅ Read freely const min = widget.options.min ?? 0 // ✅ Mutate via typed setters widget.setOption('min', 0)` |
 | <a id="widgettype"></a> `widgetType` | `readonly` | `string` | The widget's type string (e.g. `'INT'`, `'STRING'`, `'COMBO'`, `'MARKDOWN'`). Read-only invariant set at creation. |
 
 ## Methods
@@ -206,7 +206,7 @@ Defined in: [extension-api/widget.ts:493](https://github.com/Comfy-Org/ComfyUI_f
 
 Subscribe to widget serialization. The only async-allowed event.
 
-Per AXIOMS.md §A16 this is the **sole** extension-author interface
+Per AXIOMS.md §<a href="/axioms#a16-refs" class="wiki-link">A16</a> this is the **sole** extension-author interface
 to serialization. The hook fires once per serialization and the
 framework writes the resulting payload to every transport (workflow
 JSON `widgets_values`, API prompt, clone target, subgraph promotion).
@@ -240,7 +240,7 @@ Defined in: [extension-api/widget.ts:510](https://github.com/Comfy-Org/ComfyUI_f
 Subscribe to pre-queue validation. Fires before `graphToPrompt` runs.
 
 Call `event.reject(message)` to cancel the queue with a user-visible error.
-Replaces the v1 `app.queuePrompt` monkey-patching pattern (S6.A4/S6.A5)
+Replaces the v1 `app.queuePrompt` monkey-patching pattern (S6.<a href="/axioms#a4-refs" class="wiki-link">A4</a>/S6.<a href="/axioms#a5-refs" class="wiki-link">A5</a>)
 for per-widget validation use cases.
 
 Handlers are sync-only — use for validation logic only, not I/O.

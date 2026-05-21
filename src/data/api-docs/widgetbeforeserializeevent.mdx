@@ -8,7 +8,7 @@ Defined in: [extension-api/widget.ts:137](https://github.com/Comfy-Org/ComfyUI_f
 Payload for `widget.on('beforeSerialize', handler)`.
 
 This is the **only async-allowed event** in the API and, per AXIOMS.md
-§A16 (Unified Serialization Target), the **sole** extension-author
+§<a href="/axioms#a16-refs" class="wiki-link">A16</a> (Unified Serialization Target), the **sole** extension-author
 interface to serialization. Replaces every v1 serialization hook:
 `widget.serializeValue = fn`, `widget.options.serialize = false`,
 `nodeType.prototype.serialize`.
@@ -16,12 +16,12 @@ interface to serialization. Replaces every v1 serialization hook:
 The hook fires **once per serialization**. The framework writes the
 resulting payload to every transport (workflow JSON `widgets_values[i]`,
 API prompt, clone target, subgraph promotion). Extensions do not see and
-cannot branch on the transport — that is a framework concern (A16).
+cannot branch on the transport — that is a framework concern (<a href="/axioms#a16-refs" class="wiki-link">A16</a>).
 
 Call `event.setSerializedValue(v)` to override what is written. Do not
 call it to pass through the widget's current `getValue()` unchanged.
 
-Per A16 there is no `skip()` and no `context` discriminator. Per A15
+Per <a href="/axioms#a16-refs" class="wiki-link">A16</a> there is no `skip()` and no `context` discriminator. Per <a href="/axioms#a15-refs" class="wiki-link">A15</a>
 (Widget Declarativity) there is no way to exclude a widget from
 serialization — if a widget should not contribute to the payload, it
 should not be a widget (use a boxed widget, a non-widget UI primitive,

@@ -65,3 +65,21 @@ html.dark body {
   background-color: rgb(9 9 11); /* zinc-950 */
   color: rgb(244 244 245); /* zinc-100 */
 }
+
+/*
+ * Wave-18 W18.K — wiki-link style. Auto-linked symbol references in
+ * MDX content (added by scripts/wiki-link-mdx.mjs) get a dotted
+ * underline + accent color so they're distinguishable from explicit
+ * markdown links without dominating the layout.
+ */
+.wiki-link {
+  border-bottom: 1px dotted currentColor;
+  color: rgb(37 99 235); /* blue-600 */
+  text-decoration: none;
+}
+html.dark .wiki-link {
+  color: rgb(96 165 250); /* blue-400 */
+}
+.wiki-link:hover {
+  border-bottom-style: solid;
+}

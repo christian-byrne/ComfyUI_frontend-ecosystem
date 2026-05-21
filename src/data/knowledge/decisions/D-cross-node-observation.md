@@ -1,4 +1,4 @@
-# D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap
+# <a href="/decisions/D-cross-node-observation" class="wiki-link">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap
 
 **Status**: ACCEPTED — 2026-05-20 (wave-13, user direction with gap callout)
 **Closes**: `D-uwf-drafting-board.md` §N13
@@ -28,9 +28,9 @@ container, a global event bus for widget changes, or a built-in
 User direction 2026-05-20 (verbatim):
 
 > "observing is an unanswered question but the idea would, currently,
-> be to just defineNodeExtension (or defineNode) -> add the listner
+> be to just defineNodeExtension (or <a href="/api-docs/definenode" class="wiki-link">defineNode</a>) -> add the listner
 > there -> write to some store (that the author defines and maintains
-> themselvs however they want) -> defineNode or defineWidget for the
+> themselvs however they want) -> <a href="/api-docs/definenode" class="wiki-link">defineNode</a> or <a href="/api-docs/definewidget" class="wiki-link">defineWidget</a> for the
 > listener and then read from the store. would this work?"
 
 **Answer: yes, with one identified gap.** The store-mediated pattern
@@ -110,7 +110,7 @@ The "global seed" canonical case:
 
 This requires the extension to subscribe to the built-in `INT`
 widget named `'seed'` on every node that has one — without
-violating A1 (nodes cannot enumerate widgets) and without owning
+violating <a href="/axioms#a1-refs" class="wiki-link">A1</a> (nodes cannot enumerate widgets) and without owning
 the widget type itself.
 
 **This pattern does not work in the v2 surface as of wave-12.** The
@@ -159,10 +159,10 @@ No new framework primitive is needed past `defineWidgetAugmenter`.
 ## Rationale for store-mediated (over the three Options on the board)
 
 ### Why not Option A (`app.on('widgetChanged')` global event)
-- Inverts A1 (nodes look down) at the framework layer: the global
+- Inverts <a href="/axioms#a1-refs" class="wiki-link">A1</a> (nodes look down) at the framework layer: the global
   event is essentially the runtime saying "here's every widget
   change, anywhere", which encourages extensions to filter
-  imperatively across nodes — exactly the pattern A1 was added
+  imperatively across nodes — exactly the pattern <a href="/axioms#a1-refs" class="wiki-link">A1</a> was added
   to prevent.
 - High-frequency event (every keystroke in every text widget on
   every node) with most subscribers caring about one widget.
@@ -213,7 +213,7 @@ No new framework primitive is needed past `defineWidgetAugmenter`.
 ### v1 consumers
 - v1 monkey-patching of widget callbacks (e.g.
   `widget.callback = (v) => sharedSeed.value = v`) remains
-  functional through D6 parallel-paths.
+  functional through <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths.
 
 ### Future (`defineWidgetAugmenter` landing)
 - When that primitive lands, this ADR's Pattern 3 becomes
@@ -236,7 +236,7 @@ No new framework primitive is needed past `defineWidgetAugmenter`.
 
 - AXIOMS.md §A1 (widget-centric, no node-enumerates-widget) —
   this ADR honors it bilaterally (per `D-no-node-widget-access`).
-- AXIOMS.md §A10 (Vue reactivity idioms) — the store-mediated
+- AXIOMS.md §<a href="/axioms#a10-refs" class="wiki-link">A10</a> (Vue reactivity idioms) — the store-mediated
   pattern is a direct application.
 - `D-bootstrap-hooks` — extension setup() bodies are where
   authors hook the producer side; namespace event facades

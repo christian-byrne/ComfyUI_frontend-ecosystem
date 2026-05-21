@@ -1,23 +1,23 @@
-# D-define-widget-augmenter — Collapse "extend existing widgets" into `defineWidgetExtension`
+# <a href="/decisions/D-define-widget-augmenter" class="wiki-link">D-define-widget-augmenter</a> — Collapse "extend existing widgets" into `defineWidgetExtension`
 
 > **Naming/scoping resolution (2026-05-21)**: original draft proposed a new entry point `extendWidget` / `defineWidgetAugmenter`. **Rejected after second-pass review** — the existing `defineWidgetExtension` (`lifecycle.ts:253`) is the right home for this. It already mirrors `defineNodeExtension`'s shape; it just needs a `widgetTypes` *filter* (parallel to the existing `NodeExtensionOptions.nodeTypes`) to switch between "define a new widget type" (today) and "extend instances of an existing widget type" (the gap). One primitive, two modes — same pattern `defineNodeExtension` uses today for nodes.
 
 **Status**: PROPOSED (not ACCEPTED — Phase B work, no source-code change lands in Phase A)
 **Date**: 2026-05-21 (rewritten same day after user feedback collapsed the design)
 **Wave**: W14-C
-**Blocks**: dynamicPrompts.v2 unstub (wave-8 follow-up); D-cross-node-observation Pattern 3 (global seed sync); migration target for legacy `app.on('beforePrompt')` users (rejected by D-no-app-beforeprompt)
-**Depends on**: A1 bilateral closure (`D-no-node-widget-access`), A15 Widget Declarativity, A16 Unified Serialization Target
+**Blocks**: dynamicPrompts.v2 unstub (wave-8 follow-up); <a href="/decisions/D-cross-node-observation" class="wiki-link">D-cross-node-observation</a> Pattern 3 (global seed sync); migration target for legacy `app.on('beforePrompt')` users (rejected by <a href="/decisions/D-no-app-beforeprompt" class="wiki-link">D-no-app-beforeprompt</a>)
+**Depends on**: <a href="/axioms#a1-refs" class="wiki-link">A1</a> bilateral closure (`D-no-node-widget-access`), <a href="/axioms#a15-refs" class="wiki-link">A15</a> Widget Declarativity, <a href="/axioms#a16-refs" class="wiki-link">A16</a> Unified Serialization Target
 
 ---
 
 ## The gap, restated
 
-The Phase A surface (frozen at foundation `ee0537fdb5` per D-api-surface-finalization) has:
+The Phase A surface (frozen at foundation `ee0537fdb5` per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>) has:
 
 - `defineNodeExtension({ name, nodeTypes?, nodeCreated, loadedGraphNode })` — runs for nodes matching `nodeTypes` filter (or all nodes if omitted). Authors **extend** behavior on node types defined by the backend Python; they never **create** new node types (those come from `INPUT_TYPES`).
 - `defineWidgetExtension({ name, type, widgetCreated })` — registers a **NEW** widget type. `widgetCreated` returns a `{render, destroy}` pair for the custom DOM. Used for COLOR_PICKER, custom KSampler controls, etc.
 
-The asymmetry is the bug: widgets have **only the define-new path**. There is no way to subscribe to value changes of an *existing built-in widget* (e.g., the INT widget named `seed` on every KSampler) without violating A1 (nodes cannot enumerate widgets).
+The asymmetry is the bug: widgets have **only the define-new path**. There is no way to subscribe to value changes of an *existing built-in widget* (e.g., the INT widget named `seed` on every KSampler) without violating <a href="/axioms#a1-refs" class="wiki-link">A1</a> (nodes cannot enumerate widgets).
 
 ## The fix in one diff
 
@@ -67,7 +67,7 @@ export interface WidgetExtensionOptions {
 
 ## How the three motivating cases look
 
-### Case 1 — global seed sync (D-cross-node-observation Pattern 3)
+### Case 1 — global seed sync (<a href="/decisions/D-cross-node-observation" class="wiki-link">D-cross-node-observation</a> Pattern 3)
 
 ```ts
 import { defineWidgetExtension } from '@comfyorg/extension-api'
@@ -125,15 +125,15 @@ export default defineWidgetExtension({
 
 | Axiom | Status | Evidence |
 |---|---|---|
-| **A1** (Widget-Centric / no node→widget) | ✅ Compliant | EXTEND mode delivers `WidgetHandle` directly via the framework's per-instance dispatch — no `NodeHandle.getWidget(s)`. `parentNode` is delivered as the widget→node direction, the only allowed channel. |
-| **A2** (Minimal Surface) | ✅ Compliant | Net change is **2 optional fields on an existing interface**. No new entry point, no new types. Single most-minimal-possible surface delta to close the gap. |
-| **A3** (Linked Subgraph) | ⚠️ Verify | EXTEND mode MUST fire for each clone of a linked subgraph independently. Test: register extension, instantiate same subgraph twice, mutate one widget → only matching widget's listener fires. |
-| **A4** (Abstract IDs) | ✅ Compliant | `WidgetHandle` already opaque; no raw IDs added. |
-| **A5** (3-tier widget state) | ✅ Compliant | EXTEND mode observes values via `on('valueChange')`; does not touch schema/props tiers. |
-| **A6** (Command Pattern) | ✅ Compliant | `widget.setValue(…)` already routes through the command pipeline. EXTEND callbacks are observers. |
-| **A14** (Commented-out / Phase-A-excluded) | n/a | No new commented-out surfaces. |
-| **A15** (Widget Declarativity) | ✅ Compliant | EXTEND mode does **not** add widgets, does not change widget types, does not bypass schema. DEFINE-NEW mode unchanged from today (already A15-compliant). |
-| **A16** (Unified Serialization Target) | ✅ Compliant | EXTEND mode subscribes to `widget.on('beforeSerialize')` — the sole interface per A16. |
+| **<a href="/axioms#a1-refs" class="wiki-link">A1</a>** (Widget-Centric / no node→widget) | ✅ Compliant | EXTEND mode delivers `WidgetHandle` directly via the framework's per-instance dispatch — no `NodeHandle.getWidget(s)`. `parentNode` is delivered as the widget→node direction, the only allowed channel. |
+| **<a href="/axioms#a2-refs" class="wiki-link">A2</a>** (Minimal Surface) | ✅ Compliant | Net change is **2 optional fields on an existing interface**. No new entry point, no new types. Single most-minimal-possible surface delta to close the gap. |
+| **<a href="/axioms#a3-refs" class="wiki-link">A3</a>** (Linked Subgraph) | ⚠️ Verify | EXTEND mode MUST fire for each clone of a linked subgraph independently. Test: register extension, instantiate same subgraph twice, mutate one widget → only matching widget's listener fires. |
+| **<a href="/axioms#a4-refs" class="wiki-link">A4</a>** (Abstract IDs) | ✅ Compliant | `WidgetHandle` already opaque; no raw IDs added. |
+| **<a href="/axioms#a5-refs" class="wiki-link">A5</a>** (3-tier widget state) | ✅ Compliant | EXTEND mode observes values via `on('valueChange')`; does not touch schema/props tiers. |
+| **<a href="/axioms#a6-refs" class="wiki-link">A6</a>** (Command Pattern) | ✅ Compliant | `widget.setValue(…)` already routes through the command pipeline. EXTEND callbacks are observers. |
+| **<a href="/axioms#a14-refs" class="wiki-link">A14</a>** (Commented-out / Phase-A-excluded) | n/a | No new commented-out surfaces. |
+| **<a href="/axioms#a15-refs" class="wiki-link">A15</a>** (Widget Declarativity) | ✅ Compliant | EXTEND mode does **not** add widgets, does not change widget types, does not bypass schema. DEFINE-NEW mode unchanged from today (already <a href="/axioms#a15-refs" class="wiki-link">A15</a>-compliant). |
+| **<a href="/axioms#a16-refs" class="wiki-link">A16</a>** (Unified Serialization Target) | ✅ Compliant | EXTEND mode subscribes to `widget.on('beforeSerialize')` — the sole interface per <a href="/axioms#a16-refs" class="wiki-link">A16</a>. |
 
 ## Migration paths it unblocks
 
@@ -147,10 +147,10 @@ export default defineWidgetExtension({
 ## Rejected alternatives (now including the first draft of THIS ADR)
 
 ### ❌ Separate `extendWidget` / `defineWidgetAugmenter` entry point (this ADR's first draft, 2026-05-21 AM)
-Two entry points where one suffices. Asymmetric with `defineNodeExtension` (which uses a single filterable entry point). Larger surface delta. User pushback during second review: *"it would both just use defineWidget — and just like defineNode, you would be extending OR defining."* → Collapsed into the single-primitive approach above.
+Two entry points where one suffices. Asymmetric with `defineNodeExtension` (which uses a single filterable entry point). Larger surface delta. User pushback during second review: *"it would both just use <a href="/api-docs/definewidget" class="wiki-link">defineWidget</a> — and just like <a href="/api-docs/definenode" class="wiki-link">defineNode</a>, you would be extending OR defining."* → Collapsed into the single-primitive approach above.
 
 ### ❌ Global `graph.on('widgetChanged')` event bus
-Already rejected in D-cross-node-observation §Why not Option A. Encourages cross-node imperative filtering (the pattern A1 was added to prevent), broadcasts O(everything) when subscribers care about one widget. User confirmed lean-away during second review.
+Already rejected in <a href="/decisions/D-cross-node-observation" class="wiki-link">D-cross-node-observation</a> §Why not Option A. Encourages cross-node imperative filtering (the pattern A1 was added to prevent), broadcasts O(everything) when subscribers care about one widget. User confirmed lean-away during second review.
 
 ### ❌ Auto-dispatch via `type` field alone (no separate `widgetTypes`)
 Variant: framework inspects whether `type` is in the built-in registry; if yes → extend mode, if no → define-new mode. Cute but has silent typo footgun: `type: 'STIRNG'` silently registers a new STIRNG widget type. The explicit `widgetTypes` vs `type` split (mirroring `nodeTypes` vs the absent equivalent for nodes) makes the author's intent explicit at the type level.
@@ -161,7 +161,7 @@ Maximum flexibility, but evaluator runs on every widget creation. Type-level + n
 ## Open Questions
 
 1. **Multiple extensions matching the same widget** — order is registration order with lexicographic tie-break on `name` (same as `defineNodeExtension`). Verify in test.
-2. **Subgraph promotion semantics** — when a widget moves from subgraph to root via promotion, does `widgetCreated` re-fire? Proposed: **no** — promotion is a DOM-move, not a fresh entity (D12 reset-to-fresh applies only to copy/paste). Confirm in lifecycle scenarios doc.
+2. **Subgraph promotion semantics** — when a widget moves from subgraph to root via promotion, does `widgetCreated` re-fire? Proposed: **no** — promotion is a DOM-move, not a fresh entity (<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a> reset-to-fresh applies only to copy/paste). Confirm in lifecycle scenarios doc.
 3. **Type-tag evolution** — if a built-in widget's `type` changes between releases (`INT` → `INT_RANGE`), `widgetTypes: 'INT'` extensions stop firing silently. Proposed: emit one-time runtime warning when a `widgetTypes` value does not exist in the current schema registry.
 4. **Performance** — broad-match extensions (`widgetTypes: 'STRING'` on a 1000-node workflow) create thousands of listener registrations. Document complexity contract; recommend narrow `widgetNames` predicates.
 5. **DEFINE-NEW + EXTEND in the same extension** — should an author be able to define `COLOR_PICKER` AND extend `STRING` in one `defineWidgetExtension` call? Proposed: **no** — one extension does one verb. Two extensions if both are needed. Keeps the mental model clean and the validator simple.
@@ -172,7 +172,7 @@ This ADR is **PROPOSED** intentionally. Phase A surface is frozen; ACCEPTED requ
 
 1. Phase B trigger (PR #11939 ECS rebase merges).
 2. Implementation commit landing the 2 new optional fields on `WidgetExtensionOptions` + dispatch wiring in `extension-api-service.ts`.
-3. Test coverage: an `it.todo` body filled in for `bc-22.migration.test.ts` (or sibling) asserting EXTEND mode fires once per matching widget instance, including across linked-subgraph clones (A3 verification).
+3. Test coverage: an `it.todo` body filled in for `bc-22.migration.test.ts` (or sibling) asserting EXTEND mode fires once per matching widget instance, including across linked-subgraph clones (<a href="/axioms#a3-refs" class="wiki-link">A3</a> verification).
 4. Dashboard refresh — only the `widgetextensionoptions.mdx` page changes (2 new fields documented); zero new MDX pages, zero deletions.
 5. `dynamicPrompts.v2.ts` unstubs in the same PR or immediate follow-up using the new fields. Example extension demonstrating Pattern 3 cross-node seed sync ships in `ext-api/i-ext-v2`.
 

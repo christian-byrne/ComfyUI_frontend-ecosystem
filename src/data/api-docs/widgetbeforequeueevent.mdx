@@ -11,9 +11,9 @@ Fires when the user triggers a prompt queue (before `graphToPrompt` runs).
 Call `event.reject(message)` to cancel the queue attempt with a user-visible
 error. Do not call `reject` to allow the queue to proceed.
 
-Replaces the v1 `app.queuePrompt` monkey-patching pattern (S6.A4/S6.A5)
+Replaces the v1 `app.queuePrompt` monkey-patching pattern (S6.<a href="/axioms#a4-refs" class="wiki-link">A4</a>/S6.<a href="/axioms#a5-refs" class="wiki-link">A5</a>)
 for per-widget validation (e.g. required field empty, value out of range).
-For cross-node/graph-wide rejection, see the app-level `beforePrompt` event
+For cross-node/<a href="/api-docs/graph" class="wiki-link">graph</a>-wide rejection, see the app-level `beforePrompt` event
 (I-UWF.4 — not yet in the API).
 
 ## Stability
@@ -56,7 +56,7 @@ handlers still run but their `reject` calls are no-ops.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `message` | `string` | Human-readable reason shown in the UI toast. |
+| `message` | `string` | Human-readable reason shown in the UI <a href="/api-docs/toast" class="wiki-link">toast</a>. |
 
 #### Returns
 

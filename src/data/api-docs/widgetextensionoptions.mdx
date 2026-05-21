@@ -6,7 +6,7 @@ description: "Options object for defineWidgetExtension — custom widget renderi
 Defined in: [extension-api/types.ts:186](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/extension-api/types.ts#L186)
 
 Options for `defineWidget`. Registers a custom widget type that renders
-through the mount-lifecycle seam (Axiom A12 / D-widget-converge).
+through the mount-lifecycle seam (Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a> / <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a>).
 
 Once registered, the widget type can be referenced from Python
 `INPUT_TYPES` schema declarations. The runtime allocates a per-widget
@@ -16,7 +16,7 @@ constructs) via closure — there is no `widget.element` accessor on the
 handle.
 
 Runtime widget addition (`node.addWidget(...)`) is forbidden per
-AXIOMS.md A15 / `decisions/D-ban-runtime-addwidget.md` — widgets are
+AXIOMS.md <a href="/axioms#a15-refs" class="wiki-link">A15</a> / `decisions/D-ban-runtime-addwidget.md` — widgets are
 schema-declared, never created at runtime by extensions.
 
 `mount` is optional: omit it for value-only widgets (numeric, combo, etc.)
@@ -49,6 +49,6 @@ export default defineWidget({
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="mount"></a> `mount?` | [`WidgetMountFn`](./widgetmountfn) | Mount lifecycle hook — the **sole** DOM seam per Axiom A12. Called once per widget instance when the widget is first attached to its node host in the DOM. May return a `WidgetCleanup` function that fires on widget destruction (host remount does NOT fire cleanup; see `WidgetMountContext.onBeforeRemount` / `onAfterRemount`). Omit entirely for value-only widgets that need no custom DOM. **Stability** experimental |
+| <a id="mount"></a> `mount?` | [`WidgetMountFn`](./widgetmountfn) | Mount lifecycle hook — the **sole** DOM seam per Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a>. Called once per widget instance when the widget is first attached to its node host in the DOM. May return a `WidgetCleanup` function that fires on widget destruction (host remount does NOT fire cleanup; see `WidgetMountContext.onBeforeRemount` / `onAfterRemount`). Omit entirely for value-only widgets that need no custom DOM. **Stability** experimental |
 | <a id="name"></a> `name` | `string` | Globally unique extension name. |
 | <a id="type"></a> `type` | `string` | Widget type string this extension provides (e.g. `'COLOR_PICKER'`). |

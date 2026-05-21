@@ -75,4 +75,11 @@ node "$(dirname "$0")/strip-deprecated.mjs"
 # W17.G) shows a "Phase B" / "ECS PR #11939" chip above the symbol title.
 node "$(dirname "$0")/stamp-planned.mjs"
 
+# Post-process: auto-link known symbols (W18.K). Wraps bare references to
+# API types (e.g. WidgetHandle), ADR IDs (D14), and axiom IDs (A1) in
+# `<a class="wiki-link">` pointing at the canonical detail page.
+# Idempotent: skips text already inside <a>, fenced code, inline code,
+# or markdown links. Capped at 3 hits per symbol per file.
+node "$(dirname "$0")/wiki-link-mdx.mjs"
+
 echo "✅ API docs refreshed. Review with: git diff --stat src/data/api-docs/"

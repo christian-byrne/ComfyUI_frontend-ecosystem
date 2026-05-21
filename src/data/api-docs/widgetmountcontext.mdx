@@ -7,7 +7,7 @@ Defined in: [extension-api/widget.ts:551](https://github.com/Comfy-Org/ComfyUI_f
 
 Context passed to a widget's `mount()` function.
 
-Per **Axiom A12** (Mount-Lifecycle as the Sole DOM Seam), this is the only
+Per **Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a>** (Mount-Lifecycle as the Sole DOM Seam), this is the only
 surface through which DOM enters a widget. Authors capture the host element
 and any constructed DOM via closure inside `mount()` — there is no
 `widget.element` / `widget.inputEl` accessor on the handle.
@@ -58,7 +58,7 @@ onBeforeRemount(fn): void;
 Defined in: [extension-api/widget.ts:574](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/extension-api/widget.ts#L574)
 
 Register a callback that fires immediately **before** the widget's host
-`<div>` is moved to a new location (graph↔app mode, subgraph promotion,
+`<div>` is moved to a new location (<a href="/api-docs/graph" class="wiki-link">graph</a>↔app mode, subgraph promotion,
 Vue `<KeepAlive>` shuffle). Use to detach observers, pause animations,
 or capture scroll position before the move.
 

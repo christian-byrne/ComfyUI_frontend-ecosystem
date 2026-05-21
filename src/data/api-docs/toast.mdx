@@ -12,7 +12,7 @@ Defined in: [extension-api/imperatives.ts:76](https://github.com/Comfy-Org/Comfy
 Toast surface — call `toast.show(...)` from any setup body or hook
 closure.
 
-Fire-and-forget. The toast is rendered by the global Toast component
+Fire-and-forget. The <a href="/api-docs/toast" class="wiki-link">toast</a> is rendered by the global Toast component
 mounted at app root; the call is a no-op if the app is not yet mounted
 (the message is silently dropped rather than queued).
 
@@ -20,8 +20,8 @@ mounted at app root; the call is a no-op if the app is not yet mounted
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| `remove()` | (`opts`) => `void` | Remove a previously-shown toast (matches by reference). |
-| `removeAll()` | () => `void` | Clear every toast currently visible. |
+| `remove()` | (`opts`) => `void` | Remove a previously-shown <a href="/api-docs/toast" class="wiki-link">toast</a> (matches by reference). |
+| `removeAll()` | () => `void` | Clear every <a href="/api-docs/toast" class="wiki-link">toast</a> currently visible. |
 | `show()` | (`opts`) => `void` | Show a toast. Severity defaults to `'info'`. |
 
 ## Public API

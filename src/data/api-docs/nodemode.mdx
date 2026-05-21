@@ -12,13 +12,13 @@ type NodeMode = "always" | "never" | "bypass" | "once" | "onTrigger";
 
 Defined in: [src/extension-api/node.ts:64](https://github.com/Comfy-Org/ComfyUI_frontend/blob/59a2e1ce81b1ae31a7991a24d5b4ecb0a88d27ad/src/extension-api/node.ts#L64)
 
-LiteGraph node execution mode.
+LiteGraph node <a href="/api-docs/execution" class="wiki-link">execution</a> mode.
 
 String values map to the underlying `LGraphEventMode` numeric enum
 (`ALWAYS=0`, `ON_EVENT=1`, `NEVER=2`, `ON_TRIGGER=3`, `BYPASS=4`).
 
 - `'always'` — Execute every run (default).
-- `'never'` — Muted; node is skipped during execution.
+- `'never'` — Muted; node is skipped during <a href="/api-docs/execution" class="wiki-link">execution</a>.
 - `'bypass'` — Passthrough; inputs forwarded to outputs without running.
 - `'once'` — Execute once then mute.
 - `'onTrigger'` — Legacy ABI-reserved slot for the dead trigger/action
