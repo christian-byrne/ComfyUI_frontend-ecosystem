@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T02:33:02.658Z",
+  "generatedAt": "2026-05-21T02:47:58.100Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -1526,6 +1526,7 @@
         "A15"
       ],
       "adrs": [
+        "d-api-surface-finalization",
         "d-bootstrap-hooks",
         "d-coord-space",
         "d-coord-space-evidence",
@@ -1539,6 +1540,7 @@
         "d-immutability-enforcement-blast-radius",
         "d-input-output-shape",
         "d-linked-subgraph-constraint",
+        "d-notify-toast-consolidation",
         "d-reroute-primitive-real-backend-migration",
         "d-shell-ui-blast-radius",
         "d-shell-ui-entrypoints",
@@ -1654,6 +1656,7 @@
         "deterministic-rebuild",
         "dev",
         "develop",
+        "diff",
         "direct-fix",
         "directly",
         "discovered",
@@ -1698,6 +1701,7 @@
         "drift-fix-6",
         "drjkl",
         "drop",
+        "drop-in",
         "dropped",
         "duplicate"
       ],
@@ -1715,7 +1719,7 @@
         "wave-6",
         "wave-7"
       ],
-      "bytes": 205990,
+      "bytes": 215426,
       "path": "root/todo.md"
     }
   ],
