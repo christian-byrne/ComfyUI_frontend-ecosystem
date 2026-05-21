@@ -42,9 +42,15 @@ export interface ManifestEntry {
   slug: string
   title: string
   status: string | null
+  /** ISO date (`YYYY-MM-DD`) parsed out of the `**Status**:` line, when present. */
+  date?: string | null
   axioms: string[]
   adrs: string[]
   waves: string[]
+  /** Slugs this ADR explicitly supersedes (from `**Supersedes**:` header). */
+  supersedes?: string[]
+  /** Slugs that explicitly supersede this ADR (mirror of `supersedes`). */
+  supersededBy?: string[]
   bytes: number
   path: string
 }
@@ -88,35 +94,34 @@ export function getAnnouncementBody(slug: string): string | undefined {
 }
 
 /** Sorted by ADR number when possible (D1, D2, ..., D-foo last). */
-export const decisionsSorted: ManifestEntry[] = [...manifest.decisions].sort(
-  (a, b) => {
-    const an = a.slug.match(/^d(\d+)/)?.[1]
-    const bn = b.slug.match(/^d(\d+)/)?.[1]
-    if (an && bn) return Number(an) - Number(bn)
-    if (an) return -1
-    if (bn) return 1
-    return a.slug.localeCompare(b.slug)
-  }
-)
+export const decisionsSorted: ManifestEntry[] = [...manifest.decisions].sort((a, b) => {
+  const an = a.slug.match(/^d(\d+)/)?.[1]
+  const bn = b.slug.match(/^d(\d+)/)?.[1]
+  if (an && bn) return Number(an) - Number(bn)
+  if (an) return -1
+  if (bn) return 1
+  return a.slug.localeCompare(b.slug)
+})
 
 /** Group ADRs by status for the index page chip rendering. */
-export const decisionsByStatus = decisionsSorted.reduce<
-  Record<string, ManifestEntry[]>
->((acc, d) => {
-  const status = (d.status ?? 'unknown').toLowerCase()
-  acc[status] ??= []
-  acc[status].push(d)
-  return acc
-}, {})
+export const decisionsByStatus = decisionsSorted.reduce<Record<string, ManifestEntry[]>>(
+  (acc, d) => {
+    const status = (d.status ?? 'unknown').toLowerCase()
+    acc[status] ??= []
+    acc[status].push(d)
+    return acc
+  },
+  {}
+)
 
 /** Distinct waves mentioned in any ADR — powers the timeline chip filter. */
-export const allWaves: string[] = [
-  ...new Set(manifest.decisions.flatMap((d) => d.waves))
-].sort((a, b) => {
-  const an = Number.parseInt(a.replace(/[^\d]/g, ''), 10)
-  const bn = Number.parseInt(b.replace(/[^\d]/g, ''), 10)
-  return an - bn
-})
+export const allWaves: string[] = [...new Set(manifest.decisions.flatMap((d) => d.waves))].sort(
+  (a, b) => {
+    const an = Number.parseInt(a.replace(/[^\d]/g, ''), 10)
+    const bn = Number.parseInt(b.replace(/[^\d]/g, ''), 10)
+    return an - bn
+  }
+)
 
 /** Distinct axioms referenced — powers /axioms chip rendering. */
 export const allAxioms: string[] = Object.keys(manifest.axiomIndex).sort(
