@@ -1,0 +1,42 @@
+{
+  "nodemode": {
+    "variant": "phase-b",
+    "reason": "NodeMode type alias maps to A14-deferred mode-mutation surface; returns in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "nodemodechangedevent": {
+    "variant": "phase-b",
+    "reason": "Mode-change event payload is A14-deferred; wired up alongside getMode/setMode in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "nodeconnectedevent": {
+    "variant": "phase-b",
+    "reason": "Slot-level connect event is A14-deferred; ships with slot-mutation surface in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "nodedisconnectedevent": {
+    "variant": "phase-b",
+    "reason": "Slot-level disconnect event is A14-deferred; ships with slot-mutation surface in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "nodepositionchangedevent": {
+    "variant": "phase-b",
+    "reason": "Position-change event is A14-deferred; returns with position accessors in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "nodesizechangedevent": {
+    "variant": "phase-b",
+    "reason": "Size-change event is A14-deferred; returns with size accessors in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "slotinfo": {
+    "variant": "phase-b",
+    "reason": "Slot connection enumeration is A14-deferred (W17.A audit); returns with slot surface in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  },
+  "slotdirection": {
+    "variant": "phase-b",
+    "reason": "Slot direction enum is A14-deferred; returns with slot surface in Phase B.",
+    "href": "https://github.com/Comfy-Org/ComfyUI_frontend/pull/11939"
+  }
+}
