@@ -90,6 +90,21 @@ const axiomCounts = computed(() => {
   return out
 })
 
+/**
+ * Enriched "Cited by" lookup (Wave-18 W18.L). Prefers the
+ * `axiomBacklinks` array emitted by the builder (carries titles);
+ * falls back to synthesising from the flat `axiomIndex` for older
+ * manifests + the test fixture that mocks only `axiomIndex`.
+ */
+function backlinksFor(
+  axiomId: string
+): Array<{ id: string; title: string; type: 'decision' | 'axiom' }> {
+  const enriched = manifest.axiomBacklinks?.[axiomId]
+  if (enriched?.length) return enriched
+  const slugs = manifest.axiomIndex[axiomId] ?? []
+  return slugs.map((s) => ({ id: s, title: s, type: 'decision' as const }))
+}
+
 // TOC: scan the article body for h3 ids the per-axiom cards emit.
 const bodyRef = ref<HTMLElement | null>(null)
 const { items: tocItems, rebuild } = useToc(() => bodyRef.value)
@@ -273,22 +288,32 @@ async function copyPermalink(id: string) {
               </RouterLink>
             </div>
 
-            <!-- ADR backlinks (preserves the old `/axioms`
-                 "ADR citations per axiom" section, inlined). -->
+            <!--
+              ADR backlinks ("Cited by"). W18.L upgrades the chips to
+              use the enriched `axiomBacklinks` data (titles surfaced
+              as native tooltips) while preserving the previous slug
+              chips so deep-link landings still match prior visuals.
+            -->
             <div
-              v-if="manifest.axiomIndex[a.id]?.length"
+              v-if="backlinksFor(a.id).length"
               class="mt-3 flex flex-wrap items-center gap-2 text-xs"
+              :data-testid="`axiom-cited-by-${a.id}`"
             >
               <span class="text-zinc-500 dark:text-zinc-400"
-                >Cited by {{ manifest.axiomIndex[a.id].length }} ADR(s):</span
+                >Cited by {{ backlinksFor(a.id).length }} ADR(s):</span
               >
               <RouterLink
-                v-for="slug in manifest.axiomIndex[a.id]"
-                :key="slug"
-                :to="`/decisions/${slug}`"
+                v-for="b in backlinksFor(a.id)"
+                :key="b.id"
+                :to="
+                  b.type === 'decision'
+                    ? `/decisions/${b.id}`
+                    : `/axioms#${b.id.toLowerCase()}-refs`
+                "
+                :title="b.title"
                 class="rounded bg-zinc-100 px-2 py-0.5 font-mono text-blue-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-blue-400"
               >
-                {{ slug }}
+                {{ b.id }}
               </RouterLink>
             </div>
           </article>

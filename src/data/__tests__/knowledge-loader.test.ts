@@ -60,6 +60,69 @@ describe('knowledge-loader', () => {
     }
   })
 
+  // ── W18.L: enriched backlinks shape ───────────────────────────────
+  it('attaches enriched per-decision `backlinks` carrying title + type + relation', () => {
+    // At least one decision in the real corpus is referenced by another.
+    const withBacklinks = manifest.decisions.find(
+      (d) => (d.backlinks ?? []).length > 0
+    )
+    expect(withBacklinks, 'corpus must contain a back-linked ADR').toBeTruthy()
+    const b = withBacklinks!.backlinks![0]
+    expect(b).toMatchObject({
+      id: expect.any(String),
+      title: expect.any(String),
+      type: 'decision'
+    })
+    // Relation is constrained to the documented set.
+    expect(['supersedes', 'superseded-by', 'mentions']).toContain(b.relation)
+    // Title is enriched — must not be the bare slug.
+    const src = manifest.decisions.find((d) => d.slug === b.id)
+    expect(b.title).toBe(src?.title)
+  })
+
+  it('classifies supersedes-style backlinks with the correct relation', () => {
+    // Find a (target, source) pair where source.supersedes contains target.
+    const source = manifest.decisions.find(
+      (d) => (d.supersedes ?? []).length > 0
+    )
+    expect(source, 'corpus must contain a supersedes pair').toBeTruthy()
+    const targetSlug = source!.supersedes![0]
+    const target = manifest.decisions.find((d) => d.slug === targetSlug)
+    expect(target).toBeTruthy()
+    const back = (target!.backlinks ?? []).find((b) => b.id === source!.slug)
+    expect(back?.relation).toBe('supersedes')
+  })
+
+  it('emits a parallel `axiomBacklinks` map with enriched citations', () => {
+    expect(manifest.axiomBacklinks).toBeTruthy()
+    // Every axiom in the flat axiomIndex must have a matching entry.
+    for (const axiomId of Object.keys(manifest.axiomIndex)) {
+      const enriched = manifest.axiomBacklinks[axiomId] ?? []
+      expect(enriched.length).toBe(manifest.axiomIndex[axiomId].length)
+      for (const link of enriched) {
+        expect(link).toMatchObject({
+          id: expect.any(String),
+          title: expect.any(String),
+          type: 'decision'
+        })
+        // Title must come from a real decision entry.
+        const src = manifest.decisions.find((d) => d.slug === link.id)
+        expect(link.title).toBe(src?.title)
+      }
+    }
+  })
+
+  it('dedupes backlinks by source id (no duplicate citations)', () => {
+    for (const d of manifest.decisions) {
+      const ids = (d.backlinks ?? []).map((b) => b.id)
+      expect(new Set(ids).size).toBe(ids.length)
+    }
+    for (const axiomId of Object.keys(manifest.axiomBacklinks ?? {})) {
+      const ids = manifest.axiomBacklinks[axiomId].map((b) => b.id)
+      expect(new Set(ids).size).toBe(ids.length)
+    }
+  })
+
   it('returns undefined for an unknown decision slug (no throw)', () => {
     expect(getDecisionBody('d-this-does-not-exist')).toBeUndefined()
   })

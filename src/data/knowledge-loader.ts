@@ -38,6 +38,28 @@ const rawAnnouncements = import.meta.glob('./knowledge/announcements/*.md', {
   eager: true
 }) as Record<string, string>
 
+/**
+ * Enriched backlink shape (Wave-18 W18.L). Attached by
+ * `scripts/build-knowledge-manifest.mjs` to each decision and to every
+ * entry in `axiomBacklinks`. The flat slug-only `adrBacklinks` /
+ * `axiomIndex` reverse indexes are still emitted for back-compat.
+ */
+export interface BackLink {
+  /** Source page id (decision slug or axiom id). */
+  id: string
+  /** Human-friendly title to render as the link text. */
+  title: string
+  /** Target page kind — drives routing + badge variant in the UI. */
+  type: 'decision' | 'axiom'
+  /**
+   * Optional relation label:
+   *   - `supersedes`    — the source explicitly supersedes the target
+   *   - `superseded-by` — the source is explicitly superseded by the target
+   *   - `mentions`     — plain body-level reference, no formal relation
+   */
+  relation?: 'supersedes' | 'superseded-by' | 'mentions'
+}
+
 export interface ManifestEntry {
   slug: string
   title: string
@@ -51,6 +73,11 @@ export interface ManifestEntry {
   supersedes?: string[]
   /** Slugs that explicitly supersede this ADR (mirror of `supersedes`). */
   supersededBy?: string[]
+  /**
+   * Enriched "Referenced by" list (Wave-18 W18.L). Populated by the
+   * builder for decisions; undefined for root/announcement entries.
+   */
+  backlinks?: BackLink[]
   bytes: number
   path: string
 }
@@ -62,6 +89,13 @@ export interface KnowledgeManifest {
   announcements: ManifestEntry[]
   axiomIndex: Record<string, string[]>
   adrBacklinks: Record<string, string[]>
+  /**
+   * Enriched axiom → "cited by" map (Wave-18 W18.L). Parallel to
+   * `axiomIndex` but carries titles + types so the per-axiom card
+   * "Cited by" footer in `Axioms.vue` can render without round-tripping
+   * through `manifest.decisions`.
+   */
+  axiomBacklinks: Record<string, BackLink[]>
 }
 
 export const manifest = manifestJson as KnowledgeManifest

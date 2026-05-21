@@ -208,8 +208,86 @@ for (const d of manifest.decisions) {
 }
 manifest.adrBacklinks = adrBacklinks
 
+// ── Enriched backlinks (W18.L) ────────────────────────────────────────
+//
+// The flat `adrBacklinks` / `axiomIndex` reverse indexes above carry only
+// slugs, which forces the UI to look up titles + classify the relation
+// client-side. The enriched arrays below attach a `BackLink` shape
+// (`{id, title, type, relation?}`) per source ADR so the "Referenced by"
+// footers can render badges, titles, and relation labels directly.
+//
+//   relation values:
+//     'supersedes'    — the source ADR explicitly supersedes the target
+//     'superseded-by' — the source ADR is explicitly superseded by the target
+//     'mentions'      — body-level reference only (no formal relation)
+//
+// Each list is deduped by source id and sorted by source slug for stable
+// diffs across rebuilds.
+{
+  const decisionBySlug = new Map(manifest.decisions.map((d) => [d.slug, d]))
+
+  for (const target of manifest.decisions) {
+    const seen = new Map() // sourceSlug → BackLink
+    const add = (sourceSlug, relation) => {
+      const src = decisionBySlug.get(sourceSlug)
+      if (!src || src.slug === target.slug) return
+      // First-set-wins: 'supersedes' / 'superseded-by' beat 'mentions'.
+      if (seen.has(sourceSlug)) return
+      seen.set(sourceSlug, {
+        id: src.slug,
+        title: src.title,
+        type: 'decision',
+        relation
+      })
+    }
+    // 1. Other ADRs that supersede *us*.
+    for (const sourceSlug of target.supersededBy ?? []) {
+      add(sourceSlug, 'supersedes')
+    }
+    // 2. Other ADRs we supersede (they get a "superseded by us" backlink
+    //    when *they* are the target — handled here by walking the reverse
+    //    direction once more).
+    for (const sourceSlug of target.supersedes ?? []) {
+      add(sourceSlug, 'superseded-by')
+    }
+    // 3. Plain body-ref mentions (existing adrBacklinks).
+    for (const sourceSlug of adrBacklinks[target.slug] ?? []) {
+      add(sourceSlug, 'mentions')
+    }
+    target.backlinks = [...seen.values()].sort((a, b) => a.id.localeCompare(b.id))
+  }
+}
+
+// Enriched axiom backlinks: `axiomBacklinks[axiomId] = BackLink[]` of
+// decisions that cite the axiom, carrying titles for footer rendering.
+const axiomBacklinks = {}
+for (const [axiomId, slugs] of Object.entries(axiomIndex)) {
+  const seen = new Set()
+  const links = []
+  for (const slug of slugs) {
+    if (seen.has(slug)) continue
+    seen.add(slug)
+    const d = manifest.decisions.find((x) => x.slug === slug)
+    if (!d) continue
+    links.push({ id: d.slug, title: d.title, type: 'decision' })
+  }
+  links.sort((a, b) => a.id.localeCompare(b.id))
+  axiomBacklinks[axiomId] = links
+}
+manifest.axiomBacklinks = axiomBacklinks
+
+// Stats for the CLI log.
+const totalDecisionBacklinks = manifest.decisions.reduce(
+  (n, d) => n + (d.backlinks?.length ?? 0),
+  0
+)
+const totalAxiomBacklinks = Object.values(axiomBacklinks).reduce(
+  (n, list) => n + list.length,
+  0
+)
+
 const out = join(KNOWLEDGE_DIR, 'manifest.json')
 writeFileSync(out, JSON.stringify(manifest, null, 2) + '\n')
 console.log(
-  `  ✓ manifest.json (${manifest.decisions.length} ADRs, ${Object.keys(axiomIndex).length} axioms cross-ref'd)`
+  `  ✓ manifest.json (${manifest.decisions.length} ADRs, ${Object.keys(axiomIndex).length} axioms cross-ref'd, ${totalDecisionBacklinks} decision backlinks, ${totalAxiomBacklinks} axiom backlinks)`
 )

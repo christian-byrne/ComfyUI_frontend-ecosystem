@@ -33,7 +33,20 @@ const slug = computed(() => String(route.params.slug ?? '').toLowerCase())
 
 const meta = computed(() => manifest.decisions.find((d) => d.slug === slug.value))
 const body = computed(() => getDecisionBody(slug.value))
-const backlinks = computed(() => manifest.adrBacklinks[slug.value] ?? [])
+/**
+ * Enriched "Referenced by" list (Wave-18 W18.L). Falls back to the flat
+ * `adrBacklinks` slug array for older manifests that were built before
+ * the W18.L builder enrichment pass landed.
+ */
+const backlinks = computed(() => {
+  if (meta.value?.backlinks?.length) return meta.value.backlinks
+  return (manifest.adrBacklinks[slug.value] ?? []).map((src) => ({
+    id: src,
+    title: manifest.decisions.find((d) => d.slug === src)?.title ?? src,
+    type: 'decision' as const,
+    relation: 'mentions' as const
+  }))
+})
 
 useHead(() => ({
   title: meta.value ? `${meta.value.slug} — ${meta.value.title}` : 'Decision not found'
@@ -225,23 +238,46 @@ const relatedDecisions = computed(() =>
         <!-- ── Body ──────────────────────────────────────────────── -->
         <Prose :html="renderedBody" max-width="full" />
 
-        <!-- Backlinks (preserved from prior layout). -->
+        <!--
+          W18.L — enriched "Referenced by" footer. Each entry carries a
+          type Badge, title (not just slug), and a relation label
+          (supersedes / superseded-by / mentions) so power users can
+          scan citations without opening every linked ADR.
+        -->
         <section
           v-if="backlinks.length"
-          class="mt-10 rounded border border-zinc-200 p-4 dark:border-zinc-800"
+          class="mt-12 border-t border-zinc-200 pt-6 dark:border-zinc-800"
           data-testid="adr-backlinks"
         >
-          <h2 class="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+          <h2
+            class="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+          >
             Referenced by ({{ backlinks.length }})
           </h2>
-          <ul class="flex flex-wrap gap-2 text-xs">
-            <li v-for="b in backlinks" :key="b">
+          <ul class="space-y-2 text-sm">
+            <li
+              v-for="b in backlinks"
+              :key="b.id"
+              class="flex flex-wrap items-baseline gap-2"
+              :data-testid="`adr-backlink-${b.id}`"
+            >
+              <Badge :variant="b.type === 'decision' ? 'neutral' : 'planned'" size="xs">
+                {{ b.type }}
+              </Badge>
               <RouterLink
-                :to="`/decisions/${b}`"
-                class="rounded bg-zinc-100 px-2 py-1 font-mono text-blue-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-blue-400"
+                :to="b.type === 'decision' ? `/decisions/${b.id}` : `/axioms#${b.id.toLowerCase()}-refs`"
+                class="text-zinc-900 hover:text-blue-600 dark:text-zinc-100 dark:hover:text-blue-400"
               >
-                {{ b }}
+                <span class="font-mono text-xs text-zinc-500 dark:text-zinc-400">{{ b.id }}</span>
+                <span class="ml-2">{{ b.title }}</span>
               </RouterLink>
+              <span
+                v-if="b.relation"
+                class="text-xs italic text-zinc-500 dark:text-zinc-400"
+                :data-testid="`adr-backlink-relation-${b.id}`"
+              >
+                ({{ b.relation }})
+              </span>
             </li>
           </ul>
         </section>

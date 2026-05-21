@@ -222,6 +222,36 @@ describe('DecisionDetail.vue page mount', () => {
     expect(link).toBeTruthy()
   })
 
+  it('renders enriched backlinks (title + relation label) when present', async () => {
+    // W18.L — pick a decision that the builder has attached `backlinks` to.
+    const fixture = manifest.decisions.find(
+      (d) => (d.backlinks ?? []).length >= 2
+    )
+    if (!fixture) throw new Error('No ADR with ≥2 backlinks in manifest')
+    const w = await mountAt(fixture.slug)
+
+    const footer = w.find('[data-testid="adr-backlinks"]')
+    expect(footer.exists()).toBe(true)
+    expect(footer.text()).toContain(`Referenced by (${fixture.backlinks!.length})`)
+
+    // Each backlink renders an entry with the source slug, title text,
+    // a type badge, and (if present) a relation label.
+    for (const b of fixture.backlinks!) {
+      const row = w.find(`[data-testid="adr-backlink-${b.id}"]`)
+      expect(row.exists(), `missing backlink row for ${b.id}`).toBe(true)
+      // The router-link target points to the right route.
+      const link = row.find('a')
+      expect(link.attributes('href')).toBe(`/decisions/${b.id}`)
+      // The title is rendered (not just the slug).
+      expect(row.text()).toContain(b.title)
+      if (b.relation) {
+        const rel = w.find(`[data-testid="adr-backlink-relation-${b.id}"]`)
+        expect(rel.exists()).toBe(true)
+        expect(rel.text()).toContain(b.relation)
+      }
+    }
+  })
+
   it('wraps the Decision section in an adr-callout div when present', async () => {
     // The body must contain a `## Decision` H2 — most accepted ADRs do.
     const fixture = decisionsSorted.find((d) => d.status === 'accepted' && d.bytes > 1000)

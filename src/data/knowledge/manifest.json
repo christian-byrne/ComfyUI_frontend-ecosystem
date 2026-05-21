@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T21:27:59.078Z",
+  "generatedAt": "2026-05-21T21:35:16.378Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -49,7 +49,69 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 10525,
-      "path": "decisions/D-api-surface-finalization.md"
+      "path": "decisions/D-api-surface-finalization.md",
+      "backlinks": [
+        {
+          "id": "d-define-widget-augmenter",
+          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-linked-subgraph-constraint",
+          "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-notify-toast-consolidation",
+          "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-serialization-simplification",
+          "title": "D-widget-serialization-simplification",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d10-lifecycle-context-and-ordering",
+          "title": "ADR-D10: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d12-scope-clone-on-copy",
+          "title": "D12 — `NodeInstanceScope` Copy/Paste Semantics",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d14-serialization-convergence",
+          "title": "ADR-D14: Serialization Convergence — Single Target Model",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d14-widget-state-categories",
+          "title": "D14 — Widget State Categories",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d8-world-vue-reactive-adapter",
+          "title": "ADR-D8: ECS World ↔ Vue Reactive Adapter",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-ban-runtime-addwidget",
@@ -91,7 +153,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 10683,
-      "path": "decisions/D-ban-runtime-addwidget.md"
+      "path": "decisions/D-ban-runtime-addwidget.md",
+      "backlinks": []
     },
     {
       "slug": "d-bootstrap-hooks",
@@ -120,7 +183,51 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 16131,
-      "path": "decisions/D-bootstrap-hooks.md"
+      "path": "decisions/D-bootstrap-hooks.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-cross-node-observation",
+          "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-design-review-hygiene-cleanup",
+          "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-app-beforeprompt",
+          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-shell-ui-entrypoints",
+          "title": "D-shell-ui-entrypoints — Granular shell UI registration entry points",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-converge",
+          "title": "D-widget-converge — DOMWidget ↔ BaseWidget convergence",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d10-lifecycle-context-and-ordering",
+          "title": "ADR-D10: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-coordinate-space",
@@ -156,7 +263,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 17652,
-      "path": "decisions/D-coordinate-space.md"
+      "path": "decisions/D-coordinate-space.md",
+      "backlinks": []
     },
     {
       "slug": "d-cross-node-observation",
@@ -183,7 +291,33 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 9391,
-      "path": "decisions/D-cross-node-observation.md"
+      "path": "decisions/D-cross-node-observation.md",
+      "backlinks": [
+        {
+          "id": "d-define-widget-augmenter",
+          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-app-beforeprompt",
+          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-virtual-nodes-in-api",
+          "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-define-widget-augmenter",
@@ -223,7 +357,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 12370,
-      "path": "decisions/D-define-widget-augmenter.md"
+      "path": "decisions/D-define-widget-augmenter.md",
+      "backlinks": []
     },
     {
       "slug": "d-design-review-hygiene-cleanup",
@@ -256,7 +391,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 8289,
-      "path": "decisions/D-design-review-hygiene-cleanup.md"
+      "path": "decisions/D-design-review-hygiene-cleanup.md",
+      "backlinks": [
+        {
+          "id": "d-notify-toast-consolidation",
+          "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-immutability-enforcement",
@@ -289,7 +432,39 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 19637,
-      "path": "decisions/D-immutability-enforcement.md"
+      "path": "decisions/D-immutability-enforcement.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-design-review-hygiene-cleanup",
+          "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-node-widget-access",
+          "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-serialization-simplification",
+          "title": "D-widget-serialization-simplification",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-linked-subgraph-constraint",
@@ -317,7 +492,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 5752,
-      "path": "decisions/D-linked-subgraph-constraint.md"
+      "path": "decisions/D-linked-subgraph-constraint.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-no-app-beforeprompt",
@@ -345,7 +528,21 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4855,
-      "path": "decisions/D-no-app-beforeprompt.md"
+      "path": "decisions/D-no-app-beforeprompt.md",
+      "backlinks": [
+        {
+          "id": "d-define-widget-augmenter",
+          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-no-node-widget-access",
@@ -373,7 +570,27 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 6794,
-      "path": "decisions/D-no-node-widget-access.md"
+      "path": "decisions/D-no-node-widget-access.md",
+      "backlinks": [
+        {
+          "id": "d-cross-node-observation",
+          "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-define-widget-augmenter",
+          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-serialization-simplification",
+          "title": "D-widget-serialization-simplification",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-no-virtual-nodes-in-api",
@@ -398,7 +615,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 6299,
-      "path": "decisions/D-no-virtual-nodes-in-api.md"
+      "path": "decisions/D-no-virtual-nodes-in-api.md",
+      "backlinks": [
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-notify-toast-consolidation",
@@ -427,7 +652,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 15326,
-      "path": "decisions/D-notify-toast-consolidation.md"
+      "path": "decisions/D-notify-toast-consolidation.md",
+      "backlinks": []
     },
     {
       "slug": "d-shell-ui-entrypoints",
@@ -459,7 +685,21 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 27957,
-      "path": "decisions/D-shell-ui-entrypoints.md"
+      "path": "decisions/D-shell-ui-entrypoints.md",
+      "backlinks": [
+        {
+          "id": "d-bootstrap-hooks",
+          "title": "D-bootstrap-hooks — Disposition of `init` / `setup` extension hooks",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-notify-toast-consolidation",
+          "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-uwf-drafting-board",
@@ -502,7 +742,33 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 20467,
-      "path": "decisions/D-uwf-drafting-board.md"
+      "path": "decisions/D-uwf-drafting-board.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-cross-node-observation",
+          "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-app-beforeprompt",
+          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-virtual-nodes-in-api",
+          "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-widget-converge",
@@ -543,7 +809,33 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 21419,
-      "path": "decisions/D-widget-converge.md"
+      "path": "decisions/D-widget-converge.md",
+      "backlinks": [
+        {
+          "id": "d-ban-runtime-addwidget",
+          "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-coordinate-space",
+          "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-immutability-enforcement",
+          "title": "D-immutability-enforcement — Consistent immutability rules across the API surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-shell-ui-entrypoints",
+          "title": "D-shell-ui-entrypoints — Granular shell UI registration entry points",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d-widget-serialization-simplification",
@@ -583,7 +875,39 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 13270,
-      "path": "decisions/D-widget-serialization-simplification.md"
+      "path": "decisions/D-widget-serialization-simplification.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-ban-runtime-addwidget",
+          "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-app-beforeprompt",
+          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d14-serialization-convergence",
+          "title": "ADR-D14: Serialization Convergence — Single Target Model",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d1-vue-reactivity-primer",
@@ -612,7 +936,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 19181,
-      "path": "decisions/D1-vue-reactivity-primer.md"
+      "path": "decisions/D1-vue-reactivity-primer.md",
+      "backlinks": [
+        {
+          "id": "d2-vue-setup-function-primer",
+          "title": "D2 — Vue Setup Function Primer: How Hoisted State Works",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d10-lifecycle-context-and-ordering",
@@ -651,7 +983,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 23207,
-      "path": "decisions/D10-lifecycle-context-and-ordering.md"
+      "path": "decisions/D10-lifecycle-context-and-ordering.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d11-naming-definenode-definewidget",
@@ -673,7 +1013,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 3073,
-      "path": "decisions/D11-naming-defineNode-defineWidget.md"
+      "path": "decisions/D11-naming-defineNode-defineWidget.md",
+      "backlinks": []
     },
     {
       "slug": "d12-scope-clone-on-copy",
@@ -702,7 +1043,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 19944,
-      "path": "decisions/D12-scope-clone-on-copy.md"
+      "path": "decisions/D12-scope-clone-on-copy.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d13-ecs-alignment-audit",
@@ -731,7 +1080,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 16090,
-      "path": "decisions/D13-ecs-alignment-audit.md"
+      "path": "decisions/D13-ecs-alignment-audit.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d14-serialization-convergence",
@@ -765,7 +1122,27 @@
       ],
       "supersededBy": [],
       "bytes": 7375,
-      "path": "decisions/D14-serialization-convergence.md"
+      "path": "decisions/D14-serialization-convergence.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-serialization-simplification",
+          "title": "D-widget-serialization-simplification",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "type": "decision",
+          "relation": "superseded-by"
+        }
+      ]
     },
     {
       "slug": "d14-widget-state-categories",
@@ -790,7 +1167,27 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4558,
-      "path": "decisions/D14-widget-state-categories.md"
+      "path": "decisions/D14-widget-state-categories.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-immutability-enforcement",
+          "title": "D-immutability-enforcement — Consistent immutability rules across the API surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d15-ban-node-on-beforeserialize",
@@ -814,7 +1211,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 3565,
-      "path": "decisions/D15-ban-node-on-beforeSerialize.md"
+      "path": "decisions/D15-ban-node-on-beforeSerialize.md",
+      "backlinks": []
     },
     {
       "slug": "d17-pkg2-build-strategy",
@@ -839,7 +1237,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 12224,
-      "path": "decisions/D17-pkg2-build-strategy.md"
+      "path": "decisions/D17-pkg2-build-strategy.md",
+      "backlinks": []
     },
     {
       "slug": "d18-pure-functions-loader-registration",
@@ -870,7 +1269,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 12758,
-      "path": "decisions/D18-pure-functions-loader-registration.md"
+      "path": "decisions/D18-pure-functions-loader-registration.md",
+      "backlinks": []
     },
     {
       "slug": "d19-vueextension-disposition",
@@ -891,7 +1291,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4850,
-      "path": "decisions/D19-vueextension-disposition.md"
+      "path": "decisions/D19-vueextension-disposition.md",
+      "backlinks": []
     },
     {
       "slug": "d2-vue-setup-function-primer",
@@ -915,7 +1316,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 20636,
-      "path": "decisions/D2-vue-setup-function-primer.md"
+      "path": "decisions/D2-vue-setup-function-primer.md",
+      "backlinks": [
+        {
+          "id": "d1-vue-reactivity-primer",
+          "title": "D1 — Vue Reactivity Primer: How Signals Work in Vue",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d20-id-type-convergence",
@@ -945,7 +1354,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 9848,
-      "path": "decisions/D20-id-type-convergence.md"
+      "path": "decisions/D20-id-type-convergence.md",
+      "backlinks": []
     },
     {
       "slug": "d3-architecture-diagram",
@@ -963,7 +1373,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 9413,
-      "path": "decisions/D3-architecture-diagram.md"
+      "path": "decisions/D3-architecture-diagram.md",
+      "backlinks": []
     },
     {
       "slug": "d3.1-design-questions-resolved",
@@ -989,7 +1400,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 21498,
-      "path": "decisions/D3.1-design-questions-resolved.md"
+      "path": "decisions/D3.1-design-questions-resolved.md",
+      "backlinks": []
     },
     {
       "slug": "d3.2-single-api-design",
@@ -1020,7 +1432,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 17112,
-      "path": "decisions/D3.2-single-api-design.md"
+      "path": "decisions/D3.2-single-api-design.md",
+      "backlinks": []
     },
     {
       "slug": "d3.3-events-over-signals",
@@ -1047,7 +1460,15 @@
         "d5-events-and-payload-typing"
       ],
       "bytes": 9726,
-      "path": "decisions/D3.3-events-over-signals.md"
+      "path": "decisions/D3.3-events-over-signals.md",
+      "backlinks": [
+        {
+          "id": "d5-events-and-payload-typing",
+          "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+          "type": "decision",
+          "relation": "supersedes"
+        }
+      ]
     },
     {
       "slug": "d3.4-events-and-commands-reconciled",
@@ -1066,7 +1487,15 @@
         "d5-events-and-payload-typing"
       ],
       "bytes": 6780,
-      "path": "decisions/D3.4-events-and-commands-reconciled.md"
+      "path": "decisions/D3.4-events-and-commands-reconciled.md",
+      "backlinks": [
+        {
+          "id": "d5-events-and-payload-typing",
+          "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+          "type": "decision",
+          "relation": "supersedes"
+        }
+      ]
     },
     {
       "slug": "d3.5-reactive-dispatch-and-scope-alignment",
@@ -1086,7 +1515,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 10617,
-      "path": "decisions/D3.5-reactive-dispatch-and-scope-alignment.md"
+      "path": "decisions/D3.5-reactive-dispatch-and-scope-alignment.md",
+      "backlinks": []
     },
     {
       "slug": "d4-gap-analysis",
@@ -1133,7 +1563,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 31632,
-      "path": "decisions/D4-gap-analysis.md"
+      "path": "decisions/D4-gap-analysis.md",
+      "backlinks": []
     },
     {
       "slug": "d5-events-and-payload-typing",
@@ -1163,7 +1594,21 @@
       ],
       "supersededBy": [],
       "bytes": 12750,
-      "path": "decisions/D5-events-and-payload-typing.md"
+      "path": "decisions/D5-events-and-payload-typing.md",
+      "backlinks": [
+        {
+          "id": "d3.3-events-over-signals",
+          "title": "D3.3 — Events Over Signals",
+          "type": "decision",
+          "relation": "superseded-by"
+        },
+        {
+          "id": "d3.4-events-and-commands-reconciled",
+          "title": "D3.4 — Reconciling Events API with ECS Command/Query Pattern",
+          "type": "decision",
+          "relation": "superseded-by"
+        }
+      ]
     },
     {
       "slug": "d6-parallel-paths-migration",
@@ -1196,7 +1641,27 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 27855,
-      "path": "decisions/D6-parallel-paths-migration.md"
+      "path": "decisions/D6-parallel-paths-migration.md",
+      "backlinks": [
+        {
+          "id": "d17-pkg2-build-strategy",
+          "title": "ADR-D17: PKG2 build strategy — package builds from main app sources via extended root tsconfig",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d6.2-types-package-sunset-criteria",
+          "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d9-strangler-fig-phases",
+          "title": "D9 — Strangler Fig Phases for v2 Extension API Rollout",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d6.1-entry-point-shape",
@@ -1221,7 +1686,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 11987,
-      "path": "decisions/D6.1-entry-point-shape.md"
+      "path": "decisions/D6.1-entry-point-shape.md",
+      "backlinks": []
     },
     {
       "slug": "d6.2-types-package-sunset-criteria",
@@ -1260,7 +1726,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 16190,
-      "path": "decisions/D6.2-types-package-sunset-criteria.md"
+      "path": "decisions/D6.2-types-package-sunset-criteria.md",
+      "backlinks": []
     },
     {
       "slug": "d7-widget-shape-and-persistence",
@@ -1303,7 +1770,21 @@
         "d14-serialization-convergence"
       ],
       "bytes": 22844,
-      "path": "decisions/D7-widget-shape-and-persistence.md"
+      "path": "decisions/D7-widget-shape-and-persistence.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d14-serialization-convergence",
+          "title": "ADR-D14: Serialization Convergence — Single Target Model",
+          "type": "decision",
+          "relation": "supersedes"
+        }
+      ]
     },
     {
       "slug": "d8-world-vue-reactive-adapter",
@@ -1328,7 +1809,15 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4863,
-      "path": "decisions/D8-world-vue-reactive-adapter.md"
+      "path": "decisions/D8-world-vue-reactive-adapter.md",
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d9-strangler-fig-phases",
@@ -1353,7 +1842,21 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 11236,
-      "path": "decisions/D9-strangler-fig-phases.md"
+      "path": "decisions/D9-strangler-fig-phases.md",
+      "backlinks": [
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d6.2-types-package-sunset-criteria",
+          "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "template",
@@ -1370,7 +1873,8 @@
       "supersedes": [],
       "supersededBy": [],
       "bytes": 281,
-      "path": "decisions/TEMPLATE.md"
+      "path": "decisions/TEMPLATE.md",
+      "backlinks": []
     }
   ],
   "root": [
@@ -2151,6 +2655,373 @@
     ],
     "d1-vue-reactivity-primer": [
       "d2-vue-setup-function-primer"
+    ]
+  },
+  "axiomBacklinks": {
+    "A14": [
+      {
+        "id": "d-api-surface-finalization",
+        "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+        "type": "decision"
+      },
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-design-review-hygiene-cleanup",
+        "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-node-widget-access",
+        "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+        "type": "decision"
+      },
+      {
+        "id": "d-notify-toast-consolidation",
+        "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+        "type": "decision"
+      },
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      }
+    ],
+    "A15": [
+      {
+        "id": "d-api-surface-finalization",
+        "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+        "type": "decision"
+      },
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-app-beforeprompt",
+        "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-virtual-nodes-in-api",
+        "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+        "type": "decision"
+      },
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      },
+      {
+        "id": "d14-serialization-convergence",
+        "title": "ADR-D14: Serialization Convergence — Single Target Model",
+        "type": "decision"
+      }
+    ],
+    "A16": [
+      {
+        "id": "d-api-surface-finalization",
+        "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+        "type": "decision"
+      },
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-app-beforeprompt",
+        "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      },
+      {
+        "id": "d14-serialization-convergence",
+        "title": "ADR-D14: Serialization Convergence — Single Target Model",
+        "type": "decision"
+      }
+    ],
+    "A1": [
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-cross-node-observation",
+        "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-node-widget-access",
+        "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+        "type": "decision"
+      },
+      {
+        "id": "d-uwf-drafting-board",
+        "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+        "type": "decision"
+      },
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      },
+      {
+        "id": "d15-ban-node-on-beforeserialize",
+        "title": "D15 — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
+        "type": "decision"
+      },
+      {
+        "id": "d18-pure-functions-loader-registration",
+        "title": "D18 — Pure functions + loader-based registration",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      },
+      {
+        "id": "d5-events-and-payload-typing",
+        "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+        "type": "decision"
+      },
+      {
+        "id": "d6-parallel-paths-migration",
+        "title": "ADR-D6: Parallel Paths Migration Strategy",
+        "type": "decision"
+      },
+      {
+        "id": "d6.2-types-package-sunset-criteria",
+        "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+        "type": "decision"
+      },
+      {
+        "id": "d7-widget-shape-and-persistence",
+        "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+        "type": "decision"
+      },
+      {
+        "id": "d9-strangler-fig-phases",
+        "title": "D9 — Strangler Fig Phases for v2 Extension API Rollout",
+        "type": "decision"
+      }
+    ],
+    "A2": [
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-node-widget-access",
+        "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+        "type": "decision"
+      },
+      {
+        "id": "d-notify-toast-consolidation",
+        "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+        "type": "decision"
+      },
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      },
+      {
+        "id": "d15-ban-node-on-beforeserialize",
+        "title": "D15 — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A3": [
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-linked-subgraph-constraint",
+        "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-virtual-nodes-in-api",
+        "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+        "type": "decision"
+      },
+      {
+        "id": "d20-id-type-convergence",
+        "title": "D20 — Identity type convergence",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A4": [
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-linked-subgraph-constraint",
+        "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A6": [
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A12": [
+      {
+        "id": "d-ban-runtime-addwidget",
+        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-coordinate-space",
+        "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+        "type": "decision"
+      }
+    ],
+    "A13": [
+      {
+        "id": "d-coordinate-space",
+        "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+        "type": "decision"
+      }
+    ],
+    "A10": [
+      {
+        "id": "d-cross-node-observation",
+        "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+        "type": "decision"
+      }
+    ],
+    "A5": [
+      {
+        "id": "d-define-widget-augmenter",
+        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "type": "decision"
+      },
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A7": [
+      {
+        "id": "d-no-app-beforeprompt",
+        "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+        "type": "decision"
+      },
+      {
+        "id": "d-no-virtual-nodes-in-api",
+        "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A8": [
+      {
+        "id": "d-notify-toast-consolidation",
+        "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+        "type": "decision"
+      },
+      {
+        "id": "d4-gap-analysis",
+        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "type": "decision"
+      }
+    ],
+    "A11": [
+      {
+        "id": "d-widget-serialization-simplification",
+        "title": "D-widget-serialization-simplification",
+        "type": "decision"
+      }
     ]
   }
 }
