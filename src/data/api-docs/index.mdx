@@ -75,7 +75,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [NodeExtensionOptions](interfaces/NodeExtensionOptions.md) | Options for `defineNode`. Describes an extension that reacts to node lifecycle events. |
 | [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components. |
 | [ServerEventPayloads](interfaces/ServerEventPayloads.md) | See [the augmentation example](interfaces/GraphEventPayloads.md) — augment this interface the same way to narrow `server.*` payloads. |
-| [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. |
+| [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. Passed to [toast.show](variables/toast.md#show) / [toast.remove](variables/toast.md#remove) to surface a transient message to the user. |
 | [ToolbarButtonExtension](interfaces/ToolbarButtonExtension.md) | Public arg type for [defineToolbarButton](functions/defineToolbarButton.md). A button that appears in the action bar (top of the canvas area). Wraps the v1 `extension.actionBarButtons[]` shape with an `id` so each registration is independently disposable. |
 | [WidgetBeforeQueueEvent](interfaces/WidgetBeforeQueueEvent.md) | Payload for `widget.on('beforeQueue', handler)`. |
 | [WidgetBeforeSerializeEvent](interfaces/WidgetBeforeSerializeEvent.md) | Payload for `widget.on('beforeSerialize', handler)`. |

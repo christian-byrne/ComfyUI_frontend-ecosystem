@@ -3,7 +3,7 @@ title: "HotkeyExtension"
 description: "API reference for HotkeyExtension."
 ---
 
-Defined in: [types/extensionTypes.ts:184](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/types/extensionTypes.ts#L184)
+Defined in: [types/extensionTypes.ts:201](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/types/extensionTypes.ts#L201)
 
 Public arg type for [defineHotkey](./definehotkey). A hotkey binds a key combination
 (already-registered command) to fire on press. Mirrors v1
@@ -19,6 +19,13 @@ macOS and `ctrl` elsewhere. The runtime parses this into the underlying
 ## Stability
 
 experimental
+
+```ts
+import { defineCommand, defineHotkey } from '@comfyorg/extension-api'
+
+defineCommand({ id: 'my.cmd', function: () => {} })
+defineHotkey({ keys: 'mod+k', commandId: 'my.cmd' })
+```
 
 ## Properties
 

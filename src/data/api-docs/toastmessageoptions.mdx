@@ -3,9 +3,22 @@ title: "ToastMessageOptions"
 description: "API reference for ToastMessageOptions."
 ---
 
-Defined in: [types/extensionTypes.ts:54](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/types/extensionTypes.ts#L54)
+Defined in: [types/extensionTypes.ts:64](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/types/extensionTypes.ts#L64)
 
-Defines message options in Toast component.
+Defines message options in Toast component. Passed to [toast.show](../variables/toast.md#show) /
+[toast.remove](../variables/toast.md#remove) to surface a transient message to the user.
+
+## Public API
+
+## Stability
+
+experimental
+
+```ts
+import { toast } from '@comfyorg/extension-api'
+
+toast.show({ severity: 'info', summary: 'Saved', life: 2000 })
+```
 
 ## Properties
 

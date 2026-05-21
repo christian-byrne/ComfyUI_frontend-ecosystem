@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T02:47:58.100Z",
+  "generatedAt": "2026-05-21T03:14:16.082Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -363,6 +363,32 @@
       ],
       "bytes": 6299,
       "path": "decisions/D-no-virtual-nodes-in-api.md"
+    },
+    {
+      "slug": "d-notify-toast-consolidation",
+      "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+      "status": "unknown",
+      "axioms": [
+        "A2",
+        "A8",
+        "A14"
+      ],
+      "adrs": [
+        "d-api-surface-finalization",
+        "d-design-review-hygiene-cleanup",
+        "d-shell-ui-entrypoints",
+        "decider",
+        "decision",
+        "deferred",
+        "deprecate-and-keep"
+      ],
+      "waves": [
+        "wave-11",
+        "wave-12",
+        "wave-17"
+      ],
+      "bytes": 15326,
+      "path": "decisions/D-notify-toast-consolidation.md"
     },
     {
       "slug": "d-shell-ui-entrypoints",
@@ -1719,7 +1745,7 @@
         "wave-6",
         "wave-7"
       ],
-      "bytes": 215426,
+      "bytes": 217572,
       "path": "root/todo.md"
     }
   ],
@@ -1755,6 +1781,7 @@
       "d-define-widget-augmenter",
       "d-design-review-hygiene-cleanup",
       "d-no-node-widget-access",
+      "d-notify-toast-consolidation",
       "d-widget-serialization-simplification"
     ],
     "A15": [
@@ -1794,6 +1821,7 @@
       "d-ban-runtime-addwidget",
       "d-define-widget-augmenter",
       "d-no-node-widget-access",
+      "d-notify-toast-consolidation",
       "d-widget-serialization-simplification",
       "d15-ban-node-on-beforeserialize",
       "d4-gap-analysis"
@@ -1837,11 +1865,12 @@
       "d-no-virtual-nodes-in-api",
       "d4-gap-analysis"
     ],
+    "A8": [
+      "d-notify-toast-consolidation",
+      "d4-gap-analysis"
+    ],
     "A11": [
       "d-widget-serialization-simplification"
-    ],
-    "A8": [
-      "d4-gap-analysis"
     ]
   },
   "adrBacklinks": {
@@ -1909,7 +1938,8 @@
       "d-shell-ui-entrypoints"
     ],
     "d-shell-ui-entrypoints": [
-      "d-bootstrap-hooks"
+      "d-bootstrap-hooks",
+      "d-notify-toast-consolidation"
     ],
     "d-no-node-widget-access": [
       "d-cross-node-observation",
@@ -1919,6 +1949,7 @@
     "d-api-surface-finalization": [
       "d-define-widget-augmenter",
       "d-linked-subgraph-constraint",
+      "d-notify-toast-consolidation",
       "d-widget-serialization-simplification",
       "d10-lifecycle-context-and-ordering",
       "d12-scope-clone-on-copy",
@@ -1936,6 +1967,9 @@
     "d-no-app-beforeprompt": [
       "d-define-widget-augmenter",
       "d-uwf-drafting-board"
+    ],
+    "d-design-review-hygiene-cleanup": [
+      "d-notify-toast-consolidation"
     ],
     "d-no-virtual-nodes-in-api": [
       "d-uwf-drafting-board"

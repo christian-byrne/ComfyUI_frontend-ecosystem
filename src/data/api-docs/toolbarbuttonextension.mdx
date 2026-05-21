@@ -3,7 +3,7 @@ title: "ToolbarButtonExtension"
 description: "API reference for ToolbarButtonExtension."
 ---
 
-Defined in: [types/extensionTypes.ts:250](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e2e1a01d6d049cdbc912faa211000f639a159c2f/src/types/extensionTypes.ts#L250)
+Defined in: [types/extensionTypes.ts:288](https://github.com/Comfy-Org/ComfyUI_frontend/blob/528d014e15d500d349a7dcfdb3d5fae81b06e2dc/src/types/extensionTypes.ts#L288)
 
 Public arg type for [defineToolbarButton](./definetoolbarbutton). A button that appears in
 the action bar (top of the canvas area). Wraps the v1
@@ -20,6 +20,17 @@ had 0 hits across the 138-repo corpus — any first-mover use is greenfield.
 ## Stability
 
 experimental
+
+```ts
+import { defineToolbarButton } from '@comfyorg/extension-api'
+
+defineToolbarButton({
+  id: 'my.help',
+  icon: 'pi-question-circle',
+  tooltip: 'Get help',
+  onClick: () => openHelp()
+})
+```
 
 ## Properties
 
