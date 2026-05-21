@@ -36,4 +36,37 @@ find "$DST_DIR" -name '*.mdx' -delete
 cp "$SRC_DIR"/*.mdx "$DST_DIR/"
 cp "$SRC_DIR/nav-snippet.json" "$DST_DIR/"
 
+# Restore intentionally-kept "future surface" placeholder pages from git
+# HEAD. These describe surfaces that are A14 PHASE_A_EXCLUDED (commented
+# out in source pending Phase B re-enablement) but whose published doc
+# pages communicate the planned shape to extension authors. Per design
+# direction 2026-05-21: keep these absent-but-coming-back pages visible.
+# A page that wholesale moved (e.g. v1-only `extensionmanager`) is NOT
+# restored — the canonical surface is the v2 reference.
+PRESERVED_PAGES=(
+  nodeconnectedevent.mdx
+  nodedisconnectedevent.mdx
+  nodemodechangedevent.mdx
+  nodepositionchangedevent.mdx
+  nodesizechangedevent.mdx
+  nodemode.mdx
+  slotdirection.mdx
+)
+restored=0
+for page in "${PRESERVED_PAGES[@]}"; do
+  if git -C "$(dirname "$0")/.." show "HEAD:src/data/api-docs/$page" > "$DST_DIR/$page" 2>/dev/null; then
+    restored=$((restored + 1))
+  else
+    rm -f "$DST_DIR/$page"
+  fi
+done
+echo "Restored $restored intentionally-kept placeholder page(s) from HEAD."
+
+# Post-process: drop @deprecated members that have a clear v1→v2
+# migration path. Members kept "absent on purpose" (A14 PHASE_A_EXCLUDED)
+# never appear in TypeDoc output, so this only affects deprecated-with-
+# replacement entries. Done in this repo (not upstream packages/extension-api)
+# to respect the Phase A surface freeze.
+node "$(dirname "$0")/strip-deprecated.mjs"
+
 echo "✅ API docs refreshed. Review with: git diff --stat src/data/api-docs/"

@@ -71,7 +71,6 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [ExtensionOptions](interfaces/ExtensionOptions.md) | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions. |
 | [GraphEventPayloads](interfaces/GraphEventPayloads.md) | Per-namespace event payload map. **Augment via TS module augmentation** to narrow payloads for canonical events. Until D5 ships, all payloads default to `unknown`. |
 | [HotkeyExtension](interfaces/HotkeyExtension.md) | Public arg type for [defineHotkey](functions/defineHotkey.md). A hotkey binds a key combination (already-registered command) to fire on press. Mirrors v1 `extension.keybindings[]` which used the internal `Keybinding` shape. |
-| [~~NodeBeforeSerializeEvent~~](interfaces/NodeBeforeSerializeEvent.md) | Payload for `node.on('beforeSerialize', handler)`. |
 | [NodeExecutedEvent](interfaces/NodeExecutedEvent.md) | Payload for `node.on('executed', handler)`. |
 | [NodeExtensionOptions](interfaces/NodeExtensionOptions.md) | Options for `defineNode`. Describes an extension that reacts to node lifecycle events. |
 | [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components. |

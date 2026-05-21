@@ -164,23 +164,6 @@ for v1 extensions that used it for per-instance widget config (e.g. min/max).
 
 ***
 
-### ~~inputs()~~
-
-```ts
-inputs(): readonly SlotInfo[];
-```
-
-Defined in: [extension-api/node.ts:304](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L304)
-
-#### Returns
-
-readonly `SlotInfo`[]
-
-#### Deprecated
-
-Use [NodeHandle.getInputs](#getinputs) instead. Renamed to align
-with the `getX()` accessor convention.
-Will be removed in v1.0.
 
 ***
 
@@ -265,78 +248,9 @@ patterns. Fires after all widget values are restored from the workflow JSON.
 
 A cleanup function to remove the listener.
 
-#### Call Signature
-
-```ts
-on(event, handler): Unsubscribe;
-```
-
-Defined in: [extension-api/node.ts:385](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L385)
-
-Subscribe to node serialization. Async-capable.
-
-##### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `event` | `"beforeSerialize"` |
-| `handler` | [`AsyncHandler`](./asynchandler)\<[`NodeBeforeSerializeEvent`](./nodebeforeserializeevent)\> |
-
-##### Returns
-
-[`Unsubscribe`](./unsubscribe)
-
-A cleanup function to remove the listener.
-
-##### Deprecated
-
-Node-level serialization control will be removed in v1.0.
-Use widget-level `widget.on('beforeSerialize')` instead — store extension
-state in widgets rather than arbitrary node fields. See ADR-0010.
-
-**Migration example:**
-```ts
-// BEFORE (deprecated — node-level)
-node.on('beforeSerialize', (e) => {
-  e.data['my_extension_state'] = computeState()
-})
-
-// AFTER (recommended — widget-level, schema-declared)
-// Declare `_my_state` in the Python node's INPUT_TYPES as a hidden
-// STRING input; the widget will exist automatically. Then attach
-// the serialization transform to the widget:
-const stateWidget = node.getWidget('_my_state')!
-stateWidget.on('beforeSerialize', (e) => {
-  e.setSerializedValue(JSON.stringify(computeState()))
-})
-// Note: runtime widget addition is forbidden per AXIOMS.md A15 /
-// D-ban-runtime-addwidget — declare in INPUT_TYPES, do not call
-// node.addWidget().
-```
-
-##### Stability
-
-experimental
 
 ***
 
-### ~~outputs()~~
-
-```ts
-outputs(): readonly SlotInfo[];
-```
-
-Defined in: [extension-api/node.ts:311](https://github.com/Comfy-Org/ComfyUI_frontend/blob/0d8f7eaccbe795c9c2ddda90c9974a3a2ea6e5d3/src/extension-api/node.ts#L311)
-
-#### Returns
-
-readonly `SlotInfo`[]
-
-#### Deprecated
-
-Use [NodeHandle.getOutputs](#getoutputs) instead. Renamed to align
-with the `getX()` accessor convention.
-Will be removed in v1.0.
 
 ***
 
