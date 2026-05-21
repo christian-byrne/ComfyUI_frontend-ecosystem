@@ -36,5 +36,8 @@ jobs:
       - name: Verify knowledge manifest consistency
         run: |
           node scripts/build-knowledge-manifest.mjs
-          git diff --exit-code src/data/knowledge/manifest.json \
+          # Ignore the `generatedAt` timestamp line — it's wall-clock-now
+          # on every rebuild, so meaningful drift must come from any other
+          # field.
+          git diff --exit-code -I '"generatedAt":' src/data/knowledge/manifest.json \
             || (echo "::error::knowledge manifest drift — run 'pnpm sync:knowledge' locally and commit the result" && exit 1)

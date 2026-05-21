@@ -9,3 +9,9 @@ dist/
 coverage/
 playwright-report/
 test-results/
+
+# Negate any global gitignore `todo.md` rule — the synced workspace
+# todo lives under src/data/knowledge/root/ and MUST be tracked so the
+# CI manifest-drift gate (build-knowledge-manifest.mjs) stays consistent
+# between local rebuilds and ubuntu-runner rebuilds.
+!src/data/knowledge/root/todo.md
