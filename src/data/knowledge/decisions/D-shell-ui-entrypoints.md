@@ -1,6 +1,6 @@
-# D-shell-ui-entrypoints — Granular shell UI registration entry points
+# <a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points
 
-**Status**: **ACCEPTED** — 2026-05-18 (handoff-11; PICK by Christian, human-in-the-loop). Skeleton authored 2026-05-14; R1+R2+R3 evidence + W6.P5.B type-reconciliation landed 2026-05-18; option **(ii) separate entries** picked with **inline imperative carve-out for toast + notification** and **PR topology = rebased on top of foundation stack**.
+**Status**: **ACCEPTED** — 2026-05-18 (handoff-11; PICK by Christian, human-in-the-loop). Skeleton authored 2026-05-14; R1+R2+R3 evidence + W6.P5.B type-reconciliation landed 2026-05-18; option **(ii) separate entries** picked with **inline imperative carve-out for <a href="/api-docs/toast" class="wiki-link">toast</a> + notification** and **PR topology = rebased on top of foundation stack**.
 
 ## Context
 
@@ -8,7 +8,7 @@
 (sidebar tabs, bottom panels, commands, hotkeys, menu items, toolbar
 buttons, toasts) through a single `defineExtension({ shell: { … } })`
 slot pattern, mirroring v1's `app.registerExtension({ commands: […],
-sidebarTabs: […], … })`. Existing types (`SidebarTabExtension`,
+sidebarTabs: […], … })`. Existing types (`<a href="/api-docs/sidebartabextension" class="wiki-link">SidebarTabExtension</a>`,
 `BottomPanelExtension`, `CommandManager`, etc.) live in
 `src/extension-api/shell.ts`.
 
@@ -16,7 +16,7 @@ CB's Slack proposal (2026-05-13) argues for granular per-surface entry
 points so each contribution is independently load/disable/test-able:
 
 > "Separate `defineBottomPanelTab` / `defineSidebarTab` / `defineCommand`
-> / `defineHotkey` entry points; toast/command-invocation stay as
+> / `defineHotkey` entry points; <a href="/api-docs/toast" class="wiki-link">toast</a>/command-invocation stay as
 > in-hook usage. Benefits: granular load/disable, testability,
 > lifecycle."
 
@@ -42,7 +42,7 @@ This decision sits at the intersection of two concerns:
 ## Decision
 
 **Picked: Option (ii) — separate entries per registerable surface, with
-inline imperative carve-out for toast + notification.**
+inline imperative carve-out for <a href="/api-docs/toast" class="wiki-link">toast</a> + notification.**
 
 Each registerable shell-UI surface gets its own `defineX` entry point
 (per-import testable, independently disposable, individually typed).
@@ -122,7 +122,7 @@ The codemod (Step 6 below) carries the per-pack atomic translation.
 
 ### What this displaces
 
-- `defineExtension({ shell: { sidebarTabs, bottomPanels, commands,
+- `<a href="/api-docs/defineextension" class="wiki-link">defineExtension</a>({ shell: { sidebarTabs, bottomPanels, commands,
   hotkeys, … } })` is removed as a public surface.
 - The `ExtensionManager` umbrella export is removed; per-surface
   disposable handles take its place.
@@ -131,7 +131,7 @@ The codemod (Step 6 below) carries the per-pack atomic translation.
 - v1 `app.registerExtension({ commands: […], sidebarTabs: […], … })`
   continues to work during the deprecation window via a runtime
   mapper that re-routes slot bodies to the `defineX` equivalents
-  (mirrors the D-bootstrap-hooks mapper precedent).
+  (mirrors the <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> mapper precedent).
 
 Three candidate shapes were considered (see §Alternatives for pros/cons
 + R1/R2/R3 evidence). Re-labeled per the evidence axis:
@@ -149,7 +149,7 @@ compromise) is folded into (ii) as a deferred mid-granularity variant
 (§Alternatives, Cross-option observation #6).
 
 (Other shapes — pure-functions+loader registration applied to shell UI
-the same way D18 applies it to nodes — are deferred until D18 Phase 2
+the same way <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> applies it to nodes — are deferred until <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> Phase 2
 ships and we have data on whether the loader pattern feels right.)
 
 ## Consequences
@@ -239,8 +239,8 @@ cum-stars (89%). Any option's real-world success rides on those three.
 | Option | Pro (evidence) | Con (evidence) | Verdict |
 |---|---|---|---|
 | (i) keep slots | **439 ZERO cells** — every existing slot-pattern call site continues to compile and behave identically; zero migration risk for the 64 affected repos; preserves v1 muscle memory (low agent-retraining cost: v1 patterns dominate community examples + LLM training corpora); KJNodes-shaped broad-coverage extensions (5+ surfaces) don't have to coordinate a multi-PR migration | **Defeats the W6.P5 framing**: slot bodies can't be loaded in isolation (testability cost), can't be enabled/disabled per-surface (lifecycle cost), and one `ExtensionOptions` mega-type covers all 9 surfaces (type-narrowing cost); doesn't address the Slack-flagged "is this still the right shape for the next 5 years?" question; the 166 toast + 36 bottom_panel hits are **already** imperative — opt (i) doesn't bring them under the slot umbrella, so the option preserves a 2-track world (slot AND imperative) rather than converging | Rejected |
-| (ii) separate entries | Maximum granularity — each `defineX` is independently load/disable/test-able; mirrors the `defineNode` / `defineWidget` precedent (D11) so the ecosystem learns one consistent shape; per-import testability (a sidebar-tab test file imports only `defineSidebarTab`); preserves the v1 slot path during deprecation window (additive, not destructive); the 0-hit toolbar surface gets a `defineToolbarButton` entry point with no migration cost (net-new surface, not migration) | **All 439 non-menu sites move to REWRITE-METHOD** if the goal is convergence on the new shape — and the 87 settings + 70 commands + 16 hotkey + 14 about hits (187 sites) live inside `app.registerExtension({ ... })` slot bodies that need structural extraction, not a sed; biggest single rewrite victim is KJNodes (5 surfaces, ★2,588) — any cut-over has to coordinate across all 5 surfaces in that pack atomically or stage per-surface (W6.P5.C PR-topology question); ≥7 new entry-point functions to design, document, and type; **largest surface addition** in the W6 cluster | **ACCEPTED 2026-05-18 (Christian, handoff-11)** with inline-imperative carve-out for toast + notification. REWRITE cost paid via codemod (Step 6); KJNodes-shape coordination via foundation-stack rebase (PR topology = b). |
-| (iii) drop slots | **235 ZERO cells** for toast + bottom_panel + sidebar_tab (already-imperative surfaces stay imperative; toast 166 + bottom_panel 36 + sidebar_tab 20 + 13 already-imperative settings/hotkey hits); converges on a single registration shape (no slot/imperative dual-track); eliminates the `ExtensionOptions` mega-type; matches the W6.P3 D-widget-converge "hard cut, no compat shim" precedent if shipped without a slot fallback | **204 REWRITE-METHOD cells** concentrated in 4 surfaces (command 85 + settings 87 + hotkey 16 + about 14 = 202 of 204); REWRITE concentrated in the top-3 consumers (Manager + Impact-Pack + KJNodes own 89% of non-menu stars and most of the REWRITE cells); harshest blast radius on KJNodes (5 surfaces; settings 8 + hotkey 4 + command 9 = 21 sites in one pack); no v1 slot escape-hatch — extensions either migrate or break; agent-retraining cost: v1 slot pattern is the LLM training majority shape | Rejected — additive deprecation window from (ii) preserves the v1 slot path during cut-over; (iii) hard-cut would punish KJNodes-shape packs unnecessarily when the codemod can land the same end state with a safer ramp. |
+| (ii) separate entries | Maximum granularity — each `defineX` is independently load/disable/test-able; mirrors the `defineNode` / `defineWidget` precedent (<a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a>) so the ecosystem learns one consistent shape; per-import testability (a sidebar-tab test file imports only `defineSidebarTab`); preserves the v1 slot path during deprecation window (additive, not destructive); the 0-hit toolbar surface gets a `defineToolbarButton` entry point with no migration cost (net-new surface, not migration) | **All 439 non-menu sites move to REWRITE-METHOD** if the goal is convergence on the new shape — and the 87 settings + 70 commands + 16 hotkey + 14 about hits (187 sites) live inside `app.registerExtension({ ... })` slot bodies that need structural extraction, not a sed; biggest single rewrite victim is KJNodes (5 surfaces, ★2,588) — any cut-over has to coordinate across all 5 surfaces in that pack atomically or stage per-surface (W6.P5.C PR-topology question); ≥7 new entry-point functions to design, document, and type; **largest surface addition** in the W6 cluster | **ACCEPTED 2026-05-18 (Christian, handoff-11)** with inline-imperative carve-out for toast + notification. REWRITE cost paid via codemod (Step 6); KJNodes-shape coordination via foundation-stack rebase (PR topology = b). |
+| (iii) drop slots | **235 ZERO cells** for toast + bottom_panel + sidebar_tab (already-imperative surfaces stay imperative; toast 166 + bottom_panel 36 + sidebar_tab 20 + 13 already-imperative settings/hotkey hits); converges on a single registration shape (no slot/imperative dual-track); eliminates the `ExtensionOptions` mega-type; matches the W6.P3 <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> "hard cut, no compat shim" precedent if shipped without a slot fallback | **204 REWRITE-METHOD cells** concentrated in 4 surfaces (command 85 + settings 87 + hotkey 16 + about 14 = 202 of 204); REWRITE concentrated in the top-3 consumers (Manager + Impact-Pack + KJNodes own 89% of non-menu stars and most of the REWRITE cells); harshest blast radius on KJNodes (5 surfaces; settings 8 + hotkey 4 + command 9 = 21 sites in one pack); no v1 slot escape-hatch — extensions either migrate or break; agent-retraining cost: v1 slot pattern is the LLM training majority shape | Rejected — additive deprecation window from (ii) preserves the v1 slot path during cut-over; (iii) hard-cut would punish KJNodes-shape packs unnecessarily when the codemod can land the same end state with a safer ramp. |
 | (iv) keep status quo (no granularity, no disposable, no investigation) | Zero work | Leaves the Slack-flagged TODO open; defeats the W6.P5 framing | Rejected upfront |
 
 ### Cross-option observations (DATA, no preference encoded)
@@ -300,14 +300,14 @@ cum-stars (89%). Any option's real-world success rides on those three.
    surfaces (command, settings, hotkey, about) that move to REWRITE.
    Only opt (ii) gets per-import testability across all 9 surfaces.
 
-9. **D-widget-converge precedent (W6.P3.C `2f102353fa`).** That ADR
+9. **<a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> precedent (W6.P3.C `2f102353fa`).** That ADR
    accepted hard-cut hiding the DOM seam ("no compat shim", absorbing
    UNMIGRATABLE cells via migration-guide rows). Opt (iii) extends
    that pattern (no slot fallback); opt (ii) is the "additive,
    deprecation-window" alternative; opt (i) doesn't follow the
    precedent. Observation only — precedent ≠ verdict.
 
-10. **D-bootstrap-hooks (W6.P6) scope-back is the relevant precedent.**
+10. **<a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> (W6.P6) scope-back is the relevant precedent.**
     The accepted shape there (2026-05-14) keeps shell-UI registration
     OUTSIDE the `workbench` namespace — `defineSidebarTab` /
     `defineBottomPanelTab` / `defineCommand` / `defineHotkey` / `toast`
@@ -335,7 +335,7 @@ export type {
 ```
 
 `VueExtension` and `CustomExtension` are deliberately NOT re-exported per
-D19 — they are discriminated-union ingredients of
+<a href="/decisions/D19-vueextension-disposition" class="wiki-link">D19</a> — they are discriminated-union ingredients of
 `SidebarTabExtension`/`BottomPanelExtension`, internal-only.
 
 **Per-type disposition under each option:**
@@ -393,7 +393,7 @@ commit so the new entry points compose with the new lifecycle hooks.
 | 9 | Document dispose contract in package README + migration guide: ordering on multi-surface extensions, idempotency requirement, async cleanup pattern. Document carve-out: toast + notification are inline imperatives, NOT registered | embedded-docs | dispose contract section present; carve-out explicitly called out; agent-friendly examples show inline `toast.show(...)` inside `setup()` body |
 | 10 | Update behavior triplets in test framework — add coverage for each new `defineX` + dispose lifecycle + inline imperatives | tf PR #12145 | triplet rerun on Manager, Impact-Pack, KJNodes, Easy-Use, Custom-Scripts; baseline+migration scenarios both pass |
 | 11 | Migration-guide section in `docs/extensions/migration-v1-to-v2.md` with v1 slot → v2 `defineX` map table; include codemod invocation + KJNodes worked example (5-surface atomic migration) | docs | published page renders the map cleanly; KJNodes example end-to-end |
-| 12 | Dashboard refresh: surface `S12.UI*` family on `/patterns` and `/api-diff` views with per-surface migration cost from R3; flip D-shell-ui-entrypoints status badge to ACCEPTED | dashboard | `christian-byrne/ComfyUI_frontend-ecosystem` regenerated; deltas visible; `pnpm test` passes |
+| 12 | Dashboard refresh: surface `S12.UI*` family on `/patterns` and `/api-diff` views with per-surface migration cost from R3; flip <a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> status badge to ACCEPTED | dashboard | `christian-byrne/ComfyUI_frontend-ecosystem` regenerated; deltas visible; `pnpm test` passes |
 | 13 | Comment on PRs #12142, #12143, #12144, #12145 with PICK summary + per-PR commit SHAs + link to migration-guide section | PR | comments posted on all 4 PRs |
 
 Implementation cost is **weighted toward the codemod (Step 6)** — once
@@ -405,9 +405,9 @@ PR-topology-(b) success.
 
 ## References
 
-- design-review-12142.md row #18 (D18 — registration pattern; D-shell-ui-entrypoints inherits the pure-functions+loader principle)
+- design-review-12142.md row #18 (<a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> — registration pattern; <a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> inherits the pure-functions+loader principle)
 - W6.P5 task block in `todo.md` (Wave-6 section)
-- D11 — naming `defineNode`/`defineWidget` (the precedent for per-surface short-form entry points)
+- <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> — naming `defineNode`/`defineWidget` (the precedent for per-surface short-form entry points)
 - D18 — pure functions + loader registration (the principle these entry points should follow)
 - ComfyUI_frontend `src/extension-api/shell.ts` — current `SidebarTabExtension`/`BottomPanelExtension`/`CommandManager` types
 - research/touch-points/database.yaml entries S12.UI1, S12.UI2, S12.UI3, S12.UI4

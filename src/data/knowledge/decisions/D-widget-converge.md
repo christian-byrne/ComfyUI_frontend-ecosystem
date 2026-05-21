@@ -1,4 +1,4 @@
-# D-widget-converge — DOMWidget ↔ BaseWidget convergence
+# <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> — DOMWidget ↔ BaseWidget convergence
 
 **Status**: ACCEPTED — 2026-05-18 (W6.P3.B PICK: option (iii) single `Widget` + `mount(host, ctx)` lifecycle, "going hard / firm" — no compat shim, no separate registry ADR, B10/vendor-pack blockers resolved as migration-guide rows not blockers).
 
@@ -50,10 +50,10 @@ extension-api surface should reflect that internal reality or hide it.
 
 **Clarifications baked into the picked shape:**
 
-1. **`mount()` cleanup contract is destruction-only.** The returned `WidgetCleanup` function fires exactly once, when the widget entity is destroyed. Host-remount (graph↔app mode, subgraph promotion, `<KeepAlive>` shuffle) does NOT fire cleanup — it fires `ctx.onBeforeRemount(fn)` then `ctx.onAfterRemount(newHost => …)`. This matches Vue `<KeepAlive>` semantics and the CONTEXT.md R3/D7 subgraph-promotion model.
+1. **`mount()` cleanup contract is destruction-only.** The returned `WidgetCleanup` function fires exactly once, when the widget entity is destroyed. Host-remount (<a href="/api-docs/graph" class="wiki-link">graph</a>↔app mode, subgraph promotion, `<KeepAlive>` shuffle) does NOT fire cleanup — it fires `ctx.onBeforeRemount(fn)` then `ctx.onAfterRemount(newHost => …)`. This matches Vue `<KeepAlive>` semantics and the CONTEXT.md R3/<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> subgraph-promotion model.
 2. **Host ownership is per-widget, runtime-managed.** `host` is an empty `<div>` the runtime owns and provides to the widget; the widget's mount body appends/mutates inside that div but does NOT manage the div itself. This makes remount-via-DOM-move trivial (the runtime moves the host div; the widget tree inside follows) and gives the runtime a clean attachment point for measurement, scroll preservation, and event delegation.
-3. **B10 (custom widget type registry) is resolved by `defineWidget()` itself, no separate ADR.** Custom widget types like `'asset'` / `'chart'` / `'imagecompare'` register via `defineWidget({ type, mount, … })`. If no `defineWidget` is registered for a `type`, the widget does not render — the loose v1 fallback ("hope the runtime renders something") is removed by design. The 4 EXT repos / 22 hits / ★116 in B10 stay on v1 during the D6 parallel-paths window and port to `defineWidget` for v2.
-4. **D-dom-widget-compat-shim is NOT pursued.** Vendor packs that depend on `widget.element` / `widget.inputEl` continue to work through the v1 path during the D6 parallel-paths window. When v1 sunsets (D6 Phase D), unmaintained packs that wrote against v1-only patterns break — the migration guide documents this as an explicit, deliberate cliff, not a runtime promise.
+3. **B10 (custom widget type registry) is resolved by `defineWidget()` itself, no separate ADR.** Custom widget types like `'asset'` / `'chart'` / `'imagecompare'` register via `defineWidget({ type, mount, … })`. If no `defineWidget` is registered for a `type`, the widget does not render — the loose v1 fallback ("hope the runtime renders something") is removed by design. The 4 EXT repos / 22 hits / ★116 in B10 stay on v1 during the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths window and port to `defineWidget` for v2.
+4. **D-dom-widget-compat-shim is NOT pursued.** Vendor packs that depend on `widget.element` / `widget.inputEl` continue to work through the v1 path during the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths window. When v1 sunsets (<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> Phase D), unmaintained packs that wrote against v1-only patterns break — the migration guide documents this as an explicit, deliberate cliff, not a runtime promise.
 
 **Three candidate shapes that were on the table (kept for historical context):**
 
@@ -190,7 +190,7 @@ interface DOMWidgetOptions extends WidgetOptions {
   for the 31-repo / 160-hit / ★10,307 `widget.element` cluster.
 - B1 (192 addDOMWidget call sites) stays ZERO — signature unchanged,
   subtype carries `element`.
-- Aligns with the W6.P8.C D14 universalisation already in flight: every
+- Aligns with the W6.P8.C <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> universalisation already in flight: every
   widget has typed `value`, so the 92-repo / 790-hit / ★27,042 `widget.value`
   cluster (B3) is ZERO regardless.
 - Keeps the v1 mental model ("a DOM widget is a widget with an element")
@@ -231,7 +231,7 @@ interface WidgetOptions {
 - Matches the Vue node renderer reality the proposal cited ("every widget
   is technically a DOM widget in the new Vue node renderer").
 - Mirrors Vue SFC `<script setup>` + `onMounted` ergonomics; consistent
-  with the D-bootstrap-hooks ACCEPTED ADR (W6.P6) that introduced
+  with the <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> ACCEPTED ADR (W6.P6) that introduced
   context-scoped `onMounted` / `onBeforeMount` / `onUnmounted` hooks
   inside `defineExtension.setup`. Authors learn one lifecycle pattern.
 - 24% of EXT addDOMWidget call sites (47 hits / 26 repos / ★9,473) are
@@ -241,7 +241,7 @@ interface WidgetOptions {
   binding is universal and orthogonal to mount lifecycle.
 - Most ambitious option = most thorough cleanup. The B1d worst-case
   bucket (DOM widget + serializeValue override + value-bound) becomes
-  the *standard* shape under mount + D5 `on('beforeSerialize')`, not a
+  the *standard* shape under mount + <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> `on('beforeSerialize')`, not a
   special case.
 
 **Cons (evidence-grounded):**
@@ -271,7 +271,7 @@ interface WidgetOptions {
   22 hits) is invariant across options i/ii/iii. A separate
   `D-custom-widget-type-registry` ADR is required regardless of which
   option is picked.
-- The D-bootstrap-hooks precedent (W6.P6 ACCEPTED) introduced a
+- The <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> precedent (W6.P6 ACCEPTED) introduced a
   context-scoped lifecycle pattern (`onMounted` inside `setup`); option
   (iii) extends that pattern to widgets, option (ii) does not, option
   (i) is neutral. Consistency with existing accepted ADRs is an
@@ -286,8 +286,8 @@ interface WidgetOptions {
 | Option | Migration cost (R3 dominant cell) | Pro | Con | Verdict |
 |---|---|---|---|---|
 | (i) discriminated union | ZERO at call site; **TS-ERR** at B4/B5 under `kind: 'native'` (small overlap) | Smallest type-system change; preserves current author mental model; 192 EXT call sites stay valid | Two surfaces remain under a `.kind` label — maintenance burden reduced but not removed; doesn't reflect Vue-node-renderer reality | **Rejected** — half-measure; would require this ADR conversation again in 18 months |
-| (ii) DOMWidget extends Widget | ZERO at call site; **TS-ERR** at B4 only (5 high-impact consumers) | Single interface root; type narrowing via `'element' in widget`; aligns with W6.P8.C D14 universalisation | Inapplicable inherited fields become noise on 63 no-value/ref-bound call sites; doesn't match Vue-renderer reality | **Rejected** — reduces but doesn't remove the maintenance burden; type-noise across 63 no-value/ref-bound sites |
-| (iii) single Widget + `mount` | **REWRITE-METHOD** on all 192 EXT call sites; **TS-ERR/RUNTIME-THROW** on B4+B5 (72 repos / 411 hits / ★25,182) | Genuinely converges the two surfaces; matches Vue node renderer reality; consistent with D-bootstrap-hooks accepted lifecycle pattern | Largest cascade; vendor packs un-editable without compat-shim ADR; 8 high-impact repos absorb 42% of REWRITE work | **PICKED** — v2 is greenfield; the REWRITE cost is opt-in by author at v1→v2 port time, not forced. v1 keeps working through D6 parallel-paths window. |
+| (ii) DOMWidget extends Widget | ZERO at call site; **TS-ERR** at B4 only (5 high-impact consumers) | Single interface root; type narrowing via `'element' in widget`; aligns with W6.P8.C <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> universalisation | Inapplicable inherited fields become noise on 63 no-value/ref-bound call sites; doesn't match Vue-renderer reality | **Rejected** — reduces but doesn't remove the maintenance burden; type-noise across 63 no-value/ref-bound sites |
+| (iii) single Widget + `mount` | **REWRITE-METHOD** on all 192 EXT call sites; **TS-ERR/RUNTIME-THROW** on B4+B5 (72 repos / 411 hits / ★25,182) | Genuinely converges the two surfaces; matches Vue node renderer reality; consistent with <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> accepted lifecycle pattern | Largest cascade; vendor packs un-editable without compat-shim ADR; 8 high-impact repos absorb 42% of REWRITE work | **PICKED** — v2 is greenfield; the REWRITE cost is opt-in by author at v1→v2 port time, not forced. v1 keeps working through D6 parallel-paths window. |
 | (iv) keep status quo | ZERO | Zero work | Leaves the maintenance burden CB's proposal flagged; rejected by W6.P3 framing | Rejected |
 
 ## Implementation plan
@@ -301,7 +301,7 @@ interface WidgetOptions {
 | 3 | Delete `DOMWidgetOptions` interface from node.ts (the type is gone, not deprecated) | `src/extension-api/node.ts` | `pnpm lint` |
 | 4 | Delete `NodeHandle.addDOMWidget()` method (the method is gone, not deprecated) | `src/extension-api/node.ts` | `pnpm lint` |
 | 5 | Update `WidgetHandle.setHeight()` JSDoc — drop "DOM widgets only"; now applies via mount-lifecycle reserved-height contract | `src/extension-api/widget.ts` | doc-only |
-| 6 | Cross-reference doc updates: `WidgetHandle.options` and `WidgetHandle.serializeValue` JSDocs reference D-widget-converge instead of the placeholder "W6.P3" stub | `src/extension-api/widget.ts` | doc-only |
+| 6 | Cross-reference doc updates: `WidgetHandle.options` and `WidgetHandle.serializeValue` JSDocs reference <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> instead of the placeholder "W6.P3" stub | `src/extension-api/widget.ts` | doc-only |
 | 7 | Update barrel — keep `defineWidget` export, drop `DOMWidgetOptions` re-export | `src/extension-api/index.ts` | `pnpm knip` |
 | 8 | Phase A gates: `lint && format:check && knip` | — | passes per Rule #8 |
 | 9 | Commit + mirror to `ext-api/i-foundation-restratify`; force-with-lease push both | — | divergence check = 0 |
@@ -316,7 +316,7 @@ interface WidgetOptions {
 | 13 | TF stack: fix follow-on TS errors created by the surface change (expected per Rule #8) | `ext-api/i-tf-v2` | reduced TS-err count vs baseline |
 | 14 | DB amend (R4): add S4.W11 (inputEl-read), S4.W9 (element-read), S4.W10 (widget.type discriminator); amend S4.W2/W3/W5 with R2 escalation evidence | workspace | rollup regenerated |
 | 15 | Dashboard refresh (R5): `bash scripts/refresh-api-docs.sh` in `christian-byrne/ComfyUI_frontend-ecosystem` | dashboard | preview shows new surface |
-| 16 | PR comment on `#12142` summarizing P3 PICK + D-widget-converge ACCEPTED + foundation impl SHAs | PR #12142 | gh pr comment URL |
+| 16 | PR comment on `#12142` summarizing P3 PICK + <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> ACCEPTED + foundation impl SHAs | PR #12142 | gh pr comment URL |
 
 **Follow-on ADRs unblocked by this decision:**
 
@@ -328,8 +328,8 @@ interface WidgetOptions {
 |---|---|---|
 | MG.W1 | `node.addDOMWidget(name, type, el, opts)` | `defineWidget({type, mount(host, ctx) { host.appendChild(el); return () => el.remove(); }})` registered + node uses `addWidget(type, name)` |
 | MG.W2 | `widget.element` / `widget.inputEl` | Capture element in `mount()` closure; refer to via closure binding |
-| MG.W3 | `widget.serializeValue = fn` (already cliffed by W6.P8.C) | `widget.on('beforeSerialize', e => e.setSerializedValue(...))` per D5 |
-| MG.W4 | `widget.value = newVal` (already cliffed by D14) | `widget.setValue(newVal)` per D14 |
+| MG.W3 | `widget.serializeValue = fn` (already cliffed by W6.P8.C) | `widget.on('beforeSerialize', e => e.setSerializedValue(...))` per <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> |
+| MG.W4 | `widget.value = newVal` (already cliffed by <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>) | `widget.setValue(newVal)` per D14 |
 | MG.W5 | `widget.type === 'dom'` / `=== 'DOMWidget'` discriminators | Check by widget.type (the type label you defined); DOM-as-discriminant disappears |
 | MG.W6 | `node.addWidget('custom-type', …)` for unregistered types | Register via `defineWidget({type: 'custom-type', mount})` first; v2 has no loose fallback |
 | MG.W7 | Vendor packs depending on `widget.element` / `widget.inputEl` that cannot be edited | No v2 path. Remain on v1 surface during D6 parallel-paths window; break at D6 Phase D sunset. |
@@ -340,7 +340,7 @@ interface WidgetOptions {
 - W6.P3 task block in `todo.md` (Wave-6 section)
 - D14 — widget state categories (the convergence target for `value`/`state`)
 - D14 — serialization convergence (the convergence target for `serializeValue`)
-- D7 — widget shape and persistence (preceding shape decision; D-widget-converge supersedes its DOM/native split if option iii lands)
+- <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> — widget shape and persistence (preceding shape decision; D-widget-converge supersedes its DOM/native split if option iii lands)
 - R4 P9 — custom-node-patterns audit (DOM widget ecosystem)
 - research/touch-points/database.yaml entries S4.W2, S4.W3, S4.W5
 - AGENTS.md "Decision propagation rules" — once accepted, must reach (a) commit on PR #12142, (b) this ADR, (c) dashboard JSON

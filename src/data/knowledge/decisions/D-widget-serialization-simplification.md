@@ -1,14 +1,14 @@
-# D-widget-serialization-simplification
+# <a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a>
 
-- **Status**: ACCEPTED — 2026-05-20 (wave-9, see §Decision). Header format normalized 2026-05-20 (wave-12) per D-api-surface-finalization.
+- **Status**: ACCEPTED — 2026-05-20 (wave-9, see §Decision). Header format normalized 2026-05-20 (wave-12) per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>.
 - **Decider:** Christian (user direction, 2026-05-20)
 - **Wave:** 9
 - **Related:**
-  - AXIOMS.md §A1 (widget-centric), §A2 (minimal surface), §A5 (3-tier widget state), §A11 (ECS), §A14 (Phase A exclusions)
-  - AXIOMS.md §A15 (widget declarativity — NEW, codified with this decision)
-  - AXIOMS.md §A16 (unified serialization target — NEW, codified with this decision)
+  - AXIOMS.md §<a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric), §<a href="/axioms#a2-refs" class="wiki-link">A2</a> (minimal surface), §<a href="/axioms#a5-refs" class="wiki-link">A5</a> (3-tier widget state), §<a href="/axioms#a11-refs" class="wiki-link">A11</a> (ECS), §<a href="/axioms#a14-refs" class="wiki-link">A14</a> (Phase A exclusions)
+  - AXIOMS.md §<a href="/axioms#a15-refs" class="wiki-link">A15</a> (widget declarativity — NEW, codified with this decision)
+  - AXIOMS.md §<a href="/axioms#a16-refs" class="wiki-link">A16</a> (unified serialization target — NEW, codified with this decision)
   - `decisions/D14-serialization-convergence.md` (predecessor — promised the end-state this ADR ships)
-  - `decisions/D-no-node-widget-access.md` (wave-8 bilateral A1 closure — structural sibling)
+  - `decisions/D-no-node-widget-access.md` (wave-8 bilateral <a href="/axioms#a1-refs" class="wiki-link">A1</a> closure — structural sibling)
   - `decisions/D-immutability-enforcement.md` (already blocks `widget.options.serialize = false` write at the type level)
   - `docs/adr/0010-deprecate-node-level-serialization-control.md` (foundation ADR — `node.on('beforeSerialize')` stays `@deprecated` + runtime-warned per user direction; not banned by this ADR)
   - Design review row #11 (`design-review-12142.md` line 924) — reframed from "ban node-level" to "simplify widget-level + codify single target"
@@ -22,7 +22,7 @@ serialized payload** that is simultaneously the workflow JSON `widgets_values`
 entry and the API prompt payload. Authors cannot disable serialization, cannot
 distinguish serialization contexts, and cannot add widgets at runtime.
 
-Concretely, **comment out (A2/A14 pattern)** in
+Concretely, **comment out (<a href="/axioms#a2-refs" class="wiki-link">A2</a>/<a href="/axioms#a14-refs" class="wiki-link">A14</a> pattern)** in
 `src/extension-api/widget.ts`:
 
 - `WidgetHandle.setSerializeEnabled(enabled: boolean): void`
@@ -52,7 +52,7 @@ and inherits a four-context discriminator from v1 internals:
 
 1. **Three "disable serialization" knobs**, all collapsible:
    - `widget.options.serialize = false` (v1 mutation — already blocked at the
-     type level by D-immutability-enforcement, but the *key* still exists on
+     type level by <a href="/decisions/D-immutability-enforcement" class="wiki-link">D-immutability-enforcement</a>, but the *key* still exists on
      `WidgetOptions` as a readable shim).
    - `widget.setSerializeEnabled(false)` (v2 mutator — single binary, can't
      distinguish "save workflow / skip prompt" from "skip both").
@@ -62,49 +62,49 @@ and inherits a four-context discriminator from v1 internals:
    (`'workflow' | 'prompt' | 'clone' | 'subgraph-promote'`) that pushes
    transport semantics into extension authors. Real ecosystem extensions
    branch on `if (e.context === 'prompt')` to opt out of prompt
-   serialization — exactly the wrong-layer pattern D14 §Context called out.
+   serialization — exactly the wrong-layer pattern <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> §Context called out.
 3. **Run-time widget addition** (`node.addWidget` family) that the v2 surface
    never exposed but the v1 surface still permits. Frontend-only widgets and
    runtime-added widgets are the underlying *reason* extensions need a "skip
    prompt" knob: there is no schema slot for the value, so the value must be
    stripped from the prompt to avoid backend rejection.
 
-Two architectural premises (now codified as axioms A15 + A16) eliminate
+Two architectural premises (now codified as axioms <a href="/axioms#a15-refs" class="wiki-link">A15</a> + <a href="/axioms#a16-refs" class="wiki-link">A16</a>) eliminate
 the need for any of (1)–(3):
 
-- **A15 — Widget declarativity.** Widgets are schema-declared in Python
+- **<a href="/axioms#a15-refs" class="wiki-link">A15</a> — Widget declarativity.** Widgets are schema-declared in Python
   node classes. There is no runtime `addWidget`. UI-only concepts use
   *boxed/composed widgets* (BBOX-style — the widget is itself the schema
   input value), non-widget UI primitives (overlays, panels, custom DOM not
   registered as a widget), or schema inputs accepted as ordinary widget
   values. There are no "frontend-only widgets."
-- **A16 — Unified serialization target.** Workflow JSON and prompt payload
+- **<a href="/axioms#a16-refs" class="wiki-link">A16</a> — Unified serialization target.** Workflow JSON and prompt payload
   converge to one serialization output. Authors cannot disable serialization
   at the widget level. The sole interface for participating in serialization
   is `widget.on('beforeSerialize')`.
 
-D14 §Phase 2 already promised a simpler shape for (1) (the
+<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> §Phase 2 already promised a simpler shape for (1) (the
 `ephemeral`/`promptExclude` named options); the user redirect on
 2026-05-20 supersedes that with the stronger A16 form — there is no
 matrix to expose because there is nothing to disable.
 
 ## Rationale
 
-- **A1 widget-centric, A11 ECS.** Widgets are the unit of state. The
+- **<a href="/axioms#a1-refs" class="wiki-link">A1</a> widget-centric, <a href="/axioms#a11-refs" class="wiki-link">A11</a> ECS.** Widgets are the unit of state. The
   framework decides transport (workflow disk / prompt websocket / clone /
   subgraph promote); extensions decide *value*. The 4-context
   discriminator inverted that: extensions had to know which transport
   fired in order to behave correctly, which is the wrong direction of
   knowledge flow.
-- **A2 minimal surface.** Three knobs that collapse to one removal is the
+- **<a href="/axioms#a2-refs" class="wiki-link">A2</a> minimal surface.** Three knobs that collapse to one removal is the
   highest-leverage A2 cleanup left on widget.ts. Zero v2 ext call sites
   for any of the removed surfaces (verified — see *Migration impact*
   table). Wave-8 proved this kind of bilateral removal is non-disruptive
   when the surface is exposed but unused.
-- **D14 §Phase 4 collapse.** D14 already accepted that the hook fires
+- **<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> §Phase 4 collapse.** D14 already accepted that the hook fires
   once with a single payload — A16 finishes the job by removing the
   discriminator that forced authors to branch.
-- **D-immutability-enforcement alignment.** That ADR already raises a
+- **<a href="/decisions/D-immutability-enforcement" class="wiki-link">D-immutability-enforcement</a> alignment.** That ADR already raises a
   TypeScript error on `widget.options.serialize = false`. Dropping the
   key from `WidgetOptions` removes a misleading shim that contradicts
   A16 at the read site as well.
@@ -117,7 +117,7 @@ matrix to expose because there is nothing to disable.
 
 ## Consequences
 
-### What is removed (commented out per A14)
+### What is removed (commented out per <a href="/axioms#a14-refs" class="wiki-link">A14</a>)
 
 | Symbol | File | Why |
 |---|---|---|
@@ -163,7 +163,7 @@ matrix to expose because there is nothing to disable.
 
 ### Compatibility
 
-- **v1 path (`Comfy.*` extensions, `widget.options.serialize`, `widget.serializeValue = fn`) is untouched** per the parallel-paths migration (D6). This ADR is a v2-only constraint.
+- **v1 path (`Comfy.*` extensions, `widget.options.serialize`, `widget.serializeValue = fn`) is untouched** per the parallel-paths migration (<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>). This ADR is a v2-only constraint.
 - **No user-visible regression.** The v2 path was not yet in any shipped user workflow; the runtime warning on `node.on('beforeSerialize')` (separate surface, retained per user direction) continues to fire unchanged.
 - **CI on `ext-api/*-v2` PRs stays under AGENTS.md Rule 8 carve-out** — failures on this stack do not block wave-9 forward motion until the Phase B rebase onto Alex's ECS branch.
 
@@ -172,7 +172,7 @@ matrix to expose because there is nothing to disable.
 No codemod required. Migration is "if you call any of the removed surfaces,
 restructure your extension to not need them." For the rare v1 extension
 that needs `widget.options.serialize = false` semantics, the v1 surface
-remains available under `Comfy.*` per D6.
+remains available under `Comfy.*` per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.
 
 ## Restoration criteria
 

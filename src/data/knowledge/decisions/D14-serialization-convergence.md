@@ -1,15 +1,15 @@
-# ADR-D14: Serialization Convergence — Single Target Model
+# ADR-<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>: Serialization Convergence — Single Target Model
 
-**Status**: ACCEPTED + SHIPPED — 2026-05-20 (wave-12). Implementation shipped wave-9 via D-widget-serialization-simplification and codified as AXIOMS.md §A15 + §A16. See decisions/D-api-surface-finalization.md §Per-ADR closure verdicts.
+**Status**: ACCEPTED + SHIPPED — 2026-05-20 (wave-12). Implementation shipped wave-9 via <a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a> and codified as AXIOMS.md §<a href="/axioms#a15-refs" class="wiki-link">A15</a> + §<a href="/axioms#a16-refs" class="wiki-link">A16</a>. See decisions/<a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>.md §Per-ADR closure verdicts.
 **Date**: 2026-05-13
-**Supersedes**: D7 Part 4's 4-context model (partial)
-**Related**: D7 (widget shape), I-WS (lazy serialization), design-review-12142.md Topic 16
+**Supersedes**: <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> Part 4's 4-context model (partial)
+**Related**: <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> (widget shape), I-WS (lazy serialization), design-review-12142.md Topic 16
 
 ---
 
 ## Context
 
-D7 Part 4 collapsed four v1 serialization surfaces (widget.serializeValue, direct widget.value read, node.onSerialize, prototype.serialize) down to two v2 hooks (`widget.on('beforeSerialize')` and `node.on('beforeSerialize')`). However, the hook still exposes **4 context values** (`'workflow' | 'prompt' | 'clone' | 'subgraph-promote'`) that extensions must handle.
+<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> Part 4 collapsed four v1 serialization surfaces (widget.serializeValue, direct widget.value read, node.onSerialize, prototype.serialize) down to two v2 hooks (`widget.on('beforeSerialize')` and `node.on('beforeSerialize')`). However, the hook still exposes **4 context values** (`'workflow' | 'prompt' | 'clone' | 'subgraph-promote'`) that extensions must handle.
 
 The Slack thread (captured in design-review-12142.md Topic 16) proposes a more fundamental simplification:
 
@@ -157,4 +157,4 @@ The transformation moves **up a layer** from widget-instance to prompt-processor
 - **D7 Part 4** — superseded by this ADR for the serialization model (D7 shape decisions remain valid)
 - **I-WS.3** — implements Phase 1 (lazy getter)
 - **design-review-12142.md Topic 16** — original Slack thread captured here
-- **D6 §Q4** — `ctx.on('beforePrompt')` specified as Phase B app-level hook
+- **<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> §Q4** — `ctx.on('beforePrompt')` specified as Phase B app-level hook
