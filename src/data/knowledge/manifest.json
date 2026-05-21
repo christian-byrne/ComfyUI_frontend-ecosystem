@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T21:35:16.378Z",
+  "generatedAt": "2026-05-21T22:01:09.089Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -2209,7 +2209,8 @@
         "A9",
         "A13",
         "A14",
-        "A15"
+        "A15",
+        "A16"
       ],
       "adrs": [
         "d-api-surface-finalization",
@@ -2322,6 +2323,7 @@
         "delete",
         "delete-now",
         "deleted",
+        "density",
         "dep-1",
         "dep-3",
         "dep-on-event",
@@ -2409,7 +2411,7 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 219312,
+      "bytes": 220768,
       "path": "root/todo.md"
     }
   ],

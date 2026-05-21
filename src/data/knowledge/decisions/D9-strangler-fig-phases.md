@@ -1,8 +1,8 @@
-# <a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a> — Strangler Fig Phases for v2 Extension API Rollout
+# D9 — Strangler Fig Phases for v2 Extension API Rollout
 
 **Status:** Accepted (planning) 2026-05-08
 **Origin:** Standup 2026-05-08; user-driven sequencing decision
-**Related:** <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> (parallel paths migration), I-PG.A/B/C tasks in `todo.md`, P1, P2
+**Related:** D6 (parallel paths migration), I-PG.A/B/C tasks in `todo.md`, P1, P2
 
 ## Context
 
@@ -53,7 +53,7 @@ If we don't lock the public surface first, every internal change forces every co
 - For surfaces Alex's branch already migrates (e.g. widget value via `widgetValueStore` facade), v2 handles read/write through ECS-native paths.
 - For surfaces Alex hasn't moved yet, v2 handles still bridge into legacy (LGraphNode prototypes, old stores) — these are explicitly tagged `strangler-bridge` so we know what's left to migrate.
 - Per-pattern classification: `ECS-native` | `strangler-bridge` | `unchanged-legacy` | `uwf-resolved`. Tracked alongside R7 touch-point database.
-  - `uwf-resolved` = migration path is UWF Phase 3 save-time materialization, not ECS dispatch or a strangler bridge. Known: **S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a>** (graphToPrompt patching) and **S9.SG1** (virtual-node wiring). These patterns must NOT be marked `strangler-bridge` or `ECS-native` — they block on UWF Phase 3, not on Alex's ECS work. See `research/architecture/notion-uwf-frontend-impl-plan.md` §S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a>/I-PG.B2.
+  - `uwf-resolved` = migration path is UWF Phase 3 save-time materialization, not ECS dispatch or a strangler bridge. Known: **S6.A1** (graphToPrompt patching) and **S9.SG1** (virtual-node wiring). These patterns must NOT be marked `strangler-bridge` or `ECS-native` — they block on UWF Phase 3, not on Alex's ECS work. See `research/architecture/notion-uwf-frontend-impl-plan.md` §S6.A1/I-PG.B2.
 
 **Still "slightly strangler":**
 Not every code path goes through ECS; legacy paths exist for hooks Alex hasn't moved. The strangler is real but partial.
@@ -68,7 +68,7 @@ Not every code path goes through ECS; legacy paths exist for hooks Alex hasn't m
 
 **ECS-native details:**
 - `onRemoved` (S2.N4, blast radius 4.89) — wired via `onScopeDispose(fn)`. Vue EffectScope cleanup triggers on entity unmount.
-- `onNodeCreated` (S2.N1) — `nodeCreated` hook fires in `mountExtensionsForNode()` with active EffectScope (<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>).
+- `onNodeCreated` (S2.N1) — `nodeCreated` hook fires in `mountExtensionsForNode()` with active EffectScope (D10).
 
 **Strangler-bridge details:**
 - `serialize/onSerialize` (S2.N15, blast radius 5.01) — `node.on('beforeSerialize')` implemented as dispatch stub. Collapses v1 `node.onSerialize` + `prototype.serialize`. Handlers registered, dispatch deferred to Phase 4.
@@ -81,10 +81,10 @@ Not every code path goes through ECS; legacy paths exist for hooks Alex hasn't m
 
 ### Phase C — Legacy-API strangler (much later)
 
-**Trigger:** v2 API stable; majority of `src/extensions/core/*` migrated; ecosystem migration guide published; deprecation telemetry shows < 5% of core users still on v1 (per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> sunset criteria).
+**Trigger:** v2 API stable; majority of `src/extensions/core/*` migrated; ecosystem migration guide published; deprecation telemetry shows < 5% of core users still on v1 (per D6 sunset criteria).
 
 **What ships:**
-- Strangler over v1 ComfyExtension hooks we explicitly chose NOT to rewrite (per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> "parallel paths" decision — some legacy hooks are kept indefinitely as compat bridges).
+- Strangler over v1 ComfyExtension hooks we explicitly chose NOT to rewrite (per D6 "parallel paths" decision — some legacy hooks are kept indefinitely as compat bridges).
 - Choose interception mechanism (deferred until Phase C — see I-PG.C2):
   - **(a)** `Object.freeze(LGraphNode.prototype)` + Proxy façade
   - **(b)** `Object.defineProperty` getter trap that warns + redirects to v2
@@ -119,8 +119,8 @@ Not every code path goes through ECS; legacy paths exist for hooks Alex hasn't m
 ## Open questions
 
 - I-COORD.2 — What's the exact rebase target? Alex's PR #11939 is `Draft for review`; should we wait for it to be ready, or rebase onto its current state and chase it?
-- <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> (deferred per Phase C deferral) — Which interception mechanism (a/b/c)? Decide after Phase B telemetry.
-- <a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a> (a/b/c/d) — Lifecycle context, hook ordering, async setup, setupState wrap. Open; tracked as TODOs.
+- D11 (deferred per Phase C deferral) — Which interception mechanism (a/b/c)? Decide after Phase B telemetry.
+- D10 (a/b/c/d) — Lifecycle context, hook ordering, async setup, setupState wrap. Open; tracked as TODOs.
 
 ## References
 
@@ -136,7 +136,7 @@ Not every code path goes through ECS; legacy paths exist for hooks Alex hasn't m
   original touch-points sweep; the re-audit grew them substantially: S2.N1
   `onNodeCreated` 7→77 (11×), S2.N3 `onConnectionsChange` 10→53 (5.3×), S2.N4
   `onRemoved` 9→45 (5×), S2.N12/N13 connect events 2→4 / 3→5, S2.N14
-  `onWidgetChanged` 4→12 (3×), S2.N15 `onSerialize` 7→13. S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> (uwf-resolved)
+  `onWidgetChanged` 4→12 (3×), S2.N15 `onSerialize` 7→13. S6.A1 (uwf-resolved)
   9→15 with new high-traffic consumers (Manager, Copilot, comfyui-deploy,
   Crystools, SwarmUI). v2-parity claims for the Phase B dispatch stubs are
   unchanged in shape but the sequencing risk (`onNodeCreated` deferral,

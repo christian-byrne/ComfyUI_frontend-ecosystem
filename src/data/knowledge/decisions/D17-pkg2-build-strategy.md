@@ -1,15 +1,15 @@
-# ADR-<a href="/decisions/D17-pkg2-build-strategy" class="wiki-link">D17</a>: PKG2 build strategy — package builds from main app sources via extended root tsconfig
+# ADR-D17: PKG2 build strategy — package builds from main app sources via extended root tsconfig
 
 **Status**: Accepted
 **Date**: 2026-05-12
 **Related cluster**: PR #12143 CodeRabbit review (F-12143-1, F-12143-3, F-12143-7)
 **Implements**: PKG2 / PKG3 acceptance from `plans/P2-package-extension-api.md`
-**Related ADRs**: <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> (parallel paths migration), <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.1 (entry-point shape)
+**Related ADRs**: D6 (parallel paths migration), D6.1 (entry-point shape)
 
 ## Context
 
 PKG2 ships `@comfyorg/extension-api` as the published TypeScript package
-that extension authors install. Per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> and AGENTS.md, the canonical
+that extension authors install. Per D6 and AGENTS.md, the canonical
 surface lives at `src/extension-api/index.ts` in the main app — that
 file is "the one source of truth for what is part of the stable,
 semver-versioned public contract." The package barrel at
@@ -93,7 +93,7 @@ the package.
   ceremony.
 
 **Deferred.** Option B remains a viable end state once the surface
-stabilizes (post-Phase A, post-#11939). <a href="/decisions/D17-pkg2-build-strategy" class="wiki-link">D17</a> explicitly does not
+stabilizes (post-Phase A, post-#11939). D17 explicitly does not
 preclude it — see "Consequences" below.
 
 ### Option C — Build from main app sources via extended root tsconfig (chosen)
@@ -228,7 +228,7 @@ Adopt Option C. Concretely:
 
 6. **Option B remains the eventual end state.** When the Phase A
    surface stabilizes (target: after #11939 lands and the World becomes
-   reactive per <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>), revisit vendoring sources into the package. By
+   reactive per D8), revisit vendoring sources into the package. By
    that point: import sites are stable, the surface is small, and the
    payoff (clean separation, smaller publish artifact, no transitive
    type chain) outweighs the migration cost.

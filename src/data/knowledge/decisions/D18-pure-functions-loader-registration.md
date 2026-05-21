@@ -1,4 +1,4 @@
-# <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> — Pure functions + loader-based registration
+# D18 — Pure functions + loader-based registration
 
 **Status**: ACCEPTED — 2026-05-14 (decision logged in [design-review-12142.md row #18](../design-review-12142.md#decisions) on 2026-05-12; ADR formalized 2026-05-14 to satisfy `scripts/check-decision-propagation.sh` and unblock implementation)
 
@@ -41,7 +41,7 @@ CB's verdict in the review (2026-05-12, recorded inline in the doc):
 
 ## Decision
 
-`defineNode` / `defineWidget` / `defineExtension` (<a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a>) are **pure
+`defineNode` / `defineWidget` / `defineExtension` (D11) are **pure
 functions**. They return frozen, typed options objects with no side
 effects. Registration is performed by an **explicit loader** in the
 ComfyUI runtime that consumes module exports.
@@ -126,12 +126,12 @@ window.__myExtensionHandle = handle
 
 Detection: a dev-mode wrapper around `defineNode` records call sites; at
 end-of-load the loader cross-checks recorded calls against registered
-exports and `console.warn`s for any orphan call ("you called <a href="/api-docs/definenode" class="wiki-link">defineNode</a>
+exports and `console.warn`s for any orphan call ("you called defineNode
 but did not export the result — registration was skipped").
 
 ### 5. Package boundary
 
-<a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> implies the package boundary (`@comfyorg/extension-api`) is the only
+D18 implies the package boundary (`@comfyorg/extension-api`) is the only
 supported import path for the new pure-function API. The legacy shim
 system (`/scripts/app.js`, `window.comfyAPI.*`) MUST NOT re-export the
 v2 functions — third-party code that wants the new contract MUST
@@ -139,7 +139,7 @@ declare the package dependency. This makes the side-effect-vs-pure
 distinction visible at the import-statement level.
 
 The shim system continues to expose v1 (`app.registerExtension`) for the
-parallel-paths window per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.
+parallel-paths window per D6.
 
 ## Consequences
 
@@ -188,15 +188,15 @@ top-10 v1 surfaces by listener-variant consumer count:
 |---|---|---|---|---|
 | 1 | S2.N1 `onNodeCreated` | 77 | prototype patch | indirect (via setup hook) |
 | 2 | S2.N7 `onConfigure` | 56 | prototype patch | indirect |
-| 3 | S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> `app.graphToPrompt` | 15 | prototype patch | NO (D-uwf) |
+| 3 | S6.A1 `app.graphToPrompt` | 15 | prototype patch | NO (D-uwf) |
 | 4 | S2.N18 `onPropertyChanged` | 13 | prototype patch | indirect |
 | 5 | S11.G3 `beforeChange/afterChange` | 12 | direct call | no |
 | ...| ...| ...| ...| ...|
 
 None of these are *registration*-shaped — they are all hook/event-shaped.
-<a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> affects only the *outer shell* of an extension (how it's discovered
-+ registered), not the inner shape (which is governed by <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> events, <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>
-widget shape, <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> naming, <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> widget state, <a href="/decisions/D15-ban-node-on-beforeSerialize" class="wiki-link">D15</a> serialization ban). For
+D18 affects only the *outer shell* of an extension (how it's discovered
++ registered), not the inner shape (which is governed by D5 events, D7
+widget shape, D11 naming, D14 widget state, D15 serialization ban). For
 the migration guide (`docs/extensions/migration-v1-to-v2.md`) D18 adds
 exactly one rewrite pattern:
 
@@ -222,7 +222,7 @@ that do work at module-eval time.
 ## Implementation plan
 
 D18 is **the highest-impact unimplemented ADR** in the v2 stack — every
-other accepted ADR (<a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a>/<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>/<a href="/decisions/D15-ban-node-on-beforeSerialize" class="wiki-link">D15</a>) describes the *shape* of extensions;
+other accepted ADR (D11/D14/D15) describes the *shape* of extensions;
 D18 describes how they get into the runtime at all.
 
 ### Phase 1 — Loader scaffolding (foundation PR #12142, can land independently)
@@ -245,14 +245,14 @@ D18 describes how they get into the runtime at all.
 ### Phase 3 — Migration guide + lint rule (PKG6 + PKG2 docs, after Phase 2)
 
 7. Add "Replacing `app.registerExtension`" section to
-   `docs/extensions/migration-v1-to-v2.md` (the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.2 Gate 3 stub).
+   `docs/extensions/migration-v1-to-v2.md` (the D6.2 Gate 3 stub).
 8. Add `eslint-plugin-comfy/no-bare-defineNode` rule (lints the
    side-effect pattern).
 9. Cross-link from D11 (which currently notes "v2 entry points still
    register via side effect (until D18 lands)" — that line becomes
    stale once Phase 2 is merged).
 
-### Phase 4 — v1 deprecation alignment (post-merge, gated on <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.2)
+### Phase 4 — v1 deprecation alignment (post-merge, gated on D6.2)
 
 10. Add dev-mode `console.warn` to `app.registerExtension` v1 path
     pointing at the `export default defineNode({...})` replacement.
@@ -266,7 +266,7 @@ D18 describes how they get into the runtime at all.
 - D6.1 — entry-point shape (compatible: D18 narrows the entry-point contract from "function with side effects" to "function returning frozen options")
 - D6.2 — types-package sunset criteria (D18 implementation Phase 4 is gated on D6.2 telemetry + threshold)
 - D11 — naming `defineNode` / `defineWidget` (orthogonal: D18 changes the *mechanism*, D11 keeps the *names*; the "rejected `createNode`" row in D11 references D18 explicitly)
-- <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> (widget-state-categories) + <a href="/decisions/D15-ban-node-on-beforeSerialize" class="wiki-link">D15</a> (ban node-on-beforeSerialize) — orthogonal: govern the *inner* shape of extensions, D18 governs the outer shell
-- D-uwf — UWF-resolved patterns (S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> graphToPrompt is unaffected by D18; UWF Phase 3 is its migration path, not the loader)
+- D14 (widget-state-categories) + D15 (ban node-on-beforeSerialize) — orthogonal: govern the *inner* shape of extensions, D18 governs the outer shell
+- D-uwf — UWF-resolved patterns (S6.A1 graphToPrompt is unaffected by D18; UWF Phase 3 is its migration path, not the loader)
 - AGENTS.md "Decision propagation rules" — every Decisions-table row must reach a commit + ADR + dashboard JSON; this ADR closes the ADR leg for row #18 (commit + dashboard legs tracked under ADR-D18-PURE-FUNCTIONS Phase 1–3 above)
 - W2F-1 re-audit: research/meta/sourcegraph-mcp-coverage-investigation.md (consumer-count table referenced in §Migration impact)

@@ -1,4 +1,4 @@
-# <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure
+# D-api-surface-finalization — Phase A surface freeze; open-decision closure
 
 **Status**: ACCEPTED — 2026-05-20 (wave-12 — user direction "finalize the
 API surface, answer all open questions, make all open decisions firm
@@ -24,9 +24,9 @@ cleanup, foundation `ee0537fdb5`) found:
   — verified by `scripts/check-decision-propagation.sh` (0 orphans
   of 13 tracked rows).
 - **Five ADRs still carry "proposed" / "scoping" / "draft" status**:
-  <a href="/decisions/<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>-widget-shape-and-persistence" class="wiki-link"><a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>-widget-shape-and-persistence</a>, <a href="/decisions/<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>-lifecycle-context-and-ordering" class="wiki-link"><a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>-lifecycle-context-and-ordering</a>,
-  <a href="/decisions/<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>-serialization-convergence" class="wiki-link"><a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>-serialization-convergence</a>, <a href="/decisions/<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>-world-vue-reactive-adapter" class="wiki-link"><a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>-world-vue-reactive-adapter</a>,
-  <a href="/decisions/<a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a>-ecs-alignment-audit" class="wiki-link"><a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a>-ecs-alignment-audit</a>. **All five have been factually superseded
+  D7-widget-shape-and-persistence, D10-lifecycle-context-and-ordering,
+  D14-serialization-convergence, D8-world-vue-reactive-adapter,
+  D13-ecs-alignment-audit. **All five have been factually superseded
   or are explicitly Phase B work**, but their status headers had
   not been updated.
 - **`D-uwf-drafting-board.md` carries three open UWF-adjacent
@@ -54,18 +54,18 @@ foundation-status-only commit.
 
 | ADR | Pre-wave-12 status | Verdict | Successor / pointer |
 |-----|---------------------|---------|---------------------|
-| **<a href="/decisions/<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>-widget-shape-and-persistence" class="wiki-link"><a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7-widget-shape-and-persistence</a></a>** | proposed | **SUPERSEDED** | Part 1 (universal-vs-typed split) → <a href="/decisions/<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>-widget-state-categories" class="wiki-link"><a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a></a> §Categories. Part 2 (3-tier persistence) → <a href="/decisions/D-immutability-enforcement" class="wiki-link">D-immutability-enforcement</a> (Hybrid C: ReadonlyArray<Readonly<T>>). Part 3 (value-envelope) → <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a> §Options bag. Part 4 (4→2 serialization surfaces) → <a href="/decisions/D14-serialization-convergence" class="wiki-link">D14-serialization-convergence</a> + <a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a> (final shape: one `widget.on('beforeSerialize')` hook, <a href="/axioms#a16-refs" class="wiki-link">A16</a>). Part 5 (<a href="/api-docs/widgethandle" class="wiki-link">WidgetHandle</a> shape) → live `src/extension-api/widget.ts` (post wave-11). |
-| **<a href="/decisions/<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>-lifecycle-context-and-ordering" class="wiki-link"><a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10-lifecycle-context-and-ordering</a></a>** | proposed | **SUPERSEDED** | Lifecycle context, hook ordering, async-setup, setupState wrap all decided in **<a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a>** (W6.P6.C, ACCEPTED 2026-05-14). Setup-context implementation in `src/extension-api/lifecycle.ts` (`onMounted`/`onBeforeMount`/`onUnmounted`/`onActivated`/`onDeactivated`). Sub-decisions SD-1 (tagged-union ctx) / SD-2 (parallel-slots pragmatic) / SD-3 (lazy invocation) / SD-4 (module-level singletons + auto-dispose) / SD-5 (typed handler map) all resolved handoff-11. |
-| **<a href="/decisions/D14-serialization-convergence" class="wiki-link">D14-serialization-convergence</a>** | proposed (pending implementation) | **ACCEPTED + SHIPPED** | Implementation shipped wave-9 via **<a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a>** + AXIOMS.md <a href="/axioms#a15-refs" class="wiki-link">A15</a> (Widget Declarativity) + <a href="/axioms#a16-refs" class="wiki-link">A16</a> (Unified Serialization Target). Live in `src/extension-api/widget.ts` — `WidgetBeforeSerializeEvent` has no `context` / `skip()` (<a href="/axioms#a16-refs" class="wiki-link">A16</a>); zero serialization disable knobs (A16); `widget.on('beforeSerialize')` is the sole interface. Node-level `node.on('beforeSerialize')` stays `@deprecated` + runtime-warned per ADR-0010 (not banned per user direction wave-9). |
-| **<a href="/decisions/<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>-world-vue-reactive-adapter" class="wiki-link"><a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8-world-vue-reactive-adapter</a></a>** | scoping / blocker | **DEFERRED to Phase B** | Implementation depends on Alex's ECS branch (PR #11939) merging. Phase A ships the API contracts (`node.on(...)`, `widget.on(...)`) against the v1 LiteGraph + monkey-patched adapter; Phase B replaces the adapter with the World↔Vue bridge per D8. No public-API surface change required at Phase B switchover — the change is transparent to extension authors. |
-| **<a href="/decisions/<a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a>-ecs-alignment-audit" class="wiki-link"><a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13-ecs-alignment-audit</a></a>** | draft (living) | **LIVING — Phase A ongoing** | Document is intentionally a living audit log of ECS-branch divergences. Re-stated as "living during Phase A; closes when Phase B rebase lands". No closure required for surface freeze. |
-| **<a href="/decisions/<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.1-entry-point-shape" class="wiki-link"><a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.1-entry-point-shape</a>** | (informational primer) | **CLOSED — informational only** | Primer doc, not a decision. The actual entry-point decision is **<a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> (pure functions + loader registration)** ACCEPTED 2026-05-14. No status header needed; this ADR adds a §Closure-pointer to <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a>. |
-| **<a href="/decisions/<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.2-types-package-sunset-criteria" class="wiki-link"><a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6.2-types-package-sunset-criteria</a></a>** | PROPOSED | **STAYS PROPOSED — by design** | ADR explicitly defers until Phase B telemetry data exists. Not an "open question affecting surface" — this is the deferred-by-design case. No change. |
-| **<a href="/decisions/D-uwf-drafting-board" class="wiki-link">D-uwf-drafting-board</a> (N11, N12, N13)** | DRAFT FOR DISCUSSION | **DEFERRED to next milestone** | N11 (app-level `beforePrompt`), N12 (virtual wiring declaration), N13 (cross-node value sync) all add NEW Phase B surfaces. Per user direction wave-12, defer with the core internal widget/extension migrations. Drafting board stays as-is for future-milestone agents to pick up; no Phase A surface impact. |
-| **<a href="/decisions/<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>-scope-clone-on-copy" class="wiki-link"><a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>-scope-clone-on-copy</a>** | (`**Status:** accepted` format slipped grep) | **CONFIRM accepted** | Already accepted 2026-05-08. Status header normalized in this wave to canonical `**Status**: ACCEPTED — 2026-05-08`. |
-| **<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a>** | (`> Status: *implemented*` format slipped grep) | **CONFIRM implemented** | Already shipped. Status header normalized to canonical `**Status**: ACCEPTED — implemented in `src/extension-api/widget.ts` (D7 Part 1 + Part 3 successor)`. |
-| **<a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a>** | (status line uses `**Status:** ACCEPTED` — different bullet pattern) | **CONFIRM accepted** | Already shipped wave-9. Status header normalized to canonical `**Status**: ACCEPTED — 2026-05-20 (wave-9)`. |
-| **<a href="/decisions/D-linked-subgraph-constraint" class="wiki-link">D-linked-subgraph-constraint</a>** | (`**Status:** accepted` format slipped grep) | **CONFIRM accepted** | Already accepted 2026-05-18. Status header normalized. |
+| **D7-widget-shape-and-persistence** | proposed | **SUPERSEDED** | Part 1 (universal-vs-typed split) → D14-widget-state-categories §Categories. Part 2 (3-tier persistence) → D-immutability-enforcement (Hybrid C: ReadonlyArray<Readonly<T>>). Part 3 (value-envelope) → D14-widget-state-categories §Options bag. Part 4 (4→2 serialization surfaces) → D14-serialization-convergence + D-widget-serialization-simplification (final shape: one `widget.on('beforeSerialize')` hook, A16). Part 5 (WidgetHandle shape) → live `src/extension-api/widget.ts` (post wave-11). |
+| **D10-lifecycle-context-and-ordering** | proposed | **SUPERSEDED** | Lifecycle context, hook ordering, async-setup, setupState wrap all decided in **D-bootstrap-hooks** (W6.P6.C, ACCEPTED 2026-05-14). Setup-context implementation in `src/extension-api/lifecycle.ts` (`onMounted`/`onBeforeMount`/`onUnmounted`/`onActivated`/`onDeactivated`). Sub-decisions SD-1 (tagged-union ctx) / SD-2 (parallel-slots pragmatic) / SD-3 (lazy invocation) / SD-4 (module-level singletons + auto-dispose) / SD-5 (typed handler map) all resolved handoff-11. |
+| **D14-serialization-convergence** | proposed (pending implementation) | **ACCEPTED + SHIPPED** | Implementation shipped wave-9 via **D-widget-serialization-simplification** + AXIOMS.md A15 (Widget Declarativity) + A16 (Unified Serialization Target). Live in `src/extension-api/widget.ts` — `WidgetBeforeSerializeEvent` has no `context` / `skip()` (A16); zero serialization disable knobs (A16); `widget.on('beforeSerialize')` is the sole interface. Node-level `node.on('beforeSerialize')` stays `@deprecated` + runtime-warned per ADR-0010 (not banned per user direction wave-9). |
+| **D8-world-vue-reactive-adapter** | scoping / blocker | **DEFERRED to Phase B** | Implementation depends on Alex's ECS branch (PR #11939) merging. Phase A ships the API contracts (`node.on(...)`, `widget.on(...)`) against the v1 LiteGraph + monkey-patched adapter; Phase B replaces the adapter with the World↔Vue bridge per D8. No public-API surface change required at Phase B switchover — the change is transparent to extension authors. |
+| **D13-ecs-alignment-audit** | draft (living) | **LIVING — Phase A ongoing** | Document is intentionally a living audit log of ECS-branch divergences. Re-stated as "living during Phase A; closes when Phase B rebase lands". No closure required for surface freeze. |
+| **D6.1-entry-point-shape** | (informational primer) | **CLOSED — informational only** | Primer doc, not a decision. The actual entry-point decision is **D18 (pure functions + loader registration)** ACCEPTED 2026-05-14. No status header needed; this ADR adds a §Closure-pointer to D18. |
+| **D6.2-types-package-sunset-criteria** | PROPOSED | **STAYS PROPOSED — by design** | ADR explicitly defers until Phase B telemetry data exists. Not an "open question affecting surface" — this is the deferred-by-design case. No change. |
+| **D-uwf-drafting-board (N11, N12, N13)** | DRAFT FOR DISCUSSION | **DEFERRED to next milestone** | N11 (app-level `beforePrompt`), N12 (virtual wiring declaration), N13 (cross-node value sync) all add NEW Phase B surfaces. Per user direction wave-12, defer with the core internal widget/extension migrations. Drafting board stays as-is for future-milestone agents to pick up; no Phase A surface impact. |
+| **D12-scope-clone-on-copy** | (`**Status:** accepted` format slipped grep) | **CONFIRM accepted** | Already accepted 2026-05-08. Status header normalized in this wave to canonical `**Status**: ACCEPTED — 2026-05-08`. |
+| **D14-widget-state-categories** | (`> Status: *implemented*` format slipped grep) | **CONFIRM implemented** | Already shipped. Status header normalized to canonical `**Status**: ACCEPTED — implemented in `src/extension-api/widget.ts` (D7 Part 1 + Part 3 successor)`. |
+| **D-widget-serialization-simplification** | (status line uses `**Status:** ACCEPTED` — different bullet pattern) | **CONFIRM accepted** | Already shipped wave-9. Status header normalized to canonical `**Status**: ACCEPTED — 2026-05-20 (wave-9)`. |
+| **D-linked-subgraph-constraint** | (`**Status:** accepted` format slipped grep) | **CONFIRM accepted** | Already accepted 2026-05-18. Status header normalized. |
 
 ### Surface freeze content
 
@@ -83,7 +83,7 @@ union of:
 The frozen surface is enforced by:
 
 - `scripts/check-axiom-compliance.sh` — strict-fails any
-  re-introduction of <a href="/axioms#a14-refs" class="wiki-link">A14</a>-REMOVED or <a href="/axioms#a15-refs" class="wiki-link">A15</a>/A16-banned symbols.
+  re-introduction of A14-REMOVED or A15/A16-banned symbols.
 - `scripts/check-decision-propagation.sh` — strict-fails any
   design-review row without all three propagation legs.
 - `scripts/check-branch-divergence.sh` — strict-fails any drift
@@ -106,7 +106,7 @@ The Phase A surface re-opens only on:
   headers and adds cross-reference text. No `src/extension-api/*.ts`
   edits, no `packages/extension-api/build/index.d.ts` edits.
 - **Surface is shippable** — every public-API surface is either
-  ACCEPTED + shipped, COMMENTED OUT per <a href="/axioms#a14-refs" class="wiki-link">A14</a>, or REMOVED per <a href="/axioms#a14-refs" class="wiki-link">A14</a>.
+  ACCEPTED + shipped, COMMENTED OUT per A14, or REMOVED per A14.
 - **Open-question backlog closes** — 5 superseded ADRs + 3 deferred
   UWF questions + 1 deferred-by-design (D6.2) + 1 living draft
   (D13) + 1 Phase-B-blocked (D8) = the whole `decisions/` directory
@@ -118,7 +118,7 @@ The Phase A surface re-opens only on:
   are the four work-streams that re-open at Phase B. Each has its
   own ADR; this ADR does not pre-empt their decisions.
 - Internal core widget/extension migrations (preview/progress/audio
-  per <a href="/axioms#a15-refs" class="wiki-link">A15</a> follow-up, dynamicPrompts.v2 stub, others) are tracked
+  per A15 follow-up, dynamicPrompts.v2 stub, others) are tracked
   separately and explicitly deferred per user direction wave-12.
 
 ### Compatibility (D6 parallel-paths)
@@ -140,13 +140,13 @@ The Phase A surface re-opens only on:
 - [x] Foundation commit (status-header normalization only):
   - [x] D7: status → `SUPERSEDED — see D-api-surface-finalization`
   - [x] D10: status → `SUPERSEDED — see D-api-surface-finalization`
-  - [x] <a href="/decisions/D14-serialization-convergence" class="wiki-link">D14-serialization-convergence</a>: status →
+  - [x] D14-serialization-convergence: status →
     `ACCEPTED + SHIPPED via D-widget-serialization-simplification`
-  - [x] <a href="/decisions/<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>-scope-clone-on-copy" class="wiki-link"><a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12-scope-clone-on-copy</a></a>: status header normalized
+  - [x] D12-scope-clone-on-copy: status header normalized
   - [x] D14-widget-state-categories: status header normalized
   - [x] D-widget-serialization-simplification: status header
     normalized
-  - [x] <a href="/decisions/D-linked-subgraph-constraint" class="wiki-link">D-linked-subgraph-constraint</a>: status header normalized
+  - [x] D-linked-subgraph-constraint: status header normalized
 - [x] No source code edits — Phase A surface is frozen at
   `ee0537fdb5`
 - [x] No `.d.ts` edit (no surface change)

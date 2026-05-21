@@ -45,7 +45,7 @@ independent.
 ### The question
 
 Patches to `app.graphToPrompt` are the #1 source of monkey-patching across
-custom nodes (S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a>, blast-radius 6.67 — top of the touch-point database).
+custom nodes (S6.A1, blast-radius 6.67 — top of the touch-point database).
 ComfyUI-Manager (our own extension, most-installed in the ecosystem),
 KJNodes/setgetnodes, cg-use-everywhere, easyuse, and dozens of others wrap
 `graphToPrompt` to (a) resolve virtual node connections, (b) inject metadata
@@ -65,14 +65,14 @@ mutate? If yes, what's its shape? If no, what's the alternative?
 - Blocks I-PG.B2 / N9 classification: 5 patterns are tagged
   `strangler-bridge` and 2 are `uwf-resolved` partially because we haven't
   decided what `beforePrompt` looks like.
-- Blocks <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> ADR.
+- Blocks D14 ADR.
 
 ### Options
 
 #### Option A — `app.on('beforePrompt', payload => mutate(payload))`
 
 Single event on the `app` handle, async-aware. Payload exposes the assembled
-API JSON (output <a href="/api-docs/graph" class="wiki-link">graph</a>, workflow, extra, client_id) and a `cancel()` method.
+API JSON (output graph, workflow, extra, client_id) and a `cancel()` method.
 
 ```ts
 app.on('beforePrompt', async (payload) => {
@@ -94,10 +94,10 @@ app.on('beforePrompt', async (payload) => {
 #### Option B — `graph.on('beforeSerialize', mut)` + `app.on('beforePrompt', read)`
 
 Split read vs mutate by phase. Mutation happens before serialization (when the
-<a href="/api-docs/graph" class="wiki-link">graph</a> is still authoritative); reading happens after serialization (when the
+graph is still authoritative); reading happens after serialization (when the
 API JSON is final and ready to ship). Two events, two contracts.
 
-- **Pros**: structurally cleaner; mutating the <a href="/api-docs/graph" class="wiki-link">graph</a> (not the API JSON) is
+- **Pros**: structurally cleaner; mutating the graph (not the API JSON) is
   more idiomatic; serialization stays a pure function; observers can never
   corrupt the wire format
 - **Cons**: extensions that need to mutate `extra.*` (most graphToPrompt
@@ -134,7 +134,7 @@ app.registerPromptContributor({
   done through reactive sources, not by mutating event payloads. Vue's model
   argues for Option C, but Vue components don't have a "ship to backend" step.
 - **React Server Components**: action handlers can rewrite the payload before
-  it reaches the <a href="/api-docs/server" class="wiki-link">server</a>, but only via well-defined input shapes (not free
+  it reaches the server, but only via well-defined input shapes (not free
   mutation).
 - **Express/Koa middleware**: chained mutation of `req`/`res` — closest analog
   to Option A. The pattern works because middleware ordering is explicit.
@@ -144,7 +144,7 @@ app.registerPromptContributor({
 ### Open questions
 
 - Does `beforePrompt` need to be cancellable (`payload.cancel(reason)`) or
-  just observable? (<a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a>/<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a> events have `Unsubscribe` but no `cancel`.)
+  just observable? (D5/D10 events have `Unsubscribe` but no `cancel`.)
 - Does it need to be async? (Most current patches are sync; some — like
   cg-use-everywhere's link expansion — could become async in v2.)
 - How does it interact with **Universal Workflow Format Phase 3**'s save-time
@@ -324,7 +324,7 @@ other widgets"?**
   preset libraries, "lock all to this value" tools.
 - Blocks v2 conversion of any pack with cross-node sync (easyuse, anything
   built on the global-seed pattern).
-- Affects <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> (world ↔ Vue reactive adapter): cross-entity observation needs
+- Affects D8 (world ↔ Vue reactive adapter): cross-entity observation needs
   reactive primitives that scale beyond per-node scopes.
 
 ### Options
@@ -391,7 +391,7 @@ defineNodeExtension({
 ```
 
 - **Pros**: structured; cacheable; decoupled (consumer doesn't know about
-  global-seed node); maps cleanly onto Vue reactivity (<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>); enables tooling
+  global-seed node); maps cleanly onto Vue reactivity (D8); enables tooling
 - **Cons**: new concept; doesn't cover read-then-decide patterns; namespace
   collisions; extensions disagree on the canonical key
 - **Complexity**: HIGH (new shared-state registry, persistence story,
@@ -415,9 +415,9 @@ defineNodeExtension({
   or a top-100 one?)
 - Should shared state persist with the workflow? (Global seed yes; theme
   preference probably no.)
-- How does this interact with subgraphs (<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>)? Does shared state cross
+- How does this interact with subgraphs (D12)? Does shared state cross
   subgraph boundaries by default?
-- Per Pinia/<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>: should shared state be a Pinia store under the hood?
+- Per Pinia/D8: should shared state be a Pinia store under the hood?
 
 ### Recommendation (DRAFT)
 
@@ -436,7 +436,7 @@ stone — `app.observe()` subscribers are the primitive that a future
 
 ### Strangler-bridge ordering
 
-All three decisions interact with the strangler-bridge phase (<a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a> Phase B/C):
+All three decisions interact with the strangler-bridge phase (D9 Phase B/C):
 
 - N11 strangler: translate `app.graphToPrompt` patches → `app.on('beforePrompt')`
   subscriptions. Tricky because the patch wraps the original; the subscription
@@ -451,8 +451,8 @@ All three decisions interact with the strangler-bridge phase (<a href="/decision
 
 | Decision | Blocks | Unblocks |
 |---|---|---|
-| N11 | <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> ADR, PR #12144 graphToPrompt conversions, I-PG.B2 final classification | UWF Phase 3 finalization, ~12 extensions in touch-point DB |
-| N12 | <a href="/decisions/D15-ban-node-on-beforeSerialize" class="wiki-link">D15</a> ADR, UWF Phase 3 serializer | KJNodes-class virtual node packs, S9.SG1 final classification |
+| N11 | D14 ADR, PR #12144 graphToPrompt conversions, I-PG.B2 final classification | UWF Phase 3 finalization, ~12 extensions in touch-point DB |
+| N12 | D15 ADR, UWF Phase 3 serializer | KJNodes-class virtual node packs, S9.SG1 final classification |
 | N13 | D16 ADR | easyuse-class shared-state packs (smaller blast radius than N11/N12) |
 
 ### Recommended sequencing
@@ -470,7 +470,7 @@ All three decisions interact with the strangler-bridge phase (<a href="/decision
 - [ ] Review this drafting board with @christian-byrne; resolve recommendations
 - [ ] Schedule N12 discussion with Alex (UWF Phase 3 owner)
 - [ ] Schedule N11 discussion (likely needs Comfy team input on cancel/async)
-- [ ] Promote each resolved question to its own ADR (<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a>/<a href="/decisions/D15-ban-node-on-beforeSerialize" class="wiki-link">D15</a>/D16)
+- [ ] Promote each resolved question to its own ADR (D14/D15/D16)
 - [ ] Update `decisions/D9-strangler-fig-phases.md` Phase B section once
       N11/N12/N13 land
 - [ ] Update `research/architecture/n9-blast-radius-classification.md`
@@ -482,7 +482,7 @@ All three decisions interact with the strangler-bridge phase (<a href="/decision
 
 - `research/meta/sourcegraph-mcp-coverage-investigation.md` §Re-audit results
   (2026-05-13) — W2F-1 listener-variant re-audit. **Consumer counts updated.**
-  S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> cited above as `blast-radius 6.67 — top of the touch-point database`
+  S6.A1 cited above as `blast-radius 6.67 — top of the touch-point database`
   is reinforced (9→15 consumers); new high-traffic users include
   `ltdrdata/ComfyUI-Manager`, `viswamohankomati/ComfyUI-Copilot`,
   `BennyKok/comfyui-deploy`, `crystian/ComfyUI-Crystools`,

@@ -1,4 +1,4 @@
-# <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a> — Architecture Diagram: ECS World + Hook System + Public API Layer
+# D3 — Architecture Diagram: ECS World + Hook System + Public API Layer
 
 > **Purpose**: Show how the three layers connect — from ECS World internals through the hook system to the extension-facing public API
 
