@@ -38,9 +38,26 @@ function slugify(s: string): string {
     .replace(/\s+/g, '-')
 }
 
+// Wave-18 W18.N — dedupe heading ids within a single render so repeated
+// headings (e.g. `### Action Items` appearing 6× in D13-ecs-alignment-audit)
+// don't produce duplicate `id="action-items"` attributes (invalid HTML +
+// only the first hash-link works). Mirrors GitHub's algorithm: first
+// occurrence keeps the base slug; subsequent get `-1`, `-2`, …
+//
+// The counter is reset at the start of every `html` computed re-run so two
+// different `<MarkdownView>` instances (or two source updates on the same
+// instance) don't bleed state into each other.
+let slugCounts = new Map<string, number>()
+function uniqueSlug(s: string): string {
+  const base = slugify(s)
+  const n = slugCounts.get(base) ?? 0
+  slugCounts.set(base, n + 1)
+  return n === 0 ? base : `${base}-${n}`
+}
+
 renderer.heading = function ({ tokens, depth, text }) {
   const inner = this.parser.parseInline(tokens)
-  const id = slugify(text)
+  const id = uniqueSlug(text)
   return `<h${depth} id="${id}">${inner}</h${depth}>\n`
 }
 
@@ -50,6 +67,8 @@ marked.use({ renderer })
 const html = computed(() => {
   // touch `ready` so the computed re-runs after the highlighter loads
   void ready.value
+  // Reset per-render dedupe state — see uniqueSlug() comment.
+  slugCounts = new Map()
   return marked.parse(source) as string
 })
 </script>
