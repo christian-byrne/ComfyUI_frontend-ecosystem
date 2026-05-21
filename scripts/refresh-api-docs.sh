@@ -51,6 +51,7 @@ PRESERVED_PAGES=(
   nodesizechangedevent.mdx
   nodemode.mdx
   slotdirection.mdx
+  slotinfo.mdx
 )
 restored=0
 for page in "${PRESERVED_PAGES[@]}"; do
@@ -68,5 +69,10 @@ echo "Restored $restored intentionally-kept placeholder page(s) from HEAD."
 # replacement entries. Done in this repo (not upstream packages/extension-api)
 # to respect the Phase A surface freeze.
 node "$(dirname "$0")/strip-deprecated.mjs"
+
+# Post-process: stamp PlannedBadge frontmatter onto the placeholder pages
+# enumerated in scripts/planned-pages.json (W17.H). Renderer (ApiDocs.vue,
+# W17.G) shows a "Phase B" / "ECS PR #11939" chip above the symbol title.
+node "$(dirname "$0")/stamp-planned.mjs"
 
 echo "✅ API docs refreshed. Review with: git diff --stat src/data/api-docs/"

@@ -32,6 +32,16 @@ export interface ApiDocPage {
   sidebarTitle?: string
   /** Markdown body with frontmatter stripped */
   body: string
+  /**
+   * PlannedBadge variant stamped by scripts/stamp-planned.mjs (W17.G)
+   * when the page describes an A14-deferred surface. Renderer (ApiDocs.vue)
+   * shows a badge above the H1 when this is set.
+   */
+  planned?: string
+  /** Tooltip text accompanying the planned badge. */
+  plannedReason?: string
+  /** Optional href the badge anchors to (typically ECS PR #11939). */
+  plannedHref?: string
 }
 
 export interface ApiDocNavItem {
@@ -63,7 +73,10 @@ export const apiDocPages: ApiDocPage[] = Object.entries(rawPages)
       description: meta.description ?? '',
       icon: meta.icon,
       sidebarTitle: meta.sidebarTitle,
-      body
+      body,
+      planned: meta.planned,
+      plannedReason: meta.plannedReason,
+      plannedHref: meta.plannedHref
     }
   })
   .sort((a, b) => a.slug.localeCompare(b.slug))

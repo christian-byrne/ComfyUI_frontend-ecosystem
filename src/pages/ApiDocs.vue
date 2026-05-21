@@ -5,6 +5,7 @@ import { marked, Renderer } from 'marked'
 import { computed, onMounted, ref } from 'vue'
 
 import { RouterLink, useRoute } from 'vue-router'
+import PlannedBadge from '@/components/PlannedBadge.vue'
 import { ensureHighlighter, highlightCode } from '@/composables/useHighlighter'
 import {
   getAffectedRepos,
@@ -324,6 +325,17 @@ const extensionApiPRs = [
                 >
                   {{ currentPage.icon }}
                 </div>
+                <PlannedBadge
+                  v-if="
+                    currentPage.planned === 'phase-b' ||
+                    currentPage.planned === 'ecs-pr-11939' ||
+                    currentPage.planned === 'hypothetical'
+                  "
+                  :variant="currentPage.planned"
+                  :tooltip="currentPage.plannedReason"
+                  :href="currentPage.plannedHref"
+                  data-testid="api-docs-planned-badge"
+                />
                 <h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
                   {{ currentPage.title }}
                 </h2>
