@@ -63,7 +63,7 @@ const next = computed(() =>
           <RouterLink
             v-for="a in meta.axioms"
             :key="a"
-            :to="`/axioms#${a.toLowerCase()}`"
+            :to="`/axioms#${a.toLowerCase()}-refs`"
             class="rounded bg-violet-100 px-1.5 py-0.5 text-violet-800 hover:bg-violet-200 dark:bg-violet-900/40 dark:text-violet-200"
           >{{ a }}</RouterLink>
         </div>

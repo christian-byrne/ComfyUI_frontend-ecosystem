@@ -160,5 +160,20 @@ export const routes: RouteRecordRaw[] = [
 
 export const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, _from, savedPosition) {
+    // Browser back/forward — restore exact scroll position.
+    if (savedPosition) return savedPosition
+    // Hash navigation — scroll to the element with the matching id.
+    // Offset 80px clears the sticky header (~64px) with a little breathing room.
+    if (to.hash) {
+      return {
+        el: to.hash,
+        top: 80,
+        behavior: 'smooth'
+      }
+    }
+    // Otherwise — scroll to top on route change.
+    return { top: 0 }
+  }
 })

@@ -16,6 +16,24 @@ const renderer = new Renderer()
 renderer.code = ({ text, lang }) =>
   highlightCode(text, lang || 'text')
 
+// Generate stable heading ids so `/path#heading-slug` deep-links scroll to
+// the right place. Slug roughly matches GitHub's algorithm: lowercase,
+// alphanumerics + hyphens, whitespace collapsed to single hyphens. Must be a
+// regular function (not arrow) to retain `this.parser` for inline rendering.
+function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+}
+
+renderer.heading = function ({ tokens, depth, text }) {
+  const inner = this.parser.parseInline(tokens)
+  const id = slugify(text)
+  return `<h${depth} id="${id}">${inner}</h${depth}>\n`
+}
+
 marked.setOptions({ gfm: true, breaks: false })
 marked.use({ renderer })
 
