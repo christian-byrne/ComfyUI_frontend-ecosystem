@@ -21,6 +21,7 @@ const Handoff = () => import('../pages/Handoff.vue')
 const Decisions = () => import('../pages/Decisions.vue')
 const DecisionDetail = () => import('../pages/DecisionDetail.vue')
 const Axioms = () => import('../pages/Axioms.vue')
+const Glossary = () => import('../pages/Glossary.vue')
 const KnowledgeGraph = () => import('../pages/KnowledgeGraph.vue')
 const RootDoc = () => import('../pages/RootDoc.vue')
 
@@ -149,6 +150,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'axioms',
     component: Axioms,
     meta: { title: 'Axioms', nav: true }
+  },
+  {
+    path: '/glossary',
+    name: 'glossary',
+    component: Glossary,
+    meta: { title: 'Glossary', nav: true }
   },
   {
     path: '/knowledge-graph',

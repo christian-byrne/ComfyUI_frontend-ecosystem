@@ -74,8 +74,70 @@ export function buildSymbolMap(repoRoot = REPO_ROOT) {
     map.set(`A${n}`, `/axioms#a${n}-refs`)
   }
 
+  // Glossary terms (W19.A3). Each Capitalized-Term-of-Art links to
+  // `/glossary#<lowercase-slug>` — heading-ids are emitted by
+  // MarkdownView's slugify so they match `## Widget` → `#widget` etc.
+  //
+  // Cap is intentionally tighter for these (see autoLink + GLOSSARY_CAP):
+  // glossary terms are generic English words (Widget, Value, Mount) and
+  // would over-link if treated as ADR titles. We auto-link the FIRST
+  // occurrence per file only.
+  //
+  // Source-of-truth: docs/glossary.md in the workspace (mirrored to
+  // src/data/knowledge/root/glossary.md by scripts/sync-knowledge.sh).
+  // Keep this list in sync when adding/removing glossary entries.
+  for (const term of GLOSSARY_TERMS) {
+    // Only register if no longer/more-specific symbol already owns the
+    // exact name (e.g. WidgetHandle is an ADR target and stays so;
+    // generic `Widget` falls back to the glossary).
+    if (!map.has(term)) {
+      map.set(term, `/glossary#${term.toLowerCase()}`)
+    }
+  }
+
   return map
 }
+
+/**
+ * Canonical Capitalized Terms of Art (W19.A3). Mirrored to
+ * `docs/glossary.md` in the workspace. Keep this list in lockstep
+ * with the `## Term` headings in that file.
+ */
+export const GLOSSARY_TERMS = [
+  'Widget',
+  'Value',
+  'Topology',
+  'Schema',
+  'Reference',
+  'Handle',
+  'Mount',
+  'Recreate',
+  'Remount',
+  'Entity',
+  'Component',
+  'System',
+  'World',
+  'Subgraph',
+  'Blueprint',
+  'Promotion',
+  'BoxedWidget',
+  'ScopedHandle',
+  'WorkflowSpec',
+  'WorkflowLayout',
+  'ExecutionPrompt',
+  'RunSnapshot',
+  'NodeHandle',
+  'WidgetHandle',
+  'Augmenter',
+  'Disposable'
+]
+
+/**
+ * Tighter cap for glossary terms — generic words would over-link at
+ * the default per-symbol cap. One auto-link per file per term is
+ * enough to surface the glossary affordance without polluting the body.
+ */
+export const GLOSSARY_CAP = 1
 
 /**
  * Split content into segments — only `text` segments are eligible for
@@ -99,8 +161,7 @@ function splitSegments(input) {
   const remaining = input.slice(cursor)
   // Use a single combined regex with alternations. Order matters:
   // fenced > inline-code > existing <a>...</a> > markdown link > wiki-already
-  const re =
-    /(```[\s\S]*?```)|(`[^`\n]*`)|(<a\b[^>]*>[\s\S]*?<\/a>)|(\[[^\]\n]+\]\([^)\n]+\))/g
+  const re = /(```[\s\S]*?```)|(`[^`\n]*`)|(<a\b[^>]*>[\s\S]*?<\/a>)|(\[[^\]\n]+\]\([^)\n]+\))/g
   let last = 0
   let m
   while ((m = re.exec(remaining)) !== null) {
@@ -156,15 +217,23 @@ export function autoLink(content, symbolMap, options = {}) {
     if (seg.type !== 'text') continue
     let s = seg.value
     for (const sym of symbols) {
+      // W19.A3 — glossary terms get a tighter per-file cap (1) than
+      // the default symbol cap (3) since they're generic English words
+      // (Widget, Value, Mount) that appear in body prose constantly.
+      // Detection is by destination URL, not by name, so a Capitalized
+      // Term of Art that ALSO has a canonical API-docs/ADR target
+      // (e.g. WidgetHandle, NodeHandle) keeps the default cap.
+      const dest = symbolMap.get(sym) ?? ''
+      const symCap = dest.startsWith('/glossary#') ? GLOSSARY_CAP : cap
       const already = seen.get(sym) ?? 0
-      if (already >= cap) continue
+      if (already >= symCap) continue
       const escaped = escapeRegex(sym)
       // Word-boundary on each side. Use \W (excluding underscore is fine
       // here since identifiers may include underscores in real APIs).
       const re = new RegExp(`(^|[^A-Za-z0-9_])(${escaped})(?=$|[^A-Za-z0-9_])`, 'g')
       let local = 0
       s = s.replace(re, (_match, pre, hit) => {
-        if (already + local >= cap) return pre + hit
+        if (already + local >= symCap) return pre + hit
         local++
         return `${pre}<a href="${symbolMap.get(sym)}" class="wiki-link">${hit}</a>`
       })
@@ -184,7 +253,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const map = buildSymbolMap()
   const targets = [
     resolve(REPO_ROOT, 'src/data/api-docs'),
-    resolve(REPO_ROOT, 'src/data/knowledge/decisions'),
+    resolve(REPO_ROOT, 'src/data/knowledge/decisions')
   ]
   let totalReplacements = 0
   let filesTouched = 0
@@ -207,7 +276,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       }
     }
   }
-  console.log(
-    `Wiki-linked ${totalReplacements} reference(s) across ${filesTouched} file(s).`
-  )
+  console.log(`Wiki-linked ${totalReplacements} reference(s) across ${filesTouched} file(s).`)
 }

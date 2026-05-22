@@ -1,16 +1,12 @@
 {
-  "generatedAt": "2026-05-21T22:55:28.412Z",
+  "generatedAt": "2026-05-22T00:00:57.085Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
       "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A14",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A14", "A15", "A16"],
       "adrs": [
         "d-bootstrap-hooks",
         "d-immutability-enforcement",
@@ -41,11 +37,7 @@
         "draft",
         "drafting"
       ],
-      "waves": [
-        "wave-11",
-        "wave-12",
-        "wave-9"
-      ],
+      "waves": ["wave-11", "wave-12", "wave-9"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 10525,
@@ -118,17 +110,7 @@
       "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "A6",
-        "A12",
-        "A14",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A1", "A2", "A3", "A4", "A6", "A12", "A14", "A15", "A16"],
       "adrs": [
         "d-widget-converge",
         "d-widget-serialization-simplification",
@@ -146,10 +128,7 @@
         "draft",
         "drop"
       ],
-      "waves": [
-        "wave-10",
-        "wave-9"
-      ],
+      "waves": ["wave-10", "wave-9"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 10683,
@@ -177,9 +156,7 @@
         "dom",
         "domain-noun"
       ],
-      "waves": [
-        "wave-6"
-      ],
+      "waves": ["wave-6"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 16131,
@@ -234,10 +211,7 @@
       "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
       "status": "unknown",
       "date": "2026-05-18",
-      "axioms": [
-        "A12",
-        "A13"
-      ],
+      "axioms": ["A12", "A13"],
       "adrs": [
         "d-coord-space",
         "d-coordinate-space-blast-radius",
@@ -257,9 +231,7 @@
         "dpi",
         "ds"
       ],
-      "waves": [
-        "wave-6"
-      ],
+      "waves": ["wave-6"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 17652,
@@ -271,10 +243,7 @@
       "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A1",
-        "A10"
-      ],
+      "axioms": ["A1", "A10"],
       "adrs": [
         "d-bootstrap-hooks",
         "d-no-node-widget-access",
@@ -283,11 +252,7 @@
         "decision",
         "depends"
       ],
-      "waves": [
-        "wave-12",
-        "wave-13",
-        "wave-8"
-      ],
+      "waves": ["wave-12", "wave-13", "wave-8"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 9391,
@@ -324,17 +289,7 @@
       "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
       "status": "proposed",
       "date": null,
-      "axioms": [
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "A5",
-        "A6",
-        "A14",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A1", "A2", "A3", "A4", "A5", "A6", "A14", "A15", "A16"],
       "adrs": [
         "d-api-surface-finalization",
         "d-cross-node-observation",
@@ -351,9 +306,7 @@
         "dom-move",
         "dynamicprompts"
       ],
-      "waves": [
-        "wave-8"
-      ],
+      "waves": ["wave-8"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 12370,
@@ -365,9 +318,7 @@
       "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A14"
-      ],
+      "axioms": ["A14"],
       "adrs": [
         "d-bootstrap-hooks",
         "d-immutability-enforcement",
@@ -384,10 +335,7 @@
         "draft",
         "drop"
       ],
-      "waves": [
-        "wave-10",
-        "wave-11"
-      ],
+      "waves": ["wave-10", "wave-11"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 8289,
@@ -426,9 +374,7 @@
         "devtools",
         "drop"
       ],
-      "waves": [
-        "wave-6"
-      ],
+      "waves": ["wave-6"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 19637,
@@ -471,10 +417,7 @@
       "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
       "status": "accepted",
       "date": "2026-05-18",
-      "axioms": [
-        "A3",
-        "A4"
-      ],
+      "axioms": ["A3", "A4"],
       "adrs": [
         "d-api-surface-finalization",
         "d-linked-subgraph",
@@ -486,9 +429,7 @@
         "dom",
         "don"
       ],
-      "waves": [
-        "wave-12"
-      ],
+      "waves": ["wave-12"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 5752,
@@ -507,11 +448,7 @@
       "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A7",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A7", "A15", "A16"],
       "adrs": [
         "d-auth-header-injection",
         "d-bootstrap-hooks",
@@ -522,9 +459,7 @@
         "d6",
         "decision"
       ],
-      "waves": [
-        "wave-13"
-      ],
+      "waves": ["wave-13"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4855,
@@ -549,11 +484,7 @@
       "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
       "status": "accepted",
       "date": "2026-05-19",
-      "axioms": [
-        "A1",
-        "A2",
-        "A14"
-      ],
+      "axioms": ["A1", "A2", "A14"],
       "adrs": [
         "d-immutability-enforcement",
         "d11",
@@ -563,10 +494,7 @@
         "decision",
         "direction"
       ],
-      "waves": [
-        "wave-7",
-        "wave-8"
-      ],
+      "waves": ["wave-7", "wave-8"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 6794,
@@ -597,21 +525,9 @@
       "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A3",
-        "A7",
-        "A15"
-      ],
-      "adrs": [
-        "d-cross-node-observation",
-        "d-uwf-drafting-board",
-        "d6",
-        "decision",
-        "declarative"
-      ],
-      "waves": [
-        "wave-13"
-      ],
+      "axioms": ["A3", "A7", "A15"],
+      "adrs": ["d-cross-node-observation", "d-uwf-drafting-board", "d6", "decision", "declarative"],
+      "waves": ["wave-13"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 6299,
@@ -630,11 +546,7 @@
       "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
       "status": "accepted",
       "date": "2026-05-21",
-      "axioms": [
-        "A2",
-        "A8",
-        "A14"
-      ],
+      "axioms": ["A2", "A8", "A14"],
       "adrs": [
         "d-api-surface-finalization",
         "d-design-review-hygiene-cleanup",
@@ -644,11 +556,7 @@
         "deferred",
         "deprecate-and-keep"
       ],
-      "waves": [
-        "wave-11",
-        "wave-12",
-        "wave-17"
-      ],
+      "waves": ["wave-11", "wave-12", "wave-17"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 15326,
@@ -679,9 +587,7 @@
         "dom",
         "don"
       ],
-      "waves": [
-        "wave-6"
-      ],
+      "waves": ["wave-6"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 27957,
@@ -706,9 +612,7 @@
       "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
       "status": "unknown",
       "date": null,
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d-cross-node-observation",
         "d-no-app-beforeprompt",
@@ -735,10 +639,7 @@
         "drafting",
         "dx"
       ],
-      "waves": [
-        "wave-13",
-        "wave-8"
-      ],
+      "waves": ["wave-13", "wave-8"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 20467,
@@ -803,9 +704,7 @@
         "domwidgethandle",
         "domwidgetoptions"
       ],
-      "waves": [
-        "wave-6"
-      ],
+      "waves": ["wave-6"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 21419,
@@ -842,15 +741,7 @@
       "title": "D-widget-serialization-simplification",
       "status": "unknown",
       "date": null,
-      "axioms": [
-        "A1",
-        "A2",
-        "A5",
-        "A11",
-        "A14",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A1", "A2", "A5", "A11", "A14", "A15", "A16"],
       "adrs": [
         "d-api-surface-finalization",
         "d-immutability-enforcement",
@@ -866,12 +757,7 @@
         "draft",
         "dropping"
       ],
-      "waves": [
-        "wave-10",
-        "wave-12",
-        "wave-8",
-        "wave-9"
-      ],
+      "waves": ["wave-10", "wave-12", "wave-8", "wave-9"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 13270,
@@ -977,9 +863,7 @@
         "dom",
         "during"
       ],
-      "waves": [
-        "wave-12"
-      ],
+      "waves": ["wave-12"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 23207,
@@ -999,17 +883,8 @@
       "status": "accepted",
       "date": "2026-05-12",
       "axioms": [],
-      "adrs": [
-        "d11",
-        "d18",
-        "d6",
-        "decision",
-        "design",
-        "documentation"
-      ],
-      "waves": [
-        "wave-4"
-      ],
+      "adrs": ["d11", "d18", "d6", "decision", "design", "documentation"],
+      "waves": ["wave-4"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 3073,
@@ -1037,9 +912,7 @@
         "does",
         "done"
       ],
-      "waves": [
-        "wave-12"
-      ],
+      "waves": ["wave-12"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 19944,
@@ -1095,10 +968,7 @@
       "title": "ADR-D14: Serialization Convergence — Single Target Model",
       "status": "accepted",
       "date": "2026-05-20",
-      "axioms": [
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A15", "A16"],
       "adrs": [
         "d-api-surface-finalization",
         "d-widget-serialization-simplification",
@@ -1113,13 +983,8 @@
         "document",
         "dynamic"
       ],
-      "waves": [
-        "wave-12",
-        "wave-9"
-      ],
-      "supersedes": [
-        "d7-widget-shape-and-persistence"
-      ],
+      "waves": ["wave-12", "wave-9"],
+      "supersedes": ["d7-widget-shape-and-persistence"],
       "supersededBy": [],
       "bytes": 7375,
       "path": "decisions/D14-serialization-convergence.md",
@@ -1161,9 +1026,7 @@
         "deprecation",
         "discussion"
       ],
-      "waves": [
-        "wave-12"
-      ],
+      "waves": ["wave-12"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4558,
@@ -1194,20 +1057,9 @@
       "title": "D15 — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
       "status": "accepted",
       "date": "2026-05-12",
-      "axioms": [
-        "A1",
-        "A2"
-      ],
-      "adrs": [
-        "d14",
-        "d15",
-        "d6",
-        "decision",
-        "design"
-      ],
-      "waves": [
-        "wave-4"
-      ],
+      "axioms": ["A1", "A2"],
+      "adrs": ["d14", "d15", "d6", "decision", "design"],
+      "waves": ["wave-4"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 3565,
@@ -1245,9 +1097,7 @@
       "title": "D18 — Pure functions + loader-based registration",
       "status": "accepted",
       "date": "2026-05-14",
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d-uwf",
         "d11",
@@ -1278,15 +1128,7 @@
       "status": "accepted",
       "date": "2026-05-14",
       "axioms": [],
-      "adrs": [
-        "d11",
-        "d19",
-        "d6",
-        "dash-refresh-1",
-        "decision",
-        "delete",
-        "documentation"
-      ],
+      "adrs": ["d11", "d19", "d6", "dash-refresh-1", "decision", "delete", "documentation"],
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
@@ -1331,9 +1173,7 @@
       "title": "D20 — Identity type convergence",
       "status": "accepted",
       "date": "2026-05-14",
-      "axioms": [
-        "A3"
-      ],
+      "axioms": ["A3"],
       "adrs": [
         "d14",
         "d18",
@@ -1363,12 +1203,7 @@
       "status": "unknown",
       "date": null,
       "axioms": [],
-      "adrs": [
-        "d3",
-        "data",
-        "dep",
-        "diagram"
-      ],
+      "adrs": ["d3", "data", "dep", "diagram"],
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
@@ -1456,9 +1291,7 @@
       ],
       "waves": [],
       "supersedes": [],
-      "supersededBy": [
-        "d5-events-and-payload-typing"
-      ],
+      "supersededBy": ["d5-events-and-payload-typing"],
       "bytes": 9726,
       "path": "decisions/D3.3-events-over-signals.md",
       "backlinks": [
@@ -1476,16 +1309,10 @@
       "status": "unknown",
       "date": null,
       "axioms": [],
-      "adrs": [
-        "d3",
-        "dimensions",
-        "domain"
-      ],
+      "adrs": ["d3", "dimensions", "domain"],
       "waves": [],
       "supersedes": [],
-      "supersededBy": [
-        "d5-events-and-payload-typing"
-      ],
+      "supersededBy": ["d5-events-and-payload-typing"],
       "bytes": 6780,
       "path": "decisions/D3.4-events-and-commands-reconciled.md",
       "backlinks": [
@@ -1503,14 +1330,7 @@
       "status": "unknown",
       "date": null,
       "axioms": [],
-      "adrs": [
-        "d3",
-        "decision",
-        "dispatch",
-        "do",
-        "driven",
-        "during"
-      ],
+      "adrs": ["d3", "decision", "dispatch", "do", "driven", "during"],
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
@@ -1523,16 +1343,7 @@
       "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
       "status": "unknown",
       "date": null,
-      "axioms": [
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "A5",
-        "A6",
-        "A7",
-        "A8"
-      ],
+      "axioms": ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"],
       "adrs": [
         "d1",
         "d2",
@@ -1571,9 +1382,7 @@
       "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
       "status": "accepted",
       "date": "2026-05-08",
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d10b",
         "d3",
@@ -1588,10 +1397,7 @@
         "does"
       ],
       "waves": [],
-      "supersedes": [
-        "d3.3-events-over-signals",
-        "d3.4-events-and-commands-reconciled"
-      ],
+      "supersedes": ["d3.3-events-over-signals", "d3.4-events-and-commands-reconciled"],
       "supersededBy": [],
       "bytes": 12750,
       "path": "decisions/D5-events-and-payload-typing.md",
@@ -1615,9 +1421,7 @@
       "title": "ADR-D6: Parallel Paths Migration Strategy",
       "status": "accepted",
       "date": "2026-05-08",
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d3",
         "d6",
@@ -1694,9 +1498,7 @@
       "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
       "status": "proposed",
       "date": null,
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d3",
         "d6",
@@ -1734,9 +1536,7 @@
       "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
       "status": "superseded",
       "date": "2026-05-20",
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d-api-surface-finalization",
         "d-immutability-enforcement",
@@ -1762,13 +1562,9 @@
         "document",
         "dom"
       ],
-      "waves": [
-        "wave-12"
-      ],
+      "waves": ["wave-12"],
       "supersedes": [],
-      "supersededBy": [
-        "d14-serialization-convergence"
-      ],
+      "supersededBy": ["d14-serialization-convergence"],
       "bytes": 22844,
       "path": "decisions/D7-widget-shape-and-persistence.md",
       "backlinks": [
@@ -1803,9 +1599,7 @@
         "decide",
         "deferred"
       ],
-      "waves": [
-        "wave-12"
-      ],
+      "waves": ["wave-12"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 4863,
@@ -1824,9 +1618,7 @@
       "title": "D9 — Strangler Fig Phases for v2 Extension API Rollout",
       "status": "accepted",
       "date": "2026-05-08",
-      "axioms": [
-        "A1"
-      ],
+      "axioms": ["A1"],
       "adrs": [
         "d10",
         "d11",
@@ -1864,11 +1656,7 @@
       "status": "proposed",
       "date": null,
       "axioms": [],
-      "adrs": [
-        "date",
-        "dd",
-        "decision"
-      ],
+      "adrs": ["date", "dd", "decision"],
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
@@ -2012,34 +1800,46 @@
         "dpi",
         "dynamic"
       ],
-      "waves": [
-        "wave-10",
-        "wave-9"
-      ],
+      "waves": ["wave-10", "wave-9"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 23008,
       "path": "root/AXIOMS.md"
     },
     {
+      "slug": "axioms-theorems",
+      "title": "ECS + Vue Extension API — Derived Theorems",
+      "status": null,
+      "date": null,
+      "axioms": ["A1", "A3", "A4", "A5", "A6", "A7", "A10", "A11", "A12", "A15", "A16"],
+      "adrs": [
+        "d-ban-runtime-addwidget",
+        "d-immutability-enforcement",
+        "d-linked-subgraph-constraint",
+        "d-no-virtual-nodes-in-api",
+        "d-widget-converge",
+        "d-widget-promotion-semantics",
+        "d-widget-serialization-simplification",
+        "d14-widget-state-categories",
+        "d3",
+        "declarativity",
+        "derivation",
+        "derived",
+        "destroying",
+        "dom"
+      ],
+      "waves": ["wave-19"],
+      "supersedes": [],
+      "supersededBy": [],
+      "bytes": 10871,
+      "path": "root/axioms-theorems.md"
+    },
+    {
       "slug": "context",
       "title": "ECS + Vue Hoisted Client State & Hook API — Context",
       "status": null,
       "date": null,
-      "axioms": [
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "A5",
-        "A6",
-        "A7",
-        "A8",
-        "A9",
-        "A10",
-        "A11",
-        "A12"
-      ],
+      "axioms": ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12"],
       "adrs": [
         "d-bootstrap-hooks",
         "d-coord-space",
@@ -2183,35 +1983,54 @@
         "dx",
         "dynamic"
       ],
-      "waves": [
-        "wave-4",
-        "wave-5",
-        "wave-6",
-        "wave-7"
-      ],
+      "waves": ["wave-4", "wave-5", "wave-6", "wave-7"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 225537,
       "path": "root/CONTEXT.md"
     },
     {
+      "slug": "glossary",
+      "title": "ECS + Vue Extension API — Glossary",
+      "status": null,
+      "date": null,
+      "axioms": ["A1", "A2", "A3", "A4", "A5", "A7", "A11", "A12", "A14", "A15", "A16"],
+      "adrs": [
+        "d-ban-runtime-addwidget",
+        "d-bootstrap-hooks",
+        "d-coordinate-space",
+        "d-cross-node-observation",
+        "d-define-widget-augmenter",
+        "d-immutability-enforcement",
+        "d-linked-subgraph-constraint",
+        "d-no-node-widget-access",
+        "d-no-virtual-nodes-in-api",
+        "d-shell-ui-entrypoints",
+        "d-unify-widget-mount-model",
+        "d-widget-converge",
+        "d-widget-promotion-semantics",
+        "d-widget-serialization-simplification",
+        "d12-scope-clone-on-copy",
+        "d8",
+        "d8-world-vue-reactive-adapter",
+        "definition",
+        "disposable",
+        "dom",
+        "dom-seam",
+        "don"
+      ],
+      "waves": ["wave-9"],
+      "supersedes": [],
+      "supersededBy": [],
+      "bytes": 15225,
+      "path": "root/glossary.md"
+    },
+    {
       "slug": "todo",
       "title": "ECS + Vue Hoisted Client State & Hook API — Tasks",
       "status": null,
       "date": null,
-      "axioms": [
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "A5",
-        "A6",
-        "A9",
-        "A13",
-        "A14",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A1", "A2", "A3", "A4", "A5", "A6", "A9", "A13", "A14", "A15", "A16"],
       "adrs": [
         "d-api-surface-finalization",
         "d-bootstrap-hooks",
@@ -2422,11 +2241,7 @@
       "title": "Phase A surface freeze — extension-api v2",
       "status": null,
       "date": null,
-      "axioms": [
-        "A1",
-        "A15",
-        "A16"
-      ],
+      "axioms": ["A1", "A15", "A16"],
       "adrs": [
         "d-api-surface-finalization",
         "d-define-widget-augmenter",
@@ -2435,9 +2250,7 @@
         "dashboard",
         "date"
       ],
-      "waves": [
-        "wave-11"
-      ],
+      "waves": ["wave-11"],
       "supersedes": [],
       "supersededBy": [],
       "bytes": 3452,
@@ -2510,38 +2323,14 @@
       "d-linked-subgraph-constraint",
       "d4-gap-analysis"
     ],
-    "A6": [
-      "d-ban-runtime-addwidget",
-      "d-define-widget-augmenter",
-      "d4-gap-analysis"
-    ],
-    "A12": [
-      "d-ban-runtime-addwidget",
-      "d-coordinate-space"
-    ],
-    "A13": [
-      "d-coordinate-space"
-    ],
-    "A10": [
-      "d-cross-node-observation"
-    ],
-    "A5": [
-      "d-define-widget-augmenter",
-      "d-widget-serialization-simplification",
-      "d4-gap-analysis"
-    ],
-    "A7": [
-      "d-no-app-beforeprompt",
-      "d-no-virtual-nodes-in-api",
-      "d4-gap-analysis"
-    ],
-    "A8": [
-      "d-notify-toast-consolidation",
-      "d4-gap-analysis"
-    ],
-    "A11": [
-      "d-widget-serialization-simplification"
-    ]
+    "A6": ["d-ban-runtime-addwidget", "d-define-widget-augmenter", "d4-gap-analysis"],
+    "A12": ["d-ban-runtime-addwidget", "d-coordinate-space"],
+    "A13": ["d-coordinate-space"],
+    "A10": ["d-cross-node-observation"],
+    "A5": ["d-define-widget-augmenter", "d-widget-serialization-simplification", "d4-gap-analysis"],
+    "A7": ["d-no-app-beforeprompt", "d-no-virtual-nodes-in-api", "d4-gap-analysis"],
+    "A8": ["d-notify-toast-consolidation", "d4-gap-analysis"],
+    "A11": ["d-widget-serialization-simplification"]
   },
   "adrBacklinks": {
     "d-bootstrap-hooks": [
@@ -2560,9 +2349,7 @@
       "d-widget-serialization-simplification",
       "d7-widget-shape-and-persistence"
     ],
-    "d-linked-subgraph-constraint": [
-      "d-api-surface-finalization"
-    ],
+    "d-linked-subgraph-constraint": ["d-api-surface-finalization"],
     "d-uwf-drafting-board": [
       "d-api-surface-finalization",
       "d-cross-node-observation",
@@ -2576,15 +2363,9 @@
       "d14-serialization-convergence",
       "d7-widget-shape-and-persistence"
     ],
-    "d10-lifecycle-context-and-ordering": [
-      "d-api-surface-finalization"
-    ],
-    "d12-scope-clone-on-copy": [
-      "d-api-surface-finalization"
-    ],
-    "d13-ecs-alignment-audit": [
-      "d-api-surface-finalization"
-    ],
+    "d10-lifecycle-context-and-ordering": ["d-api-surface-finalization"],
+    "d12-scope-clone-on-copy": ["d-api-surface-finalization"],
+    "d13-ecs-alignment-audit": ["d-api-surface-finalization"],
     "d14-serialization-convergence": [
       "d-api-surface-finalization",
       "d-widget-serialization-simplification",
@@ -2595,22 +2376,15 @@
       "d-immutability-enforcement",
       "d7-widget-shape-and-persistence"
     ],
-    "d7-widget-shape-and-persistence": [
-      "d-api-surface-finalization"
-    ],
-    "d8-world-vue-reactive-adapter": [
-      "d-api-surface-finalization"
-    ],
+    "d7-widget-shape-and-persistence": ["d-api-surface-finalization"],
+    "d8-world-vue-reactive-adapter": ["d-api-surface-finalization"],
     "d-widget-converge": [
       "d-ban-runtime-addwidget",
       "d-coordinate-space",
       "d-immutability-enforcement",
       "d-shell-ui-entrypoints"
     ],
-    "d-shell-ui-entrypoints": [
-      "d-bootstrap-hooks",
-      "d-notify-toast-consolidation"
-    ],
+    "d-shell-ui-entrypoints": ["d-bootstrap-hooks", "d-notify-toast-consolidation"],
     "d-no-node-widget-access": [
       "d-cross-node-observation",
       "d-define-widget-augmenter",
@@ -2634,31 +2408,17 @@
       "d-no-virtual-nodes-in-api",
       "d-uwf-drafting-board"
     ],
-    "d-no-app-beforeprompt": [
-      "d-define-widget-augmenter",
-      "d-uwf-drafting-board"
-    ],
-    "d-design-review-hygiene-cleanup": [
-      "d-notify-toast-consolidation"
-    ],
-    "d-no-virtual-nodes-in-api": [
-      "d-uwf-drafting-board"
-    ],
-    "d9-strangler-fig-phases": [
-      "d-uwf-drafting-board",
-      "d6.2-types-package-sunset-criteria"
-    ],
-    "d2-vue-setup-function-primer": [
-      "d1-vue-reactivity-primer"
-    ],
+    "d-no-app-beforeprompt": ["d-define-widget-augmenter", "d-uwf-drafting-board"],
+    "d-design-review-hygiene-cleanup": ["d-notify-toast-consolidation"],
+    "d-no-virtual-nodes-in-api": ["d-uwf-drafting-board"],
+    "d9-strangler-fig-phases": ["d-uwf-drafting-board", "d6.2-types-package-sunset-criteria"],
+    "d2-vue-setup-function-primer": ["d1-vue-reactivity-primer"],
     "d6-parallel-paths-migration": [
       "d17-pkg2-build-strategy",
       "d6.2-types-package-sunset-criteria",
       "d9-strangler-fig-phases"
     ],
-    "d1-vue-reactivity-primer": [
-      "d2-vue-setup-function-primer"
-    ]
+    "d1-vue-reactivity-primer": ["d2-vue-setup-function-primer"]
   },
   "axiomBacklinks": {
     "A14": [

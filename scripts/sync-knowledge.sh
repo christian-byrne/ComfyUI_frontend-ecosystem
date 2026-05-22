@@ -42,12 +42,19 @@ echo "  ✓ ${adr_count} ADRs"
 
 # ── Root context files ───────────────────────────────────────────────
 root_count=0
-for f in AXIOMS.md CONTEXT.md AGENTS.md todo.md; do
+for f in AXIOMS.md CONTEXT.md AGENTS.md todo.md axioms-theorems.md; do
   if [ -f "$WORKSPACE_DIR/$f" ]; then
     cp "$WORKSPACE_DIR/$f" "$DST_DIR/root/$f"
     root_count=$((root_count + 1))
   fi
 done
+# W19.A3 — glossary lives under docs/ in the workspace; mirror flat into
+# root/ so the dashboard /glossary route can load it via the same
+# knowledge-loader pattern as AXIOMS/CONTEXT/AGENTS/todo/axioms-theorems.
+if [ -f "$WORKSPACE_DIR/docs/glossary.md" ]; then
+  cp "$WORKSPACE_DIR/docs/glossary.md" "$DST_DIR/root/glossary.md"
+  root_count=$((root_count + 1))
+fi
 echo "  ✓ ${root_count} root context files"
 
 # ── Announcements ────────────────────────────────────────────────────

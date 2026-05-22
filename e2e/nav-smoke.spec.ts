@@ -104,7 +104,9 @@ test.describe('Navigation smoke (W18.O)', () => {
     expect(errors, 'console errors on decision detail').toEqual([])
   })
 
-  test('axioms: permalink chip updates hash and scrolls (W18.B scrollBehavior)', async ({ page }) => {
+  test('axioms: permalink chip updates hash and scrolls (W18.B scrollBehavior)', async ({
+    page
+  }) => {
     await page.goto('/axioms')
     await expect(page.locator('h1').first()).toBeVisible()
     // Wait for the axiom permalink chips to render.
@@ -125,9 +127,7 @@ test.describe('Navigation smoke (W18.O)', () => {
   // ───────────────────────────────────────────────────────────────
   // W19.A4 — Derived-theorems section on /axioms.
   // ───────────────────────────────────────────────────────────────
-  test('axioms: derived-theorems section visible + ADR chip navigates', async ({
-    page
-  }) => {
+  test('axioms: derived-theorems section visible + ADR chip navigates', async ({ page }) => {
     const errors = captureConsoleErrors(page)
     await page.goto('/axioms')
     await expect(page.locator('h1').first()).toBeVisible()
@@ -137,15 +137,10 @@ test.describe('Navigation smoke (W18.O)', () => {
     const firstCard = page.getByTestId('theorem-card').first()
     await expect(firstCard).toBeVisible()
     // Each card carries at least one ADR link in its consequence chips.
-    const firstAdrChip = firstCard
-      .getByTestId('theorem-adrs')
-      .locator('a')
-      .first()
+    const firstAdrChip = firstCard.getByTestId('theorem-adrs').locator('a').first()
     await expect(firstAdrChip).toBeVisible()
     const href = await firstAdrChip.getAttribute('href')
-    expect(href, 'theorem ADR chip must target /decisions/<slug>').toMatch(
-      /^\/decisions\//
-    )
+    expect(href, 'theorem ADR chip must target /decisions/<slug>').toMatch(/^\/decisions\//)
     await firstAdrChip.click()
     await expect(page).toHaveURL(new RegExp(href!.replace(/[/]/g, '\\/') + '$'))
     // ADR detail page renders h1.
@@ -273,9 +268,7 @@ test.describe('Navigation smoke (W18.O)', () => {
     expect(resp?.status(), 'HTTP status for /glossary').toBeLessThan(400)
     await expect(page.locator('h1').first()).toBeVisible({ timeout: 10_000 })
     // Wait for MarkdownView to flush the parsed body so h2 ids exist.
-    const h2 = page.locator(
-      'article[data-testid="glossary-content"] h2'
-    )
+    const h2 = page.locator('article[data-testid="glossary-content"] h2')
     await expect(h2.first()).toBeVisible({ timeout: 10_000 })
     const count = await h2.count()
     expect(
