@@ -24,6 +24,7 @@ const Axioms = () => import('../pages/Axioms.vue')
 const Glossary = () => import('../pages/Glossary.vue')
 const KnowledgeGraph = () => import('../pages/KnowledgeGraph.vue')
 const RootDoc = () => import('../pages/RootDoc.vue')
+const NotFound = () => import('../pages/NotFound.vue')
 
 /**
  * Dashboard routes. `meta.nav: true` opts a route into the App.vue header
@@ -162,6 +163,18 @@ export const routes: RouteRecordRaw[] = [
     name: 'knowledge-graph',
     component: KnowledgeGraph,
     meta: { title: 'Knowledge Graph', nav: true }
+  },
+  // W19.P3 — catch-all 404. Vue Router 4 requires a regex param to
+  // soak up arbitrary paths; the `*` quantifier matches zero or more
+  // segments so `/foo`, `/foo/bar`, and `/` (no — `/` is matched by
+  // the Overview route above first, route order matters) all funnel
+  // to NotFound when nothing else matches. Before this route landed,
+  // the SPA silently 200'd on every unknown URL and rendered nothing.
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: NotFound,
+    meta: { title: 'Not Found', nav: false }
   }
 ]
 

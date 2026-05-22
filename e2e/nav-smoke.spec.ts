@@ -297,4 +297,22 @@ test.describe('Navigation smoke (W18.O)', () => {
     await chip.click()
     await expect(page).toHaveURL(new RegExp('/axioms#a\\d+-refs$'))
   })
+
+  // W19.P3 — 404 catch-all route. Before this landed, the SPA silently
+  // rendered nothing for unknown URLs (RouterView empty → blank page,
+  // not a clear "you typo'd" signal).
+  test('unknown URL renders NotFound with bad path echoed', async ({ page }) => {
+    const errors: string[] = []
+    page.on('console', (msg: ConsoleMessage) => {
+      if (msg.type() === 'error') errors.push(msg.text())
+    })
+    await page.goto('/this-route-does-not-exist/foo/bar')
+    const notFound = page.locator('[data-testid="not-found-page"]')
+    await expect(notFound).toBeVisible({ timeout: 10_000 })
+    await expect(page.locator('h1').first()).toHaveText('Page not found')
+    await expect(page.locator('[data-testid="not-found-path"]')).toContainText(
+      '/this-route-does-not-exist/foo/bar'
+    )
+    expect(errors, 'console errors on /404').toEqual([])
+  })
 })
