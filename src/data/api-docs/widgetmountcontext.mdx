@@ -7,7 +7,7 @@ Defined in: [extension-api/widget.ts:551](https://github.com/Comfy-Org/ComfyUI_f
 
 Context passed to a widget's `mount()` function.
 
-Per **Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a>** (Mount-Lifecycle as the Sole DOM Seam), this is the only
+Per **Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a>** (<a href="/glossary#mount" class="wiki-link">Mount</a>-Lifecycle as the Sole DOM Seam), this is the only
 surface through which DOM enters a widget. Authors capture the host element
 and any constructed DOM via closure inside `mount()` — there is no
 `widget.element` / `widget.inputEl` accessor on the handle.

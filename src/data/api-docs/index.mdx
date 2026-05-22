@@ -66,14 +66,14 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | Interface | Description |
 | ------ | ------ |
 | [AboutBadgeExtension](interfaces/AboutBadgeExtension.md) | Public arg type for [defineAboutBadge](functions/defineAboutBadge.md). A badge that appears on the About page (linked label + icon + optional severity). Mirrors v1 `extension.aboutPageBadges[]`. |
-| [DisposableHandle](interfaces/DisposableHandle.md) | Handle returned by every `defineX`. Call `dispose()` to remove the registration. Idempotent and synchronous — see module-level "Dispose contract" notes. |
+| [DisposableHandle](interfaces/DisposableHandle.md) | <a href="/glossary#handle" class="wiki-link">Handle</a> returned by every `defineX`. Call `dispose()` to remove the registration. Idempotent and synchronous — see module-level "Dispose contract" notes. |
 | [ExecutionEventPayloads](interfaces/ExecutionEventPayloads.md) | See [the augmentation example](interfaces/GraphEventPayloads.md) — augment this interface the same way to narrow `execution.*` payloads. |
 | [ExtensionOptions](interfaces/ExtensionOptions.md) | Options for the global `defineExtension` entry point. Covers extension-wide lifecycle and shell UI contributions. |
 | [GraphEventPayloads](interfaces/GraphEventPayloads.md) | Per-namespace event payload map. **Augment via TS module augmentation** to narrow payloads for canonical events. Until <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> ships, all payloads default to `unknown`. |
 | [HotkeyExtension](interfaces/HotkeyExtension.md) | Public arg type for [defineHotkey](functions/defineHotkey.md). A hotkey binds a key combination (already-registered command) to fire on press. Mirrors v1 `extension.keybindings[]` which used the internal `Keybinding` shape. |
 | [NodeExecutedEvent](interfaces/NodeExecutedEvent.md) | Payload for `node.on('executed', handler)`. |
 | [NodeExtensionOptions](interfaces/NodeExtensionOptions.md) | Options for `defineNode`. Describes an extension that reacts to node lifecycle events. |
-| [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS World; writes dispatch commands. Events are Vue-reactive watches on World components. |
+| [NodeHandle](interfaces/NodeHandle.md) | Controlled surface for node access. Reads query the ECS <a href="/glossary#world" class="wiki-link">World</a>; writes dispatch commands. Events are Vue-reactive watches on World components. |
 | [ServerEventPayloads](interfaces/ServerEventPayloads.md) | See [the augmentation example](interfaces/GraphEventPayloads.md) — augment this interface the same way to narrow `server.*` payloads. |
 | [ToastMessageOptions](interfaces/ToastMessageOptions.md) | Defines message options in Toast component. Passed to [toast.show](variables/toast.md#show) / [toast.remove](variables/toast.md#remove) to surface a transient message to the user. |
 | [ToolbarButtonExtension](interfaces/ToolbarButtonExtension.md) | Public arg type for [defineToolbarButton](functions/defineToolbarButton.md). A button that appears in the action bar (top of the canvas area). Wraps the v1 `extension.actionBarButtons[]` shape with an `id` so each registration is independently disposable. |
@@ -105,7 +105,7 @@ re-export — and is the explicit exception documented in AGENTS.md.
 | [ToastManager](type-aliases/ToastManager.md) | - |
 | [Unsubscribe](type-aliases/Unsubscribe.md) | Cleanup function returned by `on()` — call to remove the listener. |
 | [WidgetCleanup](type-aliases/WidgetCleanup.md) | Cleanup function returned from a widget's `mount()`. Fires exactly once, when the widget entity is destroyed. **Does NOT fire on host remount** (<a href="/api-docs/graph" class="wiki-link">graph</a>↔app mode, subgraph promotion, `<KeepAlive>` shuffle) — use [WidgetMountContext.onBeforeRemount](interfaces/WidgetMountContext.md#onbeforeremount) / [WidgetMountContext.onAfterRemount](interfaces/WidgetMountContext.md#onafterremount) for those. |
-| [WidgetMountFn](type-aliases/WidgetMountFn.md) | Mount function for a widget. Called once when the widget is first attached to a node host in the DOM. Returns an optional cleanup function that fires on widget destruction. |
+| [WidgetMountFn](type-aliases/WidgetMountFn.md) | <a href="/glossary#mount" class="wiki-link">Mount</a> function for a widget. Called once when the widget is first attached to a node host in the DOM. Returns an optional cleanup function that fires on widget destruction. |
 | [WidgetValue](type-aliases/WidgetValue.md) | The union of all legal widget scalar values. Complex widgets (DOM, canvas) may return their own serializable shapes. |
 
 ## Variables

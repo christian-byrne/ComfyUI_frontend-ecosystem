@@ -49,6 +49,6 @@ export default defineWidget({
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="mount"></a> `mount?` | [`WidgetMountFn`](./widgetmountfn) | Mount lifecycle hook — the **sole** DOM seam per Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a>. Called once per widget instance when the widget is first attached to its node host in the DOM. May return a `WidgetCleanup` function that fires on widget destruction (host remount does NOT fire cleanup; see `WidgetMountContext.onBeforeRemount` / `onAfterRemount`). Omit entirely for value-only widgets that need no custom DOM. **Stability** experimental |
+| <a id="mount"></a> `mount?` | [`WidgetMountFn`](./widgetmountfn) | <a href="/glossary#mount" class="wiki-link">Mount</a> lifecycle hook — the **sole** DOM seam per Axiom <a href="/axioms#a12-refs" class="wiki-link">A12</a>. Called once per widget instance when the widget is first attached to its node host in the DOM. May return a `WidgetCleanup` function that fires on widget destruction (host remount does NOT fire cleanup; see `WidgetMountContext.onBeforeRemount` / `onAfterRemount`). Omit entirely for value-only widgets that need no custom DOM. **Stability** experimental |
 | <a id="name"></a> `name` | `string` | Globally unique extension name. |
-| <a id="type"></a> `type` | `string` | Widget type string this extension provides (e.g. `'COLOR_PICKER'`). |
+| <a id="type"></a> `type` | `string` | <a href="/glossary#widget" class="wiki-link">Widget</a> type string this extension provides (e.g. `'COLOR_PICKER'`). |

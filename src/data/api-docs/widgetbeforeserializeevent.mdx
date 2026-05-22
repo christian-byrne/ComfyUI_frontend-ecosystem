@@ -22,7 +22,7 @@ Call `event.setSerializedValue(v)` to override what is written. Do not
 call it to pass through the widget's current `getValue()` unchanged.
 
 Per <a href="/axioms#a16-refs" class="wiki-link">A16</a> there is no `skip()` and no `context` discriminator. Per <a href="/axioms#a15-refs" class="wiki-link">A15</a>
-(Widget Declarativity) there is no way to exclude a widget from
+(<a href="/glossary#widget" class="wiki-link">Widget</a> Declarativity) there is no way to exclude a widget from
 serialization — if a widget should not contribute to the payload, it
 should not be a widget (use a boxed widget, a non-widget UI primitive,
 or a schema input).
