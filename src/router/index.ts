@@ -184,13 +184,22 @@ export const router = createRouter({
   scrollBehavior(to, _from, savedPosition) {
     // Browser back/forward — restore exact scroll position.
     if (savedPosition) return savedPosition
+    // W19.P4.B — honor `prefers-reduced-motion`. Smooth-scroll causes
+    // vestibular discomfort for some users; the OS-level pref is the
+    // standard signal. `window.matchMedia` is undefined under jsdom /
+    // unit tests, so guard for that too.
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const behavior: ScrollBehavior = prefersReducedMotion ? 'auto' : 'smooth'
     // Hash navigation — scroll to the element with the matching id.
     // Offset 80px clears the sticky header (~64px) with a little breathing room.
     if (to.hash) {
       return {
         el: to.hash,
         top: 80,
-        behavior: 'smooth'
+        behavior
       }
     }
     // Otherwise — scroll to top on route change.

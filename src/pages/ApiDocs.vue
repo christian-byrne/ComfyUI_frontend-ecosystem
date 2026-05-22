@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import PlannedBadge from '@/components/PlannedBadge.vue'
 import { ensureHighlighter, highlightCode } from '@/composables/useHighlighter'
+import { sanitizeHtml } from '@/lib/sanitizeHtml'
 import {
   getAffectedRepos,
   getBlastRadiusBg,
@@ -132,7 +133,11 @@ const renderedBody = computed<string>(() => {
   )
   const html = marked.parse(rewritten) as string
   // Post-process to hyperlink type names in inline code elements
-  return hyperlinkTypeNames(html, currentSlug.value)
+  // W19.P4.A — DOMPurify guard on v-html. TypeDoc output is trusted
+  // today (in-tree), but sanitizing here means a future build that
+  // pulls in external `.mdx` (e.g. from third-party node packs) stays
+  // safe without a second-pass code change.
+  return sanitizeHtml(hyperlinkTypeNames(html, currentSlug.value))
 })
 
 const totalPages = apiDocPages.length

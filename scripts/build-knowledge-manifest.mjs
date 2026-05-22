@@ -59,14 +59,35 @@ function extractStatusDate(body) {
   return m ? m[1] : null
 }
 
+/**
+ * W19.P4.C — ambiguity-resolution warnings. Builder-time collector that
+ * surfaces every wiki-link / backlink token where the prefix match was
+ * non-unique. Prior behaviour silently picked the first hit (`.find()`),
+ * so `D14` in a header could resolve to either D14-serialization-convergence
+ * or D14-widget-state-categories depending on filesystem order. The
+ * warnings render at the end of `node scripts/build-knowledge-manifest.mjs`
+ * and never fail the build (warn-only, mirrors the W18.K / W19.P1 posture
+ * for the wiki-linker).
+ *
+ * Shape: `{ token, candidates: string[], picked: string, sourceSlug: string,
+ *         field: 'supersedes' | 'superseded-by' | 'body' }`.
+ */
+const ambiguityWarnings = []
+
 /** Best-effort `**Supersedes**: D...` / `**Superseded by**: D...` extraction.
  *
  * Matches the canonical bold-prefix line and also tolerates compound headers
  * like `**Supersedes / extends**:`. For each `D<n>` or `D-<name>` token in
  * the value, resolves to a known slug — preferring an exact match, then a
  * prefix match (so `D7 Part 4` resolves to `d7-widget-shape-and-persistence`).
+ *
+ * W19.P4.C — when the prefix match has more than one candidate (e.g. `D14`
+ * matches both `d14-serialization-convergence` and `d14-widget-state-categories`),
+ * the function records an entry in `ambiguityWarnings` so the conflict
+ * surfaces at build time. Resolution still picks the first lexicographic
+ * candidate to keep output stable across machines.
  */
-function extractAdrRefList(body, headerKey, knownSlugs) {
+function extractAdrRefList(body, headerKey, knownSlugs, sourceSlug = '', field = 'supersedes') {
   const re = new RegExp(`^\\*\\*${headerKey}(?:\\s*/[^*]+)?\\*\\*:\\s*(.+?)\\s*$`, 'm')
   const m = body.match(re)
   if (!m) return []
@@ -78,11 +99,17 @@ function extractAdrRefList(body, headerKey, knownSlugs) {
       refs.add(token)
       continue
     }
-    // Prefix match — first known slug starting with `<token>-` or `<token>.`.
-    const prefix = [...knownSlugs].find(
-      (s) => s === token || s.startsWith(`${token}-`) || s.startsWith(`${token}.`)
-    )
-    if (prefix) refs.add(prefix)
+    // Prefix match — find ALL known slugs starting with `<token>-` or `<token>.`,
+    // not just the first. Warn if >1 (W19.P4.C).
+    const candidates = [...knownSlugs]
+      .filter((s) => s === token || s.startsWith(`${token}-`) || s.startsWith(`${token}.`))
+      .sort()
+    if (candidates.length === 0) continue
+    const picked = candidates[0]
+    if (candidates.length > 1) {
+      ambiguityWarnings.push({ token, candidates, picked, sourceSlug, field })
+    }
+    refs.add(picked)
   }
   return [...refs].sort()
 }
@@ -163,8 +190,8 @@ const manifest = {
   const known = new Set(manifest.decisions.map((d) => d.slug))
   for (const d of manifest.decisions) {
     const body = readFileSync(join(KNOWLEDGE_DIR, d.path), 'utf8')
-    d.supersedes = extractAdrRefList(body, 'Supersedes', known)
-    d.supersededBy = extractAdrRefList(body, 'Superseded by', known)
+    d.supersedes = extractAdrRefList(body, 'Supersedes', known, d.slug, 'supersedes')
+    d.supersededBy = extractAdrRefList(body, 'Superseded by', known, d.slug, 'superseded-by')
   }
   // Mirror: if A.supersedes contains B but B doesn't list A in supersededBy,
   // fill B.supersededBy. Same in the other direction. Cheap O(n²) cross-link.
@@ -197,12 +224,32 @@ for (const d of manifest.decisions) {
 manifest.axiomIndex = axiomIndex
 
 // Reverse index: ADR → ADRs that reference it.
+//
+// W19.P4.C — surface body-reference ambiguity. If a body token like
+// `D14` doesn't exact-match any slug but prefix-matches >1 (e.g. both
+// `d14-serialization-convergence` and `d14-widget-state-categories`),
+// the current resolution drops it silently. Log so authors notice.
 const adrBacklinks = {}
+const knownSlugSet = new Set(manifest.decisions.map((d) => d.slug))
 for (const d of manifest.decisions) {
   for (const ref of d.adrs) {
     if (manifest.decisions.some((other) => other.slug === ref)) {
       adrBacklinks[ref] ??= []
       adrBacklinks[ref].push(d.slug)
+      continue
+    }
+    // No exact match — check prefix ambiguity.
+    const candidates = [...knownSlugSet]
+      .filter((s) => s.startsWith(`${ref}-`) || s.startsWith(`${ref}.`))
+      .sort()
+    if (candidates.length > 1) {
+      ambiguityWarnings.push({
+        token: ref,
+        candidates,
+        picked: '(unresolved — body ref dropped)',
+        sourceSlug: d.slug,
+        field: 'body'
+      })
     }
   }
 }
@@ -291,3 +338,36 @@ writeFileSync(out, JSON.stringify(manifest, null, 2) + '\n')
 console.log(
   `  ✓ manifest.json (${manifest.decisions.length} ADRs, ${Object.keys(axiomIndex).length} axioms cross-ref'd, ${totalDecisionBacklinks} decision backlinks, ${totalAxiomBacklinks} axiom backlinks)`
 )
+
+// W19.P4.C — emit ambiguity warnings collected during extraction. Warn-only;
+// never fails the build. Output is grouped by `token → candidates` so
+// authors can decide whether to disambiguate the source ADR (rename the
+// reference to a full slug) or to merge the candidate ADRs.
+if (ambiguityWarnings.length > 0) {
+  // Group identical (token, candidates) tuples so duplicate warnings collapse.
+  const byKey = new Map()
+  for (const w of ambiguityWarnings) {
+    const key = `${w.token}::${w.candidates.join(',')}`
+    if (!byKey.has(key)) {
+      byKey.set(key, {
+        token: w.token,
+        candidates: w.candidates,
+        picked: w.picked,
+        sources: new Set()
+      })
+    }
+    byKey.get(key).sources.add(`${w.sourceSlug || '?'}(${w.field})`)
+  }
+  console.warn(
+    `  ⚠ ${byKey.size} ambiguous wiki-link / backlink resolution(s):`
+  )
+  for (const w of byKey.values()) {
+    console.warn(
+      `      "${w.token}" → picked "${w.picked}"; candidates: [${w.candidates.join(', ')}]`
+    )
+    console.warn(`        cited by: ${[...w.sources].sort().join(', ')}`)
+  }
+  console.warn(
+    `      (warn-only; rename the bare \`D14\` reference to the full slug in source to silence)`
+  )
+}

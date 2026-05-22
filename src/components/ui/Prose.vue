@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 import { cn } from '@/lib/cn'
+import { sanitizeHtml } from '@/lib/sanitizeHtml'
 
 /**
  * Prose — long-form markdown / rich-text typography wrapper
@@ -27,7 +28,13 @@ type MaxWidth = 'prose' | 'wide' | 'full'
 
 const props = withDefaults(
   defineProps<{
-    /** Raw HTML to render. Trusted — caller is responsible for sanitization. */
+    /**
+     * Raw HTML to render. Sanitized via DOMPurify before injection
+     * (Wave-19 W19.P4.A). Callers may still pre-sanitize if they
+     * want a strictly typed `TrustedHTML`; this guard is the
+     * belt-and-suspenders so a single forgotten pre-sanitize doesn't
+     * become XSS the day external content lands.
+     */
     html?: string
     /** Apply a serif drop-cap to the first paragraph. */
     dropCap?: boolean
@@ -64,14 +71,18 @@ const wrapperClass = computed(() =>
     props.dropCap && 'prose-comfy--dropcap'
   )
 )
+
+// W19.P4.A — DOMPurify guard on v-html. Cached in a computed so the
+// O(n) sanitize cost amortizes with Vue's reactive cache.
+const safeHtml = computed(() => (props.html ? sanitizeHtml(props.html) : ''))
 </script>
 
 <template>
   <div
-    v-if="html"
+    v-if="safeHtml"
     :class="wrapperClass"
     data-testid="prose"
-    v-html="html"
+    v-html="safeHtml"
   />
   <div v-else :class="wrapperClass" data-testid="prose">
     <slot />

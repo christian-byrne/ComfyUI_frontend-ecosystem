@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { deltaBySurface, PR_REPO, prByNum, surfacesByPr } from '@/data/litegraph-audit-loader'
+import { sanitizeHtml } from '@/lib/sanitizeHtml'
 
 // Configure marked for inline rendering (no <p> wrappers)
 marked.setOptions({ gfm: true, breaks: false })
@@ -61,9 +62,15 @@ const showTitle = computed(() => {
   return !desc.startsWith(title)
 })
 
-/** Render description as markdown (inline, no wrapping <p>) */
+/**
+ * Render description as markdown (inline, no wrapping <p>).
+ *
+ * W19.P4.A — DOMPurify guard. PR descriptions are user-authored
+ * content from GitHub, so this is the highest-risk v-html site in
+ * the dashboard (third-party text). Sanitize at render time.
+ */
 function renderDescription(desc: string): string {
-  return marked.parseInline(desc) as string
+  return sanitizeHtml(marked.parseInline(desc) as string)
 }
 </script>
 

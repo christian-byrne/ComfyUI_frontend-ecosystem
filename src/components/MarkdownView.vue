@@ -4,6 +4,7 @@ import { computed, onMounted, ref } from 'vue'
 import Prose from '@/components/ui/Prose.vue'
 import { ensureHighlighter } from '@/composables/useHighlighter'
 import { useMarkdownWithSlugDedupe } from '@/composables/useMarkdownWithSlugDedupe'
+import { sanitizeHtml } from '@/lib/sanitizeHtml'
 
 const { source, prose = false } = defineProps<{
   source: string
@@ -31,7 +32,10 @@ const { render } = useMarkdownWithSlugDedupe()
 const html = computed(() => {
   // touch `ready` so the computed re-runs after the highlighter loads
   void ready.value
-  return render(source)
+  // W19.P4.A — DOMPurify guard on v-html. In-tree markdown is trusted
+  // today; the sanitizer is wired so external content can flip safely
+  // without a scramble. Cost amortizes through the computed cache.
+  return sanitizeHtml(render(source))
 })
 </script>
 
