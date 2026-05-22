@@ -48,3 +48,72 @@ describe('MarkdownView heading id dedupe (W18.N)', () => {
     expect(html).toContain('id="consequences"')
   })
 })
+
+describe('MarkdownView heading id dedupe — W19.A11 regression coverage', () => {
+  // Wave-19 W19.A11 — deeper regression around the W18.M production bug
+  // (DrJKL noticed `### Action Items` collided 6× on D13-ecs-alignment-audit).
+  it('generates unique ids for 6 identical "### Action Items" headings', () => {
+    const source = Array.from({ length: 6 })
+      .map((_, i) => `### Action Items\n\nbody-${i}`)
+      .join('\n\n')
+    const wrapper = mount(MarkdownView, { props: { source } })
+    const html = wrapper.html()
+    const expected = [
+      'id="action-items"',
+      'id="action-items-1"',
+      'id="action-items-2"',
+      'id="action-items-3"',
+      'id="action-items-4"',
+      'id="action-items-5"'
+    ]
+    for (const id of expected) {
+      expect(html, `should contain ${id}`).toContain(id)
+    }
+    // Each id appears exactly once.
+    for (const id of expected) {
+      const matches = html.match(new RegExp(id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) ?? []
+      expect(matches.length, `${id} should be unique`).toBe(1)
+    }
+    // No 7th index (no `action-items-6`) — only 6 headings, last should be -5.
+    expect(html).not.toContain('id="action-items-6"')
+  })
+
+  it('generates valid kebab-case id for heading with unicode + special chars', () => {
+    // Current slugify (MarkdownView.vue): `.replace(/[^\w\s-]/g, '')` strips
+    // unicode + punctuation (JS \w without /u flag = [A-Za-z0-9_]); spaces
+    // collapse to `-`. So `### Hé éé! Foo & Bar` → `h-foo-bar`.
+    const wrapper = mount(MarkdownView, {
+      props: { source: '### Hé éé! Foo & Bar' }
+    })
+    const html = wrapper.html()
+    const idMatch = html.match(/<h3 id="([^"]+)"/)
+    expect(idMatch, 'h3 should have an id attribute').not.toBeNull()
+    const id = idMatch![1]
+    expect(id.length, 'slug must be non-empty').toBeGreaterThan(0)
+    expect(id, 'slug must be valid kebab-case (a-z, 0-9, -)').toMatch(/^[a-z0-9-]+$/)
+    // No leading/trailing/double hyphens for this input.
+    expect(id).not.toMatch(/^-|-$|--/)
+  })
+
+  it('dedupe Map resets across mount/unmount/remount cycle', () => {
+    // The slugCounts Map is module-scoped but reassigned to `new Map()` at
+    // the start of every `html` computed re-run (see MarkdownView.vue uniqueSlug
+    // comment). A fresh mount triggers a fresh computed, which resets the Map —
+    // so unmount/remount with the same source must produce `action-items`
+    // (NOT `action-items-1`). Regression guard: if anyone tries to "fix" the
+    // Map to per-instance scoping by removing the reset, this catches it.
+    // Conversely, if anyone removes the reset entirely so the Map accumulates
+    // across renders, this also catches it.
+    const source = '### Action Items\n\nbody'
+
+    const w1 = mount(MarkdownView, { props: { source } })
+    expect(w1.html(), 'first mount: base slug').toContain('id="action-items"')
+    expect(w1.html(), 'first mount: no suffix').not.toContain('id="action-items-1"')
+    w1.unmount()
+
+    const w2 = mount(MarkdownView, { props: { source } })
+    expect(w2.html(), 'second mount: base slug (Map was reset)').toContain('id="action-items"')
+    expect(w2.html(), 'second mount: no leaked suffix').not.toContain('id="action-items-1"')
+    w2.unmount()
+  })
+})

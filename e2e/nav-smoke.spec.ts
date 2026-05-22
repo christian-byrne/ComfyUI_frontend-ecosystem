@@ -28,6 +28,7 @@ const STATIC_ROUTES = [
   '/handoff',
   '/decisions',
   '/axioms',
+  '/glossary',
   '/knowledge-graph'
 ] as const
 
@@ -119,6 +120,169 @@ test.describe('Navigation smoke (W18.O)', () => {
     await page.waitForTimeout(800)
     const scrollY = await page.evaluate(() => window.scrollY)
     expect(scrollY, 'scrollBehavior should scroll past origin').toBeGreaterThan(50)
+  })
+
+  // ───────────────────────────────────────────────────────────────
+  // W19.A4 — Derived-theorems section on /axioms.
+  // ───────────────────────────────────────────────────────────────
+  test('axioms: derived-theorems section visible + ADR chip navigates', async ({
+    page
+  }) => {
+    const errors = captureConsoleErrors(page)
+    await page.goto('/axioms')
+    await expect(page.locator('h1').first()).toBeVisible()
+    const theoremSection = page.getByTestId('theorems')
+    await expect(theoremSection).toBeVisible({ timeout: 10_000 })
+    // At least one theorem card renders.
+    const firstCard = page.getByTestId('theorem-card').first()
+    await expect(firstCard).toBeVisible()
+    // Each card carries at least one ADR link in its consequence chips.
+    const firstAdrChip = firstCard
+      .getByTestId('theorem-adrs')
+      .locator('a')
+      .first()
+    await expect(firstAdrChip).toBeVisible()
+    const href = await firstAdrChip.getAttribute('href')
+    expect(href, 'theorem ADR chip must target /decisions/<slug>').toMatch(
+      /^\/decisions\//
+    )
+    await firstAdrChip.click()
+    await expect(page).toHaveURL(new RegExp(href!.replace(/[/]/g, '\\/') + '$'))
+    // ADR detail page renders h1.
+    await expect(page.locator('h1').first()).toBeVisible({ timeout: 10_000 })
+    expect(errors, 'console errors on theorems → ADR navigation').toEqual([])
+  })
+
+  // ── Wave-19 W19.A11 — deeper deep-link regression coverage ─────────
+  // Targets DrJKL's specific complaint pattern: dedupe slugs (W18.M),
+  // scrollBehavior (W18.A), and chip→`-refs` alignment (W18.B) tested
+  // against real ADR/axiom content rather than synthetic fixtures.
+
+  test('W19.A11: /decisions/d13-ecs-alignment-audit#action-items deep-link + DecisionDetail dedupe gap', async ({
+    page
+  }) => {
+    // Wave-19 W19.A11 finding (real production bug, kept un-fixed per
+    // W19.A11 worker-prompt instruction "document but don't fix"):
+    // DecisionDetail.vue registers its OWN `marked` renderer with a
+    // stateless `slugify()` — the W18.M dedupe fix only landed in
+    // MarkdownView.vue. So on D13 (which has `### Action Items` 6× and
+    // `### Impact on Extension API` 4×) all repeated headings emit the
+    // SAME `id="action-items"`, producing invalid HTML and breaking
+    // hash-links #action-items-1..#action-items-5.
+    //
+    // This test asserts the CURRENT (buggy) behavior so it acts as a
+    // regression guard for both directions:
+    //   (a) if someone backports the W18.M dedupe to DecisionDetail.vue,
+    //       `#action-items-1` will appear → this test will fail loudly →
+    //       update the test to assert the new correct behavior.
+    //   (b) if the page somehow stops emitting `id="action-items"` at
+    //       all, this test fails too.
+    //
+    // Follow-up: file an issue to extract slugify+dedupe into a shared
+    // composable used by all three marked-using pages (MarkdownView,
+    // DecisionDetail, Axioms, ApiDocs).
+    await page.goto('/decisions/d13-ecs-alignment-audit#action-items')
+    await expect(page.locator('h1').first()).toBeVisible({ timeout: 10_000 })
+    await page.waitForTimeout(1200)
+    // Exactly one element is reachable via #action-items (the first one).
+    const firstActionItems = page.locator('h3#action-items').first()
+    await expect(firstActionItems, 'first #action-items h3 must exist').toBeVisible({
+      timeout: 5_000
+    })
+    expect(
+      await firstActionItems.evaluate((el) => {
+        const r = el.getBoundingClientRect()
+        return r.top >= -50 && r.top < window.innerHeight
+      }),
+      'first h3#action-items should be in viewport after scrollBehavior'
+    ).toBe(true)
+    // Document the gap: the dedupe-suffix anchors should exist but DON'T.
+    // When DecisionDetail.vue gains dedupe, this expectation flips to >= 5.
+    const dedupedCount = await page.locator('h3[id^="action-items-"]').count()
+    expect(
+      dedupedCount,
+      'DecisionDetail.vue currently lacks dedupe (W18.M gap) — 0 suffixed ids until fixed'
+    ).toBe(0)
+    // And there are 6 duplicate-id elements (invalid HTML, real bug).
+    const duplicateCount = await page.locator('h3#action-items').count()
+    expect(duplicateCount, 'D13 emits 6 duplicate id="action-items" h3s (real bug)').toBe(6)
+  })
+
+  test('W19.A11: /axioms#a12-refs puts A12 axiom card into viewport', async ({ page }) => {
+    // The axioms page renders a card per axiom with `<h3 id="aN-refs">`.
+    // Spec called for `#a12-mount-lifecycle-as-the-sole-dom-seam`, but the
+    // page's actual canonical anchor for A12 is `#a12-refs` (see
+    // src/pages/Axioms.vue card chrome). Use the real anchor — same
+    // invariant: deep link → MarkdownView/Prose-rendered heading scrolls
+    // into view via the router's scrollBehavior (W18.A).
+    await page.goto('/axioms#a12-refs')
+    await expect(page.locator('h1').first()).toBeVisible({ timeout: 10_000 })
+    const a12 = page.locator('h3#a12-refs')
+    await expect(a12, 'A12 axiom card h3 must exist').toBeVisible({ timeout: 10_000 })
+    await page.waitForTimeout(800)
+    expect(
+      await a12.evaluate((el) => {
+        const r = el.getBoundingClientRect()
+        return r.top >= 0 && r.top < window.innerHeight
+      }),
+      'h3#a12-refs should be in viewport after scrollBehavior fired'
+    ).toBe(true)
+  })
+
+  test('W19.A11: in-content axiom cross-link scrolls hash + target into viewport', async ({
+    page
+  }) => {
+    // No ADR in the synced knowledge currently contains an in-body
+    // `[A12](#a12-...)` markdown link (verified via grep over
+    // src/data/knowledge/). Per W19.A11 spec note, scaffold against the
+    // known-stable `/axioms` "Related:" cross-ref chips, which are
+    // in-content links from inside one axiom card → another axiom card
+    // anchor. Tests the same invariant the spec named: click an in-content
+    // cross-link → hash updates → target scrolls into viewport.
+    await page.goto('/axioms')
+    await expect(page.locator('h1').first()).toBeVisible({ timeout: 10_000 })
+    // Find the first cross-ref chip inside any axiom card.
+    const xref = page.locator('[data-testid="axiom-xrefs"] a[href*="/axioms#a"]').first()
+    await expect(xref, 'at least one axiom card must expose a Related: cross-ref').toBeVisible({
+      timeout: 10_000
+    })
+    const href = await xref.getAttribute('href')
+    expect(href, 'cross-ref chip must target /axioms#aN-refs').toMatch(/\/axioms#a\d+-refs$/)
+    const targetId = href!.split('#')[1]
+    await xref.click()
+    await expect(page).toHaveURL(new RegExp(`#${targetId}$`))
+    // Smooth scroll across a long page (A14→A1 etc.) needs ~1.5s.
+    await page.waitForTimeout(1800)
+    const target = page.locator(`h3#${targetId}`)
+    await expect(target, `${targetId} target h3 must exist`).toBeVisible()
+    expect(
+      await target.evaluate((el) => {
+        const r = el.getBoundingClientRect()
+        return r.top >= -100 && r.top < window.innerHeight
+      }),
+      `${targetId} should be in viewport after click + scrollBehavior`
+    ).toBe(true)
+  })
+
+  // ───────────────────────────────────────────────────────────────
+  // W19.A3 — Glossary page renders ≥14 terms as h2.
+  // ───────────────────────────────────────────────────────────────
+  test('glossary: ≥14 term h2 headings render', async ({ page }) => {
+    const errors = captureConsoleErrors(page)
+    const resp = await page.goto('/glossary')
+    expect(resp?.status(), 'HTTP status for /glossary').toBeLessThan(400)
+    await expect(page.locator('h1').first()).toBeVisible({ timeout: 10_000 })
+    // Wait for MarkdownView to flush the parsed body so h2 ids exist.
+    const h2 = page.locator(
+      'article[data-testid="glossary-content"] h2'
+    )
+    await expect(h2.first()).toBeVisible({ timeout: 10_000 })
+    const count = await h2.count()
+    expect(
+      count,
+      'glossary must publish ≥14 Capitalized Terms of Art (W19.A3 baseline)'
+    ).toBeGreaterThanOrEqual(14)
+    expect(errors, 'console errors on /glossary').toEqual([])
   })
 
   test('decision → axiom chip navigates to /axioms#a*-refs', async ({ page }) => {
