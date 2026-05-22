@@ -4,25 +4,41 @@
 
 Logged but not actioned — will pick up after Slack-feedback approval pass.
 
-### Wave-19 polish (Phase-A-safe, do anytime)
+### Wave-19 Slack-feedback absorption — SHIPPED 2026-05-21 PM
+
+**Status**: ✅ A1+A2, A3, A4, A6, A7, A8, A9, A10, A11 all shipped. A5 was DENIED by user (classical-scroll viz skipped). Final dashboard HEAD CI green; 27/27 live-Vercel e2e (up from 21).
+
+- [x] W19.A1+A2 — AXIOMS.md compressed 540→412 lines (24% reduction). Austin preamble added at top (3-line Postel's-law contract). Rationale extracted into 9 ADRs (`decisions/D-axiom-A{1,2,4,5,6,12,13,15,16}-rationale.md`). Coverage matrix at `research/wave-19-axiom-coverage-matrix.md`. 7/7 axiom checks pass; 359 cross-refs intact.
+- [x] W19.A3 — `docs/glossary.md` (26 terms) + dashboard `/glossary` route + `wiki-link-mdx.mjs` extension + nav-smoke e2e. Dashboard commit `3029f70`.
+- [x] W19.A4 — 8 derived theorems published at `axioms-theorems.md` + rendered as cards on dashboard `/axioms` page below axiom index. Dashboard commit `70a77ae`. +5 Axioms.test.ts cases.
+- [x] W19.A6 — A12 "What this changes for you" paragraph added to AXIOMS.md (frames `widget.element`/`widget.inputEl` removal as handle-accessor-only change). Inline in AXIOMS.md.
+- [x] W19.A7 — A12 "Remount vs Recreate" glossary subsection added to AXIOMS.md distinguishing host-remount (same instance) from widget-recreate (fresh instance from spec).
+- [x] W19.A8 — `provide()`/`inject()` references reworded across AXIOMS.md (A10 + A14:`getWidget` row) — now explicit "framework-internal mechanism, NOT extension-author API".
+- [x] W19.A9 — `decisions/D-unify-widget-mount-model.md` PROPOSED (246 lines). Phase B blocker — flips ACCEPTED on PR #11939 merge.
+- [x] W19.A10 — `decisions/D-widget-promotion-semantics.md` PROPOSED. Phase B blocker — flips ACCEPTED with W19.A9. Theorem 6 (Value Promotion Impossibility) derivation chain.
+- [x] W19.A11 — +3 vitest cases (slug dedupe edge cases) + +3 e2e cases (deep-link nav). 321 vitests / 27 e2e all green locally + live Vercel. Dashboard commit `9f2a656`. Surfaced real bug: DecisionDetail.vue has its own stateless `marked` renderer (W18.M dedupe only landed in MarkdownView.vue); documented in commit + test JSDoc as follow-up.
+- DENIED: W19.A5 (classical-scroll viz) — user denied; current design preserved.
+
+### Wave-19 polish (Phase-A-safe, deferred to next wave)
 
 - [ ] W19.P1 — **Strict idempotence for `scripts/wiki-link.mjs` (W18.K follow-up)**. Converges in 2 runs today; first run added 695 links, second run modified 9 more (slug-alias overlap like `D14` vs `D14-foo`). Make cap-counter strictly idempotent so sync.sh doesn't churn 40+ files on every run. ~30m.
 - [ ] W19.P2 — **Adopt `marked-gfm-heading-id` plugin** (research/dashboard-nav-audit-2026-05-21.md Fix 3). Replaces hand-rolled `slugify()` + module-level dedupe Map from W18.M with the maintained plugin. Net code reduction; subsumes the W18.N P0 BLOCKER fix. ~45m.
 - [ ] W19.P3 — **Dashboard 404 catch-all route** (research/dashboard-nav-audit-2026-05-21.md Fix 4). Add `:pathMatch(.*)*` + `pages/NotFound.vue`. ~30m.
 - [ ] W19.P4 — **Adversarial-review SHIP-WITH-FOLLOWUPS** (research/wave-18-adversarial-review.md final 4):
-  - [ ] W19.P4.A — DOMPurify guard on `v-html` sites (`Prose.vue:30`, `MarkdownView.vue:37`, `Axioms.vue:100`, `DecisionDetail.vue:121`). Currently low-risk (sole-contributor, in-tree MD); flip to P0 the moment any external content source is added. ~45m.
-  - [ ] W19.P4.B — Honor `prefers-reduced-motion` in router `scrollBehavior` (`src/router/index.ts:171`). ~15m.
+  - [ ] W19.P4.A — DOMPurify guard on `v-html` sites. ~45m.
+  - [ ] W19.P4.B — Honor `prefers-reduced-motion` in router `scrollBehavior`. ~15m.
   - [ ] W19.P4.C — Warn on ambiguous wiki-link / backlink resolution in `scripts/build-knowledge-manifest.mjs`. ~30m.
+- [ ] W19.P5 (NEW from W19.A11 surface bug) — **Extract shared markdown-rendering composable**. DecisionDetail.vue currently has its own stateless `marked` setup; doesn't get W18.M slug-dedupe. Refactor: extract `useMarkdownWithSlugDedupe()` composable, use in both MarkdownView + DecisionDetail. ~1h. Closes the W19.A11 documented gap.
 
 ### Wave-19 follow-ups carried from OP (Christian's first Slack message)
 
 Source: <https://comfyui-frontend-ecosystem.vercel.app/api-docs> Slack thread, 2026-05-21 8:02 PM.
 
-- [ ] W19.OP1 — **Migrate 3rd-party extensions**. After W16.P1 core migrations land. Needs strategy: which packs to target first (top 5 by consumer count per `research/meta/back-propagation-matrix.yaml`), migration playbook/recipe, support matrix. ~ scoped at decision time.
-- [ ] W19.OP2 — **Virtual widgets handling/migration**. Easier than virtual nodes — pre-established patterns exist. Sometimes overlaps with W16.P1 (e.g., audio widget). Audit `ComfyUI_frontend/src/` for current virtual-widget sites, ADR `D-virtual-widget-disposition.md`, then migrate. ~6h spread across audit + ADR + impl + tests.
-- [ ] W19.OP3 — **Refine W16.P2 scope (virtual nodes)** with Christian's updated framing: "we shouldn't have any. Possibly fully deprecate old reroutes in Vue Nodes mode. Convert primitives to frontend-only that are instantiated with a copy of current state of source (not much changes really)." Update `decisions/D-reroute-primitive-real-backend-migration.md` draft + W16.P2.B/C/D acceptance criteria.
+- [ ] W19.OP1 — **Migrate 3rd-party extensions**. After W16.P1 core migrations land.
+- [ ] W19.OP2 — **Virtual widgets handling/migration**.
+- [ ] W19.OP3 — **Refine W16.P2 scope (virtual nodes)** with Christian's updated framing.
 
-### Wave-19 Slack-feedback absorption (DrJKL + Austin + Christian, 2026-05-21)
+### Wave-19 dispatch detail (superseded by SHIPPED checklist above — kept for traceability)
 
 Approved actionables from Slack thread `https://comfy-organization.slack.com/archives/C09TX71RK5F/p1774736219050719`-adjacent (frontend-ecosystem channel, 2026-05-21 12:48 PM–3:07 PM). Approvals locked by Christian 2026-05-21 PM. Phase A frozen at foundation `24d893d401`; all Wave-19 work below is JSDoc/markdown/test/dashboard-only OR proposes Phase B ADRs that flip ACCEPTED on #11939 merge.
 

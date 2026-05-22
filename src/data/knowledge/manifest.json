@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T00:32:03.350Z",
+  "generatedAt": "2026-05-22T00:33:13.049Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -2897,6 +2897,7 @@
       ],
       "adrs": [
         "d-api-surface-finalization",
+        "d-axiom-a",
         "d-axiom-an-rationale",
         "d-axiom-n-rationale",
         "d-bootstrap-hooks",
@@ -2923,7 +2924,6 @@
         "d-unify-widget-mount-model",
         "d-uwf",
         "d-uwf-drafting-board",
-        "d-virtual-widget-disposition",
         "d-widget-converge",
         "d-widget-converge-blast-radius",
         "d-widget-identity-props",
@@ -3019,6 +3019,7 @@
         "delete",
         "delete-now",
         "deleted",
+        "denied",
         "density",
         "dep-1",
         "dep-3",
@@ -3113,7 +3114,7 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 249020,
+      "bytes": 250569,
       "path": "root/todo.md"
     }
   ],
