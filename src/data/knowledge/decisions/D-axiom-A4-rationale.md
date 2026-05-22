@@ -1,14 +1,14 @@
-# ADR: <a href="/axioms#a4-refs" class="wiki-link">A4</a> Rationale — ID Strategy (Abstract Handles)
+# ADR: A4 Rationale — ID Strategy (Abstract Handles)
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
+**Wave**: W19.A1+A2 (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A4` (lines 71–79 of the pre-W19 540-line version)
 
 ## Context
 
 `AXIOMS.md §A4` carried both the postulate (extension authors should never
-need raw IDs) and a deferred-discussion note ("Locator IDs vs <a href="/api-docs/execution" class="wiki-link">execution</a> IDs
+need raw IDs) and a deferred-discussion note ("Locator IDs vs execution IDs
 need further discussion").
 
 ## Decision
@@ -25,7 +25,7 @@ ID exposure is a stability foot-gun. Once an extension stores an ID, the
 runtime owes the extension that any future ID stays stable across:
 
 - Workflow save/load round-trips
-- <a href="/glossary#subgraph" class="wiki-link">Subgraph</a> promotion and demotion
+- Subgraph promotion and demotion
 - Linked-instance clones
 - Undo/redo state restoration
 - Collaborative edits (CRDT merge)
@@ -36,20 +36,20 @@ to renumber, restructure, or clone, the handle indirection absorbs the
 change without the extension ever observing it.
 
 `D20-id-type-convergence.md` covers the internal ID type system (the
-runtime's side); <a href="/axioms#a4-refs" class="wiki-link">A4</a> covers the extension-facing surface (no raw IDs at the
+runtime's side); A4 covers the extension-facing surface (no raw IDs at the
 boundary).
 
 ### Open questions (deferred)
 
-- **Locator IDs vs <a href="/api-docs/execution" class="wiki-link">execution</a> IDs** — pre-W19 §<a href="/axioms#a4-refs" class="wiki-link">A4</a> flagged that distinguishing
+- **Locator IDs vs execution IDs** — pre-W19 §A4 flagged that distinguishing
   identifiers used for *finding* an entity from identifiers used at
-  *<a href="/api-docs/execution" class="wiki-link">execution</a> time* needs further discussion. Tracked as a Phase B follow-up
+  *execution time* needs further discussion. Tracked as a Phase B follow-up
   alongside `D20-id-type-convergence.md`.
 
 ### Scope-managed handles
 
 Auto-disposal is a critical part of A4. A handle that outlives its scope is
-a leak that violates <a href="/axioms#a9-refs" class="wiki-link">A9</a> (least privilege). The intended pattern:
+a leak that violates A9 (least privilege). The intended pattern:
 
 ```ts
 // Inside an extension's setup function:
@@ -59,7 +59,7 @@ const widget = ctx.useWidget(...)
 ```
 
 This means extension authors never have to remember to "release" a handle;
-the scope <a href="/api-docs/graph" class="wiki-link">graph</a> does it.
+the scope graph does it.
 
 ## Consequences
 

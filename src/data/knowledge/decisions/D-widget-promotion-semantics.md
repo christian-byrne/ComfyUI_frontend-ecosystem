@@ -1,17 +1,17 @@
-# <a href="/decisions/D-widget-promotion-semantics" class="wiki-link">D-widget-promotion-semantics</a> — widget promotion creates a new <a href="/glossary#topology" class="wiki-link">Topology</a> entity, not a <a href="/glossary#value" class="wiki-link">Value</a> mutation
+# D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation
 
-- **Status**: PROPOSED — 2026-05-21 (wave-19, W19.<a href="/axioms#a10-refs" class="wiki-link">A10</a>). Flips to **ACCEPTED** when PR #11939 (Alex's ECS branch) merges AND W19.<a href="/axioms#a9-refs" class="wiki-link">A9</a> (`D-unify-widget-mount-model`) is ACCEPTED. Composability gate prevents single-step landings.
+- **Status**: PROPOSED — 2026-05-21 (wave-19, W19.A10). Flips to **ACCEPTED** when PR #11939 (Alex's ECS branch) merges AND W19.A9 (`D-unify-widget-mount-model`) is ACCEPTED. Composability gate prevents single-step landings.
 - **Decider:** Christian (user direction; Slack agreement — see §Rationale)
 - **Wave:** 19
-- **Axioms cited:** <a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric), <a href="/axioms#a4-refs" class="wiki-link">A4</a> (ID strategy — abstract handles, IDs auto-dispose with scope), <a href="/axioms#a5-refs" class="wiki-link">A5</a> (3-tier widget state — <a href="/glossary#schema" class="wiki-link">Schema</a> immutable), <a href="/axioms#a7-refs" class="wiki-link">A7</a> (canonical workflow model — Topology operations produce reversible commands), <a href="/axioms#a11-refs" class="wiki-link">A11</a> (ECS principles — entities are IDs, components plain data)
-- **Composes-with:** W19.<a href="/axioms#a9-refs" class="wiki-link">A9</a> (`D-unify-widget-mount-model.md` — unified mount + this ADR together replace the current "widget becomes node" promotion code path)
+- **Axioms cited:** A1 (widget-centric), A4 (ID strategy — abstract handles, IDs auto-dispose with scope), A5 (3-tier widget state — Schema immutable), A7 (canonical workflow model — Topology operations produce reversible commands), A11 (ECS principles — entities are IDs, components plain data)
+- **Composes-with:** W19.A9 (`D-unify-widget-mount-model.md` — unified mount + this ADR together replace the current "widget becomes node" promotion code path)
 - **Supersedes:** none (this is a NEW semantic for promotion; current implementation is documented but not codified as an ADR — see §Context)
 - **Related:**
-  - `decisions/D-unify-widget-mount-model.md` (W19.<a href="/axioms#a9-refs" class="wiki-link">A9</a> — composes-with; both ADRs land together at Phase B)
+  - `decisions/D-unify-widget-mount-model.md` (W19.A9 — composes-with; both ADRs land together at Phase B)
   - `decisions/D-no-virtual-nodes-in-api.md` (sister direction — same instinct: stop hiding behavior in "virtual" categories)
   - `decisions/D-immutability-enforcement.md` (Values are immutable references; promotion cannot mutate the source Value)
-  - `axioms-theorems.md` Theorem 6 — *Value <a href="/glossary#promotion" class="wiki-link">Promotion</a> Impossibility* (derives from <a href="/axioms#a4-refs" class="wiki-link">A4</a> + <a href="/axioms#a5-refs" class="wiki-link">A5</a> that promotion CANNOT mutate the source Value, must create a new Topology entity)
-  - `AXIOMS.md` §<a href="/axioms#a1-refs" class="wiki-link">A1</a> §<a href="/axioms#a4-refs" class="wiki-link">A4</a> §<a href="/axioms#a5-refs" class="wiki-link">A5</a> §<a href="/axioms#a7-refs" class="wiki-link">A7</a> §<a href="/axioms#a11-refs" class="wiki-link">A11</a> — premises
+  - `axioms-theorems.md` Theorem 6 — *Value Promotion Impossibility* (derives from A4 + A5 that promotion CANNOT mutate the source Value, must create a new Topology entity)
+  - `AXIOMS.md` §A1 §A4 §A5 §A7 §A11 — premises
 
 ## Context
 
@@ -24,7 +24,7 @@ a node. The Value moves with it.
 This pattern predates the axiom set. Re-examining it against:
 
 - **A4** (Values independent of Topology — implicit in current AXIOMS.md
-  via <a href="/axioms#a11-refs" class="wiki-link">A11</a> ECS principles + the four-layer workflow model of <a href="/axioms#a7-refs" class="wiki-link">A7</a>),
+  via A11 ECS principles + the four-layer workflow model of A7),
 - **A5** (Schema immutable for widget lifetime),
 - **A11** (entities are IDs, components are plain data, no inheritance,
   no implicit mutation),
@@ -36,13 +36,13 @@ that "becomes" a node either:
    the widget's lifetime), OR
 2. Disappears from the widget registry while a new node entity appears
    in the Topology with no causal link to the source Value (which makes
-   undo + linked-instance projection unsafe per <a href="/axioms#a3-refs" class="wiki-link">A3</a> + A7).
+   undo + linked-instance projection unsafe per A3 + A7).
 
 Glary-Bot's W19.A4 *Theorem 6 (Value Promotion Impossibility)* makes
 the impossibility explicit:
 
 > If Values are independent of Topology (A4-equivalent) and Value Schema
-> is immutable (A5), then "promoting" a widget to the <a href="/api-docs/graph" class="wiki-link">graph</a> must create
+> is immutable (A5), then "promoting" a widget to the graph must create
 > new Topology entities, not modify the Value. The current DOM widget
 > promotion pattern (where a widget "becomes" a node) is axiomatically
 > wrong — it must instead create a new node in Topology that references
@@ -51,20 +51,20 @@ the impossibility explicit:
 Christian's Slack agreement (2026-05-21) confirmed direction:
 
 > "you're right that DOM widgets would need to change how they currently
-> work w.r.t. promotion on the <a href="/api-docs/graph" class="wiki-link">graph</a>, would need to look into it a bit
+> work w.r.t. promotion on the graph, would need to look into it a bit
 > more" — Christian Byrne
 
 ## Decision
 
-**<a href="/glossary#widget" class="wiki-link">Widget</a> promotion is a Topology operation that produces a new entity
-holding a <a href="/glossary#reference" class="wiki-link">Reference</a> to the source Value. The source widget is unchanged.**
+**Widget promotion is a Topology operation that produces a new entity
+holding a Reference to the source Value. The source widget is unchanged.**
 
 Concretely:
 
 1. The user invokes "promote widget" on a widget instance.
 2. The runtime issues a `Command.PromoteWidget` (serializable, reversible
-   per <a href="/axioms#a6-refs" class="wiki-link">A6</a> / A7) containing `{sourceValueRef, schemaSlug, targetGraphId}`.
-3. The Command's reducer creates a NEW node entity in the target <a href="/api-docs/graph" class="wiki-link">graph</a>,
+   per A6 / A7) containing `{sourceValueRef, schemaSlug, targetGraphId}`.
+3. The Command's reducer creates a NEW node entity in the target graph,
    pre-populated with a widget instance bound to the same Value
    Reference. The new node's widget reads/writes the same Value.
 4. The source widget remains intact (still rendered, still bound to the
@@ -128,7 +128,7 @@ User right-clicks widget → "Promote"
   the v2 extension-api Command schema. It does NOT change `defineWidget`
   or `defineNode` author-facing APIs.
 - **Undo correctness**: promotion + undo + redo now produces the same
-  end state as a single promotion (idempotent + reversible per <a href="/axioms#a6-refs" class="wiki-link">A6</a>/A7).
+  end state as a single promotion (idempotent + reversible per A6/A7).
   Today, undo of legacy "widget-became-node" is brittle.
 - **Linked-instance correctness**: in a blueprint scenario, the
   promotion projects through clones cleanly because the operation is a
@@ -139,8 +139,8 @@ User right-clicks widget → "Promote"
 
 The current "widget mutates into node" pattern was an implementation
 shortcut from the v1 era when widgets and nodes shared a single OOP
-hierarchy. After <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> (W6.P3) and the ECS-alignment work
-of <a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a>, widgets and nodes are *components on entities*, not
+hierarchy. After D-widget-converge (W6.P3) and the ECS-alignment work
+of D13, widgets and nodes are *components on entities*, not
 inheritance-related objects. There is no shared base class to mutate
 across; the "widget becomes node" pattern requires explicit
 serialize-rehydrate-with-different-schema acrobatics that violate every
@@ -156,18 +156,18 @@ already in axiom form — no fresh ADR discussion required.
 
 1. **Keep mutation, document as escape hatch** — Rejected. The pattern
    has surprising linked-instance behavior and brittle undo. Documenting
-   surprise as "feature" is anti-<a href="/axioms#a8-refs" class="wiki-link">A8</a> (extensibility) and anti-A11 (clean
+   surprise as "feature" is anti-A8 (extensibility) and anti-A11 (clean
    ECS semantics).
 
 2. **Drop promotion entirely** — Rejected. The UX is widely used; users
    expect to promote widgets out of subgraphs.
 
 3. **Promote via copy-paste** — Rejected. Copy-paste is a distinct
-   Command (handled by <a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12-scope-clone-on-copy</a>). Promotion is a
+   Command (handled by D12-scope-clone-on-copy). Promotion is a
    *first-class* user action that deserves its own Command for clarity
    in command-log replay + collaborative-editing scenarios.
 
-4. **Defer indefinitely** — Rejected per user direction (W19.<a href="/axioms#a10-refs" class="wiki-link">A10</a>
+4. **Defer indefinitely** — Rejected per user direction (W19.A10
    approved as PROPOSED ADR in Slack feedback absorption pass,
    2026-05-21).
 

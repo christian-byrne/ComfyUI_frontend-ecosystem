@@ -1,14 +1,14 @@
-# ADR-<a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape
+# ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape
 
 **Status**: accepted (with revisions per 2026-05-08 user review — see "Resolutions" section)
 **Date**: 2026-05-08
 **Last revised**: 2026-05-08 (user review)
-**Supersedes / extends**: <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3 (Events Over Signals), <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.4 (Events and Commands Reconciled)
+**Supersedes / extends**: D3.3 (Events Over Signals), D3.4 (Events and Commands Reconciled)
 **Related cluster**: Reviewer Feedback Cluster C (F6, F8, F9)
 
 ## Context
 
-<a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3 committed to an event/callback model at the extension boundary
+D3.3 committed to an event/callback model at the extension boundary
 (`node.on('executed', fn)`, `widget.getValue()/setValue()`). It explicitly
 deferred two follow-up questions:
 
@@ -66,25 +66,25 @@ type Handler<E extends keyof NodeEvents> = (event: NodeEvents[E]) => void
 Payload interfaces live next to the entity that emits them
 (`NodeEvents` next to `NodeHandle`, `WidgetEvents` next to `WidgetHandle`).
 
-### Part 2 — Ship only `valueChange`; defer non-value channels to <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>
+### Part 2 — Ship only `valueChange`; defer non-value channels to D7
 
 **Revised on user review (2026-05-08).** Original proposal was three separate
 events (`valueChange | optionChange | propertyChange`). User pushback: the
 options-vs-property distinction is confusing and presupposes a widget data
-model that <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> hasn't decided yet.
+model that D7 hasn't decided yet.
 
 **Resolution:**
 
-- <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> ships `valueChange` (the one channel everyone agrees on).
+- D5 ships `valueChange` (the one channel everyone agrees on).
 - The shape, naming, and even existence of non-value change channels is
-  **deferred to <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>** (widget shape & persistence). When D7 lands a coherent
+  **deferred to D7** (widget shape & persistence). When D7 lands a coherent
   data model for "options" vs "properties" vs "extension state", THAT ADR
   decides what events fire on which channel.
 - No `'change'` umbrella event in v1.
 
 | Event             | Source                 | Fired when                  | Status |
 |-------------------|------------------------|-----------------------------|--------|
-| `valueChange`     | `WidgetValue.value`    | user or extension setValue  | ✅ ships in <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> |
+| `valueChange`     | `WidgetValue.value`    | user or extension setValue  | ✅ ships in D5 |
 | (non-value)       | TBD per D7             | TBD per D7                  | 🟡 deferred to D7 |
 
 This keeps D5 unblocked from D7 (good — D5 can land while D7 is still
@@ -105,7 +105,7 @@ revealed three distinct patterns in the wild, not one:
    (`webcamCapture.ts:117`: `btn.serializeValue = () => undefined`).
 3. **Async I/O at serialize time**: side-effecting handler that does
    network I/O and returns a value derived from that I/O
-   (`webcamCapture.ts:120-150`: capture from camera, upload to <a href="/api-docs/server" class="wiki-link">server</a>,
+   (`webcamCapture.ts:120-150`: capture from camera, upload to server,
    return uploaded filename; `load3d.ts`, `uploadAudio.ts` similar).
 
 The event shape must support all three. Final API:
@@ -239,21 +239,21 @@ after)" — a documentation patch, not a semver-minor addition.
 
 ## Open Questions
 
-- **Q5 (UWF, 2026-05-08)** — D5 resolves S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> for the *per-node* serialization case
+- **Q5 (UWF, 2026-05-08)** — D5 resolves S6.A1 for the *per-node* serialization case
   (`node.on('beforeSerialize')`). The *cross-node* case — extensions that intercept
-  `graphToPrompt` to transform the entire workflow <a href="/api-docs/graph" class="wiki-link">graph</a> (virtual node resolution,
+  `graphToPrompt` to transform the entire workflow graph (virtual node resolution,
   cg-useeverywhere auto-wiring, global seed sync) — cannot be expressed through
   `beforeSerialize`. Those patterns require an app-level hook not yet in the API.
   Deferred to **I-UWF.4** (decision: `defineExtension({ onBeforeWorkflowSave })` vs
   `app.on('beforePrompt')` vs out-of-scope). Does not reopen D5; noted here so the
-  S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> cross-reference isn't misread as "fully solved."
+  S6.A1 cross-reference isn't misread as "fully solved."
 
 ## Cross-References
 
 - R4 finding P4 (CONTEXT.md): six distinct `onConnectionsChange` signatures
-- Touch-points DB: S2.N12, S2.N14, S4.W3, S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a>, S2.N6
+- Touch-points DB: S2.N12, S2.N14, S4.W3, S6.A1, S2.N6
 - D3.3 (events over signals)
-- <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a> BLOCKER G7 (mandatory widget dispose) — feeds into beforeUnmount event
+- D4 BLOCKER G7 (mandatory widget dispose) — feeds into beforeUnmount event
 - I-UWF.4 — app-level serialization hook (cross-node case, S6.A1 remainder)
 - P1-comfy-extension-v2-api.md (current proposal that this ADR amends)
 - `research/meta/sourcegraph-mcp-coverage-investigation.md` §Re-audit results

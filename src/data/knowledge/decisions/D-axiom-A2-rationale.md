@@ -1,22 +1,22 @@
-# ADR: <a href="/axioms#a2-refs" class="wiki-link">A2</a> Rationale — Minimal API Surface
+# ADR: A2 Rationale — Minimal API Surface
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
+**Wave**: W19.A1+A2 (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A2` (lines 36–53 of the pre-W19 540-line version)
 
 ## Context
 
 Pre-W19 `AXIOMS.md §A2` carried both the postulate ("start with absolute
 minimum, add by necessity") and a Phase A exclusions checklist that
-duplicates the canonical <a href="/axioms#a14-refs" class="wiki-link">A14</a> table. The Jacob Segal source quote and the
+duplicates the canonical A14 table. The Jacob Segal source quote and the
 "egregious use patterns" heuristic were also there.
 
 ## Decision
 
 Move the Jacob Segal quote and the longer "egregious-use heuristic"
 discussion into this ADR. `AXIOMS.md §A2` keeps the postulate + 3 implication
-bullets + a cross-ref to <a href="/axioms#a14-refs" class="wiki-link">A14</a> for the actual Phase A exclusion list.
+bullets + a cross-ref to A14 for the actual Phase A exclusion list.
 
 ## Rationale
 
@@ -29,12 +29,12 @@ including the workarounds they had to invent because a better surface didn't
 exist yet. A surface that 80% of extensions use today might be 80% workaround
 and 20% legitimate use.
 
-The <a href="/axioms#a2-refs" class="wiki-link">A2</a> heuristic flips the logic: if we observe an "egregious" use pattern
+The A2 heuristic flips the logic: if we observe an "egregious" use pattern
 (monkey-patching, prototype pollution, polling for state), that is a signal
 to **not** expose that surface in v2 — those uses indicate the absence of a
 proper API, not its presence.
 
-The Phase A exclusion list in <a href="/axioms#a14-refs" class="wiki-link">A14</a> (slot/connection hooks, nodeMode, node→widget
+The Phase A exclusion list in A14 (slot/connection hooks, nodeMode, node→widget
 communication) was built by applying this heuristic to the v1 surface.
 
 ### Source quote

@@ -1,4 +1,4 @@
-# <a href="/decisions/D-design-review-hygiene-cleanup" class="wiki-link">D-design-review-hygiene-cleanup</a> — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6
+# D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6
 
 **Status**: ACCEPTED — 2026-05-20 (wave-11 hygiene pass)
 
@@ -21,8 +21,8 @@ sitting outside that three-legged stool:
 | 1 | Comments & Documentation Hygiene | Partial — 25 HR-style section dividers (`// ── XYZ ──`) and ~60 decision-archaeology refs (`D5`, `D20`, `D-immutability-enforcement (Hybrid C)`) in per-export JSDoc across 10 `src/extension-api/*.ts` files | Per CB direction "remove all header/HR style comments, intuition for the rest" — HR dividers not yet stripped; decision refs in JSDoc not yet pared |
 | 2 | `@stability stable` semantics | **Done** — zero `@stability stable` instances in `src/extension-api/`; all surfaces tagged `experimental` | (b) ADR leg missing |
 | 4 | Drop `apiVersion` | **Done** — zero `apiVersion` references in `src/` repo-wide | (b) ADR leg missing |
-| 5 | `defineNode` / `defineWidget` short-form naming | **Done** at exports (<a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> ACCEPTED 2026-05-12) — but **one stale JSDoc example** in `src/extension-api/lifecycle.ts:113,115` still shows `defineWidgetExtension` | Doc residue contradicts <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> |
-| 6 | <a href="/glossary#widget" class="wiki-link">Widget</a>-prefixed methods | **Done** — zero `widgetCreated` / `widgetMounted` / `widgetUnmounted` / `widgetActivated` / `widgetDeactivated` symbols in `src/extension-api/`; the v2 surface uses unprefixed names (`onMounted`, etc., per <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a>) | (b) ADR leg missing |
+| 5 | `defineNode` / `defineWidget` short-form naming | **Done** at exports (D11 ACCEPTED 2026-05-12) — but **one stale JSDoc example** in `src/extension-api/lifecycle.ts:113,115` still shows `defineWidgetExtension` | Doc residue contradicts D11 |
+| 6 | Widget-prefixed methods | **Done** — zero `widgetCreated` / `widgetMounted` / `widgetUnmounted` / `widgetActivated` / `widgetDeactivated` symbols in `src/extension-api/`; the v2 surface uses unprefixed names (`onMounted`, etc., per D-bootstrap-hooks) | (b) ADR leg missing |
 
 Wave-11 closes all three legs for these rows. The two rows requiring
 real code edits (Row #1 + Row #5 stale JSDoc) get the smallest correct
@@ -79,9 +79,9 @@ already-shipped rows so the propagation matrix balances.
 `src/extension-api/lifecycle.ts:113,115` contains a `@example` block
 showing `import { defineWidgetExtension }` and
 `export default defineWidgetExtension({…})`. Both names contradict the
-short-form exports <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> ACCEPTED on 2026-05-12 and the surrounding
+short-form exports D11 ACCEPTED on 2026-05-12 and the surrounding
 function declaration on line 117 (`export declare function
-<a href="/api-docs/definewidget" class="wiki-link">defineWidget</a>(...)`).
+defineWidget(...)`).
 
 Fix: rename to `defineWidget` in the example body. One commit-line
 change; same edit pattern as the wave-10 v2 JSDoc scrub
@@ -99,7 +99,7 @@ surface:
   widgetCreated|widgetMounted|widgetUnmounted` shows 0 hits. The v2
   bootstrap-hooks surface uses unprefixed `onMounted` /
   `onBeforeMount` / `onUnmounted` / `onActivated` / `onDeactivated`
-  per <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a>.
+  per D-bootstrap-hooks.
 
 This ADR is the (b) ADR-leg of the propagation triple for those
 three rows. The (a) commit-leg was the earlier wave that incidentally

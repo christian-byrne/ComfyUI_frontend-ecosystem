@@ -1,13 +1,13 @@
-# ADR: <a href="/axioms#a5-refs" class="wiki-link">A5</a> Rationale — <a href="/glossary#widget" class="wiki-link">Widget</a> State Three-Tier Model
+# ADR: A5 Rationale — Widget State Three-Tier Model
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
+**Wave**: W19.A1+A2 (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A5` (lines 83–99 of the pre-W19 540-line version)
 
 ## Context
 
-Pre-W19 §<a href="/axioms#a5-refs" class="wiki-link">A5</a> carried the postulate (<a href="/glossary#schema" class="wiki-link">Schema</a> + Props + Values), the per-tier
+Pre-W19 §A5 carried the postulate (Schema + Props + Values), the per-tier
 descriptions, and a Christian Byrne source quote about the historical mess
 of widget state.
 
@@ -57,7 +57,7 @@ lookup.
 > decisions."
 > — Christian Byrne, 2026-05-18 design review
 
-This quote is the *reason* <a href="/axioms#a5-refs" class="wiki-link">A5</a> exists as an axiom rather than a convention.
+This quote is the *reason* A5 exists as an axiom rather than a convention.
 The historical-accidents observation is the empirical motivation for
 locking in the three-tier categorization at the axiom level — any future
 "can I just add this one property?" debate has to specify which tier the
@@ -65,15 +65,15 @@ property belongs to.
 
 ### Cross-axiom interaction
 
-- <a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric) — widgets are the unit; A5 specifies the unit's
+- A1 (widget-centric) — widgets are the unit; A5 specifies the unit's
   state model.
-- <a href="/axioms#a12-refs" class="wiki-link">A12</a> (mount-lifecycle DOM seam) — the mount closure sees Schema (frozen),
+- A12 (mount-lifecycle DOM seam) — the mount closure sees Schema (frozen),
   Props (reactive), Values (reactive). The DOM is built against all three
   but is not itself a fourth tier.
-- <a href="/axioms#a15-refs" class="wiki-link">A15</a> (widget declarativity) — Schema's "immutable for lifetime" property
+- A15 (widget declarativity) — Schema's "immutable for lifetime" property
   is what makes "no runtime addWidget" enforceable; if Schema were mutable
   there would be no clean line between "configure" and "create".
-- <a href="/axioms#a16-refs" class="wiki-link">A16</a> (unified serialization target) — Values serialize; Props do not;
+- A16 (unified serialization target) — Values serialize; Props do not;
   Schema is regenerated from `INPUT_TYPES` on the backend side.
   The three-tier model maps cleanly onto the serialization boundary.
 

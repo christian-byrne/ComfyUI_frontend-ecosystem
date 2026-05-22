@@ -1,16 +1,16 @@
-# <a href="/decisions/D-ban-runtime-addwidget" class="wiki-link">D-ban-runtime-addwidget</a> — Enforcement of <a href="/axioms#a15-refs" class="wiki-link">A15</a> (<a href="/glossary#widget" class="wiki-link">Widget</a> Declarativity) on the v1 surface
+# D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface
 
-**Status**: ACCEPTED — 2026-05-20 (wave-10 follow-up to <a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a>)
+**Status**: ACCEPTED — 2026-05-20 (wave-10 follow-up to D-widget-serialization-simplification)
 
 ## Context
 
-**Wave-9 (2026-05-20)** codified **AXIOMS.md <a href="/axioms#a15-refs" class="wiki-link">A15</a> (Widget Declarativity)**:
+**Wave-9 (2026-05-20)** codified **AXIOMS.md A15 (Widget Declarativity)**:
 widgets originate from Python `INPUT_TYPES` declarations. There is no
 runtime widget addition by frontend extensions, and there is no concept of
 a "frontend-only widget."
 
 The v2 surface already complies: `node.addWidget(...)` and
-`node.addDOMWidget(...)` were excluded per the <a href="/axioms#a14-refs" class="wiki-link">A14</a> REMOVED table and the
+`node.addDOMWidget(...)` were excluded per the A14 REMOVED table and the
 v2 `NodeHandle` does not expose either method. However, three loose ends
 remained at the end of wave-9:
 
@@ -26,8 +26,8 @@ remained at the end of wave-9:
 3. **v1 surface (LGraphNode prototype)** — `LGraphNode.addWidget`,
    `LGraphNode.addCustomWidget`, and `LGraphNode.prototype.addDOMWidget`
    are still freely callable from any v1 `ComfyExtension`
-   (`Comfy.*.beforeRegisterNodeDef` etc.). Per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths the v1
-   surface stays functional, but <a href="/axioms#a15-refs" class="wiki-link">A15</a> enforcement requires extension
+   (`Comfy.*.beforeRegisterNodeDef` etc.). Per D6 parallel-paths the v1
+   surface stays functional, but A15 enforcement requires extension
    authors be told *now* that this pattern is going away and given the
    concrete migration paths.
 
@@ -73,14 +73,14 @@ remediation."**
   > Migration paths: (1) boxed widget — declare a single rich-value
   > INPUT_TYPES field (e.g. BBOX [x,y,w,h]) and compose the multi-control
   > UI inside one widget; (2) non-widget UI primitive — mount custom DOM
-  > from <a href="/api-docs/definenode" class="wiki-link">defineNode</a>/<a href="/api-docs/defineextension" class="wiki-link">defineExtension</a> setup() via bootstrap-hooks
+  > from defineNode/defineExtension setup() via bootstrap-hooks
   > lifecycle, owned by the extension not the widget system;
   > (3) schema input — add it to INPUT_TYPES and let the frontend render
-  > it normally. See AXIOMS.md A15 + decisions/<a href="/decisions/D-ban-runtime-addwidget" class="wiki-link">D-ban-runtime-addwidget</a>.md.`
+  > it normally. See AXIOMS.md A15 + decisions/D-ban-runtime-addwidget.md.`
 
 - Warning text for `addDOMWidget` mirrors the above with the additional
   note that DOM-widget registration in v2 happens via
-  `defineWidget({ type, mount })` (per <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> / <a href="/axioms#a12-refs" class="wiki-link">A12</a>) not
+  `defineWidget({ type, mount })` (per D-widget-converge / A12) not
   `addDOMWidget`.
 
 ### Part 3 — First-party core call sites: silenced via no-op
@@ -123,7 +123,7 @@ remediation."**
   strict-fails on any re-introduction in `src/extension-api/node.ts`
   per A15 (added wave-9). No checker changes needed.
 
-### Compatibility (<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths)
+### Compatibility (D6 parallel-paths)
 
 - v1 path remains fully functional. Deprecation is a soft signal,
   not a runtime block. No throw, no exception, no behavior change
@@ -198,7 +198,7 @@ The v2 surface re-introduces `addWidget` / `addDOMWidget` only if:
    re-introduce frontend-only widget state lacking a schema slot.
 
 (Bar set deliberately high — same posture as
-<a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a>.)
+D-widget-serialization-simplification.)
 
 ## Implementation checklist
 
@@ -226,4 +226,4 @@ The v2 surface re-introduces `addWidget` / `addDOMWidget` only if:
 - [x] AGENTS.md `§Reconciliation history` — prepend wave-10 row above
   wave-9
 - [x] `bash scripts/sync.sh` clean — drift = 0, no orphan decisions,
-  <a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a>+<a href="/axioms#a3-refs" class="wiki-link">A3</a>+<a href="/axioms#a4-refs" class="wiki-link">A4</a>+<a href="/axioms#a6-refs" class="wiki-link">A6</a>+A15+<a href="/axioms#a16-refs" class="wiki-link">A16</a> axiom checks pass
+  A1+A2+A3+A4+A6+A15+A16 axiom checks pass

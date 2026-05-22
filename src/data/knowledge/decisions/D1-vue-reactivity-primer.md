@@ -1,4 +1,4 @@
-# <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a> — Vue Reactivity Primer: How Signals Work in Vue
+# D1 — Vue Reactivity Primer: How Signals Work in Vue
 
 > **Audience**: ComfyUI frontend team reviewing the new extension hook + setup
 > function API.
@@ -32,7 +32,7 @@
    what makes per-extension and per-node hoisted state safe.
    ([row 7](../research/vue-internals/reactivity-system.md))
 5. **We use Vue reactivity *inside* the engine, not at the API boundary.**
-   The framework adapts <a href="/glossary#world" class="wiki-link">World</a> mutations → Vue reactivity → user-visible
+   The framework adapts World mutations → Vue reactivity → user-visible
    *events*. Extensions see plain `.on('change', fn)` callbacks; the
    batching, deduping, and lifecycle cleanup come for free from Vue.
    See [D3.3](./D3.3-events-over-signals.md) for the rationale.
@@ -115,7 +115,7 @@ Subscriber. The Proxy is just the property-level instrumentation.
 All citations are to [`research/vue-internals/reactivity-system.md`](../research/vue-internals/reactivity-system.md)
 unless otherwise noted.
 
-### `ref(value)` — A Reactive <a href="/glossary#reference" class="wiki-link">Reference</a>
+### `ref(value)` — A Reactive Reference
 
 ```ts
 const count = ref(0)
@@ -173,7 +173,7 @@ effect(() => {
 - `effect()` is the building block. Most user code uses `watch` /
   `watchEffect` / `computed` instead.
 
-### `watchEffect(fn)` — Effect with a User <a href="/glossary#handle" class="wiki-link">Handle</a>
+### `watchEffect(fn)` — Effect with a User Handle
 
 ```ts
 const stop = watchEffect(() => {
@@ -318,7 +318,7 @@ exactly one call.
 ## Why We Use Vue Internally but Expose Events Externally
 
 This is the most important part of this doc for reviewers, because it's
-where <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a> and [D3.3](./D3.3-events-over-signals.md) connect.
+where D1 and [D3.3](./D3.3-events-over-signals.md) connect.
 
 ### What we get from Vue's reactivity *inside* the engine
 
@@ -336,7 +336,7 @@ where <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a> and
   `scope.stop()` releases every watcher, every computed, every event
   binding wired through that scope.
 
-### What extensions actually do (recapping <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3 evidence)
+### What extensions actually do (recapping D3.3 evidence)
 
 ```ts
 // All real extension patterns reduce to:
@@ -391,7 +391,7 @@ deduping, and scope-based cleanup for free.
 2. Event listener `Set`s registered via `node.on(...)` must register an
    `onScopeDispose` cleanup that removes the listener when the scope ends.
 3. Public types must not leak `Ref<T>` or `ComputedRef<T>`. If you see
-   either in a `.d.ts` exposed to extensions, that's a regression of <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3.
+   either in a `.d.ts` exposed to extensions, that's a regression of D3.3.
 4. Anywhere we cross the "event boundary" (Vue change → fired event), we
    must `pauseTracking()` around the user's callback so the user
    accidentally reading a ref doesn't subscribe their callback into our

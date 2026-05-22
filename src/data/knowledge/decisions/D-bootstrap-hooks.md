@@ -1,6 +1,6 @@
-# <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks
+# D-bootstrap-hooks — Disposition of `init` / `setup` extension hooks
 
-**Status**: ACCEPTED 2026-05-14 (W6.P6 pick, human-in-the-loop). Decision recorded after R1+R2+R3 evidence (228 hits / 68 repos / 97,865 cum stars across the W2F-1 corpus); pick made by Christian in chat. Supersedes the original three-option matrix with a fourth shape derived from the brainstorm. Scope is **lifecycle hooks + event namespaces only**; the originally-proposed "<a href="/api-docs/workbench" class="wiki-link">workbench</a> umbrella for UI-shell registration" was scoped back during reconcile (<a href="/api-docs/workbench" class="wiki-link">workbench</a> is for the 3 UI events, not for `defineSidebarTab`/`defineCommand`/`defineHotkey`/`toast` which keep their current shape under W6.P5).
+**Status**: ACCEPTED 2026-05-14 (W6.P6 pick, human-in-the-loop). Decision recorded after R1+R2+R3 evidence (228 hits / 68 repos / 97,865 cum stars across the W2F-1 corpus); pick made by Christian in chat. Supersedes the original three-option matrix with a fourth shape derived from the brainstorm. Scope is **lifecycle hooks + event namespaces only**; the originally-proposed "workbench umbrella for UI-shell registration" was scoped back during reconcile (workbench is for the 3 UI events, not for `defineSidebarTab`/`defineCommand`/`defineHotkey`/`toast` which keep their current shape under W6.P5).
 
 ## Context
 
@@ -32,7 +32,7 @@ Bulk-clone grep against the W2F-1 138-repo corpus.
   `app.registerExtension({...})`; **68 / 138** repos (~49% adoption)
 - Hook split: `setup` 167 (73%) / `init` 61 (27%)
 - Cumulative stars affected: ~97,865 across 24 (init) / 61 (setup) repos
-- Lifecycle bucketing: post-api-mount 36 (16%) / post-<a href="/api-docs/graph" class="wiki-link">graph</a>-loaded 41
+- Lifecycle bucketing: post-api-mount 36 (16%) / post-graph-loaded 41
   (18%) / post-extension-store-ready 37 (16%) / register-side-effect
   44 (19%) / no-op 7 (3%) / other 63 (28%)
 - **36 / 36** `api.addEventListener` registration sites use `setup`,
@@ -42,18 +42,18 @@ Bulk-clone grep against the W2F-1 138-repo corpus.
   with behavior-in-`setup`
 - Event-name surface (separate sweep of `api.addEventListener`):
   ~360 backend-dispatched listener registrations across ~50 distinct
-  event names; ~290 of those are <a href="/api-docs/execution" class="wiki-link">execution</a>-lifecycle events
+  event names; ~290 of those are execution-lifecycle events
   (`execution_start`, `executed`, `progress`, `b_preview`, etc.)
 
 ### Adjacent decisions touched
 
-- **<a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> (W6.P5)** — this ADR introduces a
+- **D-shell-ui-entrypoints (W6.P5)** — this ADR introduces a
   `workbench` namespace; P5's `defineSidebarTab` / `defineBottomPanelTab`
   / `defineCommand` / `defineHotkey` re-export through that namespace.
-- **<a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> events-and-payload-typing** — this ADR proposes typed
+- **D5 events-and-payload-typing** — this ADR proposes typed
   `graph.on()` / `execution.on()` / `server.on()` / `workbench.on()`
-  channels; <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> covers the typed-payload schema.
-- **<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a> lifecycle-context-and-ordering** — this ADR reuses <a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>'s
+  channels; D5 covers the typed-payload schema.
+- **D10 lifecycle-context-and-ordering** — this ADR reuses D10's
   `currentExtension` Vue-composable-style setup context to make the
   new context-scoped `onMounted` work the same way `onNodeMounted`
   already does.
@@ -150,9 +150,9 @@ needed; context (which `define*` you're inside) disambiguates.
 
 | namespace | what flows on it | example events | hits in corpus |
 |---|---|---|---|
-| `graph.on(...)` | <a href="/api-docs/graph" class="wiki-link">graph</a>-mutation events (frontend-dispatched) | `'changed'`, `'cleared'` | 33 |
+| `graph.on(...)` | graph-mutation events (frontend-dispatched) | `'changed'`, `'cleared'` | 33 |
 | `execution.on(...)` | prompt-run lifecycle (backend-dispatched) | `'start'`, `'end'`, `'error'`, `'interrupted'`, `'cached'`, `'executing'`, `'progress'`, `'preview'` | ~290 |
-| `server.on(...)` | non-<a href="/api-docs/execution" class="wiki-link">execution</a> backend events + custom-node events | `'status'`, `'logs'`, `'reconnected'`, `'feature_flags'`, `'assets'`, plus arbitrary strings like `'rayko.inspline.show'` | ~70 |
+| `server.on(...)` | non-execution backend events + custom-node events | `'status'`, `'logs'`, `'reconnected'`, `'feature_flags'`, `'assets'`, plus arbitrary strings like `'rayko.inspline.show'` | ~70 |
 | `workbench.on(...)` | UI shell events | `'notification'`, future `'themeChanged'`, `'panelToggled'`, `'commandInvoked'` | ~7 today, designed to grow |
 
 **Custom-node events** ride `server.on(...)` with arbitrary string
@@ -188,7 +188,7 @@ the IDE-shell concept; the event names match that folder's domain.)
 |---|---|---|
 | `init() { addStylesheet(...) }` (44 register-side-effect hits) | move body into `setup() { addStylesheet(...) }` | mechanical sed |
 | `setup() { api.addEventListener('execution_start', fn) }` (36 post-api-mount hits) | inside setup body: `onMounted(() => execution.on('start', fn))` (or `server.on('execution_start', fn)`) | mechanical codemod |
-| `setup() { app.graphToPrompt = ...wrap... }` (post-<a href="/api-docs/graph" class="wiki-link">graph</a>-loaded hits) | inside setup body: `onMounted(() => { /* app.graphToPrompt wrap */ })` | mechanical sed |
+| `setup() { app.graphToPrompt = ...wrap... }` (post-graph-loaded hits) | inside setup body: `onMounted(() => { /* app.graphToPrompt wrap */ })` | mechanical sed |
 | `init() { app.ui.settings.addSetting(...) }` (post-extension-store-ready hits) | inside setup body: `onMounted(() => app.ui.settings.addSetting(...))` (W6.P5 may later offer a `defineSetting(...)` entry point — out of scope here) | mechanical sed |
 | `app.registerExtension({ name, init, setup, sidebarTabs: [...], commands: [...] })` | `defineExtension({ name, setup() { onMounted(...) } })`; sidebar/commands entry points unchanged from current W6.P5 shape | structural for the lifecycle portion only |
 
@@ -213,11 +213,11 @@ The Slack-flagged "agent training set" concern is mitigated by:
 
 ### Cross-decision dependencies
 
-- **<a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> events-and-payload-typing** must define payload schemas for
+- **D5 events-and-payload-typing** must define payload schemas for
   the four namespaces' canonical event names.
-- **<a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> loader pattern** is no longer needed as a `init`/`setup`
+- **D18 loader pattern** is no longer needed as a `init`/`setup`
   fallback — both options collapse into `setup()` body or `onMounted`.
-- **<a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> (W6.P5)** — NOT a dependency. This ADR
+- **D-shell-ui-entrypoints (W6.P5)** — NOT a dependency. This ADR
   was originally drafted with a P5 coupling; reconciled 2026-05-14 to
   decouple. P6 ships independently.
 
@@ -240,12 +240,12 @@ Foundation impl (W6.P6.C) is conditional on:
   ready, ship with inferred-`unknown` payload + augment-to-tighten
   in a follow-on PR.)
 
-(No longer gated on <a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> / W6.P5 — the <a href="/api-docs/workbench" class="wiki-link">workbench</a>
+(No longer gated on D-shell-ui-entrypoints / W6.P5 — the workbench
 umbrella scope-back removes that dependency.)
 
 | Step | Action | Owner | Verification |
 |---|---|---|---|
-| 1 | Implement `onMounted` / `onBeforeMount` / `onUnmounted` / `onActivated` / `onDeactivated` context-scoped hooks in `src/extension-api/lifecycle.ts`. Reuse <a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a> `currentExtension` slot. | foundation PR #12142 | unit test: hook inside `defineExtension.setup` fires after app-mount; same hook inside `defineSidebarTab.setup` fires after tab-create |
+| 1 | Implement `onMounted` / `onBeforeMount` / `onUnmounted` / `onActivated` / `onDeactivated` context-scoped hooks in `src/extension-api/lifecycle.ts`. Reuse D10 `currentExtension` slot. | foundation PR #12142 | unit test: hook inside `defineExtension.setup` fires after app-mount; same hook inside `defineSidebarTab.setup` fires after tab-create |
 | 2 | Implement `graph` / `execution` / `server` / `workbench` event-namespace facades (event-only) in `src/extension-api/events.ts`. Wire to existing `api.addEventListener` underneath. | foundation PR #12142 | unit test: `execution.on('start', fn)` receives the same payload as legacy `api.addEventListener('execution_start', fn)` |
 | 3 | Mark `ExtensionOptions.init` and `.setup` as `@deprecated`; add runtime mapper that re-routes v1 `init` body to `defineExtension.setup` body and v1 `setup` body to `onMounted(...)` inside it. | foundation PR #12142 | E2E: v1 extension using `{ init, setup }` still loads + executes hooks in correct order |
 | 4 | Bundle `.d.ts` regeneration so `@comfyorg/extension-api` exports the new names + namespaces. | pkg PR #12143 | typecheck on a fresh consumer pulling the package; new exports visible |
@@ -262,12 +262,12 @@ umbrella scope-back removes that dependency.)
 - W6.P6 task block in `todo.md` (Wave-6 section)
 - D5 — events and payload typing (cross-couples on typed event payloads)
 - D10 — lifecycle context and ordering (reuses `currentExtension` slot)
-- <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a> — naming `defineNode`/`defineWidget` (precedent: short, expressive, mirrors framework idiom)
+- D11 — naming `defineNode`/`defineWidget` (precedent: short, expressive, mirrors framework idiom)
 - D-shell-ui-entrypoints (W6.P5) — `workbench` umbrella co-designed here
-- <a href="/decisions/D18-pure-functions-loader-registration" class="wiki-link">D18</a> — pure functions + loader registration (no longer needed as `init`/`setup` fallback)
+- D18 — pure functions + loader registration (no longer needed as `init`/`setup` fallback)
 - ComfyUI_frontend `src/extension-api/lifecycle.ts` — current D10 hook implementation
 - ComfyUI_frontend `src/extension-api/shell.ts` — current sidebar/bottom-panel/command/keybind types
 - ComfyUI_frontend `src/workbench/` — existing DDD folder providing the namespace name
 - Vue 3 Composition API — `onMounted` / `onActivated` / `onUnmounted` semantics
 - VSCode Extension API — `vscode.window.*` / `vscode.commands.*` / `vscode.workspace.onDidChange*` precedent for namespaced `workbench.*`
-- AGENTS.md "Decision propagation rules" — once accepted, must reach (a) commit on PR #12142 with "<a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a>" in subject, (b) this ADR, (c) dashboard JSON
+- AGENTS.md "Decision propagation rules" — once accepted, must reach (a) commit on PR #12142 with "D-bootstrap-hooks" in subject, (b) this ADR, (c) dashboard JSON

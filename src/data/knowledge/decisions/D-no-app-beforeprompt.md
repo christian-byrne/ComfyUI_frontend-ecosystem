@@ -1,4 +1,4 @@
-# <a href="/decisions/D-no-app-beforeprompt" class="wiki-link">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface
+# D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface
 
 **Status**: ACCEPTED — 2026-05-20 (wave-13, user direction)
 **Closes**: `D-uwf-drafting-board.md` §N11
@@ -37,11 +37,11 @@ concrete use cases arrive.
 ## Rationale
 
 A general-purpose `beforePrompt` mutation hook is the same anti-pattern
-class as runtime `addWidget` (<a href="/axioms#a15-refs" class="wiki-link">A15</a>) and the 4-context serialization
-discriminator (<a href="/axioms#a16-refs" class="wiki-link">A16</a>): it inverts the direction of knowledge flow by
+class as runtime `addWidget` (A15) and the 4-context serialization
+discriminator (A16): it inverts the direction of knowledge flow by
 making *extensions* responsible for the prompt's transport-time shape,
 when the prompt's shape is a *framework* concern that should be
-deterministic from the <a href="/glossary#workflowspec" class="wiki-link">WorkflowSpec</a>.
+deterministic from the WorkflowSpec.
 
 Concrete failure modes a generic mutation hook would invite:
 
@@ -50,10 +50,10 @@ Concrete failure modes a generic mutation hook would invite:
 2. **Plugin order dependence** — moving an extension up the load
    list changes prompt output silently.
 3. **Round-trip breakage** — the prompt no longer matches the
-   serialized workflow JSON, breaking replay / <a href="/glossary#runsnapshot" class="wiki-link">RunSnapshot</a> (<a href="/axioms#a7-refs" class="wiki-link">A7</a>).
+   serialized workflow JSON, breaking replay / RunSnapshot (A7).
 4. **Backend schema drift** — extensions feed arbitrary fields
    the backend may not recognize; failures are deferred to
-   <a href="/api-docs/server" class="wiki-link">server</a>-side error responses.
+   server-side error responses.
 5. **Hot-path performance regression** — every prompt-build pays
    the cost of every extension's `beforePrompt` handler, even when
    no mutation is needed.
@@ -65,9 +65,9 @@ Per-need solutions avoid all five:
 - "Auth headers" → handled at the network layer, not the prompt
   layer.
 - "Cross-node value resolution" → solved at the WorkflowSpec layer
-  (<a href="/decisions/D-cross-node-observation" class="wiki-link">D-cross-node-observation</a>, N13 closure).
+  (D-cross-node-observation, N13 closure).
 - "Extension-managed metadata" → use `widget.on('beforeSerialize')`
-  on a metadata-bearing widget (<a href="/axioms#a16-refs" class="wiki-link">A16</a>) or a dedicated sidecar API.
+  on a metadata-bearing widget (A16) or a dedicated sidecar API.
 
 ## Consequences
 
@@ -75,12 +75,12 @@ Per-need solutions avoid all five:
 - Zero new surface. No `app.on(...)` event for prompt-build.
 - The `app` global remains a v1 transition shim only; v2 surfaces
   scope events through `graph` / `execution` / `server` / `workbench`
-  per <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a>.
+  per D-bootstrap-hooks.
 - `GraphEventPayloads` does not gain a `'beforeSerialize'` / `'beforePrompt'`
   / `'promptBuilt'` key.
 
 ### v1 consumers
-- v1 monkey-patching of `app.queuePrompt` remains functional (<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>
+- v1 monkey-patching of `app.queuePrompt` remains functional (D6
   parallel-paths). Migration guide will not advertise a v2
   replacement for this pattern — instead it documents the
   per-need feature surfaces as they ship.
@@ -100,7 +100,7 @@ This decision re-opens only if:
    (ordering scheme, schema validation, round-trip invariant,
    performance budget, debuggability).
 3. An axiom amendment is proposed to permit transport-time
-   prompt mutation (currently implicitly forbidden by <a href="/axioms#a7-refs" class="wiki-link">A7</a>
+   prompt mutation (currently implicitly forbidden by A7
    §Source-of-Truth Rules — "Prompt is derived, never authored
    directly").
 

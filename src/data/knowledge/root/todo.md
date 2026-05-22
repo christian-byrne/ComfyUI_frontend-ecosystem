@@ -21,14 +21,14 @@ Logged but not actioned — will pick up after Slack-feedback approval pass.
 
 ### Wave-19 polish (Phase-A-safe, deferred to next wave)
 
-- [ ] W19.P1 — **Strict idempotence for `scripts/wiki-link.mjs` (W18.K follow-up)**. Converges in 2 runs today; first run added 695 links, second run modified 9 more (slug-alias overlap like `D14` vs `D14-foo`). Make cap-counter strictly idempotent so sync.sh doesn't churn 40+ files on every run. ~30m.
-- [ ] W19.P2 — **Adopt `marked-gfm-heading-id` plugin** (research/dashboard-nav-audit-2026-05-21.md Fix 3). Replaces hand-rolled `slugify()` + module-level dedupe Map from W18.M with the maintained plugin. Net code reduction; subsumes the W18.N P0 BLOCKER fix. ~45m.
-- [ ] W19.P3 — **Dashboard 404 catch-all route** (research/dashboard-nav-audit-2026-05-21.md Fix 4). Add `:pathMatch(.*)*` + `pages/NotFound.vue`. ~30m.
-- [ ] W19.P4 — **Adversarial-review SHIP-WITH-FOLLOWUPS** (research/wave-18-adversarial-review.md final 4):
-  - [ ] W19.P4.A — DOMPurify guard on `v-html` sites. ~45m.
-  - [ ] W19.P4.B — Honor `prefers-reduced-motion` in router `scrollBehavior`. ~15m.
-  - [ ] W19.P4.C — Warn on ambiguous wiki-link / backlink resolution in `scripts/build-knowledge-manifest.mjs`. ~30m.
-- [ ] W19.P5 (NEW from W19.A11 surface bug) — **Extract shared markdown-rendering composable**. DecisionDetail.vue currently has its own stateless `marked` setup; doesn't get W18.M slug-dedupe. Refactor: extract `useMarkdownWithSlugDedupe()` composable, use in both MarkdownView + DecisionDetail. ~1h. Closes the W19.A11 documented gap.
+- [x] W19.P1 — **Strict idempotence for `scripts/wiki-link-mdx.mjs`** — SHIPPED 2026-05-21 PM (dashboard `1aba5be`). Root cause: longest-first sort wrapped `D14-widget-state-categories` first, then the shorter `D14` regex matched **inside** the just-injected `href="/decisions/D14-..."`, producing nested anchors. Fix: re-tokenize between each symbol pass (extracted `countExistingWikiLinks` helper, swapped loop order to per-symbol, reset `seen` and re-derive from fresh tokenization after any successful pass). Was 887→9→0; now 868→0→0 in one run. +1 vitest regression case for substring-symbol nesting (11/11 pass).
+- [x] W19.P2 — **Adopt `marked-gfm-heading-id` plugin** — SHIPPED 2026-05-21 PM (dashboard `88c1c6c`, combined with W19.P5). Plugin uses github-slugger and resets via marked's `preprocess` hook on every `parse()` call, so dedupe is correctly scoped per-render. Unicode letters now PRESERVED (matches GitHub behavior; old hand-rolled `slugify` stripped non-ASCII via `/[^\w\s-]/g`).
+- [x] W19.P3 — **Dashboard 404 catch-all route** — SHIPPED 2026-05-21 PM (dashboard `88fb4d7`). New `src/pages/NotFound.vue` (404 marker + h1 + bad-path echo + curated nav suggestions). New `:pathMatch(.*)*` route at end of routes array. +3 vitest cases + 1 nav-smoke e2e (`/this-route-does-not-exist/...` → NotFound rendered).
+- [x] W19.P4 — **Adversarial-review SHIP-WITH-FOLLOWUPS** — SHIPPED 2026-05-21 PM (dashboard `a37fd0c`).
+  - [x] W19.P4.A — DOMPurify guard on `v-html` sites. New `src/lib/sanitizeHtml.ts` wraps DOMPurify; applied at MarkdownView, Prose, AuditPRDetail (highest-risk site — GitHub PR descriptions), ApiDocs. +8 vitests covering script/onclick/javascript: strip + heading-id/wiki-link-class/shiki preservation.
+  - [x] W19.P4.B — Honor `prefers-reduced-motion` in `src/router/index.ts:171` scrollBehavior. `behavior: 'smooth' | 'auto'` toggled via `window.matchMedia('(prefers-reduced-motion: reduce)').matches`. Guards `typeof window === 'undefined'` for jsdom/unit tests.
+  - [x] W19.P4.C — Warn on ambiguous wiki-link / backlink resolution in `scripts/build-knowledge-manifest.mjs`. `ambiguityWarnings` collector + per-token grouped warning print at end. Surfaces 3 real ambiguities today (D3 → 6 candidates incl D3.1..D3.5; D14 → 2; D6 → 3 incl D6.1, D6.2). Warn-only, never fails build.
+- [x] W19.P5 — **Extract `useMarkdownWithSlugDedupe()` composable** — SHIPPED 2026-05-21 PM (dashboard `88c1c6c`, combined with W19.P2). New file `src/composables/useMarkdownWithSlugDedupe.ts` (scoped `new Marked()` + highlightCode renderer + gfmHeadingId plugin). MarkdownView.vue drops its slugify+Map (-26 LOC); DecisionDetail.vue drops its duplicated stateless renderer (-18 LOC) and inherits dedupe for free — closes the W19.A11 documented gap.
 
 ### Wave-19 follow-ups carried from OP (Christian's first Slack message)
 
@@ -36,7 +36,7 @@ Source: <https://comfyui-frontend-ecosystem.vercel.app/api-docs> Slack thread, 2
 
 - [ ] W19.OP1 — **Migrate 3rd-party extensions**. After W16.P1 core migrations land.
 - [ ] W19.OP2 — **Virtual widgets handling/migration**.
-- [ ] W19.OP3 — **Refine W16.P2 scope (virtual nodes)** with Christian's updated framing.
+- [x] W19.OP3 — **Refine W16.P2 scope (virtual nodes)** with Christian's updated framing. SHIPPED 2026-05-21 PM as `decisions/D-reroute-primitive-real-backend-migration.md` (PROPOSED, Phase B). Closes the wave-13 `D-no-virtual-nodes-in-api.md` N12 carve-out for built-in Reroute + Primitive. Disposition: D-A Reroute → no-op backend pass-through Python node; D-B Primitive → snapshot-on-instantiation (matches `D-widget-promotion-semantics.md` cloned-Value variant). Flips to ACCEPTED on the **combined trigger of PR #11939 merge AND Vue Nodes mode rollout (W16.P3)** — NEW two-component trigger gate. Cites A1/A4/A5/A7/A15. Christian's verbatim direction: "we shouldn't have any; deprecate old reroutes in Vue Nodes mode; primitives instantiated with copy of source state." AGENTS.md `§Reconciliation history` row added. `bash scripts/check-axiom-compliance.sh` 7/7 green post-ADR.
 
 ### Wave-19 dispatch detail (superseded by SHIPPED checklist above — kept for traceability)
 

@@ -1,8 +1,8 @@
-# ADR: <a href="/axioms#a1-refs" class="wiki-link">A1</a> Rationale — <a href="/glossary#widget" class="wiki-link">Widget</a>-Centric Philosophy
+# ADR: A1 Rationale — Widget-Centric Philosophy
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
+**Wave**: W19.A1+A2 (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A1` (lines 12–33 of the pre-W19 540-line version)
 
 ## Context
@@ -12,7 +12,7 @@ concept), the **implications** (universal context, no node→widget references),
 and a longer **rationale** block (why widgets, not nodes, are the unit of
 extension) plus the originating quote from the 2026-05-18 design review.
 
-W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> requires every axiom to compress to postulate (≤2 sentences) +
+W19.A1+A2 requires every axiom to compress to postulate (≤2 sentences) +
 implications (3–6 bullets) + inline validation. Rationale longer than one
 paragraph extracts to a dedicated ADR (this one).
 
@@ -25,14 +25,14 @@ this ADR. `AXIOMS.md §A1` retains the postulate and implication bullets only.
 
 ### Why widgets, not nodes, are the primary surface
 
-Nodes are **topology**. They live in a <a href="/api-docs/graph" class="wiki-link">graph</a>, they connect through edges, and
+Nodes are **topology**. They live in a graph, they connect through edges, and
 they are the unit the backend executes. But the *user-facing* surface — the
 piece an extension author sees when they want to add a slider, a dropdown, a
 color picker, an audio player — is the **widget**.
 
 Widgets must move in ways nodes cannot. A widget can be **promoted** from a
-subgraph into the parent <a href="/api-docs/graph" class="wiki-link">graph</a>. A widget can appear in **app mode** with no
-<a href="/api-docs/graph" class="wiki-link">graph</a> visible at all. A widget can render in a **partial graph view** where
+subgraph into the parent graph. A widget can appear in **app mode** with no
+graph visible at all. A widget can render in a **partial graph view** where
 its owning node is hidden by the subgraph boundary. A widget can be cloned
 across **linked subgraph instances** (blueprints) where the same source
 definition manifests in multiple instances.
@@ -60,7 +60,7 @@ the one that survives all of those transitions.
 
 The pre-W19 §A1 listed widget contexts a widget must survive:
 
-1. **<a href="/glossary#promotion" class="wiki-link">Promotion</a>** — widget moves from subgraph to parent graph
+1. **Promotion** — widget moves from subgraph to parent graph
 2. **App mode** — widget exists without visible graph
 3. **Partial graph views** — subgraph boundaries hide some nodes
 4. **Linked instances** (blueprints) — same graph instance across clones
@@ -74,7 +74,7 @@ The four scenarios remain individually citeable from here.
 - ✅ `AXIOMS.md §A1` reads as a postulate + bullet list (≤ 20 lines).
 - ✅ Long-form rationale lives in one place and is cite-able from future ADRs.
 - ✅ The four widget-context scenarios are still enumerable (this ADR + the
-  W19.<a href="/axioms#a4-refs" class="wiki-link">A4</a> derived-theorems list will both cross-reference them).
+  W19.A4 derived-theorems list will both cross-reference them).
 - ⚠️ Any future change to A1 must update both this ADR (rationale) and
   `AXIOMS.md §A1` (postulate). The supersedes pointer makes the linkage
   explicit.
@@ -83,7 +83,7 @@ The four scenarios remain individually citeable from here.
 
 - `AXIOMS.md §A1` — postulate (post-W19)
 - `decisions/D-no-node-widget-access.md` — bilateral A1 closure implementation
-- `decisions/D-widget-converge.md` — <a href="/axioms#a12-refs" class="wiki-link">A12</a> sibling axiom (mount-lifecycle DOM seam)
+- `decisions/D-widget-converge.md` — A12 sibling axiom (mount-lifecycle DOM seam)
 - `decisions/D11-naming-defineNode-defineWidget.md` — naming convention
 - `research/external/meeting-2026-05-18-extension-api-design-review.md` — source
 - `research/wave-19-axiom-coverage-matrix.md` — disposition tracking

@@ -1,22 +1,22 @@
-# <a href="/decisions/D-unify-widget-mount-model" class="wiki-link">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget
+# D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget
 
-- **Status**: PROPOSED — 2026-05-21 (wave-19, W19.<a href="/axioms#a9-refs" class="wiki-link">A9</a>). Flips to **ACCEPTED** when PR #11939 (Alex's ECS branch) merges and the Phase B cascade begins.
+- **Status**: PROPOSED — 2026-05-21 (wave-19, W19.A9). Flips to **ACCEPTED** when PR #11939 (Alex's ECS branch) merges and the Phase B cascade begins.
 - **Decider:** Christian (user direction; Slack proposal — see §Rationale)
 - **Wave:** 19
-- **Axioms cited:** <a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric), <a href="/axioms#a5-refs" class="wiki-link">A5</a> (3-tier widget state — <a href="/glossary#schema" class="wiki-link">Schema</a> immutable; Props/Values mutable), <a href="/axioms#a12-refs" class="wiki-link">A12</a> (<a href="/glossary#mount" class="wiki-link">Mount</a>-Lifecycle as the Sole DOM Seam), <a href="/axioms#a15-refs" class="wiki-link">A15</a> (<a href="/glossary#widget" class="wiki-link">Widget</a> Declarativity)
-- **Composes-with:** W19.<a href="/axioms#a7-refs" class="wiki-link">A7</a> (recreate-vs-remount glossary — every mount IS a recreate event under this model), W19.<a href="/axioms#a10-refs" class="wiki-link">A10</a> (`D-widget-promotion-semantics` — promotion gets coherent semantics once "DOM widget" stops being a special case)
-- **Supersedes:** <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7-widget-shape-and-persistence</a> §Part 1 (the universal-vs-typed split was already SUPERSEDED by <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a> per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>; this ADR closes the remaining DOM/non-DOM dimension of <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>)
+- **Axioms cited:** A1 (widget-centric), A5 (3-tier widget state — Schema immutable; Props/Values mutable), A12 (Mount-Lifecycle as the Sole DOM Seam), A15 (Widget Declarativity)
+- **Composes-with:** W19.A7 (recreate-vs-remount glossary — every mount IS a recreate event under this model), W19.A10 (`D-widget-promotion-semantics` — promotion gets coherent semantics once "DOM widget" stops being a special case)
+- **Supersedes:** D7-widget-shape-and-persistence §Part 1 (the universal-vs-typed split was already SUPERSEDED by D14-widget-state-categories per D-api-surface-finalization; this ADR closes the remaining DOM/non-DOM dimension of D7)
 - **Related:**
   - `decisions/D-widget-converge.md` (W6.P3 — already collapsed the v2-surface DOM/native distinction; this ADR completes the job by removing the *runtime concept* of a non-mount widget)
-  - `decisions/D-widget-serialization-simplification.md` (wave-9 — same reduction-by-deletion shape; codified <a href="/axioms#a15-refs" class="wiki-link">A15</a> + <a href="/axioms#a16-refs" class="wiki-link">A16</a>)
+  - `decisions/D-widget-serialization-simplification.md` (wave-9 — same reduction-by-deletion shape; codified A15 + A16)
   - `decisions/D-api-surface-finalization.md` (wave-12 — Phase A surface freeze; this ADR is one of the new ACCEPTED ADRs that re-opens the surface at Phase B per §Re-opening criteria item 1)
-  - AXIOMS.md §<a href="/axioms#a12-refs" class="wiki-link">A12</a> (Mount-Lifecycle as the Sole DOM Seam — close cousin; <a href="/axioms#a12-refs" class="wiki-link">A12</a> already commits to mount-as-sole-DOM-seam for the v2 surface, but does NOT commit to mount-as-sole-renderer-path for the runtime)
+  - AXIOMS.md §A12 (Mount-Lifecycle as the Sole DOM Seam — close cousin; A12 already commits to mount-as-sole-DOM-seam for the v2 surface, but does NOT commit to mount-as-sole-renderer-path for the runtime)
   - Foundation `src/extension-api/widget.ts` — current `mount` signature (already correct; this ADR commits to it being the *only* renderer path)
-  - Glary-Bot Theorem 4 — Widget Recreation Safety (mount must be idempotent across host moves; derives from <a href="/axioms#a5-refs" class="wiki-link">A5</a> Schema immutability)
+  - Glary-Bot Theorem 4 — Widget Recreation Safety (mount must be idempotent across host moves; derives from A5 Schema immutability)
 
 ## Context
 
-Even after <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> (W6.P3.B PICK option iii, 2026-05-18) collapsed
+Even after D-widget-converge (W6.P3.B PICK option iii, 2026-05-18) collapsed
 the v2 *type-level* DOM/native split, two structurally separate widget
 behaviors still exist at runtime:
 
@@ -28,11 +28,11 @@ behaviors still exist at runtime:
    from `widget.type` + `widget.value` via per-type switch statements inside
    `LGraphCanvas.drawNodeWidgets` and friends.
 
-<a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> removed `addDOMWidget` / `widget.element` / `widget.inputEl`
+D-widget-converge removed `addDOMWidget` / `widget.element` / `widget.inputEl`
 / `DOMWidgetOptions` from the *surface*, but the runtime still branches on
 "do we render this widget through `mount(host)` or through canvas-draw?"
 That branch is the source of every promotion edge case, every
-<a href="/api-docs/graph" class="wiki-link">graph</a>↔app-mode lifecycle race, and every "why does this widget behave
+graph↔app-mode lifecycle race, and every "why does this widget behave
 differently from that one" question reviewers keep asking.
 
 User direction (Slack, post-handoff-15):
@@ -67,20 +67,20 @@ Concretely:
 4. **The `DOMWidget` concept is permanently retired** — from the surface,
    the runtime, the renderer, and the mental model. The PHASE_A_EXCLUDED
    entries for `DOMWidgetOptions` / `kind: 'dom'` / `widget.element` /
-   `widget.inputEl` / `addDOMWidget` (already in AXIOMS.md §<a href="/axioms#a14-refs" class="wiki-link">A14</a> REMOVED +
+   `widget.inputEl` / `addDOMWidget` (already in AXIOMS.md §A14 REMOVED +
    §A12) move from "deferred / commented out" to "permanently removed —
    under no circumstance returns to the surface."
 5. **`defineWidget({ type, mount, … })` is the sole widget registration
    entry point.** A widget type with no `defineWidget` registration does
-   not render (matches <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> §Clarification 3).
+   not render (matches D-widget-converge §Clarification 3).
 
 ## Rationale
 
 ### Glary-Bot Theorem 4 — Widget Recreation Safety (forced corollary)
 
-Derivation: AXIOMS.md §<a href="/axioms#a5-refs" class="wiki-link">A5</a> fixes Schema for the widget's lifetime;
-AXIOMS.md §<a href="/axioms#a1-refs" class="wiki-link">A1</a> says widgets must survive context shifts (promotion, app
-mode, partial-<a href="/api-docs/graph" class="wiki-link">graph</a> views, linked instances). Therefore the *only* safe
+Derivation: AXIOMS.md §A5 fixes Schema for the widget's lifetime;
+AXIOMS.md §A1 says widgets must survive context shifts (promotion, app
+mode, partial-graph views, linked instances). Therefore the *only* safe
 implementation of "move a widget across host contexts" is to treat every
 host re-attachment as a re-mount against a fresh host — i.e. `mount()`
 must be **idempotent** across host moves. Once mount is idempotent, the
@@ -98,7 +98,7 @@ Reproduced verbatim from W19 task brief:
 > becomes simple."
 
 The architectural read: "standard mounting/unmounting hooks" = Vue
-`onMounted` / `onUnmounted` ergonomics, which <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> already
+`onMounted` / `onUnmounted` ergonomics, which D-bootstrap-hooks already
 ships for extensions and `mount()` already shadows for widgets. Unifying
 the widget runtime removes the last "two paths, two mental models" pocket.
 
@@ -132,11 +132,11 @@ v1 LiteGraph adapter and the runtime can be rewired without surface churn.
 - **Zero Phase A surface change.** `widget.ts` already exposes
   `WidgetMountFn` / `WidgetMountContext` / `WidgetCleanup` (A12).
   `defineWidget` already takes `mount`. The Phase A surface is frozen at
-  foundation `ee0537fdb5` (per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>) and remains so.
+  foundation `ee0537fdb5` (per D-api-surface-finalization) and remains so.
 - **At Phase B flip:** PHASE_A_EXCLUDED entries for `DOMWidgetOptions` /
   `addDOMWidget` / `kind: 'dom'` / `widget.element` / `widget.inputEl`
   promote from "commented out / removed" to "permanently absent —
-  restoration criteria revoked." AXIOMS.md §<a href="/axioms#a14-refs" class="wiki-link">A14</a> REMOVED rows for
+  restoration criteria revoked." AXIOMS.md §A14 REMOVED rows for
   `addDOMWidget` get a forward-pointer to this ADR.
 
 ### Runtime / renderer
@@ -145,9 +145,9 @@ v1 LiteGraph adapter and the runtime can be rewired without surface churn.
   retire at Phase B. Built-in widget types (text / number / slider / combo
   / seed / button / toggle / …) ship as framework-internal
   `defineWidget({ type, mount, … })` registrations.
-- v1 LiteGraph remains untouched during the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths window.
+- v1 LiteGraph remains untouched during the D6 parallel-paths window.
   v1 path consumers (`Comfy.*` extensions, `node.addDOMWidget(...)`) keep
-  working until <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> Phase D sunset.
+  working until D6 Phase D sunset.
 
 ### Test surface
 
@@ -163,18 +163,18 @@ v1 LiteGraph adapter and the runtime can be rewired without surface churn.
 
 ### Compose-with notes
 
-- **W19.<a href="/axioms#a7-refs" class="wiki-link">A7</a> (recreate-vs-remount glossary):** under the unified mount
+- **W19.A7 (recreate-vs-remount glossary):** under the unified mount
   model, *every* host attachment IS a recreate event from the widget's
   perspective — there is no longer a "DOM widget that gets remounted"
   vs "native widget that gets re-drawn" asymmetry. The recreate vs
   remount distinction collapses to a clean dichotomy: cleanup fires on
   destruction; `onBeforeRemount` / `onAfterRemount` fire on host moves.
   The glossary in D-widget-converge gets a forward-pointer to this ADR.
-- **W19.<a href="/axioms#a10-refs" class="wiki-link">A10</a> (`D-widget-promotion-semantics`):** promotion semantics
+- **W19.A10 (`D-widget-promotion-semantics`):** promotion semantics
   become coherent only after this ADR lands — see §Composability in
-  W19.<a href="/axioms#a10-refs" class="wiki-link">A10</a> for the dependency direction.
+  W19.A10 for the dependency direction.
 
-### Compatibility (<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths)
+### Compatibility (D6 parallel-paths)
 
 - v1 path remains fully functional through the D6 parallel-paths window.
   Vendor packs that monkey-patch `node.addDOMWidget` / read
@@ -194,7 +194,7 @@ following hold:
    served by `defineWidget({ type, mount, … })` with a closure-captured
    element.
 3. The replacement surface is typed, lifecycle-safe across promotion /
-   app-mode / linked-subgraph (<a href="/axioms#a1-refs" class="wiki-link">A1</a>, <a href="/axioms#a3-refs" class="wiki-link">A3</a>), and does not re-introduce the
+   app-mode / linked-subgraph (A1, A3), and does not re-introduce the
    canvas-draw-vs-mount runtime branch.
 
 Bar set deliberately high: every previous DOMWidget surface restoration
@@ -207,7 +207,7 @@ other than the mount closure," which the unified mount model fully covers.
 |------|--------|-----------------|--------------|
 | 1 | Flip this ADR status header to `ACCEPTED — <date> (wave-N)` once PR #11939 merges and the Phase B cascade kicks off. | `decisions/D-unify-widget-mount-model.md` | grep `Status.*ACCEPTED` |
 | 2 | Foundation cascade — `src/extension-api/widget.ts`: delete any remaining `// PHASE_A_EXCLUDED.*DOMWidget` blocks (kind:'dom', DOMWidgetOptions); confirm `mount` is the only widget rendering surface; add JSDoc cross-link to this ADR on `defineWidget`. | `ComfyUI_frontend/src/extension-api/widget.ts` | `pnpm lint && pnpm format:check && pnpm knip` |
-| 3 | Foundation cascade — `src/extension-api/node.ts`: confirm no `addDOMWidget` / `addWidget` references re-appear (already <a href="/axioms#a14-refs" class="wiki-link">A14</a>-REMOVED + <a href="/axioms#a15-refs" class="wiki-link">A15</a>-banned). | `ComfyUI_frontend/src/extension-api/node.ts` | `bash scripts/check-axiom-compliance.sh` |
+| 3 | Foundation cascade — `src/extension-api/node.ts`: confirm no `addDOMWidget` / `addWidget` references re-appear (already A14-REMOVED + A15-banned). | `ComfyUI_frontend/src/extension-api/node.ts` | `bash scripts/check-axiom-compliance.sh` |
 | 4 | Pkg cascade — regenerate `packages/extension-api/build/index.d.ts` and verify the .d.ts matches foundation; hand-patch if Node 20 / vite blocks `pnpm build` per AGENTS.md Rule 8. | `packages/extension-api/build/index.d.ts` | `git diff` matches foundation surface |
 | 5 | Runtime change — implement framework-internal `defineWidget({ type, mount, … })` registrations for built-in widget types (text / number / slider / combo / seed / button / toggle / …) shipped as a Phase B internal module; retire `LGraphCanvas.drawNodeWidgets` switch-cases for migrated types. | `ComfyUI_frontend/src/lib/litegraph/` (NOT `src/extension-api/`) | per-type e2e demonstrating identical visual output |
 | 6 | BC test conversion — every v1 test that asserted on `kind: 'dom'`, `widget.element`, `widget.inputEl`, `node.addDOMWidget(...)` etc. converts to `axiomExcluded({ axiom: "A12" \| "A14:REMOVED", adr: "decisions/D-unify-widget-mount-model.md", rationale, migration })`. | `src/extension-api-v2/__tests__/**` | vitest run shows `test.fails` markers + `task.meta.annotations` present |
@@ -237,7 +237,7 @@ other than the mount closure," which the unified mount model fully covers.
 
 ## References
 
-- W19.<a href="/axioms#a9-refs" class="wiki-link">A9</a> task block in `todo.md`
+- W19.A9 task block in `todo.md`
 - AXIOMS.md §A1, §A5, §A12, §A15, §Axiom-Excluded Test Annotation Policy
 - `decisions/D-widget-converge.md` (surface-side predecessor)
 - `decisions/D-widget-serialization-simplification.md` (reduction-by-deletion style template)
