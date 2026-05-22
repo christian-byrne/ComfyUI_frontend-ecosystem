@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
-import { marked, Renderer } from 'marked'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
@@ -8,7 +7,8 @@ import Badge from '@/components/ui/Badge.vue'
 import Card from '@/components/ui/Card.vue'
 import Prose from '@/components/ui/Prose.vue'
 import Toc from '@/components/ui/Toc.vue'
-import { ensureHighlighter, highlightCode } from '@/composables/useHighlighter'
+import { ensureHighlighter } from '@/composables/useHighlighter'
+import { useMarkdownWithSlugDedupe } from '@/composables/useMarkdownWithSlugDedupe'
 import { useToc } from '@/composables/useToc'
 import { getDecisionBody, manifest, decisionsSorted } from '@/data/knowledge-loader'
 import { pickRelatedDecisions, statusVariant, wrapCallouts } from './decision-detail-helpers'
@@ -62,25 +62,12 @@ const next = computed(() =>
 )
 
 // ── Markdown renderer with stable heading ids ────────────────────────
-const renderer = new Renderer()
-renderer.code = ({ text, lang }) => highlightCode(text, lang || 'text')
-
-function slugify(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-')
-}
-
-renderer.heading = function ({ tokens, depth, text }) {
-  const inner = this.parser.parseInline(tokens)
-  const id = slugify(text)
-  return `<h${depth} id="${id}">${inner}</h${depth}>\n`
-}
-
-marked.setOptions({ gfm: true, breaks: false })
-marked.use({ renderer })
+// W19.P2+P5 — shared composable replaces the duplicated stateless
+// renderer that previously lived here AND in MarkdownView.vue. The
+// composable wraps `marked-gfm-heading-id` so heading dedupe is now
+// consistent across DecisionDetail (which previously had no dedupe at
+// all — real bug surfaced by W19.A11 documentation) and MarkdownView.
+const { render } = useMarkdownWithSlugDedupe()
 
 const highlighterReady = ref(false)
 onMounted(async () => {
@@ -91,7 +78,7 @@ onMounted(async () => {
 const renderedBody = computed(() => {
   void highlighterReady.value // re-run after the highlighter loads
   if (!body.value) return ''
-  return wrapCallouts(marked.parse(body.value) as string)
+  return wrapCallouts(render(body.value))
 })
 
 // ── TOC ──────────────────────────────────────────────────────────────

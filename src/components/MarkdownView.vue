@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { marked, Renderer } from 'marked'
 import { computed, onMounted, ref } from 'vue'
 
 import Prose from '@/components/ui/Prose.vue'
-import { ensureHighlighter, highlightCode } from '@/composables/useHighlighter'
+import { ensureHighlighter } from '@/composables/useHighlighter'
+import { useMarkdownWithSlugDedupe } from '@/composables/useMarkdownWithSlugDedupe'
 
 const { source, prose = false } = defineProps<{
   source: string
@@ -22,54 +22,16 @@ onMounted(async () => {
   ready.value = true
 })
 
-const renderer = new Renderer()
-renderer.code = ({ text, lang }) =>
-  highlightCode(text, lang || 'text')
-
-// Generate stable heading ids so `/path#heading-slug` deep-links scroll to
-// the right place. Slug roughly matches GitHub's algorithm: lowercase,
-// alphanumerics + hyphens, whitespace collapsed to single hyphens. Must be a
-// regular function (not arrow) to retain `this.parser` for inline rendering.
-function slugify(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-')
-}
-
-// Wave-18 W18.N — dedupe heading ids within a single render so repeated
-// headings (e.g. `### Action Items` appearing 6× in D13-ecs-alignment-audit)
-// don't produce duplicate `id="action-items"` attributes (invalid HTML +
-// only the first hash-link works). Mirrors GitHub's algorithm: first
-// occurrence keeps the base slug; subsequent get `-1`, `-2`, …
-//
-// The counter is reset at the start of every `html` computed re-run so two
-// different `<MarkdownView>` instances (or two source updates on the same
-// instance) don't bleed state into each other.
-let slugCounts = new Map<string, number>()
-function uniqueSlug(s: string): string {
-  const base = slugify(s)
-  const n = slugCounts.get(base) ?? 0
-  slugCounts.set(base, n + 1)
-  return n === 0 ? base : `${base}-${n}`
-}
-
-renderer.heading = function ({ tokens, depth, text }) {
-  const inner = this.parser.parseInline(tokens)
-  const id = uniqueSlug(text)
-  return `<h${depth} id="${id}">${inner}</h${depth}>\n`
-}
-
-marked.setOptions({ gfm: true, breaks: false })
-marked.use({ renderer })
+// Wave-19 W19.P2+P5 — heading ids + per-render dedupe are now
+// delegated to `useMarkdownWithSlugDedupe`, which wraps
+// `marked-gfm-heading-id`. Replaces the hand-rolled module-level
+// Map<string,number> previously living in this file (W18.N).
+const { render } = useMarkdownWithSlugDedupe()
 
 const html = computed(() => {
   // touch `ready` so the computed re-runs after the highlighter loads
   void ready.value
-  // Reset per-render dedupe state — see uniqueSlug() comment.
-  slugCounts = new Map()
-  return marked.parse(source) as string
+  return render(source)
 })
 </script>
 

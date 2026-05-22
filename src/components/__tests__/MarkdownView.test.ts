@@ -90,20 +90,28 @@ describe('MarkdownView heading id dedupe — W19.A11 regression coverage', () =>
     expect(idMatch, 'h3 should have an id attribute').not.toBeNull()
     const id = idMatch![1]
     expect(id.length, 'slug must be non-empty').toBeGreaterThan(0)
-    expect(id, 'slug must be valid kebab-case (a-z, 0-9, -)').toMatch(/^[a-z0-9-]+$/)
-    // No leading/trailing/double hyphens for this input.
-    expect(id).not.toMatch(/^-|-$|--/)
+    // W19.P2 — switched to `marked-gfm-heading-id` (github-slugger).
+    // Unicode letters are PRESERVED (matches GitHub's actual behavior:
+    // `### Hé éé! Foo & Bar` → `id="hé-éé-foo--bar"`). Previously the
+    // hand-rolled slugify stripped non-ASCII via `/[^\w\s-]/g` (no /u
+    // flag) — that lost information. The new slug is URL-safe but no
+    // longer kebab-restricted-ASCII; doubled hyphens around the dropped
+    // `&` are expected github-slugger behavior.
+    expect(id, 'slug must be URL-safe').not.toMatch(/[\s<>"'&]/)
+    expect(id, 'unicode letters preserved').toContain('hé')
+    expect(id, 'unicode letters preserved').toContain('éé')
   })
 
-  it('dedupe Map resets across mount/unmount/remount cycle', () => {
-    // The slugCounts Map is module-scoped but reassigned to `new Map()` at
-    // the start of every `html` computed re-run (see MarkdownView.vue uniqueSlug
-    // comment). A fresh mount triggers a fresh computed, which resets the Map —
-    // so unmount/remount with the same source must produce `action-items`
-    // (NOT `action-items-1`). Regression guard: if anyone tries to "fix" the
-    // Map to per-instance scoping by removing the reset, this catches it.
-    // Conversely, if anyone removes the reset entirely so the Map accumulates
-    // across renders, this also catches it.
+  it('dedupe state resets across mount/unmount/remount cycle', () => {
+    // W19.P2 — dedupe is now delegated to `marked-gfm-heading-id`,
+    // whose `preprocess` hook resets the internal `github-slugger`
+    // before every `marked.parse()` call (see
+    // useMarkdownWithSlugDedupe). A fresh mount triggers a fresh
+    // computed which calls render() which calls parse() which resets
+    // — so unmount/remount with the same source must produce
+    // `action-items` (NOT `action-items-1`). Regression guard: if
+    // anyone replaces the plugin with a non-resetting implementation
+    // OR forgets to call `parse()` per render, this catches it.
     const source = '### Action Items\n\nbody'
 
     const w1 = mount(MarkdownView, { props: { source } })
