@@ -440,7 +440,6 @@ declare. If you're declaring a new Widget, use `defineWidget`.
 `.dispose()` removes the registration and runs all attached cleanup.
 
 **Example**:
-
 ```ts
 const disposer = defineWidget({ name: 'foo', ... })
 // later:

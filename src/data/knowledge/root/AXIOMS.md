@@ -1,432 +1,318 @@
 # Extension API v2 — Design Axioms & Constraints
 
-> **Status**: Living document. Updated 2026-05-18 from design review meeting + Notion docs.
+> **Status**: Living document. Updated 2026-05-21 (wave-19 prose simplification).
 > **Source**: Meeting transcript `Frontend-Standup-ef8d2f8d-17b7.json` (2026-05-18),
-> Notion "Centralized Graph State Package" + "RFC Extension: Canonical Workflow Model"
+> Notion "Centralized Graph State Package" + "RFC Extension: Canonical Workflow Model",
+> Slack design feedback 2026-05-21.
 
-This document captures the **non-negotiable design constraints** that all Extension API v2
-work must respect. Violations of these axioms are hard blockers.
+## Preamble — Widget Contract (after Austin Mroz, 2026-05-21)
+
+A robust widget follows Postel's law:
+
+1. **A widget displays a valid representation of the current Value.**
+2. **When a user interaction with the widget causes a display change, the new value is assigned back to the Value.**
+3. **A widget is liberal in what it accepts (any current Value), conservative in what it emits (always schema-valid).**
+
+The axioms below formalize the consequences. The derived theorems in
+[`axioms-theorems.md`](./axioms-theorems.md) follow logically from the
+axioms. Long-form rationale per axiom lives in
+`decisions/D-axiom-A{N}-rationale.md` ADRs (cross-linked below).
 
 ---
 
 ## A1: Widget-Centric Philosophy
 
-**Widgets are THE singular concept** for all node/graph extensions.
+**Widgets are the singular extension surface. Nodes are topology; widgets
+are user-facing.** Extensions interact with widgets directly; nodes never
+"look down" to enumerate or modify widgets.
 
-- Widgets must work **anywhere**: graph editor, app mode, without a node, without a graph
-- No special-casing by context — if we can keep it general, we must
-- "Widgets can potentially work anywhere" — they are the primary extension surface
-- Nodes should **never "look down"** to widgets (D1 meeting decision)
-  - Node hooks cannot reference/modify widgets
-  - Widgets can know their parent node, but nodes cannot enumerate widgets
-  - Rationale: Widgets can move (promotion, app mode), nodes cannot safely hold widget refs
+- Widgets must survive across promotion, app mode, partial graph views, and linked-instance clones (blueprints).
+- Widgets know their parent node (`widget.parentNode`); nodes cannot enumerate widgets (`node.getWidget()` / `node.getWidgets()` are bilaterally excluded — see A14).
+- Extensions register widgets via `defineWidget({type, mount, …})`; node hooks cannot reference widget state.
 
-> "Widgets are even able to live or exist and be functional even without a graph or a node."
-> — Christian Byrne (on app mode constraint)
-
-### Widget Contexts
-Widgets must survive and function correctly across:
-1. **Promotion** — widget moves from subgraph to parent graph
-2. **App mode** — widget exists without visible graph
-3. **Partial graph views** — subgraph boundaries hide some nodes
-4. **Linked instances** (blueprints) — same graph instance across clones
+**Rationale**: see [`decisions/D-axiom-A1-rationale.md`](./decisions/D-axiom-A1-rationale.md).
+**Implementation**: `decisions/D-no-node-widget-access.md` (bilateral closure); `decisions/D11-naming-defineNode-defineWidget.md`.
 
 ---
 
 ## A2: Minimal API Surface
 
-**Start with absolute minimum. Add by necessity, not by usage patterns.**
+**Start with the absolute minimum. Add by necessity, not by usage pattern.**
+Surfaces are comment-out-by-default; restoration requires a validated
+ecosystem use case, an audit against A1–A13, and behavior-triplet test coverage.
 
-- Comment out anything we're not 100% sure about
-- `nodeMode` is just ONE example — remove/comment-out all uncertain surfaces
-- Slot/connection hooks → comment out for Phase A (most use cases have better alternatives)
-- If we observe "egregious" use patterns, that's signal to NOT expose that surface
-- Features added in phases based on **real necessity**, not ecosystem adoption patterns
+- "Egregious" observed use patterns are signal to NOT expose that surface.
+- Phase A exclusions are catalogued in §A14 (commented out — may return).
+- Permanent exclusions are catalogued in §A14 (REMOVED — never returning).
 
-> "We should have an API where however people use it, if they're only using it, things
-> should just work." — Jacob Segal
-
-### Phase A Exclusions (Comment Out)
-- [ ] Slot/connection hooks
-- [ ] `nodeMode` access
-- [ ] Node→widget communication methods
-- [ ] Any surface with primarily "egregious" observed use cases
+**Rationale**: see [`decisions/D-axiom-A2-rationale.md`](./decisions/D-axiom-A2-rationale.md).
+**Implementation**: §A14 below; `scripts/check-axiom-compliance.sh`.
 
 ---
 
 ## A3: Linked Subgraph Constraint
 
-**Linked subgraphs (blueprints) exist: same graph instance across clones.**
+**Linked subgraphs (blueprints) exist: same graph definition manifests across
+multiple instances.** All API designs must be tested against the
+linked-instance scenario.
 
-This is a MAJOR design constraint that affects:
-- ID strategy (IDs must be stable across clone boundaries)
-- Widget state (must not assume single instance)
-- Event dispatch (events may fire in multiple contexts)
-- Serialization (must not assume single workflow)
+- ID strategy must be stable across clone boundaries (A4).
+- Widget state must not assume single instance (Theorem 1, Theorem 7 in `axioms-theorems.md`).
+- Event dispatch may fire in multiple contexts (per-clone, not per-source).
+- Serialization must not assume single workflow (A7).
 
-All API designs must be tested against the linked-instance scenario.
+**Implementation**: `decisions/D-linked-subgraph-constraint.md`; `decisions/D12-scope-clone-on-copy.md`.
 
 ---
 
 ## A4: ID Strategy — Abstract Handles, Not Raw IDs
 
 **Extension authors should never need raw IDs in the ideal world.**
+IDs are scope-managed; handles auto-dispose when scope ends.
 
-- Use abstract handle objects with automatic scope management
-- IDs have scopes — auto-dispose when scope ends
-- Extensions don't need to know about subgraphs at the ID level
-- Internal ECS IDs are distinct from extension-facing handles
-- Locator IDs vs execution IDs need further discussion (deferred)
+- Abstract handle objects (`NodeHandle`, `WidgetHandle`) wrap internal ECS IDs.
+- Extensions don't need to know about subgraphs at the ID level.
+- Internal ECS IDs (UUIDs per D20) are distinct from extension-facing handles.
+- Locator IDs vs execution IDs distinction deferred (open question — see D-uwf-drafting-board).
+
+**Rationale**: see [`decisions/D-axiom-A4-rationale.md`](./decisions/D-axiom-A4-rationale.md).
+**Implementation**: `decisions/D20-id-type-convergence.md`; `decisions/D4-gap-analysis.md`.
 
 ---
 
-## A5: Widget State — Three-Tier Model
+## A5: Widget State — Three-Tier Model (Schema / Props / Values)
 
-**Schema + Props + Values (with mutual binding)**
+**Widget state is three tiers with distinct mutability.**
 
-1. **Schema** — Immutable for widget lifetime
-   - Type, name, presence of constraints
-   - Dynamic combos: schema is fixed, sub-widgets derived from parent schema
+1. **Schema** — immutable for widget lifetime (type, name, presence of constraints; dynamic combos: schema fixed, sub-widgets derived from parent schema).
+2. **Props** — mutable runtime configuration (disabled, hidden, min/max, callback).
+3. **Values** — user-facing data (Vue `modelValue`-style; mutual binding with props where appropriate).
 
-2. **Props** — Mutable runtime configuration
-   - disabled, hidden, min/max values, callback, etc.
-
-3. **Values** — User-facing data
-   - Like Vue's `modelValue` — special by convention
-   - Mutual binding between value and props where appropriate
-
-> "Widget state is basically a collection of historical accidents and bad decisions."
-> — Christian Byrne
+**Rationale**: see [`decisions/D-axiom-A5-rationale.md`](./decisions/D-axiom-A5-rationale.md).
+**Implementation**: `decisions/D14-widget-state-categories.md`; `decisions/D-immutability-enforcement.md`.
 
 ---
 
 ## A6: Command Pattern & Serialization
 
-From "Centralized Graph State Package" Notion doc:
+**All state transitions are serializable, deterministic, idempotent
+commands.** Commands target entities by stable IDs and support atomic
+multi-step transactions.
 
-### Must-Have Requirements
-- **Backend-agnostic**: Interface must work with any backend (Python, WASM, Go)
-- **Portable**: Generalizable interface not tied to specific runtime
-- **Deterministic**: Commands produce same result given same state
-- **Idempotent**: Same command can be applied multiple times safely
-- **Serializable**: All commands must be serializable (JSON, protobuf, etc.)
-- **Stable targeting**: Commands reference entities by stable IDs
-- **Transactional**: Support for atomic multi-step operations
-- **Reactive**: Via refs (Vue-style reactivity)
+- Backend-agnostic (Python, WASM, Go).
+- CRDT-compatible (collaborative editing, offline-first, conflict resolution).
+- Reactive via refs (Vue-style reactivity per A10).
+- State transitions are explicit (no hidden side effects), auditable (command log), reversible (undo/redo via command replay).
 
-### CRDT Compatibility
-Graph state must be CRDT-compatible for:
-- Collaborative editing
-- Offline-first workflows
-- Conflict resolution
-
-### Immutability
-State transitions must be:
-- Explicit (not hidden side effects)
-- Auditable (command log)
-- Reversible (undo/redo via command replay)
+**Rationale**: see [`decisions/D-axiom-A6-rationale.md`](./decisions/D-axiom-A6-rationale.md).
+**Implementation**: Notion "Centralized Graph State Package"; `decisions/D3.4-events-and-commands-reconciled.md`.
 
 ---
 
 ## A7: Canonical Workflow Model
 
-From "RFC Extension: Canonical Workflow Source and Run Snapshot Model" Notion doc:
+**Workflow state is four layers: WorkflowSpec (semantic source), WorkflowLayout
+(editor state), ExecutionPrompt (compiled), RunSnapshot (immutable run input).**
 
-### Four-Layer Model
-1. **WorkflowSpec** — Semantic source of truth
-   - The "code" of the workflow
-   - No layout, no editor state
+- WorkflowSpec is canonical for semantics; no layout, no editor state.
+- Layout never affects execution.
+- Prompt is derived from WorkflowSpec; never authored directly.
+- RunSnapshot is immutable once created; used for replay, debugging.
 
-2. **WorkflowLayout** — Editor state
-   - Node positions, zoom, selections
-   - NOT part of execution
-
-3. **ExecutionPrompt** — Compiled artifact
-   - What actually runs
-   - Derived from WorkflowSpec
-
-4. **RunSnapshot** — Immutable run input
-   - Frozen state at execution start
-   - Used for replay, debugging
-
-### Source-of-Truth Rules
-- WorkflowSpec is canonical for semantics
-- Layout never affects execution
-- Prompt is derived, never authored directly
-- RunSnapshot is immutable once created
+**Implementation**: Notion "RFC Extension: Canonical Workflow Source and Run Snapshot Model"; `decisions/D-no-app-beforeprompt.md`; A16 unifies prompt + workflow JSON.
 
 ---
 
 ## A8: Extensibility as Meta-Goal
 
-**We are building a meta-API, not just implementing features.**
+**We are building a meta-API, not just implementing features.** Every
+surface added today must consider future extension points.
 
-- API must be "easy to extend/change in the future"
-- Avoid locking ourselves into patterns that prevent evolution
-- Every surface added today must consider future extension points
-- Prefer composition over inheritance
-- Prefer explicit over implicit
+- API must be easy to extend/change in the future.
+- Prefer composition over inheritance.
+- Prefer explicit over implicit.
+- Avoid locking into patterns that prevent evolution.
 
 ---
 
 ## A9: Security & Isolation
 
-### Least Privilege
-- Extensions get minimal required access
-- No blanket access to internals
-- Scoped capabilities via handles
+**Extensions get minimal required access; private graph structure remains
+private.**
 
-### IP Protection
-- Private graph structure must remain private
-- Linked instances don't leak blueprint internals
-- Serialization must respect visibility boundaries
+- **Least privilege**: scoped capabilities via handles, no blanket access to internals.
+- **IP protection**: linked instances don't leak blueprint internals; serialization respects visibility boundaries.
 
 ---
 
 ## A10: Vue Reactivity Idioms
 
-The API follows Vue 3.5 patterns:
+**The API follows Vue 3.5 patterns natively; non-Vue extensions work via
+thin wrappers.**
 
-- **Refs** for mutable reactive state
-- **Computed** for derived values
-- **Watch** for side effects
-- **Setup function** pattern for initialization
-- **Provide/inject** for dependency injection
-- **Lifecycle hooks** (mounted, unmounted) for DOM timing
+- Refs for mutable reactive state; computed for derived values; watch for side effects.
+- Setup function pattern for initialization (per D2 — `decisions/D2-vue-setup-function-primer.md`).
+- Lifecycle hooks (`onMounted`, `onUnmounted`) for DOM timing.
+- `provide()` / `inject()` is a framework-internal mechanism, NOT an extension-author API (see A14 row for `getWidget` rationale).
 
-Extensions that use Vue patterns should feel native; those that don't
-should still work via thin wrappers.
+**Implementation**: `decisions/D1-vue-reactivity-primer.md`; `decisions/D2-vue-setup-function-primer.md`; `decisions/D8-world-vue-reactive-adapter.md`.
 
 ---
 
 ## A11: ECS Principles
 
-The underlying architecture is Entity-Component-System:
+**The underlying architecture is Entity-Component-System.**
 
-- **Entities** are IDs, not objects
-- **Components** are plain data
-- **Systems** operate on component queries
-- No inheritance hierarchies
-- Extensions interact via handles that wrap ECS queries
+- **Entities** are IDs, not objects.
+- **Components** are plain data (no methods, no back-references to parent entities).
+- **Systems** operate on component queries (pure functions).
+- No inheritance hierarchies.
+- Extensions interact via handles that wrap ECS queries.
+
+**Implementation**: `decisions/D13-ecs-alignment-audit.md`; `decisions/D-widget-serialization-simplification.md`.
 
 ---
 
 ## A12: Mount-Lifecycle as the Sole DOM Seam
 
-Per **D-widget-converge** (ACCEPTED 2026-05-18):
+**There is one Widget shape. DOM is reached only through the optional
+`mount(host, ctx) → cleanup?` lifecycle hook.** No DOM/native distinction in
+the v2 extension-api surface.
 
-There is one `Widget` shape. DOM is reached **only** through the optional
-`mount(host, ctx) → cleanup?` lifecycle hook. The DOM/native distinction does
-not exist in the v2 extension-api surface.
+### Hard rules
 
-**Hard rules:**
+- No `widget.element` / `widget.inputEl` field. No `kind: 'dom'` discriminator. No `DOMWidgetOptions` subtype. No `node.addDOMWidget()`.
+- Widget mount bodies capture the element via closure; later code paths reach the element through the closure binding.
+- `host` is a runtime-owned `<div>`; mount bodies append into it but do not manage it. The runtime moves the host (graph↔app mode, subgraph promotion, `<KeepAlive>` shuffle) without involving the widget.
+- `mount()`'s returned cleanup fires once, on widget destruction only. Host-remount (same instance, different host) fires `ctx.onBeforeRemount(fn)` / `ctx.onAfterRemount(newHostFn)` — separate from cleanup.
+- Custom widget types register via `defineWidget({type, mount, …})`. No loose `addWidget('unregistered-type', …)` fallback — unregistered types do not render.
+- v1 patterns (`addDOMWidget`, `widget.element`, `widget.inputEl`) remain available through the v1 path during the D6 parallel-paths window and break deliberately at D6 Phase D sunset.
 
-- No `widget.element` field. No `widget.inputEl` field. No `kind: 'dom'`
-  discriminator. No `DOMWidgetOptions` subtype. No `node.addDOMWidget()`.
-- The widget's mount body captures the element via closure; later code paths
-  reach the element through the closure binding, not through the handle.
-- `host` is a runtime-owned `<div>`; widget mount bodies append into it but
-  do not manage it. This lets the runtime move the host (graph↔app mode,
-  subgraph promotion, `<KeepAlive>` shuffle) without involving the widget.
-- `mount()`'s returned cleanup fires **once, on widget destruction only.**
-  Host remount fires `ctx.onBeforeRemount(fn)` / `ctx.onAfterRemount(newHostFn)`
-  — these are separate from cleanup.
-- Custom widget types register via `defineWidget({type, mount, …})`. There is
-  no loose `addWidget('unregistered-type', …)` fallback — unregistered types
-  do not render.
-- v1 patterns (`addDOMWidget`, `widget.element`, `widget.inputEl`,
-  `addWidget('custom-type')` without prior `defineWidget`) remain available
-  through the v1 path during the D6 parallel-paths window and break
-  deliberately at D6 Phase D sunset. The migration guide documents this as
-  an explicit cliff, not a runtime promise.
+### What this changes for you (W19.A6)
 
-**Why an axiom and not just an ADR:** the rule "DOM is a lifecycle seam, not
-a widget property" is invoked by every future widget-shape ADR (D14
-serialization-convergence applications, future `D-widget-host-resize`,
-future `D-custom-widget-renderer-events`). A12 short-circuits the
-re-litigation.
+v1 code accessed the wrapping `<div>` via `widget.element` / `widget.inputEl`
+on the widget handle. **v2 code captures the same element via the
+`mount(host, ctx)` closure binding instead.** The element itself isn't
+gone — only the handle accessor is removed. Both v1 and v2 widgets
+ultimately render into a runtime-owned host `<div>` the framework manages;
+v2 just makes the ownership explicit and prevents extensions from holding
+stale element references after a host-remount.
 
-**Validation:**
+### Remount vs Recreate (W19.A7 glossary)
 
-- No `element` / `inputEl` / `DOMWidget*` symbols exported from
-  `src/extension-api/widget.ts`, `node.ts`, `index.ts`, or `types.ts`.
+Two distinct lifecycle scenarios; do not conflate them:
+
+- **Remount** = *same widget instance, different host `<div>`*. Triggered by
+  `<KeepAlive>` shuffle or single-pane subgraph navigation. The widget's
+  internal state (closures, in-progress edits, listeners) survives. Fires
+  `ctx.onBeforeRemount(fn)` then `ctx.onAfterRemount(newHostFn)`.
+- **Recreate** = *fresh widget instance from spec*. Triggered by split-view
+  (the same Value displayed in two panes — each pane has its own
+  instance), subgraph promotion, or workflow load. The previous instance
+  is destroyed (cleanup fires); a new instance is constructed from the
+  schema declaration. Internal state does NOT survive.
+
+The runtime decides which path applies based on the move context. Extension
+authors who need cross-instance coordination should NOT rely on instance
+identity — instead, use `defineWidgetExtension({on('valueChanged', fn)})`
+which applies to every instance of a widget type. See `decisions/D-define-widget-augmenter.md`.
+
+A future ADR ([`D-unify-widget-mount-model.md`](./decisions/D-unify-widget-mount-model.md),
+PROPOSED) collapses non-DOM widgets onto the same mount path, making
+recreate the canonical lifecycle for ALL widgets.
+
+### Validation
+
+- No `element` / `inputEl` / `DOMWidget*` symbols exported from `src/extension-api/widget.ts`, `node.ts`, `index.ts`, or `types.ts`.
 - No `addDOMWidget` method on `NodeHandle`.
-- All custom widget rendering routes through `defineWidget({mount})` and
-  the runtime's per-widget host-`<div>` factory.
+- All custom widget rendering routes through `defineWidget({mount})` and the runtime's per-widget host-`<div>` factory.
+
+**Rationale**: see [`decisions/D-axiom-A12-rationale.md`](./decisions/D-axiom-A12-rationale.md).
+**Implementation**: `decisions/D-widget-converge.md` (W6.P3, 2026-05-18).
 
 ---
 
 ## A13: Single Coordinate Space (Canvas)
 
-Per **D-coord-space** (ACCEPTED 2026-05-18):
+**Public API speaks one coordinate space (canvas units, world space).**
+No `clientX` / `clientY` / `pageX` / `pageY` / `getBoundingClientRect`
+symbols on any public-API method signature.
 
-The v2 extension-api surface speaks **one coordinate space — canvas units —
-through every public accessor.** There is no `clientX`, no `pageX`, no
-`getBoundingClientRect`, no CSS-pixel space exposed on any `NodeHandle`,
-`WidgetHandle`, or future pointer-event helper.
+- All four `NodeHandle` spatial methods carry JSDoc naming "canvas units" explicitly.
+- Authors needing screen-space coordinates use the documented escape-hatch (`window.app.canvas.ds.scale` / `.offset` + `getBoundingClientRect` + `devicePixelRatio`) with a `// escape-hatch — see D-coord-space.md` annotation. The escape-hatch is NOT a stability promise.
+- Migration-guide section "Coordinate spaces — single-unified-concept policy" covers all six documentation-contract items from `D-coordinate-space.md`.
 
-**Hard rules:**
+### Validation
 
-- `NodeHandle.getPosition` / `setPosition` / `getSize` / `setSize` —
-  canvas units. No `space?: 'canvas' | 'client' | 'css'` parameter
-  variant. No `getScreenPosition` / `getCSSPosition`.
-- Pointer-event helpers (when added in a future ADR) deliver canvas-space
-  `{ x, y }` only. The runtime performs the conversion before handing
-  the event to the extension.
-- `defineWidget({mount})` hosts are runtime-positioned. The mount body
-  appends DOM into the host but does not run its own canvas↔CSS
-  conversion; the runtime guarantees the host's visual placement matches
-  its owning node's canvas position.
-- `convertOffsetToCanvas` / `convertCanvasToOffset` / `convertEventToCanvas`
-  LiteGraph helpers are NOT re-exported on the v2 public surface.
-- `devicePixelRatio` is invisible to extensions through the public
-  handles. The dpr policy is: the runtime owns dpr math; extensions
-  using the documented surface never multiply or divide by dpr.
-
-**The escape-hatch** (deliberately fragile, `@stability escape-hatch`):
-
-For legitimate screen-space needs (hi-DPI math on a custom GPU canvas,
-floating overlays anchored to absolute browser coordinates, custom
-hit-testing outside the LiteGraph canvas):
-
-```ts
-// escape-hatch — see D-coord-space.md § Documentation contract
-const scale = window.app.canvas.ds.scale          // zoom factor
-const [ox, oy] = window.app.canvas.ds.offset      // pan offset (canvas units)
-const rect = window.app.canvas.canvas.getBoundingClientRect()  // CSS pixels
-const dpr = window.devicePixelRatio                // hi-DPI factor
-```
-
-Authors reaching for the escape-hatch MUST annotate the use site with the
-`escape-hatch` comment so reviewers (human or AI) can see the dependency
-is deliberate. The escape-hatch is NOT a stability promise — it can
-change shape with internal renderer refactors.
-
-**Why an axiom and not just an ADR:** the rule "one coordinate space at
-the boundary" is invoked by every future surface that touches geometry
-(pointer-event helpers, drag-and-drop ADRs, future viewport ADRs,
-selection-rectangle helpers, custom `onDraw*` patching replacements).
-A13 short-circuits the re-litigation.
-
-**Validation:**
-
-- No `clientX` / `clientY` / `pageX` / `pageY` / `getBoundingClientRect`
-  symbols on any public-API method signature.
 - No `Viewport` / `ScreenPoint` / `CSSPoint` types exported.
-- All four `NodeHandle` spatial methods carry a JSDoc that names
-  "canvas units" explicitly.
-- Migration-guide section "Coordinate spaces — single-unified-concept
-  policy" covers all six documentation-contract items from D-coord-space.
+- All four `NodeHandle` spatial methods carry the "canvas units" JSDoc.
+
+**Rationale**: see [`decisions/D-axiom-A13-rationale.md`](./decisions/D-axiom-A13-rationale.md).
+**Implementation**: `decisions/D-coordinate-space.md`.
 
 ---
 
 ## A15: Widget Declarativity
 
-Per **D-widget-serialization-simplification (wave-9, 2026-05-20)** and A1
-(widget-centric), A5 (3-tier widget state):
+**Widgets are schema-declared. Every widget originates from a Python node
+class `INPUT_TYPES` declaration.** There is no runtime widget addition
+by frontend extensions; there is no "frontend-only widget" concept.
 
-**Widgets are schema-declared.** Every widget originates from a Python node
-class `INPUT_TYPES` declaration. There is no runtime widget addition by
-frontend extensions, and there is no concept of a "frontend-only widget."
-
-### Consequences
-
-- `node.addWidget(...)` and friends are **not part of the v2 surface** and
-  will not be added back. A separate ADR (`D-ban-runtime-addwidget`, tracked
-  as wave-10 follow-up) handles enforcement on the v1 surface during the
-  parallel-paths transition (D6).
-- If an extension needs UI-only state, the choices are:
-  1. **Boxed/composed widget** (BBOX-style) — the widget IS its own schema
-     input value; the box composes the UI but the value is a single
-     schema-declared field.
-  2. **Non-widget UI primitive** — overlays, panels, custom DOM not
-     registered through the widget system. Lifecycle attaches via
-     `defineNode` / `defineExtension` setup.
-  3. **Schema input** — accept that the data point belongs in the workflow
-     and add it to `INPUT_TYPES`.
-
-### Rationale
-
-Runtime widget addition was the *underlying reason* most of the
-serialization-disable matrix existed: a widget added at runtime has no
-backend schema slot, so its value had to be stripped from the prompt to
-avoid backend rejection. Declarativity removes the cause; A16 removes the
-escape hatch.
+- `node.addWidget(...)` and friends are NOT part of the v2 surface and will not be added back (`decisions/D-ban-runtime-addwidget.md` handles v1 enforcement).
+- UI-only state options: (1) boxed/composed widget (BBOX-style — widget IS its own schema input value); (2) non-widget UI primitive (overlays, panels, custom DOM via `defineNode` / `defineExtension` setup); (3) schema input (accept that the data point belongs in the workflow — add it to `INPUT_TYPES`).
 
 ### Validation
 
-- `src/extension-api/node.ts` exposes no `addWidget` / `addDOMWidget`
-  surface (already enforced — see A14 "REMOVED" table)
-- `scripts/check-axiom-compliance.sh` rejects re-introduction
+- `src/extension-api/node.ts` exposes no `addWidget` / `addDOMWidget` surface (see §A14 REMOVED table).
+- `scripts/check-axiom-compliance.sh` strict-fails on re-introduction.
+
+**Rationale**: see [`decisions/D-axiom-A15-rationale.md`](./decisions/D-axiom-A15-rationale.md).
+**Implementation**: `decisions/D-widget-serialization-simplification.md` (wave-9, 2026-05-20).
 
 ---
 
 ## A16: Unified Serialization Target
 
-Per **D-widget-serialization-simplification (wave-9, 2026-05-20)** and D14
-(serialization convergence), A1 (widget-centric):
-
 **Workflow JSON and API prompt payload converge to a single serialization
 output.** Authors cannot disable serialization at the widget level. The
-**sole** extension-author interface to serialization is
+sole extension-author interface to serialization is
 `widget.on('beforeSerialize', handler)`.
 
-### Consequences
-
-- No matrix of disable knobs (`widget.options.serialize`,
-  `widget.setSerializeEnabled`, `event.skip()`) — all are commented out
-  in A14.
-- No 4-context discriminator (`'workflow' | 'prompt' | 'clone' |
-  'subgraph-promote'`) on the serialize event payload. Clone and
-  subgraph-promote are framework concerns; workflow and prompt converge.
-- The hook fires **once per serialization**. The handler returns (or
-  awaits resolution of) a single value, and the framework writes that
-  value to every transport.
-- `node.on('beforeSerialize')` remains `@deprecated` + runtime-warned
-  per ADR-0010 — *not banned* by this axiom (per user direction
-  2026-05-20). With A15 + A16 in force the node-level surface is
-  structurally redundant, but the ban itself is deferred.
-
-### Rationale
-
-The four-context discriminator inverted the direction of knowledge flow:
-extensions had to know which transport fired in order to behave
-correctly. The framework owns transport; extensions own value. Per D14
-§Phase 4, the hook is supposed to fire once with a single payload —
-A16 finishes that job.
+- No matrix of disable knobs (commented out in §A14).
+- No 4-context discriminator on the serialize event payload — clone and subgraph-promote are framework concerns; workflow and prompt converge.
+- Hook fires once per serialization; handler returns (or awaits) a single value; framework writes that value to every transport.
+- `node.on('beforeSerialize')` remains `@deprecated` + runtime-warned per ADR-0010 (not banned — structurally redundant after A15+A16, but ban deferred per user direction 2026-05-20).
 
 ### Validation
 
-- `WidgetBeforeSerializeEvent` exposes no `context` field, no `skip()`
-  method
-- `WidgetHandle` exposes no `setSerializeEnabled` / `isSerializeEnabled`
-  methods
-- `WidgetOptions` type has no `serialize?` key
-- `scripts/check-axiom-compliance.sh` strict-fails on any of the above
-  re-appearing in `widget.ts`
+- `WidgetBeforeSerializeEvent` exposes no `context` field, no `skip()` method.
+- `WidgetHandle` exposes no `setSerializeEnabled` / `isSerializeEnabled` methods.
+- `WidgetOptions` type has no `serialize?` key.
+- `scripts/check-axiom-compliance.sh` strict-fails on any of the above re-appearing in `widget.ts`.
+
+**Rationale**: see [`decisions/D-axiom-A16-rationale.md`](./decisions/D-axiom-A16-rationale.md).
+**Implementation**: `decisions/D-widget-serialization-simplification.md` (wave-9, 2026-05-20); `decisions/D14-serialization-convergence.md`.
 
 ---
 
 ## A14: Phase A Surface Exclusions
 
-Per **2026-05-18 design review** and A2 (minimal API surface):
-
-The following surfaces are **commented out or removed** for Phase A. They may
-be restored in later phases if validated use cases emerge.
+**The following surfaces are commented out or removed for Phase A.** They
+may be restored in later phases if validated ecosystem use cases emerge.
 
 ### REMOVED (not commented — permanently excluded from v2)
 
 | Symbol | File | Rationale |
 |--------|------|-----------|
-| `addWidget()` | node.ts | Widgets are defined in Python node schema, not created at frontend runtime. Violates widget-centric philosophy (A1) — nodes mutating widget collection. |
+| `addWidget()` | node.ts | Widgets are defined in Python node schema (A15), not created at frontend runtime. Violates A1 — nodes mutating widget collection. |
 | `addDOMWidget()` | node.ts | Collapsed into unified mount-lifecycle (A12). DOM widgets register via `defineWidget({mount})`. |
 
 ### COMMENTED OUT (Phase A exclusions — may return)
 
 | Symbol | File | Rationale |
 |--------|------|-----------|
-| `getWidget(name)` / `getWidgets()` | node.ts | **Bilateral A1 closure** per D-no-node-widget-access (2026-05-19). Nodes cannot reference or enumerate widgets. The `widget→node` direction (`widget.parentNode`) remains the sole channel. Extensions needing per-widget coordination register via `defineWidget({mount, ...})` and share state through Vue `provide()` / `inject()` or the World event bus. |
-| `getMode()` / `setMode()` | node.ts | nodeMode access has "egregious" use patterns per meeting. A2. |
+| `getWidget(name)` / `getWidgets()` | node.ts | **Bilateral A1 closure** per `D-no-node-widget-access.md` (2026-05-19). Nodes cannot reference or enumerate widgets. The `widget→node` direction (`widget.parentNode`) remains the sole channel. Extensions needing per-widget coordination register via `defineWidget({mount, …})` and own their state internally — cross-entity coordination flows through the World event bus only (W19.A8: Vue `provide()` / `inject()` is a framework-internal mechanism, NOT an extension-author API). |
+| `getMode()` / `setMode()` | node.ts | `nodeMode` access has "egregious" observed use patterns per meeting. A2. |
 | `NodeMode` type | node.ts | Supporting type for mode access. A2. |
 | `NodeModeChangedEvent` | node.ts | Event for mode changes. A2. |
 | `on('modeChanged')` | node.ts | Event subscription for mode. A2. |
@@ -434,85 +320,68 @@ be restored in later phases if validated use cases emerge.
 | `SlotInfo` / `SlotDirection` / `SlotEntityId` | node.ts | Supporting types for slot API. A2. |
 | `NodeConnectedEvent` / `NodeDisconnectedEvent` | node.ts | Slot/connection events. A2. |
 | `on('connected')` / `on('disconnected')` | node.ts | Slot event subscriptions. A2. |
-| `getPosition()` / `setPosition()` | node.ts | Node spatial state. Deferred pending A13 (coord space) stabilization. |
+| `getPosition()` / `setPosition()` | node.ts | Node spatial state. Deferred pending A13 stabilization. |
 | `getSize()` / `setSize()` | node.ts | Node spatial state. Deferred. |
 | `getTitle()` / `setTitle()` | node.ts | Node visual state. Uncertain use case. |
 | `isSelected()` | node.ts | Node selection state. Uncertain use case. |
 | `isHidden()` / `setHidden()` | widget.ts | Widget visibility. Deferred pending serialization convergence. |
 | `isDisabled()` / `setDisabled()` | widget.ts | Widget enabled state. Deferred pending serialization convergence. |
-| `setSerializeEnabled(bool)` / `isSerializeEnabled()` | widget.ts | **A16 closure** per D-widget-serialization-simplification (wave-9, 2026-05-20). Authors cannot disable serialization — there is no matrix to expose. UI-only state belongs in boxed widgets, non-widget UI primitives, or schema inputs (A15). |
+| `setSerializeEnabled(bool)` / `isSerializeEnabled()` | widget.ts | **A16 closure** — authors cannot disable serialization. UI-only state belongs in boxed widgets, non-widget UI primitives, or schema inputs (A15). |
 | `WidgetBeforeSerializeEvent.context` (4-way discriminator) | widget.ts | A16 — single serialization target. Workflow JSON ≡ prompt payload; clone / subgraph-promote are framework concerns. Hook fires once. |
 | `WidgetBeforeSerializeEvent.skip()` | widget.ts | A16 — `skip()` IS a per-call disable. Removed alongside the discriminator. |
 | `WidgetPropertyChangeEvent` | widget.ts | Vacuous after `'serialize'` removed from union (only member). |
 | `on('propertyChange', handler)` overload | widget.ts | Subscriber for the vacated event. |
-| `WidgetOptions.serialize?: boolean` | widget.ts | Contradicted A16 at the read site. Already write-blocked by D-immutability-enforcement; key now removed from the type. |
+| `WidgetOptions.serialize?: boolean` | widget.ts | Contradicted A16 at the read site. Already write-blocked by `D-immutability-enforcement.md`; key now removed from the type. |
 
-**Restoration criteria:** A surface moves from "commented out" to "shipped" when:
-1. A validated ecosystem use case is documented
-2. The surface has been audited against A1–A13
-3. Test coverage exists in the behavior-triplet suite
+**Restoration criteria**: a surface moves from "commented out" to "shipped" when (1) a validated ecosystem use case is documented, (2) the surface has been audited against A1–A13, and (3) test coverage exists in the behavior-triplet suite.
 
-**Validation:**
-
-- No symbols from the "REMOVED" table appear in `src/extension-api/index.ts` barrel
-- Symbols from "COMMENTED OUT" table are wrapped in `// PHASE_A_EXCLUDED` blocks
+**Validation**: no symbols from the "REMOVED" table appear in `src/extension-api/index.ts` barrel; symbols from "COMMENTED OUT" table are wrapped in `// PHASE_A_EXCLUDED` blocks.
 
 ---
 
 ## Axiom-Excluded Test Annotation Policy
 
-Per **D-ban-runtime-addwidget (wave-10, 2026-05-20)** and as the test-side
-companion to A14 (Phase A Surface Exclusions), A15, and A16.
-
 **When a source-code surface is removed or deferred per an accepted axiom
 or ADR, tests that asserted on the absent surface MUST be converted to
-expected-failure annotations rather than deleted outright.** The
-annotated test continues to run in CI; if the surface is ever
-re-introduced (intentionally or by regression) the expected-failure
-flips to a real failure and surfaces the policy violation.
+expected-failure annotations rather than deleted outright.**
+
+The annotated test continues to run in CI; if the surface is ever
+re-introduced (intentionally or by regression) the expected-failure flips
+to a real failure and surfaces the policy violation.
 
 ### Mechanism
 
-Vitest convention. Tests use the project's `axiomExcluded({...})`
-helper (a thin wrapper around `test.fails` that writes structured
-metadata to `task.meta.annotations`). The annotation block carries:
+Tests use the project's `axiomExcluded({…})` helper (thin wrapper around
+`test.fails` + `task.meta.annotations`):
 
-- `axiom` — short id, e.g. `"A15"` or `"A14:REMOVED"`
-- `adr` — workspace ADR path, e.g. `"decisions/D-ban-runtime-addwidget.md"`
+- `axiom` — short id (`"A15"`, `"A14:REMOVED"`)
+- `adr` — workspace ADR path
 - `rationale` — one-sentence summary of *why* the surface is absent
-- `migration` — one or more migration paths the original consumer
-  should take (e.g. `"declare in INPUT_TYPES"`, `"use boxed widget"`)
-- `restoration` — optional cross-ref to the ADR's restoration criteria
-  if the surface can re-enter
+- `migration` — one or more migration paths (e.g. `"declare in INPUT_TYPES"`, `"use boxed widget"`)
+- `restoration` — optional cross-ref to ADR restoration criteria
 
-### Compat-floor doctrine retired
+### Compat-floor doctrine retired (wave-10)
 
-Previously the v2 BC test suite carried "compat-floor blast_radius ≥ N
-— MUST pass before v2 ships" annotations on tests that asserted on
-specific v1→v2 migration targets. **This doctrine is retired as of
-wave-10.** Compat floors based on ecosystem-consumer counts conflated
+The "compat-floor blast_radius ≥ N MUST pass before v2 ships" annotations
+are retired. Compat floors based on ecosystem-consumer counts conflated
 *evidence that a migration is needed* with *evidence that a specific
 surface must exist to satisfy that migration*. Axioms and ADRs are the
-correct source of truth for what the v2 surface contains; BC tests
-verify behavior of surfaces the design admits, and use
-`axiomExcluded({...})` for everything else.
+source of truth for what the v2 surface contains; BC tests verify
+behavior of admitted surfaces and use `axiomExcluded({…})` for everything else.
 
-### When deletion is preferable to annotation
+### When deletion is preferable
 
 Delete a test outright (rather than annotating) only when the **test's
-scenario** is no longer meaningful — not when the surface is gone but
-the user-journey it tested still exists with a different surface. In
-the latter case, rewrite the test against the new surface; in the
-former case, deletion is the honest signal.
+scenario** is no longer meaningful — not when the surface is gone but the
+user-journey it tested still exists with a different surface. Rewrite
+against the new surface in the latter case.
 
 ### Validation
 
-- `src/extension-api-v2/__tests__/helpers/axiomExcluded.ts` is the
-  canonical helper; tests must import from there, not inline
-  `test.fails(...)`
-- Inline `test.fails(...)` (or `test.skip(...)`) without an attached
-  axiom-excluded annotation is a process violation; future lint rule
-  may enforce
+- `src/extension-api-v2/__tests__/helpers/axiomExcluded.ts` is the canonical helper.
+- Inline `test.fails(…)` / `test.skip(…)` without an attached axiom-excluded annotation is a process violation; future lint rule may enforce.
+
+**Implementation**: `decisions/D-ban-runtime-addwidget.md` (wave-10, 2026-05-20).
 
 ---
 
@@ -529,12 +398,15 @@ All current designs must not preclude these future capabilities.
 
 ## Cross-References
 
-- D1–D8 ADRs in `decisions/`
-- D14 (serialization convergence)
-- P2 (extension-api package plan)
-- Meeting notes: `research/external/meeting-2026-05-18-extension-api-design-review.md`
-- Notion docs:
+- **Axiom rationale ADRs**: `decisions/D-axiom-A{1,2,4,5,6,12,13,15,16}-rationale.md` (long-form rationale extracted per W19.A1+A2)
+- **Derived theorems**: [`axioms-theorems.md`](./axioms-theorems.md) (W19.A4)
+- **Glossary**: [`docs/glossary.md`](./docs/glossary.md) (W19.A3)
+- **Phase B re-open ADRs (PROPOSED)**: `decisions/D-unify-widget-mount-model.md` (W19.A9); `decisions/D-widget-promotion-semantics.md` (W19.A10)
+- **Decision records**: `decisions/D1`–`decisions/D20-id-type-convergence.md`
+- **Plans**: P1 (`research/architecture/plans/`), P2 (extension-api package)
+- **Meeting notes**: `research/external/meeting-2026-05-18-extension-api-design-review.md`
+- **Notion docs**:
   - [Centralized Graph State Package](https://www.notion.so/comfy-org/Centralized-Graph-State-Package-2736d73d3650804ea114c123ddd2c51e)
   - [RFC Extension: Canonical Workflow Source and Run Snapshot Model](https://www.notion.so/comfy-org/RFC-Extension-Canonical-Workflow-Source-and-Run-Snapshot-Model-32e6d73d36508194a711c981b81b2b9a)
-- Slack checkpoint (save format PRD review): https://comfy-organization.slack.com/archives/C09TX71RK5F/p1774736219050719
-- Validation: `scripts/check-axiom-compliance.sh`
+- **Slack checkpoint**: <https://comfy-organization.slack.com/archives/C09TX71RK5F/p1774736219050719>
+- **Validation**: `scripts/check-axiom-compliance.sh`

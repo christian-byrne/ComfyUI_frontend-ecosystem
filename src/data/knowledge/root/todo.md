@@ -1,5 +1,235 @@
 # ECS + Vue Hoisted Client State & Hook API — Tasks
 
+## 2026-05-21 PM — Wave-19 backlog (proposed, not yet started)
+
+Logged but not actioned — will pick up after Slack-feedback approval pass.
+
+### Wave-19 polish (Phase-A-safe, do anytime)
+
+- [ ] W19.P1 — **Strict idempotence for `scripts/wiki-link.mjs` (W18.K follow-up)**. Converges in 2 runs today; first run added 695 links, second run modified 9 more (slug-alias overlap like `D14` vs `D14-foo`). Make cap-counter strictly idempotent so sync.sh doesn't churn 40+ files on every run. ~30m.
+- [ ] W19.P2 — **Adopt `marked-gfm-heading-id` plugin** (research/dashboard-nav-audit-2026-05-21.md Fix 3). Replaces hand-rolled `slugify()` + module-level dedupe Map from W18.M with the maintained plugin. Net code reduction; subsumes the W18.N P0 BLOCKER fix. ~45m.
+- [ ] W19.P3 — **Dashboard 404 catch-all route** (research/dashboard-nav-audit-2026-05-21.md Fix 4). Add `:pathMatch(.*)*` + `pages/NotFound.vue`. ~30m.
+- [ ] W19.P4 — **Adversarial-review SHIP-WITH-FOLLOWUPS** (research/wave-18-adversarial-review.md final 4):
+  - [ ] W19.P4.A — DOMPurify guard on `v-html` sites (`Prose.vue:30`, `MarkdownView.vue:37`, `Axioms.vue:100`, `DecisionDetail.vue:121`). Currently low-risk (sole-contributor, in-tree MD); flip to P0 the moment any external content source is added. ~45m.
+  - [ ] W19.P4.B — Honor `prefers-reduced-motion` in router `scrollBehavior` (`src/router/index.ts:171`). ~15m.
+  - [ ] W19.P4.C — Warn on ambiguous wiki-link / backlink resolution in `scripts/build-knowledge-manifest.mjs`. ~30m.
+
+### Wave-19 follow-ups carried from OP (Christian's first Slack message)
+
+Source: <https://comfyui-frontend-ecosystem.vercel.app/api-docs> Slack thread, 2026-05-21 8:02 PM.
+
+- [ ] W19.OP1 — **Migrate 3rd-party extensions**. After W16.P1 core migrations land. Needs strategy: which packs to target first (top 5 by consumer count per `research/meta/back-propagation-matrix.yaml`), migration playbook/recipe, support matrix. ~ scoped at decision time.
+- [ ] W19.OP2 — **Virtual widgets handling/migration**. Easier than virtual nodes — pre-established patterns exist. Sometimes overlaps with W16.P1 (e.g., audio widget). Audit `ComfyUI_frontend/src/` for current virtual-widget sites, ADR `D-virtual-widget-disposition.md`, then migrate. ~6h spread across audit + ADR + impl + tests.
+- [ ] W19.OP3 — **Refine W16.P2 scope (virtual nodes)** with Christian's updated framing: "we shouldn't have any. Possibly fully deprecate old reroutes in Vue Nodes mode. Convert primitives to frontend-only that are instantiated with a copy of current state of source (not much changes really)." Update `decisions/D-reroute-primitive-real-backend-migration.md` draft + W16.P2.B/C/D acceptance criteria.
+
+### Wave-19 Slack-feedback absorption (DrJKL + Austin + Christian, 2026-05-21)
+
+Approved actionables from Slack thread `https://comfy-organization.slack.com/archives/C09TX71RK5F/p1774736219050719`-adjacent (frontend-ecosystem channel, 2026-05-21 12:48 PM–3:07 PM). Approvals locked by Christian 2026-05-21 PM. Phase A frozen at foundation `24d893d401`; all Wave-19 work below is JSDoc/markdown/test/dashboard-only OR proposes Phase B ADRs that flip ACCEPTED on #11939 merge.
+
+#### **Decomposition contract (read before claiming any subtask)**
+
+- **Axiom-numbering preservation rule**: A1..A16 numbering MUST be preserved across this wave. Refactor simplifies the *prose* of each axiom (one-sentence postulate + brief implication list), extracted detail moves to `decisions/D-axiom-N-rationale.md` ADRs OR `research/axioms-theorems.md`. Renumbering is out of scope (would invalidate 50+ ADR cross-refs + `scripts/check-axiom-compliance.sh` + `scripts/wiki-link.mjs` symbol map).
+- **Nothing-lost rule (per Christian)**: every sentence in the current AXIOMS.md must either (a) survive in the new postulate, (b) move to a rationale ADR, (c) be derivable as a theorem, or (d) be explicitly moved to an existing ADR. No content silently dropped. Implementer must produce a coverage matrix (one row per existing AXIOMS.md sentence-cluster, one column per disposition).
+- **Phase A freeze respected**: no edits to `ComfyUI_frontend/src/extension-api/` (foundation worktree `/home/c_byrne/worktrees/ComfyUI_frontend/restack-foundation-v2`) except JSDoc-only changes. ADRs in `decisions/` and `AXIOMS.md` in workspace root are NOT part of the freeze.
+- **Dashboard contract**: workspace ADRs + AXIOMS.md mirror into `~/projects/ComfyUI_frontend-ecosystem/src/data/knowledge/` via `scripts/sync.sh`. Manifest regen via `node scripts/build-knowledge-manifest.mjs` (CI checks). Dashboard repo direct-push to main per AGENTS.md Rule 9.
+- **Quality gates** (any task that writes code): `pnpm test`, `pnpm typecheck`, `pnpm lint` must pass before push. For Phase A foundation/pkg/ext/tf cascades: `bash scripts/check-axiom-compliance.sh` must remain 7/7 green.
+- **Sub-agent "ship not plan" rule**: every dispatched agent returns commit SHAs + file paths + line numbers, NOT a plan. If the agent returns a plan, the orchestrator implements directly.
+
+#### **W19.A1+A2 — Axiom prose simplification + Austin preamble** *(major; one agent, NOT parallelizable internally)*
+
+- [ ] **Goal**: rewrite each axiom A1..A16 in `AXIOMS.md` into postulate-style (≤2 sentences declarative + bullet list of implications). Add Austin's 3-line preamble at top: "A widget should display a valid representation of the current Value. When a user interaction with the widget causes a display change, it is assigned back to Value. A robust widget follows Postel's law." Extract removed prose to either `decisions/D-axiom-N-rationale.md` (one per axiom that loses substantial rationale) OR `research/axioms-theorems.md` (if derivable from other axioms).
+- [ ] **Inputs**:
+  - `AXIOMS.md` (workspace root) — 540 lines, 16 axioms
+  - `decisions/TEMPLATE.md` — ADR template
+  - `decisions/D-define-widget-augmenter.md`, `D-widget-converge.md`, `D-coordinate-space.md` — examples of how axioms get cited
+  - `scripts/check-axiom-compliance.sh` — keeps strict-failing on uncommented surfaces; axiom REFERENCES (numbers, label strings) must match
+  - `scripts/wiki-link.mjs` — symbol map cites `A1 A14 A15 A16` strings
+- [ ] **Steps**:
+  1. Build coverage matrix: open `AXIOMS.md`, list every paragraph by axiom, classify each as `[postulate / implication / rationale / example / validation / theorem]`.
+  2. For each axiom, draft new postulate (≤2 sentences) + 3–6 implication bullets.
+  3. Anything classified as `rationale` longer than 1 paragraph → new `decisions/D-axiom-AN-rationale.md` ADR (status: ACCEPTED, supersedes "AXIOMS.md §AN prose" with explicit pointer).
+  4. Anything classified as `theorem` → defer to W19.A4 (Glary-Bot 8-theorem list will absorb).
+  5. Anything classified as `validation` → keep inline (validation criteria stay with the axiom — they're invariants, not rationale).
+  6. Verify all ADR cross-refs (`A1`..`A16`) still resolve by string-matching.
+  7. Verify `scripts/check-axiom-compliance.sh` runs green.
+  8. Sync to dashboard mirror via `scripts/sync.sh`.
+- [ ] **Acceptance**:
+  - `AXIOMS.md` ≤ 350 lines (current: 540; ~35% reduction).
+  - Coverage matrix attached as `research/wave-19-axiom-coverage-matrix.md`.
+  - All 16 axioms have postulate + implications + validation sections.
+  - Zero broken cross-refs from `decisions/D*.md` to A1..A16 (verify via `rg -l 'A[1-9][0-9]?' decisions/`).
+  - `scripts/check-axiom-compliance.sh` 7/7 green.
+  - Dashboard `/axioms` renders without layout regression (verify via PLAYWRIGHT_BASE_URL e2e).
+
+#### **W19.A3 — Glossary (`docs/glossary.md` + dashboard `/glossary` route)** *(parallel-safe, can start with current term-set)*
+
+- [ ] **Goal**: author `docs/glossary.md` defining the Capitalized Terms of Art used throughout AXIOMS.md and ADRs (Widget, Value, Topology, Schema, Reference, Handle, Mount, Recreate, Entity, Component, System, World, Subgraph, Blueprint, Promotion, BoxedWidget, ScopedHandle, etc.). Add dashboard `/glossary` route. Auto-link first occurrence per page via existing `scripts/wiki-link.mjs` extension (workspace-side; dashboard route reads from `src/data/knowledge/root/glossary.md` mirror).
+- [ ] **Inputs**:
+  - `AXIOMS.md` (workspace root) — source of Capitalized Terms; ~14 candidate terms
+  - `decisions/D-define-widget-augmenter.md`, `D-widget-converge.md`, `D-immutability-enforcement.md`, `D-coordinate-space.md`, `D-linked-subgraph-constraint.md` — secondary term sources
+  - `scripts/wiki-link.mjs` — extend symbol map with glossary terms; auto-wrap first occurrence per file in `<a href="/glossary#TERM" class="glossary-link">` 
+  - Dashboard: `~/projects/ComfyUI_frontend-ecosystem/src/router/index.ts` for route registration; `src/pages/` for new `Glossary.vue` page
+- [ ] **Steps**:
+  1. Extract Capitalized Terms from `AXIOMS.md` + all `decisions/D*.md`. Dedupe.
+  2. Draft `docs/glossary.md` with one section per term: definition (1 sentence), example, non-example, cross-refs to axioms/ADRs.
+  3. Mirror to dashboard `src/data/knowledge/root/glossary.md` via `scripts/sync.sh` (extend sync script if needed to include glossary alongside AGENTS/AXIOMS/CONTEXT/todo).
+  4. Add dashboard route `/glossary` → new `src/pages/Glossary.vue` rendering markdown via existing `MarkdownView` component.
+  5. Extend `scripts/wiki-link.mjs` symbol map with glossary terms; ensure idempotence (one auto-link per term per file, not every occurrence).
+  6. Add navbar link to `/glossary` in `~/projects/ComfyUI_frontend-ecosystem/src/components/AppNav.vue`.
+  7. Vitest: `src/pages/Glossary.test.ts` (renders all glossary terms, first-occurrence linking only).
+  8. E2E: add to `e2e/nav-smoke.spec.ts` — `/glossary` static route + click first term-link round-trip.
+- [ ] **Acceptance**:
+  - `docs/glossary.md` ≥ 14 entries, all from AXIOMS.md + key ADRs.
+  - Dashboard route `/glossary` live + linked from navbar.
+  - Vitest + e2e green.
+  - `pnpm sync:knowledge` reproducible (manifest byte-identical post-glossary entry).
+
+#### **W19.A4 — Derived Theorems section on `/axioms`** *(parallel-safe; uses Glary-Bot 8-theorem list as starting point)*
+
+- [ ] **Goal**: hand-curate 5–8 derived theorems (Glary-Bot's output as starting point: Widget Identity Independence, Schema Validation Boundary, Topology-Value Separation, Widget Recreation Safety, Reversibility Completeness, Value Promotion Impossibility, Multi-Instance Consistency, Schema Evolution Prohibition). Render as new section in `/axioms` page under axiom index. Each theorem: 1 paragraph + 1 ADR cross-link minimum.
+- [ ] **Inputs**:
+  - Slack thread Glary-Bot output (in original user message, 2026-05-21 3:07 PM) — 8 candidate theorems
+  - `AXIOMS.md` (workspace root) — sources to verify derivation correctness
+  - Dashboard: `~/projects/ComfyUI_frontend-ecosystem/src/pages/Axioms.vue` for section render
+  - `decisions/D-no-virtual-nodes-in-api.md`, `D-widget-converge.md`, `D-immutability-enforcement.md`, `D-linked-subgraph-constraint.md`, `D-widget-serialization-simplification.md` — ADR cross-link targets
+- [ ] **Steps**:
+  1. Verify each Glary-Bot theorem actually derives from the current AXIOMS.md axiom set (or the W19.A1-refactored set if A1 lands first). Reject any that require extra premises not in axioms.
+  2. Author `docs/axioms-theorems.md` (workspace) — one section per surviving theorem with derivation chain + ADR cross-link.
+  3. Mirror to dashboard `src/data/knowledge/root/axioms-theorems.md`.
+  4. Edit `~/projects/ComfyUI_frontend-ecosystem/src/pages/Axioms.vue` to render the theorems section below the existing axiom index.
+  5. Vitest: ensure rendered DOM contains all theorem headings + ADR links resolve (no 404).
+  6. E2E: extend `e2e/nav-smoke.spec.ts` — `/axioms` theorems section visible, ADR link click navigates.
+- [ ] **Acceptance**:
+  - 5–8 theorems published, each ≤ 1 paragraph + ≥ 1 ADR cross-link.
+  - Coverage matrix: every theorem traces to ≥ 2 axioms as premises.
+  - Dashboard `/axioms` shows theorems section.
+  - Vitest + e2e green.
+
+#### **W19.A6 — A13 / `D-coordinate-space.md` "No widget.element / No widget.inputEl" rewrite** *(JSDoc/ADR-only, in-freeze)*
+
+- [ ] **Goal**: Austin's reading of the A12 prose "No widget.element field. No widget.inputEl field..." (AXIOMS.md:224) reads as if functionality is being removed. Reality: both already wrapped in div the client never sees; the change is "access through widget handle" → "store reference from mount call". Add explicit "What this changes for you" paragraph framing it that way.
+- [ ] **Inputs**:
+  - `AXIOMS.md:224` (the A12 "Hard rules" bullet about element/inputEl)
+  - `decisions/D-widget-converge.md` (A12 source ADR)
+  - `decisions/D-coordinate-space.md` (A13 source; user mis-attributed to A13 in Slack but actual text is A12 — fix in either location with cross-ref)
+  - Foundation worktree JSDoc on `widget.ts` mount() / WidgetHandle — verify framing matches
+- [ ] **Steps**:
+  1. Add "What this changes for you" paragraph to A12 in `AXIOMS.md` (after "Hard rules", before "Why an axiom"). Explicitly state: "v1 code accessed the wrapping `<div>` via `widget.element` / `widget.inputEl` on the handle. v2 code captures the element via the `mount(host, ctx)` closure binding instead. The element itself isn't gone — only the handle accessor is. Both v1 and v2 widgets ultimately render into a runtime-owned host `<div>` the framework manages."
+  2. Add same paragraph to `decisions/D-widget-converge.md` § Hard rules.
+  3. Verify JSDoc on `ComfyUI_frontend/src/extension-api/widget.ts:defineWidget` matches framing (cite axiom). JSDoc-only edit is in-freeze; foundation cascade required if .ts changes.
+  4. Sync to dashboard.
+- [ ] **Acceptance**:
+  - Austin (proxied via re-reading the new text aloud to oneself) does not interpret it as functionality removal.
+  - AXIOMS.md + D-widget-converge.md + widget.ts JSDoc all carry consistent "What this changes for you" framing.
+  - 7/7 axiom checks green.
+
+#### **W19.A7 — "Remount" → "Recreate" naming pass** *(ADR-only, in-freeze if Phase A surface unchanged)*
+
+- [ ] **Goal**: Austin's argument: single-DOM-element-for-life-of-widget-instance breaks split-view; ADRs use `onBeforeRemount` / `onAfterRemount` but the intended semantic is **recreate from spec** (each pane gets its own instance, value clamping flows via `defineWidgetExtension({on('valueChanged', clampValue)})` applied to both). Christian agreed instances are duplicated rather than projected. Audit ADRs for `remount`/`Remount`/`onAfter Remount`/`onBeforeRemount` and re-frame as recreate when the semantic is "fresh instance from spec".
+- [ ] **Inputs**:
+  - `AXIOMS.md:232` (A12 mentions `ctx.onBeforeRemount(fn)` / `ctx.onAfterRemount(newHostFn)`)
+  - `decisions/D-widget-converge.md` (primary source)
+  - `decisions/D3.1-design-questions-resolved.md` (also mentions remount)
+  - Foundation `ComfyUI_frontend/src/extension-api/widget.ts` — verify whether `onBeforeRemount`/`onAfterRemount` are exported surface (Phase A frozen — if exported as API, can only do JSDoc-rewording; if internal, safe to rename)
+- [ ] **Steps**:
+  1. Run `rg -n "[Rr]emount" decisions/ AXIOMS.md ComfyUI_frontend/src/extension-api/` to enumerate all sites.
+  2. For each site, classify: `[host-remount (host moves, instance stays)]` vs `[widget-recreate (instance disposed, new instance from spec)]`. The former keeps `remount` naming; the latter switches to `recreate`.
+  3. Decision: per Austin's split-view argument, ANY case where "the same Value is displayed in multiple panes" is `recreate`, not `remount`. Remount = same-instance-different-host (e.g., `<KeepAlive>` shuffle, single-pane subgraph navigation). Recreate = fresh-instance-from-spec (split-view, subgraph promotion).
+  4. Update ADR prose + AXIOMS.md A12 to distinguish the two cases explicitly. If both lifecycle hooks exist in the API, they coexist; if `onAfterRemount` is currently the only hook, add `onAfterRecreate` as a NEW exported hook (this WOULD be a surface change → defer to W19.A9 ADR, just rename in prose for now).
+  5. Cite the rename in `decisions/D-widget-converge.md` § Open questions or amend ADR with a "2026-05-21 amendment" footer.
+- [ ] **Acceptance**:
+  - Every `remount` site is intentional (kept) or `recreate` (renamed).
+  - `decisions/D-widget-converge.md` has an explicit recreate-vs-remount glossary entry.
+  - No Phase A surface change unless ADR amendment is justified (defer surface change to W19.A9).
+  - Cross-link from `D-widget-converge.md` to W19.A9 ADR.
+
+#### **W19.A8 — Strike "provide()/inject()" mention from extension-coordination text** *(ADR-only, in-freeze)*
+
+- [ ] **Goal**: Austin asked: "Are we allowing extension code to access provide/inject?" Christian's intent was the opposite: "they can handle state management themselves" — not via Vue provide/inject. The text in `AXIOMS.md:428` (A14 commented-out table for `getWidget(name)` rationale) currently says "Extensions needing per-widget coordination register via `defineWidget({mount, ...})` and share state through Vue `provide()` / `inject()` or the World event bus." Strike the provide/inject mention; reword to "extensions own their own state; coordination flows through the World event bus only".
+- [ ] **Inputs**:
+  - `AXIOMS.md:428` (the A14 row for `getWidget(name)` / `getWidgets()`)
+  - `decisions/D-no-node-widget-access.md` (sister ADR; check for same text pattern)
+  - `decisions/D-cross-node-observation.md` (covers cross-node state-sharing patterns)
+- [ ] **Steps**:
+  1. `rg -n "provide\(\)|inject\(\)" decisions/ AXIOMS.md` — enumerate every mention.
+  2. For each site, decide: keep (if specifically describing Vue framework internals, not extension API surface) vs strike (if presenting provide/inject as extension-author API).
+  3. AXIOMS.md:428 → reword: "Extensions needing per-widget coordination register via `defineWidget({mount, ...})` and own their state internally. Cross-entity coordination flows through the World event bus only — Vue `provide()` / `inject()` is a framework-internal mechanism, not an extension-author API."
+  4. `decisions/D-no-node-widget-access.md` — apply same reword if text present.
+  5. Sync to dashboard.
+- [ ] **Acceptance**:
+  - No prose in `decisions/` or `AXIOMS.md` presents `provide()` / `inject()` as extension-author API.
+  - Vue framework-internal mentions (D1, D2 reactivity primers) are unaffected.
+
+#### **W19.A9 — `decisions/D-unify-widget-mount-model.md` (PROPOSED)** *(Phase B blocker; ADR-only land now, surface change defers to #11939 merge)*
+
+- [ ] **Goal**: Christian's design idea: drop the DOMWidget/non-DOM distinction entirely. All widgets use one mount/unmount path. Standard lifecycle hooks become trivially uniform. Subsumes W19.A7 (recreate-on-mount becomes the only path). Composes with W19.A10 (promotion rework).
+- [ ] **Inputs**:
+  - `decisions/TEMPLATE.md`
+  - `decisions/D-widget-converge.md` (sister ADR — predecessor work on the same theme)
+  - `decisions/D-widget-serialization-simplification.md` (axiom A16 origin; similar reduction-by-deletion shape)
+  - `AXIOMS.md` A12 (Mount-Lifecycle as the Sole DOM Seam) — close cousin
+  - Foundation `ComfyUI_frontend/src/extension-api/widget.ts` — current `mount` signature
+  - Glary-Bot Theorem 4 (Widget Recreation Safety) — derives that mount must be idempotent → supports A9
+- [ ] **Steps**:
+  1. Author `decisions/D-unify-widget-mount-model.md` (status: **PROPOSED**, supersedes none, axioms cited: A1 A5 A12 A15).
+  2. Sections: Decision (drop DOMWidget concept), Rationale (split-view, theorem 4, Christian quote), Consequences (mount becomes the ONLY DOM seam, value-listener race conditions discussed by Austin become non-issues because each instance has its own listener), Implementation Plan (Phase B — flip ACCEPTED on #11939 merge, then foundation cascade `widget.ts` to expose unified mount, retire `kind: 'dom'` / `DOMWidgetOptions` references that still exist as PHASE_A_EXCLUDED).
+  3. Add to `AGENTS.md` Reconciliation history Phase B re-open triggers: "PR #11939 merge + W19.A9 ACCEPTED flip → foundation cascade per ADR-D-unify-widget-mount-model implementation plan."
+  4. Cite W19.A7 (recreate naming) + W19.A10 (promotion) as composes-with.
+  5. Update `research/meta/back-propagation-matrix.yaml` with A9 entry.
+- [ ] **Acceptance**:
+  - ADR PROPOSED, no Phase A surface change (foundation worktree untouched except potentially JSDoc cross-link).
+  - `decisions/D-design-questions-resolved.md` or equivalent index includes A9.
+  - W16 Phase B trigger list includes A9 flip-to-ACCEPTED step.
+  - `scripts/check-decision-propagation.sh` green (new ADR has commit + ADR + dashboard mirror).
+
+#### **W19.A10 — `decisions/D-widget-promotion-semantics.md` (PROPOSED)** *(Phase B blocker; composes with W19.A9)*
+
+- [ ] **Goal**: Christian agreed promotion-on-graph behavior must change w.r.t. how DOM widgets work. Validates Glary-Bot Theorem 6 (Value Promotion Impossibility): promotion creates new Topology entities, not Value mutation. The current DOM widget "promotion" pattern (where a widget "becomes" a node) is axiomatically wrong per A4 (Values independent of Topology) + A5 (Schema immutable).
+- [ ] **Inputs**:
+  - `decisions/TEMPLATE.md`
+  - `decisions/D-widget-converge.md` + new `D-unify-widget-mount-model.md` (W19.A9)
+  - `AXIOMS.md` A1 A3 A4 A5 — premises for the impossibility theorem
+  - Glary-Bot Theorem 6 — derivation
+  - Current ComfyUI_frontend code: `rg -l "promote|promotion" ComfyUI_frontend/src/lib/litegraph/` to find current implementation
+- [ ] **Steps**:
+  1. Author `decisions/D-widget-promotion-semantics.md` (status: **PROPOSED**, axioms cited: A1 A4 A5 A7 A11; composes-with A9).
+  2. Decision: widget promotion creates a NEW Topology entity (a node) that holds a Reference to the original Value. The widget itself is not mutated. The "promoted node" reads the same Value via its own widget instance. Original widget remains intact (if user keeps it in the graph).
+  3. Rationale: Theorem 6 derivation + Christian quote + concrete current-vs-proposed sequence diagram.
+  4. Consequences: legacy "widget becomes node" promotions migrate via auto-rewrite at workflow load time (similar pattern to virtual-node migration in W16.P2). Document a 1-version transition window.
+  5. Implementation plan: Phase B — flip ACCEPTED on #11939 merge AND W19.A9 ACCEPTED, then implement in `ComfyUI_frontend/src/lib/litegraph/`. Specifically NOT a surface change — Promotion is a runtime behavior, not a public API. So this ADR may flip ACCEPTED + implement in Phase A IF the implementation touches only `src/lib/litegraph/` and not `src/extension-api/`. Verify with Christian during implementation.
+  6. Add to AGENTS.md Phase B trigger list with composability note (A9 + A10 must land together).
+- [ ] **Acceptance**:
+  - ADR PROPOSED.
+  - Sequence diagrams (mermaid or ASCII) for current-vs-proposed promotion.
+  - Composability with A9 documented.
+  - W16 Phase B trigger list updated.
+
+#### **W19.A11 — Component + e2e tests for shipped UI fix (W18.A/B/M)** *(dashboard-only, fully parallel)*
+
+- [ ] **Goal**: DrJKL's "buttons do nothing" / "anchors but sections don't have id set" report (Slack 12:53 PM). The fixes shipped in W18.A (router scrollBehavior), W18.B (chip→`-refs` alignment), W18.M (MarkdownView stateful slugify w/ dedupe). 313 vitests + 21/21 e2e currently cover top-level paths. Add deeper regression coverage targeting DrJKL's specific complaint: AXIOMS.md heading anchors AND deep-link-to-second-occurrence of duplicate headings.
+- [ ] **Inputs**:
+  - `~/projects/ComfyUI_frontend-ecosystem/src/components/MarkdownView.vue` (stateful slugify lives here, lines ~30–55)
+  - `~/projects/ComfyUI_frontend-ecosystem/src/components/MarkdownView.test.ts` (existing 3 dedupe tests — extend)
+  - `~/projects/ComfyUI_frontend-ecosystem/e2e/nav-smoke.spec.ts` (existing 21 tests — extend)
+  - `~/projects/ComfyUI_frontend-ecosystem/src/router/index.ts:171` (scrollBehavior — verify coverage)
+  - `~/projects/ComfyUI_frontend-ecosystem/src/pages/Axioms.vue` (chip target rendering)
+- [ ] **Steps**:
+  1. Component test: extend `MarkdownView.test.ts` with cases — (a) markdown with 6 identical `### Action Items` produces ids `action-items` / `action-items-1` / .. / `action-items-5`; (b) heading text with unicode produces valid kebab-case id; (c) re-rendering same component twice (mount→unmount→mount) RESETS the dedupe Map (no `action-items-6` cross-render leak).
+  2. E2E test: extend `e2e/nav-smoke.spec.ts` — (a) navigate to `/decisions/d13-ecs-alignment-audit#action-items-1`, assert that the second action-items heading scrolls into view; (b) navigate to `/axioms#a12-mount-lifecycle-as-the-sole-dom-seam`, assert the A12 section is in viewport; (c) click an in-content link to `/decisions/x#section`, assert smooth-scroll fires and arrives at correct anchor.
+  3. Run `pnpm test` + `pnpm test:e2e` + `PLAYWRIGHT_BASE_URL=https://comfyui-frontend-ecosystem.vercel.app pnpm test:e2e`.
+- [ ] **Acceptance**:
+  - +3 vitests (slug-dedupe edge cases), +3 e2e tests (deep-link nav).
+  - All green locally + live Vercel.
+  - PR-ready commit.
+
+#### **Wave-19 dispatch + close-out plan**
+
+1. **Round 1 (parallel, 5 agents)**: A1+A2, A3, A4, A6+A7+A8, A9+A10, A11. Each agent dispatched with the relevant subsection above as its full prompt + the explicit constraints from the Decomposition Contract.
+2. **Round 2 (orchestrator reconciliation)**: cross-ref check (every theorem in A4 maps to ≥ 2 axioms in A1; every glossary term in A3 appears in A1 or an ADR); resolve any naming collisions between A7 rename pass and A9/A10 ADRs.
+3. **Quality gates**: `pnpm test`, `pnpm typecheck`, `pnpm lint` in both ComfyUI_frontend (foundation worktree, if any .ts/.vue touched) and dashboard repo. `bash scripts/check.sh` + `bash scripts/check-axiom-compliance.sh` 7/7. CI green on dashboard.
+4. **Self-review**: `research/wave-19-self-review-2026-05-21.md` (mirror W18.M pattern). Audit each subtask deliverable against its acceptance criteria. Flag CLEAN / SMELL / BLOCKER.
+5. **PR/merge/deploy/sync**: workspace push (no PR — workspace is the source of truth) + dashboard PR (or direct main per Rule 9 if tests green) + Vercel auto-deploy + live e2e re-validate + `bash scripts/sync.sh` clean.
+
 ## 2026-05-21 PM — Wave-18 closeout (deploy + live-validate)
 
 **Status**: ✅ All 15 Wave-18 items shipped + live-validated. Final dashboard HEAD: `1746f6e` (CI green ✅, deployed to Vercel production at 22:53:30Z).

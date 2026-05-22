@@ -10,7 +10,7 @@
 > numbering.
 >
 > Theorems are **derived**, not axiomatic. Adding or modifying a
-> theorem does not require an axiom change; _deleting_ a theorem
+> theorem does not require an axiom change; *deleting* a theorem
 > requires showing its derivation no longer holds (typically because
 > a premise axiom was retired or restated).
 
@@ -163,7 +163,7 @@ entities, optionally copy the Value, optionally destroy the old".
 **Consequences**:
 
 - [D-no-virtual-nodes-in-api](./decisions/D-no-virtual-nodes-in-api.md) — promotion-style surfaces that pretend to move state in place would violate this theorem.
-- [D-widget-promotion-semantics](./decisions/d-widget-promotion-semantics) _(planned — W19.A10, Agent-2 in parallel)_ — codifies the create-and-destroy semantics this theorem mandates.
+- [D-widget-promotion-semantics](./decisions/d-widget-promotion-semantics) *(planned — W19.A10, Agent-2 in parallel)* — codifies the create-and-destroy semantics this theorem mandates.
 
 ---
 
@@ -201,7 +201,7 @@ Declarativity — widgets originate from Python `INPUT_TYPES`; no
 runtime widget addition; no frontend-only widgets).
 
 **Statement**: A node type change that modifies its declared widget
-schema requires _new node instances_ (re-creation from the updated
+schema requires *new node instances* (re-creation from the updated
 type), not in-place upgrade of existing instances. The frontend
 extension API exposes no surface for "patch this widget's schema".
 
