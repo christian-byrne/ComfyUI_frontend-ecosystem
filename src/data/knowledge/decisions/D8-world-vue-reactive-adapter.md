@@ -1,10 +1,10 @@
-# ADR-D8: ECS World ↔ Vue Reactive Adapter
+# ADR-<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>: ECS <a href="/glossary#world" class="wiki-link">World</a> ↔ Vue Reactive Adapter
 
 **Status**: SCOPING / DEFERRED to Phase B — 2026-05-20 (wave-12, see `decisions/D-api-surface-finalization.md`). Phase A ships the API contracts (`node.on(...)`, `widget.on(...)`) against the v1 LiteGraph + monkey-patched adapter; Phase B replaces the adapter with the World↔Vue bridge per this ADR. No public-API surface change required at Phase B switchover — the change is transparent to extension authors.
 **Date**: 2026-05-08
 **Related cluster**: Reviewer Feedback Cluster D (F1, F7)
 **Blocks**: full implementation of every `node.on(...)` and `widget.on(...)`
-**Original gap**: D4 BLOCKER G12
+**Original gap**: <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a> BLOCKER G12
 
 ## Context
 
@@ -41,12 +41,12 @@ contract being pinned down first.
 
 2. **What is `shallow` vs `deep`?** Most ECS components are plain data
    objects (per ADR 0008). Per-component reactivity is almost always shallow
-   — extensions care about "the WidgetValue component changed" not "a deep
+   — extensions care about "the <a href="/api-docs/widgetvalue" class="wiki-link">WidgetValue</a> component changed" not "a deep
    field inside it changed."
 
 3. **What is `markRaw`'d?** LiteGraph `LGraphNode` instances (during the
    strangler-fig transition) and any large object that should not be made
-   reactive. CONTEXT.md D1 review flagged this as undocumented.
+   reactive. CONTEXT.md <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a> review flagged this as undocumented.
 
 4. **`flush: 'pre' | 'post' | 'sync'` strategy?** When a system batch-
    updates 50 components, do extension event handlers fire 50 times (sync)?
@@ -68,13 +68,13 @@ contract being pinned down first.
 
 ## What we know already (anchors)
 
-- Vue reactivity primer (D1) — the primitives we have to work with.
+- Vue reactivity primer (<a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a>) — the primitives we have to work with.
 - ADR 0008 — World is per-workflow, components are plain data.
 - ADR 0003 — every mutation is a command; the command dispatcher is the
   natural notification chokepoint.
-- D3.5 — extension setup runs inside `pauseTracking()` + scope activation
+- <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5 — extension setup runs inside `pauseTracking()` + scope activation
   (Vue's `setupStatefulComponent` pattern).
-- CONTEXT.md D1 review: "engine layer translating ECS World mutations →
+- CONTEXT.md <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a> review: "engine layer translating ECS World mutations →
   Vue notifications (so `watch(() => world.getComponent(...))` works) is
   undocumented. Likely the next biggest gap before implementation."
 
@@ -92,8 +92,8 @@ This is a real ADR with non-trivial implementation impact. Likely sequence:
 ## Cross-References
 
 - D1 (Vue reactivity primer)
-- D3.5 (reactive dispatch and scope alignment)
-- D4 BLOCKER G12 (this ADR resolves it)
+- <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5 (reactive dispatch and scope alignment)
+- <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a> BLOCKER G12 (this ADR resolves it)
 - ADR 0003, ADR 0008
 - F1, F7 from this session's reviewer feedback
 - CONTEXT.md D1-review: "engine layer ... undocumented"

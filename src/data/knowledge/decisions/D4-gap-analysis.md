@@ -1,11 +1,11 @@
-# D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API
+# <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API
 
 > Synthesis decision. Compares the `ComfyExtension` surface that ships today
 > against (a) the patterns extensions actually use in the wild (R4) and (b)
 > the proposed v2 API in `plans/P1-comfy-extension-v2-api.md` plus its
-> reactive/event substrate (D3.3, D3.4, D3.5). Output: a coverage matrix,
+> reactive/event substrate (<a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3, <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.4, <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5). Output: a coverage matrix,
 > a numbered gap list with severity tags, and a queue of follow-up
-> decisions (D5+) that must land before implementation.
+> decisions (<a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a>+) that must land before implementation.
 
 ---
 
@@ -28,16 +28,16 @@
   `dispose`; P1 returns `{ render, destroy? }` with optional cleanup. The
   whole point of the rewrite (preventing DOM-widget leaks, F5) is undermined
   by making teardown opt-in.
-- Six of the eight CONTEXT.md "open issues from D2 review" map directly to
+- Six of the eight CONTEXT.md "open issues from <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> review" map directly to
   unresolved P1 ambiguities (currentExtension global vs ctx, hook ordering,
   async setup, proxyRefs on setupState, ECS↔Vue notification engine, missing
-  reactivity primitives in D1).
+  reactivity primitives in <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a>).
 - The `init` / `setup` distinction, `loadedGraphNode`, and the
   `beforeRegisterVueAppNodeDefs` / auth-event family all warrant a
   **delete or merge** decision rather than a 1:1 port.
 - Transport-layer concerns from `extension-development-guide.md`
   (`window.comfyAPI` shim, `/scripts/*` legacy import paths,
-  `WEB_DIRECTORY`, dev-server inability to load custom-node JS) are
+  `WEB_DIRECTORY`, dev-<a href="/api-docs/server" class="wiki-link">server</a> inability to load custom-node JS) are
   **entirely unaddressed** by P1. Behaviour-surface and delivery-surface
   must be decoupled in the spec.
 
@@ -62,7 +62,7 @@ declarative arrays + 1 escape-hatch index signature.
 | H7 | `registerCustomNodes(app)` | `ComfyApp` | Register additional `LGraphNode` subclasses. | Medium — class registration. |
 | H8 | `loadedGraphNode(node, app)` | `LGraphNode`, `ComfyApp` | Fix-up nodes loaded from saved workflow. | **HIGH** — instance patching. |
 | H9 | `nodeCreated(node, app)` | `LGraphNode`, `ComfyApp` | Per-instance "just constructed" callback. | **HIGH** — instance patching. |
-| H10 | `beforeConfigureGraph(graphData, missing, app)` | `ComfyWorkflowJSON`, `MissingNodeType[]`, `ComfyApp` | Pre-load workflow hook. | Medium — graph data mutation. |
+| H10 | `beforeConfigureGraph(graphData, missing, app)` | `ComfyWorkflowJSON`, `MissingNodeType[]`, `ComfyApp` | Pre-load workflow hook. | Medium — <a href="/api-docs/graph" class="wiki-link">graph</a> data mutation. |
 | H11 | `afterConfigureGraph(missing, app)` | `MissingNodeType[]`, `ComfyApp` | Post-load workflow hook. | Low. |
 | H12 | `getSelectionToolboxCommands(item)` | `Positionable` | Contribute commands to the selection toolbox. | Low — returns IDs. |
 | H13 | `getCanvasMenuItems(canvas)` | `LGraphCanvas` | Contribute canvas right-click items. | Low — returns data. |
@@ -75,14 +75,14 @@ declarative arrays + 1 escape-hatch index signature.
 
 | # | Property | Element type | Purpose |
 |---|----------|--------------|---------|
-| A1 | `commands` | `ComfyCommand[]` | Command palette entries. |
-| A2 | `keybindings` | `Keybinding[]` | Keyboard shortcuts. |
-| A3 | `menuCommands` | `MenuCommandGroup[]` | Top-level menu items. |
-| A4 | `settings` | `SettingParams[]` | Settings panel entries. |
-| A5 | `bottomPanelTabs` | `BottomPanelExtension[]` | Bottom panel tabs. |
-| A6 | `aboutPageBadges` | `AboutPageBadge[]` | About-page badges. |
-| A7 | `topbarBadges` | `TopbarBadge[]` | Topbar badges. |
-| A8 | `actionBarButtons` | `ActionBarButton[]` | Action bar buttons. |
+| <a href="/axioms#a1-refs" class="wiki-link">A1</a> | `commands` | `ComfyCommand[]` | Command palette entries. |
+| <a href="/axioms#a2-refs" class="wiki-link">A2</a> | `keybindings` | `Keybinding[]` | Keyboard shortcuts. |
+| <a href="/axioms#a3-refs" class="wiki-link">A3</a> | `menuCommands` | `MenuCommandGroup[]` | Top-level menu items. |
+| <a href="/axioms#a4-refs" class="wiki-link">A4</a> | `settings` | `SettingParams[]` | Settings panel entries. |
+| <a href="/axioms#a5-refs" class="wiki-link">A5</a> | `bottomPanelTabs` | `BottomPanelExtension[]` | Bottom panel tabs. |
+| <a href="/axioms#a6-refs" class="wiki-link">A6</a> | `aboutPageBadges` | `AboutPageBadge[]` | About-page badges. |
+| <a href="/axioms#a7-refs" class="wiki-link">A7</a> | `topbarBadges` | `TopbarBadge[]` | Topbar badges. |
+| <a href="/axioms#a8-refs" class="wiki-link">A8</a> | `actionBarButtons` | `ActionBarButton[]` | Action bar buttons. |
 
 ### Escape hatch
 
@@ -146,10 +146,10 @@ replacement; verify zero usage first).
 | H15 `onAuthUserResolved` | ✅ covered | Direct port in `ExtensionOptions`. |
 | H16 `onAuthTokenRefreshed` | ✅ covered | Direct port. |
 | H17 `onAuthUserLogout` | ✅ covered | Direct port. |
-| A1–A5 (`commands` … `bottomPanelTabs`) | ✅ covered | Direct ports in `ExtensionOptions`. |
-| A6 `aboutPageBadges` | ❌ gap | Missing from P1. → Gap G5. |
-| A7 `topbarBadges` | ❌ gap | Missing from P1. → Gap G5. |
-| A8 `actionBarButtons` | ❌ gap | Missing from P1. → Gap G5. |
+| <a href="/axioms#a1-refs" class="wiki-link">A1</a>–<a href="/axioms#a5-refs" class="wiki-link">A5</a> (`commands` … `bottomPanelTabs`) | ✅ covered | Direct ports in `ExtensionOptions`. |
+| <a href="/axioms#a6-refs" class="wiki-link">A6</a> `aboutPageBadges` | ❌ gap | Missing from P1. → Gap G5. |
+| <a href="/axioms#a7-refs" class="wiki-link">A7</a> `topbarBadges` | ❌ gap | Missing from P1. → Gap G5. |
+| <a href="/axioms#a8-refs" class="wiki-link">A8</a> `actionBarButtons` | ❌ gap | Missing from P1. → Gap G5. |
 | `[key: string]: unknown` escape hatch | 🗑️ removed | The three `define*` functions take typed options; arbitrary keys are no longer carried. This is a wins/loses tradeoff: removes accidental APIs, breaks any extension using arbitrary keys for inter-extension messaging. |
 
 ### Per R4 pattern
@@ -194,7 +194,7 @@ shows UI based on declared inputs.
 **Suggested resolution**: add a top-level `inspectNodeDef(comfyClass:
 string): ReadonlyDeep<ComfyNodeDef> | undefined` to the `@comfyorg/comfyui`
 public surface. Frozen view; mutation requires a separate command (per
-R4 F8). Decide as part of D5.
+R4 F8). Decide as part of <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a>.
 
 ---
 
@@ -212,7 +212,7 @@ unknown number of community packs that ship pure-frontend node types.
 
 **Suggested resolution**: add `defineCustomNodeType({ comfyClass, def,
 setup(node) })` — equivalent to "synthesise a node def + setup nodes of
-this type". Decide as part of D5 (alongside G1).
+this type". Decide as part of <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> (alongside G1).
 
 ---
 
@@ -252,7 +252,7 @@ and similar.
 
 **Suggested resolution**: a `contextMenuContributions: ContextMenuItem[]`
 declarative array on `ExtensionOptions` (and matching events on
-`NodeHandle` / a `CanvasHandle` for dynamic cases). Resolve in D6 (UI
+`NodeHandle` / a `CanvasHandle` for dynamic cases). Resolve in <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> (UI
 contribution registry).
 
 ---
@@ -271,7 +271,7 @@ badge or action-bar button.
 
 **Suggested resolution**: copy the three properties verbatim into
 `ExtensionOptions`. Trivial edit; no new decision required, but list as
-part of D6 (UI contribution registry) for consistency.
+part of <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> (UI contribution registry) for consistency.
 
 ---
 
@@ -281,19 +281,19 @@ part of D6 (UI contribution registry) for consistency.
 
 P1 generalises `api.addEventListener('executed', …)` *for one node* via
 `node.on('executed', …)`. The aggregate cases — queue progress, status
-updates, server reconnection, prompt completion across the whole queue —
+updates, <a href="/api-docs/server" class="wiki-link">server</a> reconnection, prompt completion across the whole queue —
 have no v2 surface. Today extensions reach into `app.api`. P1 doesn't
 expose `app` to extension authors at all.
 
 **Suggested resolution**: ship `import { useApi } from '@comfyorg/
 comfyui'` returning a stable, typed event-emitter wrapper around
 `ComfyApi`. Or, equivalently, a top-level `onAppEvent(event, fn)` that
-auto-cleans via the active `EffectScope`. Decide in D7 (global handles
+auto-cleans via the active `EffectScope`. Decide in <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> (global handles
 beyond entity scope).
 
 ---
 
-### G7. Widget extension teardown is opt-in (contradicts F5 prevention)
+### G7. <a href="/glossary#widget" class="wiki-link">Widget</a> extension teardown is opt-in (contradicts F5 prevention)
 
 **Severity: BLOCKER.**
 
@@ -305,7 +305,7 @@ P6 needs replacement is that today's `addDOMWidget` has no teardown
 contract — preserving optionality reproduces the bug.
 
 **Blocking which decision/PR**: any DOM-widget migration; HMR safety;
-graph reload determinism.
+<a href="/api-docs/graph" class="wiki-link">graph</a> reload determinism.
 
 **Suggested resolution**: make `destroy: () => void` required on the
 returned object (or move teardown to `onScopeDispose(() => …)` *inside*
@@ -322,7 +322,7 @@ the v2 substrate). Resolve in P1 revision.
 D3.5 deferred the `currentExtension` global "until implicit hooks like
 `onNodeMounted(() => …)` are needed". CONTEXT.md (2026-05-06) flags that
 the proposed lifecycle hooks already assume this implicit context, while
-R3-implied D8 says "extensions write capability fns onto `node.ctx`;
+R3-implied <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> says "extensions write capability fns onto `node.ctx`;
 runtime reads via duck-typed interface". These three sources are
 mutually inconsistent.
 
@@ -339,7 +339,7 @@ any extension factoring its setup into reusable composables.
 - (a) Route lifecycle through `node.onRemoved(fn)` / `widget.onRemoved(fn)`
   — never expose `onScopeDispose` to extension authors. Keeps the global
   unnecessary.
-- (b) Commit to `currentExtension` now and document it as part of D2's
+- (b) Commit to `currentExtension` now and document it as part of <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a>'s
   setup-context primer.
 
 Resolve in D5.
@@ -385,23 +385,23 @@ async-capable for global initialisation. Document in P1.
 
 **Severity: NICE-TO-HAVE.**
 
-Open D2 question: should `entity.extensionState['foo'].count` work
+Open <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> question: should `entity.extensionState['foo'].count` work
 without `.value` (Vue's `proxyRefs` model)? P1 has no
 `extensionState` concept at all — the closest analogue is
 "closures captured in `nodeCreated`" plus widget options. If extensions
 need to expose state to other extensions, the entire mechanism is
 undefined.
 
-**Suggested resolution**: defer until R3-implied D8 (ctx-injection) is
+**Suggested resolution**: defer until R3-implied <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> (ctx-injection) is
 fully spec'd. The two are the same problem under different framings.
 
 ---
 
-### G12. ECS World → Vue notification engine is undocumented
+### G12. ECS <a href="/glossary#world" class="wiki-link">World</a> → Vue notification engine is undocumented
 
 **Severity: BLOCKER (for implementation, not for spec).**
 
-D1 review gap, restated in CONTEXT.md: the layer that translates ECS
+<a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a> review gap, restated in CONTEXT.md: the layer that translates ECS
 World mutations into Vue reactive notifications (so
 `watch(() => world.getComponent(…))` works) is undefined. D3.3's
 "framework internal" sketch shows `watch(() => world.getComponent(…))`
@@ -409,17 +409,17 @@ but never explains how the World's internal state-change generates a
 Vue dependency.
 
 Without this layer, *every event in P1 is unimplementable*. `widget.on
-('change')` requires that `WidgetValue` component changes notify Vue;
+('change')` requires that `<a href="/api-docs/widgetvalue" class="wiki-link">WidgetValue</a>` component changes notify Vue;
 `node.on('positionChanged')` requires the same for `Position`.
 
 **Blocking which decision/PR**: every implementation PR.
 
 **Suggested resolution**: explicit decision doc on the World's reactive
 adapter — likely `shallowRef` per component slot, with `markRaw` on
-LiteGraph instances embedded in components. D1's reactivity primer also
+LiteGraph instances embedded in components. <a href="/decisions/D1-vue-reactivity-primer" class="wiki-link">D1</a>'s reactivity primer also
 needs to be extended (CONTEXT.md notes missing coverage of `flush:
 'pre'|'post'|'sync'`, `pauseTracking/resetTracking`, `shallowRef/
-shallowReactive/markRaw`). Resolve in D8.
+shallowReactive/markRaw`). Resolve in <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>.
 
 ---
 
@@ -438,7 +438,7 @@ public API.
 
 **Suggested resolution**: a separate decision doc on the v2 packaging
 and transport story (manifest format, `/extensions` v2 response shape,
-which legacy `comfyAPI.modules['/scripts/…']` keys are permanent). D9.
+which legacy `comfyAPI.modules['/scripts/…']` keys are permanent). <a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a>.
 
 ---
 
@@ -519,12 +519,12 @@ to a gap above.
    extension ordering), and G10 (async setup) since they all reduce to
    "what is the extension setup context?".
 
-2. **D6 — UI contribution registry**
+2. **<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> — UI contribution registry**
    Resolves G4 (menu/toolbox hooks) and G5 (badges, action-bar buttons).
    Likely a single declarative registry with typed contribution kinds,
    replacing the current per-feature hooks.
 
-3. **D7 — App-level / global events surface**
+3. **<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> — App-level / global events surface**
    Resolves G6 (no app event surface). Decides whether extensions get
    `useApi()`, top-level `onAppEvent(…)`, or both. Pulls in G15
    (cross-entity queries) if that scope is also accepted for v2.0.
@@ -535,7 +535,7 @@ to a gap above.
    `markRaw` strategy for embedded LiteGraph instances, and `flush`
    timing. Without this doc no implementation PR can land.
 
-5. **D9 — Transport, packaging, and legacy import compatibility**
+5. **<a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a> — Transport, packaging, and legacy import compatibility**
    Resolves G13 and tracks G14. Decides which `comfyAPI.modules['/scripts
    /…']` keys are permanent vs deprecated, what the v2 manifest looks
    like, and how the `/extensions` API evolves.
@@ -577,7 +577,7 @@ might appear later" sketch uses `queryAll(NodeType, Position)` /
 `world.queryAll(NodeType)` as a *current* surface for the reactive
 mount system. The naming and the layer-boundary aren't aligned: is
 `queryAll` an internal World method or a public extension API? Worth
-disambiguating in D7/D8.
+disambiguating in <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>/D8.
 
 ---
 
@@ -592,7 +592,7 @@ the implementation-blocking adapter doc (G12) are the work that must
 land before a coding subagent can usefully run.
 
 Recommended sequence: D5 (G1, G2, G8, G9, G10) → P1 revision (G3, G5,
-G7, G10) → D6 (G4, G5) → D8 (G12) → D7 (G6, G15) → D9 (G13, G14).
+G7, G10) → D6 (G4, G5) → D8 (G12) → D7 (G6, G15) → <a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a> (G13, G14).
 
 ---
 
@@ -603,7 +603,7 @@ G7, G10) → D6 (G4, G5) → D8 (G12) → D7 (G6, G15) → D9 (G13, G14).
   The "H5 + H9 = ~80% of community adoption coverage" parity claim above
   remains directionally correct, but the underlying R4 pattern counts (P1
   callback chaining, P2 prototype monkey-patch, P5 `api.addEventListener`)
-  are 5–10× higher than the touch-points DB rows D4 was synthesised from.
+  are 5–10× higher than the touch-points DB rows <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a> was synthesised from.
   Specifically: `nodeCreated` (S2.N1, the heart of P2) jumps 7→77 consumers;
   `onConnectionsChange` (S2.N3) 10→53; `onConfigure` (S2.N7) 8→56. v2
   parity gates (G1–G15) must be evaluated against the new counts when

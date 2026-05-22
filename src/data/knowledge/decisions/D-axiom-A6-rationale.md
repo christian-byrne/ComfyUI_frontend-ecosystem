@@ -1,16 +1,16 @@
-# ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)
+# ADR: <a href="/axioms#a6-refs" class="wiki-link">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.A1+A2 (axiom prose simplification)
+**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A6` (lines 103–127 of the pre-W19 540-line version)
 
 ## Context
 
-Pre-W19 §A6 carried both the must-have-requirements list (8 invariants) and
+Pre-W19 §<a href="/axioms#a6-refs" class="wiki-link">A6</a> carried both the must-have-requirements list (8 invariants) and
 a separate "CRDT Compatibility" subsection covering collaborative editing,
 offline-first workflows, and conflict resolution. The CRDT block is rationale
-for *why* the 8 invariants exist; moved here so §A6 keeps the invariants
+for *why* the 8 invariants exist; moved here so §<a href="/axioms#a6-refs" class="wiki-link">A6</a> keeps the invariants
 inline.
 
 ## Decision
@@ -25,7 +25,7 @@ discussion + the auditability/reversibility justifications into this ADR.
 The 8 invariants (backend-agnostic, portable, deterministic, idempotent,
 serializable, stable targeting, transactional, reactive) are not 8
 independent design preferences — they are the closure of "what commands need
-to support CRDT-compatible graph state".
+to support CRDT-compatible <a href="/api-docs/graph" class="wiki-link">graph</a> state".
 
 - **Backend-agnostic + portable + serializable** — commands cross the
   network and execute on different runtimes. The Python backend, a future
@@ -35,10 +35,10 @@ to support CRDT-compatible graph state".
   a command must produce the same result whether it runs once or a
   thousand times.
 - **Stable targeting** — commands reference entities by IDs that survive
-  rename, restructure, and clone. (A4's handles are the extension-facing
+  rename, restructure, and clone. (<a href="/axioms#a4-refs" class="wiki-link">A4</a>'s handles are the extension-facing
   side of this; commands operate on internal IDs.)
 - **Transactional** — multi-step operations atomicize so partial-merge
-  scenarios don't leave the graph in a torn state.
+  scenarios don't leave the <a href="/api-docs/graph" class="wiki-link">graph</a> in a torn state.
 - **Reactive** — state observers (Vue refs, downstream computed) update
   on command application without polling.
 
@@ -48,7 +48,7 @@ Dropping any one invariant breaks CRDT compatibility. They're a package.
 
 Graph state must be CRDT-compatible for three use-cases:
 
-1. **Collaborative editing** — two users edit the same graph concurrently;
+1. **Collaborative editing** — two users edit the same <a href="/api-docs/graph" class="wiki-link">graph</a> concurrently;
    merges resolve without explicit conflict markers. The command log is
    the natural CRDT operation log.
 

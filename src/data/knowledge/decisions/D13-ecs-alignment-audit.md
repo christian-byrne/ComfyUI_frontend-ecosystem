@@ -1,4 +1,4 @@
-# D13 — ECS Alignment Audit
+# <a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a> — ECS Alignment Audit
 
 > Status: **draft** — living document, updated as ECS branch evolves
 > Last updated: 2026-05-13
@@ -10,7 +10,7 @@ The goal is to catch integration issues before Phase B rebase.
 
 ---
 
-## 1. Entity ID Format
+## 1. <a href="/glossary#entity" class="wiki-link">Entity</a> ID Format
 
 ### Current State
 
@@ -35,7 +35,7 @@ This migration will:
 
 - **Test fixtures**: Our tests use IDs like `node:graph-test:1` — will break
 - **Type imports**: `NodeEntityId`/`WidgetEntityId` brands will change from `string` to `string` (UUIDs) — compatible
-- **Handle constructors**: If we cache entity IDs, UUID migration is transparent
+- **<a href="/glossary#handle" class="wiki-link">Handle</a> constructors**: If we cache entity IDs, UUID migration is transparent
 
 ### Action Items
 
@@ -100,9 +100,9 @@ entity support.
 
 ---
 
-## 3. Widget State Components
+## 3. <a href="/glossary#widget" class="wiki-link">Widget</a> State Components
 
-### Current ECS Component Split
+### Current ECS <a href="/glossary#component" class="wiki-link">Component</a> Split
 
 From `src/world/widgets/widgetComponents.ts`:
 
@@ -311,7 +311,7 @@ has NO ECS backing and NO reactivity.
 
 **NOT centralized** (still on `LGraphNode` instance):
 - Node title
-- Node mode (execution mode)
+- Node mode (<a href="/api-docs/execution" class="wiki-link">execution</a> mode)
 - Node properties
 
 ECS slice-1 covers:

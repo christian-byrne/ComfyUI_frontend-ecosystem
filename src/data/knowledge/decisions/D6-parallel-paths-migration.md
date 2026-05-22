@@ -1,4 +1,4 @@
-# ADR-D6: Parallel Paths Migration Strategy
+# ADR-<a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>: Parallel Paths Migration Strategy
 
 **Status**: accepted (with revisions per 2026-05-08 user review — see "Resolutions" section)
 **Date**: 2026-05-08
@@ -9,7 +9,7 @@
 
 Cluster A reviewer comments (F10, F12, F13) ask whether `getX()/setX()/isX()`
 methods on handles should become accessor sugar (`get x()`, `set x()`,
-`get x()` for booleans). D3.3 (Events Over Signals) deliberately chose method
+`get x()` for booleans). <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3 (Events Over Signals) deliberately chose method
 form to:
 
 1. Make mutation visibly side-effecting (you can't tell `node.position = p`
@@ -22,7 +22,7 @@ Counter-argument from this session's review:
 > if we ever want people to be able to easily migrate then the accessor
 > approach to everything is something we will have to do right?
 
-This is the core trade-off: **D3.3's "command honesty" principle vs. the
+This is the core trade-off: **<a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3's "command honesty" principle vs. the
 strangler-fig migration ergonomics that let v1 extensions become v2
 extensions with minimal source change**.
 
@@ -77,7 +77,7 @@ specific hooks we've already deprecated (DEP1: `beforeRegisterNodeDef`, DEP2:
 `useChainCallback`). The v2 path is the new shape and is the one we
 document, type, and publish.
 
-**Status: tentative.** If extension-author feedback during D6 Phase A
+**Status: tentative.** If extension-author feedback during <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> Phase A
 indicates this entry-point model is friction (e.g. authors strongly prefer
 `app.registerExtension` muscle memory), reconsider via the alternatives in
 "Future Pivots" below.
@@ -187,7 +187,7 @@ during the transition:
   APIs until Phase D.
 - ⚠️ Internal implementation has to bridge: v1 hooks need to fire in a way
   that doesn't break v2 expectations and vice versa. This is the single
-  hardest bit — needs its own design doc (call it D6.1, deferred).
+  hardest bit — needs its own design doc (call it <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>.1, deferred).
 
 ## Alternatives Considered
 
@@ -206,7 +206,7 @@ during the transition:
 ## Open Sub-Questions
 
 - Q1 — D6.1: internal bridge architecture. How does the v2 ECS-backed
-  implementation expose a v1-shaped surface for v1 extensions? Two World
+  implementation expose a v1-shaped surface for v1 extensions? Two <a href="/glossary#world" class="wiki-link">World</a>
   views? Adapter layer? Deferred to its own ADR.
 - Q2 — Phase B trigger: which v1 hooks emit warnings on which call
   patterns? Some hooks (e.g. `setup`) are shape-compatible with v2's
@@ -221,14 +221,14 @@ during the transition:
 ### Q4 Analysis — App-level serialization hook (GAP-UWF-1)
 
 **Background.** F1 survey (I-UWF.4.F1) confirmed three high-blast-radius
-repos do genuine graph-wide cross-node transforms at `graphToPrompt` time
+repos do genuine <a href="/api-docs/graph" class="wiki-link">graph</a>-wide cross-node transforms at `graphToPrompt` time
 that cannot be expressed as per-node `node.on('beforeSerialize')`:
 
 | Repo | Stars | Transform type | Per-node possible? |
 |---|---|---|---|
 | ComfyUI-Manager | ★14,554 | Filters disabled nodes, rewrites component node inputs | No — reads and mutates arbitrary nodes |
-| ComfyUI-KJNodes Set/Get | ★2,568 | Resolves named values across the graph (virtual wiring) | No — must enumerate all Get nodes |
-| cg-use-everywhere | ★1,243 | Auto-wires matching output→input pairs across the whole graph | No — graph-wide topology mutation |
+| ComfyUI-KJNodes Set/Get | ★2,568 | Resolves named values across the <a href="/api-docs/graph" class="wiki-link">graph</a> (virtual wiring) | No — must enumerate all Get nodes |
+| cg-use-everywhere | ★1,243 | Auto-wires matching output→input pairs across the whole <a href="/api-docs/graph" class="wiki-link">graph</a> | No — graph-wide topology mutation |
 
 All three are `uwf-resolved` per I-PG.B2 taxonomy — UWF Phase 3 save-time
 materialization is their long-term migration path, not v2 extension API
@@ -251,7 +251,7 @@ App-level callback receives the full `WorkflowSpec` / prompt object.
 
 **(b) `app.on('beforePrompt', handler)` — event on a new app handle**
 Event fires before submission; handler receives mutable prompt.
-- **Pro:** Fits the D3.3 events-over-signals model.
+- **Pro:** Fits the <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.3 events-over-signals model.
 - **Con:** Requires `app` to be accessible at event-subscription time.
   If the subscription happens at module load (before `window.app` is
   initialized), it breaks D6 Part 1's hard constraint.
@@ -279,7 +279,7 @@ Don't add an app-level hook now. Extensions that need it keep patching
 `graphToPrompt` (v1). Migration path is UWF Phase 3, not v2 API.
 - **Pro:** Zero additional API surface in Phase A. Reduces scope risk.
 - **Con:** Phase A still tells extension authors to migrate to v2, but
-  gives them no replacement for their most-used pattern (S6.A1 is #1
+  gives them no replacement for their most-used pattern (S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> is #1
   blast-radius). Documentation becomes "use v2, except for the thing you
   most commonly use v1 for."
 - **Con:** Leaves the three highest-blast-radius repos on v1 indefinitely.
@@ -492,7 +492,7 @@ transformation.
    package (PKG2–PKG6) is required for the external-author case.
 
 **Extractable component:** The `VersionProxies` canonical↔v1 bidirectional Proxy
-transform *is* what our D9 Phase C strangler (I-PG.C1) needs. Study
+transform *is* what our <a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a> Phase C strangler (I-PG.C1) needs. Study
 `VersionProxies.createV1Proxy` + `transformCanonicalToV1Property` when I-PG.C1 lands.
 
 **Extractable telemetry:** `getExtensionVersionReport()` (groups by `ext.apiVersion`)
@@ -512,7 +512,7 @@ Artifact: `research/issues/issue-4668-import-based-api-versioning.md`.
 - GH issue #4668 + branch `feat/import-based-api-versioning` (rejected alternative, see Future Pivots above)
 - `research/meta/sourcegraph-mcp-coverage-investigation.md` §Re-audit results
   (2026-05-13) — W2F-1 listener-variant re-audit. **Consumer counts updated.**
-  The "S6.A1 is #1 blast-radius" framing above is reinforced (9→15 consumers
+  The "S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> is #1 blast-radius" framing above is reinforced (9→15 consumers
   including Manager, Copilot, comfyui-deploy, Crystools, SwarmUI), and the
   parity claim implicit in I-EXT.3 (`apiVersion?: string` telemetry as the
   Phase D sunset gate) must measure parity against the new larger consumer

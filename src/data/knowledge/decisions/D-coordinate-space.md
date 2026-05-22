@@ -1,4 +1,4 @@
-# D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence
+# <a href="/decisions/D-coordinate-space" class="wiki-link">D-coordinate-space</a> — Canvas vs client-pixel vs CSS coordinate convergence
 
 **Status**: **ACCEPTED** — 2026-05-18 (handoff-9; PICK by Christian, human-in-the-loop) — Option **(iii) hide spaces, canvas-only handles**, with documentation-first migration strategy. Skeleton authored 2026-05-14; R1+R2+R3 evidence landed 2026-05-18.
 
@@ -76,7 +76,7 @@ client-space accessor for authors to reach for in the first place. The
   reach for `window.devicePixelRatio` or canvas-DS directly).
 - Vendor packs that mix client/canvas spaces will see compile-time
   removal of the surface in the v2 cut-over wave (mirrors the
-  W6.P3 D-widget-converge "hard cut, no compat shim" precedent for
+  W6.P3 <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> "hard cut, no compat shim" precedent for
   `node.addDOMWidget`).
 
 The documentation-first commitment is load-bearing here — the PICK is
@@ -187,7 +187,7 @@ similar).
 
 **Common (any option):**
 
-- The R4 P7 canvas-prototype patching surface (G13 in D4) needs an
+- The R4 P7 canvas-prototype patching surface (G13 in <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a>) needs an
   explicit story whether the chosen option closes that gap or whether a
   separate `defineCanvasExtension` ADR is still required.
 - Hi-DPI handling (devicePixelRatio) is currently invisible to
@@ -211,7 +211,7 @@ during W6.P4.B.
 | Option | ZERO | TS-ERR | SILENT-NOOP | REWRITE-METHOD | UNMIGRATABLE |
 |---|---:|---:|---:|---:|---:|
 | (i) branded types + converters       | 1,305 | **5,524** |     0 | 1,595 |     0 |
-| (ii) single Point + space param      | **5,619** |     0 | **1,559** | 1,246 |     0 |
+| (ii) single <a href="/api-docs/point" class="wiki-link">Point</a> + space param      | **5,619** |     0 | **1,559** | 1,246 |     0 |
 | (iii) hide spaces, canvas-only       | 4,314 |     0 |     0 | 1,390 | **2,720** |
 
 (Bold cells = the "headline cost" each option pays.)
@@ -233,8 +233,8 @@ data.
 | Option | Pro (evidence) | Con (evidence) | Verdict |
 |---|---|---|---|
 | (i) branded types + converters | Catches the 2,617-hit bug class at **compile time** for new authors; native muscle memory for the 919 existing `ds.scale`/`ds.offset` callers; converters already exist in the surface for the 34 explicit-convert callers across 8 repos | **5,524 TS errors on consumer cut-over** — 3,965 of those land in canvas-symbol hits (`node.pos`/`node.size`), not just the bug-class ones; biggest single victim `rgthree-comfy` (★3,066) absorbs 249 TS-errs; branded literals add ergonomic tax on every `{x, y}` constructor | **Rejected** — TS-err blast radius punishes canvas-symbol authors (the majority) for the client-symbol authors' bug class. Branded literals also fail the "agent-friendly" criterion: AI agents writing extension code don't naturally construct branded values. |
-| (ii) single Point + space param | Cheapest to adopt — **5,619 ZERO cells**, 67% of all hits; no breaking change for existing canvas-symbol callers; `space` param can default to canvas to match observed-intent skew | **1,559 SILENT-NOOP cells** — the bug class still ships with no type-system signal; no compile-time guarantee against the very gap the audit is meant to prevent; top-10 silent-noop repos identical to top-10 unmigratable repos for opt (iii) — same broken behavior, different label | **Rejected** — leaves the bug class open (just with a different label). Multiple-truth surface is the opposite of the "single unified concept" PICK criterion. |
-| (iii) hide spaces, canvas-only handles | Simplest API; closes the bug class entirely for client-space cases; matches the W6.P3 D-widget-converge precedent ("hard cut, no compat shim"); 4,314 ZERO cells for canvas-symbol users; existing `convert*` API is barely adopted (34 hits / 8 repos) — hiding it loses very little ecosystem muscle memory | **2,720 UNMIGRATABLE cells across 71 repos** — biggest single loser `guido-gfv_gfv_pro_upgrade` (455 hits, mostly bbox + clientX/Y); forces escape-hatch usage (`window.app.canvas.ds.*`) for legitimate hi-DPI math (213 dpr hits) and floating-overlay use cases; cliff is concentrated in the same top-10 repos as opt (ii) SILENT-NOOP | **ACCEPTED 2026-05-18 (Christian, handoff-9).** Cliff cost paid as documented escape-hatch + migration-guide rows. Per Christian: "single unified concept and then we just document the nuance thoroughly such that 3rd party devs and their agents see it". |
+| (ii) single <a href="/api-docs/point" class="wiki-link">Point</a> + space param | Cheapest to adopt — **5,619 ZERO cells**, 67% of all hits; no breaking change for existing canvas-symbol callers; `space` param can default to canvas to match observed-intent skew | **1,559 SILENT-NOOP cells** — the bug class still ships with no type-system signal; no compile-time guarantee against the very gap the audit is meant to prevent; top-10 silent-noop repos identical to top-10 unmigratable repos for opt (iii) — same broken behavior, different label | **Rejected** — leaves the bug class open (just with a different label). Multiple-truth surface is the opposite of the "single unified concept" PICK criterion. |
+| (iii) hide spaces, canvas-only handles | Simplest API; closes the bug class entirely for client-space cases; matches the W6.P3 <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> precedent ("hard cut, no compat shim"); 4,314 ZERO cells for canvas-symbol users; existing `convert*` API is barely adopted (34 hits / 8 repos) — hiding it loses very little ecosystem muscle memory | **2,720 UNMIGRATABLE cells across 71 repos** — biggest single loser `guido-gfv_gfv_pro_upgrade` (455 hits, mostly bbox + clientX/Y); forces escape-hatch usage (`window.app.canvas.ds.*`) for legitimate hi-DPI math (213 dpr hits) and floating-overlay use cases; cliff is concentrated in the same top-10 repos as opt (ii) SILENT-NOOP | **ACCEPTED 2026-05-18 (Christian, handoff-9).** Cliff cost paid as documented escape-hatch + migration-guide rows. Per Christian: "single unified concept and then we just document the nuance thoroughly such that 3rd party devs and their agents see it". |
 | (iv) keep status quo (canvas default, no doc, no enforcement) | Zero work | Leaves the 2,617-hit / 71-repo / ★40,040 bug class open; rejected by W6.P4 framing | Rejected |
 
 ### Cross-option observations (DATA, no preference)
@@ -257,7 +257,7 @@ data.
    it into the canvas-only handle. Whichever option lands, the dpr
    policy must be documented explicitly.
 
-4. **D-widget-converge precedent (A12 / W6.P3.C `2f102353fa`)** —
+4. **<a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> precedent (<a href="/axioms#a12-refs" class="wiki-link">A12</a> / W6.P3.C `2f102353fa`)** —
    accepted hard-cut hiding the DOM seam in favor of `mount(host, ctx)`,
    absorbing UNMIGRATABLE cells via migration-guide rows. Opt (iii)
    extends that pattern; opts (i) and (ii) don't. Observation only —
@@ -275,8 +275,8 @@ Evidence artifact: `research/architecture/D-coordinate-space-blast-radius.md`
 
 | Step | Action | Owner | Verification |
 |---|---|---|---|
-| 1 | Expand JSDoc on `NodeHandle.getPosition` / `setPosition` / `getSize` / `setSize` to explicitly state **canvas units**, name the other two spaces in prose, point to the escape-hatch, and link to A13 + this ADR | foundation | grep `node.ts` for "canvas units" appears in each of the 4 method JSDocs |
-| 2 | Author **Axiom A13: Single Coordinate Space (Canvas)** in `AXIOMS.md` codifying the policy + the escape-hatch + the dpr policy | foundation | A13 present + cross-linked from A12 |
+| 1 | Expand JSDoc on `NodeHandle.getPosition` / `setPosition` / `getSize` / `setSize` to explicitly state **canvas units**, name the other two spaces in prose, point to the escape-hatch, and link to <a href="/axioms#a13-refs" class="wiki-link">A13</a> + this ADR | foundation | grep `node.ts` for "canvas units" appears in each of the 4 method JSDocs |
+| 2 | Author **Axiom <a href="/axioms#a13-refs" class="wiki-link">A13</a>: Single Coordinate Space (Canvas)** in `AXIOMS.md` codifying the policy + the escape-hatch + the dpr policy | foundation | <a href="/axioms#a13-refs" class="wiki-link">A13</a> present + cross-linked from <a href="/axioms#a12-refs" class="wiki-link">A12</a> |
 | 3 | Add `@stability escape-hatch` JSDoc tag explanation to the package README so `@stability stable` keeps its meaning | pkg | README mentions the new tag |
 | 4 | Author migration-guide section `extensions/development.md` § "Coordinate spaces — single-unified-concept policy" covering all 6 documentation-contract items above. Every code sample comments the space inline (`// canvas units`) | embedded-docs | All 6 items present + at least 3 worked examples |
 | 5 | Pkg `.d.ts` regen | pkg | `pnpm build`; `WidgetCleanup` etc. unchanged; JSDoc visible in build output |
@@ -294,7 +294,7 @@ actually works.
 
 - design-review-12142.md row #10 (the open-research item this ADR closes)
 - W6.P4 task block in `todo.md` (Wave-6 section)
-- D4 — gap analysis (BLOCKER G13: canvas-level extension surface; closely related but distinct)
+- <a href="/decisions/D4-gap-analysis" class="wiki-link">D4</a> — gap analysis (BLOCKER G13: canvas-level extension surface; closely related but distinct)
 - research/touch-points/database.yaml entries S2.N9, S2.N10, S2.N11, S4.W2, R4 P7
 - ComfyUI_frontend `core` assert() PR (in flight, exact PR# pending lookup) — runtime invariant carrier
 - AGENTS.md "Decision propagation rules" — once accepted, must reach (a) commit on PR #12142, (b) this ADR, (c) dashboard JSON

@@ -1,9 +1,9 @@
-# D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy
+# <a href="/decisions/D-notify-toast-consolidation" class="wiki-link">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy
 
 **Status**: ACCEPTED — 2026-05-21 (wave-17, W17.B)
 **Decider**: Christian Byrne (sole-contributor authority per AGENTS.md Rule 9)
 **Wave**: 17 (W17.B authors ADR; W17.E executes the in-freeze source change)
-**Related**: AXIOMS.md §A2 (Minimal API Surface), §A8 (Extensibility as Meta-Goal), §A14 (Phase A Exclusions table); D-api-surface-finalization (Phase A freeze, wave-12); D-shell-ui-entrypoints (W6.P5.C — introduced both `toast` + `notify` as inline-imperative carve-outs); D-design-review-hygiene-cleanup (wave-11 — precedent for JSDoc-only in-freeze landings)
+**Related**: AXIOMS.md §<a href="/axioms#a2-refs" class="wiki-link">A2</a> (Minimal API Surface), §<a href="/axioms#a8-refs" class="wiki-link">A8</a> (Extensibility as Meta-Goal), §<a href="/axioms#a14-refs" class="wiki-link">A14</a> (Phase A Exclusions table); <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a> (Phase A freeze, wave-12); <a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> (W6.P5.C — introduced both `toast` + `notify` as inline-imperative carve-outs); <a href="/decisions/D-design-review-hygiene-cleanup" class="wiki-link">D-design-review-hygiene-cleanup</a> (wave-11 — precedent for JSDoc-only in-freeze landings)
 
 ## Decision
 
@@ -11,7 +11,7 @@
 
 Verdicts (b) "keep both with distinct roles" and (c) "remove `notify` outright" are rejected. See §Rationale.
 
-Removal of the `notify` export and `NotifyOptions` type is deferred to a post-Phase-A wave (earliest: the Phase B ECS rebase wave that re-opens the surface per D-api-surface-finalization §Re-opening criteria). A follow-up checkbox is added below; no surface-removal ADR is required to ride along with this one because the `@deprecated` tag is metadata-only (no signature change, no .d.ts shape diff beyond JSDoc).
+Removal of the `notify` export and `NotifyOptions` type is deferred to a post-Phase-A wave (earliest: the Phase B ECS rebase wave that re-opens the surface per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a> §Re-opening criteria). A follow-up checkbox is added below; no surface-removal ADR is required to ride along with this one because the `@deprecated` tag is metadata-only (no signature change, no .d.ts shape diff beyond JSDoc).
 
 ## Context
 
@@ -63,8 +63,8 @@ The file's own JSDoc states the redundancy out loud (`imperatives.ts:95–99`):
 > *"Convenience notification API — a thinner wrapper over `toast` that accepts a `{ kind, message, detail }` shape closer to OS notification vocabulary. Use whichever shape you prefer; **they share the same underlying transport**."*
 
 So `notify` provides:
-- **No distinct transport** (no OS-level notification, no persistent toast, no different store, no different mount point).
-- **No distinct lifetime** (same auto-dismiss `life` semantics, same toast component).
+- **No distinct transport** (no OS-level notification, no persistent <a href="/api-docs/toast" class="wiki-link">toast</a>, no different store, no different mount point).
+- **No distinct lifetime** (same auto-dismiss `life` semantics, same <a href="/api-docs/toast" class="wiki-link">toast</a> component).
 - **No distinct severity model** (PrimeVue severities under a different label).
 - **No behavior that isn't trivially expressible as one `toast.show(...)` call.**
 
@@ -72,22 +72,22 @@ The only thing `notify` adds is a slightly more "notification-flavored" field na
 
 ### Why both were introduced
 
-[D-shell-ui-entrypoints](file:///home/c_byrne/cross-repo-tasks/ecs-vue-hoisted-client-state-hook-api/decisions/D-shell-ui-entrypoints.md) (W6.P5.C, ACCEPTED 2026-05-18) carved `toast` and `notify` out of the `defineX` registration model and made them inline-imperative entry points. The R1+R2+R3 evidence cited there shows toast at **166 hits across 16 repos, 100% imperative**, with **zero ecosystem use of any `notify`-shaped API** (notify is net-new — there is no v1 equivalent to migrate from).
+[D-shell-ui-entrypoints](file:///home/c_byrne/cross-repo-tasks/ecs-vue-hoisted-client-state-hook-api/decisions/D-shell-ui-entrypoints.md) (W6.P5.C, ACCEPTED 2026-05-18) carved `toast` and `notify` out of the `defineX` registration model and made them inline-imperative entry points. The R1+R2+R3 evidence cited there shows <a href="/api-docs/toast" class="wiki-link">toast</a> at **166 hits across 16 repos, 100% imperative**, with **zero ecosystem use of any `notify`-shaped API** (notify is net-new — there is no v1 equivalent to migrate from).
 
-The D-shell-ui-entrypoints ADR introduced both APIs as a paired set without re-checking A2 minimal-surface: `notify` was added on the assumption that an OS-notification-shaped option bag would be useful, but no validated ecosystem use case was provided (it cannot be — no consumer of `notify` exists yet, since the surface is brand-new). Per AGENTS.md axiom checklist Rule 10 ("Are we 100% sure this is needed? → If not, comment out"), `notify` fails A2 on the same standard that comments out `getMode`, `inputs`, `setPosition`, etc., per the AXIOMS.md §A14 table.
+The <a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> ADR introduced both APIs as a paired set without re-checking <a href="/axioms#a2-refs" class="wiki-link">A2</a> minimal-surface: `notify` was added on the assumption that an OS-notification-shaped option bag would be useful, but no validated ecosystem use case was provided (it cannot be — no consumer of `notify` exists yet, since the surface is brand-new). Per AGENTS.md axiom checklist Rule 10 ("Are we 100% sure this is needed? → If not, comment out"), `notify` fails <a href="/axioms#a2-refs" class="wiki-link">A2</a> on the same standard that comments out `getMode`, `inputs`, `setPosition`, etc., per the AXIOMS.md §<a href="/axioms#a14-refs" class="wiki-link">A14</a> table.
 
 ### Why this is a §A2 violation, not just a §A2 style preference
 
-A2 is explicit ("Start with absolute minimum. Add by necessity, not by usage patterns") and the §A14 table treats unvalidated surfaces uniformly — there is no "but it's a tiny one-liner wrapper" exception. Two entry points where one suffices forces every author, codemod, doc page, JSDoc cross-ref, and downstream linter rule to disambiguate. The disambiguation is pure churn because both routes hit the same store via the same code path.
+A2 is explicit ("Start with absolute minimum. Add by necessity, not by usage patterns") and the §<a href="/axioms#a14-refs" class="wiki-link">A14</a> table treats unvalidated surfaces uniformly — there is no "but it's a tiny one-liner wrapper" exception. Two entry points where one suffices forces every author, codemod, doc page, JSDoc cross-ref, and downstream linter rule to disambiguate. The disambiguation is pure churn because both routes hit the same store via the same code path.
 
-A8 ("Extensibility as Meta-Goal") cuts the same way: keeping a second entry point that adds zero capability constrains future evolution. Any future work on toast (e.g. queueing for the pre-mount window, OS-notification fall-through, persistent-toast variants, programmatic dismiss handles) must now be designed twice or the two surfaces drift.
+<a href="/axioms#a8-refs" class="wiki-link">A8</a> ("Extensibility as Meta-Goal") cuts the same way: keeping a second entry point that adds zero capability constrains future evolution. Any future work on toast (e.g. queueing for the pre-mount window, OS-notification fall-through, persistent-toast variants, programmatic dismiss handles) must now be designed twice or the two surfaces drift.
 
 ## Rationale
 
 ### Why (a) Deprecate-and-keep is the right verdict
 
-1. **In-freeze legal.** D-api-surface-finalization §Re-opening criteria require a new ACCEPTED ADR for any surface change. Adding `@deprecated` JSDoc is metadata, not a surface change — the symbol, signature, options interface, and runtime behavior are all preserved. This is the same pattern wave-11 D-design-review-hygiene-cleanup used for JSDoc-only foundation commits during the freeze.
-2. **Zero migration cost today.** Because `notify` is net-new with zero ecosystem call sites (D-shell-ui-entrypoints R3 evidence: no `notify` hits in the 16-repo sweep), there is no consumer to break. The deprecation tag is purely advisory.
+1. **In-freeze legal.** <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a> §Re-opening criteria require a new ACCEPTED ADR for any surface change. Adding `@deprecated` JSDoc is metadata, not a surface change — the symbol, signature, options interface, and runtime behavior are all preserved. This is the same pattern wave-11 <a href="/decisions/D-design-review-hygiene-cleanup" class="wiki-link">D-design-review-hygiene-cleanup</a> used for JSDoc-only foundation commits during the freeze.
+2. **Zero migration cost today.** Because `notify` is net-new with zero ecosystem call sites (<a href="/decisions/D-shell-ui-entrypoints" class="wiki-link">D-shell-ui-entrypoints</a> R3 evidence: no `notify` hits in the 16-repo sweep), there is no consumer to break. The deprecation tag is purely advisory.
 3. **Clear signal to extension authors and to LLM training corpora.** The `@deprecated` tag is what JetBrains/VS Code surface inline; it is also what TypeDoc renders as a strikethrough in the dashboard. Adding it now means any pre-1.0 `@comfyorg/extension-api` consumer that imports `notify` gets an editor warning, and any LLM trained on the published `.d.ts` learns `toast.show` as the canonical shape from day one.
 4. **Avoids re-opening the freeze for a low-stakes change.** Verdict (c) "remove now" would require either (i) re-opening the freeze early (against D-api-surface-finalization §Re-opening criteria 1, which is reserved for surfaces with material risk), or (ii) authoring a separate ACCEPTED ADR for the surface-removal and rolling a fresh wave. Both are disproportionate for a four-line wrapper.
 
@@ -108,7 +108,7 @@ Per D-api-surface-finalization, the Phase A surface re-opens only on (1) a new A
 - **Violation identified**: two exported entry points (`notify`, `NotifyOptions`) provide a strict subset of the capabilities of one already-exported entry point (`toast.show` + `ToastMessageOptions`). Per A2 "Add by necessity, not by usage patterns" and §A14 ("comment out anything we're not 100% sure about"), the second entry point is not necessary.
 - **Resolution**: `@deprecated` JSDoc on `notify` + `NotifyOptions` signals deprecation to authors and tooling now; deferred export removal completes A2 compliance at the next surface-re-opening wave. Restoration criteria identical to other §A14 entries: validated ecosystem use case + axiom re-audit + behavior-triplet test coverage of any distinct transport semantics.
 
-### §A8 (Extensibility as Meta-Goal)
+### §<a href="/axioms#a8-refs" class="wiki-link">A8</a> (Extensibility as Meta-Goal)
 
 - Single canonical entry point preserves design headroom: any future toast feature (queueing, persistence, OS-notification fallthrough, dismiss handles) is designed once against `toast`. Keeping `notify` would force every such feature to be designed twice or the surfaces drift.
 - **No extension-author impact** under verdict (a): the symbol still exports, the signature is unchanged, the runtime is unchanged. Authors see an editor deprecation hint only.
@@ -128,7 +128,7 @@ Per D-api-surface-finalization, the Phase A surface re-opens only on (1) a new A
 - **No .d.ts shape change beyond JSDoc strings**: `@deprecated` flows through TypeDoc and the published `.d.ts` as a comment-level tag; no exports added or removed.
 - **CI**: `pnpm lint && pnpm format:check && pnpm knip` stay green. No `scripts/check-axiom-compliance.sh` strict-fail change (no surface added to A14-banned list).
 - **Knip**: `notify` and `NotifyOptions` are still re-exported from `index.ts:173`; no orphan-export false-positive expected. If knip flags the deprecated symbols, that is a separate issue tracked by the export-removal follow-up.
-- **D-api-surface-finalization freeze status**: this ADR documents an in-freeze JSDoc-only landing under the wave-11 D-design-review-hygiene-cleanup precedent. The Phase A surface remains FROZEN at foundation `ee0537fdb5` + wave-11 hygiene + wave-17 deprecation JSDoc (additive metadata).
+- **D-api-surface-finalization freeze status**: this ADR documents an in-freeze JSDoc-only landing under the wave-11 <a href="/decisions/D-design-review-hygiene-cleanup" class="wiki-link">D-design-review-hygiene-cleanup</a> precedent. The Phase A surface remains FROZEN at foundation `ee0537fdb5` + wave-11 hygiene + wave-17 deprecation JSDoc (additive metadata).
 
 ### v1 path (`ComfyExtension`)
 
@@ -173,4 +173,4 @@ Per §A14 pattern, `notify` / `NotifyOptions` return to the public API only when
 
 1. A validated ecosystem use case exists that **cannot** be expressed as `toast.show({severity, summary, detail, life})`. (Vocabulary preference is not sufficient.)
 2. The proposal documents a **distinct transport or semantic** (e.g. OS Notifications API integration, persistent system tray, native-app message bus) — not a rename of existing toast options.
-3. Behavior-triplet test coverage exists for the distinct transport across graph-mode + app-mode + linked-instance scenarios.
+3. Behavior-triplet test coverage exists for the distinct transport across <a href="/api-docs/graph" class="wiki-link">graph</a>-mode + app-mode + linked-instance scenarios.

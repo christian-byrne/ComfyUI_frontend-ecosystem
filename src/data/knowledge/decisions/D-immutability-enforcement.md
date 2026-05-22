@@ -1,4 +1,4 @@
-# D-immutability-enforcement — Consistent immutability rules across the API surface
+# <a href="/decisions/D-immutability-enforcement" class="wiki-link">D-immutability-enforcement</a> — Consistent immutability rules across the API surface
 
 **Status**: ACCEPTED — 2026-05-14 (W6.P8.B PICK 2026-05-14 handoff-6 by Christian)
 
@@ -23,7 +23,7 @@ The current v2 surface is inconsistent:
 - Some accessors return live references (`node.widgets`,
   `node.inputs`, `node.outputs` — direct array references that allow
   `node.widgets.push(…)`, `node.widgets[0].value = X`, etc.).
-- Others return computed views (`getWidgets()` — D11/restratify
+- Others return computed views (`getWidgets()` — <a href="/decisions/D11-naming-defineNode-defineWidget" class="wiki-link">D11</a>/restratify
   rename).
 - Others return method-returned tuples (`getPosition()` returns a
   fresh object).
@@ -90,10 +90,10 @@ runtime enforcement leg.
    - `node.getOutputs(): ReadonlyArray<Readonly<NodeOutput>>`
    - `node.size: readonly [number, number]` (tuple)
    - `node.pos: readonly [number, number]`
-   - `widget.options: Readonly<WidgetOptions>` (per D14 widget-state)
-   - `widget.serializeValue` accessor (no setter on the public type — D5
+   - `widget.options: Readonly<WidgetOptions>` (per <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> widget-state)
+   - `widget.serializeValue` accessor (no setter on the public type — <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a>
      `'beforeSerialize'` event is the v2 migration target)
-   - `widget.value` keeps the existing setter pair per D14 (READ+WRITE
+   - `widget.value` keeps the existing setter pair per <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> (READ+WRITE
      both allowed because the setter proxies through to the underlying
      widget; this is the ZERO row in R3)
 2. **Codemod stub**: a small codemod (`scripts/codemod-immutability.ts`)
@@ -114,9 +114,9 @@ runtime enforcement leg.
   overhead + identity-break risk + DevTools confusion not worth the
   prettier error message).
 - **No new mutator-method surfaces** beyond what already exists today
-  (D14 widget setters, existing add/remove input/output/widget methods).
+  (<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> widget setters, existing add/remove input/output/widget methods).
   The ~225 `UNMIGRATABLE` hits in option (iii)'s R3 cells need
-  separate ADRs to cover (D-widget-converge W6.P3 likely covers
+  separate ADRs to cover (<a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> W6.P3 likely covers
   options-bulk; inputs/outputs per-field setters need a fresh ADR —
   tracked as W6.P8.UNMIGRATABLE).
 - **No major-version bump compulsion** in this PR — the typing change
@@ -142,8 +142,8 @@ runtime enforcement leg.
   worked" in production. Highest-leverage signal location.
 - **Zero runtime cost** — no `Object.freeze` traversal, no `Proxy`
   per-access overhead. Production performance identical to today.
-- **No D8 reactive-adapter interaction risk** — no frozen objects
-  flowing through the Vue ↔ World adapter.
+- **No <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> reactive-adapter interaction risk** — no frozen objects
+  flowing through the Vue ↔ <a href="/glossary#world" class="wiki-link">World</a> adapter.
 - **`as any` / `@ts-ignore` / JS-not-TS escape gap is the explicit
   trade** — accepted in exchange for shipping the typing surface
   fast. The follow-up W6.P8.FREEZE closes that gap when prioritized.
@@ -160,7 +160,7 @@ runtime enforcement leg.
 - **W6.P8.UNMIGRATABLE** — Address the ~225 hits that have no v2
   surface today: bulk `setOptions(opts)`, `setInputField(i, key, val)`,
   `setOutputField(i, key, val)`, `replaceInput(i, def)`,
-  `replaceOutput(i, def)`. Likely rolls into D-widget-converge (W6.P3)
+  `replaceOutput(i, def)`. Likely rolls into <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> (W6.P3)
   for the options-bulk slice; inputs/outputs per-field setters need a
   fresh ADR.
 
@@ -241,13 +241,13 @@ ergonomics regress.
 **Common (any option):**
 
 - Migration cost is concentrated in the same blast-radius cluster
-  flagged for D14 (S4.W*) and D-widget-converge (S2.N16). The same
+  flagged for D14 (S4.W*) and <a href="/decisions/D-widget-converge" class="wiki-link">D-widget-converge</a> (S2.N16). The same
   consumers will need touch — schedule the migrations together if
   possible.
 - Whichever option ships must include a "list of fields/methods that
   ARE mutable and where to mutate them" appendix in the migration
   guide. Authors today need a where-do-I-put-this answer.
-- The ECS World ↔ Vue reactive adapter (D8) interaction matters: any
+- The ECS World ↔ Vue reactive adapter (<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>) interaction matters: any
   fresh-copy / `Object.freeze` strategy must coexist cleanly with the
   reactivity layer's tracking dependencies.
 
@@ -284,7 +284,7 @@ land during W6.P8.B.
   mechanism but replaces the symptom with a quieter one.
 - 8 families × ~22 distinct call-site idioms across 116 EXT repos
   would need migration guidance ("if you used to do X, now do Y").
-- Widget shape mismatch under D14: `WIDGET_VALUE_WRITE` is ZERO
+- <a href="/glossary#widget" class="wiki-link">Widget</a> shape mismatch under D14: `WIDGET_VALUE_WRITE` is ZERO
   only if the v2 `.value` setter writes through to the underlying
   widget; if the handle returns a copy of the widget that's
   internally re-resolved on next read, the setter pattern breaks
@@ -319,7 +319,7 @@ land during W6.P8.B.
   the handle. The R3 matrix flags `WIDGETS_INDEX_FIELD_WRITE` (247
   hits) and the analogous inputs/outputs rows as needing per-field
   setters that don't all exist today.
-- D8 World ↔ Vue reactive adapter interaction risk: the adapter
+- <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> World ↔ Vue reactive adapter interaction risk: the adapter
   must tolerate frozen inputs (or skip them) without losing
   tracking. Spec adjustment in D8 likely.
 - Performance: `Object.freeze` in dev mode adds traversal cost on
@@ -405,6 +405,6 @@ for completeness; W6.P8 framing rejected status-quo.
 - ADR 0003 — command pattern for all mutations (option iii alignment)
 - ADR 0008 — entity component system (where the underlying state lives)
 - D8 — ECS World ↔ Vue reactive adapter (interaction concern)
-- D14-widget-state-categories — separate but related (D14 says what's Schema vs Props; D-immutability says what's mutable how)
+- <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a> — separate but related (D14 says what's <a href="/glossary#schema" class="wiki-link">Schema</a> vs Props; D-immutability says what's mutable how)
 - research/touch-points/database.yaml entries S2.N16, S4.W3, S4.W5
 - AGENTS.md "Decision propagation rules" — once accepted, must reach (a) commit on PR #12142, (b) this ADR, (c) dashboard JSON

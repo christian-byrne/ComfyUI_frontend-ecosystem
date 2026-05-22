@@ -1,4 +1,4 @@
-# D2 — Vue Setup Function Primer: How Hoisted State Works
+# <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> — Vue Setup Function Primer: How Hoisted State Works
 
 > **Audience**: ComfyUI frontend team (Vue-fluent) + external contributors designing/consuming the ECS hook + setup-function API
 > **Purpose**: Build a shared mental model of Vue's `setup → scope → lifecycle` pattern so we can faithfully port it to `defineNodeExtension(setup)`
@@ -12,7 +12,7 @@
 - **"Hoisted state" = state that lives above the render boundary.** Refs, computeds, watchers created in `setup()` survive every re-render; they only die when the component instance dies (`scope.stop()`).
 - **Two storage slots after setup**: `instance.setupState` (the returned object, ref-unwrapped, used by render) and `instance.ctx` (the proxy backing `this` in templates). State you `return` lives in `setupState`; private state stays in setup's closure.
 - **Lifecycle hooks (`onMounted`, etc.) and `provide/inject` work via an implicit `currentInstance` global** that Vue sets before calling your `setup()` and restores after. No explicit instance argument needed.
-- **We copy this model verbatim for ComfyUI extensions**: `defineNodeExtension({ setup(ctx) { ... } })` runs once per node entity, owns an `EffectScope`, captures lifecycle hooks via `currentExtension`, and survives DOM moves (graph ↔ app, subgraph promotion) because the scope is bound to the ECS entity, not the DOM node.
+- **We copy this model verbatim for ComfyUI extensions**: `defineNodeExtension({ setup(ctx) { ... } })` runs once per node entity, owns an `EffectScope`, captures lifecycle hooks via `currentExtension`, and survives DOM moves (<a href="/api-docs/graph" class="wiki-link">graph</a> ↔ app, subgraph promotion) because the scope is bound to the ECS entity, not the DOM node.
 
 ---
 
@@ -112,7 +112,7 @@ Compare with React: a function component **is** re-invoked every render; `useSta
 
 ### 2.3 Hoisted state across DOM moves (the ComfyUI requirement)
 
-ComfyUI nodes can move between graph mode and app mode, and can be promoted into / out of subgraphs. The DOM widget can be detached and re-attached. We need extension state to behave like `<KeepAlive>` *by default*: the scope is bound to the ECS entity ID, not to a DOM node or render slot.
+ComfyUI nodes can move between <a href="/api-docs/graph" class="wiki-link">graph</a> mode and app mode, and can be promoted into / out of subgraphs. The DOM widget can be detached and re-attached. We need extension state to behave like `<KeepAlive>` *by default*: the scope is bound to the ECS entity ID, not to a DOM node or render slot.
 
 ```
 Graph Mode               Subgraph Promotion              App Mode
@@ -124,7 +124,7 @@ Graph Mode               Subgraph Promotion              App Mode
        same refs, same watchers, same provide/inject tree
 ```
 
-This is the *whole reason* we are adopting Vue's setup model rather than React's hooks model: hooks-as-call-order assume a re-execution boundary aligned with renders, which is exactly what we don't want for cross-mode-stable extensions.
+This is the *whole reason* we are adopting Vue's setup model rather than React's hooks model: hooks-as-call-order assume a re-<a href="/api-docs/execution" class="wiki-link">execution</a> boundary aligned with renders, which is exactly what we don't want for cross-mode-stable extensions.
 
 ---
 
@@ -250,7 +250,7 @@ function mountExtensionForNode(ext, nodeId, hook) {
 
 Without this, an extension whose `nodeCreated` happens to be invoked from inside another extension's `watch` callback would accidentally register dependencies on whatever refs that outer effect is tracking. With it, extension setup is clean: it can read any ref, create any computed, and nothing leaks outward.
 
-This is one of two gaps D3.5 identifies between Vue's pattern and our first draft (the other being a `currentExtension` global, which we defer until implicit hooks are introduced).
+This is one of two gaps <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5 identifies between Vue's pattern and our first draft (the other being a `currentExtension` global, which we defer until implicit hooks are introduced).
 
 ---
 
@@ -327,15 +327,15 @@ export default defineNodeExtension({
 | Vue concept | ComfyUI extension analog | Notes |
 |-------------|--------------------------|-------|
 | `defineComponent({ setup })` | `defineNodeExtension({ setup })` | Same shape, same once-per-instance contract |
-| Component instance | ECS entity (node, widget, hook target) | Long-lived, stable ID |
+| <a href="/glossary#component" class="wiki-link">Component</a> instance | ECS entity (node, widget, hook target) | Long-lived, stable ID |
 | `instance.scope: EffectScope` | Per-entity-per-extension `EffectScope` | Created in `getOrCreateScope(ext.name, nodeId)` |
-| `currentInstance` global | `currentExtension` global (deferred — see D3.5) | Same pattern, introduced when we add implicit hooks |
+| `currentInstance` global | `currentExtension` global (deferred — see <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5) | Same pattern, introduced when we add implicit hooks |
 | `setup(props, setupContext)` | `setup(ctx: NodeHookContext)` | We collapse props + context into one typed `ctx` |
 | `instance.setupState` | `entity.extensionState[ext.name]` | Returned object, ref-unwrapped, queryable |
 | `instance.ctx` (template proxy) | Not needed | We don't have a `this`-binding template; ECS queries replace it |
 | `onMounted` / `onBeforeUnmount` | `onNodeMounted` / `onNodeRemoved` | Same `currentInstance` capture trick |
 | `provide` / `inject` | `provide` / `inject` (re-exported) | Vue's impl works as-is once we set `currentInstance = currentExtension` |
-| `pauseTracking()` around setup | `pauseTracking()` around extension hook | See §5 + D3.5 |
+| `pauseTracking()` around setup | `pauseTracking()` around extension hook | See §5 + <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5 |
 | `scope.stop()` on unmount | `scope.stop()` on entity removal | Same auto-cleanup of watchers/computeds |
 | `<KeepAlive>` cached instance | Default behavior — entity outlives DOM | The whole reason we picked this model |
 

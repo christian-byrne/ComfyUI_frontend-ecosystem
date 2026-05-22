@@ -1,4 +1,4 @@
-# D3 — Architecture Diagram: ECS World + Hook System + Public API Layer
+# <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a> — Architecture Diagram: ECS <a href="/glossary#world" class="wiki-link">World</a> + Hook <a href="/glossary#system" class="wiki-link">System</a> + Public API Layer
 
 > **Purpose**: Show how the three layers connect — from ECS World internals through the hook system to the extension-facing public API
 
@@ -130,7 +130,7 @@ Later: User drags node
   │                             └── (newPos) => { pos: [100, 200] }
 ```
 
-## Data Flow for an Extension Mutating Widget Value
+## Data Flow for an Extension Mutating <a href="/glossary#widget" class="wiki-link">Widget</a> <a href="/glossary#value" class="wiki-link">Value</a>
 
 ```
 Extension setup()

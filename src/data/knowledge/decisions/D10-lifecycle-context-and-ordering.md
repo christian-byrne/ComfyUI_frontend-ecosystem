@@ -1,34 +1,34 @@
-# ADR-D10: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap
+# ADR-<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap
 
-**Status**: SUPERSEDED — 2026-05-20 (wave-12) — see decisions/D-api-surface-finalization.md. Lifecycle context, hook ordering, async setup, and setupState wrap all decided in D-bootstrap-hooks (ACCEPTED 2026-05-14).
+**Status**: SUPERSEDED — 2026-05-20 (wave-12) — see decisions/<a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>.md. Lifecycle context, hook ordering, async setup, and setupState wrap all decided in <a href="/decisions/D-bootstrap-hooks" class="wiki-link">D-bootstrap-hooks</a> (ACCEPTED 2026-05-14).
 **Date**: 2026-05-08
-**Related**: D2 (Vue setup primer), D3.5 (reactive dispatch & scope alignment), D5 (events), D6 (parallel paths), D7 (widget shape), D8 (world-Vue adapter)
+**Related**: <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> (Vue setup primer), <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5 (reactive dispatch & scope alignment), <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> (events), <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> (parallel paths), <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> (widget shape), <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> (world-Vue adapter)
 **Resolves**: I-SR.4 (lifecycle context choice), I-SR.5 (hook ordering across extensions); todo I-NEW.3
 **Blocks**: PKG2 (`@comfyorg/extension-api` package author work — `defineExtension` / `defineNodeExtension` cannot be implemented until these four contracts are pinned)
 
 ## Context
 
 I-SR.4 and I-SR.5 were both marked done in `todo.md`, but the implementing
-ADR (D10) was never written. D2 explicitly leaves four lifecycle-shape
+ADR (<a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a>) was never written. <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> explicitly leaves four lifecycle-shape
 questions open in its §8 ("Open Questions / Follow-Ups"):
 
 1. **Lifecycle context mechanism** — how do hooks like `onNodeMounted(fn)`
-   know which extension/entity they belong to? D2 §6.2 says "`currentExtension`
-   global (deferred — see D3.5)" but never lands the decision.
+   know which extension/entity they belong to? <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> §6.2 says "`currentExtension`
+   global (deferred — see <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5)" but never lands the decision.
 2. **Hook ordering across multiple extensions** on the same entity. D2 §8
    says "likely: registration order, with a tie-breaker on extension name
-   for determinism" — preference, not decision. D5 Part 4's "Resolutions"
+   for determinism" — preference, not decision. <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> Part 4's "Resolutions"
    block confirms: *"Q3 OPEN — Hook ordering across extensions still
    unspecified; tracked in D10b (lifecycle/ordering ADR, see todo I-NEW.3)."*
 3. **Async setup** — D2 §8: "We almost certainly want sync-only for v1 to
    avoid a whole class of 'extension half-mounted' bugs." Preference,
-   not decision. D5 Part 3 separately ships *one* async-aware event
+   not decision. <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> Part 3 separately ships *one* async-aware event
    (`beforeSerialize`) but explicitly does not extend that to `setup`.
 4. **`setupState` `proxyRefs` wrap** — D2 §1.2 shows Vue does
    `proxyRefs(setupResult)`; D2 §6.2 table says
    `entity.extensionState[ext.name]` is "Returned object, ref-unwrapped".
    That's a *description of Vue*, not a normative API decision for our
-   public surface. D7 Context anchor explicitly flags this as unresolved:
+   public surface. <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> Context anchor explicitly flags this as unresolved:
    *"D2 review open question: should extension `setupState` be `proxyRefs`-wrapped
    (Vue analog) so `entity.extensionState['foo'].count` works without `.value`?"*
 
@@ -37,9 +37,9 @@ This ADR lands the four sub-decisions as **D10a / D10b / D10c / D10d**.
 User's stated defaults if no other constraint applies:
 **(i) for all four — mirror Vue, smallest possible deviation.**
 
-## D10 sub-decisions already resolved in D5–D8
+## <a href="/decisions/D10-lifecycle-context-and-ordering" class="wiki-link">D10</a> sub-decisions already resolved in D5–<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>
 
-After re-reading D5–D8 in full, **none of D10a–d is fully resolved
+After re-reading D5–<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> in full, **none of D10a–d is fully resolved
 elsewhere**. There are three partial touches that this ADR honors:
 
 - **D10c (partial, narrow scope only)** — D5 Part 3 ships exactly one
@@ -50,14 +50,14 @@ elsewhere**. There are three partial touches that this ADR honors:
   exception per D5 (the exception is on the *event* contract, not on
   `setup`). D10c below confirms and consolidates.
 - **D10d (hint only, not decision)** — D2 describes that Vue does
-  `proxyRefs(setupResult)`; D7 Context lists it as still-open. D10d
+  `proxyRefs(setupResult)`; <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> Context lists it as still-open. D10d
   below decides.
 - **D10a (hint only, not decision)** — D2 §6.2 table maps Vue's
-  `currentInstance` to "`currentExtension` global (deferred — see D3.5)".
+  `currentInstance` to "`currentExtension` global (deferred — see <a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.5)".
   D3.5 then defers it again (*"the other being a `currentExtension` global,
   which we defer until implicit hooks are introduced"*). The moment we
   ship `onNodeMounted` / `onNodeRemoved` in the public API surface (which
-  D6 Part 1's `defineExtension({ setup(ctx) { ... } })` example does
+  <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> Part 1's `defineExtension({ setup(ctx) { ... } })` example does
   literally call out: `ctx.onNodeMounted((node) => { ... })`), the
   decision can no longer be deferred. D10a below decides.
 
@@ -109,7 +109,7 @@ registers another nested extension scope.
 
 - D2 §6.2 explicitly maps this as the Vue analog and the user's default
   ("i — mirror Vue") picks it directly.
-- D6 Part 1 already shows `ctx.onNodeMounted(...)` in the v2 example.
+- <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> Part 1 already shows `ctx.onNodeMounted(...)` in the v2 example.
   That call-site syntax stays valid as a *thin convenience binding* on
   `ctx` (it just calls the global-reading factory under the hood).
   Authors can use either; documentation recommends the import form to
@@ -169,7 +169,7 @@ Tie-breaker for *registration order itself* (when extensions register
 within the same microtask, e.g. eager imports inside an `index.ts`
 barrel): **lexicographic on `extension.name`**. This makes the order
 deterministic and reproducible across reloads, regardless of import
-graph traversal order.
+<a href="/api-docs/graph" class="wiki-link">graph</a> traversal order.
 
 ```ts
 // Both extensions register onNodeMounted on CounterNode.
@@ -230,7 +230,7 @@ config. We do **not** ship a `dependsOn:` field in v1.
    even by reordering imports). Vue does not do this. The tie-break-only
    form keeps determinism without sacrificing intent.
 3. **(iii) Explicit `dependsOn:` edges.** Rejected for v1: zero R4
-   evidence of need; introduces graph cycles, missing-dep errors, and a
+   evidence of need; introduces <a href="/api-docs/graph" class="wiki-link">graph</a> cycles, missing-dep errors, and a
    whole new diagnostic surface; the "throw on missing inject" pattern
    captures the same intent without new API. Reserved for v2 if real
    demand surfaces.
@@ -289,7 +289,7 @@ defineNodeExtension({
 - Vue itself ships `async setup` only behind `<Suspense>` for exactly
   this reason. We don't have `<Suspense>` for ECS entities (no parent
   boundary that "waits" for a node to finish setting up before the
-  graph renders), so the Vue gate doesn't exist for us, and shipping
+  <a href="/api-docs/graph" class="wiki-link">graph</a> renders), so the Vue gate doesn't exist for us, and shipping
   `async setup` without it is shipping the failure mode without the
   guardrail.
 - The `loading: ref(true)` pattern is well-understood, type-safe, and
@@ -324,7 +324,7 @@ defineNodeExtension({
    non-representable.
 3. **(iii) Vue-Suspense-style boundary on the ECS entity.** Rejected for
    v1 on cost grounds: requires a parent-boundary concept, a "fallback"
-   render, suspended-state semantics in the World, and integration with
+   render, suspended-state semantics in the <a href="/glossary#world" class="wiki-link">World</a>, and integration with
    the workflow loader. None of these exist; building them is multi-ADR
    work. Reserved for a future `D10c.1` if/when subgraph-host extensions
    demand it.

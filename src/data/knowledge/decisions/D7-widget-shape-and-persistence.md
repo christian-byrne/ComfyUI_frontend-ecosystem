@@ -1,6 +1,6 @@
-# ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model
+# ADR-<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>: <a href="/glossary#widget" class="wiki-link">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model
 
-**Status**: SUPERSEDED — 2026-05-20 (wave-12) — see decisions/D-api-surface-finalization.md §Per-ADR closure verdicts. Parts 1–5 are addressed by D14-widget-state-categories, D-immutability-enforcement, D14-serialization-convergence, D-widget-serialization-simplification, and the live `src/extension-api/widget.ts` surface.
+**Status**: SUPERSEDED — 2026-05-20 (wave-12) — see decisions/<a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>.md §Per-ADR closure verdicts. Parts 1–5 are addressed by <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a>, <a href="/decisions/D-immutability-enforcement" class="wiki-link">D-immutability-enforcement</a>, <a href="/decisions/D14-serialization-convergence" class="wiki-link">D14-serialization-convergence</a>, <a href="/decisions/D-widget-serialization-simplification" class="wiki-link">D-widget-serialization-simplification</a>, and the live `src/extension-api/widget.ts` surface.
 **Date**: 2026-05-08
 **Related cluster**: Reviewer Feedback Cluster B (F4, F5, F11)
 **Blocks**: PKG2 (`WidgetHandle` declaration), I-WS.3 (lazy serialization design)
@@ -8,8 +8,8 @@
 - `research/architecture/widget-props-serialization-from-slack.md` (Slack thread: Primitive Int/Float metadata design, Glary-Bot analysis, Christian/Austin/Alex/Jedrzej discussion)
 - `research/architecture/widget-serialization-state.md` (I-WS.1: 3-surface audit)
 - `research/architecture/widget-serialization-edge-cases.md` (I-WS.2: 7 edge-case widgets)
-- D5 (event payload typing), D6 (parallel paths), D10d (proxyRefs wrap)
-- Touch-points S4.W3, S2.N6, S2.N15, S6.A1
+- <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> (event payload typing), <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> (parallel paths), D10d (proxyRefs wrap)
+- Touch-points S4.W3, S2.N6, S2.N15, S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a>
 
 ---
 
@@ -25,7 +25,7 @@ These are one question: **what is the data model of a widget, what persists, and
 
 The Slack thread (`widget-props-serialization-from-slack.md`) adds a concrete pressure case: Primitive Int/Float nodes need per-instance min/max/step metadata that must survive serialization to workflow JSON, subgraph IO promotion, PrimitiveNode wrapping, and copy/paste — but NOT necessarily change the prompt API contract to the backend (which stays as a plain scalar). This is a _widget-instance config_ use case, distinct from widget _value_.
 
-The serialization audit (I-WS.1) revealed that the current system has **four** overlapping serialization surfaces (direct `widget.value` read, `widget.serializeValue`, `node.onSerialize`, `nodeType.prototype.serialize`) that differ by scope (widget vs node) and timing (workflow-save vs prompt-execute), collide silently when two extensions target the same widget/node, and collectively produced the ADR 0006 bug. Any D7 decision must collapse these toward one principled model.
+The serialization audit (I-WS.1) revealed that the current system has **four** overlapping serialization surfaces (direct `widget.value` read, `widget.serializeValue`, `node.onSerialize`, `nodeType.prototype.serialize`) that differ by scope (widget vs node) and timing (workflow-save vs prompt-execute), collide silently when two extensions target the same widget/node, and collectively produced the ADR 0006 bug. Any <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> decision must collapse these toward one principled model.
 
 The critical constraint from the user (recorded in the scoping placeholder):
 > **No inconsistent ad-hoc distinctions.** The rule for what is first-class vs what is in an options bag must be principled, not case-by-case.
@@ -57,7 +57,7 @@ Applying this rule:
 
 This rule **directly resolves F4 and F5**: `hidden` and `label` are first-class because they are every-widget, not type-specific. The reviewer's implicit preference for an options bag would be valid only if these properties appeared for some widget kinds and not others — they don't.
 
-The same rule applies to the accessor/method distinction from D6 Part 3:
+The same rule applies to the accessor/method distinction from <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> Part 3:
 - Invariant-shaped every-widget properties → accessor pair (`isHidden() / setHidden()`)
 - Action-shaped mutations that fire events → methods (`setValue(v)`)
 - Type-specific options bag entries → accessible via `getOption<T>(key)` / `setOption<T>(key, value)` rather than first-class methods
@@ -70,9 +70,9 @@ Widget state has **three distinct tiers**, each with different persistence seman
 
 | Tier | What it contains | API shape | Persistence |
 |---|---|---|---|
-| **Value** | The user-edited runtime value (`widget.value`). Single scalar or composite object depending on type. | `getValue(): T` / `setValue(v: T)` | workflow JSON (`widgets_values`), API prompt, copy/paste, subgraph promotion |
+| **<a href="/glossary#value" class="wiki-link">Value</a>** | The user-edited runtime value (`widget.value`). Single scalar or composite object depending on type. | `getValue(): T` / `setValue(v: T)` | workflow JSON (`widgets_values`), API prompt, copy/paste, subgraph promotion |
 | **Options** | Type-specific config set at node-def registration time. Defaults from `INPUT_TYPES`. May have per-instance overrides (see Part 3). | `getOption<T>(key)` / `setOption<T>(key, val)` | **workflow JSON** for per-instance overrides (as `widget_options` sidecar, see Part 3). NOT in API prompt. |
-| **Extension state** | Per-extension reactive data living in `entity.extensionState[extName]` (D10d). | `proxyRefs`-wrapped object returned by `setup()`. | **NOT persisted** — reset on copy (D12), reset on reload. State that must survive goes in Value tier via `widget.on('beforeSerialize', ...)`. |
+| **Extension state** | Per-extension reactive data living in `entity.extensionState[extName]` (D10d). | `proxyRefs`-wrapped object returned by `setup()`. | **NOT persisted** — reset on copy (<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>), reset on reload. State that must survive goes in Value tier via `widget.on('beforeSerialize', ...)`. |
 
 This directly resolves F11: `getProperty / getProperties` from v1's node-level `node.properties` map is **not** a first-class widget API. Extensions that want persistent per-node-instance state must either:
 1. Route it through an owned widget's `value` (the cleanest path for data the backend also needs), or
@@ -87,12 +87,12 @@ The v1 `node.properties` bag remains accessible via `NodeHandle.getProperty / se
 | `widget.value`           | ✅ | ✅ | ✅ | ✅ (projected) | ✅ (restored from JSON) |
 | `widget.options` (class defaults) | ❌ | ❌ | derived at connect time | derived at connect time | derived from `INPUT_TYPES` |
 | `widget.options` (per-instance overrides) | ✅ (as `widget_options` sidecar in workflow) | ⚠️ optional envelope (see Part 3) | ✅ (via `widgets_values` or sidecar) | ✅ (via `ExposedWidget.overrides`) | ✅ (restored from sidecar) |
-| `extensionState` (setup return) | ❌ | ❌ | ❌ (reset per D12) | ❌ (entityId-preserving move, scope survives) | ❌ (fresh setup) |
-| `node.properties` (v1 compat) | ✅ | ❌ | ✅ | ⚠️ (lost today — not fixed by D7) | ✅ |
+| `extensionState` (setup return) | ❌ | ❌ | ❌ (reset per <a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>) | ❌ (entityId-preserving move, scope survives) | ❌ (fresh setup) |
+| `node.properties` (v1 compat) | ✅ | ❌ | ✅ | ⚠️ (lost today — not fixed by <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>) | ✅ |
 
 **Notable cells:**
 
-- **Subgraph promotion / `extensionState`**: Subgraph promotion is an entityId-preserving DOM move (per D2 §2.3, D9 Phase A). The `NodeInstanceScope` survives promotion — `scope.stop()` does NOT fire, `onNodeRemoved` does NOT fire. So `extensionState` data persists across promotion. The ❌ means it is not serialized _to disk_.
+- **<a href="/glossary#subgraph" class="wiki-link">Subgraph</a> promotion / `extensionState`**: Subgraph promotion is an entityId-preserving DOM move (per <a href="/decisions/D2-vue-setup-function-primer" class="wiki-link">D2</a> §2.3, <a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a> Phase A). The `NodeInstanceScope` survives promotion — `scope.stop()` does NOT fire, `onNodeRemoved` does NOT fire. So `extensionState` data persists across promotion. The ❌ means it is not serialized _to disk_.
 - **`node.properties` across subgraph promotion**: Currently lost. Not a D7 BLOCKER — the v2 persistence story (route through Value or `beforeSerialize`) is the fix, and D7 does not promise to fix v1 `node.properties` promotion gaps.
 - **Per-instance `widget.options` overrides in API prompt**: Optional envelope (see Part 3 below). The backend does not need min/max/step — they are UI metadata. The prompt API stays as a plain scalar unless the extension author explicitly ships an override that changes the backend contract.
 
@@ -129,9 +129,9 @@ interface ExposedWidget {
 }
 ```
 
-Promotion reads the source widget's `_options_overrides` and writes them here. `promotedWidgetTypes.ts` merges on read.
+<a href="/glossary#promotion" class="wiki-link">Promotion</a> reads the source widget's `_options_overrides` and writes them here. `promotedWidgetTypes.ts` merges on read.
 
-**API prompt**: The backend receives a plain scalar by default. The `widget.serializeValue` → v2 `beforeSerialize` event (per D5 Part 3) _may_ emit an envelope `{value, min?, max?, step?}` if the extension author opts in, but this is not default behavior. A 7-line unwrap in the backend (`execution.py:957-973`) makes the envelope transparent to all FUNCTION handlers. This is not mandatory; it is an opt-in for extensions that want the backend to see the config.
+**API prompt**: The backend receives a plain scalar by default. The `widget.serializeValue` → v2 `beforeSerialize` event (per <a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> Part 3) _may_ emit an envelope `{value, min?, max?, step?}` if the extension author opts in, but this is not default behavior. A 7-line unwrap in the backend (`execution.py:957-973`) makes the envelope transparent to all FUNCTION handlers. This is not mandatory; it is an opt-in for extensions that want the backend to see the config.
 
 **v2 API surface**:
 
@@ -149,7 +149,7 @@ widget.getOption<number>('min')  // returns instance override ?? class default
 
 **Rationale for the value-envelope model vs alternatives:**
 
-The Slack thread analyzed three paths — polymorphism (new BoxedInt type), structural typing (duck-type `{value,…}` as INT), and simple compat-layer (unwrap at execution time). Christian's conclusion was that a format-level change is needed (not frontend-only), but that structural typing and polymorphism are out of scope for the near term: too much engine churn, too many compat risks for custom nodes that do string-equality type matching. The value-envelope is the "format-level but minimal" path: additive to the schema, unwrapped by the backend before any FUNCTION or VALIDATE_INPUTS handler sees it, and not a new type system change.
+The Slack thread analyzed three paths — polymorphism (new BoxedInt type), structural typing (duck-type `{value,…}` as INT), and simple compat-layer (unwrap at <a href="/api-docs/execution" class="wiki-link">execution</a> time). Christian's conclusion was that a format-level change is needed (not frontend-only), but that structural typing and polymorphism are out of scope for the near term: too much engine churn, too many compat risks for custom nodes that do string-equality type matching. The value-envelope is the "format-level but minimal" path: additive to the schema, unwrapped by the backend before any FUNCTION or VALIDATE_INPUTS handler sees it, and not a new type system change.
 
 ---
 
@@ -159,7 +159,7 @@ This is the widget-shape consequence of I-WS.1's audit. The four current seriali
 
 | v1 surface | v2 replacement | What it replaces |
 |---|---|---|
-| `widget.serializeValue` / direct `widget.value` read | **`widget.on('beforeSerialize', event => ...)` event** (D5 Part 3) | Per-widget serialization transform, async-capable, fires for both workflow and prompt paths via a unified lazy getter |
+| `widget.serializeValue` / direct `widget.value` read | **`widget.on('beforeSerialize', event => ...)` event** (<a href="/decisions/D5-events-and-payload-typing" class="wiki-link">D5</a> Part 3) | Per-widget serialization transform, async-capable, fires for both workflow and prompt paths via a unified lazy getter |
 | `node.onSerialize` + `nodeType.prototype.serialize` | **`node.on('beforeSerialize', event => ...)` event** | Node-level serialization hook; replaces both append (`onSerialize`) and wrap (`prototype.serialize`) patterns with a single event that mutates or replaces the serialized object |
 
 The `event` object for the widget `beforeSerialize`:
@@ -175,10 +175,10 @@ The `event` object for the node `beforeSerialize`:
 
 **Why this resolves ADR 0006**: if `event.context === 'clone'`, the handler can safely skip re-computing the value (it will be populated from the source's `widgets_values` snapshot). No extension needs `prototype.serialize` just to fix "widgets don't exist on clone" — the framework handles the clone-context case and calls the handler with the source state already populated.
 
-**Migration shims** (for the parallel-paths transition per D6):
+**Migration shims** (for the parallel-paths transition per <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a>):
 - `widget.serializeValue = fn` assignment → intercepted, registers as `widget.on('beforeSerialize', event => { event.setSerializedValue(await fn(node, i)) })` under the hood.
 - `node.onSerialize = fn` assignment → intercepted, registers as `node.on('beforeSerialize', event => fn(event.data))`.
-- `nodeType.prototype.serialize = fn` assignment → Phase C strangler concern (D9); in Phase A/B, the override still fires as before (no interception yet).
+- `nodeType.prototype.serialize = fn` assignment → Phase C strangler concern (<a href="/decisions/D9-strangler-fig-phases" class="wiki-link">D9</a>); in Phase A/B, the override still fires as before (no interception yet).
 
 ---
 
@@ -245,7 +245,7 @@ interface WidgetValueChangeEvent<T> {
 - `node.properties` accessors — available on `NodeHandle`, not `WidgetHandle`; explicitly migration-shim territory
 - Type-specific option names as first-class methods (no `setMin/setMax`) — use `setOption('min', v)` for all
 - Direct `extensionState` accessors — accessed via `entity.extensionState[extName]` (D10d)
-- `world`/ECS internals — not surfaced on handles (D3.4)
+- `world`/ECS internals — not surfaced on handles (<a href="/decisions/D3.5-reactive-dispatch-and-scope-alignment" class="wiki-link">D3</a>.4)
 
 ---
 
@@ -263,7 +263,7 @@ interface WidgetValueChangeEvent<T> {
 ### Open (deferred)
 
 - **I-WS.3 detailed design** — lazy-getter implementation, memoized-single-flight-per-epoch for async widgets (webcam, load3d, uploadAudio), migration shims for `serializeValue` assignment. D7 sets the target shape; I-WS.3 designs the implementation.
-- **D8 (world-Vue adapter)** — the `getValue()` / `setValue()` reactivity story still needs the adapter to make `watch(() => widget.getValue())` work. D7 specifies the shape; D8 wires the reactivity.
+- **<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> (world-Vue adapter)** — the `getValue()` / `setValue()` reactivity story still needs the adapter to make `watch(() => widget.getValue())` work. D7 specifies the shape; <a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a> wires the reactivity.
 - **`node.properties` across subgraph promotion** — currently lost; not a D7 blocker. Fix is for extensions to migrate to the Value tier or `beforeSerialize` event.
 - **API prompt value-envelope** — the backend 7-line unwrap is specified but not scheduled. Backend team coordination needed. This does NOT block PKG2 or I-WS.3 — it is an opt-in enhancement.
 - **`dependsOn` for serialize ordering across multiple extensions** — two extensions registering `beforeSerialize` on the same widget fire in D10b registration order. If ordering matters (e.g. one transform depends on another's output), there is no `dependsOn` in v1 per D10b. Document as a known limitation.
@@ -289,20 +289,20 @@ interface WidgetValueChangeEvent<T> {
 
 - **D5** — `beforeSerialize` is the async-aware event from D5 Part 3; D7 specifies the full `WidgetBeforeSerializeEvent` shape
 - **D6 Part 3** — accessor/method hybrid rule applied to `WidgetHandle` shape in Part 5
-- **D8** — `getValue()` / `setValue()` reactivity depends on the world-Vue adapter; D7 defers the reactive wiring to D8
+- **<a href="/decisions/D8-world-vue-reactive-adapter" class="wiki-link">D8</a>** — `getValue()` / `setValue()` reactivity depends on the world-Vue adapter; D7 defers the reactive wiring to D8
 - **D10c** — sync setup / async `beforeSerialize` is the narrow async exception; D7 inherits it
 - **D10d** — `extensionState` is `proxyRefs`-wrapped and NOT in `WidgetHandle`; D7 is consistent
-- **D12** — `extensionState` does not survive copy/paste; widget `value` and `widget_options` do
+- **<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>** — `extensionState` does not survive copy/paste; widget `value` and `widget_options` do
 - **I-WS.1** — serialization surface audit (four surfaces → two in v2)
 - **I-WS.2** — edge-case widgets (webcam/load3d/uploadAudio need memoized async getter)
 - **I-WS.3** — lazy getter implementation (deferred; D7 sets the shape it targets)
 - **ADR 0006** — PrimitiveNode copy/paste bug is resolved by `beforeSerialize` with `context='clone'`
 - `research/architecture/widget-props-serialization-from-slack.md` — Primitive Int/Float Slack thread; D7 Part 3 implements the value-envelope recommendation
 - `research/notion/widget-component-apis.md` — PrimeVue component prop API decisions (2026-05-08, WIP). The `Pick<ComponentProps, ...>` types are the concrete per-component typed options bags for D7's future pivot (`WidgetHandle<T, Opts>`). `disabled`/`readonly` on PrimeVue components map to D7 first-class fields. Re-fetch when complete.
-- Touch-points S4.W3, S2.N6, S2.N15 (Part 4 v2 replacements), S6.A1 (graphToPrompt — still the #1 blast-radius surface; `beforeSerialize` is its v2 seam)
+- Touch-points S4.W3, S2.N6, S2.N15 (Part 4 v2 replacements), S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> (graphToPrompt — still the #1 blast-radius surface; `beforeSerialize` is its v2 seam)
 - `research/meta/sourcegraph-mcp-coverage-investigation.md` §Re-audit results
   (2026-05-13) — W2F-1 listener-variant re-audit. **Consumer counts updated.**
-  S2.N6 5→23 (4.6×), S2.N15 7→13 (1.9×), S6.A1 9→15 (1.7×). The "#1
+  S2.N6 5→23 (4.6×), S2.N15 7→13 (1.9×), S6.<a href="/axioms#a1-refs" class="wiki-link">A1</a> 9→15 (1.7×). The "#1
   blast-radius surface" framing for S6.A1 is reinforced (new high-traffic
   consumers: Manager, Copilot, comfyui-deploy, Crystools, SwarmUI); the
   Part 4 v2 replacement contract is unchanged but its v2-parity stakes are

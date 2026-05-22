@@ -85,4 +85,28 @@ describe('wiki-link-mdx autoLink', () => {
     expect(content).toContain('href="/long"')
     expect(content).not.toContain('href="/short"')
   })
+
+  // W19.P1 — strict idempotence regression. Previously a longer symbol
+  // wrapped first would have its `href="/decisions/D14-…"` URL substring
+  // matched by the shorter `D14` symbol regex on the same run, producing
+  // nested anchors that grew on every subsequent run (887/9/0 → 868/0/0
+  // after the re-tokenization fix). Guards against removal of the
+  // per-symbol re-tokenization loop.
+  it('does NOT inject nested anchors when shorter symbol is substring of longer one', () => {
+    const map = new Map([
+      ['D14', '/decisions/D14-serialization-convergence'],
+      ['D14-widget-state-categories', '/decisions/D14-widget-state-categories'],
+    ])
+    const { content } = autoLink('See D14-widget-state-categories §Categories.', map)
+    // No nested `<a` inside another `<a>` tag.
+    expect(content).not.toMatch(/<a[^>]*>[^<]*<a /)
+    // The longer match wins; shorter doesn't fire inside the href.
+    expect(content).toContain(
+      '<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14-widget-state-categories</a>',
+    )
+    // Re-running on the produced content must be a no-op.
+    const second = autoLink(content, map)
+    expect(second.replacements).toBe(0)
+    expect(second.content).toBe(content)
+  })
 })

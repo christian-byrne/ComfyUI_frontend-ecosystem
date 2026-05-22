@@ -1,13 +1,13 @@
-# D-linked-subgraph — Linked Subgraph (Blueprint) Constraints
+# D-linked-subgraph — Linked <a href="/glossary#subgraph" class="wiki-link">Subgraph</a> (<a href="/glossary#blueprint" class="wiki-link">Blueprint</a>) Constraints
 
-**Status**: ACCEPTED — 2026-05-18 (per AXIOMS.md A3 codification + 2026-05-18 design review). Header format normalized 2026-05-20 (wave-12) per D-api-surface-finalization.
+**Status**: ACCEPTED — 2026-05-18 (per AXIOMS.md <a href="/axioms#a3-refs" class="wiki-link">A3</a> codification + 2026-05-18 design review). Header format normalized 2026-05-20 (wave-12) per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>.
 **Date:** 2026-05-18
-**Origin:** AXIOMS.md A3 (Linked Subgraph Constraint), design review meeting 2026-05-18
+**Origin:** AXIOMS.md <a href="/axioms#a3-refs" class="wiki-link">A3</a> (Linked Subgraph Constraint), design review meeting 2026-05-18
 **Related:**
-- D12 (Scope clone-on-copy — different scenario: copy/paste creates new entityId)
-- D7 (Widget shape & persistence)
-- D20 (ID type convergence)
-- AXIOMS.md A3, A4
+- <a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a> (Scope clone-on-copy — different scenario: copy/paste creates new entityId)
+- <a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> (<a href="/glossary#widget" class="wiki-link">Widget</a> shape & persistence)
+- <a href="/decisions/D20-id-type-convergence" class="wiki-link">D20</a> (ID type convergence)
+- AXIOMS.md <a href="/axioms#a3-refs" class="wiki-link">A3</a>, <a href="/axioms#a4-refs" class="wiki-link">A4</a>
 
 ---
 
@@ -15,7 +15,7 @@
 
 ### What are Linked Subgraphs (Blueprints)?
 
-Linked subgraphs — internally called "blueprints" — allow the **same graph instance to exist across multiple clones**. Unlike copy/paste (D12), which creates new entity IDs, a linked subgraph shares entity identity across all instances.
+Linked subgraphs — internally called "blueprints" — allow the **same <a href="/api-docs/graph" class="wiki-link">graph</a> instance to exist across multiple clones**. Unlike copy/paste (<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>), which creates new entity IDs, a linked subgraph shares entity identity across all instances.
 
 ```
 ┌─────────────────────┐      ┌─────────────────────┐
@@ -45,7 +45,7 @@ Extensions that work correctly with single-instance nodes may break silently wit
 
 ## Constraints
 
-### C1: Entity IDs Must Be Context-Stable
+### C1: <a href="/glossary#entity" class="wiki-link">Entity</a> IDs Must Be Context-Stable
 
 Entity IDs (`NodeEntityId`, `WidgetEntityId`) must remain stable across blueprint boundaries. The same node in a blueprint has the same ID regardless of which workflow is viewing it.
 
@@ -132,7 +132,7 @@ All API designs must be tested against the linked-instance scenario:
 ## Future Considerations
 
 - **I-BLUEPRINT.1**: Full linked subgraph implementation (deferred)
-- **FU-1 (Jacob)**: Constraints for parallel execution, streaming, incremental computation
+- **FU-1 (Jacob)**: Constraints for parallel <a href="/api-docs/execution" class="wiki-link">execution</a>, streaming, incremental computation
 - The current v2 API is designed to NOT preclude blueprint support
 
 ---
@@ -140,7 +140,7 @@ All API designs must be tested against the linked-instance scenario:
 ## Cross-References
 
 - **AXIOMS.md A3**: Linked Subgraph Constraint (source axiom)
-- **AXIOMS.md A4**: ID Strategy — Abstract Handles, Not Raw IDs
-- **D12**: Scope clone-on-copy (different scenario — copy creates new IDs)
-- **D20**: ID type convergence (branded IDs enable compile-time safety)
-- **D7**: Widget shape & persistence
+- **AXIOMS.md <a href="/axioms#a4-refs" class="wiki-link">A4</a>**: ID Strategy — Abstract Handles, Not Raw IDs
+- **<a href="/decisions/D12-scope-clone-on-copy" class="wiki-link">D12</a>**: Scope clone-on-copy (different scenario — copy creates new IDs)
+- **<a href="/decisions/D20-id-type-convergence" class="wiki-link">D20</a>**: ID type convergence (branded IDs enable compile-time safety)
+- **<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a>**: Widget shape & persistence

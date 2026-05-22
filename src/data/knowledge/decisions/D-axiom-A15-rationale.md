@@ -1,16 +1,16 @@
-# ADR: A15 Rationale — Widget Declarativity
+# ADR: <a href="/axioms#a15-refs" class="wiki-link">A15</a> Rationale — <a href="/glossary#widget" class="wiki-link">Widget</a> Declarativity
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.A1+A2 (axiom prose simplification)
+**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A15` (lines 323–360 of the pre-W19 540-line version), specifically the multi-paragraph "Rationale" block
 
 ## Context
 
-Pre-W19 §A15 carried the postulate (widgets are schema-declared), three
+Pre-W19 §<a href="/axioms#a15-refs" class="wiki-link">A15</a> carried the postulate (widgets are schema-declared), three
 consequence bullets, and a multi-paragraph rationale explaining why runtime
 widget addition was the *underlying reason* most of the serialization-disable
-matrix existed. Moved here so §A15 keeps the postulate + consequences +
+matrix existed. Moved here so §<a href="/axioms#a15-refs" class="wiki-link">A15</a> keeps the postulate + consequences +
 validation inline.
 
 ## Decision
@@ -45,7 +45,7 @@ A15 removes the cause: every widget originates from `INPUT_TYPES`, so
 every widget has a backend slot, so every widget's value is safe to
 serialize, so the disable matrix is unnecessary.
 
-A16 (unified serialization target) is the consequence ADR: it removes
+<a href="/axioms#a16-refs" class="wiki-link">A16</a> (unified serialization target) is the consequence ADR: it removes
 the escape hatches because A15 removed the need for them.
 
 ### The three UI-state escape hatches
@@ -67,21 +67,21 @@ UI-only state migrate to one of:
    panel. None of these need to serialize, so none of them need to be
    widgets.
 
-3. **Schema input** — the honest answer when the UI-only state really
+3. **<a href="/glossary#schema" class="wiki-link">Schema</a> input** — the honest answer when the UI-only state really
    does belong in the workflow. Add it to `INPUT_TYPES`. The data point
    was lying about being UI-only.
 
 The three options cover the full space. If a use case fits none of them,
-the use case is likely violating A1 (widget-centric) by trying to make
+the use case is likely violating <a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric) by trying to make
 widgets do something they shouldn't.
 
 ### Cross-axiom interaction
 
-- **A1 (widget-centric)** — widgets are the singular extension surface;
+- **<a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric)** — widgets are the singular extension surface;
   A15 specifies they come from schema, not from runtime registration.
-- **A5 (3-tier widget state)** — Schema's "immutable for lifetime"
+- **<a href="/axioms#a5-refs" class="wiki-link">A5</a> (3-tier widget state)** — Schema's "immutable for lifetime"
   property is what makes A15 enforceable.
-- **A16 (unified serialization target)** — A15 removes the cause; A16
+- **<a href="/axioms#a16-refs" class="wiki-link">A16</a> (unified serialization target)** — A15 removes the cause; <a href="/axioms#a16-refs" class="wiki-link">A16</a>
   closes the escape hatches.
 
 ### Enforcement
@@ -89,10 +89,10 @@ widgets do something they shouldn't.
 A15 is enforced by:
 
 - `src/extension-api/node.ts` exposes no `addWidget` / `addDOMWidget`
-  surface (A14 "REMOVED" table)
+  surface (<a href="/axioms#a14-refs" class="wiki-link">A14</a> "REMOVED" table)
 - `scripts/check-axiom-compliance.sh` rejects re-introduction (strict-fail)
 - `D-ban-runtime-addwidget` (wave-10) is the matching ADR for v1 surface
-  enforcement during the D6 parallel-paths transition
+  enforcement during the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths transition
 
 ## Consequences
 

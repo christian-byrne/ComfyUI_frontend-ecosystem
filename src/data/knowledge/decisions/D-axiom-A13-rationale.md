@@ -1,13 +1,13 @@
-# ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch
+# ADR: <a href="/axioms#a13-refs" class="wiki-link">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.A1+A2 (axiom prose simplification)
+**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A13` (lines 259–319 of the pre-W19 540-line version), specifically the "escape-hatch" code block + the "Why an axiom and not just an ADR" block
 
 ## Context
 
-Pre-W19 §A13 was the longest axiom (~60 lines) because it carried:
+Pre-W19 §<a href="/axioms#a13-refs" class="wiki-link">A13</a> was the longest axiom (~60 lines) because it carried:
 
 - Postulate (one coordinate space — canvas units)
 - 5 hard rules covering accessors, pointer events, mount hosts, helper
@@ -72,7 +72,7 @@ future surface that touches geometry:
 - **Custom `onDraw*` patching replacements** — draw callbacks receive
   canvas-space context
 
-A13 short-circuits the per-ADR coordinate-space debate. If a future ADR
+<a href="/axioms#a13-refs" class="wiki-link">A13</a> short-circuits the per-ADR coordinate-space debate. If a future ADR
 wants to expose CSS pixels or screen coordinates as a stable type, that
 ADR must depose A13.
 

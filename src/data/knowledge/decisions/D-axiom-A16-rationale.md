@@ -1,17 +1,17 @@
-# ADR: A16 Rationale — Unified Serialization Target
+# ADR: <a href="/axioms#a16-refs" class="wiki-link">A16</a> Rationale — Unified Serialization Target
 
 **Status**: accepted
 **Date**: 2026-05-21
-**Wave**: W19.A1+A2 (axiom prose simplification)
+**Wave**: W19.<a href="/axioms#a1-refs" class="wiki-link">A1</a>+<a href="/axioms#a2-refs" class="wiki-link">A2</a> (axiom prose simplification)
 **Supersedes**: prose previously inline at `AXIOMS.md §A16` (lines 364–406 of the pre-W19 540-line version), specifically the "Rationale" paragraph
 
 ## Context
 
-Pre-W19 §A16 carried the postulate (workflow JSON and prompt payload
+Pre-W19 §<a href="/axioms#a16-refs" class="wiki-link">A16</a> carried the postulate (workflow JSON and prompt payload
 converge; sole interface is `widget.on('beforeSerialize')`), four
 consequence bullets, a rationale paragraph explaining that the four-context
 discriminator inverted the direction of knowledge flow, and validation
-criteria. Moved the rationale paragraph here so §A16 stays tight.
+criteria. Moved the rationale paragraph here so §<a href="/axioms#a16-refs" class="wiki-link">A16</a> stays tight.
 
 ## Decision
 
@@ -21,7 +21,7 @@ criteria. Moved the rationale paragraph here so §A16 stays tight.
   hook fires once, node.on('beforeSerialize') @deprecated not banned)
 - Validation criteria
 
-This ADR carries the rationale + cross-axiom analysis + the D14 §Phase 4
+This ADR carries the rationale + cross-axiom analysis + the <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> §Phase 4
 historical context.
 
 ## Rationale
@@ -69,25 +69,25 @@ leaves those two events to be added as separate ADRs if needed.
 
 ### Why `node.on('beforeSerialize')` is @deprecated but not banned
 
-A16 explicitly *does not* ban the node-level hook. With A15 (widgets
+A16 explicitly *does not* ban the node-level hook. With <a href="/axioms#a15-refs" class="wiki-link">A15</a> (widgets
 schema-declared) + A16 (unified serialization) in force, the node-level
 hook is structurally redundant — there is nothing a node-level handler
 can do that a widget-level handler can't do better. But banning it
-outright would break existing extensions during the D6 parallel-paths
+outright would break existing extensions during the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> parallel-paths
 window without a corresponding migration recipe.
 
 The disposition is:
 - The hook remains exported and callable
 - It carries `@deprecated` JSDoc + runtime warning per ADR-0010
-- A future ADR may flip it to banned (probably as part of the D6 sunset)
+- A future ADR may flip it to banned (probably as part of the <a href="/decisions/D6.2-types-package-sunset-criteria" class="wiki-link">D6</a> sunset)
 
 Per user direction 2026-05-20: "we should ban this eventually but A16's
 job is to specify the *new* surface, not to delete the old one. The
 deprecation tag is the signal; the ban is the next-wave decision."
 
-### D14 §Phase 4 historical context
+### <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> §Phase 4 historical context
 
-D14 (serialization convergence) had a Phase 4 milestone that said "the
+<a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> (serialization convergence) had a Phase 4 milestone that said "the
 beforeSerialize hook fires once with a single payload". The 4-context
 discriminator was a Phase 3 artifact that survived into Phase 4
 implementation without anyone re-reading the Phase 4 spec. A16 makes
@@ -96,14 +96,14 @@ once-per-serialization semantics are axiomatized.
 
 ### Cross-axiom interaction
 
-- **A15 (widget declarativity)** — removes the cause; A16 removes the
+- **<a href="/axioms#a15-refs" class="wiki-link">A15</a> (widget declarativity)** — removes the cause; A16 removes the
   escape hatches. The two axioms work as a pair.
-- **A1 (widget-centric)** — the sole interface is widget-level, not
-  node-level. A1 makes that natural.
-- **A5 (3-tier widget state)** — Values serialize; Props and Schema do
+- **<a href="/axioms#a1-refs" class="wiki-link">A1</a> (widget-centric)** — the sole interface is widget-level, not
+  node-level. <a href="/axioms#a1-refs" class="wiki-link">A1</a> makes that natural.
+- **<a href="/axioms#a5-refs" class="wiki-link">A5</a> (3-tier widget state)** — Values serialize; Props and <a href="/glossary#schema" class="wiki-link">Schema</a> do
   not. The three tiers map cleanly onto the serialization boundary.
-- **A6 (command pattern)** — serialized values feed into commands;
-  commands serialize for transport. A16 specifies the value-side; A6
+- **<a href="/axioms#a6-refs" class="wiki-link">A6</a> (command pattern)** — serialized values feed into commands;
+  commands serialize for transport. A16 specifies the value-side; <a href="/axioms#a6-refs" class="wiki-link">A6</a>
   specifies the operation-side.
 
 ## Consequences

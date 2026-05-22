@@ -183,27 +183,16 @@ function escapeRegex(s) {
 }
 
 /**
- * Auto-link known symbols within free text. Returns the modified
- * content + a count of replacements made.
+ * Count pre-existing `<a class="wiki-link">` anchors per symbol so the
+ * per-file cap survives re-runs. Iterates ALL opaque segments and
+ * matches each anchor's inner text against the catalogued symbols.
  */
-export function autoLink(content, symbolMap, options = {}) {
-  const cap = options.cap ?? PER_SYMBOL_CAP
-  const segments = splitSegments(content)
-  const seen = new Map() // symbol → count already linked in this file
-  let total = 0
-
-  // Sort symbols longest-first so multi-word matches win over short ones.
-  const symbols = [...symbolMap.keys()].sort((a, b) => b.length - a.length)
-
-  // Idempotency: count pre-existing <a class="wiki-link"> spans toward
-  // the per-symbol cap so re-runs don't keep linking unlinked occurrences
-  // past the budget already established on a previous run.
+function countExistingWikiLinks(segments, symbols, seen) {
   const wikiLinkRe = /<a\b[^>]*class="[^"]*\bwiki-link\b[^"]*"[^>]*>([\s\S]*?)<\/a>/g
   for (const seg of segments) {
     if (seg.type !== 'opaque') continue
     for (const m of seg.value.matchAll(wikiLinkRe)) {
       const inner = m[1].trim()
-      // Find which catalogued symbol matches (longest-match wins).
       for (const sym of symbols) {
         if (inner === sym) {
           seen.set(sym, (seen.get(sym) ?? 0) + 1)
@@ -212,37 +201,71 @@ export function autoLink(content, symbolMap, options = {}) {
       }
     }
   }
+}
 
-  for (const seg of segments) {
-    if (seg.type !== 'text') continue
-    let s = seg.value
-    for (const sym of symbols) {
-      // W19.A3 — glossary terms get a tighter per-file cap (1) than
-      // the default symbol cap (3) since they're generic English words
-      // (Widget, Value, Mount) that appear in body prose constantly.
-      // Detection is by destination URL, not by name, so a Capitalized
-      // Term of Art that ALSO has a canonical API-docs/ADR target
-      // (e.g. WidgetHandle, NodeHandle) keeps the default cap.
-      const dest = symbolMap.get(sym) ?? ''
-      const symCap = dest.startsWith('/glossary#') ? GLOSSARY_CAP : cap
-      const already = seen.get(sym) ?? 0
-      if (already >= symCap) continue
-      const escaped = escapeRegex(sym)
-      // Word-boundary on each side. Use \W (excluding underscore is fine
-      // here since identifiers may include underscores in real APIs).
-      const re = new RegExp(`(^|[^A-Za-z0-9_])(${escaped})(?=$|[^A-Za-z0-9_])`, 'g')
+/**
+ * Auto-link known symbols within free text. Returns the modified
+ * content + a count of replacements made.
+ *
+ * Strict idempotence (W19.P1): re-tokenize between each symbol pass so
+ * newly-injected `<a>` markup becomes opaque to subsequent symbol
+ * regexes in the same run. Without this re-tokenization, a longer
+ * symbol like `D14-widget-state-categories` wrapped first would later
+ * have the substring `D14` matched INSIDE its own injected
+ * `href="/decisions/D14-..."` attribute, producing nested anchors that
+ * grow on every run.
+ */
+export function autoLink(content, symbolMap, options = {}) {
+  const cap = options.cap ?? PER_SYMBOL_CAP
+  const seen = new Map() // symbol → count already linked in this file
+
+  // Sort symbols longest-first so multi-word matches win over short ones.
+  const symbols = [...symbolMap.keys()].sort((a, b) => b.length - a.length)
+
+  let segments = splitSegments(content)
+  countExistingWikiLinks(segments, symbols, seen)
+
+  let total = 0
+  for (const sym of symbols) {
+    // W19.A3 — glossary terms get a tighter per-file cap (1) than
+    // the default symbol cap (3) since they're generic English words
+    // (Widget, Value, Mount) that appear in body prose constantly.
+    // Detection is by destination URL, not by name, so a Capitalized
+    // Term of Art that ALSO has a canonical API-docs/ADR target
+    // (e.g. WidgetHandle, NodeHandle) keeps the default cap.
+    const dest = symbolMap.get(sym) ?? ''
+    const symCap = dest.startsWith('/glossary#') ? GLOSSARY_CAP : cap
+    let already = seen.get(sym) ?? 0
+    if (already >= symCap) continue
+    const escaped = escapeRegex(sym)
+    // Word-boundary on each side. Use \W (excluding underscore is fine
+    // here since identifiers may include underscores in real APIs).
+    const re = new RegExp(`(^|[^A-Za-z0-9_])(${escaped})(?=$|[^A-Za-z0-9_])`, 'g')
+    let touched = false
+    for (const seg of segments) {
+      if (seg.type !== 'text') continue
       let local = 0
-      s = s.replace(re, (_match, pre, hit) => {
+      const replaced = seg.value.replace(re, (_match, pre, hit) => {
         if (already + local >= symCap) return pre + hit
         local++
         return `${pre}<a href="${symbolMap.get(sym)}" class="wiki-link">${hit}</a>`
       })
-      if (local) {
-        seen.set(sym, already + local)
+      if (local > 0) {
+        seg.value = replaced
+        already += local
         total += local
+        touched = true
       }
     }
-    seg.value = s
+    if (touched) {
+      // Rebuild the segment list so the just-injected `<a>` tags become
+      // opaque for the next symbol pass (W19.P1 strict idempotence).
+      // Reset `seen` and re-derive from the fresh tokenization — the
+      // newly-injected anchors are now counted by countExistingWikiLinks.
+      segments = splitSegments(segments.map((s) => s.value).join(''))
+      seen.clear()
+      countExistingWikiLinks(segments, symbols, seen)
+    }
   }
 
   return { content: segments.map((s) => s.value).join(''), replacements: total }

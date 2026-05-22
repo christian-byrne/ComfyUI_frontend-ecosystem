@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-22T00:33:13.049Z",
+  "generatedAt": "2026-05-22T00:40:53.674Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
-      "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+      "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -23,9 +23,11 @@
         "d12-scope-clone-on-copy",
         "d13",
         "d13-ecs-alignment-audit",
+        "d14",
         "d14-serialization-convergence",
         "d14-widget-state-categories",
         "d18",
+        "d18-pure-functions-loader-registration",
         "d6",
         "d7",
         "d7-widget-shape-and-persistence",
@@ -48,72 +50,72 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 10525,
+      "bytes": 14045,
       "path": "decisions/D-api-surface-finalization.md",
       "backlinks": [
         {
           "id": "d-define-widget-augmenter",
-          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-linked-subgraph-constraint",
-          "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+          "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-notify-toast-consolidation",
-          "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+          "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-serialization-simplification",
-          "title": "D-widget-serialization-simplification",
+          "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d10-lifecycle-context-and-ordering",
-          "title": "ADR-D10: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d12-scope-clone-on-copy",
-          "title": "D12 — `NodeInstanceScope` Copy/Paste Semantics",
+          "title": "<a href=\"/decisions/D12-scope-clone-on-copy\" class=\"wiki-link\">D12</a> — `NodeInstanceScope` Copy/Paste Semantics",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d14-serialization-convergence",
-          "title": "ADR-D14: Serialization Convergence — Single Target Model",
+          "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d14-widget-state-categories",
-          "title": "D14 — Widget State Categories",
+          "title": "<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a> — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Categories",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d7-widget-shape-and-persistence",
-          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d8-world-vue-reactive-adapter",
-          "title": "ADR-D8: ECS World ↔ Vue Reactive Adapter",
+          "title": "ADR-<a href=\"/decisions/D8-world-vue-reactive-adapter\" class=\"wiki-link\">D8</a>: ECS <a href=\"/glossary#world\" class=\"wiki-link\">World</a> ↔ Vue Reactive Adapter",
           "type": "decision",
           "relation": "mentions"
         }
@@ -121,7 +123,7 @@
     },
     {
       "slug": "d-axiom-a1-rationale",
-      "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+      "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -143,18 +145,18 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4185,
+      "bytes": 4767,
       "path": "decisions/D-axiom-A1-rationale.md",
       "backlinks": [
         {
           "id": "d-axiom-a12-rationale",
-          "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+          "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a2-rationale",
-          "title": "ADR: A2 Rationale — Minimal API Surface",
+          "title": "ADR: <a href=\"/axioms#a2-refs\" class=\"wiki-link\">A2</a> Rationale — Minimal API Surface",
           "type": "decision",
           "relation": "mentions"
         }
@@ -162,7 +164,7 @@
     },
     {
       "slug": "d-axiom-a12-rationale",
-      "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+      "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -194,12 +196,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4784,
+      "bytes": 5829,
       "path": "decisions/D-axiom-A12-rationale.md",
       "backlinks": [
         {
           "id": "d-axiom-a13-rationale",
-          "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+          "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
           "type": "decision",
           "relation": "mentions"
         }
@@ -207,7 +209,7 @@
     },
     {
       "slug": "d-axiom-a13-rationale",
-      "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+      "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -233,12 +235,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4961,
+      "bytes": 5204,
       "path": "decisions/D-axiom-A13-rationale.md",
       "backlinks": [
         {
           "id": "d-axiom-a12-rationale",
-          "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+          "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
           "type": "decision",
           "relation": "mentions"
         }
@@ -246,7 +248,7 @@
     },
     {
       "slug": "d-axiom-a15-rationale",
-      "title": "ADR: A15 Rationale — Widget Declarativity",
+      "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -274,12 +276,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4675,
+      "bytes": 5434,
       "path": "decisions/D-axiom-A15-rationale.md",
       "backlinks": [
         {
           "id": "d-axiom-a16-rationale",
-          "title": "ADR: A16 Rationale — Unified Serialization Target",
+          "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
           "type": "decision",
           "relation": "mentions"
         }
@@ -287,7 +289,7 @@
     },
     {
       "slug": "d-axiom-a16-rationale",
-      "title": "ADR: A16 Rationale — Unified Serialization Target",
+      "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -304,6 +306,7 @@
         "d-widget-serialization-simplification",
         "d14",
         "d14-serialization-convergence",
+        "d14-widget-state-categories",
         "d6",
         "date",
         "decision"
@@ -314,13 +317,13 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 5741,
+      "bytes": 6740,
       "path": "decisions/D-axiom-A16-rationale.md",
       "backlinks": []
     },
     {
       "slug": "d-axiom-a2-rationale",
-      "title": "ADR: A2 Rationale — Minimal API Surface",
+      "title": "ADR: <a href=\"/axioms#a2-refs\" class=\"wiki-link\">A2</a> Rationale — Minimal API Surface",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -338,13 +341,13 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 2979,
+      "bytes": 3318,
       "path": "decisions/D-axiom-A2-rationale.md",
       "backlinks": []
     },
     {
       "slug": "d-axiom-a4-rationale",
-      "title": "ADR: A4 Rationale — ID Strategy (Abstract Handles)",
+      "title": "ADR: <a href=\"/axioms#a4-refs\" class=\"wiki-link\">A4</a> Rationale — ID Strategy (Abstract Handles)",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -364,13 +367,13 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 2784,
+      "bytes": 3327,
       "path": "decisions/D-axiom-A4-rationale.md",
       "backlinks": []
     },
     {
       "slug": "d-axiom-a5-rationale",
-      "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+      "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -393,12 +396,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4021,
+      "bytes": 4554,
       "path": "decisions/D-axiom-A5-rationale.md",
       "backlinks": [
         {
           "id": "d-axiom-a15-rationale",
-          "title": "ADR: A15 Rationale — Widget Declarativity",
+          "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
           "type": "decision",
           "relation": "mentions"
         }
@@ -406,7 +409,7 @@
     },
     {
       "slug": "d-axiom-a6-rationale",
-      "title": "ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)",
+      "title": "ADR: <a href=\"/axioms#a6-refs\" class=\"wiki-link\">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)",
       "status": "accepted",
       "date": null,
       "axioms": [
@@ -427,13 +430,13 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 3891,
+      "bytes": 4323,
       "path": "decisions/D-axiom-A6-rationale.md",
       "backlinks": []
     },
     {
       "slug": "d-ban-runtime-addwidget",
-      "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+      "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -470,12 +473,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 10683,
+      "bytes": 11890,
       "path": "decisions/D-ban-runtime-addwidget.md",
       "backlinks": [
         {
           "id": "d-axiom-a15-rationale",
-          "title": "ADR: A15 Rationale — Widget Declarativity",
+          "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
           "type": "decision",
           "relation": "mentions"
         }
@@ -483,16 +486,20 @@
     },
     {
       "slug": "d-bootstrap-hooks",
-      "title": "D-bootstrap-hooks — Disposition of `init` / `setup` extension hooks",
+      "title": "<a href=\"/decisions/D-bootstrap-hooks\" class=\"wiki-link\">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks",
       "status": "accepted",
       "date": "2026-05-14",
       "axioms": [],
       "adrs": [
         "d-shell-ui-entrypoints",
         "d10",
+        "d10-lifecycle-context-and-ordering",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d18",
+        "d18-pure-functions-loader-registration",
         "d5",
+        "d5-events-and-payload-typing",
         "dashboard",
         "ddd",
         "decision",
@@ -507,54 +514,54 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 16131,
+      "bytes": 17547,
       "path": "decisions/D-bootstrap-hooks.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-cross-node-observation",
-          "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+          "title": "<a href=\"/decisions/D-cross-node-observation\" class=\"wiki-link\">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-design-review-hygiene-cleanup",
-          "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+          "title": "<a href=\"/decisions/D-design-review-hygiene-cleanup\" class=\"wiki-link\">D-design-review-hygiene-cleanup</a> — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-app-beforeprompt",
-          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-shell-ui-entrypoints",
-          "title": "D-shell-ui-entrypoints — Granular shell UI registration entry points",
+          "title": "<a href=\"/decisions/D-shell-ui-entrypoints\" class=\"wiki-link\">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-converge",
-          "title": "D-widget-converge — DOMWidget ↔ BaseWidget convergence",
+          "title": "<a href=\"/decisions/D-widget-converge\" class=\"wiki-link\">D-widget-converge</a> — DOMWidget ↔ BaseWidget convergence",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d10-lifecycle-context-and-ordering",
-          "title": "ADR-D10: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
           "type": "decision",
           "relation": "mentions"
         }
@@ -562,7 +569,7 @@
     },
     {
       "slug": "d-coordinate-space",
-      "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+      "title": "<a href=\"/decisions/D-coordinate-space\" class=\"wiki-link\">D-coordinate-space</a> — Canvas vs client-pixel vs CSS coordinate convergence",
       "status": "unknown",
       "date": "2026-05-18",
       "axioms": [
@@ -574,6 +581,7 @@
         "d-coordinate-space-blast-radius",
         "d-widget-converge",
         "d4",
+        "d4-gap-analysis",
         "data",
         "data-only",
         "db",
@@ -593,12 +601,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 17652,
+      "bytes": 18356,
       "path": "decisions/D-coordinate-space.md",
       "backlinks": [
         {
           "id": "d-axiom-a13-rationale",
-          "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+          "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
           "type": "decision",
           "relation": "mentions"
         }
@@ -606,7 +614,7 @@
     },
     {
       "slug": "d-cross-node-observation",
-      "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+      "title": "<a href=\"/decisions/D-cross-node-observation\" class=\"wiki-link\">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -628,24 +636,24 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 9391,
+      "bytes": 9891,
       "path": "decisions/D-cross-node-observation.md",
       "backlinks": [
         {
           "id": "d-define-widget-augmenter",
-          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-app-beforeprompt",
-          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-virtual-nodes-in-api",
-          "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+          "title": "<a href=\"/decisions/D-no-virtual-nodes-in-api\" class=\"wiki-link\">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept",
           "type": "decision",
           "relation": "mentions"
         },
@@ -659,7 +667,7 @@
     },
     {
       "slug": "d-define-widget-augmenter",
-      "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+      "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
       "status": "proposed",
       "date": null,
       "axioms": [
@@ -679,6 +687,7 @@
         "d-no-app-beforeprompt",
         "d-no-node-widget-access",
         "d12",
+        "d12-scope-clone-on-copy",
         "dashboard",
         "date",
         "declarativity",
@@ -694,13 +703,13 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 12370,
+      "bytes": 13828,
       "path": "decisions/D-define-widget-augmenter.md",
       "backlinks": []
     },
     {
       "slug": "d-design-review-hygiene-cleanup",
-      "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+      "title": "<a href=\"/decisions/D-design-review-hygiene-cleanup\" class=\"wiki-link\">D-design-review-hygiene-cleanup</a> — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -710,6 +719,7 @@
         "d-bootstrap-hooks",
         "d-immutability-enforcement",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d20",
         "d5",
         "dashboard",
@@ -728,12 +738,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 8289,
+      "bytes": 8824,
       "path": "decisions/D-design-review-hygiene-cleanup.md",
       "backlinks": [
         {
           "id": "d-notify-toast-consolidation",
-          "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+          "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
           "type": "decision",
           "relation": "mentions"
         }
@@ -741,7 +751,7 @@
     },
     {
       "slug": "d-immutability-enforcement",
-      "title": "D-immutability-enforcement — Consistent immutability rules across the API surface",
+      "title": "<a href=\"/decisions/D-immutability-enforcement\" class=\"wiki-link\">D-immutability-enforcement</a> — Consistent immutability rules across the API surface",
       "status": "accepted",
       "date": "2026-05-14",
       "axioms": [],
@@ -750,10 +760,13 @@
         "d-immutability-enforcement-blast-radius",
         "d-widget-converge",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d14",
         "d14-widget-state-categories",
         "d5",
+        "d5-events-and-payload-typing",
         "d8",
+        "d8-world-vue-reactive-adapter",
         "db",
         "decision",
         "decisions",
@@ -769,42 +782,42 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 19637,
+      "bytes": 20689,
       "path": "decisions/D-immutability-enforcement.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-design-review-hygiene-cleanup",
-          "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+          "title": "<a href=\"/decisions/D-design-review-hygiene-cleanup\" class=\"wiki-link\">D-design-review-hygiene-cleanup</a> — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-node-widget-access",
-          "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+          "title": "<a href=\"/decisions/D-no-node-widget-access\" class=\"wiki-link\">D-no-node-widget-access</a> — Nodes Cannot Access Their Widgets (Bilateral <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Closure)",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-promotion-semantics",
-          "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-serialization-simplification",
-          "title": "D-widget-serialization-simplification",
+          "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d7-widget-shape-and-persistence",
-          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -812,7 +825,7 @@
     },
     {
       "slug": "d-linked-subgraph-constraint",
-      "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+      "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
       "status": "accepted",
       "date": "2026-05-18",
       "axioms": [
@@ -823,8 +836,11 @@
         "d-api-surface-finalization",
         "d-linked-subgraph",
         "d12",
+        "d12-scope-clone-on-copy",
         "d20",
+        "d20-id-type-convergence",
         "d7",
+        "d7-widget-shape-and-persistence",
         "date",
         "do",
         "dom",
@@ -835,12 +851,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 5752,
+      "bytes": 6848,
       "path": "decisions/D-linked-subgraph-constraint.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         }
@@ -848,7 +864,7 @@
     },
     {
       "slug": "d-no-app-beforeprompt",
-      "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+      "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -871,12 +887,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4855,
+      "bytes": 5528,
       "path": "decisions/D-no-app-beforeprompt.md",
       "backlinks": [
         {
           "id": "d-define-widget-augmenter",
-          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
           "type": "decision",
           "relation": "mentions"
         },
@@ -890,7 +906,7 @@
     },
     {
       "slug": "d-no-node-widget-access",
-      "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+      "title": "<a href=\"/decisions/D-no-node-widget-access\" class=\"wiki-link\">D-no-node-widget-access</a> — Nodes Cannot Access Their Widgets (Bilateral <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Closure)",
       "status": "accepted",
       "date": "2026-05-19",
       "axioms": [
@@ -901,6 +917,7 @@
       "adrs": [
         "d-immutability-enforcement",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d3",
         "dashboard",
         "decider",
@@ -913,30 +930,30 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 6794,
+      "bytes": 7804,
       "path": "decisions/D-no-node-widget-access.md",
       "backlinks": [
         {
           "id": "d-axiom-a1-rationale",
-          "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+          "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-cross-node-observation",
-          "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+          "title": "<a href=\"/decisions/D-cross-node-observation\" class=\"wiki-link\">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-define-widget-augmenter",
-          "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-serialization-simplification",
-          "title": "D-widget-serialization-simplification",
+          "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
           "type": "decision",
           "relation": "mentions"
         }
@@ -944,7 +961,7 @@
     },
     {
       "slug": "d-no-virtual-nodes-in-api",
-      "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+      "title": "<a href=\"/decisions/D-no-virtual-nodes-in-api\" class=\"wiki-link\">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -964,7 +981,7 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 6299,
+      "bytes": 7170,
       "path": "decisions/D-no-virtual-nodes-in-api.md",
       "backlinks": [
         {
@@ -975,7 +992,7 @@
         },
         {
           "id": "d-widget-promotion-semantics",
-          "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
           "type": "decision",
           "relation": "mentions"
         }
@@ -983,7 +1000,7 @@
     },
     {
       "slug": "d-notify-toast-consolidation",
-      "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+      "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
       "status": "accepted",
       "date": "2026-05-21",
       "axioms": [
@@ -1007,13 +1024,13 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 15326,
+      "bytes": 16658,
       "path": "decisions/D-notify-toast-consolidation.md",
       "backlinks": []
     },
     {
       "slug": "d-shell-ui-entrypoints",
-      "title": "D-shell-ui-entrypoints — Granular shell UI registration entry points",
+      "title": "<a href=\"/decisions/D-shell-ui-entrypoints\" class=\"wiki-link\">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points",
       "status": "unknown",
       "date": "2026-05-18",
       "axioms": [],
@@ -1023,8 +1040,11 @@
         "d-shell-ui-blast-radius",
         "d-widget-converge",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d18",
+        "d18-pure-functions-loader-registration",
         "d19",
+        "d19-vueextension-disposition",
         "dashboard",
         "data",
         "data-only",
@@ -1040,18 +1060,18 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 27957,
+      "bytes": 29188,
       "path": "decisions/D-shell-ui-entrypoints.md",
       "backlinks": [
         {
           "id": "d-bootstrap-hooks",
-          "title": "D-bootstrap-hooks — Disposition of `init` / `setup` extension hooks",
+          "title": "<a href=\"/decisions/D-bootstrap-hooks\" class=\"wiki-link\">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-notify-toast-consolidation",
-          "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+          "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1059,7 +1079,7 @@
     },
     {
       "slug": "d-unify-widget-mount-model",
-      "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+      "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
       "status": "unknown",
       "date": null,
       "axioms": [
@@ -1102,12 +1122,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 15962,
+      "bytes": 18278,
       "path": "decisions/D-unify-widget-mount-model.md",
       "backlinks": [
         {
           "id": "d-widget-promotion-semantics",
-          "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1126,13 +1146,19 @@
         "d-no-app-beforeprompt",
         "d-no-virtual-nodes-in-api",
         "d10",
+        "d10-lifecycle-context-and-ordering",
         "d10b",
         "d12",
+        "d12-scope-clone-on-copy",
         "d14",
+        "d14-widget-state-categories",
         "d15",
+        "d15-ban-node-on-beforeserialize",
         "d16",
         "d5",
+        "d5-events-and-payload-typing",
         "d8",
+        "d8-world-vue-reactive-adapter",
         "d9",
         "d9-strangler-fig-phases",
         "db",
@@ -1153,30 +1179,30 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 20467,
+      "bytes": 21622,
       "path": "decisions/D-uwf-drafting-board.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-cross-node-observation",
-          "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+          "title": "<a href=\"/decisions/D-cross-node-observation\" class=\"wiki-link\">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-app-beforeprompt",
-          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-virtual-nodes-in-api",
-          "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+          "title": "<a href=\"/decisions/D-no-virtual-nodes-in-api\" class=\"wiki-link\">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1184,7 +1210,7 @@
     },
     {
       "slug": "d-widget-converge",
-      "title": "D-widget-converge — DOMWidget ↔ BaseWidget convergence",
+      "title": "<a href=\"/decisions/D-widget-converge\" class=\"wiki-link\">D-widget-converge</a> — DOMWidget ↔ BaseWidget convergence",
       "status": "accepted",
       "date": "2026-05-18",
       "axioms": [],
@@ -1194,9 +1220,12 @@
         "d-dom-widget-compat-shim",
         "d-widget-converge-blast-radius",
         "d14",
+        "d14-widget-state-categories",
         "d5",
+        "d5-events-and-payload-typing",
         "d6",
         "d7",
+        "d7-widget-shape-and-persistence",
         "dashboard",
         "data",
         "db",
@@ -1220,54 +1249,54 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 21419,
+      "bytes": 22623,
       "path": "decisions/D-widget-converge.md",
       "backlinks": [
         {
           "id": "d-axiom-a1-rationale",
-          "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+          "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a12-rationale",
-          "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+          "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-ban-runtime-addwidget",
-          "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+          "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-coordinate-space",
-          "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+          "title": "<a href=\"/decisions/D-coordinate-space\" class=\"wiki-link\">D-coordinate-space</a> — Canvas vs client-pixel vs CSS coordinate convergence",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-immutability-enforcement",
-          "title": "D-immutability-enforcement — Consistent immutability rules across the API surface",
+          "title": "<a href=\"/decisions/D-immutability-enforcement\" class=\"wiki-link\">D-immutability-enforcement</a> — Consistent immutability rules across the API surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-shell-ui-entrypoints",
-          "title": "D-shell-ui-entrypoints — Granular shell UI registration entry points",
+          "title": "<a href=\"/decisions/D-shell-ui-entrypoints\" class=\"wiki-link\">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-promotion-semantics",
-          "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1275,7 +1304,7 @@
     },
     {
       "slug": "d-widget-promotion-semantics",
-      "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+      "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
       "status": "unknown",
       "date": null,
       "axioms": [
@@ -1297,6 +1326,7 @@
         "d-widget-converge",
         "d12-scope-clone-on-copy",
         "d13",
+        "d13-ecs-alignment-audit",
         "d14-widget-state-categories",
         "decider",
         "decision",
@@ -1314,12 +1344,12 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 10408,
+      "bytes": 12229,
       "path": "decisions/D-widget-promotion-semantics.md",
       "backlinks": [
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1327,7 +1357,7 @@
     },
     {
       "slug": "d-widget-serialization-simplification",
-      "title": "D-widget-serialization-simplification",
+      "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
       "status": "unknown",
       "date": null,
       "axioms": [
@@ -1345,6 +1375,7 @@
         "d-no-node-widget-access",
         "d14",
         "d14-serialization-convergence",
+        "d14-widget-state-categories",
         "d6",
         "dashboard",
         "decider",
@@ -1362,54 +1393,54 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 13270,
+      "bytes": 14854,
       "path": "decisions/D-widget-serialization-simplification.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a15-rationale",
-          "title": "ADR: A15 Rationale — Widget Declarativity",
+          "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a16-rationale",
-          "title": "ADR: A16 Rationale — Unified Serialization Target",
+          "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-ban-runtime-addwidget",
-          "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+          "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-no-app-beforeprompt",
-          "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+          "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d14-serialization-convergence",
-          "title": "ADR-D14: Serialization Convergence — Single Target Model",
+          "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d7-widget-shape-and-persistence",
-          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1417,7 +1448,7 @@
     },
     {
       "slug": "d1-vue-reactivity-primer",
-      "title": "D1 — Vue Reactivity Primer: How Signals Work in Vue",
+      "title": "<a href=\"/decisions/D1-vue-reactivity-primer\" class=\"wiki-link\">D1</a> — Vue Reactivity Primer: How Signals Work in Vue",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -1441,12 +1472,30 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 19181,
+      "bytes": 19638,
       "path": "decisions/D1-vue-reactivity-primer.md",
       "backlinks": [
         {
           "id": "d2-vue-setup-function-primer",
-          "title": "D2 — Vue Setup Function Primer: How Hoisted State Works",
+          "title": "<a href=\"/decisions/D2-vue-setup-function-primer\" class=\"wiki-link\">D2</a> — Vue Setup Function Primer: How Hoisted State Works",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d3.1-design-questions-resolved",
+          "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.1 — Design Questions: Resolving the API Surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d4-gap-analysis",
+          "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d8-world-vue-reactive-adapter",
+          "title": "ADR-<a href=\"/decisions/D8-world-vue-reactive-adapter\" class=\"wiki-link\">D8</a>: ECS <a href=\"/glossary#world\" class=\"wiki-link\">World</a> ↔ Vue Reactive Adapter",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1454,7 +1503,7 @@
     },
     {
       "slug": "d10-lifecycle-context-and-ordering",
-      "title": "ADR-D10: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+      "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
       "status": "superseded",
       "date": "2026-05-20",
       "axioms": [],
@@ -1468,11 +1517,15 @@
         "d10d",
         "d2",
         "d2-review",
+        "d2-vue-setup-function-primer",
         "d3",
         "d5",
+        "d5-events-and-payload-typing",
         "d6",
         "d7",
+        "d7-widget-shape-and-persistence",
         "d8",
+        "d8-world-vue-reactive-adapter",
         "date",
         "decided",
         "decision",
@@ -1488,12 +1541,36 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 23207,
+      "bytes": 25132,
       "path": "decisions/D10-lifecycle-context-and-ordering.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-bootstrap-hooks",
+          "title": "<a href=\"/decisions/D-bootstrap-hooks\" class=\"wiki-link\">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d3.1-design-questions-resolved",
+          "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.1 — Design Questions: Resolving the API Surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d9-strangler-fig-phases",
+          "title": "<a href=\"/decisions/D9-strangler-fig-phases\" class=\"wiki-link\">D9</a> — Strangler Fig Phases for v2 Extension API Rollout",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1501,13 +1578,14 @@
     },
     {
       "slug": "d11-naming-definenode-definewidget",
-      "title": "D11 — Naming: `defineNode` / `defineWidget` (short form)",
+      "title": "<a href=\"/decisions/D11-naming-defineNode-defineWidget\" class=\"wiki-link\">D11</a> — Naming: `defineNode` / `defineWidget` (short form)",
       "status": "accepted",
       "date": "2026-05-12",
       "axioms": [],
       "adrs": [
         "d11",
         "d18",
+        "d18-pure-functions-loader-registration",
         "d6",
         "decision",
         "design",
@@ -1518,12 +1596,60 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 3073,
+      "bytes": 3631,
       "path": "decisions/D11-naming-defineNode-defineWidget.md",
       "backlinks": [
         {
           "id": "d-axiom-a1-rationale",
-          "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+          "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-bootstrap-hooks",
+          "title": "<a href=\"/decisions/D-bootstrap-hooks\" class=\"wiki-link\">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-design-review-hygiene-cleanup",
+          "title": "<a href=\"/decisions/D-design-review-hygiene-cleanup\" class=\"wiki-link\">D-design-review-hygiene-cleanup</a> — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-immutability-enforcement",
+          "title": "<a href=\"/decisions/D-immutability-enforcement\" class=\"wiki-link\">D-immutability-enforcement</a> — Consistent immutability rules across the API surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-no-node-widget-access",
+          "title": "<a href=\"/decisions/D-no-node-widget-access\" class=\"wiki-link\">D-no-node-widget-access</a> — Nodes Cannot Access Their Widgets (Bilateral <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Closure)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-shell-ui-entrypoints",
+          "title": "<a href=\"/decisions/D-shell-ui-entrypoints\" class=\"wiki-link\">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d18-pure-functions-loader-registration",
+          "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d19-vueextension-disposition",
+          "title": "<a href=\"/decisions/D19-vueextension-disposition\" class=\"wiki-link\">D19</a> — `VueExtension` / `CustomExtension` disposition",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d9-strangler-fig-phases",
+          "title": "<a href=\"/decisions/D9-strangler-fig-phases\" class=\"wiki-link\">D9</a> — Strangler Fig Phases for v2 Extension API Rollout",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1531,7 +1657,7 @@
     },
     {
       "slug": "d12-scope-clone-on-copy",
-      "title": "D12 — `NodeInstanceScope` Copy/Paste Semantics",
+      "title": "<a href=\"/decisions/D12-scope-clone-on-copy\" class=\"wiki-link\">D12</a> — `NodeInstanceScope` Copy/Paste Semantics",
       "status": "accepted",
       "date": "2026-05-08",
       "axioms": [],
@@ -1539,9 +1665,11 @@
         "d-api-surface-finalization",
         "d12",
         "d2",
+        "d2-vue-setup-function-primer",
         "d3",
         "d6",
         "d7",
+        "d7-widget-shape-and-persistence",
         "date",
         "debuggability",
         "default",
@@ -1555,18 +1683,42 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 19944,
+      "bytes": 21187,
       "path": "decisions/D12-scope-clone-on-copy.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-define-widget-augmenter",
+          "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-linked-subgraph-constraint",
+          "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-promotion-semantics",
-          "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1574,7 +1726,7 @@
     },
     {
       "slug": "d13-ecs-alignment-audit",
-      "title": "D13 — ECS Alignment Audit",
+      "title": "<a href=\"/decisions/D13-ecs-alignment-audit\" class=\"wiki-link\">D13</a> — ECS Alignment Audit",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -1598,12 +1750,24 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 16090,
+      "bytes": 16408,
       "path": "decisions/D13-ecs-alignment-audit.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-promotion-semantics",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d14-widget-state-categories",
+          "title": "<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a> — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Categories",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1611,7 +1775,7 @@
     },
     {
       "slug": "d14-serialization-convergence",
-      "title": "ADR-D14: Serialization Convergence — Single Target Model",
+      "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [
@@ -1622,8 +1786,10 @@
         "d-api-surface-finalization",
         "d-widget-serialization-simplification",
         "d14",
+        "d14-widget-state-categories",
         "d6",
         "d7",
+        "d7-widget-shape-and-persistence",
         "date",
         "decision",
         "deferred",
@@ -1640,30 +1806,30 @@
         "d7-widget-shape-and-persistence"
       ],
       "supersededBy": [],
-      "bytes": 7375,
+      "bytes": 8047,
       "path": "decisions/D14-serialization-convergence.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a16-rationale",
-          "title": "ADR: A16 Rationale — Unified Serialization Target",
+          "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-serialization-simplification",
-          "title": "D-widget-serialization-simplification",
+          "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d7-widget-shape-and-persistence",
-          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "superseded-by"
         }
@@ -1671,15 +1837,17 @@
     },
     {
       "slug": "d14-widget-state-categories",
-      "title": "D14 — Widget State Categories",
+      "title": "<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a> — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Categories",
       "status": "accepted",
       "date": "2026-05-20",
       "axioms": [],
       "adrs": [
         "d-api-surface-finalization",
         "d13",
+        "d13-ecs-alignment-audit",
         "d14",
         "d7",
+        "d7-widget-shape-and-persistence",
         "decision",
         "default",
         "definition",
@@ -1691,48 +1859,96 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4558,
+      "bytes": 5083,
       "path": "decisions/D14-widget-state-categories.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a12-rationale",
-          "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+          "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-axiom-a16-rationale",
+          "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-axiom-a5-rationale",
-          "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+          "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-immutability-enforcement",
-          "title": "D-immutability-enforcement — Consistent immutability rules across the API surface",
+          "title": "<a href=\"/decisions/D-immutability-enforcement\" class=\"wiki-link\">D-immutability-enforcement</a> — Consistent immutability rules across the API surface",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-converge",
+          "title": "<a href=\"/decisions/D-widget-converge\" class=\"wiki-link\">D-widget-converge</a> — DOMWidget ↔ BaseWidget convergence",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-widget-promotion-semantics",
-          "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+          "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-serialization-simplification",
+          "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d14-serialization-convergence",
+          "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d15-ban-node-on-beforeserialize",
+          "title": "<a href=\"/decisions/D15-ban-node-on-beforeSerialize\" class=\"wiki-link\">D15</a> — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d18-pure-functions-loader-registration",
+          "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d20-id-type-convergence",
+          "title": "<a href=\"/decisions/D20-id-type-convergence\" class=\"wiki-link\">D20</a> — Identity type convergence",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d7-widget-shape-and-persistence",
-          "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1740,7 +1956,7 @@
     },
     {
       "slug": "d15-ban-node-on-beforeserialize",
-      "title": "D15 — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
+      "title": "<a href=\"/decisions/D15-ban-node-on-beforeSerialize\" class=\"wiki-link\">D15</a> — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
       "status": "accepted",
       "date": "2026-05-12",
       "axioms": [
@@ -1749,6 +1965,7 @@
       ],
       "adrs": [
         "d14",
+        "d14-widget-state-categories",
         "d15",
         "d6",
         "decision",
@@ -1759,13 +1976,26 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 3565,
+      "bytes": 4354,
       "path": "decisions/D15-ban-node-on-beforeSerialize.md",
-      "backlinks": []
+      "backlinks": [
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d18-pure-functions-loader-registration",
+          "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d17-pkg2-build-strategy",
-      "title": "ADR-D17: PKG2 build strategy — package builds from main app sources via extended root tsconfig",
+      "title": "ADR-<a href=\"/decisions/D17-pkg2-build-strategy\" class=\"wiki-link\">D17</a>: PKG2 build strategy — package builds from main app sources via extended root tsconfig",
       "status": "accepted",
       "date": null,
       "axioms": [],
@@ -1774,6 +2004,7 @@
         "d6",
         "d6-parallel-paths-migration",
         "d8",
+        "d8-world-vue-reactive-adapter",
         "date",
         "decision",
         "declaration",
@@ -1785,13 +2016,13 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 12224,
+      "bytes": 12713,
       "path": "decisions/D17-pkg2-build-strategy.md",
       "backlinks": []
     },
     {
       "slug": "d18-pure-functions-loader-registration",
-      "title": "D18 — Pure functions + loader-based registration",
+      "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
       "status": "accepted",
       "date": "2026-05-14",
       "axioms": [
@@ -1800,13 +2031,18 @@
       "adrs": [
         "d-uwf",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d14",
+        "d14-widget-state-categories",
         "d15",
+        "d15-ban-node-on-beforeserialize",
         "d18",
         "d18-pure-functions",
         "d5",
+        "d5-events-and-payload-typing",
         "d6",
         "d7",
+        "d7-widget-shape-and-persistence",
         "decision",
         "decisions-table",
         "decorator-based",
@@ -1817,18 +2053,50 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 12758,
+      "bytes": 14206,
       "path": "decisions/D18-pure-functions-loader-registration.md",
-      "backlinks": []
+      "backlinks": [
+        {
+          "id": "d-api-surface-finalization",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-bootstrap-hooks",
+          "title": "<a href=\"/decisions/D-bootstrap-hooks\" class=\"wiki-link\">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-shell-ui-entrypoints",
+          "title": "<a href=\"/decisions/D-shell-ui-entrypoints\" class=\"wiki-link\">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d11-naming-definenode-definewidget",
+          "title": "<a href=\"/decisions/D11-naming-defineNode-defineWidget\" class=\"wiki-link\">D11</a> — Naming: `defineNode` / `defineWidget` (short form)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d20-id-type-convergence",
+          "title": "<a href=\"/decisions/D20-id-type-convergence\" class=\"wiki-link\">D20</a> — Identity type convergence",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d19-vueextension-disposition",
-      "title": "D19 — `VueExtension` / `CustomExtension` disposition",
+      "title": "<a href=\"/decisions/D19-vueextension-disposition\" class=\"wiki-link\">D19</a> — `VueExtension` / `CustomExtension` disposition",
       "status": "accepted",
       "date": "2026-05-14",
       "axioms": [],
       "adrs": [
         "d11",
+        "d11-naming-definenode-definewidget",
         "d19",
         "d6",
         "dash-refresh-1",
@@ -1839,13 +2107,26 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4850,
+      "bytes": 5222,
       "path": "decisions/D19-vueextension-disposition.md",
-      "backlinks": []
+      "backlinks": [
+        {
+          "id": "d-shell-ui-entrypoints",
+          "title": "<a href=\"/decisions/D-shell-ui-entrypoints\" class=\"wiki-link\">D-shell-ui-entrypoints</a> — Granular shell UI registration entry points",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d20-id-type-convergence",
+          "title": "<a href=\"/decisions/D20-id-type-convergence\" class=\"wiki-link\">D20</a> — Identity type convergence",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d2-vue-setup-function-primer",
-      "title": "D2 — Vue Setup Function Primer: How Hoisted State Works",
+      "title": "<a href=\"/decisions/D2-vue-setup-function-primer\" class=\"wiki-link\">D2</a> — Vue Setup Function Primer: How Hoisted State Works",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -1864,12 +2145,36 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 20636,
+      "bytes": 21166,
       "path": "decisions/D2-vue-setup-function-primer.md",
       "backlinks": [
         {
           "id": "d1-vue-reactivity-primer",
-          "title": "D1 — Vue Reactivity Primer: How Signals Work in Vue",
+          "title": "<a href=\"/decisions/D1-vue-reactivity-primer\" class=\"wiki-link\">D1</a> — Vue Reactivity Primer: How Signals Work in Vue",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d10-lifecycle-context-and-ordering",
+          "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d12-scope-clone-on-copy",
+          "title": "<a href=\"/decisions/D12-scope-clone-on-copy\" class=\"wiki-link\">D12</a> — `NodeInstanceScope` Copy/Paste Semantics",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d4-gap-analysis",
+          "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1877,7 +2182,7 @@
     },
     {
       "slug": "d20-id-type-convergence",
-      "title": "D20 — Identity type convergence",
+      "title": "<a href=\"/decisions/D20-id-type-convergence\" class=\"wiki-link\">D20</a> — Identity type convergence",
       "status": "accepted",
       "date": "2026-05-14",
       "axioms": [
@@ -1885,8 +2190,11 @@
       ],
       "adrs": [
         "d14",
+        "d14-widget-state-categories",
         "d18",
+        "d18-pure-functions-loader-registration",
         "d19",
+        "d19-vueextension-disposition",
         "d20",
         "d3",
         "dash-refresh-1",
@@ -1902,12 +2210,18 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 9848,
+      "bytes": 10794,
       "path": "decisions/D20-id-type-convergence.md",
       "backlinks": [
         {
           "id": "d-axiom-a4-rationale",
-          "title": "ADR: A4 Rationale — ID Strategy (Abstract Handles)",
+          "title": "ADR: <a href=\"/axioms#a4-refs\" class=\"wiki-link\">A4</a> Rationale — ID Strategy (Abstract Handles)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-linked-subgraph-constraint",
+          "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
           "type": "decision",
           "relation": "mentions"
         }
@@ -1915,7 +2229,7 @@
     },
     {
       "slug": "d3-architecture-diagram",
-      "title": "D3 — Architecture Diagram: ECS World + Hook System + Public API Layer",
+      "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a> — Architecture Diagram: ECS <a href=\"/glossary#world\" class=\"wiki-link\">World</a> + Hook <a href=\"/glossary#system\" class=\"wiki-link\">System</a> + Public API Layer",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -1927,20 +2241,31 @@
       ],
       "waves": [],
       "supersedes": [],
-      "supersededBy": [],
-      "bytes": 9413,
+      "supersededBy": [
+        "d5-events-and-payload-typing"
+      ],
+      "bytes": 9693,
       "path": "decisions/D3-architecture-diagram.md",
-      "backlinks": []
+      "backlinks": [
+        {
+          "id": "d5-events-and-payload-typing",
+          "title": "ADR-<a href=\"/decisions/D5-events-and-payload-typing\" class=\"wiki-link\">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+          "type": "decision",
+          "relation": "supersedes"
+        }
+      ]
     },
     {
       "slug": "d3.1-design-questions-resolved",
-      "title": "D3.1 — Design Questions: Resolving the API Surface",
+      "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.1 — Design Questions: Resolving the API Surface",
       "status": "unknown",
       "date": null,
       "axioms": [],
       "adrs": [
-        "d1-d3",
+        "d1",
+        "d1-vue-reactivity-primer",
         "d10",
+        "d10-lifecycle-context-and-ordering",
         "d3",
         "d6",
         "data",
@@ -1955,13 +2280,13 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 21498,
+      "bytes": 22373,
       "path": "decisions/D3.1-design-questions-resolved.md",
       "backlinks": []
     },
     {
       "slug": "d3.2-single-api-design",
-      "title": "D3.2 — Single API Design: Consolidated Decisions",
+      "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.2 — Single API Design: Consolidated Decisions",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -1970,6 +2295,7 @@
         "d3",
         "d6",
         "d9",
+        "d9-strangler-fig-phases",
         "decisions",
         "dep",
         "derive",
@@ -1987,13 +2313,13 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 17112,
+      "bytes": 17849,
       "path": "decisions/D3.2-single-api-design.md",
       "backlinks": []
     },
     {
       "slug": "d3.3-events-over-signals",
-      "title": "D3.3 — Events Over Signals",
+      "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.3 — Events Over Signals",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -2012,23 +2338,14 @@
       ],
       "waves": [],
       "supersedes": [],
-      "supersededBy": [
-        "d5-events-and-payload-typing"
-      ],
-      "bytes": 9726,
+      "supersededBy": [],
+      "bytes": 10106,
       "path": "decisions/D3.3-events-over-signals.md",
-      "backlinks": [
-        {
-          "id": "d5-events-and-payload-typing",
-          "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
-          "type": "decision",
-          "relation": "supersedes"
-        }
-      ]
+      "backlinks": []
     },
     {
       "slug": "d3.4-events-and-commands-reconciled",
-      "title": "D3.4 — Reconciling Events API with ECS Command/Query Pattern",
+      "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.4 — Reconciling Events API with ECS Command/Query Pattern",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -2039,23 +2356,14 @@
       ],
       "waves": [],
       "supersedes": [],
-      "supersededBy": [
-        "d5-events-and-payload-typing"
-      ],
-      "bytes": 6780,
+      "supersededBy": [],
+      "bytes": 7243,
       "path": "decisions/D3.4-events-and-commands-reconciled.md",
-      "backlinks": [
-        {
-          "id": "d5-events-and-payload-typing",
-          "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
-          "type": "decision",
-          "relation": "supersedes"
-        }
-      ]
+      "backlinks": []
     },
     {
       "slug": "d3.5-reactive-dispatch-and-scope-alignment",
-      "title": "D3.5 — Reactive Dispatch & Scope Alignment with Vue Core",
+      "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.5 — Reactive Dispatch & Scope Alignment with Vue Core",
       "status": "unknown",
       "date": null,
       "axioms": [],
@@ -2069,14 +2377,23 @@
       ],
       "waves": [],
       "supersedes": [],
-      "supersededBy": [],
-      "bytes": 10617,
+      "supersededBy": [
+        "d5-events-and-payload-typing"
+      ],
+      "bytes": 11045,
       "path": "decisions/D3.5-reactive-dispatch-and-scope-alignment.md",
-      "backlinks": []
+      "backlinks": [
+        {
+          "id": "d5-events-and-payload-typing",
+          "title": "ADR-<a href=\"/decisions/D5-events-and-payload-typing\" class=\"wiki-link\">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+          "type": "decision",
+          "relation": "supersedes"
+        }
+      ]
     },
     {
       "slug": "d4-gap-analysis",
-      "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+      "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
       "status": "unknown",
       "date": null,
       "axioms": [
@@ -2091,14 +2408,20 @@
       ],
       "adrs": [
         "d1",
+        "d1-vue-reactivity-primer",
         "d2",
+        "d2-vue-setup-function-primer",
         "d3",
         "d4",
         "d5",
+        "d5-events-and-payload-typing",
         "d6",
         "d7",
+        "d7-widget-shape-and-persistence",
         "d8",
+        "d8-world-vue-reactive-adapter",
         "d9",
+        "d9-strangler-fig-phases",
         "db",
         "decide",
         "decides",
@@ -2118,13 +2441,32 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 31632,
+      "bytes": 34492,
       "path": "decisions/D4-gap-analysis.md",
-      "backlinks": []
+      "backlinks": [
+        {
+          "id": "d-coordinate-space",
+          "title": "<a href=\"/decisions/D-coordinate-space\" class=\"wiki-link\">D-coordinate-space</a> — Canvas vs client-pixel vs CSS coordinate convergence",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d5-events-and-payload-typing",
+          "title": "ADR-<a href=\"/decisions/D5-events-and-payload-typing\" class=\"wiki-link\">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d8-world-vue-reactive-adapter",
+          "title": "ADR-<a href=\"/decisions/D8-world-vue-reactive-adapter\" class=\"wiki-link\">D8</a>: ECS <a href=\"/glossary#world\" class=\"wiki-link\">World</a> ↔ Vue Reactive Adapter",
+          "type": "decision",
+          "relation": "mentions"
+        }
+      ]
     },
     {
       "slug": "d5-events-and-payload-typing",
-      "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+      "title": "ADR-<a href=\"/decisions/D5-events-and-payload-typing\" class=\"wiki-link\">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
       "status": "accepted",
       "date": "2026-05-08",
       "axioms": [
@@ -2134,8 +2476,10 @@
         "d10b",
         "d3",
         "d4",
+        "d4-gap-analysis",
         "d5",
         "d7",
+        "d7-widget-shape-and-persistence",
         "date",
         "db",
         "decision",
@@ -2145,30 +2489,78 @@
       ],
       "waves": [],
       "supersedes": [
-        "d3.3-events-over-signals",
-        "d3.4-events-and-commands-reconciled"
+        "d3-architecture-diagram",
+        "d3.5-reactive-dispatch-and-scope-alignment"
       ],
       "supersededBy": [],
-      "bytes": 12750,
+      "bytes": 13749,
       "path": "decisions/D5-events-and-payload-typing.md",
       "backlinks": [
         {
-          "id": "d3.3-events-over-signals",
-          "title": "D3.3 — Events Over Signals",
+          "id": "d-bootstrap-hooks",
+          "title": "<a href=\"/decisions/D-bootstrap-hooks\" class=\"wiki-link\">D-bootstrap-hooks</a> — Disposition of `init` / `setup` extension hooks",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-immutability-enforcement",
+          "title": "<a href=\"/decisions/D-immutability-enforcement\" class=\"wiki-link\">D-immutability-enforcement</a> — Consistent immutability rules across the API surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-converge",
+          "title": "<a href=\"/decisions/D-widget-converge\" class=\"wiki-link\">D-widget-converge</a> — DOMWidget ↔ BaseWidget convergence",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d10-lifecycle-context-and-ordering",
+          "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d18-pure-functions-loader-registration",
+          "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d3-architecture-diagram",
+          "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a> — Architecture Diagram: ECS <a href=\"/glossary#world\" class=\"wiki-link\">World</a> + Hook <a href=\"/glossary#system\" class=\"wiki-link\">System</a> + Public API Layer",
           "type": "decision",
           "relation": "superseded-by"
         },
         {
-          "id": "d3.4-events-and-commands-reconciled",
-          "title": "D3.4 — Reconciling Events API with ECS Command/Query Pattern",
+          "id": "d3.5-reactive-dispatch-and-scope-alignment",
+          "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.5 — Reactive Dispatch & Scope Alignment with Vue Core",
           "type": "decision",
           "relation": "superseded-by"
+        },
+        {
+          "id": "d4-gap-analysis",
+          "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
+          "type": "decision",
+          "relation": "mentions"
         }
       ]
     },
     {
       "slug": "d6-parallel-paths-migration",
-      "title": "ADR-D6: Parallel Paths Migration Strategy",
+      "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>: Parallel Paths Migration Strategy",
       "status": "accepted",
       "date": "2026-05-08",
       "axioms": [
@@ -2178,6 +2570,7 @@
         "d3",
         "d6",
         "d9",
+        "d9-strangler-fig-phases",
         "date",
         "db",
         "decision",
@@ -2196,24 +2589,24 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 27855,
+      "bytes": 28702,
       "path": "decisions/D6-parallel-paths-migration.md",
       "backlinks": [
         {
           "id": "d17-pkg2-build-strategy",
-          "title": "ADR-D17: PKG2 build strategy — package builds from main app sources via extended root tsconfig",
+          "title": "ADR-<a href=\"/decisions/D17-pkg2-build-strategy\" class=\"wiki-link\">D17</a>: PKG2 build strategy — package builds from main app sources via extended root tsconfig",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d6.2-types-package-sunset-criteria",
-          "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+          "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d9-strangler-fig-phases",
-          "title": "D9 — Strangler Fig Phases for v2 Extension API Rollout",
+          "title": "<a href=\"/decisions/D9-strangler-fig-phases\" class=\"wiki-link\">D9</a> — Strangler Fig Phases for v2 Extension API Rollout",
           "type": "decision",
           "relation": "mentions"
         }
@@ -2228,6 +2621,7 @@
       "adrs": [
         "d6",
         "d9",
+        "d9-strangler-fig-phases",
         "deprecation",
         "dimension",
         "dispatch",
@@ -2241,13 +2635,13 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 11987,
+      "bytes": 12132,
       "path": "decisions/D6.1-entry-point-shape.md",
       "backlinks": []
     },
     {
       "slug": "d6.2-types-package-sunset-criteria",
-      "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+      "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
       "status": "proposed",
       "date": null,
       "axioms": [
@@ -2258,6 +2652,7 @@
         "d6",
         "d6-parallel-paths-migration",
         "d7",
+        "d7-widget-shape-and-persistence",
         "d9",
         "d9-strangler-fig-phases",
         "date",
@@ -2281,13 +2676,13 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 16190,
+      "bytes": 17002,
       "path": "decisions/D6.2-types-package-sunset-criteria.md",
       "backlinks": []
     },
     {
       "slug": "d7-widget-shape-and-persistence",
-      "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+      "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
       "status": "superseded",
       "date": "2026-05-20",
       "axioms": [
@@ -2301,15 +2696,20 @@
         "d10c",
         "d10d",
         "d12",
+        "d12-scope-clone-on-copy",
         "d14-serialization-convergence",
         "d14-widget-state-categories",
         "d2",
+        "d2-vue-setup-function-primer",
         "d3",
         "d5",
+        "d5-events-and-payload-typing",
         "d6",
         "d7",
         "d8",
+        "d8-world-vue-reactive-adapter",
         "d9",
+        "d9-strangler-fig-phases",
         "date",
         "decision",
         "defaults",
@@ -2325,32 +2725,86 @@
       "supersededBy": [
         "d14-serialization-convergence"
       ],
-      "bytes": 22844,
+      "bytes": 24992,
       "path": "decisions/D7-widget-shape-and-persistence.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-linked-subgraph-constraint",
+          "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d-unify-widget-mount-model",
-          "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-widget-converge",
+          "title": "<a href=\"/decisions/D-widget-converge\" class=\"wiki-link\">D-widget-converge</a> — DOMWidget ↔ BaseWidget convergence",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d10-lifecycle-context-and-ordering",
+          "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d12-scope-clone-on-copy",
+          "title": "<a href=\"/decisions/D12-scope-clone-on-copy\" class=\"wiki-link\">D12</a> — `NodeInstanceScope` Copy/Paste Semantics",
           "type": "decision",
           "relation": "mentions"
         },
         {
           "id": "d14-serialization-convergence",
-          "title": "ADR-D14: Serialization Convergence — Single Target Model",
+          "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
           "type": "decision",
           "relation": "supersedes"
+        },
+        {
+          "id": "d14-widget-state-categories",
+          "title": "<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a> — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Categories",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d18-pure-functions-loader-registration",
+          "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d4-gap-analysis",
+          "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d5-events-and-payload-typing",
+          "title": "ADR-<a href=\"/decisions/D5-events-and-payload-typing\" class=\"wiki-link\">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d6.2-types-package-sunset-criteria",
+          "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+          "type": "decision",
+          "relation": "mentions"
         }
       ]
     },
     {
       "slug": "d8-world-vue-reactive-adapter",
-      "title": "ADR-D8: ECS World ↔ Vue Reactive Adapter",
+      "title": "ADR-<a href=\"/decisions/D8-world-vue-reactive-adapter\" class=\"wiki-link\">D8</a>: ECS <a href=\"/glossary#world\" class=\"wiki-link\">World</a> ↔ Vue Reactive Adapter",
       "status": "unknown",
       "date": "2026-05-20",
       "axioms": [],
@@ -2358,8 +2812,10 @@
         "d-api-surface-finalization",
         "d1",
         "d1-review",
+        "d1-vue-reactivity-primer",
         "d3",
         "d4",
+        "d4-gap-analysis",
         "d8",
         "date",
         "decide",
@@ -2370,12 +2826,48 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 4863,
+      "bytes": 5532,
       "path": "decisions/D8-world-vue-reactive-adapter.md",
       "backlinks": [
         {
           "id": "d-api-surface-finalization",
-          "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+          "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-immutability-enforcement",
+          "title": "<a href=\"/decisions/D-immutability-enforcement\" class=\"wiki-link\">D-immutability-enforcement</a> — Consistent immutability rules across the API surface",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d-uwf-drafting-board",
+          "title": "UWF Decisions — Drafting Board (CLOSED 2026-05-20 — wave-13)",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d10-lifecycle-context-and-ordering",
+          "title": "ADR-<a href=\"/decisions/D10-lifecycle-context-and-ordering\" class=\"wiki-link\">D10</a>: Lifecycle Context, Hook Ordering, Async Setup, and `setupState` Wrap",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d17-pkg2-build-strategy",
+          "title": "ADR-<a href=\"/decisions/D17-pkg2-build-strategy\" class=\"wiki-link\">D17</a>: PKG2 build strategy — package builds from main app sources via extended root tsconfig",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d4-gap-analysis",
+          "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -2383,7 +2875,7 @@
     },
     {
       "slug": "d9-strangler-fig-phases",
-      "title": "D9 — Strangler Fig Phases for v2 Extension API Rollout",
+      "title": "<a href=\"/decisions/D9-strangler-fig-phases\" class=\"wiki-link\">D9</a> — Strangler Fig Phases for v2 Extension API Rollout",
       "status": "accepted",
       "date": "2026-05-08",
       "axioms": [
@@ -2391,7 +2883,9 @@
       ],
       "adrs": [
         "d10",
+        "d10-lifecycle-context-and-ordering",
         "d11",
+        "d11-naming-definenode-definewidget",
         "d6",
         "d6-parallel-paths-migration",
         "d9",
@@ -2403,7 +2897,7 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 11236,
+      "bytes": 11963,
       "path": "decisions/D9-strangler-fig-phases.md",
       "backlinks": [
         {
@@ -2413,8 +2907,38 @@
           "relation": "mentions"
         },
         {
+          "id": "d3.2-single-api-design",
+          "title": "<a href=\"/decisions/D3.5-reactive-dispatch-and-scope-alignment\" class=\"wiki-link\">D3</a>.2 — Single API Design: Consolidated Decisions",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d4-gap-analysis",
+          "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d6-parallel-paths-migration",
+          "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>: Parallel Paths Migration Strategy",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d6.1-entry-point-shape",
+          "title": "d6.1-entry-point-shape",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
           "id": "d6.2-types-package-sunset-criteria",
-          "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+          "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+          "type": "decision",
+          "relation": "mentions"
+        },
+        {
+          "id": "d7-widget-shape-and-persistence",
+          "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
           "type": "decision",
           "relation": "mentions"
         }
@@ -3353,14 +3877,24 @@
       "d7-widget-shape-and-persistence"
     ],
     "d10-lifecycle-context-and-ordering": [
-      "d-api-surface-finalization"
+      "d-api-surface-finalization",
+      "d-bootstrap-hooks",
+      "d-uwf-drafting-board",
+      "d3.1-design-questions-resolved",
+      "d9-strangler-fig-phases"
     ],
     "d12-scope-clone-on-copy": [
       "d-api-surface-finalization",
-      "d-widget-promotion-semantics"
+      "d-define-widget-augmenter",
+      "d-linked-subgraph-constraint",
+      "d-uwf-drafting-board",
+      "d-widget-promotion-semantics",
+      "d7-widget-shape-and-persistence"
     ],
     "d13-ecs-alignment-audit": [
-      "d-api-surface-finalization"
+      "d-api-surface-finalization",
+      "d-widget-promotion-semantics",
+      "d14-widget-state-categories"
     ],
     "d14-serialization-convergence": [
       "d-api-surface-finalization",
@@ -3371,18 +3905,49 @@
     "d14-widget-state-categories": [
       "d-api-surface-finalization",
       "d-axiom-a12-rationale",
+      "d-axiom-a16-rationale",
       "d-axiom-a5-rationale",
       "d-immutability-enforcement",
       "d-unify-widget-mount-model",
+      "d-uwf-drafting-board",
+      "d-widget-converge",
       "d-widget-promotion-semantics",
+      "d-widget-serialization-simplification",
+      "d14-serialization-convergence",
+      "d15-ban-node-on-beforeserialize",
+      "d18-pure-functions-loader-registration",
+      "d20-id-type-convergence",
       "d7-widget-shape-and-persistence"
+    ],
+    "d18-pure-functions-loader-registration": [
+      "d-api-surface-finalization",
+      "d-bootstrap-hooks",
+      "d-shell-ui-entrypoints",
+      "d11-naming-definenode-definewidget",
+      "d20-id-type-convergence"
     ],
     "d7-widget-shape-and-persistence": [
       "d-api-surface-finalization",
-      "d-unify-widget-mount-model"
+      "d-linked-subgraph-constraint",
+      "d-unify-widget-mount-model",
+      "d-widget-converge",
+      "d10-lifecycle-context-and-ordering",
+      "d12-scope-clone-on-copy",
+      "d14-serialization-convergence",
+      "d14-widget-state-categories",
+      "d18-pure-functions-loader-registration",
+      "d4-gap-analysis",
+      "d5-events-and-payload-typing",
+      "d6.2-types-package-sunset-criteria"
     ],
     "d8-world-vue-reactive-adapter": [
-      "d-api-surface-finalization"
+      "d-api-surface-finalization",
+      "d-immutability-enforcement",
+      "d-uwf-drafting-board",
+      "d10-lifecycle-context-and-ordering",
+      "d17-pkg2-build-strategy",
+      "d4-gap-analysis",
+      "d7-widget-shape-and-persistence"
     ],
     "d-no-node-widget-access": [
       "d-axiom-a1-rationale",
@@ -3401,7 +3966,15 @@
       "d-widget-promotion-semantics"
     ],
     "d11-naming-definenode-definewidget": [
-      "d-axiom-a1-rationale"
+      "d-axiom-a1-rationale",
+      "d-bootstrap-hooks",
+      "d-design-review-hygiene-cleanup",
+      "d-immutability-enforcement",
+      "d-no-node-widget-access",
+      "d-shell-ui-entrypoints",
+      "d18-pure-functions-loader-registration",
+      "d19-vueextension-disposition",
+      "d9-strangler-fig-phases"
     ],
     "d-axiom-a1-rationale": [
       "d-axiom-a12-rationale",
@@ -3426,11 +3999,27 @@
       "d-axiom-a16-rationale"
     ],
     "d20-id-type-convergence": [
-      "d-axiom-a4-rationale"
+      "d-axiom-a4-rationale",
+      "d-linked-subgraph-constraint"
     ],
     "d-shell-ui-entrypoints": [
       "d-bootstrap-hooks",
       "d-notify-toast-consolidation"
+    ],
+    "d5-events-and-payload-typing": [
+      "d-bootstrap-hooks",
+      "d-immutability-enforcement",
+      "d-uwf-drafting-board",
+      "d-widget-converge",
+      "d10-lifecycle-context-and-ordering",
+      "d18-pure-functions-loader-registration",
+      "d4-gap-analysis",
+      "d7-widget-shape-and-persistence"
+    ],
+    "d4-gap-analysis": [
+      "d-coordinate-space",
+      "d5-events-and-payload-typing",
+      "d8-world-vue-reactive-adapter"
     ],
     "d-api-surface-finalization": [
       "d-define-widget-augmenter",
@@ -3458,6 +4047,10 @@
     "d-design-review-hygiene-cleanup": [
       "d-notify-toast-consolidation"
     ],
+    "d19-vueextension-disposition": [
+      "d-shell-ui-entrypoints",
+      "d20-id-type-convergence"
+    ],
     "d-widget-promotion-semantics": [
       "d-unify-widget-mount-model"
     ],
@@ -3465,15 +4058,28 @@
       "d-uwf-drafting-board",
       "d-widget-promotion-semantics"
     ],
+    "d15-ban-node-on-beforeserialize": [
+      "d-uwf-drafting-board",
+      "d18-pure-functions-loader-registration"
+    ],
     "d9-strangler-fig-phases": [
       "d-uwf-drafting-board",
-      "d6.2-types-package-sunset-criteria"
+      "d3.2-single-api-design",
+      "d4-gap-analysis",
+      "d6-parallel-paths-migration",
+      "d6.1-entry-point-shape",
+      "d6.2-types-package-sunset-criteria",
+      "d7-widget-shape-and-persistence"
     ],
     "d-unify-widget-mount-model": [
       "d-widget-promotion-semantics"
     ],
     "d2-vue-setup-function-primer": [
-      "d1-vue-reactivity-primer"
+      "d1-vue-reactivity-primer",
+      "d10-lifecycle-context-and-ordering",
+      "d12-scope-clone-on-copy",
+      "d4-gap-analysis",
+      "d7-widget-shape-and-persistence"
     ],
     "d6-parallel-paths-migration": [
       "d17-pkg2-build-strategy",
@@ -3481,245 +4087,248 @@
       "d9-strangler-fig-phases"
     ],
     "d1-vue-reactivity-primer": [
-      "d2-vue-setup-function-primer"
+      "d2-vue-setup-function-primer",
+      "d3.1-design-questions-resolved",
+      "d4-gap-analysis",
+      "d8-world-vue-reactive-adapter"
     ]
   },
   "axiomBacklinks": {
     "A14": [
       {
         "id": "d-api-surface-finalization",
-        "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+        "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
         "type": "decision"
       },
       {
         "id": "d-axiom-a15-rationale",
-        "title": "ADR: A15 Rationale — Widget Declarativity",
+        "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a2-rationale",
-        "title": "ADR: A2 Rationale — Minimal API Surface",
+        "title": "ADR: <a href=\"/axioms#a2-refs\" class=\"wiki-link\">A2</a> Rationale — Minimal API Surface",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-design-review-hygiene-cleanup",
-        "title": "D-design-review-hygiene-cleanup — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
+        "title": "<a href=\"/decisions/D-design-review-hygiene-cleanup\" class=\"wiki-link\">D-design-review-hygiene-cleanup</a> — Wave-11 closure of design-review rows #1, #2, #4, #5 stale JSDoc, #6",
         "type": "decision"
       },
       {
         "id": "d-no-node-widget-access",
-        "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+        "title": "<a href=\"/decisions/D-no-node-widget-access\" class=\"wiki-link\">D-no-node-widget-access</a> — Nodes Cannot Access Their Widgets (Bilateral <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Closure)",
         "type": "decision"
       },
       {
         "id": "d-notify-toast-consolidation",
-        "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+        "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       }
     ],
     "A15": [
       {
         "id": "d-api-surface-finalization",
-        "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+        "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
         "type": "decision"
       },
       {
         "id": "d-axiom-a15-rationale",
-        "title": "ADR: A15 Rationale — Widget Declarativity",
+        "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a5-rationale",
-        "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+        "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-no-app-beforeprompt",
-        "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+        "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
         "type": "decision"
       },
       {
         "id": "d-no-virtual-nodes-in-api",
-        "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+        "title": "<a href=\"/decisions/D-no-virtual-nodes-in-api\" class=\"wiki-link\">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       },
       {
         "id": "d14-serialization-convergence",
-        "title": "ADR-D14: Serialization Convergence — Single Target Model",
+        "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
         "type": "decision"
       }
     ],
     "A16": [
       {
         "id": "d-api-surface-finalization",
-        "title": "D-api-surface-finalization — Phase A surface freeze; open-decision closure",
+        "title": "<a href=\"/decisions/D-api-surface-finalization\" class=\"wiki-link\">D-api-surface-finalization</a> — Phase A surface freeze; open-decision closure",
         "type": "decision"
       },
       {
         "id": "d-axiom-a15-rationale",
-        "title": "ADR: A15 Rationale — Widget Declarativity",
+        "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a5-rationale",
-        "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+        "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-no-app-beforeprompt",
-        "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+        "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       },
       {
         "id": "d14-serialization-convergence",
-        "title": "ADR-D14: Serialization Convergence — Single Target Model",
+        "title": "ADR-<a href=\"/decisions/D14-widget-state-categories\" class=\"wiki-link\">D14</a>: Serialization Convergence — Single Target Model",
         "type": "decision"
       }
     ],
     "A1": [
       {
         "id": "d-axiom-a1-rationale",
-        "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+        "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
         "type": "decision"
       },
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a13-rationale",
-        "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+        "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
         "type": "decision"
       },
       {
         "id": "d-axiom-a15-rationale",
-        "title": "ADR: A15 Rationale — Widget Declarativity",
+        "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a2-rationale",
-        "title": "ADR: A2 Rationale — Minimal API Surface",
+        "title": "ADR: <a href=\"/axioms#a2-refs\" class=\"wiki-link\">A2</a> Rationale — Minimal API Surface",
         "type": "decision"
       },
       {
         "id": "d-axiom-a4-rationale",
-        "title": "ADR: A4 Rationale — ID Strategy (Abstract Handles)",
+        "title": "ADR: <a href=\"/axioms#a4-refs\" class=\"wiki-link\">A4</a> Rationale — ID Strategy (Abstract Handles)",
         "type": "decision"
       },
       {
         "id": "d-axiom-a5-rationale",
-        "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+        "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
         "type": "decision"
       },
       {
         "id": "d-axiom-a6-rationale",
-        "title": "ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)",
+        "title": "ADR: <a href=\"/axioms#a6-refs\" class=\"wiki-link\">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-cross-node-observation",
-        "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+        "title": "<a href=\"/decisions/D-cross-node-observation\" class=\"wiki-link\">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-no-node-widget-access",
-        "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+        "title": "<a href=\"/decisions/D-no-node-widget-access\" class=\"wiki-link\">D-no-node-widget-access</a> — Nodes Cannot Access Their Widgets (Bilateral <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Closure)",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
@@ -3729,461 +4338,461 @@
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       },
       {
         "id": "d15-ban-node-on-beforeserialize",
-        "title": "D15 — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
+        "title": "<a href=\"/decisions/D15-ban-node-on-beforeSerialize\" class=\"wiki-link\">D15</a> — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
         "type": "decision"
       },
       {
         "id": "d18-pure-functions-loader-registration",
-        "title": "D18 — Pure functions + loader-based registration",
+        "title": "<a href=\"/decisions/D18-pure-functions-loader-registration\" class=\"wiki-link\">D18</a> — Pure functions + loader-based registration",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       },
       {
         "id": "d5-events-and-payload-typing",
-        "title": "ADR-D5: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
+        "title": "ADR-<a href=\"/decisions/D5-events-and-payload-typing\" class=\"wiki-link\">D5</a>: Event Vocabulary, Payload Typing, and Serialization Hook Shape",
         "type": "decision"
       },
       {
         "id": "d6-parallel-paths-migration",
-        "title": "ADR-D6: Parallel Paths Migration Strategy",
+        "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>: Parallel Paths Migration Strategy",
         "type": "decision"
       },
       {
         "id": "d6.2-types-package-sunset-criteria",
-        "title": "ADR-D6.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
+        "title": "ADR-<a href=\"/decisions/D6.2-types-package-sunset-criteria\" class=\"wiki-link\">D6</a>.2: `@comfyorg/comfyui-frontend-types` Sunset Criteria",
         "type": "decision"
       },
       {
         "id": "d7-widget-shape-and-persistence",
-        "title": "ADR-D7: Widget Shape — First-Class Fields vs Options Bag, and Persistence Model",
+        "title": "ADR-<a href=\"/decisions/D7-widget-shape-and-persistence\" class=\"wiki-link\">D7</a>: <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Shape — First-Class Fields vs Options Bag, and Persistence Model",
         "type": "decision"
       },
       {
         "id": "d9-strangler-fig-phases",
-        "title": "D9 — Strangler Fig Phases for v2 Extension API Rollout",
+        "title": "<a href=\"/decisions/D9-strangler-fig-phases\" class=\"wiki-link\">D9</a> — Strangler Fig Phases for v2 Extension API Rollout",
         "type": "decision"
       }
     ],
     "A2": [
       {
         "id": "d-axiom-a1-rationale",
-        "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+        "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
         "type": "decision"
       },
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a13-rationale",
-        "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+        "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
         "type": "decision"
       },
       {
         "id": "d-axiom-a15-rationale",
-        "title": "ADR: A15 Rationale — Widget Declarativity",
+        "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a2-rationale",
-        "title": "ADR: A2 Rationale — Minimal API Surface",
+        "title": "ADR: <a href=\"/axioms#a2-refs\" class=\"wiki-link\">A2</a> Rationale — Minimal API Surface",
         "type": "decision"
       },
       {
         "id": "d-axiom-a4-rationale",
-        "title": "ADR: A4 Rationale — ID Strategy (Abstract Handles)",
+        "title": "ADR: <a href=\"/axioms#a4-refs\" class=\"wiki-link\">A4</a> Rationale — ID Strategy (Abstract Handles)",
         "type": "decision"
       },
       {
         "id": "d-axiom-a5-rationale",
-        "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+        "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
         "type": "decision"
       },
       {
         "id": "d-axiom-a6-rationale",
-        "title": "ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)",
+        "title": "ADR: <a href=\"/axioms#a6-refs\" class=\"wiki-link\">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-no-node-widget-access",
-        "title": "D-no-node-widget-access — Nodes Cannot Access Their Widgets (Bilateral A1 Closure)",
+        "title": "<a href=\"/decisions/D-no-node-widget-access\" class=\"wiki-link\">D-no-node-widget-access</a> — Nodes Cannot Access Their Widgets (Bilateral <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Closure)",
         "type": "decision"
       },
       {
         "id": "d-notify-toast-consolidation",
-        "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+        "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       },
       {
         "id": "d15-ban-node-on-beforeserialize",
-        "title": "D15 — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
+        "title": "<a href=\"/decisions/D15-ban-node-on-beforeSerialize\" class=\"wiki-link\">D15</a> — Ban `node.on('beforeSerialize')`, deprecate node-level serialization control",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ],
     "A4": [
       {
         "id": "d-axiom-a1-rationale",
-        "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+        "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
         "type": "decision"
       },
       {
         "id": "d-axiom-a4-rationale",
-        "title": "ADR: A4 Rationale — ID Strategy (Abstract Handles)",
+        "title": "ADR: <a href=\"/axioms#a4-refs\" class=\"wiki-link\">A4</a> Rationale — ID Strategy (Abstract Handles)",
         "type": "decision"
       },
       {
         "id": "d-axiom-a6-rationale",
-        "title": "ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)",
+        "title": "ADR: <a href=\"/axioms#a6-refs\" class=\"wiki-link\">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-linked-subgraph-constraint",
-        "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+        "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ],
     "A12": [
       {
         "id": "d-axiom-a1-rationale",
-        "title": "ADR: A1 Rationale — Widget-Centric Philosophy",
+        "title": "ADR: <a href=\"/axioms#a1-refs\" class=\"wiki-link\">A1</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a>-Centric Philosophy",
         "type": "decision"
       },
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a13-rationale",
-        "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+        "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
         "type": "decision"
       },
       {
         "id": "d-axiom-a5-rationale",
-        "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+        "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-coordinate-space",
-        "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+        "title": "<a href=\"/decisions/D-coordinate-space\" class=\"wiki-link\">D-coordinate-space</a> — Canvas vs client-pixel vs CSS coordinate convergence",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       }
     ],
     "A5": [
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a15-rationale",
-        "title": "ADR: A15 Rationale — Widget Declarativity",
+        "title": "ADR: <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a5-rationale",
-        "title": "ADR: A5 Rationale — Widget State Three-Tier Model",
+        "title": "ADR: <a href=\"/axioms#a5-refs\" class=\"wiki-link\">A5</a> Rationale — <a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> State Three-Tier Model",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ],
     "A6": [
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a16-rationale",
-        "title": "ADR: A16 Rationale — Unified Serialization Target",
+        "title": "ADR: <a href=\"/axioms#a16-refs\" class=\"wiki-link\">A16</a> Rationale — Unified Serialization Target",
         "type": "decision"
       },
       {
         "id": "d-axiom-a6-rationale",
-        "title": "ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)",
+        "title": "ADR: <a href=\"/axioms#a6-refs\" class=\"wiki-link\">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)",
         "type": "decision"
       },
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ],
     "A7": [
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-no-app-beforeprompt",
-        "title": "D-no-app-beforeprompt — N11 closure: no `app.on('beforePrompt')` surface",
+        "title": "<a href=\"/decisions/D-no-app-beforeprompt\" class=\"wiki-link\">D-no-app-beforeprompt</a> — N11 closure: no `app.on('beforePrompt')` surface",
         "type": "decision"
       },
       {
         "id": "d-no-virtual-nodes-in-api",
-        "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+        "title": "<a href=\"/decisions/D-no-virtual-nodes-in-api\" class=\"wiki-link\">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ],
     "A11": [
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a6-rationale",
-        "title": "ADR: A6 Rationale — Command Pattern & Serialization (CRDT compatibility)",
+        "title": "ADR: <a href=\"/axioms#a6-refs\" class=\"wiki-link\">A6</a> Rationale — Command Pattern & Serialization (CRDT compatibility)",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d-widget-serialization-simplification",
-        "title": "D-widget-serialization-simplification",
+        "title": "<a href=\"/decisions/D-widget-serialization-simplification\" class=\"wiki-link\">D-widget-serialization-simplification</a>",
         "type": "decision"
       }
     ],
     "A13": [
       {
         "id": "d-axiom-a12-rationale",
-        "title": "ADR: A12 Rationale — Mount-Lifecycle as the Sole DOM Seam",
+        "title": "ADR: <a href=\"/axioms#a12-refs\" class=\"wiki-link\">A12</a> Rationale — <a href=\"/glossary#mount\" class=\"wiki-link\">Mount</a>-Lifecycle as the Sole DOM Seam",
         "type": "decision"
       },
       {
         "id": "d-axiom-a13-rationale",
-        "title": "ADR: A13 Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
+        "title": "ADR: <a href=\"/axioms#a13-refs\" class=\"wiki-link\">A13</a> Rationale — Single Coordinate Space (Canvas) + Escape Hatch",
         "type": "decision"
       },
       {
         "id": "d-coordinate-space",
-        "title": "D-coordinate-space — Canvas vs client-pixel vs CSS coordinate convergence",
+        "title": "<a href=\"/decisions/D-coordinate-space\" class=\"wiki-link\">D-coordinate-space</a> — Canvas vs client-pixel vs CSS coordinate convergence",
         "type": "decision"
       }
     ],
     "A9": [
       {
         "id": "d-axiom-a4-rationale",
-        "title": "ADR: A4 Rationale — ID Strategy (Abstract Handles)",
+        "title": "ADR: <a href=\"/axioms#a4-refs\" class=\"wiki-link\">A4</a> Rationale — ID Strategy (Abstract Handles)",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       }
     ],
     "A3": [
       {
         "id": "d-ban-runtime-addwidget",
-        "title": "D-ban-runtime-addwidget — Enforcement of A15 (Widget Declarativity) on the v1 surface",
+        "title": "<a href=\"/decisions/D-ban-runtime-addwidget\" class=\"wiki-link\">D-ban-runtime-addwidget</a> — Enforcement of <a href=\"/axioms#a15-refs\" class=\"wiki-link\">A15</a> (<a href=\"/glossary#widget\" class=\"wiki-link\">Widget</a> Declarativity) on the v1 surface",
         "type": "decision"
       },
       {
         "id": "d-define-widget-augmenter",
-        "title": "D-define-widget-augmenter — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
+        "title": "<a href=\"/decisions/D-define-widget-augmenter\" class=\"wiki-link\">D-define-widget-augmenter</a> — Collapse \"extend existing widgets\" into `defineWidgetExtension`",
         "type": "decision"
       },
       {
         "id": "d-linked-subgraph-constraint",
-        "title": "D-linked-subgraph — Linked Subgraph (Blueprint) Constraints",
+        "title": "D-linked-subgraph — Linked <a href=\"/glossary#subgraph\" class=\"wiki-link\">Subgraph</a> (<a href=\"/glossary#blueprint\" class=\"wiki-link\">Blueprint</a>) Constraints",
         "type": "decision"
       },
       {
         "id": "d-no-virtual-nodes-in-api",
-        "title": "D-no-virtual-nodes-in-api — N12 closure: virtual nodes are not a v2 API concept",
+        "title": "<a href=\"/decisions/D-no-virtual-nodes-in-api\" class=\"wiki-link\">D-no-virtual-nodes-in-api</a> — N12 closure: virtual nodes are not a v2 API concept",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d20-id-type-convergence",
-        "title": "D20 — Identity type convergence",
+        "title": "<a href=\"/decisions/D20-id-type-convergence\" class=\"wiki-link\">D20</a> — Identity type convergence",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ],
     "A10": [
       {
         "id": "d-cross-node-observation",
-        "title": "D-cross-node-observation — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
+        "title": "<a href=\"/decisions/D-cross-node-observation\" class=\"wiki-link\">D-cross-node-observation</a> — N13 closure: store-mediated observation, with `defineWidgetAugmenter` gap",
         "type": "decision"
       },
       {
         "id": "d-unify-widget-mount-model",
-        "title": "D-unify-widget-mount-model — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
+        "title": "<a href=\"/decisions/D-unify-widget-mount-model\" class=\"wiki-link\">D-unify-widget-mount-model</a> — drop the DOMWidget/non-DOM distinction; one mount path for every widget",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       }
     ],
     "A8": [
       {
         "id": "d-notify-toast-consolidation",
-        "title": "D-notify-toast-consolidation — Resolve `notify()` vs `toast.show()` redundancy",
+        "title": "<a href=\"/decisions/D-notify-toast-consolidation\" class=\"wiki-link\">D-notify-toast-consolidation</a> — Resolve `notify()` vs `toast.show()` redundancy",
         "type": "decision"
       },
       {
         "id": "d-widget-promotion-semantics",
-        "title": "D-widget-promotion-semantics — widget promotion creates a new Topology entity, not a Value mutation",
+        "title": "<a href=\"/decisions/D-widget-promotion-semantics\" class=\"wiki-link\">D-widget-promotion-semantics</a> — widget promotion creates a new <a href=\"/glossary#topology\" class=\"wiki-link\">Topology</a> entity, not a <a href=\"/glossary#value\" class=\"wiki-link\">Value</a> mutation",
         "type": "decision"
       },
       {
         "id": "d4-gap-analysis",
-        "title": "D4 — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
+        "title": "<a href=\"/decisions/D4-gap-analysis\" class=\"wiki-link\">D4</a> — Gap Analysis: Current ComfyExtension ↔ Real Demand ↔ v2 API",
         "type": "decision"
       }
     ]

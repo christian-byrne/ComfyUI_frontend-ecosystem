@@ -1,8 +1,8 @@
-# D14 — Widget State Categories
+# <a href="/decisions/D14-widget-state-categories" class="wiki-link">D14</a> — <a href="/glossary#widget" class="wiki-link">Widget</a> State Categories
 
-**Status**: ACCEPTED — implemented in `src/extension-api/widget.ts` (D7 Parts 1 + 3 successor). Header format normalized 2026-05-20 (wave-12) per D-api-surface-finalization.
+**Status**: ACCEPTED — implemented in `src/extension-api/widget.ts` (<a href="/decisions/D7-widget-shape-and-persistence" class="wiki-link">D7</a> Parts 1 + 3 successor). Header format normalized 2026-05-20 (wave-12) per <a href="/decisions/D-api-surface-finalization" class="wiki-link">D-api-surface-finalization</a>.
 > Created: 2026-05-12
-> Context: Follow-up to D13 §3.1 widget options investigation
+> Context: Follow-up to <a href="/decisions/D13-ecs-alignment-audit" class="wiki-link">D13</a> §3.1 widget options investigation
 > ADR: `docs/adr/0010-widget-state-categories.md`
 > Code: `src/extension-api/widget.ts`, `src/services/extension-api-service.ts`
 
@@ -19,7 +19,7 @@ The current widget system is a pile of historical accidents:
 
 ---
 
-## Decision: Schema + Props + Model Value
+## Decision: <a href="/glossary#schema" class="wiki-link">Schema</a> + Props + Model <a href="/glossary#value" class="wiki-link">Value</a>
 
 Two categories, with `value` as a special prop (like Vue's `modelValue`):
 
@@ -98,7 +98,7 @@ API surface ≠ ECS internals. The facade pattern hides the component split.
 
 3. *Views don't mutate props directly* — like Vue's one-way data flow. Systems mutate, views observe.
 
-4. *"Changing graph topology mutates values" causes bugs* — props should be stable across topology changes where possible.
+4. *"Changing <a href="/api-docs/graph" class="wiki-link">graph</a> topology mutates values" causes bugs* — props should be stable across topology changes where possible.
 
 ---
 
@@ -126,7 +126,7 @@ See `#frontend-eng` thread starting at 12:58 PM. Participants: Christian, Austin
 
 Key quotes:
 - Austin: "Using min as an example. Under what circumstances would it change, or need to be externally observable?"
-- Alex: "A lot of bugs come from 'changing the graph topology mutates values'"
+- Alex: "A lot of bugs come from 'changing the <a href="/api-docs/graph" class="wiki-link">graph</a> topology mutates values'"
 - Christian: "The presence of Min and max are immutable in the schema. Along with defaults. Their values would be props, which are only set by the systems"
 - Christian: "Views of the data shouldn't directly mutate the props just like with Vue"
 
