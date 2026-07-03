@@ -41,7 +41,7 @@
     "marked": "^18.0.3",
     "marked-gfm-heading-id": "^4.1.4",
     "pinia": "^2.2.0",
-    "shiki": "^4.0.2",
+    "shiki": "^4.3.0",
     "tailwind-merge": "^3.6.0",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0",
