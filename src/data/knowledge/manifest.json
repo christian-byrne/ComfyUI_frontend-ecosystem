@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-10T22:34:17.570Z",
+  "generatedAt": "2026-08-10T23:09:16.282Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -3098,7 +3098,6 @@
         "data-model",
         "db",
         "dead",
-        "dec",
         "decide",
         "decided",
         "decision",
@@ -3159,7 +3158,6 @@
         "disposition",
         "distill",
         "distinguish",
-        "dm",
         "dns",
         "do",
         "doc",
@@ -3221,7 +3219,7 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 258916,
+      "bytes": 258945,
       "path": "root/todo.md"
     }
   ],
