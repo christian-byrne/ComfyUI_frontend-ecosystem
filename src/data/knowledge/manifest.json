@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T01:43:40.251Z",
+  "generatedAt": "2026-08-10T22:34:17.570Z",
   "decisions": [
     {
       "slug": "d-api-surface-finalization",
@@ -2022,7 +2022,7 @@
       "waves": [],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 9413,
+      "bytes": 9397,
       "path": "decisions/D3-architecture-diagram.md",
       "backlinks": []
     },
@@ -2136,7 +2136,7 @@
       "supersededBy": [
         "d5-events-and-payload-typing"
       ],
-      "bytes": 6780,
+      "bytes": 6788,
       "path": "decisions/D3.4-events-and-commands-reconciled.md",
       "backlinks": [
         {
@@ -3098,6 +3098,7 @@
         "data-model",
         "db",
         "dead",
+        "dec",
         "decide",
         "decided",
         "decision",
@@ -3158,6 +3159,7 @@
         "disposition",
         "distill",
         "distinguish",
+        "dm",
         "dns",
         "do",
         "doc",
@@ -3210,6 +3212,7 @@
         "wave-18",
         "wave-19",
         "wave-2",
+        "wave-20",
         "wave-3",
         "wave-4",
         "wave-5",
@@ -3218,7 +3221,7 @@
       ],
       "supersedes": [],
       "supersededBy": [],
-      "bytes": 252700,
+      "bytes": 258916,
       "path": "root/todo.md"
     }
   ],

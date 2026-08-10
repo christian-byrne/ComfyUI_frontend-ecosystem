@@ -182,27 +182,27 @@ Extension registers with name "my-ext"
 ```ts
 // BEFORE (current)
 interface ComfyExtension {
-  nodeCreated?(node: LGraphNode, app: ComfyApp): void
+  nodeCreated?(node: LGraphNode, app: ComfyApp): void;
 }
 
 // AFTER (additive, non-breaking)
 interface ComfyExtension {
   nodeCreated?(
-    node: LGraphNode,          // Still passed (deprecated)
-    app: ComfyApp,             // Still passed (deprecated)
-    ctx?: NodeHookContext       // NEW: opt-in ECS APIs
-  ): void
+    node: LGraphNode, // Still passed (deprecated)
+    app: ComfyApp, // Still passed (deprecated)
+    ctx?: NodeHookContext, // NEW: opt-in ECS APIs
+  ): void;
 }
 
 // Extensions that use ctx get:
 interface NodeHookContext {
-  entityId: NodeEntityId
-  useComponent<C>(key: ComponentKey<C>): Readonly<Ref<C>>
-  useQuery<K extends ComponentKey[]>(...keys: K): ComputedRef<QueryResult<K>[]>
-  dispatch(command: Command): CommandResult
-  watch: typeof watch
-  provide: typeof provide
-  onRemoved(fn: () => void): void
-  expose(exposed: Record<string, any>): void
+  entityId: NodeEntityId;
+  useComponent<C>(key: ComponentKey<C>): Readonly<Ref<C>>;
+  useQuery<K extends ComponentKey[]>(...keys: K): ComputedRef<QueryResult<K>[]>;
+  dispatch(command: Command): CommandResult;
+  watch: typeof watch;
+  provide: typeof provide;
+  onRemoved(fn: () => void): void;
+  expose(exposed: Record<string, any>): void;
 }
 ```

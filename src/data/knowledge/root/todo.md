@@ -1838,3 +1838,74 @@ PICK stage.
 - [x] W18.M — Self-review — `research/wave-18-self-review-2026-05-21.md`; 9 CLEAN / 1 SMELL (W18.K idempotence — acceptable) / 1 BLOCKER (MarkdownView slugify collision) FIXED in dashboard `27807e8` with 3 vitests; foundation `24d893d401` JSDoc-only verified; compliance grid 10/10
 - [x] W18.N — Adversarial review — `research/wave-18-adversarial-review.md`; Skeptic/Architect/Minimalist on gemini-2.5-pro; verdict SHIP-WITH-FOLLOWUPS; P0 slugify collision found + handed to W18.M
 - [x] W18.O — E2E nav smoke — dashboard `d90279a`, 21 tests covering 12 static routes + 6 dynamic fixtures + scrollBehavior + chip alignment regression guards; pnpm test:e2e → 21 passed (3.3s)
+
+---
+
+## 2026-08-10 — Wave-20: Re-entry, recalibration, reconciliation
+
+**Context**: workspace dormant 81 days. Ownership of the V1 custom-node API moved to Ben Cooley (2026-08-03); sequencing inverted (V1 ships *before* ECS, non-breaking); the ECS "World" was deleted (ADR 0008 amendment, PR 12617) taking `WidgetEntityId`/`entityId` with it. Full record in `CONTEXT-UPDATE-2026-08-10.md`. Reconciliation in `RECONCILIATION-ben-v1-vs-workspace.md`. Axiom dispositions in `AXIOMS-vs-v1-lineitem.md`. Claims audit (SENSITIVE — private) in `AUDIT-ben-claims-vs-data.md`.
+
+### W20.CTX — context records
+
+- [x] W20.CTX.1 — Re-entry briefing from Fireflies/Notion/Linear/Slack/git — `CONTEXT-UPDATE-2026-08-10.md`
+- [x] W20.CTX.2 — Reconciliation vs Ben's V1 surface — `RECONCILIATION-ben-v1-vs-workspace.md`
+- [x] W20.CTX.3 — A1–A16 line-item pass — `AXIOMS-vs-v1-lineitem.md`
+- [x] W20.CTX.4 — Claims-vs-data audit — `AUDIT-ben-claims-vs-data.md` (private; do not share verbatim)
+- [x] W20.CTX.5 — Recover lost session prompts — `logs/recovered-prompt-history-2026-05-08-to-05-20.md`
+- [x] W20.CTX.6 — Notion mirror (private) — https://app.notion.com/p/3b86d73d365081828f4ff9536bf55660
+- [ ] W20.CTX.7 — Re-read `AXIOMS.md` + all `decisions/` for stale "the World" references; amend to the store model
+- [ ] W20.CTX.8 — Update `D20-id-type-convergence.md` — UUID premise is stale; `NodeId` is a branded string upstream
+
+### W20.MET — measurement & methodology recalibration
+
+- [x] W20.MET.1 — Build the seeded-defect control — `tools/seed_control.py`, self-test green
+- [ ] W20.MET.2 — DM Ben with the five methodology questions (questions only, no discrepancy named)
+- [ ] W20.MET.3 — Offer to pair on running `seed_control.py` against the existing `mx/` artifacts (no corpus re-fetch needed)
+- [ ] W20.MET.4 — Propose folding `vue_row_desync` into the shipped verdict in `diff_matrix.py`
+- [ ] W20.MET.5 — Propose the order-sensitive comparison (the current one sorts both sides before diffing)
+- [ ] W20.MET.6 — Ask which automated check can currently *fail* a conversion outright
+- [ ] W20.MET.7 — Establish the denominator convention: every breakage figure carries its population + weighting
+- [ ] W20.MET.8 — Measure the `USES-BROKEN-API` false-positive rate (currently asserted as "known", never measured)
+- [ ] W20.MET.9 — Once MET.1 has run: decide whether the PASS rate can support a release gate at all
+
+### W20.AX — axiom dispositions (batch into themed sessions, not one meeting)
+
+- [ ] W20.AX.A — **Session A: the refuted three.** A1 bilateral closure, A15 absolutism, A14 `getMode` exclusion. Prep doc leads with the install-weighted data. Owner: Christian. Attendee: Ben (+ Alex for A1).
+- [ ] W20.AX.B — **Session B: the surface-philosophy fork.** A2 vs the completeness criterion. Proposed synthesis: *usage volume justifies a capability, never its shape.* Owner: Christian + Ben, escalate to Miles.
+- [ ] W20.AX.C — **Session C: hold-firm set.** A13 (refuse `getScreenRect`/`onViewportChanged`), A12 (answers Ben's Q1 outright + contribute the remount lifecycle), A16 as target state. Owner: Christian.
+- [ ] W20.AX.D — **Session D: forward-compat.** A3 blueprint/linked-subgraph constraint — absent from V1 entirely; A7 four-layer model as the V2 wire-format frame. Owner: Christian + Alex.
+- [ ] W20.AX.E — Retire A10's "Vue-native" claim (Ben's dual-Vue objection is correct); record as an amendment, not a deletion
+- [ ] W20.AX.F — Amend A4 to "handles are the ergonomic path; ids are exposed, branded, opaque"; adopt `sameEntity`/`adopt`
+
+### W20.PR — port the stack (do not rebase — 946 commits behind, built on deleted `world/*`)
+
+- [ ] W20.PR.1 — Port #12143 (npm types package + TypeDoc→MDX docgen + CI) — answers Ben's open Q6
+- [ ] W20.PR.2 — Port #12145 (test framework + behaviour triplets) — fills the §6 proxy-contract test hole
+- [ ] W20.PR.3 — Contribute AXIOMS.md as a design-review input to the V1 refactor pass
+- [ ] W20.PR.4 — Port #12142's surface only where it disagrees with V1 after W20.AX
+- [ ] W20.PR.5 — Decide the fate of #12144 (core extension conversions) — likely superseded by Ben's conversions
+- [ ] W20.PR.6 — Close or convert-to-draft whatever does not survive, with a comment pointing at the reconciliation
+
+### W20.GATE — repair the wave-19 gates
+
+- [ ] W20.GATE.1 — Rewrite every `W16.*` / `W19.OP*` / `W19.A9` / `W19.A10` trigger: PR 11939 is closed, not merged
+- [ ] W20.GATE.2 — Re-point gates at `feature/ecs-migration` or an ECS ship date (none committed yet)
+- [ ] W20.GATE.3 — Close out the three unchecked wave-19 validation items (sync.sh clean, dashboard CI, live-Vercel e2e 28/28)
+- [ ] W20.GATE.4 — Apply or drop the four stale ext-api stashes (`stash@{1}`–`{4}`)
+
+### W20.DEC — decisions Christian owns and is currently blocking
+
+- [ ] W20.DEC.1 — **§3** core widgets silently win name collisions — packs win, or shadowing fails loudly? 12 packs / 6.8M downloads
+- [ ] W20.DEC.2 — **§4a** rgthree pack-wide conversion — Ben recommends decline; 3.69M downloads
+- [ ] W20.DEC.3 — **§6a** 14 sanctioned hold-outs on workflow save/load — confirm, and say what retires them
+- [ ] W20.DEC.4 — **Bundling** Nodes 2.0 in-band vs opt-in (co-owned with Miles). Do not decide before W20.MET.1 has a number — the current evidence base cannot see the dominant Nodes 2.0 failure mode
+- [ ] W20.DEC.5 — Serialization split (A16): accept for V1 as recorded deferral, converge in the batched major
+- [ ] W20.DEC.6 — Re-file the `controls` wire-format proposal as the V2 anchor; cross-link Ben's Q8; de-scope from V1
+
+### W20.RISK — things nobody currently owns
+
+- [ ] W20.RISK.1 — QA is unstaffed. 66h for the ECS gate (98h if Nodes 2.0 bundles). 0 of 27 packs signed off
+- [ ] W20.RISK.2 — Custom Nodes CI has no Linear project and is untracked at programme level
+- [ ] W20.RISK.3 — No telemetry on custom-node usage — acknowledged visibility gap, affects every reach estimate
+- [ ] W20.RISK.4 — Nodes 2.0 is 10–30% worse on memory/FPS than canvas (Pillar 1, 2026-08-07). Exists only in a transcript; not in any doc, not in the bundling analysis
+- [ ] W20.RISK.5 — Announce target 2026-08-20 with 0 packs validated — flag the gap between the date and the evidence
