@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 
 import { RouterLink, useRoute } from 'vue-router'
 import NodePackBanner from '@/components/NodePackBanner.vue'
-import { useTestRunner } from '@/composables/useTestRunner'
+import { useSimulatedTestRunner } from '@/composables/useSimulatedTestRunner'
 import { evidenceByPatternId, patternById, rollupByPatternId } from '@/data'
 import { categoriesByPatternId } from '@/data/categories'
 import { isInStarCache } from '@/data/star-cache'
@@ -23,8 +23,9 @@ import { isInStarCache } from '@/data/star-cache'
  *   - evidence rows : per-repo · file · lines · excerpt (collapsible <pre>)
  *                     each row also renders an inline <NodePackBanner> when
  *                     the repo is present in the star-cache (W2.C swap-in).
- *   - test runner   : disabled "Run v1↔v2 contract test" button — the real
- *                     wire-up lands in W5.1 TestRunner.
+ *   - test runner   : a SIMULATED "Run v1↔v2 contract test" button. It does
+ *                     not execute anything — see useSimulatedTestRunner. The
+ *                     section renders a standing banner saying so.
  */
 const route = useRoute()
 
@@ -52,10 +53,11 @@ function lineRange(lines?: number[]): string {
 }
 
 /**
- * W5.1 TestRunner integration.
- * Provides test execution state and controls for v1↔v2 contract tests.
+ * Simulated contract-test runner. Executes nothing — the button and the
+ * result card below are a mock-up, and the template says so in a permanent
+ * banner so the green ticks cannot be mistaken for a passing suite.
  */
-const testRunner = useTestRunner(patternId)
+const testRunner = useSimulatedTestRunner(patternId)
 
 async function handleRunTest() {
   await testRunner.runTest()
@@ -270,11 +272,24 @@ async function handleRunTest() {
         </ul>
       </section>
 
-      <!-- W5.1 Contract test runner -->
+      <!-- Contract test runner — SIMULATED, executes nothing. -->
       <section
         data-testid="contract-test"
         class="border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-3"
       >
+        <div
+          data-testid="simulated-banner"
+          role="note"
+          class="flex items-start gap-2 rounded-md border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/30 p-3 text-xs text-amber-900 dark:text-amber-200"
+        >
+          <span aria-hidden="true" class="text-sm leading-none">⚠️</span>
+          <p>
+            <strong class="font-semibold uppercase tracking-wide"
+              >Simulated — not a real test run.</strong
+            >
+            {{ testRunner.simulatedNotice }}
+          </p>
+        </div>
         <div class="flex items-center gap-3">
           <button
             v-if="testRunner.canRun.value"
@@ -289,8 +304,8 @@ async function handleRunTest() {
             data-testid="run-test-btn"
             @click="handleRunTest"
           >
-            <span v-if="testRunner.state.value === 'running'">⏳ Running...</span>
-            <span v-else>▶ Run v1↔v2 contract test</span>
+            <span v-if="testRunner.state.value === 'running'">⏳ Simulating...</span>
+            <span v-else>▶ Simulate v1↔v2 contract test</span>
           </button>
           <button
             v-else
@@ -326,6 +341,10 @@ async function handleRunTest() {
           data-testid="test-result"
         >
           <div class="flex items-center gap-2">
+            <span
+              class="rounded bg-amber-200 dark:bg-amber-800 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900 dark:text-amber-100"
+              >simulated</span
+            >
             <span v-if="testRunner.result.value.state === 'passed'">✅ Passed</span>
             <span v-else-if="testRunner.result.value.state === 'failed'">❌ Failed</span>
             <span v-else-if="testRunner.result.value.state === 'skipped'">⏭️ Skipped</span>

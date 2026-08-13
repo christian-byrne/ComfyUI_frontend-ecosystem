@@ -23,10 +23,28 @@ test.describe('Pattern Detail Page', () => {
     await expect(page.getByTestId('contract-test')).toBeVisible()
 
     // Should have some button (either run-test-btn or disabled no-test button)
-    const hasRunBtn = await page.getByTestId('run-test-btn').isVisible().catch(() => false)
-    const hasDisabledBtn = await page.locator('button:has-text("No test available")').isVisible().catch(() => false)
+    const hasRunBtn = await page
+      .getByTestId('run-test-btn')
+      .isVisible()
+      .catch(() => false)
+    const hasDisabledBtn = await page
+      .locator('button:has-text("No test available")')
+      .isVisible()
+      .catch(() => false)
 
     expect(hasRunBtn || hasDisabledBtn).toBe(true)
+  })
+
+  test('labels the contract-test runner as simulated', async ({ page }) => {
+    await page.goto('/patterns/S6.A1')
+
+    // The runner executes nothing — unlisted patterns always report "passed".
+    // The banner is the only thing stopping a reader taking the green tick at
+    // face value, so it is a hard requirement, not decoration.
+    const banner = page.getByTestId('simulated-banner')
+    await expect(banner).toBeVisible()
+    await expect(banner).toContainText(/simulated — not a real test run/i)
+    await expect(banner).toContainText(/no tests are executed/i)
   })
 
   test('shows not found for invalid pattern', async ({ page }) => {
@@ -40,7 +58,10 @@ test.describe('Pattern Detail Page', () => {
     await page.goto('/patterns/S6.A1')
 
     // Click back link
-    await page.getByRole('link', { name: /patterns/i }).first().click()
+    await page
+      .getByRole('link', { name: /patterns/i })
+      .first()
+      .click()
     await expect(page).toHaveURL(/\/patterns$/)
   })
 })

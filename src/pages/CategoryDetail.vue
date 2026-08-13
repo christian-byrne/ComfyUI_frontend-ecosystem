@@ -2,7 +2,7 @@
 import type { StubVariant } from '@/composables/useStubFetcher'
 import { computed, onMounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { stubUrl, useStubFetcher } from '@/composables/useStubFetcher'
+import { STUB_BRANCH, stubUrl, useStubFetcher } from '@/composables/useStubFetcher'
 import { useBehaviorCategoriesStore } from '@/stores/behaviorCategories'
 
 const route = useRoute()
@@ -84,7 +84,8 @@ function variantBody(variant: StubVariant): string {
 
       <section data-test="stub-trio">
         <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400 mb-2">
-          Test stubs (upstream PR <code>ext-api/i-tf</code>)
+          Test stubs (upstream branch <code>{{ STUB_BRANCH }}</code
+          >)
         </h2>
         <div class="space-y-4">
           <div
