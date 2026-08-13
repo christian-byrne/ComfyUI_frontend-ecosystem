@@ -2,6 +2,7 @@
 import type { StubState, StubVariant } from '@/composables/useStubFetcher'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import ProvenanceNotice from '@/components/ProvenanceNotice.vue'
 import { readTrioCoverage } from '@/composables/useStubFetcher'
 import { useBehaviorCategoriesStore } from '@/stores/behaviorCategories'
 
@@ -49,12 +50,14 @@ function dotTitle(variant: StubVariant, state: StubState): string {
 
 <template>
   <section class="p-6">
-    <header class="mb-6">
+    <header class="mb-6 space-y-3">
       <h1 class="text-2xl font-semibold">Behavior Categories</h1>
       <p class="text-zinc-400 text-sm mt-1">
         {{ cards.length }} categories · click a card for patterns + test stubs. Stub coverage
-        indicators (v1 · v2 · migration) reflect cached fetches from the upstream PR (1-day TTL).
+        indicators (v1 · v2 · migration) reflect cached fetches from the canonical upstream branch
+        (1-day TTL). Listed in category-id order.
       </p>
+      <ProvenanceNotice v2 />
     </header>
 
     <div

@@ -37,12 +37,24 @@ describe('behaviorCategories grid', () => {
       global: { stubs: { RouterLink: RouterLinkStub } }
     })
 
-    const links = wrapper.findAllComponents(RouterLinkStub)
-    expect(links.length).toBeGreaterThanOrEqual(41)
-    const first = links[0]
-    expect(first.props('to')).toMatchObject({
+    // Scope to the grid. The page also renders a <ProvenanceNotice>, which
+    // contains its own RouterLink to the axioms — an unscoped
+    // findAllComponents() would return that one first and assert against the
+    // wrong link.
+    const cards = wrapper.findAll('[data-test="bc-card"]')
+    expect(cards.length).toBe(behaviorCategoriesData.categories.length)
+
+    const cardLinks = cards.map((card) => card.findComponent(RouterLinkStub))
+    expect(cardLinks[0].props('to')).toMatchObject({
       name: 'category-detail',
       params: { id: 'BC.01' }
     })
+    // Every card links to its own category, not just the first.
+    for (const [i, link] of cardLinks.entries()) {
+      expect(link.props('to')).toMatchObject({
+        name: 'category-detail',
+        params: { id: behaviorCategoriesData.categories[i].category_id }
+      })
+    }
   })
 })

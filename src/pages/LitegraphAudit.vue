@@ -378,11 +378,29 @@ const maxDelta = computed(() => {
       </table>
     </section>
 
-    <!-- D6.2 sunset gates -->
+    <!--
+      D6.2 sunset gates. These gate the v1 sunset on the v2 API landing, and
+      the v2 rewrite is deferred — so "pending" here means "not scheduled",
+      not "in flight". Labelled inline so the status badges are not read as
+      live burn-down.
+    -->
     <section v-if="sunsetGates.length > 0" class="space-y-3">
       <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">
         D6.2 Sunset Gates
       </h2>
+      <p
+        data-testid="sunset-gates-deferred"
+        class="rounded-md border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 px-3 py-2 text-xs text-amber-900 dark:text-amber-200"
+      >
+        <strong>Deferred, not in flight.</strong> These gates block retiring v1 on the v2 extension
+        API shipping, and <strong>the v2 rewrite is deferred</strong> — near-term focus is getting
+        tests working against Nodes 2.0. A <code>pending</code> badge below means "not scheduled".
+        Separately, the old <code>blast_radius &gt;= 2.0</code> compat floor was
+        <strong>retired in wave-10</strong>;
+        <RouterLink to="/handoff/root/axioms" class="underline underline-offset-2">
+          axioms are the source of truth </RouterLink
+        >for what the v2 surface contains.
+      </p>
       <ol class="space-y-2">
         <li
           v-for="g in sunsetGates"

@@ -16,6 +16,7 @@ The v2 extension API redesign (P1, D3.x) and the eventual test framework need a 
 2. **Test framework with the wrong floor.** Tests that don't reflect real extension shapes will pass v2 while production extensions break.
 
 The database is the input for:
+
 - v2 API gap analysis (D4 G1–G13, plus future Gs surfaced here)
 - Test framework design (widget-api-thoughts.md "Test Framework" section): every entry maps to ≥1 test case
 - Migration guide writing (P3, DEP3, DEP4)
@@ -32,6 +33,7 @@ There are 5 untracked v2 files in `ComfyUI_frontend` worktree (proof-of-concept)
 - `src/extensions/core/previewAny.v2.ts` — POC migration (90→35 lines)
 
 **Open questions left in v2 service comments** (touch-points must answer these):
+
 - `setLabel` — special vs just an option? `setHidden` — same?
 - `on('change')` watches `WidgetValue.value` only — how do extensions watch options/props?
 - `setSerializeValue` callback — should be `on('serialize')` or `onBeforeSerialize`?
@@ -40,7 +42,7 @@ There are 5 untracked v2 files in `ComfyUI_frontend` worktree (proof-of-concept)
 - `addWidget` returns by what mechanism? sync dispatch? promise?
 - Widget figler tree / coverage report of "strangler-figged vs re-implemented vs unsupported"
 
-These open questions become *test cases*: for each, the database tells us how many extensions in the wild touch the underlying surface.
+These open questions become _test cases_: for each, the database tells us how many extensions in the wild touch the underlying surface.
 
 ## Comprehensive surface enumeration
 
@@ -50,25 +52,25 @@ The audit covers **8 surface families**. Each family contains specific patterns 
 
 From `src/types/comfy.ts`, lines 144-266:
 
-| Hook | Core extension files using it | Replacement direction |
-|---|---:|---|
-| `init` | 16 | unchanged in v2 (ExtensionOptions.init) |
-| `setup` | 3 | unchanged in v2 (ExtensionOptions.setup) |
-| `addCustomNodeDefs` | 1 | unknown — may need v2 registration API |
-| `getCustomWidgets` | 4 | replaced by `defineWidgetExtension` |
-| `beforeRegisterNodeDef` | 10 | replaced by `nodeTypes` filter + `inspectNodeDef` (G1) |
-| `beforeRegisterVueAppNodeDefs` | 0 | candidate for removal |
-| `registerCustomNodes` | 3 | NO v2 equivalent (D4-G2 BLOCKER) |
-| `loadedGraphNode` | 0 (core), 1 (entire wild corpus) | candidate for removal |
-| `nodeCreated` | 12 | `defineNodeExtension({ nodeCreated })` |
-| `beforeConfigureGraph` | 1 | needs decision — graph lifecycle hook |
-| `afterConfigureGraph` | 0 | candidate for removal |
-| `getSelectionToolboxCommands` | 0 | candidate for removal |
-| `getCanvasMenuItems` | 4 | EXISTS — replaces canvas right-click monkey-patching |
-| `getNodeMenuItems` | 4 | EXISTS — replaces node right-click monkey-patching (P6 in R4) |
-| `onAuthUserResolved` | 1 | unchanged |
-| `onAuthTokenRefreshed` | 1 | unchanged |
-| `onAuthUserLogout` | 1 | unchanged |
+| Hook                           |    Core extension files using it | Replacement direction                                         |
+| ------------------------------ | -------------------------------: | ------------------------------------------------------------- |
+| `init`                         |                               16 | unchanged in v2 (ExtensionOptions.init)                       |
+| `setup`                        |                                3 | unchanged in v2 (ExtensionOptions.setup)                      |
+| `addCustomNodeDefs`            |                                1 | unknown — may need v2 registration API                        |
+| `getCustomWidgets`             |                                4 | replaced by `defineWidgetExtension`                           |
+| `beforeRegisterNodeDef`        |                               10 | replaced by `nodeTypes` filter + `inspectNodeDef` (G1)        |
+| `beforeRegisterVueAppNodeDefs` |                                0 | candidate for removal                                         |
+| `registerCustomNodes`          |                                3 | NO v2 equivalent (D4-G2 BLOCKER)                              |
+| `loadedGraphNode`              | 0 (core), 1 (entire wild corpus) | candidate for removal                                         |
+| `nodeCreated`                  |                               12 | `defineNodeExtension({ nodeCreated })`                        |
+| `beforeConfigureGraph`         |                                1 | needs decision — graph lifecycle hook                         |
+| `afterConfigureGraph`          |                                0 | candidate for removal                                         |
+| `getSelectionToolboxCommands`  |                                0 | candidate for removal                                         |
+| `getCanvasMenuItems`           |                                4 | EXISTS — replaces canvas right-click monkey-patching          |
+| `getNodeMenuItems`             |                                4 | EXISTS — replaces node right-click monkey-patching (P6 in R4) |
+| `onAuthUserResolved`           |                                1 | unchanged                                                     |
+| `onAuthTokenRefreshed`         |                                1 | unchanged                                                     |
+| `onAuthUserLogout`             |                                1 | unchanged                                                     |
 
 ### S2 — `LGraphNode.prototype` methods commonly patched
 
@@ -95,6 +97,7 @@ Add to search: `drawNode`, `drawNodeShape`, `drawConnections`, `onMouseDown`, `o
 - `addDOMWidget(name, type, element, options)` — DOM widget contribution (R4 P9)
 
 **Widget thoughts file flags lifecycle dependencies** (widget-api-thoughts.md:25-30):
+
 - 3D widgets: file uploads
 - Webcam widgets: heavy perf
 - Webcam widgets: lifecycle-dependent serialization
@@ -168,7 +171,7 @@ ADR 0008 enumerates **six** entity kinds; the bulk of the ecosystem touches more
 
 ### S12 — Shell UI registries (sidebar / bottom panel / commands / toasts)
 
-These are *declarative* surfaces in v1 (extensions push registrations) but their semantics are still public API. Migration must preserve names and contracts.
+These are _declarative_ surfaces in v1 (extensions push registrations) but their semantics are still public API. Migration must preserve names and contracts.
 
 - `extensionManager.registerSidebarTab(...)` — `SidebarTabExtension`
 - `extensionManager.registerBottomPanelTab(...)` — `BottomPanelExtension`
@@ -210,31 +213,31 @@ Extensions inspect the node-def schema directly to drive UI/behavior — this is
 Each entry is a YAML record:
 
 ```yaml
-- pattern_id: P1.1                              # stable ID for cross-reference
-  surface_family: S4                            # S1-S8
-  surface: "widget.callback assignment"         # human-readable name
+- pattern_id: P1.1 # stable ID for cross-reference
+  surface_family: S4 # S1-S8
+  surface: 'widget.callback assignment' # human-readable name
   fingerprint: 'w.callback = function(v) {...}' # regex-ish
-  semantic: "subscribe to widget value change"  # what extensions are *trying* to do
-  v2_replacement: "widget.on('change', fn)"     # proposed
-  decision_ref: D3.3                            # which decision doc covers it
-  test_target: WIDGET_VALUE_CHANGE_LISTENER     # test framework symbol
+  semantic: 'subscribe to widget value change' # what extensions are *trying* to do
+  v2_replacement: "widget.on('change', fn)" # proposed
+  decision_ref: D3.3 # which decision doc covers it
+  test_target: WIDGET_VALUE_CHANGE_LISTENER # test framework symbol
   evidence:
     - repo: crom8505/ComfyUI-Dynamic-Sigmas
       file: web/js/graph_sigmas.js
       lines: [79, 80]
       url: https://github.com/crom8505/ComfyUI-Dynamic-Sigmas/blob/main/web/js/graph_sigmas.js#L79
-      stars: 12                                  # github stars (cached, asof date)
+      stars: 12 # github stars (cached, asof date)
       stars_asof: 2026-05-06
-      variant: canonical                         # canonical | unsafe | with-bind | tempCallback-swap | per-instance | prototype
-      breakage_class: silent                     # silent | loud | undefined-behavior | crash
-      notes: "fourteen instances in same file"
+      variant: canonical # canonical | unsafe | with-bind | tempCallback-swap | per-instance | prototype
+      breakage_class: silent # silent | loud | undefined-behavior | crash
+      notes: 'fourteen instances in same file'
   derived:
-    occurrences: 7                               # rolled up from evidence
+    occurrences: 7 # rolled up from evidence
     repos_touched: 5
     cumulative_stars: 245
-    canonical_signatures: 1                      # how many distinct shapes seen (P4 had 6 for onConnectionsChange!)
+    canonical_signatures: 1 # how many distinct shapes seen (P4 had 6 for onConnectionsChange!)
     breakage_classes: [silent, undefined-behavior]
-    blast_radius: 3.2                            # see formula
+    blast_radius: 3.2 # see formula
 ```
 
 ## Blast-radius scoring formula
@@ -250,25 +253,32 @@ blast_radius = 0.40 * log10(1 + cumulative_stars)
 ```
 
 Where:
+
 - `silent_breakage_weight` = max over evidence: silent=1.0, undefined=0.6, loud=0.3, crash=0.2
 - `lifecycle_coupling` = 0 (none) | 1 (depends on init/teardown order) | 2 (depends on serialization-timing or DOM-mount-timing)
 
 Rationale:
+
 - `log10` on stars + occurrences damps mega-popular packs from drowning out long-tail diversity
 - Silent breakage scores higher than loud — these are the ones that destroy trust
 - Lifecycle coupling captures widget-api-thoughts.md concerns (3D, webcam)
 - Canonical signatures captures "the API has no schema" risk (R4 P4 with 6 sigs)
 
-A blast_radius ≥ 3.0 = MUST have a v1-compat shim or the migration story breaks.
+~~A blast_radius ≥ 3.0 = MUST have a v1-compat shim or the migration story breaks.~~
+**RETIRED (wave-10)** along with the compat-floor doctrine — see §Integration
+with the test framework. Blast radius remains useful for _prioritisation_; it is
+no longer a MUST-ship gate.
 
 ## Star-fetching strategy
 
 For each unique repo:
+
 ```bash
 gh api "repos/<owner>/<name>" --jq '.stargazers_count'
 ```
 
 Cache in `research/touch-points/star-cache.yaml`:
+
 ```yaml
 - repo: crom8505/ComfyUI-Dynamic-Sigmas
   stars: 12
@@ -303,7 +313,16 @@ Each pattern in the database becomes a test triple:
 2. **v2 contract test** (new): proves the v2 replacement covers the same semantic
 3. **Migration test**: takes a real extension snippet from evidence, confirms it works in v2 (or fails with a documented compat error)
 
-The test framework's "compatibility floor" is: every blast_radius ≥ 2.0 entry MUST pass all three tests before v2 ships.
+> **RETIRED (wave-10).** The "compatibility floor" below is no longer a gate.
+> Per `src/data/knowledge/root/AXIOMS.md` §"Compat-floor doctrine retired
+> (wave-10)": compat floors based on ecosystem-consumer counts conflated
+> _evidence that a migration is needed_ with _evidence that a specific surface
+> must exist to satisfy it_. Axioms and ADRs are the source of truth for what
+> the v2 surface contains; BC tests verify admitted surfaces and use
+> `axiomExcluded({…})` for everything else. Kept here for historical context —
+> the v2 rewrite is deferred anyway.
+
+~~The test framework's "compatibility floor" is: every blast_radius ≥ 2.0 entry MUST pass all three tests before v2 ships.~~
 
 ## Out of scope (deferred)
 

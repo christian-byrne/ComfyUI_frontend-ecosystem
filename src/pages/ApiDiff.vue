@@ -4,6 +4,7 @@ import { useHead } from '@unhead/vue'
 
 import { computed, ref } from 'vue'
 import PlannedBadge from '@/components/PlannedBadge.vue'
+import ProvenanceNotice from '@/components/ProvenanceNotice.vue'
 import { MIGRATION_STATUSES, migrationEntries } from '@/data/migration-status'
 
 useHead({
@@ -101,6 +102,12 @@ function onPickerChange(event: Event) {
         v1 → v2 surface mapping, one card per pattern, classified by D9 strangler-fig status. Use
         search and status filters to narrow the grid; use the picker to jump to a specific pattern.
       </p>
+      <!--
+        This page is the most likely to be misread as a live roadmap, so the
+        deferral is expanded here by default rather than tucked behind a
+        disclosure triangle.
+      -->
+      <ProvenanceNotice v2 open />
     </header>
 
     <!-- Controls -->

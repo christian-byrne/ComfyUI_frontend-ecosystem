@@ -4,6 +4,7 @@ import { useHead } from '@unhead/vue'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
+import ProvenanceNotice from '@/components/ProvenanceNotice.vue'
 import { useDataStore } from '@/stores/data'
 
 useHead({
@@ -81,10 +82,21 @@ const commitSha = computed(() => __BUILD_INFO__.commitSha || 'unknown')
 <template>
   <section class="space-y-12">
     <!-- Hero numbers -->
-    <header>
+    <header class="space-y-6">
       <h1 class="sr-only">Overview</h1>
-      <dl class="grid grid-cols-2 gap-x-12 gap-y-8 md:grid-cols-4">
-        <div v-for="stat in heroStats" :key="stat.label">
+
+      <!--
+        The hero numbers below understate reality in two independent ways
+        (bundle is behind upstream; evidence counts predate the W2F-1
+        re-audit). Say so before showing them, not after.
+      -->
+      <ProvenanceNotice v2 />
+      <dl data-testid="hero-stats" class="grid grid-cols-2 gap-x-12 gap-y-8 md:grid-cols-4">
+        <div
+          v-for="stat in heroStats"
+          :key="stat.label"
+          :data-testid="`hero-${stat.label.replace(/ /g, '-')}`"
+        >
           <dt class="text-sm text-zinc-500 dark:text-zinc-400">
             {{ stat.label }}
           </dt>

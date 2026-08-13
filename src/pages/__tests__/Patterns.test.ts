@@ -32,7 +32,7 @@ describe('patterns.vue', () => {
     expect(filtered.length).toBeLessThan(all.length)
   })
 
-  it('renders the table with all 59 patterns by default', async () => {
+  it('renders the table with every pattern in the dataset by default', async () => {
     const router = makeRouter()
     await router.push('/patterns')
     await router.isReady()

@@ -13,7 +13,9 @@ useHead({
 })
 
 /**
- * Patterns — searchable, filterable list of all 59 touch-point patterns.
+ * Patterns — searchable, filterable list of all touch-point patterns
+ * (73 at time of writing, across 17 surface families). The count is read
+ * from the data, never hardcoded.
  *
  * Layout:
  *   ┌──────────────────────────────────────────────────────────────┐

@@ -13,8 +13,23 @@ test.describe('Behavior Categories Page', () => {
   })
 
   test('categories show BC.XX format ids', async ({ page }) => {
-    // Categories should have BC.XX format IDs
-    await expect(page.getByText(/BC\.\d+/).first()).toBeVisible()
+    // Scope to the grid. Unscoped, the first /BC\.\d+/ match is the
+    // provenance notice's list of missing upstream ids (…, BC.42), which sits
+    // in a collapsed <details> in the header and is not visible.
+    await expect(
+      page
+        .locator('[data-test="bc-card"]')
+        .first()
+        .getByText(/BC\.\d+/)
+        .first()
+    ).toBeVisible()
+  })
+
+  test('carries a provenance notice in the header', async ({ page }) => {
+    const notice = page.getByTestId('provenance-notice')
+    await expect(notice).toBeVisible()
+    await notice.locator('summary').click()
+    await expect(notice).toContainText(/deferred/i)
   })
 
   test('clicking category navigates to detail', async ({ page }) => {
@@ -43,7 +58,10 @@ test.describe('Category Detail Page', () => {
     await page.goto('/behavior-categories/BC.01')
 
     // Click back link (the categories nav link)
-    await page.getByTestId('primary-nav').getByRole('link', { name: /behavior categories/i }).click()
+    await page
+      .getByTestId('primary-nav')
+      .getByRole('link', { name: /behavior categories/i })
+      .click()
     await expect(page).toHaveURL(/\/behavior-categories$/)
   })
 })
