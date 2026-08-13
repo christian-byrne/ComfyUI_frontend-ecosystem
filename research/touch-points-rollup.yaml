@@ -1158,15 +1158,15 @@ patterns:
     lifecycle_coupling: 0.0
     blast_radius: 1.302
     top_repos:
-      - repo: ComfyUI-Custom-Scripts
+      - repo: pythongosssss/ComfyUI-Custom-Scripts
         stars: 0
-      - repo: ComfyUI-OpenPose-Editor
+      - repo: space-nuko/ComfyUI-OpenPose-Editor
         stars: 0
-      - repo: ComfyUI_Custom_Nodes_AlekPet
+      - repo: AlekPet/ComfyUI_Custom_Nodes_AlekPet
         stars: 0
-      - repo: comfy_mtb
+      - repo: melMass/comfy_mtb
         stars: 0
-      - repo: comfyui-mixlab-nodes
+      - repo: MixLabPro/comfyui-mixlab-nodes
         stars: 0
   - pattern_id: S14.ID1
     surface_family: S14
@@ -1192,13 +1192,13 @@ patterns:
     lifecycle_coupling: 0.0
     blast_radius: 1.229
     top_repos:
-      - repo: ComfyUI-BlenderAI-node
+      - repo: AIGODLIKE/ComfyUI-BlenderAI-node
         stars: 0
-      - repo: ComfyUI-KJNodes
+      - repo: kijai/ComfyUI-KJNodes
         stars: 0
-      - repo: ComfyUI_tinyterraNodes
+      - repo: TinyTerra/ComfyUI_tinyterraNodes
         stars: 0
-      - repo: comfy_mtb
+      - repo: melMass/comfy_mtb
         stars: 0
   - pattern_id: S16.D7
     surface_family: S16
@@ -1211,7 +1211,7 @@ patterns:
     lifecycle_coupling: 0.0
     blast_radius: 1.168
     top_repos:
-      - repo: comfyui_controlnet_aux
+      - repo: Fannovel16/comfyui_controlnet_aux
         stars: 0
   - pattern_id: S16.VUE1
     surface_family: S16
@@ -1224,7 +1224,7 @@ patterns:
     lifecycle_coupling: 1.0
     blast_radius: 0.611
     top_repos:
-      - repo: ComfyUI-NKD-Sigmas-Curve
+      - repo: Nekodificador/ComfyUI-NKD-Sigmas-Curve
         stars: 0
   - pattern_id: S17.AM1
     surface_family: S17
@@ -1341,7 +1341,7 @@ patterns:
     lifecycle_coupling: 0.0
     blast_radius: 0.211
     top_repos:
-      - repo: ComfyUI-Easy-Use
+      - repo: yolain/ComfyUI-Easy-Use
         stars: 0
   - pattern_id: S12.UI2
     surface_family: S12
@@ -1354,7 +1354,7 @@ patterns:
     lifecycle_coupling: 0.0
     blast_radius: 0.211
     top_repos:
-      - repo: ComfyUI-Easy-Use
+      - repo: yolain/ComfyUI-Easy-Use
         stars: 0
   - pattern_id: S17.FA1
     surface_family: S17

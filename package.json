@@ -23,14 +23,18 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "verify:quick": "pnpm typecheck",
+    "verify:quick": "pnpm typecheck && bash scripts/rebuild.sh check",
     "rebuild": "bash scripts/rebuild.sh",
     "rebuild:offline": "bash scripts/rebuild.sh --skip-stars",
     "data:rollup": "bash scripts/rebuild.sh rollup",
     "data:stars": "bash scripts/rebuild.sh stars",
     "data:verify": "bash scripts/rebuild.sh data",
     "prepare": "husky",
-    "sync:knowledge": "bash scripts/sync-knowledge.sh"
+    "sync:knowledge": "bash scripts/sync-knowledge.sh",
+    "data:check": "bash scripts/rebuild.sh check",
+    "data:weights": "bash scripts/rebuild.sh weights",
+    "data:slugs": "bash scripts/rebuild.sh slugs",
+    "data:stars:sync": "python3 scripts/sync-star-cache.py"
   },
   "dependencies": {
     "@unhead/vue": "^3.1.0",

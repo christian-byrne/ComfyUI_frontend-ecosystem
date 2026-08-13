@@ -1,6 +1,7 @@
 {
-  "asof": "2026-05-13",
-  "populated_via": "scripts/fetch-stars.sh",
+  "asof": "2026-08-13",
+  "asof_oldest": "2026-05-13",
+  "populated_via": "research/scripts/fetch-stars.sh + scripts/sync-star-cache.py",
   "repos": [
     {
       "repo": "40740/ComfyUI_LayerStyle_Bmss",
@@ -147,6 +148,14 @@
       "asof": "2026-05-13"
     },
     {
+      "repo": "chflame163/ComfyUI_LayerStyle",
+      "stars": 3125,
+      "archived": false,
+      "forks": 201,
+      "last_commit": "2026-08-01",
+      "asof": "2026-08-13"
+    },
+    {
       "repo": "choovin/comfyui-api",
       "stars": 3,
       "archived": false,
@@ -179,22 +188,6 @@
       "asof": "2026-05-13"
     },
     {
-      "repo": "ComfyNodePRs/PR-comfyui-pkg39-ccab78b5",
-      "stars": 0,
-      "archived": false,
-      "forks": 0,
-      "last_commit": "2024-07-31",
-      "asof": "2026-05-13"
-    },
-    {
-      "repo": "Comfy-Org/ComfyUI_frontend",
-      "stars": 1794,
-      "archived": false,
-      "forks": 574,
-      "last_commit": "2026-05-14",
-      "asof": "2026-05-13"
-    },
-    {
       "repo": "Comfy-Org/ComfyUI-Manager",
       "stars": 14637,
       "archived": false,
@@ -208,6 +201,22 @@
       "archived": false,
       "forks": 1,
       "last_commit": "2026-03-23",
+      "asof": "2026-05-13"
+    },
+    {
+      "repo": "Comfy-Org/ComfyUI_frontend",
+      "stars": 1794,
+      "archived": false,
+      "forks": 574,
+      "last_commit": "2026-05-14",
+      "asof": "2026-05-13"
+    },
+    {
+      "repo": "ComfyNodePRs/PR-comfyui-pkg39-ccab78b5",
+      "stars": 0,
+      "archived": false,
+      "forks": 0,
+      "last_commit": "2024-07-31",
       "asof": "2026-05-13"
     },
     {
@@ -649,6 +658,14 @@
       "asof": "2026-05-13"
     },
     {
+      "repo": "Nekodificador/ComfyUI-NKD-Sigmas-Curve",
+      "stars": 46,
+      "archived": false,
+      "forks": 4,
+      "last_commit": "2026-07-15",
+      "asof": "2026-08-13"
+    },
+    {
       "repo": "niknah/presentation-ComfyUI",
       "stars": 2,
       "archived": false,
@@ -745,6 +762,14 @@
       "asof": "2026-05-13"
     },
     {
+      "repo": "r-vage/ComfyUI_Eclipse",
+      "stars": 19,
+      "archived": false,
+      "forks": 2,
+      "last_commit": "2026-05-13",
+      "asof": "2026-05-13"
+    },
+    {
       "repo": "Raykosan/ComfyUI_RaykoStudio",
       "stars": 46,
       "archived": false,
@@ -774,14 +799,6 @@
       "archived": false,
       "forks": 0,
       "last_commit": "2026-03-27",
-      "asof": "2026-05-13"
-    },
-    {
-      "repo": "r-vage/ComfyUI_Eclipse",
-      "stars": 19,
-      "archived": false,
-      "forks": 2,
-      "last_commit": "2026-05-13",
       "asof": "2026-05-13"
     },
     {

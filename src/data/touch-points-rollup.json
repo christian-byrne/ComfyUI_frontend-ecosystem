@@ -1230,8 +1230,9 @@
           "stars": 3054
         },
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
-          "stars": 0
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
+          "stars": 0,
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         }
       ]
     },
@@ -1256,16 +1257,18 @@
           "stars": 27
         },
         {
-          "repo": "40740/ComfyUI_LayerStyle_Bmss",
-          "stars": 0
+          "repo": "chflame163/ComfyUI_LayerStyle",
+          "stars": 0,
+          "repo_original": "40740/ComfyUI_LayerStyle_Bmss"
         },
         {
           "repo": "FloyoAI/ComfyUI-SoundFlow",
           "stars": 0
         },
         {
-          "repo": "coeuskoalemoss/comfyUI-layerstyle-custom",
-          "stars": 0
+          "repo": "chflame163/ComfyUI_LayerStyle",
+          "stars": 0,
+          "repo_original": "coeuskoalemoss/comfyUI-layerstyle-custom"
         }
       ]
     },
@@ -1838,24 +1841,29 @@
       "blast_radius": 1.302,
       "top_repos": [
         {
-          "repo": "ComfyUI-Custom-Scripts",
-          "stars": 0
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
+          "stars": 0,
+          "repo_original": "ComfyUI-Custom-Scripts"
         },
         {
-          "repo": "ComfyUI-OpenPose-Editor",
-          "stars": 0
+          "repo": "space-nuko/ComfyUI-OpenPose-Editor",
+          "stars": 0,
+          "repo_original": "ComfyUI-OpenPose-Editor"
         },
         {
-          "repo": "ComfyUI_Custom_Nodes_AlekPet",
-          "stars": 0
+          "repo": "AlekPet/ComfyUI_Custom_Nodes_AlekPet",
+          "stars": 0,
+          "repo_original": "ComfyUI_Custom_Nodes_AlekPet"
         },
         {
-          "repo": "comfy_mtb",
-          "stars": 0
+          "repo": "melMass/comfy_mtb",
+          "stars": 0,
+          "repo_original": "comfy_mtb"
         },
         {
-          "repo": "comfyui-mixlab-nodes",
-          "stars": 0
+          "repo": "MixLabPro/comfyui-mixlab-nodes",
+          "stars": 0,
+          "repo_original": "comfyui-mixlab-nodes"
         }
       ]
     },
@@ -1890,20 +1898,24 @@
       "blast_radius": 1.229,
       "top_repos": [
         {
-          "repo": "ComfyUI-BlenderAI-node",
-          "stars": 0
+          "repo": "AIGODLIKE/ComfyUI-BlenderAI-node",
+          "stars": 0,
+          "repo_original": "ComfyUI-BlenderAI-node"
         },
         {
-          "repo": "ComfyUI-KJNodes",
-          "stars": 0
+          "repo": "kijai/ComfyUI-KJNodes",
+          "stars": 0,
+          "repo_original": "ComfyUI-KJNodes"
         },
         {
-          "repo": "ComfyUI_tinyterraNodes",
-          "stars": 0
+          "repo": "TinyTerra/ComfyUI_tinyterraNodes",
+          "stars": 0,
+          "repo_original": "ComfyUI_tinyterraNodes"
         },
         {
-          "repo": "comfy_mtb",
-          "stars": 0
+          "repo": "melMass/comfy_mtb",
+          "stars": 0,
+          "repo_original": "comfy_mtb"
         }
       ]
     },
@@ -1920,8 +1932,9 @@
       "blast_radius": 1.168,
       "top_repos": [
         {
-          "repo": "comfyui_controlnet_aux",
-          "stars": 0
+          "repo": "Fannovel16/comfyui_controlnet_aux",
+          "stars": 0,
+          "repo_original": "comfyui_controlnet_aux"
         }
       ]
     },
@@ -2028,8 +2041,9 @@
       "blast_radius": 0.711,
       "top_repos": [
         {
-          "repo": "ComfyUI-Easy-Use",
-          "stars": 0
+          "repo": "yolain/ComfyUI-Easy-Use",
+          "stars": 0,
+          "repo_original": "ComfyUI-Easy-Use"
         }
       ]
     },
@@ -2046,8 +2060,9 @@
       "blast_radius": 0.711,
       "top_repos": [
         {
-          "repo": "ComfyUI-Easy-Use",
-          "stars": 0
+          "repo": "yolain/ComfyUI-Easy-Use",
+          "stars": 0,
+          "repo_original": "ComfyUI-Easy-Use"
         }
       ]
     },
@@ -2064,8 +2079,9 @@
       "blast_radius": 0.611,
       "top_repos": [
         {
-          "repo": "ComfyUI-NKD-Sigmas-Curve",
-          "stars": 0
+          "repo": "Nekodificador/ComfyUI-NKD-Sigmas-Curve",
+          "stars": 0,
+          "repo_original": "ComfyUI-NKD-Sigmas-Curve"
         }
       ]
     },
@@ -2082,8 +2098,9 @@
       "blast_radius": 0.411,
       "top_repos": [
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
-          "stars": 0
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
+          "stars": 0,
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         }
       ]
     },
@@ -2100,8 +2117,9 @@
       "blast_radius": 0.411,
       "top_repos": [
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
-          "stars": 0
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
+          "stars": 0,
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         }
       ]
     },

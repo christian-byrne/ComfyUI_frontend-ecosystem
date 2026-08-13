@@ -1302,14 +1302,15 @@
         },
         {
           "pattern_id": "S3.C1",
-          "repo": "ComfyUI-Easy-Use",
+          "repo": "yolain/ComfyUI-Easy-Use",
           "file": "notion-api-usage-research",
           "lines": [1],
           "url": "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692",
           "source": "notion-api-research",
           "variant": "aggregate-count",
           "notes": "5 packages patch LGraphCanvas.prototype — rare but maximally destructive; Easy-Use replaces drawNodeShape in 300+ lines",
-          "excerpt": "// ComfyUI-Easy-Use/web_version/v1/js/easy/easyInterface.js:171\nLGraphCanvas.prototype.drawNodeShape = function(node, ctx, size, fgcolor, bgcolor, selected, mouse_over) {\n    // Completely rewrites the original drawing function (~300 lines)\n}\n// Also: pasteFromClipboard, all mouse events (rgthree), keyboard\n"
+          "excerpt": "// ComfyUI-Easy-Use/web_version/v1/js/easy/easyInterface.js:171\nLGraphCanvas.prototype.drawNodeShape = function(node, ctx, size, fgcolor, bgcolor, selected, mouse_over) {\n    // Completely rewrites the original drawing function (~300 lines)\n}\n// Also: pasteFromClipboard, all mouse events (rgthree), keyboard\n",
+          "repo_original": "ComfyUI-Easy-Use"
         }
       ],
       "evidence_status": "swept"
@@ -4661,30 +4662,33 @@
           "breakage_class": "loud"
         },
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/graphArrange.js",
           "lines": [27],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts/blob/main/web/js/graphArrange.js#L27",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/graphArrange.js#L27",
           "variant": "graph.links[id]-target_id",
           "breakage_class": "loud",
-          "notes": "ComfyUI-Custom-Scripts: walks graph.links map to find target nodes for arrange"
+          "notes": "ComfyUI-Custom-Scripts: walks graph.links map to find target nodes for arrange",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         },
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/reroutePrimitive.js",
           "lines": [186],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts/blob/main/web/js/reroutePrimitive.js#L186",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/reroutePrimitive.js#L186",
           "variant": "graph.links[id]-input.link",
           "breakage_class": "loud",
-          "notes": "reroute logic depends on graph.links[input.link] traversal"
+          "notes": "reroute logic depends on graph.links[input.link] traversal",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         },
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/reroutePrimitive.js",
           "lines": [213],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts/blob/main/web/js/reroutePrimitive.js#L213",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/reroutePrimitive.js#L213",
           "variant": "graph.links[id]-linkId",
-          "breakage_class": "loud"
+          "breakage_class": "loud",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         },
         {
           "pattern_id": "S9.L1",
@@ -5174,22 +5178,24 @@
           "notes": "3rd-party docs treat node.disconnect* as a stable extension surface"
         },
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/quickNodes.js",
           "lines": [138],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts/blob/main/web/js/quickNodes.js#L138",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/quickNodes.js#L138",
           "variant": "node.connect-target_id",
           "breakage_class": "loud",
-          "notes": "quickNodes auto-wires nodes; connect(srcSlot, target_id, dst_slot) signature"
+          "notes": "quickNodes auto-wires nodes; connect(srcSlot, target_id, dst_slot) signature",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         },
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/quickNodes.js",
           "lines": [166],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts/blob/main/web/js/quickNodes.js#L166",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/quickNodes.js#L166",
           "variant": "node.connect-target_id",
           "breakage_class": "loud",
-          "notes": "LoRA node auto-wire — same fingerprint, different node type"
+          "notes": "LoRA node auto-wire — same fingerprint, different node type",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         },
         {
           "repo": "MuhammadMuradKhan/efficiency-nodes-comfyui",
@@ -5374,21 +5380,23 @@
           "breakage_class": "silent"
         },
         {
-          "repo": "coeuskoalemoss/comfyUI-layerstyle-custom",
+          "repo": "chflame163/ComfyUI_LayerStyle",
           "file": "js/dz_mtb_widgets.js",
           "lines": [292],
-          "url": "https://github.com/coeuskoalemoss/comfyUI-layerstyle-custom/blob/main/js/dz_mtb_widgets.js#L292",
-          "variant": "post-mutation-bump",
-          "breakage_class": "silent"
-        },
-        {
-          "repo": "40740/ComfyUI_LayerStyle_Bmss",
-          "file": "js/dz_mtb_widgets.js",
-          "lines": [292],
-          "url": "https://github.com/40740/ComfyUI_LayerStyle_Bmss/blob/main/js/dz_mtb_widgets.js#L292",
+          "url": "https://github.com/chflame163/ComfyUI_LayerStyle/blob/main/js/dz_mtb_widgets.js#L292",
           "variant": "post-mutation-bump",
           "breakage_class": "silent",
-          "notes": "duplicate-of-coeuskoalemoss pattern — fork"
+          "repo_original": "coeuskoalemoss/comfyUI-layerstyle-custom"
+        },
+        {
+          "repo": "chflame163/ComfyUI_LayerStyle",
+          "file": "js/dz_mtb_widgets.js",
+          "lines": [292],
+          "url": "https://github.com/chflame163/ComfyUI_LayerStyle/blob/main/js/dz_mtb_widgets.js#L292",
+          "variant": "post-mutation-bump",
+          "breakage_class": "silent",
+          "notes": "duplicate-of-coeuskoalemoss pattern — fork",
+          "repo_original": "40740/ComfyUI_LayerStyle_Bmss"
         },
         {
           "pattern_id": "S11.G1",
@@ -7436,133 +7444,146 @@
       "evidence": [
         {
           "pattern_id": "S16.D1",
-          "repo": "ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/workflowImage.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "ComfyUI-Custom-Scripts"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "ComfyUI-OpenPose-Editor",
+          "repo": "space-nuko/ComfyUI-OpenPose-Editor",
           "file": "js/fabric.min.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "ComfyUI-OpenPose-Editor"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "ComfyUI_Custom_Nodes_AlekPet",
+          "repo": "AlekPet/ComfyUI_Custom_Nodes_AlekPet",
           "file": "PainterNode/js/painter_node.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "ComfyUI_Custom_Nodes_AlekPet"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/worker-css.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/mode-markdown.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/worker-javascript.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/ace.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/mode-html.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/worker-html.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfyui-mixlab-nodes",
+          "repo": "MixLabPro/comfyui-mixlab-nodes",
           "file": "web/javascript/image_mixlab.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfyui-mixlab-nodes"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfyui-mixlab-nodes",
+          "repo": "MixLabPro/comfyui-mixlab-nodes",
           "file": "web/javascript/3d_mixlab.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfyui-mixlab-nodes"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfyui-mixlab-nodes",
+          "repo": "MixLabPro/comfyui-mixlab-nodes",
           "file": "web/javascript/ui_mixlab.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfyui-mixlab-nodes"
         },
         {
           "pattern_id": "S16.D1",
-          "repo": "comfyui-mixlab-nodes",
+          "repo": "MixLabPro/comfyui-mixlab-nodes",
           "file": "web/javascript/layer_mixlab.js",
           "lines": [1],
           "url": "",
           "rule": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
           "source": "security",
-          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23"
+          "variant": "svg_onload_onerror/SUSP_SVG_Onload_Onerror_Jul23",
+          "repo_original": "comfyui-mixlab-nodes"
         }
       ]
     },
@@ -7581,103 +7602,113 @@
       "evidence": [
         {
           "pattern_id": "S16.D3",
-          "repo": "ComfyUI-BlenderAI-node",
+          "repo": "AIGODLIKE/ComfyUI-BlenderAI-node",
           "file": "SDNode/custom_nodes/Cup-ClipBoard/cup_clipboard.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "ComfyUI-BlenderAI-node"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "ComfyUI-KJNodes",
+          "repo": "kijai/ComfyUI-KJNodes",
           "file": "kjweb_async/marked.min.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "ComfyUI-KJNodes"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "ComfyUI_tinyterraNodes",
+          "repo": "TinyTerra/ComfyUI_tinyterraNodes",
           "file": "js/ttNembedAC.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "ComfyUI_tinyterraNodes"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web/extern/shodown.min.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/ext-emmet.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/ext-language_tools.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/ext-prompt.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/worker-base.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/worker-json.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         },
         {
           "pattern_id": "S16.D3",
-          "repo": "comfy_mtb",
+          "repo": "melMass/comfy_mtb",
           "file": "web_async/ace/ext-inline_autocomplete.js",
           "lines": [1],
           "url": "",
           "rule": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
           "source": "security",
-          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace"
+          "variant": "powershell_obfuscation/OBFUS_PowerShell_Common_Replace",
+          "repo_original": "comfy_mtb"
         }
       ]
     },
@@ -7696,83 +7727,91 @@
       "evidence": [
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/controlnet_aux/dsine/models/submodules/efficientnet_repo/setup.py",
           "lines": [1],
           "url": "",
           "rule": "B102",
           "source": "security",
-          "variant": "B102"
+          "variant": "B102",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/controlnet_aux/normalbae/nets/submodules/efficientnet_repo/setup.py",
           "lines": [1],
           "url": "",
           "rule": "B102",
           "source": "security",
-          "variant": "B102"
+          "variant": "B102",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/custom_detectron2/config/lazy.py",
           "lines": [1],
           "url": "",
           "rule": "B102",
           "source": "security",
-          "variant": "B102"
+          "variant": "B102",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/custom_detectron2/utils/tracing.py",
           "lines": [1],
           "url": "",
           "rule": "B307",
           "source": "security",
-          "variant": "B307"
+          "variant": "B307",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/custom_midas_repo/midas/backbones/utils.py",
           "lines": [1],
           "url": "",
           "rule": "B102",
           "source": "security",
-          "variant": "B102"
+          "variant": "B102",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/custom_midas_repo/midas/backbones/vit.py",
           "lines": [1],
           "url": "",
           "rule": "B102",
           "source": "security",
-          "variant": "B102"
+          "variant": "B102",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/custom_mmpkg/custom_mmcv/ops/nms.py",
           "lines": [1],
           "url": "",
           "rule": "B307",
           "source": "security",
-          "variant": "B307"
+          "variant": "B307",
+          "repo_original": "comfyui_controlnet_aux"
         },
         {
           "pattern_id": "S16.D7",
-          "repo": "comfyui_controlnet_aux",
+          "repo": "Fannovel16/comfyui_controlnet_aux",
           "file": "src/custom_mmpkg/custom_mmseg/core/evaluation/class_names.py",
           "lines": [1],
           "url": "",
           "rule": "B307",
           "source": "security",
-          "variant": "B307"
+          "variant": "B307",
+          "repo_original": "comfyui_controlnet_aux"
         }
       ]
     },
@@ -7793,13 +7832,14 @@
       "notes": "Identified by Simon Tranter (COM-3668) as an API needed by Custom Scripts Autocomplete feature. Distinct from S4.W2 (which is the *creator* calling addDOMWidget): this is a *different* extension observing all DOM widget creations. Gap confirmed: no v1 hook for cross-extension widget observation.",
       "evidence": [
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/autocomplete.js",
           "lines": [],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
           "variant": "inferred-from-requirements",
           "breakage_class": "silent",
-          "source": "notion-COM-3668"
+          "source": "notion-COM-3668",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         }
       ]
     },
@@ -7820,13 +7860,14 @@
       "notes": "Identified by Simon Tranter (COM-3668) as an API needed by Custom Scripts Autocomplete feature. Currently implemented via raw DOM injection (S16.DOM3 innerHTML). Distinct gap: settings-panel integration point for modal dialogs is missing from v1 and not addressed in S12.UI1/UI2.",
       "evidence": [
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/autocomplete.js",
           "lines": [],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
           "variant": "inferred-from-requirements",
           "breakage_class": "silent",
-          "source": "notion-COM-3668"
+          "source": "notion-COM-3668",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         }
       ]
     },
@@ -7847,13 +7888,14 @@
       "notes": "Identified by Simon Tranter (COM-3668) as an API needed by Custom Scripts Preset text feature. Currently extensions patch app.queuePrompt (S6.A4) to intercept and validate — a destructive monkey-patch. Distinct from beforeSerialize (D5): validation rejects submission rather than transforming values. silent_breakage=true because current S6.A4 patches silently fail if another extension also patches queuePrompt. v2 needs explicit pre-queue validation event with typed rejection mechanism.",
       "evidence": [
         {
-          "repo": "goodtab/ComfyUI-Custom-Scripts",
+          "repo": "pythongosssss/ComfyUI-Custom-Scripts",
           "file": "web/js/presetText.js",
           "lines": [],
-          "url": "https://github.com/goodtab/ComfyUI-Custom-Scripts",
+          "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
           "variant": "inferred-from-requirements",
           "breakage_class": "silent",
-          "source": "notion-COM-3668"
+          "source": "notion-COM-3668",
+          "repo_original": "goodtab/ComfyUI-Custom-Scripts"
         },
         {
           "pattern_id": "S6.A5",
@@ -7994,14 +8036,15 @@
       "evidence": [
         {
           "pattern_id": "S16.VUE1",
-          "repo": "ComfyUI-NKD-Sigmas-Curve",
+          "repo": "Nekodificador/ComfyUI-NKD-Sigmas-Curve",
           "file": "notion-api-usage-research",
           "lines": [1],
           "url": "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692",
           "source": "notion-api-research",
           "variant": "aggregate-count",
           "notes": "Each package ships own Vue runtime (bundle bloat). Cannot access host stores, i18n, theme. Manual mount/unmount is error-prone.",
-          "excerpt": "// ComfyUI-NKD-Sigmas-Curve — 7000+ line single file includes full Vue runtime\nconst vueApp = createApp(SigmaCurveWidget, { onChange: (json) => { ... } });\nconst instance = vueApp.mount(container);\nconst domWidget = this.addDOMWidget(\"sigma_curve_editor\", \"CURVE_EDITOR\", container, {\n    getValue: () => instance.serialise(),\n    setValue: (val) => { instance.deserialise(val); }\n});\n"
+          "excerpt": "// ComfyUI-NKD-Sigmas-Curve — 7000+ line single file includes full Vue runtime\nconst vueApp = createApp(SigmaCurveWidget, { onChange: (json) => { ... } });\nconst instance = vueApp.mount(container);\nconst domWidget = this.addDOMWidget(\"sigma_curve_editor\", \"CURVE_EDITOR\", container, {\n    getValue: () => instance.serialise(),\n    setValue: (val) => { instance.deserialise(val); }\n});\n",
+          "repo_original": "ComfyUI-NKD-Sigmas-Curve"
         }
       ]
     },
@@ -8022,14 +8065,15 @@
       "evidence": [
         {
           "pattern_id": "S3.C2",
-          "repo": "ComfyUI-Easy-Use",
+          "repo": "yolain/ComfyUI-Easy-Use",
           "file": "notion-api-usage-research",
           "lines": [1],
           "url": "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692",
           "source": "notion-api-research",
           "variant": "aggregate-count",
           "notes": "Only last-writer wins. Cannot be detected or managed by frontend. ComfyUI-Easy-Use is sole evidenced user.",
-          "excerpt": "// ComfyUI-Easy-Use/web_version/v1/js/easy/easyQuick.js\nLiteGraph.ContextMenu = function(values, options) {\n    // Completely replaces the global ContextMenu constructor\n}\n"
+          "excerpt": "// ComfyUI-Easy-Use/web_version/v1/js/easy/easyQuick.js\nLiteGraph.ContextMenu = function(values, options) {\n    // Completely replaces the global ContextMenu constructor\n}\n",
+          "repo_original": "ComfyUI-Easy-Use"
         }
       ]
     },
@@ -8050,14 +8094,15 @@
       "evidence": [
         {
           "pattern_id": "S12.UI2",
-          "repo": "ComfyUI-Easy-Use",
+          "repo": "yolain/ComfyUI-Easy-Use",
           "file": "notion-api-usage-research",
           "lines": [1],
           "url": "https://www.notion.so/comfy-org/ComfyUI-Custom-Node-Frontend-API-Usage-Research-3356d73d365080dbaacafe8e52d52692",
           "source": "notion-api-research",
           "variant": "aggregate-count",
           "notes": "ComfyUI-Easy-Use replaces Comfy.UseNewMenu onChange. Cross-extension state corruption. Silently breaks the target extension.",
-          "excerpt": "// ComfyUI-Easy-Use — accesses internal settingsLookup and replaces onChange handler\nconst changeNewMenuPosition = app.ui.settings.settingsLookup?.['Comfy.UseNewMenu']\nif(changeNewMenuPosition) changeNewMenuPosition.onChange = v => { ... }\n"
+          "excerpt": "// ComfyUI-Easy-Use — accesses internal settingsLookup and replaces onChange handler\nconst changeNewMenuPosition = app.ui.settings.settingsLookup?.['Comfy.UseNewMenu']\nif(changeNewMenuPosition) changeNewMenuPosition.onChange = v => { ... }\n",
+          "repo_original": "ComfyUI-Easy-Use"
         }
       ]
     },

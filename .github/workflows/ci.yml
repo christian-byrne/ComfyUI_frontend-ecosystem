@@ -24,7 +24,21 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm verify:quick
+
+      # Data drift guards. Each one corresponds to a staleness bug that
+      # actually shipped:
+      #   * usage_weight frozen at a stale generator run (11 categories at 0.00)
+      #   * the two star caches silently diverging, YAML behind JSON
+      #   * bare/fork repo slugs that resolve to 0 stars and understate
+      #     blast_radius (issue #30)
+      # pyyaml is the only extra dependency.
+      - name: Install python deps for data checks
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Data drift + consistency checks
+        run: bash scripts/rebuild.sh check
+
+      - run: pnpm typecheck
       - run: pnpm test
 
       # Knowledge-base drift check. The synced workspace markdown (ADRs,

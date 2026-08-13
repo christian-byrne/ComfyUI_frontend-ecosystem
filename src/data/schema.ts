@@ -12,6 +12,12 @@ export interface EvidenceRow {
   /** Backfilled at load time when missing from the source row. */
   pattern_id?: string
   repo: string
+  /**
+   * Pre-normalisation slug, set by scripts/normalize-repo-slugs.py when a bare
+   * or fork slug was rewritten to its canonical upstream. Kept so the
+   * MCP-code-search vs clone-and-grep provenance stays answerable (issue #30).
+   */
+  repo_original?: string
   file: string
   lines?: number[]
   url?: string
@@ -48,6 +54,8 @@ export interface PatternFile {
 export interface TopRepo {
   repo: string
   stars: number
+  /** See EvidenceRow.repo_original. */
+  repo_original?: string
 }
 
 export interface RollupEntry {
@@ -74,6 +82,8 @@ export interface BehaviorExemplar {
   repo: string
   url: string
   stars: number
+  /** See EvidenceRow.repo_original. */
+  repo_original?: string
 }
 
 export interface BehaviorCategory {
@@ -81,7 +91,15 @@ export interface BehaviorCategory {
   name: string
   intent: string
   member_pattern_ids: string[]
+  /** sum over member patterns of (blast_radius * occurrences). */
   usage_weight: number
+  /**
+   * The value `usage_weight` held before the 2026-08 recompute. Preserved by
+   * scripts/recompute-usage-weights.py so the historical (wrong) ranking stays
+   * auditable — 11 categories were a placeholder 0.00 because they post-dated
+   * the last run of the never-vendored generator.
+   */
+  usage_weight_legacy?: number
   exemplars?: BehaviorExemplar[]
   notes?: string
   mechanism?: string
@@ -104,7 +122,14 @@ export interface StarCacheEntry {
 }
 
 export interface StarCacheFile {
+  /** Newest row — when the cache was last touched at all. */
   asof?: string
+  /**
+   * Oldest row — the staleness *floor*. A targeted backfill of one repo moves
+   * `asof` forward while leaving the rest months old, so `asof` alone reads as
+   * fresher than the data is. Prefer this when reporting staleness.
+   */
+  asof_oldest?: string
   populated_via?: string
   repos: StarCacheEntry[]
 }

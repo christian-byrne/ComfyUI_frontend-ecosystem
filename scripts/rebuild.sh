@@ -6,18 +6,29 @@
 # or one-off prompts. Re-runnable; same inputs ⇒ same outputs.
 #
 # Pipeline (in order):
-#   1. stars  — refresh research/touch-points-star-cache.yaml from GitHub
-#               (reads database.yaml, calls `gh api repos/<r>` for each repo)
-#   2. rollup — recompute research/touch-points-rollup.yaml from
-#               database.yaml + star-cache.yaml
-#   3. data   — verify dashboard data inputs are present + parseable
-#   4. build  — pnpm build (Vite reads YAMLs at build time via `?raw` import)
+#   1. stars   — refresh star data from GitHub and MERGE it into the canonical
+#                cache src/data/touch-points-star-cache.json, re-emitting
+#                research/touch-points-star-cache.yaml as a derived mirror.
+#                The merge is a union (newest asof wins per repo) behind a
+#                regression guard, so this step cannot shrink the data — see
+#                README §"Which star cache is canonical?".
+#   2. rollup  — recompute research/touch-points-rollup.yaml from
+#                database.yaml + star-cache
+#   3. weights — recompute usage_weight in src/data/behavior-categories.json
+#                from the rollup (replaces the never-vendored
+#                build-behavior-categories.py)
+#   4. slugs   — normalise repo slugs to canonical owner/name
+#   5. data    — verify inputs parse, then run every drift/consistency check
+#   6. build   — pnpm build (Vite inlines the JSON under src/data/)
 #
 # Usage:
-#   bash scripts/rebuild.sh             # full pipeline (stars + rollup + data + build)
-#   bash scripts/rebuild.sh stars       # just refresh star cache
+#   bash scripts/rebuild.sh             # full pipeline
+#   bash scripts/rebuild.sh stars       # just refresh + merge the star cache
 #   bash scripts/rebuild.sh rollup      # just recompute rollup
-#   bash scripts/rebuild.sh data        # just verify data inputs
+#   bash scripts/rebuild.sh weights     # just recompute usage_weight
+#   bash scripts/rebuild.sh slugs       # just normalise repo slugs
+#   bash scripts/rebuild.sh data        # verify data inputs + run all checks
+#   bash scripts/rebuild.sh check       # read-only checks only (what CI runs)
 #   bash scripts/rebuild.sh build       # just run pnpm build
 #   bash scripts/rebuild.sh --skip-stars   # full pipeline minus stars (for offline / no `gh` auth)
 #   bash scripts/rebuild.sh --clean     # blow away dist/ and Vite cache before building
@@ -40,21 +51,69 @@ require() {
 }
 
 # ─── steps ────────────────────────────────────────────────────────────────
+need_python() {
+  require python3
+  python3 -c 'import yaml' 2>/dev/null || die "missing pyyaml — install with: pip install pyyaml"
+}
+
+# Keep the JSON data files formatted the way lint-staged/prettier would, so a
+# regenerated file never shows up as a whitespace-only diff.
+format_json() {
+  if command -v pnpm >/dev/null 2>&1; then
+    pnpm exec prettier --write --log-level warn "$@" >/dev/null 2>&1 || true
+  fi
+}
+
 step_stars() {
-  log "[1/4] refreshing star cache (research/touch-points-star-cache.yaml)"
+  log "[1/6] refreshing star cache -> src/data/touch-points-star-cache.json (canonical)"
+  need_python
   require gh; require jq
+  # fetch-stars.sh writes the research YAML; sync merges it INTO the canonical
+  # JSON (union, newest-asof-wins) and re-emits the YAML as a derived mirror.
+  # The merge is guarded, so a rate-limited fetch degrades to a no-op rather
+  # than deleting repos.
   bash research/scripts/fetch-stars.sh
+  python3 scripts/sync-star-cache.py --backfill-missing
+  format_json src/data/touch-points-star-cache.json
 }
 
 step_rollup() {
-  log "[2/4] recomputing rollup (research/touch-points-rollup.yaml)"
-  require python3
-  python3 -c 'import yaml' 2>/dev/null || die "missing pyyaml — install with: pip install pyyaml"
+  log "[2/6] recomputing rollup (research/touch-points-rollup.yaml)"
+  need_python
   ( cd research && python3 scripts/rollup-blast-radius.py )
 }
 
+step_weights() {
+  log "[3/6] recomputing behavior-category usage_weight from the rollup"
+  need_python
+  python3 scripts/recompute-usage-weights.py
+  format_json src/data/behavior-categories.json
+}
+
+step_slugs() {
+  log "[4/6] normalising repo slugs to canonical owner/name"
+  need_python
+  python3 scripts/normalize-repo-slugs.py
+  format_json src/data/touch-points-database.json src/data/touch-points-rollup.json \
+    src/data/behavior-categories.json
+}
+
+# Read-only guards. Every one of these caught a real, shipped staleness bug;
+# they exist so the same class cannot come back silently.
+step_check() {
+  log "[check] running data drift + consistency guards"
+  need_python
+  local failed=0
+  python3 scripts/recompute-usage-weights.py --check || failed=1
+  python3 scripts/sync-star-cache.py --check       || failed=1
+  python3 scripts/normalize-repo-slugs.py --check  || failed=1
+  python3 scripts/check-repo-slugs.py              || failed=1
+  [ $failed -eq 0 ] || die "data checks failed (see above)"
+  log "✅ all data checks passed"
+}
+
 step_data() {
-  log "[3/4] verifying dashboard data inputs are present + parseable"
+  log "[5/6] verifying dashboard data inputs are present + parseable"
   require python3
   python3 -c 'import yaml' 2>/dev/null || die "missing pyyaml — install with: pip install pyyaml"
   python3 - <<'PY'
@@ -79,6 +138,7 @@ for p in inputs:
     print(f"  ✗ PARSE ERR:  {p}: {e}"); errors += 1
 sys.exit(errors)
 PY
+  step_check
 }
 
 step_clean() {
@@ -87,7 +147,7 @@ step_clean() {
 }
 
 step_build() {
-  log "[4/4] running pnpm build (vite + vue-tsc)"
+  log "[6/6] running pnpm build (vite + vue-tsc)"
   require pnpm
   if [ ! -d node_modules ]; then
     log "  installing dependencies (pnpm install)"
@@ -113,7 +173,7 @@ while [ $# -gt 0 ]; do
     --clean)              CLEAN=1 ;;
     -h|--help)
       sed -n '2,30p' "$0"; exit 0 ;;
-    stars|rollup|data|build|clean|test|all)
+    stars|rollup|weights|slugs|data|check|build|clean|test|all)
       TARGET="$1" ;;
     *)
       die "unknown argument: $1 (try --help)" ;;
@@ -123,20 +183,29 @@ done
 
 # ─── dispatch ─────────────────────────────────────────────────────────────
 case "${TARGET:-all}" in
-  stars)  step_stars ;;
-  rollup) step_rollup ;;
-  data)   step_data ;;
-  build)  [ $CLEAN -eq 1 ] && step_clean; step_build ;;
-  clean)  step_clean ;;
-  test)   step_test ;;
+  stars)   step_stars ;;
+  rollup)  step_rollup ;;
+  weights) step_weights ;;
+  slugs)   step_slugs ;;
+  data)    step_data ;;
+  check)   step_check ;;
+  build)   [ $CLEAN -eq 1 ] && step_clean; step_build ;;
+  clean)   step_clean ;;
+  test)    step_test ;;
   all)
     [ $CLEAN -eq 1 ] && step_clean
     if [ $SKIP_STARS -eq 0 ]; then
       step_stars
     else
       warn "skipping stars (--skip-stars)"
+      # Still reconcile the two caches offline so they cannot drift.
+      need_python
+      python3 scripts/sync-star-cache.py
+      format_json src/data/touch-points-star-cache.json
     fi
     step_rollup
+    step_weights
+    step_slugs
     step_data
     step_build
     log "✅ rebuild complete"
