@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
+<<<<<<< HEAD
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
@@ -25,5 +26,26 @@
     }
   },
   "include": ["src/**/*", "src/**/*.vue", "vite.config.ts", "vitest.setup.ts"],
+=======
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vitest/globals", "vite/client"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@research/*": ["research/*"]
+    }
+  },
+  "include": ["src/**/*", "src/**/*.vue", "tests/**/*"],
+>>>>>>> 2fd61da (chore(scaffold): vite + vue 3 + ts + pinia + vue-router)
   "exclude": ["node_modules", "dist"]
 }

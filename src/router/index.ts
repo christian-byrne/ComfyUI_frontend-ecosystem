@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
+=======
+import {
+  createRouter,
+  createWebHistory,
+  type RouteRecordRaw
+} from 'vue-router'
+>>>>>>> 2fd61da (chore(scaffold): vite + vue 3 + ts + pinia + vue-router)
 
 import RouteSkeleton from '../components/RouteSkeleton.vue'
 

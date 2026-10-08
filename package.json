@@ -2,13 +2,17 @@
   "name": "comfyui-frontend-ecosystem",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "description": "Visualize and explore the ComfyUI extension API ecosystem",
   "license": "MIT",
+=======
+>>>>>>> 2fd61da (chore(scaffold): vite + vue 3 + ts + pinia + vue-router)
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
+<<<<<<< HEAD
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test:e2e": "playwright test",
@@ -47,4 +51,27 @@
     "vue-tsc": "^2.2.0"
   },
   "packageManager": "pnpm@10.33.0"
+=======
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "data:build": "python3 scripts/build-data.py"
+  },
+  "dependencies": {
+    "pinia": "^2.2.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-vue": "^5.1.0",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^15.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.0.0",
+    "vue-tsc": "^2.1.0"
+  }
+>>>>>>> 2fd61da (chore(scaffold): vite + vue 3 + ts + pinia + vue-router)
 }
